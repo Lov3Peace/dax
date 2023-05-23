@@ -30,7 +30,6 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
   @override
   void initState() {
     // TODO: implement initState
-//how the hell do you do this
     scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
     opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
     controller.stop();

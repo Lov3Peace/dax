@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/background.dart';
 import 'package:flutter_application_1/util/dock.dart';
-import 'package:rive/rive.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import '../util/dashboard_decks_list.dart';
 import '../util/news_deck_template.dart';
 import '../util/profile_bubble.dart';
@@ -10,7 +10,7 @@ import '../util/title_bubble.dart';
 import 'main.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:responsive_framework/responsive_framework.dart';
+//import 'package:responsive_framework/responsive_framework.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);

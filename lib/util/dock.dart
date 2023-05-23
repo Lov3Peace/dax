@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
-import 'package:flutter_application_1/util/projects_deck_template.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:scale_button/scale_button.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:spring_button/spring_button.dart';
-import 'package:buttons_tabbar/buttons_tabbar.dart';
-import '../util/my_flashy_tabbar2.dart';
 import 'dock_buttons.dart';
 import 'home_button.dart';
 

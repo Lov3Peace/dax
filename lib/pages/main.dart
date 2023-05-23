@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_application_1/responsive/desktop__scaffold.dart';
+import 'package:flutter_application_1/responsive/mobile__scaffold.dart';
+import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:responsive_framework/responsive_framework.dart';
+import '../responsive/tablet_scaffold.dart';
 import 'dashboard.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
 import 'testing_widgets.dart';
-import 'package:rive/rive.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,25 +28,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    builder:
-    (context, child) => ResponsiveBreakpoints.builder(
-          child: child!,
-          breakpoints: [
-            const Breakpoint(start: 0, end: 450, name: MOBILE),
-            const Breakpoint(start: 451, end: 800, name: TABLET),
-            const Breakpoint(start: 801, end: 1920, name: DESKTOP),
-            const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
-          ],
-        );
     timeDilation = 1;
     return MaterialApp(
+      //builder: (context, widget) => ResponsiveBreakpoints.builder(child: ClampingScrollWrapper.builder(context, widget!), breakpoints: []),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: GoogleFonts.montserrat().fontFamily,
           colorScheme:
               const ColorScheme.dark(secondary: red, onSurface: Colors.white),
           scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)),
-      home: const Dashboard(),
+      home: ResponsiveLayout(
+        mobileScaffold: const MobileScaffold(),
+        tabletScaffold: const TabletScaffold(),
+        desktopScaffold: const DesktopScaffold(),
+      ),
     );
   }
 }

@@ -13,6 +13,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.cyan,
+      extendBody: true,
     );
   }
 }

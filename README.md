@@ -1,4 +1,4 @@
-# flutter_application_1
+# 3xodus Project
 
 A new Flutter project.
 

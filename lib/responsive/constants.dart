@@ -4,6 +4,7 @@ import 'package:flutter_application_1/pages/main.dart';
 import '../util/profile_bubble.dart';
 import '../util/title_bubble.dart';
 
+//screen dimension variables to use instead of MediaQuery (context)
 var screenHeight = window.physicalSize.height / window.devicePixelRatio;
 var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 

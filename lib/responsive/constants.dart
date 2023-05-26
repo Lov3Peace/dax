@@ -1,8 +1,6 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
-
 import '../util/profile_bubble.dart';
 import '../util/title_bubble.dart';
 

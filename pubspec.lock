@@ -41,14 +41,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
-  auto_size_text:
-    dependency: transitive
-    description:
-      name: auto_size_text
-      sha256: "3f5261cd3fb5f2a9ab4e2fc3fba84fd9fcaac8821f20a1d4e71f557521b22599"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -198,14 +190,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_animate:
-    dependency: transitive
-    description:
-      name: flutter_animate
-      sha256: "1f6fdee1f63eda3c35e04c07664593c31b7fdae290b6b0dc513d2fdfb2d27c76"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   flutter_blurhash:
     dependency: transitive
     description:
@@ -246,14 +230,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
-  flutter_spinkit:
-    dependency: transitive
-    description:
-      name: flutter_spinkit
-      sha256: "77a2117c0517ff909221f3160b8eb20052ab5216107581168af574ac1f05dff8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.1.0"
   flutter_staggered_animations:
     dependency: "direct dev"
     description:
@@ -288,14 +264,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.29"
-  font_awesome_flutter:
-    dependency: transitive
-    description:
-      name: font_awesome_flutter
-      sha256: "7811c8b4e7455d2f60ef30022a6a07376de2858b47aecbe2861965b348fe2016"
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.1.0"
   freezed_annotation:
     dependency: transitive
     description:
@@ -304,14 +272,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-  from_css_color:
-    dependency: transitive
-    description:
-      name: from_css_color
-      sha256: "5e4d1795c8d10af94e51dd97636b2a29170a132be1aceba103e9866028d20823"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   gesture_x_detector:
     dependency: transitive
     description:
@@ -368,14 +328,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.17.0"
   ionicons:
     dependency: "direct main"
     description:
@@ -400,14 +352,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.8.0"
-  json_path:
-    dependency: transitive
-    description:
-      name: json_path
-      sha256: e1ff18e87737fd5bee5d3408a58c51452b3351ab1292fdcf4ee597ab480123e2
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.1"
   linkify:
     dependency: transitive
     description:
@@ -480,14 +424,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  page_transition:
-    dependency: transitive
-    description:
-      name: page_transition
-      sha256: "12776be3ffb2d080095e912fc4e820a85be8846913a93261148b75256b9c7691"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.4"
   path:
     dependency: transitive
     description:
@@ -552,14 +488,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
-  petitparser:
-    dependency: transitive
-    description:
-      name: petitparser
-      sha256: "49392a45ced973e8d94a85fdb21293fbb40ba805fc49f2965101ae748a3683b4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.1.0"
   platform:
     dependency: transitive
     description:
@@ -616,14 +544,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
-  rfc_6901:
-    dependency: transitive
-    description:
-      name: rfc_6901
-      sha256: "8d97680dada633146cf75ab9382f2ce2b7e4bd63ceecd867416cf43b5832b988"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.1"
   rive:
     dependency: "direct main"
     description:
@@ -733,14 +653,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  smooth_page_indicator:
-    dependency: transitive
-    description:
-      name: smooth_page_indicator
-      sha256: "49e9b6a265790454c39bd4a447a02f398c02b44b2602e7c5e3a381dc2e3b4102"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0+2"
   source_span:
     dependency: transitive
     description:
@@ -813,14 +725,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  switcher_button:
-    dependency: transitive
-    description:
-      name: switcher_button
-      sha256: "532fa81813faf0fd21f233b75e0ca955512b86b6f784fd33804a5ababa4ac71b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.4"
   synchronized:
     dependency: transitive
     description:
@@ -845,14 +749,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
-  timeago:
-    dependency: transitive
-    description:
-      name: timeago
-      sha256: "3a38963615f1178531afa7177199e37522cf8dcbd93a144b597e32ec6d84bd9f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.2.2"
   typed_data:
     dependency: transitive
     description:

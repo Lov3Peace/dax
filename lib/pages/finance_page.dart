@@ -1,10 +1,6 @@
-import 'package:flutter_application_1/util/dock.dart';
-
 import '../util/background.dart';
-import '../util/my_flashy_tabbar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/big_dock.dart';
-import '../util/decks.dart';
 import '../util/finances_stacks_list.dart';
 import '../util/profile_bubble.dart';
 import '../util/title_bubble.dart';

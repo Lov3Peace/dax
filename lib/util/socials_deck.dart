@@ -3,11 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '../pages/main.dart';
 import 'decks.dart';
 
-class SocialsDeck extends StatelessWidget {
-  SocialsDeck({super.key, this.onTap, this.color});
+class SocialsDeckTemplate extends StatelessWidget {
+  const SocialsDeckTemplate({super.key, this.onTap, this.color});
 
-  VoidCallback? onTap;
-  Color? color;
+  final VoidCallback? onTap;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

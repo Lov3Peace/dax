@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop__scaffold.dart';
+import 'package:flutter_application_1/responsive/desktop/desktop__dashboard.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile__scaffold.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       home: ResponsiveLayout(
         mobileScaffold: const MobileScaffold(),
         tabletScaffold: const TabletScaffold(),
-        desktopScaffold: const DesktopScaffold(),
+        desktopScaffold: const DesktopDashboard(),
       ),
     );
   }

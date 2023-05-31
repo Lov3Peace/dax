@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/util/projects_deck_template.dart';
-import 'package:flutter_application_1/util/socials_deck_template.dart';
 import 'package:simple_animations/animation_controller_extension/animation_controller_extension.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../pages/projects_page.dart';
 import '../pages/socials_page.dart';
+import '../responsive/constants.dart';
 
 class SocialsDeckLink extends StatefulWidget {
   const SocialsDeckLink({super.key});

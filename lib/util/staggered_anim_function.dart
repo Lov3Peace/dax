@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import 'news_deck_template.dart';
+import 'news_deck.dart';
 
 class StaggerAnim extends State<StatefulWidget> with AnimationMixin {
   late AnimationController controller;

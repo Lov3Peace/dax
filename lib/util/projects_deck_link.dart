@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/util/projects_deck_template.dart';
+import 'package:flutter_application_1/util/projects_deck.dart';
 import 'package:simple_animations/animation_controller_extension/animation_controller_extension.dart';
 import 'package:simple_animations/simple_animations.dart';
 

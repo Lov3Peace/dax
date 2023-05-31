@@ -1,25 +1,27 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/constants.dart';
 import 'package:flutter_application_1/util/background.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../util/dashboard_decks_list.dart';
-import '../util/news_deck.dart';
-import '../util/profile_bubble.dart';
-import '../util/title_bubble.dart';
-import 'main.dart';
+import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import '../../util/dashboard_decks_list.dart';
+import '../../util/news_deck.dart';
+import 'desktop_dock.dart';
+
 //import 'package:responsive_framework/responsive_framework.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+class DesktopDashboard extends StatefulWidget {
+  const DesktopDashboard({Key? key}) : super(key: key);
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<DesktopDashboard> createState() => _DesktopDashboardState();
 }
 
-class _DashboardState extends State<Dashboard> with AnimationMixin {
+class _DesktopDashboardState extends State<DesktopDashboard>
+    with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
   late AnimationController widthController;
@@ -40,48 +42,7 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: tran,
-        shadowColor: tran,
-        automaticallyImplyLeading: false,
-        leadingWidth: MediaQuery.of(context).size.width * .9,
-        flexibleSpace: Padding(
-          padding: EdgeInsets.fromLTRB(
-              MediaQuery.of(context).size.width * 0.035,
-              25,
-              MediaQuery.of(context).size.width * 0.035,
-              0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Hero(
-                tag: 'title',
-                flightShuttleBuilder: flightShuttleBuilder,
-                child: TitleBubble(
-                  deckHeight: MediaQuery.of(context).size.height * 0.1,
-                  deckWidth: MediaQuery.of(context).size.width * 0.4,
-                  deckName: 'Dashboard',
-                  gradient1: tran,
-                  gradient2: tran,
-                  neonGlow: tran,
-                ),
-              ),
-              Hero(
-                tag: 'profile',
-                flightShuttleBuilder: flightShuttleBuilder,
-                child: ProfileBubble(
-                  deckHeight: MediaQuery.of(context).size.height * 0.1,
-                  deckWidth: MediaQuery.of(context).size.width * 0.30,
-                  deckName: 's3rv',
-                  gradient1: tran,
-                  gradient2: tran,
-                  neonGlow: tran,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: myAppBar,
       body: Stack(
         children: [
           Background(),
@@ -109,11 +70,8 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
                         AnimationLimiter(
                           child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
-                            padding: EdgeInsets.fromLTRB(
-                                MediaQuery.of(context).size.width * 0.035,
-                                90,
-                                MediaQuery.of(context).size.width * 0.035,
-                                15),
+                            padding: EdgeInsets.fromLTRB(screenWidth * 0.035,
+                                90, screenWidth * 0.035, 15),
                             itemCount: DashboardDecks().dashboardDecks.length,
                             itemBuilder: (BuildContext context, int index) {
                               return AnimationConfiguration.staggeredList(
@@ -150,7 +108,7 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
                       ],
                     ),
                   ),
-                  const Dock()
+                  const DesktopDock()
                 ],
               )),
         ],

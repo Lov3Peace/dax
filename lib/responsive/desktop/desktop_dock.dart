@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
+import 'package:flutter_application_1/responsive/constants.dart';
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../dock_buttons.dart';
-import '../home_button.dart';
+import '../../util/home_button.dart';
 
-class Dock extends StatefulWidget {
-  const Dock({super.key});
+class DesktopDock extends StatefulWidget {
+  const DesktopDock({super.key});
 
   @override
-  State<Dock> createState() => _DockState();
+  State<DesktopDock> createState() => _DesktopDockState();
 }
 
-class _DockState extends State<Dock> with AnimationMixin {
+class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
   void initState() {
@@ -30,7 +30,7 @@ class _DockState extends State<Dock> with AnimationMixin {
     return Hero(
       tag: 'dock',
       child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
+          padding: const EdgeInsets.fromLTRB(15, 0, 0, 15),
           child: Container(
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
@@ -53,74 +53,45 @@ class _DockState extends State<Dock> with AnimationMixin {
                     //   offset: Offset(0, 0),
                     // )
                   ]),
-              width: MediaQuery.of(context).size.width * 0.75,
-              height: MediaQuery.of(context).size.height * 0.12,
+              width: screenWidth * 0.12,
+              height: screenHeight * 0.75,
               child: PageView(
                 physics: const BouncingScrollPhysics(),
                 clipBehavior: Clip.antiAlias,
                 children: [
                   /*PAGE 1
                   */
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    alignment: WrapAlignment.spaceEvenly,
-                    runAlignment: WrapAlignment.center,
-                    children: [
-                      //
-                      //Profile
-                      DockButton(icon: Ionicons.person_circle_outline),
+                  DockButton(icon: Ionicons.person_circle_outline),
 
-                      //Home
-                      HomeButton(
-                        gradient1: purp,
-                        gradient2: red,
-                        glow: red,
-                      ),
+                  //Home
+                  HomeButton(
+                    gradient1: purp,
+                    gradient2: red,
+                    glow: red,
+                  ),
 
-                      //Messages
-                      DockButton(
-                        icon: Ionicons.chatbox,
-                      ),
-                    ],
+                  //Messages
+                  DockButton(
+                    icon: Ionicons.chatbox,
                   ),
 
                   //PAGE 2
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    alignment: WrapAlignment.spaceEvenly,
-                    runAlignment: WrapAlignment.center,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      //
-                      //Settings
-                      DockButton(icon: Ionicons.settings_sharp),
+                  DockButton(icon: Ionicons.settings_sharp),
 
-                      //Wallet
-                      DockButton(icon: Ionicons.wallet),
+                  //Wallet
+                  DockButton(icon: Ionicons.wallet),
 
-                      //Friends
-                      DockButton(icon: Ionicons.people),
-                    ],
-                  ),
+                  //Friends
+                  DockButton(icon: Ionicons.people),
 
                   //PAGE 3
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    alignment: WrapAlignment.spaceEvenly,
-                    runAlignment: WrapAlignment.center,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      //
-                      //Help
-                      DockButton(icon: Ionicons.help_circle_outline),
+                  DockButton(icon: Ionicons.help_circle_outline),
 
-                      //About Us/Info
-                      DockButton(icon: Icons.info_sharp),
+                  //About Us/Info
+                  DockButton(icon: Icons.info_sharp),
 
-                      //Logout
-                      DockButton(icon: Icons.logout_outlined),
-                    ],
-                  ),
+                  //Logout
+                  DockButton(icon: Icons.logout_outlined),
                 ],
               ))),
     );

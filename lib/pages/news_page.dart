@@ -3,10 +3,8 @@ import 'package:flutter_application_1/pages/test_page.dart';
 import 'package:flutter_application_1/util/big_dock.dart';
 import 'package:flutter_application_1/util/news_stacks_list.dart';
 import '../util/background.dart';
-import '../util/decks.dart';
 import '../util/profile_bubble.dart';
 import '../util/title_bubble.dart';
-import 'keyboards_deck.dart';
 import 'main.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 

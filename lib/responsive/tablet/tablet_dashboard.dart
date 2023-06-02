@@ -4,7 +4,9 @@ import 'package:flutter_application_1/util/background.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import '../../pages/main.dart';
 import '../../util/dashboard_decks_list.dart';
+import '../../util/title_bubble.dart';
 import '../constants.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
@@ -22,7 +24,6 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
   late AnimationController widthController;
   late AnimationController heightController;
   late AnimationController colorController;
-  Widget newsDeckVar = NewsDeck();
 
   @override
   void initState() {
@@ -38,7 +39,11 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: myAppBar,
+      appBar: globalAppBar(
+          profileBubbleHeight: screenHeight * 0.05,
+          profileBubbleWidth: screenWidth * 0.3,
+          titleBubbleHeight: screenHeight * 0.05,
+          titleBubbleWidth: screenWidth * 0.3),
       body: Stack(
         children: [
           Background(),
@@ -67,7 +72,7 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
                           child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
                             padding: EdgeInsets.fromLTRB(screenHeight * 0.035,
-                                90, screenWidth * 0.035, 15),
+                                100, screenWidth * 0.035, 15),
                             itemCount: DashboardDecks().dashboardDecks.length,
                             itemBuilder: (BuildContext context, int index) {
                               return AnimationConfiguration.staggeredList(

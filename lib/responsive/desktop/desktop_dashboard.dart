@@ -42,7 +42,11 @@ class _DesktopDashboardState extends State<DesktopDashboard>
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: myAppBar,
+      appBar: globalAppBar(
+          profileBubbleHeight: screenHeight * 0.2,
+          profileBubbleWidth: screenWidth * 0.3,
+          titleBubbleHeight: screenHeight * 0.2,
+          titleBubbleWidth: screenWidth * 0.3),
       body: Stack(
         children: [
           Background(),

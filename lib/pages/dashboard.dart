@@ -84,7 +84,6 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
       ),
       body: Stack(
         children: [
-          Background(),
           Positioned.fill(
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),

@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
-import 'package:simple_animations/animation_builder/custom_animation_builder.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../pages/finance_page.dart';
 import '../pages/news_page.dart';
@@ -17,49 +16,51 @@ var screenHeight = window.physicalSize.height / window.devicePixelRatio;
 var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 
 //APPBAR FOR ALL PAGES
-var myAppBar = AppBar(
-  backgroundColor: tran,
-  shadowColor: tran,
-  automaticallyImplyLeading: false,
-  leadingWidth: screenWidth * 0.9,
-  flexibleSpace: Padding(
-    padding: EdgeInsets.fromLTRB(
-      screenWidth * 0.035,
-      25,
-      screenWidth * 0.035,
-      0,
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Hero(
-          tag: 'title',
-          flightShuttleBuilder: flightShuttleBuilder,
-          child: TitleBubble(
-            deckHeight: screenHeight * 0.1,
-            deckWidth: screenWidth * 0.4,
-            deckName: 'Dashboard',
-            gradient1: tran,
-            gradient2: tran,
-            neonGlow: tran,
+AppBar globalAppBar(
+    {required double titleBubbleHeight,
+    required double titleBubbleWidth,
+    required double profileBubbleHeight,
+    required double profileBubbleWidth}) {
+  return AppBar(
+    backgroundColor: tran,
+    shadowColor: tran,
+    automaticallyImplyLeading: false,
+    leadingWidth: screenWidth * 0.9,
+    toolbarHeight: lerpDouble(0, 10, 8),
+    flexibleSpace: Padding(
+      padding: EdgeInsets.fromLTRB(screenWidth * .05, 20, screenWidth * .05, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Hero(
+            tag: 'title',
+            flightShuttleBuilder: flightShuttleBuilder,
+            child: TitleBubble(
+              deckHeight: titleBubbleHeight,
+              deckWidth: titleBubbleWidth,
+              deckName: 'Dashboard',
+              gradient1: tran,
+              gradient2: tran,
+              neonGlow: tran,
+            ),
           ),
-        ),
-        Hero(
-          tag: 'profile',
-          flightShuttleBuilder: flightShuttleBuilder,
-          child: ProfileBubble(
-            deckHeight: screenHeight * 0.1,
-            deckWidth: screenWidth * 0.30,
-            deckName: 's3rv',
-            gradient1: tran,
-            gradient2: tran,
-            neonGlow: tran,
+          Hero(
+            tag: 'profile',
+            flightShuttleBuilder: flightShuttleBuilder,
+            child: ProfileBubble(
+              deckHeight: profileBubbleHeight,
+              deckWidth: profileBubbleWidth,
+              deckName: 's3rv',
+              gradient1: tran,
+              gradient2: tran,
+              neonGlow: tran,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
-  ),
-);
+  );
+}
 
 //PROFILE BUBBLE FOR USERNAME/PROFILE
 class ProfileBubble extends StatelessWidget {

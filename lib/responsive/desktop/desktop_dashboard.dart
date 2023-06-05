@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/projects_page.dart';
 import 'package:flutter_application_1/responsive/constants.dart';
 import 'package:flutter_application_1/util/background.dart';
 import 'package:flutter_application_1/util/dock.dart';
@@ -7,11 +8,10 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../util/dashboard_decks_list.dart';
-import '../../util/news_deck.dart';
-import 'desktop_dock.dart';
+import '../../util/dash_decks_list.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
+final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
 
 class DesktopDashboard extends StatefulWidget {
   const DesktopDashboard({Key? key}) : super(key: key);
@@ -40,6 +40,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
 
   @override
   Widget build(BuildContext context) {
+    if (screenHeight < 1) {}
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: globalAppBar(
@@ -76,7 +77,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                             physics: const BouncingScrollPhysics(),
                             padding: EdgeInsets.fromLTRB(screenWidth * 0.035,
                                 90, screenWidth * 0.035, 15),
-                            itemCount: DashboardDecks().dashboardDecks.length,
+                            itemCount: dashboardDecksList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return AnimationConfiguration.staggeredList(
                                 delay: const Duration(milliseconds: 200),
@@ -88,7 +89,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                   child: FadeInAnimation(
                                     child: Column(
                                       children: [
-                                        DashboardDecks().dashboardDecks[index],
+                                        //dashboardDecks().dashboardDecks[index],
                                       ],
                                     ),
                                   ),
@@ -112,7 +113,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                       ],
                     ),
                   ),
-                  const DesktopDock()
+                  //const DesktopDock()
                 ],
               )),
         ],

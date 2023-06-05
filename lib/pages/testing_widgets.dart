@@ -4,9 +4,9 @@ import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:flutter_application_1/util/decks.dart';
 import 'package:flutter_application_1/util/projects_stacks_list.dart';
 import 'package:flutter_application_1/util/socials_stacks_list.dart';
-import '../util/dashboard_decks_list.dart';
+import '../util/dash_decks_list.dart';
 
-List x = DashboardDecks().dashboardDecks;
+//List x = DashboardDecks().dashboardDecks;
 List currentList = [];
 List deckNamesList = ['Projects', 'Socials', 'Finances', 'News'];
 List projectStackNamesList = [
@@ -55,13 +55,13 @@ class _TestingState extends State<Testing> {
                         }
                         if (currentView == 0 && index == 1) {
                           setState(() {
-                            x = SocialsStacks().socialsStacks;
+                            //x = SocialsStacks().socialsStacks;
                             currentView = 2;
                           });
                         }
                         if (currentView == 0 && index == 2) {
                           setState(() {
-                            x = DashboardDecks().dashboardDecks;
+                            // x = DashboardDecks().dashboardDecks;
                             currentView = 0;
                           });
                         }

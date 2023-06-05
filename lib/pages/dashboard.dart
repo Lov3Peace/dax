@@ -1,11 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/util/background.dart';
+import 'package:flutter_application_1/responsive/constants.dart';
 import 'package:flutter_application_1/util/dock.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import '../util/dashboard_decks_list.dart';
-import '../util/news_deck.dart';
-import '../util/profile_bubble.dart';
+import 'package:flutter_application_1/util/projects_stacks_list.dart';
+import '../util/dash_decks_list.dart';
 import '../util/title_bubble.dart';
 import 'main.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -20,11 +18,16 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> with AnimationMixin {
+  //globals
   late Animation<double> scale;
   late Animation<double> opacity;
   late AnimationController widthController;
   late AnimationController heightController;
   late AnimationController colorController;
+  late double deckHeight;
+  late double deckWidth;
+  late double halfDeckWidth;
+  final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
 
   @override
   void initState() {
@@ -84,6 +87,22 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
       ),
       body: Stack(
         children: [
+          LayoutBuilder(builder: (context, constraints) {
+            if (constraints.maxWidth < 550) {
+              deckHeight = screenHeight * 0.22;
+              deckWidth = screenWidth * 0.90;
+              halfDeckWidth = screenWidth * 0.41;
+              return const Dashboard();
+            } else if (constraints.maxWidth < 1100) {
+              deckHeight = screenHeight * 0.23;
+              deckWidth = screenWidth * 0.90;
+              halfDeckWidth = screenWidth * 0.41;
+              return const Dashboard();
+            } else {
+              deckHeight = screenHeight * 0.24;
+              return const Dashboard();
+            }
+          }),
           Positioned.fill(
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
@@ -113,7 +132,7 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
                                 90,
                                 MediaQuery.of(context).size.width * 0.035,
                                 15),
-                            itemCount: DashboardDecks().dashboardDecks.length,
+                            itemCount: dashboardDecksList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return AnimationConfiguration.staggeredList(
                                 delay: const Duration(milliseconds: 200),
@@ -125,7 +144,23 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
                                   child: FadeInAnimation(
                                     child: Column(
                                       children: [
-                                        DashboardDecks().dashboardDecks[index],
+                                        dashboardDecks(
+                                            ProjectsDeck(
+                                                deckHeight: deckHeight,
+                                                deckWidth: deckWidth),
+                                            SocialsDeck(
+                                                deckHeight: deckHeight,
+                                                deckWidth: deckWidth),
+                                            FinancesDeck(
+                                              deckHeight: deckHeight,
+                                              deckWidth: deckWidth,
+                                              halfDeckWidth: halfDeckWidth,
+                                            ),
+                                            NewsDeck(
+                                              deckHeight: deckHeight,
+                                              deckWidth: deckWidth,
+                                              halfDeckWidth: halfDeckWidth,
+                                            )).dashboardDecks[index],
                                       ],
                                     ),
                                   ),

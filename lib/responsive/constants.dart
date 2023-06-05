@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
+import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../pages/finance_page.dart';
 import '../pages/news_page.dart';
@@ -236,54 +237,21 @@ class _DockButtonState extends State<DockButton> {
   }
 }
 
-//PROJECTS DECK TEMPLATE
-class ProjectsDeck extends StatelessWidget {
-  const ProjectsDeck({super.key, this.onTap, this.color});
-
-  final VoidCallback? onTap;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Deck(
-        deckHeight: MediaQuery.of(context).size.height * 0.22,
-        deckWidth: MediaQuery.of(context).size.width * 0.93,
-        deckName: 'Projects',
-        gradient1: red,
-        gradient2: purp,
-        neonGlow: red,
-        text: Text(
-          'Collaborate and innovate.',
-          style: GoogleFonts.montserrat(
-              textStyle: const TextStyle(fontSize: 32, height: 1.0),
-              fontWeight: FontWeight.w600),
-        ),
-        // subText: Text(
-        //   'Post, join, or support independent projects anywhere in the world.',
-        //   style: GoogleFonts.montserrat(
-        //       textStyle: const TextStyle(fontSize: 12, color: Colors.white60),
-        //       fontWeight: FontWeight.w500),
-        // ),
-      ),
-    );
-  }
-}
-
 //PROJECTS DECK ANIMATION
-class ProjectsDeckAnimLink extends StatefulWidget {
-  const ProjectsDeckAnimLink({super.key});
-
+class ProjectsDeck extends StatefulWidget {
+  ProjectsDeck({super.key, required this.deckHeight, required this.deckWidth});
+  double deckHeight;
+  double deckWidth;
   @override
-  State<ProjectsDeckAnimLink> createState() => _ProjectsDeckAnimLinkState();
+  State<ProjectsDeck> createState() => _ProjectsDeckState();
 }
 
-class _ProjectsDeckAnimLinkState extends State<ProjectsDeckAnimLink>
-    with AnimationMixin {
+class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
   @override
   late AnimationController controller;
   late Animation<double> scale;
   late Animation<double> opacity;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -334,41 +302,37 @@ class _ProjectsDeckAnimLinkState extends State<ProjectsDeckAnimLink>
       child: ScaleTransition(
         scale: scale,
         child: AnimatedOpacity(
-          opacity: opacity.value,
-          duration: const Duration(milliseconds: 300),
-          child: ProjectsDeck(),
-        ),
+            opacity: opacity.value,
+            duration: const Duration(milliseconds: 300),
+            child: projectDeck(
+                deckHeight: widget.deckHeight, deckWidth: widget.deckWidth)),
       ),
     );
   }
-}
 
-//SOCIALS DECK TEMPLATE
-class SocialsDeck extends StatelessWidget {
-  const SocialsDeck({super.key, this.onTap, this.color});
-
-  final VoidCallback? onTap;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
+  GestureDetector projectDeck({
+    required double deckHeight,
+    required double deckWidth,
+    VoidCallback? onTap,
+    Color? color,
+  }) {
     return GestureDetector(
       child: Deck(
-        deckHeight: MediaQuery.of(context).size.height * 0.22,
-        deckWidth: MediaQuery.of(context).size.width * 0.93,
-        deckName: 'Socials',
-        gradient1: Colors.orange,
+        deckHeight: widget.deckHeight,
+        deckWidth: widget.deckWidth,
+        deckName: 'Projects',
+        gradient1: red,
         gradient2: purp,
-        neonGlow: Colors.deepOrange,
+        neonGlow: red,
         onTap: onTap,
         text: Text(
-          'All of your socials in one place.',
+          'Collaborate and innovate.',
           style: GoogleFonts.montserrat(
-              textStyle: const TextStyle(fontSize: 28, height: 1.0),
+              textStyle: const TextStyle(fontSize: 32, height: 1.0),
               fontWeight: FontWeight.w600),
         ),
         // subText: Text(
-        //   'Just link your social media accounts and access them all in one place.',
+        //   'Post, join, or support independent projects anywhere in the world.',
         //   style: GoogleFonts.montserrat(
         //       textStyle: const TextStyle(fontSize: 12, color: Colors.white60),
         //       fontWeight: FontWeight.w500),
@@ -379,15 +343,15 @@ class SocialsDeck extends StatelessWidget {
 }
 
 //SOCIALS DECK ANIMATION
-class SocialsDeckAnimLink extends StatefulWidget {
-  const SocialsDeckAnimLink({super.key});
-
+class SocialsDeck extends StatefulWidget {
+  SocialsDeck({super.key, required this.deckHeight, required this.deckWidth});
+  double deckHeight;
+  double deckWidth;
   @override
-  State<SocialsDeckAnimLink> createState() => _SocialsDeckAnimLinkState();
+  State<SocialsDeck> createState() => _SocialsDeckState();
 }
 
-class _SocialsDeckAnimLinkState extends State<SocialsDeckAnimLink>
-    with AnimationMixin {
+class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
   @override
   late AnimationController controller;
   late Animation<double> scale;
@@ -444,46 +408,60 @@ class _SocialsDeckAnimLinkState extends State<SocialsDeckAnimLink>
         child: AnimatedOpacity(
           opacity: opacity.value,
           duration: const Duration(milliseconds: 300),
-          child: SocialsDeck(),
+          child: socialsDeck(
+              deckHeight: widget.deckHeight, deckWidth: widget.deckWidth),
         ),
       ),
     );
   }
-}
 
-//FINANCES DECK TEMPLATE
-class FinancesDeck extends StatelessWidget {
-  const FinancesDeck({super.key, this.onTap, this.color});
-
-  final VoidCallback? onTap;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
+  GestureDetector socialsDeck({
+    required double deckHeight,
+    required double deckWidth,
+    VoidCallback? onTap,
+    Color? color,
+  }) {
     return GestureDetector(
       child: Deck(
-        deckHeight: MediaQuery.of(context).size.height * 0.22,
-        deckWidth: MediaQuery.of(context).size.width * 0.45,
-        deckName: 'Finances',
-        gradient1: const Color.fromARGB(255, 157, 255, 45),
-        gradient2: const Color.fromARGB(255, 59, 193, 255),
-        neonGlow: const Color.fromARGB(169, 136, 255, 0),
+        deckHeight: deckHeight,
+        deckWidth: deckWidth,
+        deckName: 'Socials',
+        gradient1: Colors.orange,
+        gradient2: purp,
+        neonGlow: Colors.deepOrange,
         onTap: onTap,
+        text: Text(
+          'All of your socials in one place.',
+          style: GoogleFonts.montserrat(
+              textStyle: const TextStyle(fontSize: 28, height: 1.0),
+              fontWeight: FontWeight.w600),
+        ),
+        // subText: Text(
+        //   'Just link your social media accounts and access them all in one place.',
+        //   style: GoogleFonts.montserrat(
+        //       textStyle: const TextStyle(fontSize: 12, color: Colors.white60),
+        //       fontWeight: FontWeight.w500),
+        // ),
       ),
     );
   }
 }
 
 //FINACNES DECK ANIMATION
-class FinancesDeckAnimLink extends StatefulWidget {
-  const FinancesDeckAnimLink({super.key});
-
+class FinancesDeck extends StatefulWidget {
+  FinancesDeck(
+      {super.key,
+      required this.deckHeight,
+      required this.deckWidth,
+      required this.halfDeckWidth});
+  double deckHeight;
+  double deckWidth;
+  double halfDeckWidth;
   @override
-  State<FinancesDeckAnimLink> createState() => _FinancesDeckAnimLinkState();
+  State<FinancesDeck> createState() => _FinancesDeckState();
 }
 
-class _FinancesDeckAnimLinkState extends State<FinancesDeckAnimLink>
-    with AnimationMixin {
+class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
   @override
   late AnimationController controller;
   late Animation<double> scale;
@@ -540,30 +518,29 @@ class _FinancesDeckAnimLinkState extends State<FinancesDeckAnimLink>
         child: AnimatedOpacity(
           opacity: opacity.value,
           duration: const Duration(milliseconds: 300),
-          child: FinancesDeck(),
+          child: financesDeck(
+              deckHeight: widget.deckHeight,
+              deckWidth: widget.deckWidth,
+              halfDeckWidth: widget.halfDeckWidth),
         ),
       ),
     );
   }
-}
 
-//NEWS DECK TEMPLATE
-class NewsDeck extends StatelessWidget {
-  const NewsDeck({super.key, this.onTap, this.color});
-
-  final VoidCallback? onTap;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
+  GestureDetector financesDeck(
+      {required deckHeight,
+      required deckWidth,
+      required halfDeckWidth,
+      VoidCallback? onTap,
+      Color? color}) {
     return GestureDetector(
       child: Deck(
-        deckHeight: MediaQuery.of(context).size.height * 0.22,
-        deckWidth: MediaQuery.of(context).size.width * 0.45,
-        deckName: 'News',
-        gradient1: const Color.fromARGB(255, 59, 193, 255),
-        gradient2: purp,
-        neonGlow: const Color.fromARGB(255, 59, 193, 255),
+        deckHeight: deckHeight,
+        deckWidth: deckWidth,
+        deckName: 'Finances',
+        gradient1: const Color.fromARGB(255, 157, 255, 45),
+        gradient2: const Color.fromARGB(255, 59, 193, 255),
+        neonGlow: const Color.fromARGB(169, 136, 255, 0),
         onTap: onTap,
       ),
     );
@@ -571,15 +548,20 @@ class NewsDeck extends StatelessWidget {
 }
 
 //NEWS DECK ANIMATION
-class NewsDeckAnimLink extends StatefulWidget {
-  const NewsDeckAnimLink({super.key});
-
+class NewsDeck extends StatefulWidget {
+  NewsDeck(
+      {super.key,
+      required this.deckHeight,
+      required this.deckWidth,
+      required this.halfDeckWidth});
+  double deckHeight;
+  double deckWidth;
+  double halfDeckWidth;
   @override
-  State<NewsDeckAnimLink> createState() => _NewsDeckAnimLinkState();
+  State<NewsDeck> createState() => _NewsDeckState();
 }
 
-class _NewsDeckAnimLinkState extends State<NewsDeckAnimLink>
-    with AnimationMixin {
+class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
   @override
   late AnimationController controller;
   late Animation<double> scale;
@@ -636,8 +618,30 @@ class _NewsDeckAnimLinkState extends State<NewsDeckAnimLink>
         child: AnimatedOpacity(
           opacity: opacity.value,
           duration: const Duration(milliseconds: 300),
-          child: NewsDeck(),
+          child: NewsDeck(
+              deckHeight: widget.deckHeight,
+              deckWidth: widget.deckWidth,
+              halfDeckWidth: widget.halfDeckWidth),
         ),
+      ),
+    );
+  }
+
+  GestureDetector NewsDeck(
+      {required deckHeight,
+      required deckWidth,
+      required halfDeckWidth,
+      VoidCallback? onTap,
+      Color? color}) {
+    return GestureDetector(
+      child: Deck(
+        deckHeight: deckHeight,
+        deckWidth: deckWidth,
+        deckName: 'News',
+        gradient1: const Color.fromARGB(255, 59, 193, 255),
+        gradient2: purp,
+        neonGlow: const Color.fromARGB(255, 59, 193, 255),
+        onTap: onTap,
       ),
     );
   }

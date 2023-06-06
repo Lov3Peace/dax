@@ -5,7 +5,7 @@ import 'package:flutter_application_1/util/dock.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../pages/main.dart';
-import '../../util/dashboard_decks_list.dart';
+import '../../util/dash_decks_list.dart';
 import '../../util/title_bubble.dart';
 import '../constants.dart';
 
@@ -24,6 +24,7 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
   late AnimationController widthController;
   late AnimationController heightController;
   late AnimationController colorController;
+  final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
 
   @override
   void initState() {
@@ -73,7 +74,7 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
                             physics: const BouncingScrollPhysics(),
                             padding: EdgeInsets.fromLTRB(screenHeight * 0.035,
                                 100, screenWidth * 0.035, 15),
-                            itemCount: DashboardDecks().dashboardDecks.length,
+                            itemCount: dashboardDecksList.length,
                             itemBuilder: (BuildContext context, int index) {
                               return AnimationConfiguration.staggeredList(
                                 delay: const Duration(milliseconds: 200),
@@ -85,7 +86,7 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
                                   child: FadeInAnimation(
                                     child: Column(
                                       children: [
-                                        DashboardDecks().dashboardDecks[index],
+                                        //dashboardDecks().dashboardDecks[index],
                                       ],
                                     ),
                                   ),

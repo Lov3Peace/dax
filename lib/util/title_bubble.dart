@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../pages/main.dart';
 
@@ -10,6 +11,8 @@ class TitleBubble extends StatelessWidget {
     required this.gradient1,
     required this.gradient2,
     required this.neonGlow,
+    required this.leftPad,
+    this.textSize,
     this.onTap,
     super.key,
   });
@@ -20,6 +23,8 @@ class TitleBubble extends StatelessWidget {
   Color gradient1;
   Color gradient2;
   Color neonGlow;
+  double? textSize;
+  double leftPad;
   VoidCallback? onTap;
   Color shadowColor = Colors.white;
   Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
@@ -30,13 +35,12 @@ class TitleBubble extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        margin: const EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
             gradient: const LinearGradient(colors: [
               Color.fromARGB(134, 10, 10, 10),
               Color.fromARGB(230, 24, 24, 24),
             ], transform: GradientRotation(180)),
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(screenHeight * 0.05),
             border: Border.all(color: const Color.fromARGB(147, 36, 36, 36)),
             boxShadow: const [
               BoxShadow(
@@ -57,7 +61,7 @@ class TitleBubble extends StatelessWidget {
           alignment: Alignment.centerLeft,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              padding: EdgeInsets.fromLTRB(leftPad, 0, 0, 0),
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
@@ -73,7 +77,7 @@ class TitleBubble extends StatelessWidget {
                   child: Text(
                     deckName,
                     style: GoogleFonts.montserrat(
-                        fontSize: 18,
+                        fontSize: textSize,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                         shadows: [

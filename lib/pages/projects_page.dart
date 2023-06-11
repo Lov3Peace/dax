@@ -45,6 +45,7 @@ class ProjectsPage extends StatelessWidget {
                       gradient1: tran,
                       gradient2: tran,
                       neonGlow: tran,
+                      leftPad: 0,
                     ),
                   ),
                   Hero(

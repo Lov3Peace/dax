@@ -45,6 +45,7 @@ class _SocialsPageState extends State<SocialsPage> {
                     gradient1: tran,
                     gradient2: tran,
                     neonGlow: tran,
+                    leftPad: 0,
                   ),
                 ),
                 Hero(

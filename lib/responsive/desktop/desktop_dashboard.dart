@@ -1,17 +1,18 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/projects_page.dart';
+import 'package:flutter_application_1/pages/main.dart';
 import 'package:flutter_application_1/responsive/constants.dart';
 import 'package:flutter_application_1/util/background.dart';
+import 'package:flutter_application_1/util/decks.dart';
 import 'package:flutter_application_1/util/dock.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:flutter_application_1/pages/main.dart';
+import 'package:flutter_application_1/util/projects_stacks_list.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../util/dash_decks_list.dart';
 
+import '../../util/dashboard_decks.dart';
+import '../../util/desk_dashboard_decks.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
-final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
 
 class DesktopDashboard extends StatefulWidget {
   const DesktopDashboard({Key? key}) : super(key: key);
@@ -22,11 +23,14 @@ class DesktopDashboard extends StatefulWidget {
 
 class _DesktopDashboardState extends State<DesktopDashboard>
     with AnimationMixin {
+  //globals
   late Animation<double> scale;
   late Animation<double> opacity;
   late AnimationController widthController;
   late AnimationController heightController;
   late AnimationController colorController;
+
+  //final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
 
   @override
   void initState() {
@@ -40,14 +44,22 @@ class _DesktopDashboardState extends State<DesktopDashboard>
 
   @override
   Widget build(BuildContext context) {
-    if (screenHeight < 1) {}
+    /*
+    double deckHeight = screenHeight * 0.22;
+    double deckWidth = screenWidth * 0.90;
+    double halfDeckWidth = screenWidth * 0.45;
+
+    if (screenWidth < 550) {
+      deckHeight = screenHeight * 0.22;
+    } else if (screenWidth < 1100) {
+      deckHeight = screenHeight * 0.24;
+    } else {
+      deckHeight = screenHeight * 0.26;
+    } */
+
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: globalAppBar(
-          profileBubbleHeight: screenHeight * 0.2,
-          profileBubbleWidth: screenWidth * 0.3,
-          titleBubbleHeight: screenHeight * 0.2,
-          titleBubbleWidth: screenWidth * 0.3),
+      appBar: deskAppBar(),
       body: Stack(
         children: [
           Background(),
@@ -75,9 +87,12 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                         AnimationLimiter(
                           child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
-                            padding: EdgeInsets.fromLTRB(screenWidth * 0.035,
-                                90, screenWidth * 0.035, 15),
-                            itemCount: dashboardDecksList.length,
+                            padding: EdgeInsets.fromLTRB(
+                                MediaQuery.of(context).size.width * 0.035,
+                                90,
+                                MediaQuery.of(context).size.width * 0.035,
+                                15),
+                            itemCount: 3,
                             itemBuilder: (BuildContext context, int index) {
                               return AnimationConfiguration.staggeredList(
                                 delay: const Duration(milliseconds: 200),
@@ -87,9 +102,15 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                   scale: 0.7,
                                   curve: Curves.easeOutBack,
                                   child: FadeInAnimation(
-                                    child: Column(
+                                    child: Stack(
+                                      alignment: Alignment.centerLeft,
                                       children: [
-                                        //dashboardDecks().dashboardDecks[index],
+                                        deskDashboardDecks(
+                                          ProjectsDeck(),
+                                          SocialsDeck(),
+                                          FinancesDeck(),
+                                          NewsDeck(),
+                                        )[index]
                                       ],
                                     ),
                                   ),
@@ -113,7 +134,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                       ],
                     ),
                   ),
-                  //const DesktopDock()
+                  const Dock()
                 ],
               )),
         ],

@@ -32,6 +32,7 @@ class _KeyboardsDeckState extends State<KeyboardsDeck> {
               gradient1: tran,
               gradient2: tran,
               neonGlow: tran,
+              leftPad: 0,
             ),
           ),
         ),

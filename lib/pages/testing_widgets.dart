@@ -4,7 +4,7 @@ import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:flutter_application_1/util/decks.dart';
 import 'package:flutter_application_1/util/projects_stacks_list.dart';
 import 'package:flutter_application_1/util/socials_stacks_list.dart';
-import '../util/dash_decks_list.dart';
+import '../util/dashboard_decks.dart';
 
 //List x = DashboardDecks().dashboardDecks;
 List currentList = [];

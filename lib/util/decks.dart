@@ -13,6 +13,8 @@ class Deck extends StatelessWidget {
     required this.neonGlow,
     this.text,
     this.subText,
+    this.textConstraint,
+    this.image,
     this.onTap,
     super.key,
   });
@@ -25,6 +27,8 @@ class Deck extends StatelessWidget {
   Color neonGlow;
   Text? text;
   Text? subText;
+  double? textConstraint;
+  Image? image;
   VoidCallback? onTap;
   Color shadowColor = Colors.white;
   Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
@@ -69,16 +73,27 @@ class Deck extends StatelessWidget {
                 children: [
                   Container(
                       margin: const EdgeInsets.only(bottom: 5),
-                      width: 270,
+                      width: textConstraint,
                       child: text),
                   Container(
                       margin: const EdgeInsets.only(bottom: 5),
-                      width: 270,
+                      width: textConstraint,
                       child: subText)
                 ],
               ),
             ),
-
+            Positioned(
+              left: 150,
+              bottom: 20,
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: image),
+                ],
+              ),
+            ),
             // Card label
             //
             Positioned(

@@ -1,9 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/constants.dart';
+import 'package:flutter_application_1/util/background.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import 'package:flutter_application_1/util/projects_stacks_list.dart';
-import '../util/dash_decks_list.dart';
+import '../util/dashboard_decks.dart';
 import '../util/title_bubble.dart';
 import 'main.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -24,10 +25,8 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
   late AnimationController widthController;
   late AnimationController heightController;
   late AnimationController colorController;
-  late double deckHeight;
-  late double deckWidth;
-  late double halfDeckWidth;
-  final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
+
+  //final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
 
   @override
   void initState() {
@@ -41,68 +40,42 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    double deckHeight = screenHeight * 0.22;
+    double deckWidth = screenWidth * 0.90;
+    double halfDeckWidth = screenWidth * 0.45;
+    double profileBubbleHeight = screenHeight * 0.04;
+    double profileBubbleWidth = screenWidth * 0.3;
+    double titleBubbleHeight = screenHeight * 0.04;
+    double titleBubbleWidth = screenWidth * 0.3;
+
+    if (screenWidth < 550) {
+      deckHeight = screenHeight * 0.22;
+    } else if (screenWidth < 1100) {
+      deckHeight = screenHeight * 0.24;
+    } else {
+      deckHeight = screenHeight * 0.26;
+    }
+
+    if (screenWidth < 550) {
+      profileBubbleHeight = screenHeight * 0.05;
+      titleBubbleHeight = screenHeight * 0.05;
+      titleBubbleWidth = screenWidth * 0.4;
+    } else if (screenWidth < 1100) {
+      profileBubbleHeight = screenHeight * 0.04;
+    } else {
+      deckHeight = screenHeight * 0.26;
+    }
+
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: tran,
-        shadowColor: tran,
-        automaticallyImplyLeading: false,
-        leadingWidth: MediaQuery.of(context).size.width * .9,
-        flexibleSpace: Padding(
-          padding: EdgeInsets.fromLTRB(
-              MediaQuery.of(context).size.width * 0.035,
-              25,
-              MediaQuery.of(context).size.width * 0.035,
-              0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Hero(
-                tag: 'title',
-                flightShuttleBuilder: flightShuttleBuilder,
-                child: TitleBubble(
-                  deckHeight: MediaQuery.of(context).size.height * 0.1,
-                  deckWidth: MediaQuery.of(context).size.width * 0.4,
-                  deckName: 'Dashboard',
-                  gradient1: tran,
-                  gradient2: tran,
-                  neonGlow: tran,
-                ),
-              ),
-              Hero(
-                tag: 'profile',
-                flightShuttleBuilder: flightShuttleBuilder,
-                child: ProfileBubble(
-                  deckHeight: MediaQuery.of(context).size.height * 0.1,
-                  deckWidth: MediaQuery.of(context).size.width * 0.30,
-                  deckName: 's3rv',
-                  gradient1: tran,
-                  gradient2: tran,
-                  neonGlow: tran,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: mobTabAppBar(
+          profileBubbleHeight: profileBubbleHeight,
+          profileBubbleWidth: profileBubbleWidth,
+          titleBubbleHeight: titleBubbleHeight,
+          titleBubbleWidth: titleBubbleWidth),
       body: Stack(
         children: [
-          LayoutBuilder(builder: (context, constraints) {
-            if (constraints.maxWidth < 550) {
-              deckHeight = screenHeight * 0.22;
-              deckWidth = screenWidth * 0.90;
-              halfDeckWidth = screenWidth * 0.41;
-              return const Dashboard();
-            } else if (constraints.maxWidth < 1100) {
-              deckHeight = screenHeight * 0.23;
-              deckWidth = screenWidth * 0.90;
-              halfDeckWidth = screenWidth * 0.41;
-              return const Dashboard();
-            } else {
-              deckHeight = screenHeight * 0.24;
-              return const Dashboard();
-            }
-          }),
+          Background(),
           Positioned.fill(
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
@@ -132,7 +105,12 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
                                 90,
                                 MediaQuery.of(context).size.width * 0.035,
                                 15),
-                            itemCount: dashboardDecksList.length,
+                            itemCount: mobTabDashboardDecks(
+                              ProjectsDeck(),
+                              SocialsDeck(),
+                              FinancesDeck(),
+                              NewsDeck(),
+                            ).length,
                             itemBuilder: (BuildContext context, int index) {
                               return AnimationConfiguration.staggeredList(
                                 delay: const Duration(milliseconds: 200),
@@ -144,23 +122,11 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
                                   child: FadeInAnimation(
                                     child: Column(
                                       children: [
-                                        dashboardDecks(
-                                            ProjectsDeck(
-                                                deckHeight: deckHeight,
-                                                deckWidth: deckWidth),
-                                            SocialsDeck(
-                                                deckHeight: deckHeight,
-                                                deckWidth: deckWidth),
-                                            FinancesDeck(
-                                              deckHeight: deckHeight,
-                                              deckWidth: deckWidth,
-                                              halfDeckWidth: halfDeckWidth,
-                                            ),
-                                            NewsDeck(
-                                              deckHeight: deckHeight,
-                                              deckWidth: deckWidth,
-                                              halfDeckWidth: halfDeckWidth,
-                                            )).dashboardDecks[index],
+                                        mobTabDashboardDecks(
+                                            ProjectsDeck(),
+                                            SocialsDeck(),
+                                            FinancesDeck(),
+                                            NewsDeck())[index]
                                       ],
                                     ),
                                   ),

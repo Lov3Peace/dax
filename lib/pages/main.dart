@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_dashboard.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../responsive/desktop/desktop_dashboard.dart';
+import '../responsive/mobile/mobile_dashboard.dart';
+import '../responsive/tablet/tablet_dashboard.dart';
 import 'dashboard.dart';
 import 'home_page.dart';
 import 'profile_page.dart';
 import 'testing_widgets.dart';
-import 'package:flutter_application_1/responsive/tablet/tablet_dashboard.dart';
-import 'package:flutter_application_1/responsive/mobile/mobile_dashboard.dart';
 
 void main() {
   runApp(const MyApp());

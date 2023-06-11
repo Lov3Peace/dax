@@ -16,8 +16,17 @@ import 'package:google_fonts/google_fonts.dart';
 var screenHeight = window.physicalSize.height / window.devicePixelRatio;
 var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 
+//responsive variables
+double deckHeight = screenHeight * 0.22;
+double deckWidth = screenWidth * 0.90;
+double halfDeckWidth = screenWidth * 0.45;
+double headerTextSize = 24;
+double subTextSize = 14;
+double profBubTextSize = 20;
+double titleTextSize = 20;
+
 //APPBAR FOR ALL PAGES
-AppBar globalAppBar(
+AppBar mobTabAppBar(
     {required double titleBubbleHeight,
     required double titleBubbleWidth,
     required double profileBubbleHeight,
@@ -29,7 +38,7 @@ AppBar globalAppBar(
     leadingWidth: screenWidth * 0.9,
     toolbarHeight: lerpDouble(0, 10, 8),
     flexibleSpace: Padding(
-      padding: EdgeInsets.fromLTRB(screenWidth * .05, 20, screenWidth * .05, 0),
+      padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -43,6 +52,7 @@ AppBar globalAppBar(
               gradient1: tran,
               gradient2: tran,
               neonGlow: tran,
+              leftPad: 0,
             ),
           ),
           Hero(
@@ -55,6 +65,41 @@ AppBar globalAppBar(
               gradient1: tran,
               gradient2: tran,
               neonGlow: tran,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+AppBar deskAppBar() {
+  if (screenWidth > 1100) {
+    titleTextSize = 40;
+  }
+  return AppBar(
+    backgroundColor: tran,
+    shadowColor: tran,
+    automaticallyImplyLeading: false,
+    leadingWidth: screenWidth * 0.9,
+    toolbarHeight: lerpDouble(0, 18, 8),
+    flexibleSpace: Padding(
+      padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Hero(
+            tag: 'title',
+            flightShuttleBuilder: flightShuttleBuilder,
+            child: TitleBubble(
+              deckHeight: screenHeight * 0.07,
+              deckWidth: screenWidth * 0.30,
+              deckName: 'Dashboard',
+              gradient1: tran,
+              gradient2: tran,
+              neonGlow: tran,
+              textSize: titleTextSize,
+              leftPad: 30,
             ),
           ),
         ],
@@ -239,9 +284,8 @@ class _DockButtonState extends State<DockButton> {
 
 //PROJECTS DECK ANIMATION
 class ProjectsDeck extends StatefulWidget {
-  ProjectsDeck({super.key, required this.deckHeight, required this.deckWidth});
-  double deckHeight;
-  double deckWidth;
+  ProjectsDeck({super.key});
+
   @override
   State<ProjectsDeck> createState() => _ProjectsDeckState();
 }
@@ -263,6 +307,19 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
     scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
     opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
     controller.stop();
+    if (screenWidth < 550) {
+      deckHeight = screenHeight * 0.22;
+      headerTextSize = 20;
+      subTextSize = 16;
+    } else if (screenWidth < 1100) {
+      deckHeight = screenHeight * 0.24;
+      headerTextSize = 24;
+      subTextSize = 14;
+    } else {
+      deckHeight = screenHeight * 0.26;
+      deckWidth = screenWidth * 0.33;
+      halfDeckWidth = screenWidth * 0.16;
+    }
 
     super.initState();
   }
@@ -304,39 +361,36 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         child: AnimatedOpacity(
             opacity: opacity.value,
             duration: const Duration(milliseconds: 300),
-            child: projectDeck(
-                deckHeight: widget.deckHeight, deckWidth: widget.deckWidth)),
+            child: projectDeck()),
       ),
     );
   }
 
   GestureDetector projectDeck({
-    required double deckHeight,
-    required double deckWidth,
+    //required double deckHeight,
+    //required double deckWidth,
     VoidCallback? onTap,
     Color? color,
   }) {
     return GestureDetector(
       child: Deck(
-        deckHeight: widget.deckHeight,
-        deckWidth: widget.deckWidth,
+        deckHeight: deckHeight,
+        deckWidth: deckWidth,
         deckName: 'Projects',
         gradient1: red,
         gradient2: purp,
         neonGlow: red,
-        onTap: onTap,
+        textConstraint: 270,
+        image: Image.asset(
+          'images/proj placeholder.webp',
+          height: 80,
+        ),
         text: Text(
           'Collaborate and innovate.',
           style: GoogleFonts.montserrat(
-              textStyle: const TextStyle(fontSize: 32, height: 1.0),
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
               fontWeight: FontWeight.w600),
         ),
-        // subText: Text(
-        //   'Post, join, or support independent projects anywhere in the world.',
-        //   style: GoogleFonts.montserrat(
-        //       textStyle: const TextStyle(fontSize: 12, color: Colors.white60),
-        //       fontWeight: FontWeight.w500),
-        // ),
       ),
     );
   }
@@ -344,9 +398,8 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
 
 //SOCIALS DECK ANIMATION
 class SocialsDeck extends StatefulWidget {
-  SocialsDeck({super.key, required this.deckHeight, required this.deckWidth});
-  double deckHeight;
-  double deckWidth;
+  SocialsDeck({super.key});
+
   @override
   State<SocialsDeck> createState() => _SocialsDeckState();
 }
@@ -408,16 +461,13 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         child: AnimatedOpacity(
           opacity: opacity.value,
           duration: const Duration(milliseconds: 300),
-          child: socialsDeck(
-              deckHeight: widget.deckHeight, deckWidth: widget.deckWidth),
+          child: socialsDeck(),
         ),
       ),
     );
   }
 
   GestureDetector socialsDeck({
-    required double deckHeight,
-    required double deckWidth,
     VoidCallback? onTap,
     Color? color,
   }) {
@@ -426,22 +476,16 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         deckHeight: deckHeight,
         deckWidth: deckWidth,
         deckName: 'Socials',
-        gradient1: Colors.orange,
+        gradient1: orange,
         gradient2: purp,
-        neonGlow: Colors.deepOrange,
-        onTap: onTap,
+        neonGlow: orange,
+        textConstraint: 270,
         text: Text(
           'All of your socials in one place.',
           style: GoogleFonts.montserrat(
-              textStyle: const TextStyle(fontSize: 28, height: 1.0),
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
               fontWeight: FontWeight.w600),
         ),
-        // subText: Text(
-        //   'Just link your social media accounts and access them all in one place.',
-        //   style: GoogleFonts.montserrat(
-        //       textStyle: const TextStyle(fontSize: 12, color: Colors.white60),
-        //       fontWeight: FontWeight.w500),
-        // ),
       ),
     );
   }
@@ -449,14 +493,10 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
 
 //FINACNES DECK ANIMATION
 class FinancesDeck extends StatefulWidget {
-  FinancesDeck(
-      {super.key,
-      required this.deckHeight,
-      required this.deckWidth,
-      required this.halfDeckWidth});
-  double deckHeight;
-  double deckWidth;
-  double halfDeckWidth;
+  FinancesDeck({
+    super.key,
+  });
+
   @override
   State<FinancesDeck> createState() => _FinancesDeckState();
 }
@@ -518,30 +558,28 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         child: AnimatedOpacity(
           opacity: opacity.value,
           duration: const Duration(milliseconds: 300),
-          child: financesDeck(
-              deckHeight: widget.deckHeight,
-              deckWidth: widget.deckWidth,
-              halfDeckWidth: widget.halfDeckWidth),
+          child: financesDeck(),
         ),
       ),
     );
   }
 
-  GestureDetector financesDeck(
-      {required deckHeight,
-      required deckWidth,
-      required halfDeckWidth,
-      VoidCallback? onTap,
-      Color? color}) {
+  GestureDetector financesDeck({VoidCallback? onTap, Color? color}) {
     return GestureDetector(
       child: Deck(
         deckHeight: deckHeight,
-        deckWidth: deckWidth,
+        deckWidth: halfDeckWidth,
         deckName: 'Finances',
-        gradient1: const Color.fromARGB(255, 157, 255, 45),
-        gradient2: const Color.fromARGB(255, 59, 193, 255),
-        neonGlow: const Color.fromARGB(169, 136, 255, 0),
-        onTap: onTap,
+        gradient1: green,
+        gradient2: blue,
+        neonGlow: green,
+        textConstraint: 150,
+        text: Text(
+          'Manage your money.',
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+              fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }
@@ -549,14 +587,10 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
 
 //NEWS DECK ANIMATION
 class NewsDeck extends StatefulWidget {
-  NewsDeck(
-      {super.key,
-      required this.deckHeight,
-      required this.deckWidth,
-      required this.halfDeckWidth});
-  double deckHeight;
-  double deckWidth;
-  double halfDeckWidth;
+  NewsDeck({
+    super.key,
+  });
+
   @override
   State<NewsDeck> createState() => _NewsDeckState();
 }
@@ -618,31 +652,28 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
         child: AnimatedOpacity(
           opacity: opacity.value,
           duration: const Duration(milliseconds: 300),
-          child: NewsDeck(
-              deckHeight: widget.deckHeight,
-              deckWidth: widget.deckWidth,
-              halfDeckWidth: widget.halfDeckWidth),
+          child: NewsDeck(),
         ),
       ),
     );
   }
 
-  GestureDetector NewsDeck(
-      {required deckHeight,
-      required deckWidth,
-      required halfDeckWidth,
-      VoidCallback? onTap,
-      Color? color}) {
+  GestureDetector NewsDeck({VoidCallback? onTap, Color? color}) {
     return GestureDetector(
-      child: Deck(
-        deckHeight: deckHeight,
-        deckWidth: deckWidth,
-        deckName: 'News',
-        gradient1: const Color.fromARGB(255, 59, 193, 255),
-        gradient2: purp,
-        neonGlow: const Color.fromARGB(255, 59, 193, 255),
-        onTap: onTap,
+        child: Deck(
+      deckHeight: deckHeight,
+      deckWidth: halfDeckWidth,
+      deckName: 'News',
+      gradient1: blue,
+      gradient2: purp,
+      neonGlow: blue,
+      textConstraint: 150,
+      text: Text(
+        'Stay up to date.',
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+            fontWeight: FontWeight.w600),
       ),
-    );
+    ));
   }
 }

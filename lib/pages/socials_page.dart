@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import '../util/background.dart';
 import '../util/big_dock.dart';
-import '../util/profile_bubble.dart';
-import '../util/socials_stacks_list.dart';
-import '../util/title_bubble.dart';
 import 'main.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_application_1/responsive/constants.dart';
 
 class SocialsPage extends StatefulWidget {
   const SocialsPage(
@@ -75,7 +73,7 @@ class _SocialsPageState extends State<SocialsPage> {
                 AnimationLimiter(
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: SocialsStacks().socialsStacks.length,
+                    itemCount: SocialsStacks().mobSocialsStacks.length,
                     itemBuilder: (BuildContext context, int index) {
                       return AnimationConfiguration.staggeredList(
                         delay: const Duration(milliseconds: 200),
@@ -87,7 +85,7 @@ class _SocialsPageState extends State<SocialsPage> {
                           child: FadeInAnimation(
                             child: Column(
                               children: [
-                                SocialsStacks().socialsStacks[index],
+                                SocialsStacks().mobSocialsStacks[index],
                               ],
                             ),
                           ),

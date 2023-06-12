@@ -83,8 +83,8 @@ class Deck extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: 150,
-              bottom: 20,
+              left: 300,
+              bottom: 0,
               child: Column(
                 children: [
                   Container(

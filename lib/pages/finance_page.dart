@@ -1,12 +1,10 @@
 import '../util/background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/big_dock.dart';
-import '../util/finances_stacks_list.dart';
-import '../util/profile_bubble.dart';
-import '../util/title_bubble.dart';
 import 'keyboards_deck.dart';
 import 'main.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_application_1/responsive/constants.dart';
 
 class FinancePage extends StatefulWidget {
   final Animation<double> transitionAnimation;
@@ -71,7 +69,7 @@ class _FinancePageState extends State<FinancePage> {
           AnimationLimiter(
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
-              itemCount: 3,
+              itemCount: FinancesStacks().mobFinancesStacks.length,
               itemBuilder: (BuildContext context, int index) {
                 return AnimationConfiguration.staggeredList(
                   delay: const Duration(milliseconds: 200),
@@ -90,7 +88,7 @@ class _FinancePageState extends State<FinancePage> {
                                   return const KeyboardsDeck();
                                 }));
                               },
-                              child: FinancesStacks().financesStacks[index]),
+                              child: FinancesStacks().mobFinancesStacks[index]),
                         ],
                       ),
                     ),

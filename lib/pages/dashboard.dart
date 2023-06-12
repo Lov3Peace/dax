@@ -6,7 +6,6 @@ import 'package:flutter_application_1/util/dock.dart';
 import 'package:flutter_application_1/util/projects_stacks_list.dart';
 import '../util/dashboard_decks.dart';
 import '../util/title_bubble.dart';
-import 'main.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
@@ -68,11 +67,7 @@ class _DashboardState extends State<Dashboard> with AnimationMixin {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: mobTabAppBar(
-          profileBubbleHeight: profileBubbleHeight,
-          profileBubbleWidth: profileBubbleWidth,
-          titleBubbleHeight: titleBubbleHeight,
-          titleBubbleWidth: titleBubbleWidth),
+      appBar: mobTabAppBar(),
       body: Stack(
         children: [
           Background(),

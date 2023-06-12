@@ -57,11 +57,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: mobTabAppBar(
-          profileBubbleHeight: screenHeight * 0.05,
-          profileBubbleWidth: screenWidth * 0.40,
-          titleBubbleHeight: screenHeight * 0.05,
-          titleBubbleWidth: screenWidth * 0.40),
+      appBar: mobTabAppBar(),
       body: Stack(
         children: [
           Background(),

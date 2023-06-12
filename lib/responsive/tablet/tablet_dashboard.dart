@@ -1,16 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/main.dart';
 import 'package:flutter_application_1/responsive/constants.dart';
 import 'package:flutter_application_1/util/background.dart';
-import 'package:flutter_application_1/util/decks.dart';
 import 'package:flutter_application_1/util/dock.dart';
-import 'package:flutter_application_1/util/projects_stacks_list.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import '../../util/dashboard_decks.dart';
+
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class TabletDashboard extends StatefulWidget {
@@ -57,11 +54,7 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: mobTabAppBar(
-          profileBubbleHeight: screenHeight * 0.04,
-          profileBubbleWidth: screenWidth * 0.2,
-          titleBubbleHeight: screenHeight * 0.04,
-          titleBubbleWidth: screenWidth * 0.2),
+      appBar: mobTabAppBar(),
       body: Stack(
         children: [
           Background(),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/test_page.dart';
 import 'package:flutter_application_1/util/big_dock.dart';
-import 'package:flutter_application_1/util/news_stacks_list.dart';
 import '../util/background.dart';
-import '../util/profile_bubble.dart';
-import '../util/title_bubble.dart';
 import 'main.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_application_1/responsive/constants.dart';
 
 class NewsPage extends StatefulWidget {
   const NewsPage({super.key, required Animation<double> transitionAnimation});
@@ -75,7 +73,7 @@ class _NewsPageState extends State<NewsPage> {
                 AnimationLimiter(
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    itemCount: NewsStacks().newsStacks.length,
+                    itemCount: NewsStacks().mobNewsStacks.length,
                     itemBuilder: (BuildContext context, int index) {
                       return AnimationConfiguration.staggeredList(
                         delay: const Duration(milliseconds: 200),
@@ -94,7 +92,7 @@ class _NewsPageState extends State<NewsPage> {
                                         return TestPage();
                                       }));
                                     },
-                                    child: NewsStacks().newsStacks[index]),
+                                    child: NewsStacks().mobNewsStacks[index]),
                               ],
                             ),
                           ),

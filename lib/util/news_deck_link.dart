@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simple_animations/animation_controller_extension/animation_controller_extension.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../pages/news_page.dart';
-import '../pages/projects_page.dart';
+import '../responsive/mobile/mobile_news_page.dart';
 import 'news_deck.dart';
 
 class NewsDeckLink extends StatefulWidget {
@@ -51,7 +50,7 @@ class _NewsDeckLinkState extends State<NewsDeckLink> with AnimationMixin {
                   );
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
-                  return NewsPage(
+                  return MobNewsPage(
                     transitionAnimation: animation,
                   );
                 },

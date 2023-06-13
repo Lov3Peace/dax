@@ -19,7 +19,7 @@ class _TabFinancePageState extends State<TabFinancePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: mobTabAppBar(),
+      appBar: tabAppBar(),
       body: Stack(
         alignment: const AlignmentDirectional(0, 1),
         fit: StackFit.loose,

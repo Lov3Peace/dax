@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
-
-import '../pages/dashboard.dart';
 import '../responsive/constants.dart';
 import '../responsive/desktop/desktop_dashboard.dart';
 import '../responsive/mobile/mobile_dashboard.dart';

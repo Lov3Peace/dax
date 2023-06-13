@@ -5,10 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../responsive/desktop/desktop_dashboard.dart';
 import '../responsive/mobile/mobile_dashboard.dart';
 import '../responsive/tablet/tablet_dashboard.dart';
-import 'dashboard.dart';
-import 'home_page.dart';
 import 'profile_page.dart';
-import 'testing_widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,12 +52,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
-  List<Widget> pages = [
-    const HomePage(),
-    const ProfilePage(),
-    const Testing(),
-    const Dashboard()
-  ];
+  List<Widget> pages = [const ProfilePage(), const MobileDashboard()];
   @override
   Widget build(BuildContext context) {
     double deckHeight = MediaQuery.of(context).size.height * 0.21;

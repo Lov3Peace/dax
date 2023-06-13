@@ -54,7 +54,7 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: mobTabAppBar(),
+      appBar: tabAppBar(),
       body: Stack(
         children: [
           Background(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../pages/main.dart';
-import '../pages/projects_page.dart';
 import 'decks.dart';
 
 class SocialsStacks {

@@ -57,7 +57,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: mobTabAppBar(),
+      appBar: mobAppBar(),
       body: Stack(
         children: [
           Background(),

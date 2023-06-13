@@ -19,7 +19,7 @@ class _TabSocialsPageState extends State<TabSocialsPage> {
     return Material(
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: mobTabAppBar(),
+        appBar: tabAppBar(),
         body: Stack(
           alignment: const AlignmentDirectional(0, 1),
           fit: StackFit.loose,

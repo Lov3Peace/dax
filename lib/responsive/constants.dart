@@ -7,14 +7,12 @@ import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dar
 import 'package:flutter_application_1/responsive/tablet/tablet_socials_page.dart';
 import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../pages/finance_page.dart';
-import '../pages/news_page.dart';
-import '../pages/projects_page.dart';
-import '../pages/socials_page.dart';
 import '../util/decks.dart';
-import '../util/profile_bubble.dart';
-import '../util/title_bubble.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'mobile/mobile_finance_page.dart';
+import 'mobile/mobile_news_page.dart';
+import 'mobile/mobile_projects_page.dart';
+import 'mobile/mobile_socials_page.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)
 var screenHeight = window.physicalSize.height / window.devicePixelRatio;
@@ -30,7 +28,50 @@ double profBubTextSize = 20;
 double titleTextSize = 20;
 
 //APPBAR FOR ALL PAGES
-AppBar mobTabAppBar() {
+AppBar mobAppBar() {
+  return AppBar(
+    backgroundColor: tran,
+    shadowColor: tran,
+    automaticallyImplyLeading: false,
+    leadingWidth: screenWidth * 0.9,
+    toolbarHeight: lerpDouble(0, 10, 8),
+    flexibleSpace: Padding(
+      padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Hero(
+            tag: 'title',
+            flightShuttleBuilder: flightShuttleBuilder,
+            child: TitleBubble(
+              deckHeight: screenHeight * 0.05,
+              deckWidth: screenWidth * 0.4,
+              deckName: 'Dashboard',
+              gradient1: tran,
+              gradient2: tran,
+              neonGlow: tran,
+              leftPad: 0,
+            ),
+          ),
+          Hero(
+            tag: 'profile',
+            flightShuttleBuilder: flightShuttleBuilder,
+            child: ProfileBubble(
+              deckHeight: screenHeight * 0.05,
+              deckWidth: screenWidth * 0.3,
+              deckName: 's3rv',
+              gradient1: tran,
+              gradient2: tran,
+              neonGlow: tran,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+AppBar tabAppBar() {
   return AppBar(
     backgroundColor: tran,
     shadowColor: tran,
@@ -161,6 +202,7 @@ class ProfileBubble extends StatelessWidget {
         height: deckHeight,
         width: deckWidth,
         child: Stack(
+          alignment: Alignment.centerRight,
           children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -443,7 +485,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
                   if (screenWidth < 550) {
-                    return ProjectsPage(
+                    return MobProjectsPage(
                       transitionAnimation: animation,
                     );
                   } else if (screenWidth < 1100) {
@@ -451,7 +493,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return ProjectsPage(
+                    return MobProjectsPage(
                       transitionAnimation: animation,
                     );
                   }
@@ -719,7 +761,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
                   if (screenWidth < 550) {
-                    return SocialsPage(
+                    return MobSocialsPage(
                       transitionAnimation: animation,
                     );
                   } else if (screenWidth < 1100) {
@@ -727,7 +769,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return SocialsPage(
+                    return MobSocialsPage(
                       transitionAnimation: animation,
                     );
                   }
@@ -935,7 +977,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
                   if (screenWidth < 550) {
-                    return FinancePage(
+                    return MobFinancePage(
                       transitionAnimation: animation,
                     );
                   } else if (screenWidth < 1100) {
@@ -943,7 +985,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return FinancePage(
+                    return MobFinancePage(
                       transitionAnimation: animation,
                     );
                   }
@@ -1124,7 +1166,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
                   if (screenWidth < 550) {
-                    return NewsPage(
+                    return MobNewsPage(
                       transitionAnimation: animation,
                     );
                   } else if (screenWidth < 1100) {
@@ -1132,7 +1174,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return NewsPage(
+                    return MobNewsPage(
                       transitionAnimation: animation,
                     );
                   }

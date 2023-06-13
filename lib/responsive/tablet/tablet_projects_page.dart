@@ -16,7 +16,7 @@ class TabProjectsPage extends StatelessWidget {
     return Material(
       child: Scaffold(
           extendBodyBehindAppBar: true,
-          appBar: mobTabAppBar(),
+          appBar: tabAppBar(),
           body: Stack(
             alignment: const AlignmentDirectional(0.9, 1),
             fit: StackFit.loose,

@@ -283,6 +283,7 @@ class TitleBubble extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
+        margin: const EdgeInsets.only(top: 20),
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
             gradient: const LinearGradient(colors: [
@@ -448,25 +449,25 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
     scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
     opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
     controller.stop();
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-      headerTextSize = 20;
-      subTextSize = 16;
-    } else if (screenWidth < 1100) {
-      deckHeight = screenHeight * 0.24;
-      headerTextSize = 24;
-      subTextSize = 14;
-    } else {
-      deckHeight = screenHeight * 0.26;
-      deckWidth = screenWidth * 0.33;
-      halfDeckWidth = screenWidth * 0.16;
-    }
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (screenWidth < 550) {
+      deckHeight = screenHeight * 0.22;
+      headerTextSize = 24;
+      subTextSize = 16;
+    } else if (screenWidth < 1100) {
+      deckHeight = screenHeight * 0.24;
+      headerTextSize = headerTextSize * 2.30;
+      subTextSize = 14;
+    } else {
+      deckHeight = screenHeight * 0.26;
+      deckWidth = screenWidth * 0.33;
+      halfDeckWidth = screenWidth * 0.16;
+    }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -531,16 +532,15 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         gradient1: red,
         gradient2: purp,
         neonGlow: red,
-        textConstraint: 700,
+        textConstraint: 300,
         image: Image.asset(
           'images/proj placeholder.webp',
-          height: 180,
+          height: screenWidth * 0.3,
         ),
         text: Text(
           'Collaborate and innovate.',
           style: GoogleFonts.montserrat(
-              textStyle:
-                  TextStyle(fontSize: headerTextSize * 2.30, height: 1.0),
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
               fontWeight: FontWeight.w600),
         ),
       ),
@@ -743,6 +743,19 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    if (screenWidth < 550) {
+      deckHeight = screenHeight * 0.22;
+      headerTextSize = 24;
+      subTextSize = 16;
+    } else if (screenWidth < 1100) {
+      deckHeight = screenHeight * 0.24;
+      headerTextSize = headerTextSize * 2.30;
+      subTextSize = 14;
+    } else {
+      deckHeight = screenHeight * 0.26;
+      deckWidth = screenWidth * 0.33;
+      halfDeckWidth = screenWidth * 0.16;
+    }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -806,12 +819,11 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         gradient1: orange,
         gradient2: purp,
         neonGlow: orange,
-        textConstraint: 600,
+        textConstraint: 300,
         text: Text(
           'All of your socials in one place.',
           style: GoogleFonts.montserrat(
-              textStyle:
-                  TextStyle(fontSize: headerTextSize * 2.30, height: 1.0),
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
               fontWeight: FontWeight.w600),
         ),
       ),
@@ -959,6 +971,19 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    if (screenWidth < 550) {
+      deckHeight = screenHeight * 0.22;
+      headerTextSize = 24;
+      subTextSize = 16;
+    } else if (screenWidth < 1100) {
+      deckHeight = screenHeight * 0.24;
+      headerTextSize = headerTextSize * 2.30;
+      subTextSize = 14;
+    } else {
+      deckHeight = screenHeight * 0.26;
+      deckWidth = screenWidth * 0.33;
+      halfDeckWidth = screenWidth * 0.16;
+    }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -1019,12 +1044,11 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         gradient1: green,
         gradient2: blue,
         neonGlow: green,
-        textConstraint: 350,
+        textConstraint: 150,
         text: Text(
           'Manage your money.',
           style: GoogleFonts.montserrat(
-              textStyle:
-                  TextStyle(fontSize: headerTextSize * 2.30, height: 1.0),
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
               fontWeight: FontWeight.w600),
         ),
       ),
@@ -1148,6 +1172,19 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    if (screenWidth < 550) {
+      deckHeight = screenHeight * 0.22;
+      headerTextSize = 24;
+      subTextSize = 16;
+    } else if (screenWidth < 1100) {
+      deckHeight = screenHeight * 0.24;
+      headerTextSize = headerTextSize * 2.30;
+      subTextSize = 14;
+    } else {
+      deckHeight = screenHeight * 0.26;
+      deckWidth = screenWidth * 0.33;
+      halfDeckWidth = screenWidth * 0.16;
+    }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -1208,11 +1245,11 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
       gradient1: blue,
       gradient2: purp,
       neonGlow: blue,
-      textConstraint: 300,
+      textConstraint: 150,
       text: Text(
         'Stay up to date.',
         style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: headerTextSize * 2.3, height: 1.0),
+            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
             fontWeight: FontWeight.w600),
       ),
     ));

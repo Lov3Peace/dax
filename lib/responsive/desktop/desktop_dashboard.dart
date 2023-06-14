@@ -3,14 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:flutter_application_1/responsive/constants.dart';
 import 'package:flutter_application_1/util/background.dart';
-import 'package:flutter_application_1/util/decks.dart';
-import 'package:flutter_application_1/util/dock.dart';
-import 'package:flutter_application_1/util/projects_stacks_list.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import '../../util/dashboard_decks.dart';
 import '../../util/desk_dashboard_decks.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -59,7 +53,36 @@ class _DesktopDashboardState extends State<DesktopDashboard>
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: deskAppBar(),
+      appBar: AppBar(
+        backgroundColor: tran,
+        shadowColor: tran,
+        automaticallyImplyLeading: false,
+        leadingWidth: screenWidth * 0.9,
+        toolbarHeight: lerpDouble(0, 18, 8),
+        flexibleSpace: Padding(
+          padding:
+              EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Hero(
+                tag: 'title',
+                flightShuttleBuilder: flightShuttleBuilder,
+                child: TitleBubble(
+                  deckHeight: screenHeight * 0.07,
+                  deckWidth: screenWidth * 0.30,
+                  deckName: 'Dashboard',
+                  gradient1: tran,
+                  gradient2: tran,
+                  neonGlow: tran,
+                  textSize: titleTextSize,
+                  leftPad: 30,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Stack(
         children: [
           Background(),
@@ -77,64 +100,53 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                   controller.playReverse();
                 });
               },
-              child: Column(
+              child: Row(
                 children: [
                   Expanded(
-                    child: PageView(
-                      scrollDirection: Axis.vertical,
-                      physics: const BouncingScrollPhysics(),
-                      children: [
-                        AnimationLimiter(
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            padding: EdgeInsets.fromLTRB(
-                                MediaQuery.of(context).size.width * 0.035,
-                                90,
-                                MediaQuery.of(context).size.width * 0.035,
-                                15),
-                            itemCount: 3,
-                            itemBuilder: (BuildContext context, int index) {
-                              return AnimationConfiguration.staggeredList(
-                                delay: const Duration(milliseconds: 200),
-                                position: index,
-                                duration: const Duration(milliseconds: 700),
-                                child: ScaleAnimation(
-                                  scale: 0.7,
-                                  curve: Curves.easeOutBack,
-                                  child: FadeInAnimation(
-                                    child: Stack(
-                                      alignment: Alignment.centerLeft,
-                                      children: [
-                                        deskDashboardDecks(
-                                          ProjectsDeck(),
-                                          SocialsDeck(),
-                                          FinancesDeck(),
-                                          NewsDeck(),
-                                        )[index]
-                                      ],
-                                    ),
+                    child: AnimationLimiter(
+                      child: ListView.builder(
+                        padding: EdgeInsets.fromLTRB(
+                            MediaQuery.of(context).size.width * 0.035,
+                            90,
+                            MediaQuery.of(context).size.width * 0.035,
+                            15),
+                        itemCount: 3,
+                        itemBuilder: (BuildContext context, int index) {
+                          return AnimationConfiguration.staggeredList(
+                            delay: const Duration(milliseconds: 200),
+                            position: index,
+                            duration: const Duration(milliseconds: 700),
+                            child: ScaleAnimation(
+                              scale: 0.7,
+                              curve: Curves.easeOutBack,
+                              child: FadeInAnimation(
+                                child: deskDashboardDecks(
+                                  lane1: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: FinancesDeck(),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ProjectsDeck(),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: FinancesDeck(),
+                                      )
+                                    ],
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(10.0),
-                        //   child: Column(
-                        //     children: ProjectStacks().projectStacks,
-                        //   ),
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(10.0),
-                        //   child: Column(
-                        //     children: ProjectStacks2().projectStacks2,
-                        //   ),
-                        // ),
-                      ],
+                                  lane2: FinancesDeck(),
+                                  lane3: SocialsDeck(),
+                                )[index],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
-                  const Dock()
                 ],
               )),
         ],

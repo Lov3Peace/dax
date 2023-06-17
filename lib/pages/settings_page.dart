@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 const int listCount = 20;
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  const SettingsPage({super.key, required IoniconsData icon});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();

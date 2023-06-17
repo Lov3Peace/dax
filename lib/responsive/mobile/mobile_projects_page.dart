@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/util/big_dock.dart';
 import 'package:flutter_application_1/util/projects_stacks_list2.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../pages/keyboards_deck.dart';
-import '../../pages/main.dart';
 import '../../util/background.dart';
+import '../../util/dock.dart';
 import '../constants.dart';
 
 final List<Widget> projStacks = ProjectStacks().mobProjectStacks;
@@ -21,7 +20,7 @@ class MobProjectsPage extends StatelessWidget {
           extendBodyBehindAppBar: true,
           appBar: mobAppBar(),
           body: Stack(
-            alignment: const AlignmentDirectional(0.9, 1),
+            alignment: const AlignmentDirectional(0, 1),
             fit: StackFit.loose,
             children: [
               Background(),
@@ -76,7 +75,7 @@ class MobProjectsPage extends StatelessWidget {
                   // ),
                 ],
               ),
-              BigDock(newGrad1: red, newGrad2: purp, newGlow: red)
+              const Dock()
             ],
           )),
     );

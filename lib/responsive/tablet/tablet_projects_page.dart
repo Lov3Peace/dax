@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/big_dock.dart';
+import 'package:flutter_application_1/util/dock.dart';
 import 'package:flutter_application_1/util/projects_stacks_list2.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_application_1/responsive/constants.dart';
@@ -18,7 +19,7 @@ class TabProjectsPage extends StatelessWidget {
           extendBodyBehindAppBar: true,
           appBar: tabAppBar(),
           body: Stack(
-            alignment: const AlignmentDirectional(0.9, 1),
+            alignment: const AlignmentDirectional(0, 1),
             fit: StackFit.loose,
             children: [
               Background(),
@@ -73,7 +74,7 @@ class TabProjectsPage extends StatelessWidget {
                   // ),
                 ],
               ),
-              BigDock(newGrad1: red, newGrad2: purp, newGlow: red)
+              const Dock()
             ],
           )),
     );

@@ -461,7 +461,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
       subTextSize = 16;
     } else if (screenWidth < 1100) {
       deckHeight = screenHeight * 0.24;
-      headerTextSize = headerTextSize * 2.30;
+      headerTextSize = 48;
       subTextSize = 14;
     } else {
       deckHeight = screenHeight * 0.26;
@@ -749,7 +749,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
       subTextSize = 16;
     } else if (screenWidth < 1100) {
       deckHeight = screenHeight * 0.24;
-      headerTextSize = headerTextSize * 2.30;
+      headerTextSize = 48;
       subTextSize = 14;
     } else {
       deckHeight = screenHeight * 0.26;
@@ -977,7 +977,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
       subTextSize = 16;
     } else if (screenWidth < 1100) {
       deckHeight = screenHeight * 0.24;
-      headerTextSize = headerTextSize * 2.30;
+      headerTextSize = 48;
       subTextSize = 14;
     } else {
       deckHeight = screenHeight * 0.26;
@@ -1044,7 +1044,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         gradient1: green,
         gradient2: blue,
         neonGlow: green,
-        textConstraint: 150,
+        textConstraint: 250,
         text: Text(
           'Manage your money.',
           style: GoogleFonts.montserrat(
@@ -1178,7 +1178,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
       subTextSize = 16;
     } else if (screenWidth < 1100) {
       deckHeight = screenHeight * 0.24;
-      headerTextSize = headerTextSize * 2.30;
+      headerTextSize = 48;
       subTextSize = 14;
     } else {
       deckHeight = screenHeight * 0.26;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/dock.dart';
 import '../../pages/main.dart';
 import '../../util/background.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -67,7 +68,7 @@ class _MobSocialsPageState extends State<MobSocialsPage> {
                 // ),
               ],
             ),
-            BigDock(newGrad1: orange, newGrad2: purp, newGlow: orangeGlow),
+            const Dock()
           ],
         ),
       ),

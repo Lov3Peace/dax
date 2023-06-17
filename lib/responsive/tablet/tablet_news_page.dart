@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/test_page.dart';
 import 'package:flutter_application_1/util/big_dock.dart';
+import 'package:flutter_application_1/util/dock.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_application_1/responsive/constants.dart';
 
@@ -64,7 +65,7 @@ class _TabNewsPageState extends State<TabNewsPage> {
                 ),
               ],
             ),
-            BigDock(newGrad1: blue, newGrad2: purp, newGlow: blue),
+            const Dock()
           ],
         ),
       ),

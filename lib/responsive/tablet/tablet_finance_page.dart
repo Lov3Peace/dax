@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/big_dock.dart';
+import 'package:flutter_application_1/util/dock.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_application_1/responsive/constants.dart';
 import '../../pages/keyboards_deck.dart';
@@ -56,7 +57,7 @@ class _TabFinancePageState extends State<TabFinancePage> {
               },
             ),
           ),
-          BigDock(newGrad1: green, newGrad2: blue, newGlow: greenGlow),
+          const Dock()
         ],
       ),
     );

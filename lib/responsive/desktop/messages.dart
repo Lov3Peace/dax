@@ -36,7 +36,7 @@ class _MessagesState extends State<Messages> {
         ],
       ),
 
-      height: 70.h,
+      height: 80.h,
       width: 15.w,
 
       child: Column(
@@ -66,7 +66,7 @@ class _MessagesState extends State<Messages> {
                   ),
                 ],
               ),
-              height: 55.h,
+              height: 65.h,
             ),
           )
         ],

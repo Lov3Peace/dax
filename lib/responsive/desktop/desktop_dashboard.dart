@@ -104,96 +104,94 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                       Expanded(
                         child: ListView(
                           children: [
-                            Padding(
-                              padding: EdgeInsets.all(.5.w),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 40.h,
-                                    width: 75.w,
-                                    constraints: const BoxConstraints(
-                                        minWidth: 800, minHeight: 600),
-                                    child: AnimationLimiter(
-                                      child: ListView.builder(
-                                        // shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: 3,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return AnimationConfiguration
-                                              .staggeredList(
-                                            delay: const Duration(
-                                                milliseconds: 200),
-                                            position: index,
-                                            duration: const Duration(
-                                                milliseconds: 700),
-                                            child: ScaleAnimation(
-                                              scale: 0.7,
-                                              curve: Curves.easeOutBack,
-                                              child: FadeInAnimation(
-                                                child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0.25.w,
-                                                      0.25.w,
-                                                      0.25.w,
-                                                      0.25.w),
-                                                  child: deskDashboardDecks1(
-                                                    deck1: FinancesDeck(),
-                                                    deck2: ProjectsDeck(),
-                                                    deck3: FinancesDeck(),
-                                                  )[index],
-                                                ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 40.h,
+                                  width: 75.w,
+                                  constraints: const BoxConstraints(
+                                      minWidth: 800, minHeight: 600),
+                                  child: AnimationLimiter(
+                                    child: ListView.builder(
+                                      // shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: 3,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return AnimationConfiguration
+                                            .staggeredList(
+                                          delay:
+                                              const Duration(milliseconds: 200),
+                                          position: index,
+                                          duration:
+                                              const Duration(milliseconds: 700),
+                                          child: ScaleAnimation(
+                                            scale: 0.7,
+                                            curve: Curves.easeOutBack,
+                                            child: FadeInAnimation(
+                                              child: Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    0.25.w,
+                                                    0.25.w,
+                                                    0.25.w,
+                                                    0.25.w),
+                                                child: deskDashboardDecks1(
+                                                  deck1: FinancesDeck(),
+                                                  deck2: ProjectsDeck(),
+                                                  deck3: FinancesDeck(),
+                                                )[index],
                                               ),
                                             ),
-                                          );
-                                        },
-                                      ),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
-                                  Container(
-                                    height: 40.h,
-                                    width: 75.w,
-                                    constraints: const BoxConstraints(
-                                        minWidth: 800, minHeight: 600),
-                                    child: AnimationLimiter(
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: 2,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
-                                          return AnimationConfiguration
-                                              .staggeredList(
-                                            delay: const Duration(
-                                                milliseconds: 200),
-                                            position: index,
-                                            duration: const Duration(
-                                                milliseconds: 700),
-                                            child: ScaleAnimation(
-                                              scale: 0.7,
-                                              curve: Curves.easeOutBack,
-                                              child: FadeInAnimation(
-                                                child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0.25.w,
-                                                      0.25.w,
-                                                      0.25.w,
-                                                      0.25.w),
-                                                  child: deskDashboardDecks2(
-                                                    deck4: SocialsDeck(),
-                                                    deck5: NewsDeck(),
-                                                  )[index],
-                                                ),
+                                ),
+                                Container(
+                                  height: 40.h,
+                                  width: 75.w,
+                                  constraints: const BoxConstraints(
+                                      minWidth: 800, minHeight: 600),
+                                  child: AnimationLimiter(
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: 2,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return AnimationConfiguration
+                                            .staggeredList(
+                                          delay:
+                                              const Duration(milliseconds: 200),
+                                          position: index,
+                                          duration:
+                                              const Duration(milliseconds: 700),
+                                          child: ScaleAnimation(
+                                            scale: 0.7,
+                                            curve: Curves.easeOutBack,
+                                            child: FadeInAnimation(
+                                              child: Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    0.25.w,
+                                                    0.25.w,
+                                                    0.25.w,
+                                                    0.25.w),
+                                                child: deskDashboardDecks2(
+                                                  deck4: SocialsDeck(),
+                                                  deck5: NewsDeck(),
+                                                )[index],
                                               ),
                                             ),
-                                          );
-                                        },
-                                      ),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

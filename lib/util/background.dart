@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../pages/main.dart';
 
-class Background extends StatelessWidget {
+class Background extends StatefulWidget {
   Background({super.key});
 
+  @override
+  State<Background> createState() => _BackgroundState();
+}
+
+class _BackgroundState extends State<Background> {
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,79 +1,16 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/login%20ui%20final/onboarding_page.dart';
 import 'package:flutter_application_1/pages/main.dart';
-import 'package:flutter_application_1/util/Window%20Route/logout_window_route.dart';
+
 import 'package:ionicons/ionicons.dart';
+import 'package:simple_animations/animation_builder/custom_animation_builder.dart';
+import 'package:simple_animations/simple_animations.dart';
 
-/*class SettingsDockButton extends StatefulWidget {
-  SettingsDockButton({super.key, required this.icon, this.onPressed});
-  IconData icon;
-  VoidCallback? onPressed;
-  @override
-  State<SettingsDockButton> createState() => _SettingsDockButtonState();
-}
+import '../../login ui final/Personal SignIn/personal_btn.dart';
 
-class _SettingsDockButtonState extends State<SettingsDockButton> {
-  Control control = Control.stop;
-  Color activeColor = Colors.white;
-  Color inactiveColor = Colors.white30;
-  Color currentColor = Colors.white30;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: tran,
-      child: CustomAnimationBuilder<double>(
-        control: control,
-        startPosition: 0,
-        tween: Tween(begin: 2, end: 1.5),
-        duration: const Duration(milliseconds: 150),
-        curve: Curves.linear,
-        onCompleted: () {
-          reverseShrink();
-        },
-        builder: (context, value, child) {
-          return Transform.scale(
-            scale: value,
-            child: child,
-          );
-        },
-        child: IconButton(
-          icon: Icon(widget.icon),
-          color: currentColor,
-          onPressed: toggleShrink,
-          highlightColor: tran,
-          splashColor: tran,
-        ),
-      ),
-    );
-  }
-
-  void toggleShrink() {
-    // toggle between control instructions
-    setState(() {
-      control = Control.play;
-      currentColor =
-          (currentColor == activeColor) ? inactiveColor : activeColor;
-    });
-  }
-
-  void reverseShrink() {
-    setState(() {
-      control = Control.playReverse;
-    });
-  }
-}*/
+import '../../responsive/mobile/mob_constants.dart';
+import '../Window Route/logout_window_route.dart';
 
 class LogoutWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
@@ -86,14 +23,13 @@ class LogoutWindowButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(LogoutWindowRoute(builder: (context) {
-            return const _LogoutWindowPopupCard();
+            return LogoutWindowPopupCard(
+              onPressed: () {},
+            );
           }));
         },
         child: const Hero(
           tag: _heroLogoutWindow,
-          /*createRectTween: (begin, end) {
-            return Tween(begin: begin, end: end);
-          },*/
           child: Material(
             color: tran,
             child: Icon(
@@ -109,20 +45,26 @@ class LogoutWindowButton extends StatelessWidget {
 
 const String _heroLogoutWindow = 'Logout-window-hero';
 
-class _LogoutWindowPopupCard extends StatelessWidget {
-  /// {@macro add_todo_popup_card}
-  const _LogoutWindowPopupCard({Key? key}) : super(key: key);
+class LogoutWindowPopupCard extends StatefulWidget {
+  const LogoutWindowPopupCard({
+    Key? key,
+    required dynamic Function()? onPressed,
+  }) : super(key: key);
+  @override
+  State<LogoutWindowPopupCard> createState() => _LogoutwindowPopupCardState();
+  // TODO: implement createState
+}
 
+/// {@macro add_todo_popup_card}
+class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
+    with AnimationMixin {
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(32.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: Hero(
           tag: _heroLogoutWindow,
-          /*createRectTween: (begin, end) {
-            return Tween(begin: begin, end: end);
-          },*/
           child: Material(
             color: const Color(0xA9444444),
             elevation: 2,
@@ -133,30 +75,70 @@ class _LogoutWindowPopupCard extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Logout',
-                        border: InputBorder.none,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 110),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Logout',
+                          hintStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          border: InputBorder.none,
+                        ),
+                        cursorColor: Colors.white,
                       ),
-                      cursorColor: Colors.white,
                     ),
                     Divider(
+                      thickness: 0.5,
                       color: Colors.white,
-                      thickness: 0.2,
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Write a note',
-                        border: InputBorder.none,
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Would you like to log out?',
+                          hintStyle: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),
+                          border: InputBorder.none,
+                        ),
+                        cursorColor: Colors.white,
                       ),
-                      cursorColor: Colors.white,
-                      maxLines: 6,
                     ),
-                    Divider(
-                      color: Colors.white,
-                      thickness: 0.2,
-                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OnboardingScreen()));
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.symmetric(horizontal: 25),
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: [purp, red]),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: red,
+                                  blurRadius: 20,
+                                  blurStyle: BlurStyle.solid)
+                            ],
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(screenWidth / 4))),
+                        child: const Center(
+                          child: Text(
+                            'Log Out',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

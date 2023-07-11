@@ -1,15 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
-import 'package:flutter_application_1/responsive/constants.dart';
+import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 import 'package:flutter_application_1/util/background.dart';
 import 'package:flutter_application_1/util/decks.dart';
 import 'package:flutter_application_1/util/dock.dart';
-import 'package:flutter_application_1/util/projects_stacks_list.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
+import '../../Screens/background/artboard_page.dart';
 import '../../util/dashboard_decks.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -60,80 +60,81 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
       appBar: mobAppBar(),
       body: Stack(
         children: [
-          Background(),
+          const ArtBoardScreen(),
           Positioned.fill(
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
                 child: const SizedBox()),
           ),
           GestureDetector(
-              onTap: () {
-                setState(() {
-                  controller.play();
-                });
-                Future.delayed(const Duration(milliseconds: 500)).then((_) {
-                  controller.playReverse();
-                });
-              },
-              child: Column(
-                children: [
-                  Expanded(
-                    child: PageView(
-                      scrollDirection: Axis.vertical,
-                      physics: const BouncingScrollPhysics(),
-                      children: [
-                        AnimationLimiter(
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            padding: EdgeInsets.fromLTRB(
-                                MediaQuery.of(context).size.width * 0.035,
-                                90,
-                                MediaQuery.of(context).size.width * 0.035,
-                                15),
-                            itemCount: 3,
-                            itemBuilder: (BuildContext context, int index) {
-                              return AnimationConfiguration.staggeredList(
-                                delay: const Duration(milliseconds: 200),
-                                position: index,
-                                duration: const Duration(milliseconds: 700),
-                                child: ScaleAnimation(
-                                  scale: 0.7,
-                                  curve: Curves.easeOutBack,
-                                  child: FadeInAnimation(
-                                    child: Column(
-                                      children: [
-                                        mobTabDashboardDecks(
-                                          ProjectsDeck(),
-                                          SocialsDeck(),
-                                          FinancesDeck(),
-                                          NewsDeck(),
-                                        )[index]
-                                      ],
-                                    ),
+            onTap: () {
+              setState(() {
+                controller.play();
+              });
+              Future.delayed(const Duration(milliseconds: 500)).then((_) {
+                controller.playReverse();
+              });
+            },
+            child: Column(
+              children: [
+                Expanded(
+                  child: PageView(
+                    scrollDirection: Axis.vertical,
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      AnimationLimiter(
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          padding: EdgeInsets.fromLTRB(
+                              MediaQuery.of(context).size.width * 0.035,
+                              90,
+                              MediaQuery.of(context).size.width * 0.035,
+                              15),
+                          itemCount: 3,
+                          itemBuilder: (BuildContext context, int index) {
+                            return AnimationConfiguration.staggeredList(
+                              delay: const Duration(milliseconds: 200),
+                              position: index,
+                              duration: const Duration(milliseconds: 700),
+                              child: ScaleAnimation(
+                                scale: 0.7,
+                                curve: Curves.easeOutBack,
+                                child: FadeInAnimation(
+                                  child: Column(
+                                    children: [
+                                      mobTabDashboardDecks(
+                                        ProjectsDeck(),
+                                        SocialsDeck(),
+                                        FinancesDeck(),
+                                        NewsDeck(),
+                                      )[index]
+                                    ],
                                   ),
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          },
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(10.0),
-                        //   child: Column(
-                        //     children: ProjectStacks().projectStacks,
-                        //   ),
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(10.0),
-                        //   child: Column(
-                        //     children: ProjectStacks2().projectStacks2,
-                        //   ),
-                        // ),
-                      ],
-                    ),
+                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(10.0),
+                      //   child: Column(
+                      //     children: ProjectStacks().projectStacks,
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.all(10.0),
+                      //   child: Column(
+                      //     children: ProjectStacks2().projectStacks2,
+                      //   ),
+                      // ),
+                    ],
                   ),
-                  const Dock()
-                ],
-              )),
+                ),
+                Dock(newGlow: red, newGrad1: purp, newGrad2: red)
+              ],
+            ),
+          ),
         ],
       ),
     );

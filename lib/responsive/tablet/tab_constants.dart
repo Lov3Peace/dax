@@ -7,12 +7,9 @@ import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dar
 import 'package:flutter_application_1/responsive/tablet/tablet_socials_page.dart';
 import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../util/decks.dart';
+import '../../util/decks.dart';
+
 import 'package:google_fonts/google_fonts.dart';
-import 'mobile/mobile_finance_page.dart';
-import 'mobile/mobile_news_page.dart';
-import 'mobile/mobile_projects_page.dart';
-import 'mobile/mobile_socials_page.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)
 var screenHeight = window.physicalSize.height / window.devicePixelRatio;
@@ -28,48 +25,6 @@ double profBubTextSize = 20;
 double titleTextSize = 20;
 
 //APPBAR FOR ALL PAGES
-AppBar mobAppBar() {
-  return AppBar(
-    backgroundColor: tran,
-    shadowColor: tran,
-    automaticallyImplyLeading: false,
-    leadingWidth: screenWidth * 0.9,
-    toolbarHeight: lerpDouble(0, 10, 8),
-    flexibleSpace: Padding(
-      padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Hero(
-            tag: 'title',
-            flightShuttleBuilder: flightShuttleBuilder,
-            child: TitleBubble(
-              deckHeight: screenHeight * 0.05,
-              deckWidth: screenWidth * 0.4,
-              deckName: 'Dashboard',
-              gradient1: tran,
-              gradient2: tran,
-              neonGlow: tran,
-              leftPad: 0,
-            ),
-          ),
-          Hero(
-            tag: 'profile',
-            flightShuttleBuilder: flightShuttleBuilder,
-            child: ProfileBubble(
-              deckHeight: screenHeight * 0.05,
-              deckWidth: screenWidth * 0.3,
-              deckName: 's3rv',
-              gradient1: tran,
-              gradient2: tran,
-              neonGlow: tran,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
 
 AppBar tabAppBar() {
   return AppBar(
@@ -106,41 +61,6 @@ AppBar tabAppBar() {
               gradient1: tran,
               gradient2: tran,
               neonGlow: tran,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-AppBar deskAppBar() {
-  if (screenWidth > 1100) {
-    titleTextSize = 40;
-  }
-  return AppBar(
-    backgroundColor: tran,
-    shadowColor: tran,
-    automaticallyImplyLeading: false,
-    leadingWidth: screenWidth * 0.9,
-    toolbarHeight: lerpDouble(0, 18, 8),
-    flexibleSpace: Padding(
-      padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Hero(
-            tag: 'title',
-            flightShuttleBuilder: flightShuttleBuilder,
-            child: TitleBubble(
-              deckHeight: screenHeight * 0.07,
-              deckWidth: screenWidth * 0.30,
-              deckName: 'Dashboard',
-              gradient1: tran,
-              gradient2: tran,
-              neonGlow: tran,
-              textSize: titleTextSize,
-              leftPad: 30,
             ),
           ),
         ],
@@ -455,19 +375,6 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-      headerTextSize = 24;
-      subTextSize = 16;
-    } else if (screenWidth < 1100) {
-      deckHeight = screenHeight * 0.24;
-      headerTextSize = 48;
-      subTextSize = 14;
-    } else {
-      deckHeight = screenHeight * 0.26;
-      deckWidth = screenWidth * 0.33;
-      halfDeckWidth = screenWidth * 0.16;
-    }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -485,19 +392,9 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
                   );
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobProjectsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabProjectsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    return MobProjectsPage(
-                      transitionAnimation: animation,
-                    );
-                  }
+                  return TabProjectsPage(
+                    transitionAnimation: animation,
+                  );
                 },
                 transitionDuration: const Duration(milliseconds: 300),
               ),
@@ -743,19 +640,6 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-      headerTextSize = 24;
-      subTextSize = 16;
-    } else if (screenWidth < 1100) {
-      deckHeight = screenHeight * 0.24;
-      headerTextSize = 48;
-      subTextSize = 14;
-    } else {
-      deckHeight = screenHeight * 0.26;
-      deckWidth = screenWidth * 0.33;
-      halfDeckWidth = screenWidth * 0.16;
-    }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -773,19 +657,9 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
                   );
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobSocialsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabSocialsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    return MobSocialsPage(
-                      transitionAnimation: animation,
-                    );
-                  }
+                  return TabSocialsPage(
+                    transitionAnimation: animation,
+                  );
                 },
                 transitionDuration: const Duration(milliseconds: 300),
               ),
@@ -971,19 +845,6 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-      headerTextSize = 24;
-      subTextSize = 16;
-    } else if (screenWidth < 1100) {
-      deckHeight = screenHeight * 0.24;
-      headerTextSize = 48;
-      subTextSize = 14;
-    } else {
-      deckHeight = screenHeight * 0.26;
-      deckWidth = screenWidth * 0.33;
-      halfDeckWidth = screenWidth * 0.16;
-    }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -1001,19 +862,9 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
                   );
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobFinancePage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabFinancePage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    return MobFinancePage(
-                      transitionAnimation: animation,
-                    );
-                  }
+                  return TabFinancePage(
+                    transitionAnimation: animation,
+                  );
                 },
                 transitionDuration: const Duration(milliseconds: 300),
               ),
@@ -1057,33 +908,6 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
 }
 
 class FinancesStacks {
-  List<Widget> mobFinancesStacks = [
-    Deck(
-      deckHeight: 100,
-      deckWidth: 375,
-      deckName: 'Balance',
-      gradient1: const Color.fromARGB(255, 157, 255, 45),
-      gradient2: const Color.fromARGB(255, 59, 193, 255),
-      neonGlow: const Color.fromARGB(129, 157, 255, 45),
-    ),
-    Deck(
-      deckHeight: DeckHeight().deckHeight,
-      deckWidth: 375,
-      deckName: 'Current Investments',
-      gradient1: const Color.fromARGB(255, 157, 255, 45),
-      gradient2: const Color.fromARGB(255, 59, 193, 255),
-      neonGlow: const Color.fromARGB(129, 157, 255, 45),
-    ),
-    Deck(
-      deckHeight: DeckHeight().deckHeight,
-      deckWidth: 375,
-      deckName: 'Current Loans',
-      gradient1: const Color.fromARGB(255, 157, 255, 45),
-      gradient2: const Color.fromARGB(255, 59, 193, 255),
-      neonGlow: const Color.fromARGB(129, 157, 255, 45),
-    ),
-    const SizedBox(height: 150)
-  ];
   List<Widget> tabFinancesStacks = [
     Deck(
       deckHeight: 300,
@@ -1109,28 +933,25 @@ class FinancesStacks {
       gradient2: const Color.fromARGB(255, 59, 193, 255),
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
-    const SizedBox(height: 150)
-  ];
-  List<Widget> deskFinancesStacks = [
     Deck(
-      deckHeight: 100,
-      deckWidth: 375,
-      deckName: 'Balance',
+      deckHeight: 300,
+      deckWidth: deckWidth * 0.85,
+      deckName: 'Current Loans',
       gradient1: const Color.fromARGB(255, 157, 255, 45),
       gradient2: const Color.fromARGB(255, 59, 193, 255),
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
-      deckHeight: DeckHeight().deckHeight,
-      deckWidth: 375,
-      deckName: 'Current Investments',
+      deckHeight: 300,
+      deckWidth: deckWidth * 0.85,
+      deckName: 'Current Loans',
       gradient1: const Color.fromARGB(255, 157, 255, 45),
       gradient2: const Color.fromARGB(255, 59, 193, 255),
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
-      deckHeight: DeckHeight().deckHeight,
-      deckWidth: 375,
+      deckHeight: 300,
+      deckWidth: deckWidth * 0.85,
       deckName: 'Current Loans',
       gradient1: const Color.fromARGB(255, 157, 255, 45),
       gradient2: const Color.fromARGB(255, 59, 193, 255),
@@ -1172,19 +993,6 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-      headerTextSize = 24;
-      subTextSize = 16;
-    } else if (screenWidth < 1100) {
-      deckHeight = screenHeight * 0.24;
-      headerTextSize = 48;
-      subTextSize = 14;
-    } else {
-      deckHeight = screenHeight * 0.26;
-      deckWidth = screenWidth * 0.33;
-      halfDeckWidth = screenWidth * 0.16;
-    }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -1202,19 +1010,9 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
                   );
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobNewsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabNewsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    return MobNewsPage(
-                      transitionAnimation: animation,
-                    );
-                  }
+                  return TabNewsPage(
+                    transitionAnimation: animation,
+                  );
                 },
                 transitionDuration: const Duration(milliseconds: 300),
               ),

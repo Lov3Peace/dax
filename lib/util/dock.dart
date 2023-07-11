@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
-import 'package:flutter_application_1/responsive/constants.dart';
+import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 import 'package:flutter_application_1/util/Dock%20Button/friends_dock_button.dart';
 import 'package:flutter_application_1/util/Dock%20Button/help_dock_button.dart';
 import 'package:flutter_application_1/util/Dock%20Button/info_dock_button.dart';
@@ -14,7 +14,15 @@ import 'package:simple_animations/simple_animations.dart';
 import 'home_button.dart';
 
 class Dock extends StatefulWidget {
-  const Dock({super.key});
+  Dock({
+    super.key,
+    required this.newGrad1,
+    required this.newGrad2,
+    required this.newGlow,
+  });
+  Color newGrad1;
+  Color newGrad2;
+  Color newGlow;
 
   @override
   State<Dock> createState() => _DockState();
@@ -76,10 +84,9 @@ class _DockState extends State<Dock> with AnimationMixin {
 
                   //Home
                   HomeButton(
-                    gradient1: purp,
-                    gradient2: red,
-                    glow: red,
-                  ),
+                      gradient1: widget.newGrad1,
+                      gradient2: widget.newGrad2,
+                      glow: widget.newGlow),
 
                   //Messages
                   const MessagesWindowButton(),

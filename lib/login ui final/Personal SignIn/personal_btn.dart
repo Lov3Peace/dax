@@ -1,0 +1,190 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/main.dart';
+import 'package:simple_animations/simple_animations.dart';
+
+import '../../../responsive/mobile/mob_constants.dart';
+import '../../responsive/desktop/desktop_dashboard.dart';
+import '../../responsive/mobile/mobile_dashboard.dart';
+import '../../responsive/responsive_layout.dart';
+import '../../responsive/tablet/tablet_dashboard.dart';
+
+import '../Create Account/createacc_btn.dart';
+import 'per_sign_in_form.dart';
+
+class PersonalButton extends StatefulWidget {
+  final Function()? onTap;
+
+  PersonalButton({super.key, required this.onTap});
+
+  @override
+  State<PersonalButton> createState() => _PersonalButtonState();
+}
+
+class _PersonalButtonState extends State<PersonalButton> {
+  bool isSignInDialogShown = false;
+  //controlls button
+  Control control = Control.stop;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomAnimationBuilder<double>(
+      control: control,
+      startPosition: 0,
+      tween: Tween(begin: 1.0, end: 0.8),
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.linear,
+      onCompleted: () {
+        reverseShrink();
+      },
+      builder: (context, value, child) {
+        return Transform.scale(
+          scale: value,
+          child: child,
+        );
+      },
+      child: GestureDetector(
+        onTap: pressed,
+        child: Container(
+          padding: const EdgeInsets.all(25),
+          margin: const EdgeInsets.symmetric(horizontal: 25),
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(colors: [purp, red]),
+              boxShadow: const [
+                BoxShadow(
+                    color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
+              ],
+              borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
+          child: const Center(
+            child: Text(
+              'Personal',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void pressed() {
+    // toggle between control instructions
+
+    control = Control.play;
+    Future.delayed(
+      Duration(milliseconds: 400),
+      () {
+        //slide animation
+        showGeneralDialog(
+          barrierDismissible: true,
+          barrierLabel: "Sign in",
+          context: context,
+          transitionDuration: Duration(milliseconds: 400),
+          transitionBuilder: (_, animation, __, child) {
+            Tween<Offset> tween;
+            tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
+            return SlideTransition(
+              position: tween.animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+              ),
+              child: child,
+            );
+          },
+          pageBuilder: (context, _, __) => Center(
+            child: Container(
+              height: 680,
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(225, 50, 50, 50).withOpacity(0.99),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(40),
+                ),
+              ),
+              child: Scaffold(
+                resizeToAvoidBottomInset: false,
+                backgroundColor: Colors.transparent,
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Sign in",
+                        style: TextStyle(
+                          fontSize: 34,
+                          fontFamily: "Gontserrat",
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: Text(
+                          "Have your personal Projects, Social Media, Finances, and News all at your finger tips! Omni's world is Endless!",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SignInForm(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Row(
+                          children: const [
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.5,
+                                color: Colors.white54,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5.0),
+                              child: Text(
+                                'Or',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.5,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text("Sign up with email, apple, or google"),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        child: CreateAccountButton(
+                          onTap: createaccbtn,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    setState(() {
+      isSignInDialogShown = true;
+    });
+  }
+
+  void reverseShrink() {
+    setState(() {
+      control = Control.playReverse;
+    });
+  }
+
+  void createaccbtn() {}
+}

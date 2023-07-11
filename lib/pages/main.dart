@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_application_1/responsive/desktop/layout_test.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../responsive/desktop/desktop_dashboard.dart';
 import '../responsive/mobile/mobile_dashboard.dart';
 import '../responsive/tablet/tablet_dashboard.dart';
 import 'profile_page.dart';
+import 'package:sizer/sizer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,100 +28,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     timeDilation = 1;
-    return MaterialApp(
-      //builder: (context, widget) => ResponsiveBreakpoints.builder(child: ClampingScrollWrapper.builder(context, widget!), breakpoints: []),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          fontFamily: GoogleFonts.montserrat().fontFamily,
-          colorScheme:
-              const ColorScheme.dark(secondary: red, onSurface: Colors.white),
-          scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)),
-      home: ResponsiveLayout(
-        mobileScaffold: const MobileDashboard(),
-        tabletScaffold: const TabletDashboard(),
-        desktopScaffold: const DesktopDashboard(),
-      ),
-    );
-  }
-}
-
-class RootPage extends StatefulWidget {
-  const RootPage({super.key});
-
-  @override
-  State<RootPage> createState() => _RootPageState();
-}
-
-class _RootPageState extends State<RootPage> {
-  int currentPage = 0;
-  List<Widget> pages = [const ProfilePage(), const MobileDashboard()];
-  @override
-  Widget build(BuildContext context) {
-    double deckHeight = MediaQuery.of(context).size.height * 0.21;
-    return Scaffold(
-      extendBody: true,
-      body: pages[currentPage],
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     debugPrint('Floating Action Button');
-      //   },
-      //   foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-      //   hoverColor: Colors.amber[700],
-      //   child: const Icon(Icons.add),
-      // ),
-      // bottomNavigationBar: NavigationBar(
-      //     backgroundColor: tran,
-      //     animationDuration: const Duration(seconds: 1),
-      //     destinations: const [
-      //       NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-      //       NavigationDestination(
-      //           icon: Icon(Icons.account_circle), label: 'Profile'),
-      //       NavigationDestination(icon: Icon(Icons.settings), label: 'Testing'),
-      //       NavigationDestination(
-      //           icon: Icon(Icons.dashboard), label: 'Dashboard'),
-      //     ],
-      //     onDestinationSelected: (int index) {
-      //       currentPage = index;
-      //       setState(() {
-      //         currentPage = index;
-      //       });
-      //     },
-      //     selectedIndex: currentPage),
-    );
-  }
-}
-
-class Stacks extends StatelessWidget {
-  const Stacks({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 15),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: const Color(0xA9444444),
-          boxShadow: const [
-            BoxShadow(
-              blurRadius: 12,
-              color: Color(0x4E000000),
-              offset: Offset(0, 8),
-            )
-          ]),
-      constraints: const BoxConstraints(maxHeight: 700, maxWidth: 1500),
-      height: MediaQuery.of(context).size.height * 0.40,
-      width: MediaQuery.of(context).size.width * 0.85,
-      child: Stack(
-        alignment: const AlignmentDirectional(-0.8, 0.7),
-        children: const [
-          // Text('Projects',
-          //     style: TextStyle(
-          //         fontFamily: 'Gontserrat',
-          //         fontSize: 14,
-          //         fontWeight: FontWeight.w500)),
-        ],
+    return Sizer(
+      builder: (context, orientation, deviceType) => MaterialApp(
+        //builder: (context, widget) => ResponsiveBreakpoints.builder(child: ClampingScrollWrapper.builder(context, widget!), breakpoints: []),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            fontFamily: GoogleFonts.montserrat().fontFamily,
+            colorScheme:
+                const ColorScheme.dark(secondary: red, onSurface: Colors.white),
+            scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)),
+        // ignore: prefer_const_constructors
+        home: ResponsiveLayout(
+          mobileVersion: MobileDashboard(),
+          tabletVersion: TabletDashboard(),
+          desktopVersion: DesktopDashboard(),
+        ),
       ),
     );
   }

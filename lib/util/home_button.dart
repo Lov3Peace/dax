@@ -86,21 +86,21 @@ class _HomeButtonState extends State<HomeButton> {
         control = Control.play;
         Future.delayed(const Duration(milliseconds: 200)).then((_) {
           Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-            return const MobileDashboard();
+            return MobileDashboard();
           }));
         });
       } else if (screenWidth < 1100) {
         control = Control.play;
         Future.delayed(const Duration(milliseconds: 200)).then((_) {
           Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-            return const TabletDashboard();
+            return TabletDashboard();
           }));
         });
       } else {
         control = Control.play;
         Future.delayed(const Duration(milliseconds: 200)).then((_) {
           Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-            return const DesktopDashboard();
+            return DesktopDashboard();
           }));
         });
       }

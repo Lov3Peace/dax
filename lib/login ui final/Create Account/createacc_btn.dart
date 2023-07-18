@@ -44,8 +44,8 @@ class _CreateAccountButtonState extends State<CreateAccountButton> {
       child: GestureDetector(
         onTap: pressed,
         child: Container(
-          padding: const EdgeInsets.all(25),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.all(15),
+          margin: const EdgeInsets.symmetric(horizontal: 35),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [

@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../pages/main.dart';
 import '../../responsive/mobile/mob_constants.dart';
 import '../../responsive/mobile/mobile_dashboard.dart';
-import 'forget_password_from.dart';
+import 'forget_password_form.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({
@@ -49,8 +49,8 @@ class _SignInFormState extends State<SignInForm> {
                 },
                 onSaved: (username) {},
                 decoration: InputDecoration(
-                  prefixIcon: SvgPicture.asset("images/username (1).svg",
-                      color: Colors.black),
+                  // prefixIcon: SvgPicture.asset("images/username (1).svg",
+                  //     color: Colors.black),
                   //prefixIconColor: Colors.black,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
@@ -79,9 +79,9 @@ class _SignInFormState extends State<SignInForm> {
                 onSaved: (password) {},
                 obscureText: true,
                 decoration: InputDecoration(
-                  prefixIcon: SvgPicture.asset(
-                    "images/Lock.svg",
-                  ),
+                  // prefixIcon: SvgPicture.asset(
+                  //   "images/Lock.svg",
+                  // ),
                   prefixIconColor: Colors.black,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
@@ -254,8 +254,8 @@ class _SignInButtonState extends State<SignInButton> {
       child: GestureDetector(
         onTap: pressed,
         child: Container(
-          padding: const EdgeInsets.all(25),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.all(15),
+          margin: const EdgeInsets.symmetric(horizontal: 35),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [

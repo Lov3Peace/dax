@@ -42,19 +42,6 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    /*
-    double deckHeight = screenHeight * 0.22;
-    double deckWidth = screenWidth * 0.90;
-    double halfDeckWidth = screenWidth * 0.45;
-
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-    } else if (screenWidth < 1100) {
-      deckHeight = screenHeight * 0.24;
-    } else {
-      deckHeight = screenHeight * 0.26;
-    } */
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: mobAppBar(),
@@ -116,18 +103,6 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                           },
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(10.0),
-                      //   child: Column(
-                      //     children: ProjectStacks().projectStacks,
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(10.0),
-                      //   child: Column(
-                      //     children: ProjectStacks2().projectStacks2,
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

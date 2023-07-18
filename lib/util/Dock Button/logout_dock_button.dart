@@ -90,10 +90,6 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                         cursorColor: Colors.white,
                       ),
                     ),
-                    Divider(
-                      thickness: 0.5,
-                      color: Colors.white,
-                    ),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextField(
@@ -117,7 +113,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                       },
                       child: Container(
                         padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.symmetric(horizontal: 25),
+                        margin: const EdgeInsets.symmetric(horizontal: 45),
                         decoration: BoxDecoration(
                             gradient: LinearGradient(colors: [purp, red]),
                             boxShadow: const [

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_application_1/responsive/desktop/layout_test.dart';
+import 'package:flutter_application_1/login%20ui%20final/onboarding_page.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../responsive/desktop/desktop_dashboard.dart';
 import '../responsive/mobile/mobile_dashboard.dart';
 import '../responsive/tablet/tablet_dashboard.dart';
-import 'profile_page.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -30,20 +29,20 @@ class MyApp extends StatelessWidget {
     timeDilation = 1;
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
-        //builder: (context, widget) => ResponsiveBreakpoints.builder(child: ClampingScrollWrapper.builder(context, widget!), breakpoints: []),
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            fontFamily: GoogleFonts.montserrat().fontFamily,
-            colorScheme:
-                const ColorScheme.dark(secondary: red, onSurface: Colors.white),
-            scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)),
-        // ignore: prefer_const_constructors
-        home: ResponsiveLayout(
-          mobileVersion: MobileDashboard(),
-          tabletVersion: TabletDashboard(),
-          desktopVersion: DesktopDashboard(),
-        ),
-      ),
+          //builder: (context, widget) => ResponsiveBreakpoints.builder(child: ClampingScrollWrapper.builder(context, widget!), breakpoints: []),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              fontFamily: GoogleFonts.montserrat().fontFamily,
+              colorScheme: const ColorScheme.dark(
+                  secondary: red, onSurface: Colors.white),
+              scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)),
+          // ignore: prefer_const_constructors
+          home: OnboardingScreen() //ResponsiveLayout(
+          //   mobileVersion: MobileDashboard(),
+          //   tabletVersion: TabletDashboard(),
+          //   desktopVersion: DesktopDashboard(),
+          // ),
+          ),
     );
   }
 }

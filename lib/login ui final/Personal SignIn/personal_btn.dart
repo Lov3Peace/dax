@@ -46,8 +46,8 @@ class _PersonalButtonState extends State<PersonalButton> {
       child: GestureDetector(
         onTap: pressed,
         child: Container(
-          padding: const EdgeInsets.all(25),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [
@@ -94,7 +94,7 @@ class _PersonalButtonState extends State<PersonalButton> {
           },
           pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 680,
+              height: 650,
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               decoration: BoxDecoration(
@@ -159,7 +159,7 @@ class _PersonalButtonState extends State<PersonalButton> {
                           ],
                         ),
                       ),
-                      Text("Sign up with email, apple, or google"),
+                      Text("Create an Accoutn with your email"),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: CreateAccountButton(

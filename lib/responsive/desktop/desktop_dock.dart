@@ -2,15 +2,30 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
+import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
+import 'package:flutter_application_1/util/Dock%20Button/friends_dock_button.dart';
+import 'package:flutter_application_1/util/Dock%20Button/help_dock_button.dart';
+import 'package:flutter_application_1/util/Dock%20Button/info_dock_button.dart';
+import 'package:flutter_application_1/util/Dock%20Button/logout_dock_button.dart';
+import 'package:flutter_application_1/util/Dock%20Button/messages_dock_button.dart';
+import 'package:flutter_application_1/util/Dock%20Button/settings_dock_button.dart';
+import 'package:flutter_application_1/util/Dock%20Button/wallet_dock_button.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../util/home_button.dart';
 
 class DesktopDock extends StatefulWidget {
-  const DesktopDock({super.key});
-
+  DesktopDock({
+    super.key,
+    required this.newGrad1,
+    required this.newGrad2,
+    required this.newGlow,
+  });
+  Color newGrad1;
+  Color newGrad2;
+  Color newGlow;
   @override
   State<DesktopDock> createState() => _DesktopDockState();
 }
@@ -29,66 +44,135 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints(minHeight: 750),
-      clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [
-            Color.fromARGB(134, 10, 10, 10),
-            Color.fromARGB(230, 24, 24, 24),
-          ], transform: GradientRotation(180)),
-          borderRadius: BorderRadius.circular(50),
-          border: Border.all(color: const Color.fromARGB(148, 37, 37, 37)),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 5,
-              color: Color.fromARGB(255, 8, 8, 8),
-              offset: Offset(0, 0),
-            ),
-            // BoxShadow(
-            //   blurRadius: 10,
-            //   color: Color.fromARGB(255, 37, 37, 37),
-            //   offset: Offset(0, 0),
-            // )
-          ]),
-      width: 100,
-      height: 75.h,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          //Home
-          HomeButton(
-            gradient1: purp,
-            gradient2: red,
-            glow: red,
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+        child: Container(
+          constraints: BoxConstraints(minHeight: 750),
+          clipBehavior: Clip.hardEdge,
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(colors: [
+                Color.fromARGB(134, 10, 10, 10),
+                Color.fromARGB(230, 24, 24, 24),
+              ], transform: GradientRotation(180)),
+              borderRadius: BorderRadius.circular(50),
+              border: Border.all(color: const Color.fromARGB(148, 37, 37, 37)),
+              boxShadow: const [
+                BoxShadow(
+                  blurRadius: 5,
+                  color: Color.fromARGB(255, 8, 8, 8),
+                  offset: Offset(0, 0),
+                ),
+                // BoxShadow(
+                //   blurRadius: 10,
+                //   color: Color.fromARGB(255, 37, 37, 37),
+                //   offset: Offset(0, 0),
+                // )
+              ]),
+          width: 100,
+          height: 75.h,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              //
+              //Profile
+              DockButton(icon: Ionicons.person_circle_outline),
+
+              //Home
+              HomeButton(
+                  gradient1: widget.newGrad1,
+                  gradient2: widget.newGrad2,
+                  glow: widget.newGlow),
+
+              //Messages
+              const MessagesWindowButton(),
+
+              //PAGE 2
+
+              //
+              //Settings
+              const SettingsWindowButton(),
+
+              //Wallet
+              const WalletWindowButton(),
+
+              //Friends
+              const FriendsWindowButton(),
+
+              //PAGE 3
+
+              //
+              //Help
+              const HelpWindowButton(),
+
+              //About Us/Info
+              const InfoWindowButton(),
+
+              //Logout
+              const LogoutWindowButton(),
+            ],
           ),
+        ));
 
-          DockButton(icon: Ionicons.person_circle_outline),
+    // return Container(
+    //   constraints: BoxConstraints(minHeight: 750),
+    //   clipBehavior: Clip.hardEdge,
+    //   decoration: BoxDecoration(
+    //       gradient: const LinearGradient(colors: [
+    //         Color.fromARGB(134, 10, 10, 10),
+    //         Color.fromARGB(230, 24, 24, 24),
+    //       ], transform: GradientRotation(180)),
+    //       borderRadius: BorderRadius.circular(50),
+    //       border: Border.all(color: const Color.fromARGB(148, 37, 37, 37)),
+    //       boxShadow: [
+    //         BoxShadow(
+    //           blurRadius: 5,
+    //           color: Color.fromARGB(255, 8, 8, 8),
+    //           offset: Offset(0, 0),
+    //         ),
+    //         // BoxShadow(
+    //         //   blurRadius: 10,
+    //         //   color: Color.fromARGB(255, 37, 37, 37),
+    //         //   offset: Offset(0, 0),
+    //         // )
+    //       ]),
+    //   width: 100,
+    //   height: 75.h,
+    //   child: Column(
+    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //     children: [
+    //       //Home
+    //       HomeButton(
+    //         gradient1: purp,
+    //         gradient2: red,
+    //         glow: red,
+    //       ),
 
-          //Messages
-          DockButton(
-            icon: Ionicons.chatbox,
-          ),
+    //       DockButton(icon: Ionicons.person_circle_outline),
 
-          //PAGE 2
-          DockButton(icon: Ionicons.settings_sharp),
+    //       //Messages
+    //       DockButton(
+    //         icon: Ionicons.chatbox,
+    //       ),
 
-          //Wallet
-          DockButton(icon: Ionicons.wallet),
+    //       //PAGE 2
+    //       DockButton(icon: Ionicons.settings_sharp),
 
-          //Friends
-          DockButton(icon: Ionicons.people),
+    //       //Wallet
+    //       DockButton(icon: Ionicons.wallet),
 
-          //PAGE 3
-          DockButton(icon: Ionicons.help_circle_outline),
+    //       //Friends
+    //       DockButton(icon: Ionicons.people),
 
-          //About Us/Info
-          DockButton(icon: Icons.info_sharp),
+    //       //PAGE 3
+    //       DockButton(icon: Ionicons.help_circle_outline),
 
-          //Logout
-          DockButton(icon: Icons.logout_outlined),
-        ],
-      ),
-    );
+    //       //About Us/Info
+    //       DockButton(icon: Icons.info_sharp),
+
+    //       //Logout
+    //       DockButton(icon: Icons.logout_outlined),
+    //     ],
+    //   ),
+    // );
   }
 }

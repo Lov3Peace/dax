@@ -107,7 +107,7 @@ class WalletWindowButton extends StatelessWidget {
   }
 }
 
-const String _heroWalletWindow = 'Message-window-hero';
+const String _heroWalletWindow = 'Wallet-window-hero';
 
 class _WalletWindowPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}

@@ -10,6 +10,7 @@ import 'package:flutter_application_1/util/Dock%20Button/settings_dock_button.da
 import 'package:flutter_application_1/util/Dock%20Button/wallet_dock_button.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
+import 'package:sizer/sizer.dart';
 
 import 'home_button.dart';
 
@@ -65,8 +66,8 @@ class _DockState extends State<Dock> with AnimationMixin {
                 //   offset: Offset(0, 0),
                 // )
               ]),
-          width: MediaQuery.of(context).size.width * 0.75,
-          height: MediaQuery.of(context).size.height * 0.12,
+          width: 75.w,
+          height: 12.h,
           child: PageView(
             physics: const BouncingScrollPhysics(),
             clipBehavior: Clip.antiAlias,

@@ -29,6 +29,7 @@ double headerTextSize = 24;
 double subTextSize = 14;
 double profBubTextSize = 20;
 double titleTextSize = 20;
+double labelTextSize = 16;
 double? textConstraint = 500;
 double? subTextConstraint = 500;
 
@@ -42,6 +43,7 @@ class Deck extends StatelessWidget {
     required this.neonGlow,
     this.text,
     this.subText,
+    this.labelTextSize,
     this.textConstraint,
     this.image,
     this.onTap,
@@ -57,6 +59,7 @@ class Deck extends StatelessWidget {
   Color neonGlow;
   Text? text;
   Text? subText;
+  double? labelTextSize;
   double? textConstraint;
   double? subTextConstraint;
   Image? image;
@@ -154,7 +157,7 @@ class Deck extends StatelessWidget {
                     child: Text(
                       deckName,
                       style: GoogleFonts.montserrat(
-                          fontSize: 18,
+                          fontSize: labelTextSize,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                           shadows: [
@@ -698,6 +701,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         gradient1: red,
         gradient2: purp,
         neonGlow: red,
+        labelTextSize: labelTextSize,
         textConstraint: deckWidth * 0.7,
         subTextConstraint: deckWidth * 0.6,
         // image: Image.asset(
@@ -1000,6 +1004,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         gradient1: orange,
         gradient2: purp,
         neonGlow: orange,
+        labelTextSize: labelTextSize,
         textConstraint: deckWidth * 0.9,
         text: Text(
           'All of your socials in one place.',
@@ -1161,6 +1166,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     deckHeight = 22.h;
     deckWidth = 40.w;
+    labelTextSize = 16;
     var screenHeight = window.physicalSize.height / window.devicePixelRatio;
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
     if (screenWidth < 550) {
@@ -1187,6 +1193,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
       deckWidth = 37.w;
       headerTextSize = 85;
       subTextSize = 30;
+      labelTextSize = 22;
     }
     return GestureDetector(
       onTap: () {
@@ -1248,6 +1255,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         gradient1: green,
         gradient2: blue,
         neonGlow: green,
+        labelTextSize: labelTextSize,
         textConstraint: halfDeckWidth * 0.8,
         text: Text(
           'Manage your money.',
@@ -1478,6 +1486,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
         gradient1: blue,
         gradient2: purp,
         neonGlow: blue,
+        labelTextSize: labelTextSize,
         textConstraint: deckWidth * 0.7,
         text: Text(
           'Stay up to date.',

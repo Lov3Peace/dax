@@ -96,25 +96,29 @@ class Deck extends StatelessWidget {
           children: [
             //
             // Description text
-            //
             Positioned(
               left: 0,
               top: 20,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  //Heading
                   Container(
-                      // constraints: const BoxConstraints(minWidth: 200),
+                      constraints: BoxConstraints(maxWidth: deckWidth * 0.9),
                       margin: EdgeInsets.fromLTRB(2.w, 1.w, 2.w, 0),
                       width: textConstraint,
                       child: text),
+                  //Subheading
                   Container(
+                      constraints: BoxConstraints(maxWidth: deckWidth * 0.9),
                       margin: EdgeInsets.fromLTRB(2.w, 0.5.w, 2.w, 0),
                       width: subTextConstraint,
                       child: subText)
                 ],
               ),
             ),
+            //
+            //Image
             Positioned(
               left: 200,
               bottom: 0,
@@ -127,16 +131,15 @@ class Deck extends StatelessWidget {
                 ],
               ),
             ),
-            // Card label
             //
+            // Card label
             Positioned(
               bottom: 0,
               left: 0,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(50, 0, 0, 50),
+                padding: EdgeInsets.fromLTRB(2.w, 0, 0, 2.w),
                 child: Container(
-                  constraints:
-                      const BoxConstraints(maxHeight: 150, maxWidth: 400),
+                  constraints: BoxConstraints(minHeight: 50, maxHeight: 160),
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [gradient1, gradient2]),
                       boxShadow: [
@@ -145,13 +148,13 @@ class Deck extends StatelessWidget {
                             blurRadius: 20,
                             blurStyle: BlurStyle.solid)
                       ],
-                      borderRadius: BorderRadius.all(Radius.circular(2.w))),
+                      borderRadius: BorderRadius.all(Radius.circular(500))),
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(2.w, 24, 2.w, 24),
+                    padding: EdgeInsets.fromLTRB(2.w, 25, 2.w, 25),
                     child: Text(
                       deckName,
                       style: GoogleFonts.montserrat(
-                          fontSize: 2.5.sp,
+                          fontSize: 18,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                           shadows: [
@@ -696,7 +699,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         gradient2: purp,
         neonGlow: red,
         textConstraint: deckWidth * 0.7,
-        subTextConstraint: deckWidth * 0.5,
+        subTextConstraint: deckWidth * 0.6,
         // image: Image.asset(
         //   'images/proj placeholder.webp',
         //   height: screenWidth * 0.1,
@@ -1010,7 +1013,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
               textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
               fontWeight: FontWeight.w400),
         ),
-        subTextConstraint: deckWidth * 0.5,
+        subTextConstraint: deckWidth * 0.6,
       ),
     );
   }
@@ -1156,6 +1159,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    deckHeight = 22.h;
+    deckWidth = 40.w;
     var screenHeight = window.physicalSize.height / window.devicePixelRatio;
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
     if (screenWidth < 550) {
@@ -1163,33 +1168,25 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
       headerTextSize = 24;
       subTextSize = 16;
     } else if (screenWidth < 1500) {
-      deckHeight = 40.h;
       halfDeckWidth = 18.w;
       deckWidth = 37.w;
       headerTextSize = 30;
       textConstraint = halfDeckWidth * 0.7;
-    } else if (screenWidth < 1920) {
-      deckHeight = 40.h;
+    } else if (screenWidth <= 1920) {
       halfDeckWidth = 18.w;
       deckWidth = 37.w;
       headerTextSize = 40;
-      textConstraint = halfDeckWidth * 0.7;
+      subTextSize = 22;
     } else if (screenWidth < 2600) {
-      deckHeight = 40.h;
       halfDeckWidth = 18.w;
       deckWidth = 37.w;
       headerTextSize = 48;
       subTextSize = 24;
-      textConstraint = halfDeckWidth * 0.7;
-      subTextConstraint = 600;
     } else {
-      deckHeight = 40.h;
       halfDeckWidth = 18.w;
       deckWidth = 37.w;
       headerTextSize = 85;
       subTextSize = 30;
-      textConstraint = halfDeckWidth * 0.7;
-      subTextConstraint = 700;
     }
     return GestureDetector(
       onTap: () {
@@ -1251,8 +1248,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         gradient1: green,
         gradient2: blue,
         neonGlow: green,
-        textConstraint: textConstraint,
-        subTextConstraint: subTextConstraint,
+        textConstraint: halfDeckWidth * 0.8,
         text: Text(
           'Manage your money.',
           style: GoogleFonts.montserrat(
@@ -1482,7 +1478,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
         gradient1: blue,
         gradient2: purp,
         neonGlow: blue,
-        textConstraint: deckWidth - 200,
+        textConstraint: deckWidth * 0.7,
         text: Text(
           'Stay up to date.',
           style: GoogleFonts.montserrat(

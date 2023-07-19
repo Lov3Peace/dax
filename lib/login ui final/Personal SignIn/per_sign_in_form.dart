@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../pages/main.dart';
 import '../../responsive/mobile/mob_constants.dart';
 import '../../responsive/mobile/mobile_dashboard.dart';
-import 'forget_password_from.dart';
+import 'forget_password_form.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({

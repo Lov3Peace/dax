@@ -29,6 +29,8 @@ double headerTextSize = 24;
 double subTextSize = 14;
 double profBubTextSize = 20;
 double titleTextSize = 20;
+double? textConstraint = 500;
+double? subTextConstraint = 500;
 
 class Deck extends StatelessWidget {
   Deck({
@@ -69,23 +71,23 @@ class Deck extends StatelessWidget {
         // margin: const EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
           gradient: const LinearGradient(colors: [
-            Color.fromARGB(164, 0, 0, 0),
-            Color.fromARGB(59, 15, 15, 15),
+            Color.fromARGB(204, 0, 0, 0),
+            Color.fromARGB(126, 15, 15, 15),
           ], transform: GradientRotation(180)),
           borderRadius: BorderRadius.circular(1.5.w),
           border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
-          boxShadow: const [
-            // BoxShadow(
-            //   blurRadius: 5,
-            //   color: Color.fromARGB(255, 14, 14, 14),
-            //   offset: Offset(5, 5),
-            // ),
-            //   BoxShadow(
-            //     blurRadius: 10,
-            //     color: Color.fromARGB(255, 37, 37, 37),
-            //     offset: Offset(-5, -5),
-            //   )
-          ],
+          // boxShadow: const [
+          // BoxShadow(
+          //   blurRadius: 5,
+          //   color: Color.fromARGB(255, 14, 14, 14),
+          //   offset: Offset(5, 5),
+          // ),
+          //   BoxShadow(
+          //     blurRadius: 10,
+          //     color: Color.fromARGB(255, 37, 37, 37),
+          //     offset: Offset(-5, -5),
+          //   )
+          // ],
         ),
         // constraints: const BoxConstraints(minWidth: 500, minHeight: 500),
         height: deckHeight,
@@ -96,18 +98,18 @@ class Deck extends StatelessWidget {
             // Description text
             //
             Positioned(
-              left: 25,
+              left: 0,
               top: 20,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      constraints: const BoxConstraints(minWidth: 300),
-                      margin: EdgeInsets.fromLTRB(1.5.w, 1.w, 0, 0),
+                      // constraints: const BoxConstraints(minWidth: 200),
+                      margin: EdgeInsets.fromLTRB(2.w, 1.w, 2.w, 0),
                       width: textConstraint,
                       child: text),
                   Container(
-                      margin: EdgeInsets.fromLTRB(1.5.w, 0.5.w, 0, 0),
+                      margin: EdgeInsets.fromLTRB(2.w, 0.5.w, 2.w, 0),
                       width: subTextConstraint,
                       child: subText)
                 ],
@@ -131,8 +133,10 @@ class Deck extends StatelessWidget {
               bottom: 0,
               left: 0,
               child: Padding(
-                padding: EdgeInsets.fromLTRB(2.w, 0, 0, 2.w),
+                padding: const EdgeInsets.fromLTRB(50, 0, 0, 50),
                 child: Container(
+                  constraints:
+                      const BoxConstraints(maxHeight: 150, maxWidth: 400),
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [gradient1, gradient2]),
                       boxShadow: [
@@ -143,11 +147,11 @@ class Deck extends StatelessWidget {
                       ],
                       borderRadius: BorderRadius.all(Radius.circular(2.w))),
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(2.w, 1.w, 2.w, 1.w),
+                    padding: EdgeInsets.fromLTRB(2.w, 24, 2.w, 24),
                     child: Text(
                       deckName,
                       style: GoogleFonts.montserrat(
-                          fontSize: 3.sp,
+                          fontSize: 2.5.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                           shadows: [
@@ -611,22 +615,22 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     var screenHeight = window.physicalSize.height / window.devicePixelRatio;
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-      headerTextSize = 24;
-      subTextSize = 16;
-    } else if (screenWidth < 1000) {
-      deckHeight = 40.h;
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 10.sp;
-      subTextSize = 14;
-    } else {
-      deckHeight = 40.h;
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 10.sp;
-    }
+    // if (screenWidth < 550) {
+    //   deckHeight = screenHeight * 0.22;
+    //   headerTextSize = 24;
+    //   subTextSize = 16;
+    // } else if (screenWidth < 1000) {
+    //   deckHeight = 40.h;
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 10.sp;
+    //   subTextSize = 14;
+    // } else {
+    //   deckHeight = 40.h;
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 10.sp;
+    // }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -693,10 +697,10 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         neonGlow: red,
         textConstraint: deckWidth * 0.7,
         subTextConstraint: deckWidth * 0.5,
-        image: Image.asset(
-          'images/proj placeholder.webp',
-          height: screenWidth * 0.1,
-        ),
+        // image: Image.asset(
+        //   'images/proj placeholder.webp',
+        //   height: screenWidth * 0.1,
+        // ),
         text: Text.rich(
           const TextSpan(
             text: 'Collaborate and innovate.',
@@ -914,22 +918,22 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     var screenHeight = window.physicalSize.height / window.devicePixelRatio;
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-      headerTextSize = 24;
-      subTextSize = 16;
-    } else if (screenWidth < 1000) {
-      deckHeight = 40.h;
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 10.sp;
-      subTextSize = 14;
-    } else {
-      deckHeight = 40.h;
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 10.sp;
-    }
+    // if (screenWidth < 550) {
+    //   deckHeight = screenHeight * 0.22;
+    //   headerTextSize = 24;
+    //   subTextSize = 16;
+    // } else if (screenWidth < 1000) {
+    //   deckHeight = 40.h;
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 10.sp;
+    //   subTextSize = 14;
+    // } else {
+    //   deckHeight = 40.h;
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 10.sp;
+    // }
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -1158,17 +1162,34 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
       deckHeight = screenHeight * 0.22;
       headerTextSize = 24;
       subTextSize = 16;
-    } else if (screenWidth < 1000) {
+    } else if (screenWidth < 1500) {
       deckHeight = 40.h;
       halfDeckWidth = 18.w;
       deckWidth = 37.w;
-      headerTextSize = 10.sp;
-      subTextSize = 14;
+      headerTextSize = 30;
+      textConstraint = halfDeckWidth * 0.7;
+    } else if (screenWidth < 1920) {
+      deckHeight = 40.h;
+      halfDeckWidth = 18.w;
+      deckWidth = 37.w;
+      headerTextSize = 40;
+      textConstraint = halfDeckWidth * 0.7;
+    } else if (screenWidth < 2600) {
+      deckHeight = 40.h;
+      halfDeckWidth = 18.w;
+      deckWidth = 37.w;
+      headerTextSize = 48;
+      subTextSize = 24;
+      textConstraint = halfDeckWidth * 0.7;
+      subTextConstraint = 600;
     } else {
       deckHeight = 40.h;
       halfDeckWidth = 18.w;
       deckWidth = 37.w;
-      headerTextSize = 10.sp;
+      headerTextSize = 85;
+      subTextSize = 30;
+      textConstraint = halfDeckWidth * 0.7;
+      subTextConstraint = 700;
     }
     return GestureDetector(
       onTap: () {
@@ -1230,7 +1251,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         gradient1: green,
         gradient2: blue,
         neonGlow: green,
-        textConstraint: halfDeckWidth - 200,
+        textConstraint: textConstraint,
+        subTextConstraint: subTextConstraint,
         text: Text(
           'Manage your money.',
           style: GoogleFonts.montserrat(
@@ -1384,22 +1406,22 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     var screenHeight = window.physicalSize.height / window.devicePixelRatio;
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-      headerTextSize = 24;
-      subTextSize = 16;
-    } else if (screenWidth < 1000) {
-      deckHeight = 40.h;
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 10.sp;
-      subTextSize = 14;
-    } else {
-      deckHeight = 40.h;
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 10.sp;
-    }
+    // if (screenWidth < 550) {
+    //   deckHeight = screenHeight * 0.22;
+    //   headerTextSize = 24;
+    //   subTextSize = 16;
+    // } else if (screenWidth < 1000) {
+    //   deckHeight = 40.h;
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 10.sp;
+    //   subTextSize = 14;
+    // } else {
+    //   deckHeight = 40.h;
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 10.sp;
+    // }
     return GestureDetector(
       onTap: () {
         setState(() {

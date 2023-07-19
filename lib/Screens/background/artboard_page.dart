@@ -17,14 +17,14 @@ class _ArtBoardScreenState extends State<ArtBoardScreen> {
       body: Stack(
         children: [
           const RiveAnimation.asset(
-            "rive/onboarding_animation (3).riv",
+            "rive/desk_br_anim.riv",
           ),
           Positioned.fill(
             child: BackdropFilter(
-              //Now it looks perfecto
+              //Now it looks perfecto...sike no tf it doesn't
               filter: ImageFilter.blur(
-                sigmaX: 50,
-                sigmaY: 50,
+                sigmaX: 500,
+                sigmaY: 500,
               ),
               child: const SizedBox(),
             ),

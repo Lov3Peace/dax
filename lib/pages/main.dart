@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../responsive/desktop/desktop_dashboard.dart';
 import '../responsive/mobile/mobile_dashboard.dart';
 import '../responsive/tablet/tablet_dashboard.dart';
-import 'profile_page.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
             fontFamily: GoogleFonts.montserrat().fontFamily,
             colorScheme:
                 const ColorScheme.dark(secondary: red, onSurface: Colors.white),
-            scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)),
+            scaffoldBackgroundColor: Color.fromARGB(255, 13, 13, 13)),
         // ignore: prefer_const_constructors
         home: ResponsiveLayout(
           mobileVersion: MobileDashboard(),

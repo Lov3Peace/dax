@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../pages/main.dart';
 import '../../responsive/mobile/mob_constants.dart';
 import '../../responsive/mobile/mobile_dashboard.dart';
-import '../Personal SignIn/per_sign_in_form.dart';
+import 'signin_form.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({
@@ -26,10 +26,6 @@ class ForgotPasswordForm extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
               child: TextFormField(
                 decoration: InputDecoration(
-                  // prefixIcon: SvgPicture.asset(
-                  //   "",
-                  // ),
-                  // prefixIconColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,

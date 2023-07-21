@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import '../../responsive/mobile/mob_constants.dart';
+import '../pages/main.dart';
+import '../responsive/mobile/mob_constants.dart';
+import '../responsive/mobile/mobile_dashboard.dart';
 
-class ProfessionalButton extends StatefulWidget {
+class SignButton extends StatefulWidget {
   final Function()? onTap;
 
-  ProfessionalButton({super.key, required this.onTap});
+  SignButton({super.key, required this.onTap});
 
   @override
-  State<ProfessionalButton> createState() => _ProfessionalButtonState();
+  State<SignButton> createState() => _SignButtonState();
 }
 
-class _ProfessionalButtonState extends State<ProfessionalButton> {
+class _SignButtonState extends State<SignButton> {
   //controlls button
   Control control = Control.stop;
 
@@ -37,8 +38,8 @@ class _ProfessionalButtonState extends State<ProfessionalButton> {
       child: GestureDetector(
         onTap: pressed,
         child: Container(
-          padding: const EdgeInsets.all(20),
-          margin: const EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.all(15),
+          margin: const EdgeInsets.symmetric(horizontal: 35),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [
@@ -48,7 +49,7 @@ class _ProfessionalButtonState extends State<ProfessionalButton> {
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(
             child: Text(
-              'Professional',
+              'Sign In',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -62,30 +63,15 @@ class _ProfessionalButtonState extends State<ProfessionalButton> {
 
   void pressed() {
     // toggle between control instructions
+
     setState(() {
       control = Control.play;
-      showGeneralDialog(
-        barrierDismissible: true,
-        barrierLabel: "Sign in",
-        context: context,
-        pageBuilder: (context, _, __) => Center(
-          child: Container(
-            height: 620,
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(40),
-              ),
-            ),
-          ),
-        ),
-      );
-      // Future.delayed(const Duration(milliseconds: 200)).then((_) {
-      //   Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-      //     return const MobileDashboard();
-      //   }));
-      // });
+
+      Future.delayed(const Duration(milliseconds: 200)).then((_) {
+        Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
+          return const MobileDashboard();
+        }));
+      });
     });
   }
 

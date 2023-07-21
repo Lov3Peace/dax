@@ -5,12 +5,20 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../pages/main.dart';
 import '../../responsive/mobile/mob_constants.dart';
 import '../../responsive/mobile/mobile_dashboard.dart';
-import '../Personal SignIn/per_sign_in_form.dart';
+import '../SignIn/signin_form.dart';
+import '../final_signin.dart';
 
-class CreateAccountForm extends StatelessWidget {
-  const CreateAccountForm({
+class SignUpForm extends StatefulWidget {
+  SignUpForm({
     super.key,
   });
+
+  @override
+  State<SignUpForm> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpForm> {
+  bool isSwitch = false;
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +34,12 @@ class CreateAccountForm extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
               child: TextFormField(
                 decoration: InputDecoration(
-                  prefixIcon: SvgPicture.asset(
-                    "",
-                  ),
-                  prefixIconColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  //fillColor: Colors.white54,
                 ),
               ),
             ),
@@ -47,17 +50,12 @@ class CreateAccountForm extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
               child: TextFormField(
                 decoration: InputDecoration(
-                  prefixIcon: SvgPicture.asset(
-                    "",
-                  ),
-                  prefixIconColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  //fillColor: Colors.white54,
                 ),
               ),
             ),
@@ -68,24 +66,38 @@ class CreateAccountForm extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
               child: TextFormField(
                 decoration: InputDecoration(
-                  prefixIcon: SvgPicture.asset(
-                    "",
-                  ),
-                  prefixIconColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  //fillColor: Colors.white54,
                 ),
               ),
             ),
-            SizedBox(
-              height: 25,
+            const SizedBox(
+              height: 10,
             ),
-            SignInButton(
+            Row(
+              children: [
+                const Text(
+                  "Remember Me",
+                ),
+                Switch(
+                    value: isSwitch,
+                    activeColor: Colors.white,
+                    activeTrackColor: Color.fromARGB(255, 221, 83, 245),
+                    onChanged: (bool newBool) {
+                      setState(() {
+                        isSwitch = newBool;
+                      });
+                    }),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SignButton(
               onTap: signinbtn,
             ),
             // Text(

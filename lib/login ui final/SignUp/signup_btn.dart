@@ -1,26 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/login%20ui%20final/SignUp/signup_form.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 import '../../../responsive/mobile/mob_constants.dart';
-import '../../responsive/desktop/desktop_dashboard.dart';
-import '../../responsive/mobile/mobile_dashboard.dart';
-import '../../responsive/responsive_layout.dart';
-import '../../responsive/tablet/tablet_dashboard.dart';
-import 'createacc_form.dart';
 
-class CreateAccountButton extends StatefulWidget {
+class SignUpButton extends StatefulWidget {
   final Function()? onTap;
 
-  CreateAccountButton({super.key, required this.onTap});
+  SignUpButton({super.key, required this.onTap});
 
   @override
-  State<CreateAccountButton> createState() => _CreateAccountButtonState();
+  State<SignUpButton> createState() => _SignUpButtonState();
 }
 
-class _CreateAccountButtonState extends State<CreateAccountButton> {
-  bool isSignInDialogShown = false;
+class _SignUpButtonState extends State<SignUpButton> {
+  bool isSignUpDialogShown = false;
   //controlls button
   Control control = Control.stop;
 
@@ -44,8 +39,8 @@ class _CreateAccountButtonState extends State<CreateAccountButton> {
       child: GestureDetector(
         onTap: pressed,
         child: Container(
-          padding: const EdgeInsets.all(15),
-          margin: const EdgeInsets.symmetric(horizontal: 35),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [
@@ -55,7 +50,7 @@ class _CreateAccountButtonState extends State<CreateAccountButton> {
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(
             child: Text(
-              'Create Account',
+              'Sign Up',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -92,7 +87,7 @@ class _CreateAccountButtonState extends State<CreateAccountButton> {
           },
           pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 680,
+              height: 600,
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               decoration: BoxDecoration(
@@ -106,9 +101,9 @@ class _CreateAccountButtonState extends State<CreateAccountButton> {
                 backgroundColor: Colors.transparent,
                 body: SingleChildScrollView(
                   child: Column(
-                    children: const [
-                      Text(
-                        "Create Account",
+                    children: [
+                      const Text(
+                        "Sign Up",
                         style: TextStyle(
                           fontSize: 34,
                           fontFamily: "Gontserrat",
@@ -116,10 +111,10 @@ class _CreateAccountButtonState extends State<CreateAccountButton> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.0),
                         child: Text(
-                          "Create an account to experience a new world for creative and collaborative endeavors!",
+                          "Sign Up to experience a new world for creative and collaborative endeavors!",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 14,
@@ -128,36 +123,7 @@ class _CreateAccountButtonState extends State<CreateAccountButton> {
                           ),
                         ),
                       ),
-
-                      CreateAccountForm(),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                      //   child: Row(
-                      //     children: const [
-                      //       Expanded(
-                      //         child: Divider(
-                      //           thickness: 0.5,
-                      //           color: Colors.white54,
-                      //         ),
-                      //       ),
-                      //       Padding(
-                      //         padding: EdgeInsets.symmetric(horizontal: 5.0),
-                      //         child: Text(
-                      //           'Or',
-                      //           style: TextStyle(
-                      //             color: Colors.grey,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       Expanded(
-                      //         child: Divider(
-                      //           thickness: 0.5,
-                      //           color: Colors.grey,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
+                      SignUpForm(),
                     ],
                   ),
                 ),
@@ -168,7 +134,7 @@ class _CreateAccountButtonState extends State<CreateAccountButton> {
       },
     );
     setState(() {
-      isSignInDialogShown = true;
+      isSignUpDialogShown = true;
     });
   }
 

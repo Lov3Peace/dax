@@ -40,20 +40,20 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       child: Column(
                         children: const [
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 40),
+                            padding: EdgeInsets.only(right: 60),
                             child: Text(
-                              "Omni",
+                              "Experience",
                               style: TextStyle(
-                                fontSize: 70,
+                                fontSize: 50,
                                 fontFamily: "Gontserrat",
                                 height: 1.2,
                               ),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 40),
+                            padding: EdgeInsets.only(left: 100),
                             child: Text(
-                              "Project",
+                              "Omni",
                               style: TextStyle(
                                 fontSize: 60,
                                 fontFamily: "Gontserrat",

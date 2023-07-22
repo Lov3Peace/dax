@@ -40,11 +40,11 @@ class Deck extends StatelessWidget {
         margin: const EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
           gradient: const LinearGradient(colors: [
-            Color.fromARGB(164, 0, 0, 0),
-            Color.fromARGB(59, 15, 15, 15),
+            Color.fromARGB(240, 19, 19, 19),
+            Color.fromARGB(194, 33, 33, 33),
           ], transform: GradientRotation(180)),
           borderRadius: BorderRadius.circular(25),
-          border: Border.all(color: const Color.fromARGB(149, 41, 41, 41)),
+          border: Border.all(color: Color.fromARGB(182, 60, 60, 60)),
           boxShadow: const [
             // BoxShadow(
             //   blurRadius: 5,

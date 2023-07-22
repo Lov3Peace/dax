@@ -17,7 +17,7 @@ class _ArtBoardScreenState extends State<ArtBoardScreen> {
       body: Stack(
         children: [
           const RiveAnimation.asset(
-            "rive/onboarding_animation (3).riv",
+            "rive/mobile_artboard.riv",
           ),
           Positioned.fill(
             child: BackdropFilter(

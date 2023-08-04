@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/login%20ui%20final/SignUp/signup_form.dart';
+
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import '../../../responsive/mobile/mob_constants.dart';
+import '../../../../../responsive/mobile/mob_constants.dart';
+import 'tab_signup_form.dart';
 
-class SignUpButton extends StatefulWidget {
+class TabSignUpButton extends StatefulWidget {
   final Function()? onTap;
 
-  SignUpButton({super.key, required this.onTap});
+  TabSignUpButton({super.key, required this.onTap});
 
   @override
-  State<SignUpButton> createState() => _SignUpButtonState();
+  State<TabSignUpButton> createState() => _TabSignUpButtonState();
 }
 
-class _SignUpButtonState extends State<SignUpButton> {
+class _TabSignUpButtonState extends State<TabSignUpButton> {
   bool isSignUpDialogShown = false;
   //controlls button
   Control control = Control.stop;
@@ -39,8 +40,8 @@ class _SignUpButtonState extends State<SignUpButton> {
       child: GestureDetector(
         onTap: pressed,
         child: Container(
-          padding: const EdgeInsets.all(20),
-          margin: const EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 35),
+          margin: const EdgeInsets.symmetric(horizontal: 90),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [
@@ -123,7 +124,7 @@ class _SignUpButtonState extends State<SignUpButton> {
                           ),
                         ),
                       ),
-                      SignUpForm(),
+                      TabSignUpForm(),
                     ],
                   ),
                 ),

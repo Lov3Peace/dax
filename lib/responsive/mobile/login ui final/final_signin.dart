@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import '../pages/main.dart';
-import '../responsive/mobile/mob_constants.dart';
-import '../responsive/mobile/mobile_dashboard.dart';
+import '../../../pages/main.dart';
+import '../mob_constants.dart';
+import '../mobile_dashboard.dart';
 
 class SignButton extends StatefulWidget {
   final Function()? onTap;

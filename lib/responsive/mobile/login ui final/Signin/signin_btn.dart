@@ -2,12 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
-
-import '../../../responsive/mobile/mob_constants.dart';
-import '../../responsive/desktop/desktop_dashboard.dart';
-import '../../responsive/mobile/mobile_dashboard.dart';
-import '../../responsive/responsive_layout.dart';
-import '../../responsive/tablet/tablet_dashboard.dart';
+import '../../mob_constants.dart';
 import 'signin_form.dart';
 
 class SignInButton extends StatefulWidget {

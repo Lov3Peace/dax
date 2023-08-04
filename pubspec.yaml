@@ -67,6 +67,9 @@ dependencies:
   easy_scroll_animation: ^1.0.2
   flutter_svg: ^1.1.6
   firebase_auth: ^3.3.14
+  carousel_slider: ^4.2.1
+  flutter_carousel_slider: ^1.1.0
+
 
 dev_dependencies:
   flutter_test:

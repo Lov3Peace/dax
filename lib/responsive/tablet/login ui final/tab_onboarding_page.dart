@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Screens/background/artboard_page.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
+import 'package:sizer/sizer.dart';
+import 'SignIn/tab_signin_btn.dart';
+import 'SignUp/tab_signup_btn.dart';
 
-import 'SignIn/signin_btn.dart';
-import 'SignUp/signup_btn.dart';
+class TabOnboardingScreen extends StatefulWidget {
+  TabOnboardingScreen({super.key});
 
-class OnboardingScreen extends StatefulWidget {
-  OnboardingScreen({super.key});
-
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
+  State<TabOnboardingScreen> createState() => _TabOnboardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen>
+class _TabOnboardingScreenState extends State<TabOnboardingScreen>
     with AnimationMixin {
   bool isSignInDialogShown = false;
 
@@ -36,26 +36,26 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       flex: 1,
                     ),
                     SizedBox(
-                      width: 350,
+                      width: 90.h,
                       child: Column(
                         children: const [
                           Padding(
-                            padding: EdgeInsets.only(right: 60),
+                            padding: EdgeInsets.only(right: 100),
                             child: Text(
                               "Experience",
                               style: TextStyle(
-                                fontSize: 50,
+                                fontSize: 100,
                                 fontFamily: "Gontserrat",
                                 height: 1.2,
                               ),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 100),
+                            padding: EdgeInsets.only(left: 200),
                             child: Text(
                               "Omni",
                               style: TextStyle(
-                                fontSize: 60,
+                                fontSize: 120,
                                 fontFamily: "Gontserrat",
                                 height: 1.2,
                               ),
@@ -68,21 +68,21 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                             padding: EdgeInsets.only(right: 110.0),
                             child: Text(
                               "Connect with friends",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 40),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 10.0),
                             child: Text(
                               "Create your legacy",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 40),
                             ),
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 150.0),
                             child: Text(
                               "Conquer the world",
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 40),
                             ),
                           ),
                         ],
@@ -90,16 +90,20 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     ),
 
                     Spacer(),
-                    Row(
+                    Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15.0),
-                          child: SignUpButton(
-                            onTap: signupbtn,
-                          ),
-                        ),
-                        SignInButton(
-                          onTap: signinbtn,
+                        Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              child: TabSignUpButton(
+                                onTap: signupbtn,
+                              ),
+                            ),
+                            TabSignInButton(
+                              onTap: signinbtn,
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -108,7 +112,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       height: 80,
                       child: Padding(
                         padding: EdgeInsets.only(top: 40.0),
-                        child: Text("Why SignUp? Learn more about Us!"),
+                        child: Text(
+                          "Why SignUp? Learn more about Us!",
+                          style: TextStyle(fontSize: 25),
+                        ),
                       ),
                     ),
 

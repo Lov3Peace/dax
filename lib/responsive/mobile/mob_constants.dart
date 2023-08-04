@@ -1365,3 +1365,30 @@ class NewsStacks {
     const SizedBox(height: 150)
   ];
 }
+
+class ButtonColor extends StatelessWidget {
+  const ButtonColor({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(horizontal: 55),
+      decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [purp, red]),
+          boxShadow: const [
+            BoxShadow(color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
+          ],
+          borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
+      child: const Center(
+        child: Text(
+          'Log Out',
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+      ),
+    );
+  }
+}

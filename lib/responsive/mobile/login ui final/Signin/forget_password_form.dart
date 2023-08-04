@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../pages/main.dart';
-import '../../responsive/mobile/mob_constants.dart';
-import '../../responsive/mobile/mobile_dashboard.dart';
-import 'signin_form.dart';
+
+import '../../../../pages/main.dart';
+import '../../mob_constants.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({
@@ -128,7 +126,7 @@ class _SendCodeButtonState extends State<SendCodeButton> {
       // );
       // Future.delayed(const Duration(milliseconds: 200)).then((_) {
       //   Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-      //     return const MobileDashboard();
+      //     return const ileDashboard();
       //   }));
       // });
     });

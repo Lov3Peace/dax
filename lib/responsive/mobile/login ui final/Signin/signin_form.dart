@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../pages/main.dart';
-import '../../responsive/mobile/mob_constants.dart';
-import '../../responsive/mobile/mobile_dashboard.dart';
+
+import '../../mob_constants.dart';
 import '../final_signin.dart';
 import 'forget_password_form.dart';
 
@@ -143,6 +142,7 @@ class _SignInFormState extends State<SignInForm> {
                                   resizeToAvoidBottomInset: false,
                                   backgroundColor: Colors.transparent,
                                   body: SingleChildScrollView(
+                                    reverse: true,
                                     child: Column(
                                       children: const [
                                         Text(

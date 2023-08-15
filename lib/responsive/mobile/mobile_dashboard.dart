@@ -2,15 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
-import 'package:flutter_application_1/util/background.dart';
-import 'package:flutter_application_1/util/decks.dart';
 import 'package:flutter_application_1/util/dock.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import '../../Screens/background/artboard_page.dart';
 import '../../util/dashboard_decks.dart';
+import 'mob_artboard_page.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class MobileDashboard extends StatefulWidget {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Screens/background/artboard_page.dart';
-import 'package:rive/rive.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
-
+import '../mob_artboard_page.dart';
 import 'SignUp/signup_btn.dart';
 import 'Signin/signin_btn.dart';
 

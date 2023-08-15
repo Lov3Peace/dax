@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Screens/background/artboard_page.dart';
-import 'package:rive/rive.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
 import 'package:sizer/sizer.dart';
+import '../tab_artboard_page.dart';
 import 'SignIn/tab_signin_btn.dart';
 import 'SignUp/tab_signup_btn.dart';
 
@@ -21,7 +20,7 @@ class _TabOnboardingScreenState extends State<TabOnboardingScreen>
     return Scaffold(
       body: Stack(
         children: [
-          const ArtBoardScreen(),
+          const TabArtBoardScreen(),
           AnimatedPositioned(
             top: isSignInDialogShown ? -50 : 0,
             duration: Duration(milliseconds: 240),

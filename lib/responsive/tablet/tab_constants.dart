@@ -5,10 +5,9 @@ import 'package:flutter_application_1/responsive/tablet/tablet_finance_page.dart
 import 'package:flutter_application_1/responsive/tablet/tablet_news_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_socials_page.dart';
-import 'package:flutter_application_1/util/deck_height_value.dart';
+
 import 'package:simple_animations/simple_animations.dart';
 import '../../util/decks.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)
@@ -19,10 +18,10 @@ var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 double deckHeight = screenHeight * 0.22;
 double deckWidth = screenWidth * 0.90;
 double halfDeckWidth = screenWidth * 0.45;
-double headerTextSize = 24;
+double headerTextSize = 40;
 double subTextSize = 14;
-double profBubTextSize = 20;
-double titleTextSize = 20;
+double profBubTextSize = 24;
+double titleTextSize = 24;
 
 //APPBAR FOR ALL PAGES
 
@@ -145,7 +144,7 @@ class ProfileBubble extends StatelessWidget {
                       Text(
                         deckName,
                         style: GoogleFonts.montserrat(
-                            fontSize: 18,
+                            fontSize: profBubTextSize,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
                             shadows: [
@@ -247,7 +246,7 @@ class TitleBubble extends StatelessWidget {
                   child: Text(
                     deckName,
                     style: GoogleFonts.montserrat(
-                        fontSize: textSize,
+                        fontSize: titleTextSize,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                         shadows: [
@@ -1161,3 +1160,6 @@ class NewsStacks {
     const SizedBox(height: 150)
   ];
 }
+
+
+//lets run the app

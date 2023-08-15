@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../../util/decks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'mobile_finance_page.dart';
 import 'mobile_news_page.dart';

@@ -7,9 +7,10 @@ import 'package:flutter_application_1/util/dock.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../Screens/background/artboard_page.dart';
+
 import '../../pages/main.dart';
 import '../../util/dashboard_decks.dart';
+import 'tab_artboard_page.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -47,7 +48,7 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
       appBar: tabAppBar(),
       body: Stack(
         children: [
-          const ArtBoardScreen(),
+          const TabArtBoardScreen(),
           Positioned.fill(
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),

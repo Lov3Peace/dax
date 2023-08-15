@@ -2,16 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_application_1/util/big_dock.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
-
-import '../../Screens/background/artboard_page.dart';
 import '../../pages/keyboards_deck.dart';
 import '../../pages/main.dart';
-
-import '../../util/background.dart';
+import 'mob_artboard_page.dart';
 
 class MobNewsPage extends StatefulWidget {
   const MobNewsPage(
@@ -104,6 +100,8 @@ class _MobNewsPageState extends State<MobNewsPage> {
               ),
             ),
           ),
+          //6092763548
+          //lilydavis0002
         ),
         body: Stack(
           alignment: const AlignmentDirectional(0, 1),

@@ -82,24 +82,29 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
             child: Center(
               child: Container(
                 height: 85.h,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding:
                     const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
                   tag: _heroMessagesWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
-                    shadowColor: Color.fromRGBO(42, 41, 41, 0.631),
-                    color: Color.fromARGB(197, 27, 27, 27).withOpacity(0.7),
+                    shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
+                    color:
+                        const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
                     elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32)),
+                    borderRadius: BorderRadius.circular(32),
                     child: Stack(
                       children: [
                         // Container(height: 5.h, color: red),
-                        ClipRect(
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(24),
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                            child: Container(height: 85.h),
+                            child: Container(
+                              height: 85.h,
+                            ),
                           ),
                         ),
                         Column(

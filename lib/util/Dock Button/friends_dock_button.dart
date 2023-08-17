@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
@@ -93,15 +95,23 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                   tag: _heroFriendsWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
-                    color: const Color.fromRGBO(27, 27, 27, 0.937),
+                    shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
+                    color:
+                        const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
                     elevation: 2,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
+                    borderRadius: BorderRadius.circular(32),
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(24),
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+                            child: Container(
+                              height: 85.h,
+                            ),
+                          ),
+                        ),
+                        Column(
                           children: [
                             //Stories
                             Padding(
@@ -314,7 +324,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                             ),
                           ],
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),

@@ -51,6 +51,9 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        minSdkVersion 25
+        multiDexEnabled true
+        ndkVersion "25.1.8937393"
     }
 
     buildTypes {

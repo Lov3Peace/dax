@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../../util/decks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'mobile_finance_page.dart';
 import 'mobile_news_page.dart';
@@ -23,8 +22,146 @@ double subTextSize = 14;
 double profBubTextSize = 20;
 double titleTextSize = 20;
 
-//APPBAR FOR ALL PAGES
+class Deck extends StatelessWidget {
+  Deck({
+    required this.deckHeight,
+    required this.deckWidth,
+    required this.deckName,
+    required this.gradient1,
+    required this.gradient2,
+    required this.neonGlow,
+    this.text,
+    this.subText,
+    this.textConstraint,
+    this.image,
+    this.onTap,
+    super.key,
+  });
 
+  double deckHeight;
+  double deckWidth;
+  String deckName;
+  Color gradient1;
+  Color gradient2;
+  Color neonGlow;
+  Text? text;
+  Text? subText;
+  double? textConstraint;
+  Image? image;
+  VoidCallback? onTap;
+  Color shadowColor = Colors.white;
+  Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(top: 20),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [
+            Color.fromARGB(164, 0, 0, 0),
+            Color.fromARGB(59, 15, 15, 15),
+          ], transform: GradientRotation(180)),
+          borderRadius: BorderRadius.circular(25),
+          border: Border.all(color: const Color.fromARGB(149, 41, 41, 41)),
+          boxShadow: const [
+            // BoxShadow(
+            //   blurRadius: 5,
+            //   color: Color.fromARGB(255, 14, 14, 14),
+            //   offset: Offset(5, 5),
+            // ),
+            //   BoxShadow(
+            //     blurRadius: 10,
+            //     color: Color.fromARGB(255, 37, 37, 37),
+            //     offset: Offset(-5, -5),
+            //   )
+          ],
+        ),
+        constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080),
+        height: deckHeight,
+        width: deckWidth,
+        child: Stack(
+          children: [
+            //
+            // Description text
+            //
+            Positioned(
+              left: 25,
+              top: 20,
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: text),
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: subText)
+                ],
+              ),
+            ),
+            Positioned(
+              left: 300,
+              bottom: 0,
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: image),
+                ],
+              ),
+            ),
+            // Card label
+            //
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(25, 0, 0, 25),
+                child: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [gradient1, gradient2]),
+                      boxShadow: [
+                        BoxShadow(
+                            color: neonGlow,
+                            blurRadius: 20,
+                            blurStyle: BlurStyle.solid)
+                      ],
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20))),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Text(
+                      deckName,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 1,
+                            ),
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 2,
+                            ),
+                          ]),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+//APPBAR FOR ALL PAGES
 AppBar mobAppBar() {
   return AppBar(
     backgroundColor: tran,
@@ -1226,4 +1363,31 @@ class NewsStacks {
     ),
     const SizedBox(height: 150)
   ];
+}
+
+class ButtonColor extends StatelessWidget {
+  const ButtonColor({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(horizontal: 55),
+      decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [purp, red]),
+          boxShadow: const [
+            BoxShadow(color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
+          ],
+          borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
+      child: const Center(
+        child: Text(
+          'Log Out',
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+      ),
+    );
+  }
 }

@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/util/projects_stacks_list2.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../Screens/background/artboard_page.dart';
 import '../../pages/keyboards_deck.dart';
 import '../../pages/main.dart';
-import '../../util/background.dart';
 import '../../util/dock.dart';
+import 'mob_artboard_page.dart';
 import 'mob_constants.dart';
 
 final List<Widget> projStacks = ProjectStacks().mobProjectStacks;

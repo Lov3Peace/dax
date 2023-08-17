@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_application_1/responsive/desktop/layout_test.dart';
+import 'package:flutter_application_1/responsive/mobile/login%20ui%20final/onboarding_page.dart';
+import 'package:flutter_application_1/responsive/tablet/login%20ui%20final/tab_onboarding_page.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../responsive/desktop/desktop_dashboard.dart';
-import '../responsive/mobile/mobile_dashboard.dart';
 import '../responsive/tablet/tablet_dashboard.dart';
-import 'profile_page.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -36,11 +35,11 @@ class MyApp extends StatelessWidget {
             fontFamily: GoogleFonts.montserrat().fontFamily,
             colorScheme:
                 const ColorScheme.dark(secondary: red, onSurface: Colors.white),
-            scaffoldBackgroundColor: const Color.fromARGB(255, 27, 27, 27)),
+            scaffoldBackgroundColor: Color.fromARGB(255, 17, 17, 17)),
         // ignore: prefer_const_constructors
         home: ResponsiveLayout(
-          mobileVersion: MobileDashboard(),
-          tabletVersion: TabletDashboard(),
+          mobileVersion: OnboardingScreen(),
+          tabletVersion: TabOnboardingScreen(),
           desktopVersion: DesktopDashboard(),
         ),
       ),

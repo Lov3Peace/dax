@@ -2,15 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
-import 'package:flutter_application_1/util/background.dart';
-import 'package:flutter_application_1/util/decks.dart';
 import 'package:flutter_application_1/util/dock.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
-import '../../Screens/background/artboard_page.dart';
 import '../../util/dashboard_decks.dart';
+import 'mob_artboard_page.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class MobileDashboard extends StatefulWidget {
@@ -42,19 +38,6 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    /*
-    double deckHeight = screenHeight * 0.22;
-    double deckWidth = screenWidth * 0.90;
-    double halfDeckWidth = screenWidth * 0.45;
-
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-    } else if (screenWidth < 1100) {
-      deckHeight = screenHeight * 0.24;
-    } else {
-      deckHeight = screenHeight * 0.26;
-    } */
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: mobAppBar(),
@@ -116,18 +99,6 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                           },
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(10.0),
-                      //   child: Column(
-                      //     children: ProjectStacks().projectStacks,
-                      //   ),
-                      // ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(10.0),
-                      //   child: Column(
-                      //     children: ProjectStacks2().projectStacks2,
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

@@ -6,10 +6,11 @@ import 'package:flutter_application_1/util/background.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:sizer/sizer.dart';
 
-import '../../Screens/background/artboard_page.dart';
 import '../../pages/main.dart';
 import '../../util/dashboard_decks.dart';
+import 'tab_artboard_page.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -42,25 +43,12 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    /*
-    double deckHeight = screenHeight * 0.22;
-    double deckWidth = screenWidth * 0.90;
-    double halfDeckWidth = screenWidth * 0.45;
-
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-    } else if (screenWidth < 1100) {
-      deckHeight = screenHeight * 0.24;
-    } else {
-      deckHeight = screenHeight * 0.26;
-    } */
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: tabAppBar(),
       body: Stack(
         children: [
-          const ArtBoardScreen(),
+          const TabArtBoardScreen(),
           Positioned.fill(
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
@@ -116,18 +104,6 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
                             },
                           ),
                         ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(10.0),
-                        //   child: Column(
-                        //     children: ProjectStacks().projectStacks,
-                        //   ),
-                        // ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(10.0),
-                        //   child: Column(
-                        //     children: ProjectStacks2().projectStacks2,
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),

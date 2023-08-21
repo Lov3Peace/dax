@@ -2,9 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+<<<<<<< HEAD:lib/login ui final/Personal SignIn/per_sign_in_form.dart
 import '../../pages/main.dart';
 import '../../responsive/mobile/mob_constants.dart';
 import '../../responsive/mobile/mobile_dashboard.dart';
+=======
+
+import '../../mob_constants.dart';
+import '../final_signin.dart';
+>>>>>>> dae183237a939e33b1842327119397b98dbc7a27:lib/responsive/mobile/login ui final/Signin/signin_form.dart
 import 'forget_password_form.dart';
 
 class SignInForm extends StatefulWidget {
@@ -36,7 +42,6 @@ class _SignInFormState extends State<SignInForm> {
             const Text(
               "Username",
               style: TextStyle(color: Colors.white),
-              //color: Colors.black,
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
@@ -49,17 +54,12 @@ class _SignInFormState extends State<SignInForm> {
                 },
                 onSaved: (username) {},
                 decoration: InputDecoration(
-                  prefixIcon: SvgPicture.asset("images/username (1).svg",
-                      color: Colors.black),
-                  //prefixIconColor: Colors.black,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  // fillColor: Colors.white,
-                  // filled: true,
                 ),
               ),
             ),
@@ -79,9 +79,6 @@ class _SignInFormState extends State<SignInForm> {
                 onSaved: (password) {},
                 obscureText: true,
                 decoration: InputDecoration(
-                  prefixIcon: SvgPicture.asset(
-                    "images/Lock.svg",
-                  ),
                   prefixIconColor: Colors.black,
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
@@ -89,8 +86,6 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                     borderSide: BorderSide(color: Colors.white),
                   ),
-                  // fillColor: Colors.white,
-                  // filled: true,
                 ),
               ),
             ),
@@ -137,7 +132,7 @@ class _SignInFormState extends State<SignInForm> {
                             },
                             pageBuilder: (context, _, __) => Center(
                               child: Container(
-                                height: 680,
+                                height: 500,
                                 margin:
                                     const EdgeInsets.symmetric(horizontal: 16),
                                 padding: const EdgeInsets.symmetric(
@@ -153,6 +148,7 @@ class _SignInFormState extends State<SignInForm> {
                                   resizeToAvoidBottomInset: false,
                                   backgroundColor: Colors.transparent,
                                   body: SingleChildScrollView(
+                                    reverse: true,
                                     child: Column(
                                       children: const [
                                         Text(
@@ -187,9 +183,6 @@ class _SignInFormState extends State<SignInForm> {
                           );
                         },
                       );
-                      // setState(() {
-                      //   isSignInDialogShown = true;
-                      // });
                     },
                     child: const Text(
                       "Forgot Password?",
@@ -202,7 +195,7 @@ class _SignInFormState extends State<SignInForm> {
             const SizedBox(
               height: 10,
             ),
-            SignInButton(
+            SignButton(
               onTap: signinbtn,
             ),
           ],
@@ -218,98 +211,5 @@ class _SignInFormState extends State<SignInForm> {
     } else {
       //else it shows the error information
     }
-  }
-}
-
-class SignInButton extends StatefulWidget {
-  final Function()? onTap;
-
-  SignInButton({super.key, required this.onTap});
-
-  @override
-  State<SignInButton> createState() => _SignInButtonState();
-}
-
-class _SignInButtonState extends State<SignInButton> {
-  //controlls button
-  Control control = Control.stop;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomAnimationBuilder<double>(
-      control: control,
-      startPosition: 0,
-      tween: Tween(begin: 1.0, end: 0.8),
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.linear,
-      onCompleted: () {
-        reverseShrink();
-      },
-      builder: (context, value, child) {
-        return Transform.scale(
-          scale: value,
-          child: child,
-        );
-      },
-      child: GestureDetector(
-        onTap: pressed,
-        child: Container(
-          padding: const EdgeInsets.all(25),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [purp, red]),
-              boxShadow: const [
-                BoxShadow(
-                    color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
-              ],
-              borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
-          child: const Center(
-            child: Text(
-              'Sign In',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  void pressed() {
-    // toggle between control instructions
-
-    setState(() {
-      control = Control.play;
-      // showGeneralDialog(
-      //   barrierDismissible: true,
-      //   barrierLabel: "Sign in",
-      //   context: context,
-      //   pageBuilder: (context, _, __) => Center(
-      //     child: Container(
-      //       height: 620,
-      //       margin: EdgeInsets.symmetric(horizontal: 16),
-      //       decoration: BoxDecoration(
-      //         color: Colors.white,
-      //         borderRadius: BorderRadius.all(
-      //           Radius.circular(40),
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // );
-      Future.delayed(const Duration(milliseconds: 200)).then((_) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-          return const MobileDashboard();
-        }));
-      });
-    });
-  }
-
-  void reverseShrink() {
-    setState(() {
-      control = Control.playReverse;
-    });
   }
 }

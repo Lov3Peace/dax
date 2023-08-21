@@ -2,26 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
+import '../../mob_constants.dart';
+import 'signin_form.dart';
 
-import '../../../responsive/mobile/mob_constants.dart';
-import '../../responsive/desktop/desktop_dashboard.dart';
-import '../../responsive/mobile/mobile_dashboard.dart';
-import '../../responsive/responsive_layout.dart';
-import '../../responsive/tablet/tablet_dashboard.dart';
-
-import '../Create Account/createacc_btn.dart';
-import 'per_sign_in_form.dart';
-
-class PersonalButton extends StatefulWidget {
+class SignInButton extends StatefulWidget {
   final Function()? onTap;
 
-  PersonalButton({super.key, required this.onTap});
+  SignInButton({super.key, required this.onTap});
 
   @override
-  State<PersonalButton> createState() => _PersonalButtonState();
+  State<SignInButton> createState() => _SignInButtonState();
 }
 
-class _PersonalButtonState extends State<PersonalButton> {
+class _SignInButtonState extends State<SignInButton> {
   bool isSignInDialogShown = false;
   //controlls button
   Control control = Control.stop;
@@ -46,8 +39,8 @@ class _PersonalButtonState extends State<PersonalButton> {
       child: GestureDetector(
         onTap: pressed,
         child: Container(
-          padding: const EdgeInsets.all(25),
-          margin: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [
@@ -57,7 +50,7 @@ class _PersonalButtonState extends State<PersonalButton> {
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(
             child: Text(
-              'Personal',
+              'Sign In',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -74,14 +67,14 @@ class _PersonalButtonState extends State<PersonalButton> {
 
     control = Control.play;
     Future.delayed(
-      Duration(milliseconds: 400),
+      const Duration(milliseconds: 400),
       () {
         //slide animation
         showGeneralDialog(
           barrierDismissible: true,
           barrierLabel: "Sign in",
           context: context,
-          transitionDuration: Duration(milliseconds: 400),
+          transitionDuration: const Duration(milliseconds: 400),
           transitionBuilder: (_, animation, __, child) {
             Tween<Offset> tween;
             tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
@@ -94,11 +87,11 @@ class _PersonalButtonState extends State<PersonalButton> {
           },
           pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 680,
+              height: 500,
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               decoration: BoxDecoration(
-                color: Color.fromARGB(225, 50, 50, 50).withOpacity(0.99),
+                color: const Color.fromARGB(225, 50, 50, 50).withOpacity(0.99),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(40),
                 ),
@@ -108,8 +101,8 @@ class _PersonalButtonState extends State<PersonalButton> {
                 backgroundColor: Colors.transparent,
                 body: SingleChildScrollView(
                   child: Column(
-                    children: [
-                      const Text(
+                    children: const [
+                      Text(
                         "Sign in",
                         style: TextStyle(
                           fontSize: 34,
@@ -118,7 +111,7 @@ class _PersonalButtonState extends State<PersonalButton> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.0),
                         child: Text(
                           "Have your personal Projects, Social Media, Finances, and News all at your finger tips! Omni's world is Endless!",
@@ -131,41 +124,6 @@ class _PersonalButtonState extends State<PersonalButton> {
                         ),
                       ),
                       SignInForm(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0),
-                        child: Row(
-                          children: const [
-                            Expanded(
-                              child: Divider(
-                                thickness: 0.5,
-                                color: Colors.white54,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Text(
-                                'Or',
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Divider(
-                                thickness: 0.5,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Text("Sign up with email, apple, or google"),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        child: CreateAccountButton(
-                          onTap: createaccbtn,
-                        ),
-                      ),
                     ],
                   ),
                 ),

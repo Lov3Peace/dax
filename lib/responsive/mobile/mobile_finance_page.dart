@@ -4,10 +4,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
-import '../../Screens/background/artboard_page.dart';
 import '../../pages/keyboards_deck.dart';
 import '../../pages/main.dart';
-import '../../util/background.dart';
+import 'mob_artboard_page.dart';
 
 class MobFinancePage extends StatefulWidget {
   final Animation<double> transitionAnimation;

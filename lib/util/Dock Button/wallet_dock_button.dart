@@ -3,78 +3,6 @@ import 'package:flutter_application_1/pages/main.dart';
 import 'package:flutter_application_1/util/Window%20Route/wallet_window_route.dart';
 import 'package:ionicons/ionicons.dart';
 
-/*class SettingsDockButton extends StatefulWidget {
-  SettingsDockButton({super.key, required this.icon, this.onPressed});
-  IconData icon;
-  VoidCallback? onPressed;
-  @override
-  State<SettingsDockButton> createState() => _SettingsDockButtonState();
-}
-
-class _SettingsDockButtonState extends State<SettingsDockButton> {
-  Control control = Control.stop;
-  Color activeColor = Colors.white;
-  Color inactiveColor = Colors.white30;
-  Color currentColor = Colors.white30;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: tran,
-      child: CustomAnimationBuilder<double>(
-        control: control,
-        startPosition: 0,
-        tween: Tween(begin: 2, end: 1.5),
-        duration: const Duration(milliseconds: 150),
-        curve: Curves.linear,
-        onCompleted: () {
-          reverseShrink();
-        },
-        builder: (context, value, child) {
-          return Transform.scale(
-            scale: value,
-            child: child,
-          );
-        },
-        child: IconButton(
-          icon: Icon(widget.icon),
-          color: currentColor,
-          onPressed: toggleShrink,
-          highlightColor: tran,
-          splashColor: tran,
-        ),
-      ),
-    );
-  }
-
-  void toggleShrink() {
-    // toggle between control instructions
-    setState(() {
-      control = Control.play;
-      currentColor =
-          (currentColor == activeColor) ? inactiveColor : activeColor;
-    });
-  }
-
-  void reverseShrink() {
-    setState(() {
-      control = Control.playReverse;
-    });
-  }
-}*/
-
 class WalletWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
   const WalletWindowButton({super.key, required});
@@ -91,9 +19,6 @@ class WalletWindowButton extends StatelessWidget {
         },
         child: const Hero(
           tag: _heroWalletWindow,
-          /*createRectTween: (begin, end) {
-            return Tween(begin: begin, end: end);
-          },*/
           child: Material(
             color: tran,
             child: Icon(

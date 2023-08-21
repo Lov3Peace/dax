@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             fontFamily: GoogleFonts.montserrat().fontFamily,
             colorScheme:
                 const ColorScheme.dark(secondary: red, onSurface: Colors.white),
-            scaffoldBackgroundColor: Color.fromARGB(255, 13, 13, 13)),
+            scaffoldBackgroundColor: Color.fromARGB(255, 6, 0, 12)),
         // ignore: prefer_const_constructors
         home: ResponsiveLayout(
           mobileVersion: MobileDashboard(),

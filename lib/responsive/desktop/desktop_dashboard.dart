@@ -114,6 +114,24 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        // Positioned(
+                        //   top: 100,
+                        //   left: 5.w,
+                        //   child: Hero(
+                        //     tag: 'title',
+                        //     flightShuttleBuilder: flightShuttleBuilder,
+                        //     child: TitleBubble(
+                        //       deckHeight: screenHeight * 0.07,
+                        //       deckWidth: screenWidth * 0.15,
+                        //       deckName: 'SMFH',
+                        //       gradient1: tran,
+                        //       gradient2: tran,
+                        //       neonGlow: tran,
+                        //       textSize: titleTextSize,
+                        //       leftPad: 30,
+                        //     ),
+                        //   ),
+                        // ),
                         Container(
                           height: 45.h,
                           width: 75.w,
@@ -121,8 +139,9 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                               minWidth: 1200, minHeight: 500),
                           child: AnimationLimiter(
                             child: ListView.builder(
-                              shrinkWrap: true,
+                              // shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
+
                               itemCount: 3,
                               itemBuilder: (BuildContext context, int index) {
                                 return AnimationConfiguration.staggeredList(
@@ -140,7 +159,22 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                           padding: EdgeInsets.fromLTRB(
                                               0.25.w, 0.25.w, 0.25.w, 0.25.w),
                                           child: deskDashboardDecks1(
-                                            deck1: FinancesDeck(),
+                                            deck1: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0, 0, 0, 1.5.h),
+                                                  child: TitleBubble(
+                                                    deckHeight: 5.5.h,
+                                                    deckName: 'Dashboard',
+                                                    deckWidth: 18.w,
+                                                    textSize: 3.sp,
+                                                    leftPad: 30,
+                                                  ),
+                                                ),
+                                                Expanded(child: ProfileCard()),
+                                              ],
+                                            ),
                                             deck2: ProjectsDeck(),
                                             deck3: FinancesDeck(),
                                           )[index],
@@ -160,7 +194,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                               minWidth: 1200, minHeight: 500),
                           child: AnimationLimiter(
                             child: ListView.builder(
-                              shrinkWrap: true,
+                              // shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) {

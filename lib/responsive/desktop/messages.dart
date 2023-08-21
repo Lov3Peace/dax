@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
@@ -13,7 +14,7 @@ class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(minWidth: 200, minHeight: 750),
+      constraints: const BoxConstraints(minWidth: 250, minHeight: 750),
       // margin: EdgeInsets.all(1.w),
       decoration: BoxDecoration(
         gradient: const LinearGradient(colors: [
@@ -36,14 +37,14 @@ class _MessagesState extends State<Messages> {
         ],
       ),
 
-      height: 80.h,
+      height: 90.h,
       width: 15.w,
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(1.w),
+            padding: EdgeInsets.fromLTRB(1.w, 1.5.w, 1.w, 1.w),
             child: Text(
               'Messages',
               style: GoogleFonts.montserrat(
@@ -51,22 +52,22 @@ class _MessagesState extends State<Messages> {
                   fontWeight: FontWeight.w600),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(1.w, 0.5.h, 1.w, 0.5.h),
+          Expanded(
             child: Container(
-              constraints: const BoxConstraints(minWidth: 500, minHeight: 600),
+              margin: EdgeInsets.fromLTRB(1.w, 0, 1.w, 2.w),
+              constraints: const BoxConstraints(minWidth: 250, minHeight: 650),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(1.w),
-                color: const Color.fromARGB(227, 28, 28, 28),
-                boxShadow: const [
-                  BoxShadow(
-                    blurRadius: 10,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    offset: Offset(0, 5),
-                  ),
-                ],
-              ),
-              height: 65.h,
+                  borderRadius: BorderRadius.circular(1.w),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color.fromARGB(255, 10, 10, 10),
+                        spreadRadius: -10),
+                    BoxShadow(
+                      color: Color.fromARGB(255, 26, 26, 26),
+                      spreadRadius: -20.0,
+                      blurRadius: 30.0,
+                    ),
+                  ]),
             ),
           )
         ],

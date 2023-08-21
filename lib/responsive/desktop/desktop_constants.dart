@@ -23,8 +23,7 @@ var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 //responsive variables
 double deckHeight = 22.h;
 double deckWidth = 40.w;
-double dynDeckWidth = 40.w;
-double halfDeckWidth = 40.w;
+double halfDeckWidth = 18.w;
 double headerTextSize = 24;
 double subTextSize = 14;
 double profBubTextSize = 20;
@@ -70,246 +69,135 @@ class Deck extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        // margin: const EdgeInsets.only(top: 20),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [
-            Color.fromARGB(204, 0, 0, 0),
-            Color.fromARGB(126, 15, 15, 15),
-          ], transform: GradientRotation(180)),
-          borderRadius: BorderRadius.circular(1.5.w),
-          border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
-          // boxShadow: const [
-          // BoxShadow(
-          //   blurRadius: 5,
-          //   color: Color.fromARGB(255, 14, 14, 14),
-          //   offset: Offset(5, 5),
-          // ),
-          //   BoxShadow(
-          //     blurRadius: 10,
-          //     color: Color.fromARGB(255, 37, 37, 37),
-          //     offset: Offset(-5, -5),
-          //   )
-          // ],
-        ),
-        // constraints: const BoxConstraints(minWidth: 500, minHeight: 500),
-        height: deckHeight,
-        width: deckWidth,
-        child: Stack(
-          children: [
-            //
-            // Description text
-            Positioned(
-              left: 0,
-              top: 20,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //Heading
-                  Container(
-                      constraints: BoxConstraints(maxWidth: deckWidth * 0.9),
-                      margin: EdgeInsets.fromLTRB(2.w, 1.w, 2.w, 0),
-                      width: textConstraint,
-                      child: text),
-                  //Subheading
-                  Container(
-                      constraints: BoxConstraints(maxWidth: deckWidth * 0.9),
-                      margin: EdgeInsets.fromLTRB(2.w, 0.5.w, 2.w, 0),
-                      width: subTextConstraint,
-                      child: subText)
-                ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(1.5.w),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Container(
+          color: tran,
+          // margin: const EdgeInsets.only(top: 20),
+          // constraints: const BoxConstraints(minWidth: 500, minHeight: 500),
+          height: deckHeight,
+          width: deckWidth,
+          child: Stack(
+            children: [
+              BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                blendMode: BlendMode.darken,
+                child: const SizedBox(),
               ),
-            ),
-            //
-            //Image
-            Positioned(
-              left: 200,
-              bottom: 0,
-              child: Column(
-                children: [
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: image),
-                ],
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(1.5.w),
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 15, 15, 15).withOpacity(0.7),
+                      Color.fromARGB(255, 15, 15, 15).withOpacity(0.50),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+
+                  border: Border.all(color: Color.fromARGB(182, 82, 82, 82)),
+                  // boxShadow: const [
+                  // BoxShadow(
+                  //   blurRadius: 5,
+                  //   color: Color.fromARGB(255, 14, 14, 14),
+                  //   offset: Offset(5, 5),
+                  // ),
+                  //   BoxShadow(
+                  //     blurRadius: 10,
+                  //     color: Color.fromARGB(255, 37, 37, 37),
+                  //     offset: Offset(-5, -5),
+                  //   )
+                  // ],
+                ),
               ),
-            ),
-            //
-            // Card label
-            Positioned(
-              bottom: 0,
-              left: 0,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(2.w, 0, 0, 2.w),
-                child: Container(
-                  constraints: BoxConstraints(minHeight: 50, maxHeight: 160),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [gradient1, gradient2]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: neonGlow,
-                            blurRadius: 20,
-                            blurStyle: BlurStyle.solid)
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(500))),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(2.w, 25, 2.w, 25),
-                    child: Text(
-                      deckName,
-                      style: GoogleFonts.montserrat(
-                          fontSize: labelTextSize,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(
-                              color: shadowColor,
-                              blurRadius: 1,
-                            ),
-                            Shadow(
-                              color: shadowColor,
-                              blurRadius: 2,
-                            ),
-                          ]),
+              //
+              // Description text
+              Positioned(
+                left: 0,
+                top: 20,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //Heading
+                    Container(
+                        constraints: BoxConstraints(maxWidth: deckWidth * 0.9),
+                        margin:
+                            EdgeInsets.fromLTRB(2.w, deckHeight * 0.12, 2.w, 0),
+                        width: textConstraint,
+                        child: text),
+                    //Subheading
+                    Container(
+                        constraints: BoxConstraints(maxWidth: deckWidth * 0.9),
+                        margin: EdgeInsets.fromLTRB(2.w, 0.5.w, 2.w, 0),
+                        width: subTextConstraint,
+                        child: subText)
+                  ],
+                ),
+              ),
+              //
+              //Image
+              Positioned(
+                left: 200,
+                bottom: 0,
+                child: Column(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(bottom: 5),
+                        width: textConstraint,
+                        child: image),
+                  ],
+                ),
+              ),
+              //
+              // Card label
+              Positioned(
+                bottom: 0,
+                left: 0,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(2.w, 0, 0, 2.w),
+                  child: Container(
+                    constraints: BoxConstraints(minHeight: 50, maxHeight: 160),
+                    decoration: BoxDecoration(
+                        gradient:
+                            LinearGradient(colors: [gradient1, gradient2]),
+                        boxShadow: [
+                          BoxShadow(
+                              color: neonGlow,
+                              blurRadius: 20,
+                              blurStyle: BlurStyle.solid)
+                        ],
+                        borderRadius: BorderRadius.all(Radius.circular(500))),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(2.w, 25, 2.w, 25),
+                      child: Text(
+                        deckName,
+                        style: GoogleFonts.montserrat(
+                            fontSize: labelTextSize,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                color: shadowColor,
+                                blurRadius: 1,
+                              ),
+                              Shadow(
+                                color: shadowColor,
+                                blurRadius: 2,
+                              ),
+                            ]),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
-}
-
-//APPBAR FOR ALL PAGES
-NestedScrollView mobAppBar() {
-  return NestedScrollView(
-    headerSliverBuilder: (BuildContext context, bool isScrolled) {
-      return [
-        SliverAppBar(
-          backgroundColor: tran,
-          shadowColor: tran,
-          automaticallyImplyLeading: false,
-          leadingWidth: screenWidth * 0.9,
-          toolbarHeight: 80,
-          flexibleSpace: Padding(
-            padding: EdgeInsets.fromLTRB(
-                screenWidth * .05, 30, screenWidth * .05, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Hero(
-                  tag: 'title',
-                  flightShuttleBuilder: flightShuttleBuilder,
-                  child: TitleBubble(
-                    deckHeight: screenHeight * 0.05,
-                    deckWidth: screenWidth * 0.4,
-                    deckName: 'Dashboard',
-                    gradient1: tran,
-                    gradient2: tran,
-                    neonGlow: tran,
-                    leftPad: 0,
-                  ),
-                ),
-                Hero(
-                  tag: 'profile',
-                  flightShuttleBuilder: flightShuttleBuilder,
-                  child: ProfileBubble(
-                    deckHeight: screenHeight * 0.05,
-                    deckWidth: screenWidth * 0.3,
-                    deckName: 's3rv',
-                    gradient1: tran,
-                    gradient2: tran,
-                    neonGlow: tran,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        )
-      ];
-    },
-    body: const SizedBox(),
-  );
-}
-
-AppBar tabAppBar() {
-  return AppBar(
-    backgroundColor: tran,
-    shadowColor: tran,
-    automaticallyImplyLeading: false,
-    leadingWidth: screenWidth * 0.9,
-    toolbarHeight: lerpDouble(0, 10, 8),
-    flexibleSpace: Padding(
-      padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Hero(
-            tag: 'title',
-            flightShuttleBuilder: flightShuttleBuilder,
-            child: TitleBubble(
-              deckHeight: screenHeight * 0.04,
-              deckWidth: screenWidth * 0.3,
-              deckName: 'Dashboard',
-              gradient1: tran,
-              gradient2: tran,
-              neonGlow: tran,
-              leftPad: 0,
-            ),
-          ),
-          Hero(
-            tag: 'profile',
-            flightShuttleBuilder: flightShuttleBuilder,
-            child: ProfileBubble(
-              deckHeight: screenHeight * 0.04,
-              deckWidth: screenWidth * 0.2,
-              deckName: 's3rv',
-              gradient1: tran,
-              gradient2: tran,
-              neonGlow: tran,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-AppBar deskAppBar() {
-  if (screenWidth > 1100) {
-    titleTextSize = 40;
-  }
-  return AppBar(
-    backgroundColor: tran,
-    shadowColor: tran,
-    automaticallyImplyLeading: false,
-    leadingWidth: screenWidth * 0.9,
-    toolbarHeight: lerpDouble(0, 18, 8),
-    flexibleSpace: Padding(
-      padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Hero(
-            tag: 'title',
-            flightShuttleBuilder: flightShuttleBuilder,
-            child: TitleBubble(
-              deckHeight: screenHeight * 0.07,
-              deckWidth: screenWidth * 0.15,
-              deckName: 'Dashboard',
-              gradient1: tran,
-              gradient2: tran,
-              neonGlow: tran,
-              textSize: titleTextSize,
-              leftPad: 30,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
 }
 
 //PROFILE BUBBLE FOR USERNAME/PROFILE
@@ -420,11 +308,8 @@ class TitleBubble extends StatelessWidget {
     required this.deckHeight,
     required this.deckWidth,
     required this.deckName,
-    required this.gradient1,
-    required this.gradient2,
-    required this.neonGlow,
     required this.leftPad,
-    this.textSize,
+    required this.textSize,
     this.onTap,
     super.key,
   });
@@ -432,10 +317,7 @@ class TitleBubble extends StatelessWidget {
   double deckHeight;
   double deckWidth;
   String deckName;
-  Color gradient1;
-  Color gradient2;
-  Color neonGlow;
-  double? textSize;
+  double textSize;
   double leftPad;
   VoidCallback? onTap;
   Color shadowColor = Colors.white;
@@ -446,29 +328,22 @@ class TitleBubble extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        margin: const EdgeInsets.only(top: 20),
+        // margin: const EdgeInsets.only(top: 20),
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
-            gradient: const LinearGradient(colors: [
-              Color.fromARGB(134, 10, 10, 10),
-              Color.fromARGB(230, 24, 24, 24),
-            ], transform: GradientRotation(180)),
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: const Color.fromARGB(148, 37, 37, 37)),
-            boxShadow: const [
-              BoxShadow(
-                blurRadius: 5,
-                color: Color.fromARGB(255, 8, 8, 8),
-                offset: Offset(0, 0),
-              ),
-              // BoxShadow(
-              //   blurRadius: 10,
-              //   color: Color.fromARGB(255, 37, 37, 37),
-              //   offset: Offset(0, 0),
-              // )
-            ]),
-        constraints:
-            const BoxConstraints(maxHeight: 600, maxWidth: 1080, minWidth: 250),
+          borderRadius: BorderRadius.circular(1.5.w),
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 15, 15, 15).withOpacity(0.7),
+              Color.fromARGB(255, 15, 15, 15).withOpacity(0.50),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          border: Border.all(color: Color.fromARGB(182, 82, 82, 82)),
+        ),
+        constraints: const BoxConstraints(
+            maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 50),
         height: deckHeight,
         width: deckWidth,
         child: Stack(
@@ -477,33 +352,24 @@ class TitleBubble extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(leftPad, 0, 0, 0),
               child: Container(
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [gradient1, gradient2]),
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(colors: [tran, tran]),
                     boxShadow: [
                       BoxShadow(
-                          color: neonGlow,
+                          color: tran,
                           blurRadius: 20,
                           blurStyle: BlurStyle.solid)
                     ],
-                    borderRadius: const BorderRadius.all(Radius.circular(20))),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
                     deckName,
                     style: GoogleFonts.montserrat(
-                        fontSize: textSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 1,
-                          ),
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 2,
-                          ),
-                        ]),
+                      fontSize: textSize,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -1166,6 +1032,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     deckHeight = 22.h;
     deckWidth = 40.w;
+    halfDeckWidth = 18.w;
     labelTextSize = 16;
     var screenHeight = window.physicalSize.height / window.devicePixelRatio;
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
@@ -1249,7 +1116,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
   GestureDetector financesDeck({VoidCallback? onTap, Color? color}) {
     return GestureDetector(
       child: Deck(
-        deckHeight: deckHeight,
+        deckHeight: 20.h,
         deckWidth: halfDeckWidth,
         deckName: 'Finances',
         gradient1: green,
@@ -1605,4 +1472,140 @@ class NewsStacks {
     ),
     const SizedBox(height: 150)
   ];
+}
+
+class ProfileCard extends StatefulWidget {
+  ProfileCard({
+    super.key,
+  });
+
+  @override
+  State<ProfileCard> createState() => _ProfileCardState();
+}
+
+class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
+  @override
+  late AnimationController controller;
+  late Animation<double> scale;
+  late Animation<double> opacity;
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
+    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
+    controller.stop();
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    deckHeight = 22.h;
+    deckWidth = 40.w;
+    halfDeckWidth = 18.w;
+    labelTextSize = 16;
+    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
+    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
+    if (screenWidth < 550) {
+      deckHeight = screenHeight * 0.22;
+      headerTextSize = 24;
+      subTextSize = 16;
+    } else if (screenWidth < 1500) {
+      halfDeckWidth = 18.w;
+      deckWidth = 37.w;
+      headerTextSize = 30;
+      textConstraint = halfDeckWidth * 0.7;
+    } else if (screenWidth <= 1920) {
+      halfDeckWidth = 18.w;
+      deckWidth = 37.w;
+      headerTextSize = 40;
+      subTextSize = 22;
+    } else if (screenWidth < 2600) {
+      halfDeckWidth = 18.w;
+      deckWidth = 37.w;
+      headerTextSize = 48;
+      subTextSize = 24;
+    } else {
+      halfDeckWidth = 18.w;
+      deckWidth = 37.w;
+      headerTextSize = 85;
+      subTextSize = 30;
+      labelTextSize = 22;
+    }
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          controller.play();
+          Future.delayed(const Duration(milliseconds: 100)).then((_) {
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  animation =
+                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+                pageBuilder: (context, animation, secondaryAnimation) {
+                  if (screenWidth < 550) {
+                    return MobFinancePage(
+                      transitionAnimation: animation,
+                    );
+                  } else if (screenWidth < 1100) {
+                    return TabFinancePage(
+                      transitionAnimation: animation,
+                    );
+                  } else {
+                    return MobFinancePage(
+                      transitionAnimation: animation,
+                    );
+                  }
+                },
+                transitionDuration: const Duration(milliseconds: 300),
+              ),
+            );
+          });
+          Future.delayed(const Duration(milliseconds: 500)).then((_) {
+            controller.reset();
+          });
+        });
+      },
+      child: ScaleTransition(
+        scale: scale,
+        child: AnimatedOpacity(
+          opacity: opacity.value,
+          duration: const Duration(milliseconds: 300),
+          child: profileCard(),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector profileCard({VoidCallback? onTap, Color? color}) {
+    return GestureDetector(
+      child: Deck(
+        deckHeight: 20.h,
+        deckWidth: halfDeckWidth,
+        deckName: '',
+        gradient1: tran,
+        gradient2: tran,
+        neonGlow: tran,
+        labelTextSize: labelTextSize,
+        textConstraint: halfDeckWidth * 0.8,
+        text: Text(
+          'Davon',
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+              fontWeight: FontWeight.w600),
+        ),
+      ),
+    );
+  }
 }

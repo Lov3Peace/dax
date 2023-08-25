@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
+import 'package:sizer/sizer.dart';
 import '../../mob_constants.dart';
 import 'signin_form.dart';
 
@@ -87,7 +88,7 @@ class _SignInButtonState extends State<SignInButton> {
           },
           pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 500,
+              height: 60.h,
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               decoration: BoxDecoration(

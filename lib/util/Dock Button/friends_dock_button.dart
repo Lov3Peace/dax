@@ -89,8 +89,8 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
             child: Center(
               child: Container(
                 height: 85.h,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                width: 91.w,
+                padding: const EdgeInsets.symmetric(vertical: 32),
                 child: Hero(
                   tag: _heroFriendsWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
@@ -115,7 +115,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                           children: [
                             //Stories
                             Padding(
-                              padding: EdgeInsets.only(right: 30.w),
+                              padding: EdgeInsets.only(right: 37.w, top: 1.h),
                               child: const Text(
                                 "Connections",
                                 style: TextStyle(
@@ -127,6 +127,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                             Padding(
                               padding: EdgeInsets.symmetric(
                                 vertical: 1.h,
+                                horizontal: 1.5.w,
                               ),
                               child: TextFormField(
                                 controller: _searchController,
@@ -148,177 +149,184 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                             ),
 
                             //Container housing the tab buttons
-                            Container(
-                              clipBehavior: Clip.hardEdge,
-                              height: 6.5.h,
-                              decoration: BoxDecoration(
-                                color: const Color.fromRGBO(42, 41, 41, 0.631)
-                                    .withOpacity(0.98),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(40),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                clipBehavior: Clip.hardEdge,
+                                height: 6.5.h,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromRGBO(42, 41, 41, 0.631)
+                                      .withOpacity(0.98),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(40),
+                                  ),
                                 ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  //
-                                  //All Button
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        if (selectedIndex != 1) {
-                                          selectedIndex = 1;
-                                          isSelected = true;
-                                          currentColor = activeColor;
-                                        }
-                                      });
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    //
+                                    //All Button
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (selectedIndex != 1) {
+                                            selectedIndex = 1;
+                                            isSelected = true;
+                                            currentColor = activeColor;
+                                          }
+                                        });
 
-                                      int pageIndex =
-                                          0; // Change this to the page index
-                                      _carouselController
-                                          .animateToPage(pageIndex);
+                                        int pageIndex =
+                                            0; // Change this to the page index
+                                        _carouselController
+                                            .animateToPage(pageIndex);
 
-                                      // isSelected = false;
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 7.w, vertical: 1.h),
-                                      decoration: const BoxDecoration(
-                                          gradient: LinearGradient(
-                                              colors: [purp, red]),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: red,
-                                                blurRadius: 20,
-                                                blurStyle: BlurStyle.solid)
-                                          ],
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20))),
-                                      child: const Text("All",
-                                          style:
-                                              TextStyle(color: Colors.white)),
+                                        // isSelected = false;
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 7.w, vertical: 1.h),
+                                        decoration: const BoxDecoration(
+                                            gradient: LinearGradient(
+                                                colors: [purp, red]),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: red,
+                                                  blurRadius: 20,
+                                                  blurStyle: BlurStyle.solid)
+                                            ],
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20))),
+                                        child: const Text("All",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                      ),
                                     ),
-                                  ),
-                                  //Favorites Button
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        if (selectedIndex != 1) {
-                                          selectedIndex = 1;
-                                          isSelected = true;
-                                          currentColor = activeColor;
-                                        }
-                                      });
+                                    //Favorites Button
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (selectedIndex != 1) {
+                                            selectedIndex = 1;
+                                            isSelected = true;
+                                            currentColor = activeColor;
+                                          }
+                                        });
 
-                                      int pageIndex =
-                                          1; // Change this to the page index
-                                      _carouselController
-                                          .animateToPage(pageIndex);
+                                        int pageIndex =
+                                            1; // Change this to the page index
+                                        _carouselController
+                                            .animateToPage(pageIndex);
 
-                                      // isSelected = false;
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.5.w, vertical: 1.h),
-                                      decoration: const BoxDecoration(
-                                          gradient: LinearGradient(colors: [
-                                            Colors.black54,
-                                            Colors.black54
-                                          ]),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: tran,
-                                                blurRadius: 20,
-                                                blurStyle: BlurStyle.solid)
-                                          ],
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20))),
-                                      child: const Text("Favorites",
-                                          style:
-                                              TextStyle(color: Colors.white)),
+                                        // isSelected = false;
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4.5.w, vertical: 1.h),
+                                        decoration: const BoxDecoration(
+                                            gradient: LinearGradient(colors: [
+                                              Colors.black54,
+                                              Colors.black54
+                                            ]),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: tran,
+                                                  blurRadius: 20,
+                                                  blurStyle: BlurStyle.solid)
+                                            ],
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20))),
+                                        child: const Text("Favorites",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                      ),
                                     ),
-                                  ),
-                                  //Partners Button
-                                  GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        if (selectedIndex != 1) {
-                                          selectedIndex = 1;
-                                          isSelected = true;
-                                          currentColor = activeColor;
-                                        }
-                                      });
+                                    //Partners Button
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (selectedIndex != 1) {
+                                            selectedIndex = 1;
+                                            isSelected = true;
+                                            currentColor = activeColor;
+                                          }
+                                        });
 
-                                      int pageIndex =
-                                          2; // Change this to the page index
-                                      _carouselController
-                                          .animateToPage(pageIndex);
+                                        int pageIndex =
+                                            2; // Change this to the page index
+                                        _carouselController
+                                            .animateToPage(pageIndex);
 
-                                      // isSelected = false;
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4.5.w, vertical: 1.h),
-                                      decoration: const BoxDecoration(
-                                          gradient: LinearGradient(colors: [
-                                            Colors.black54,
-                                            Colors.black54
-                                          ]),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: tran,
-                                                blurRadius: 20,
-                                                blurStyle: BlurStyle.solid)
-                                          ],
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20))),
-                                      child: const Text("Partners",
-                                          style:
-                                              TextStyle(color: Colors.white)),
+                                        // isSelected = false;
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4.5.w, vertical: 1.h),
+                                        decoration: const BoxDecoration(
+                                            gradient: LinearGradient(colors: [
+                                              Colors.black54,
+                                              Colors.black54
+                                            ]),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: tran,
+                                                  blurRadius: 20,
+                                                  blurStyle: BlurStyle.solid)
+                                            ],
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20))),
+                                        child: const Text("Partners",
+                                            style:
+                                                TextStyle(color: Colors.white)),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
 
                             SizedBox(height: 1.h),
+
                             //Container Housing Carousel slider
-                            Container(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              height: 53.h,
-                              width: 100.w,
-                              decoration: BoxDecoration(
-                                color: const Color.fromRGBO(27, 27, 27, 0.937)
-                                    .withOpacity(0.98),
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(35),
-                                ),
-                              ),
-                              //Carousel Slider
-                              child: PageStorage(
-                                bucket: friendsBucket,
-                                child: CarouselSlider(
-                                  carouselController: _carouselController,
-                                  options: CarouselOptions(
-                                    height: 53.h,
-                                    viewportFraction: 1,
-                                    enlargeCenterPage: true,
-                                    initialPage: _currentIndex,
-                                    onPageChanged: (index, _) {
-                                      setState(() {
-                                        _currentIndex = index;
-                                      });
-                                    },
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                height: 51.h,
+                                width: 100.w,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromRGBO(27, 27, 27, 0.937)
+                                      .withOpacity(0.98),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(35),
                                   ),
-                                  items: _carouselContainers.map((container) {
-                                    return Builder(
-                                      builder: (BuildContext context) {
-                                        return container;
+                                ),
+                                //Carousel Slider
+                                child: PageStorage(
+                                  bucket: friendsBucket,
+                                  child: CarouselSlider(
+                                    carouselController: _carouselController,
+                                    options: CarouselOptions(
+                                      height: 53.h,
+                                      viewportFraction: 1,
+                                      enlargeCenterPage: true,
+                                      initialPage: _currentIndex,
+                                      onPageChanged: (index, _) {
+                                        setState(() {
+                                          _currentIndex = index;
+                                        });
                                       },
-                                    );
-                                  }).toList(),
+                                    ),
+                                    items: _carouselContainers.map((container) {
+                                      return Builder(
+                                        builder: (BuildContext context) {
+                                          return container;
+                                        },
+                                      );
+                                    }).toList(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -377,7 +385,7 @@ class ChatMessages extends StatelessWidget {
       height: 53.h,
       width: 100.w,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(159, 220, 6, 195).withOpacity(0.98),
+        color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
         borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
@@ -449,7 +457,7 @@ class AllMessages extends StatelessWidget {
       height: 53.h,
       width: 100.w,
       decoration: BoxDecoration(
-        color: Color.fromARGB(159, 56, 56, 56).withOpacity(0.98),
+        color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
         borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),

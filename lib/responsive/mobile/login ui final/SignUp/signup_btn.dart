@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../mob_constants.dart';
 
@@ -89,7 +90,7 @@ class _SignUpButtonState extends State<SignUpButton> {
           },
           pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 600,
+              height: 70.h,
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               decoration: BoxDecoration(

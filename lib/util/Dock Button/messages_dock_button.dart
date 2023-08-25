@@ -82,10 +82,10 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
             child: Center(
               child: Container(
                 height: 85.h,
+                width: 91.w,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                padding: const EdgeInsets.symmetric(vertical: 32),
                 child: Hero(
                   tag: _heroMessagesWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
@@ -107,11 +107,12 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                             ),
                           ),
                         ),
+
                         Column(
                           children: [
                             //Stories
                             Padding(
-                              padding: EdgeInsets.only(right: 42.w),
+                              padding: EdgeInsets.only(right: 42.w, top: 1.h),
                               child: const Text(
                                 "Messages",
                                 style: TextStyle(

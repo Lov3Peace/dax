@@ -9,7 +9,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../util/desk_dashboard_decks.dart';
-import '../../Screens/background/artboard_page.dart';
+import '../mobile/mob_artboard_page.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class DesktopDashboard extends StatefulWidget {

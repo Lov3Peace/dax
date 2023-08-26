@@ -11,10 +11,6 @@ import 'package:flutter_application_1/util/Dock%20Button/wallet_dock_button.dart
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-<<<<<<< HEAD
-
-=======
->>>>>>> dae183237a939e33b1842327119397b98dbc7a27
 import 'home_button.dart';
 
 class Dock extends StatefulWidget {

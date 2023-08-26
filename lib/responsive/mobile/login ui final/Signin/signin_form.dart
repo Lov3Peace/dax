@@ -2,15 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-<<<<<<< HEAD:lib/login ui final/Personal SignIn/per_sign_in_form.dart
-import '../../pages/main.dart';
-import '../../responsive/mobile/mob_constants.dart';
-import '../../responsive/mobile/mobile_dashboard.dart';
-=======
 
 import '../../mob_constants.dart';
 import '../final_signin.dart';
->>>>>>> dae183237a939e33b1842327119397b98dbc7a27:lib/responsive/mobile/login ui final/Signin/signin_form.dart
 import 'forget_password_form.dart';
 
 class SignInForm extends StatefulWidget {

@@ -66,15 +66,13 @@ dependencies:
   sizer: ^2.0.15
   easy_scroll_animation: ^1.0.2
   flutter_svg: ^1.1.6
-<<<<<<< HEAD
-  
-=======
   firebase_auth: ^3.3.14
   carousel_slider: ^4.2.1
   flutter_carousel_slider: ^1.1.0
 
->>>>>>> dae183237a939e33b1842327119397b98dbc7a27
-
+dependency_overrides:
+  firebase_core_platform_interface: 4.5.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

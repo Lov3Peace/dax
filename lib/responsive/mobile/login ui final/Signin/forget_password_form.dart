@@ -1,17 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
-<<<<<<< HEAD:lib/login ui final/Personal SignIn/forget_password_form.dart
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../pages/main.dart';
-import '../../responsive/mobile/mob_constants.dart';
-import '../../responsive/mobile/mobile_dashboard.dart';
-import '../Personal SignIn/per_sign_in_form.dart';
-=======
 
 import '../../../../pages/main.dart';
 import '../../mob_constants.dart';
->>>>>>> dae183237a939e33b1842327119397b98dbc7a27:lib/responsive/mobile/login ui final/Signin/forget_password_form.dart
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({
@@ -32,64 +24,24 @@ class ForgotPasswordForm extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
               child: TextFormField(
                 decoration: InputDecoration(
-<<<<<<< HEAD:lib/login ui final/Personal SignIn/forget_password_form.dart
-                  prefixIcon: SvgPicture.asset(
-                    "",
-                  ),
-                  prefixIconColor: Colors.white,
-=======
->>>>>>> dae183237a939e33b1842327119397b98dbc7a27:lib/responsive/mobile/login ui final/Signin/forget_password_form.dart
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
                     borderSide: BorderSide(color: Colors.white),
                   ),
-<<<<<<< HEAD:lib/login ui final/Personal SignIn/forget_password_form.dart
-                  //fillColor: Colors.white54,
-                ),
-              ),
-            ),
-
-            // Text(
-            //   "Password",
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 8.0, bottom: 16),
-            //   child: TextFormField(
-            //     obscureText: true,
-            //     decoration: InputDecoration(
-            //       prefixIcon: SvgPicture.asset(
-            //         "images/Lock.svg",
-            //       ),
-            //       prefixIconColor: Colors.white,
-            //       enabledBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(
-            //           screenWidth / 4,
-            //         ),
-            //         borderSide:
-            //             BorderSide(color: Color.fromARGB(160, 41, 41, 41)),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-=======
                 ),
               ),
             ),
             SendCodeButton(
               onTap: sendcodebtn,
             ),
->>>>>>> dae183237a939e33b1842327119397b98dbc7a27:lib/responsive/mobile/login ui final/Signin/forget_password_form.dart
           ],
         ),
       ),
     );
   }
 
-<<<<<<< HEAD:lib/login ui final/Personal SignIn/forget_password_form.dart
-  void signinbtn() {}
-=======
   void sendcodebtn() {}
 }
 
@@ -185,5 +137,4 @@ class _SendCodeButtonState extends State<SendCodeButton> {
       control = Control.playReverse;
     });
   }
->>>>>>> dae183237a939e33b1842327119397b98dbc7a27:lib/responsive/mobile/login ui final/Signin/forget_password_form.dart
 }

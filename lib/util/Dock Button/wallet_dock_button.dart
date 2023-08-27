@@ -84,468 +84,519 @@ class _WalletWindowPopupCardState extends State<_WalletWindowPopupCard> {
                                 height: 85.h,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Color.fromARGB(182, 31, 31, 31)),
+                                      color: const Color.fromARGB(
+                                          182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
                           ),
                         ),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(right: 55.w, top: 1.h),
-                              child: const Text(
-                                "Wallet",
-                                style: TextStyle(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w800,
+                        SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(right: 55.w, top: 1.h),
+                                child: const Text(
+                                  "Wallet",
+                                  style: TextStyle(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.w800,
+                                  ),
                                 ),
                               ),
-                            ),
 
-                            //Container for the Card itself
-                            Container(
-                              margin: EdgeInsets.all(1.75.h),
-                              height: 23.h,
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(colors: [
-                                  blue,
-                                  Color.fromARGB(255, 85, 221, 89),
-                                ]),
-                                boxShadow: const [
-                                  BoxShadow(
-                                      color: blue,
-                                      blurRadius: 10,
-                                      blurStyle: BlurStyle.solid)
-                                ],
-                                borderRadius: BorderRadius.circular(24),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    // Row for Balance and Profile bubble
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 2.w, right: 2.w),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text(
-                                            'Balance',
-                                            style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 255, 255, 255),
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 24),
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  Color.fromARGB(0, 86, 81, 81)
-                                                      .withOpacity(0.6),
-                                              borderRadius:
-                                                  BorderRadius.circular(24),
+                              //Container for the Card itself
+                              Container(
+                                margin: EdgeInsets.all(1.75.h),
+                                height: 23.h,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(colors: [
+                                    blue,
+                                    Color.fromARGB(255, 85, 221, 89),
+                                  ]),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: blue,
+                                        blurRadius: 10,
+                                        blurStyle: BlurStyle.solid)
+                                  ],
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SingleChildScrollView(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        // Row for Balance and Profile bubble
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 2.w, right: 2.w),
+                                          child: SizedBox(
+                                            width: double.infinity,
+                                            child: Wrap(
+                                              alignment:
+                                                  WrapAlignment.spaceBetween,
+                                              crossAxisAlignment:
+                                                  WrapCrossAlignment.center,
+                                              children: [
+                                                const Text(
+                                                  'Balance',
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 255, 255, 255),
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 24),
+                                                ),
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: const Color.fromARGB(
+                                                            0, 86, 81, 81)
+                                                        .withOpacity(0.6),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            24),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.only(
+                                                      top: 1.h,
+                                                      right: 5.w,
+                                                      left: 5.w,
+                                                      bottom: 1.h,
+                                                    ),
+                                                    child: const Text(
+                                                      "s3rv",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 18,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 1.h,
-                                                right: 5.w,
-                                                left: 5.w,
-                                                bottom: 1.h,
+                                          ),
+                                        ),
+
+                                        //Money for card
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            bottom: 2.h,
+                                            left: 2.w,
+                                            top: 10.h,
+                                          ),
+                                          child: Text(
+                                            NumberFormat.simpleCurrency(
+                                                    locale: 'en-US',
+                                                    decimalDigits: 2)
+                                                .format(7837),
+                                            style: const TextStyle(
+                                                fontSize: 36,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              // Row of buttons for Wallet
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: Wrap(
+                                    alignment: WrapAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    children: [
+                                      //Send Button for Wallet
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 7.w, vertical: 1.h),
+                                          decoration: const BoxDecoration(
+                                              gradient: LinearGradient(
+                                                  colors: [blue, blue]),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: blue,
+                                                    blurRadius: 3,
+                                                    blurStyle: BlurStyle.solid)
+                                              ],
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20))),
+                                          child: const Text(
+                                            "Send",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ),
+                                      //Deposit Button for Wallet
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 7.w, vertical: 1.5.h),
+                                          decoration: const BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  blue,
+                                                  Color.fromARGB(
+                                                      255, 85, 221, 89),
+                                                ],
                                               ),
-                                              child: const Text(
-                                                "s3rv",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: blue,
+                                                    blurRadius: 3,
+                                                    blurStyle: BlurStyle.solid)
+                                              ],
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20))),
+                                          child: const Text(
+                                            "Deposit",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      //Transfer Button for Wallet
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 5.w, vertical: 1.h),
+                                          decoration: const BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Color.fromARGB(
+                                                      255, 85, 221, 89),
+                                                  Color.fromARGB(
+                                                      255, 85, 221, 89),
+                                                ],
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: greenGlow,
+                                                    blurRadius: 3,
+                                                    blurStyle: BlurStyle.solid)
+                                              ],
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20))),
+                                          child: const Text(
+                                            "Transfer",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              //Container housing the financial data for Account
+                              Container(
+                                margin: EdgeInsets.all(1.75.h),
+                                height: 35.h,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 39, 38, 38),
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: SingleChildScrollView(
+                                  physics: const BouncingScrollPhysics(),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Linked Card Container Text
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 1.h,
+                                              bottom: 1.h,
+                                              left: 5.w,
+                                            ),
+                                            child: const Text(
+                                              'Linked Card',
+                                              style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
+                                                  fontSize: 16),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 2.w),
+                                            child: Container(
+                                              height: 6.h,
+                                              margin:
+                                                  EdgeInsets.only(bottom: 2.h),
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: const Color.fromARGB(
+                                                        159, 28, 28, 28)
+                                                    .withOpacity(0.98),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(40),
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.w),
+                                                child: Wrap(
+                                                  alignment: WrapAlignment
+                                                      .spaceBetween,
+                                                  runAlignment:
+                                                      WrapAlignment.center,
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 1.h),
+                                                      child: const Text(
+                                                          'XXXX-1234',
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 3.w,
+                                                              vertical: 1.h),
+                                                      decoration: BoxDecoration(
+                                                        color: const Color
+                                                                .fromARGB(
+                                                            104, 95, 94, 94),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(32),
+                                                      ),
+                                                      child: const Text(
+                                                        'Edit',
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ),
 
-                                    //Money
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                        bottom: 2.h,
-                                        left: 2.w,
-                                      ),
-                                      child: Text(
-                                        NumberFormat.simpleCurrency(
-                                                locale: 'en-US',
-                                                decimalDigits: 2)
-                                            .format(7837),
-                                        style: const TextStyle(
-                                            fontSize: 36,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-
-                            // Row of buttons for Wallet
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  //Send Button for Wallet
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 7.w, vertical: 1.h),
-                                      decoration: const BoxDecoration(
-                                          gradient: LinearGradient(
-                                              colors: [blue, blue]),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: blue,
-                                                blurRadius: 3,
-                                                blurStyle: BlurStyle.solid)
-                                          ],
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20))),
-                                      child: const Text(
-                                        "Send",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
-                                  //Deposit Button for Wallet
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 7.w, vertical: 1.5.h),
-                                      decoration: const BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              blue,
-                                              Color.fromARGB(255, 85, 221, 89),
-                                            ],
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: blue,
-                                                blurRadius: 3,
-                                                blurStyle: BlurStyle.solid)
-                                          ],
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20))),
-                                      child: const Text(
-                                        "Deposit",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  //Transfer Button for Wallet
-                                  GestureDetector(
-                                    onTap: () {},
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 5.w, vertical: 1.h),
-                                      decoration: const BoxDecoration(
-                                          gradient: LinearGradient(
-                                            colors: [
-                                              Color.fromARGB(255, 85, 221, 89),
-                                              Color.fromARGB(255, 85, 221, 89),
-                                            ],
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: greenGlow,
-                                                blurRadius: 3,
-                                                blurStyle: BlurStyle.solid)
-                                          ],
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20))),
-                                      child: const Text(
-                                        "Transfer",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            Container(
-                              margin: EdgeInsets.all(1.75.h),
-                              height: 35.h,
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 39, 38, 38),
-                                borderRadius: BorderRadius.circular(24),
-                              ),
-                              child: SingleChildScrollView(
-                                physics: const BouncingScrollPhysics(),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Linked Card Container Text
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            bottom: 1.h,
-                                            left: 5.w,
-                                          ),
-                                          child: const Text(
-                                            'Linked Card',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 2.w),
-                                          child: Container(
-                                            height: 6.h,
-                                            margin:
-                                                EdgeInsets.only(bottom: 2.h),
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                      159, 28, 28, 28)
-                                                  .withOpacity(0.98),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(40),
-                                              ),
+                                      // Project Contribution Container
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              bottom: 1.h,
+                                              left: 5.w,
                                             ),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.w),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  const Text('XXXX-1234',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 3.w,
-                                                            vertical: 1.h),
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              104, 95, 94, 94),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              32),
-                                                    ),
-                                                    child: const Text(
-                                                      'Edit',
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
+                                            child: const Text(
+                                              'Project Contributions',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-
-                                    // Project Contribution Container
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            bottom: 1.h,
-                                            left: 5.w,
-                                          ),
-                                          child: const Text(
-                                            'Project Contributions',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 2.w),
-                                          child: Container(
-                                            height: 6.h,
-                                            margin:
-                                                EdgeInsets.only(bottom: 2.h),
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                      159, 28, 28, 28)
-                                                  .withOpacity(0.98),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(40),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 2.w),
+                                            child: Container(
+                                              height: 6.h,
+                                              margin:
+                                                  EdgeInsets.only(bottom: 2.h),
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: const Color.fromARGB(
+                                                        159, 28, 28, 28)
+                                                    .withOpacity(0.98),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(40),
+                                                ),
                                               ),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.w),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  const Text('Lagom Mini',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 3.w,
-                                                            vertical: 1.h),
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromARGB(
-                                                          104, 95, 94, 94),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              32),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.w),
+                                                child: Wrap(
+                                                  alignment: WrapAlignment
+                                                      .spaceBetween,
+                                                  runAlignment:
+                                                      WrapAlignment.center,
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 1.h),
+                                                      child: const Text(
+                                                          'Lagom Mini',
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
                                                     ),
-                                                    child: Text(
-                                                      NumberFormat
-                                                          .simpleCurrency(
-                                                        locale: 'en-US',
-                                                      ).format(374),
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: red,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-
-                                    //Deposits Container
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            bottom: 1.h,
-                                            left: 5.w,
-                                          ),
-                                          child: const Text(
-                                            'Deposits',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 2.w),
-                                          child: Container(
-                                            height: 6.h,
-                                            margin:
-                                                EdgeInsets.only(bottom: 1.h),
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                      159, 28, 28, 28)
-                                                  .withOpacity(0.98),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                Radius.circular(40),
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 4.w),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  const Text('Wallet',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                  Container(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 3.w,
-                                                            vertical: 1.h),
-                                                    decoration: BoxDecoration(
-                                                      color: Color.fromARGB(
-                                                          104, 95, 94, 94),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              32),
-                                                    ),
-                                                    child: Text(
-                                                      NumberFormat
-                                                          .simpleCurrency(
-                                                        locale: 'en-US',
-                                                      ).format(10000),
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.bold,
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 3.w,
+                                                              vertical: 1.h),
+                                                      decoration: BoxDecoration(
                                                         color: Color.fromARGB(
-                                                            255, 85, 221, 89),
+                                                            104, 95, 94, 94),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(32),
+                                                      ),
+                                                      child: Text(
+                                                        NumberFormat
+                                                            .simpleCurrency(
+                                                          locale: 'en-US',
+                                                        ).format(374),
+                                                        style: const TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: red,
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                        ],
+                                      ),
+
+                                      //Deposits Container
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              bottom: 1.h,
+                                              left: 5.w,
+                                            ),
+                                            child: const Text(
+                                              'Deposits',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 2.w),
+                                            child: Container(
+                                              height: 6.h,
+                                              margin:
+                                                  EdgeInsets.only(bottom: 1.h),
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color: const Color.fromARGB(
+                                                        159, 28, 28, 28)
+                                                    .withOpacity(0.98),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                  Radius.circular(40),
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 4.w),
+                                                child: Wrap(
+                                                  alignment: WrapAlignment
+                                                      .spaceBetween,
+                                                  runAlignment:
+                                                      WrapAlignment.center,
+                                                  children: [
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 1.h),
+                                                      child: const Text(
+                                                          'Wallet',
+                                                          style: TextStyle(
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 3.w,
+                                                              vertical: 1.h),
+                                                      decoration: BoxDecoration(
+                                                        color: Color.fromARGB(
+                                                            104, 95, 94, 94),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(32),
+                                                      ),
+                                                      child: Text(
+                                                        NumberFormat
+                                                            .simpleCurrency(
+                                                          locale: 'en-US',
+                                                        ).format(10000),
+                                                        style: const TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Color.fromARGB(
+                                                              255, 85, 221, 89),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),

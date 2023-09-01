@@ -225,7 +225,7 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: tran,
-                                                    blurRadius: 20,
+                                                    blurRadius: 3,
                                                     blurStyle: BlurStyle.solid)
                                               ],
                                               borderRadius: BorderRadius.all(
@@ -264,7 +264,7 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: tran,
-                                                    blurRadius: 20,
+                                                    blurRadius: 3,
                                                     blurStyle: BlurStyle.solid)
                                               ],
                                               borderRadius: BorderRadius.all(

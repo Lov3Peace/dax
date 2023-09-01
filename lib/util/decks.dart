@@ -58,7 +58,7 @@ class Deck extends StatelessWidget {
             //   )
           ],
         ),
-        constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080),
+        constraints: const BoxConstraints(),
         height: deckHeight,
         width: deckWidth,
         child: Stack(

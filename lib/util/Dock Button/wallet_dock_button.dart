@@ -2,12 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 import 'package:flutter_application_1/util/Window%20Route/wallet_window_route.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
-import 'package:swipeable_button_view/swipeable_button_view.dart';
 
 class WalletWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
@@ -391,7 +389,7 @@ class _WalletWindowPopupCardState extends State<_WalletWindowPopupCard> {
                                                               vertical: 1.h),
                                                       decoration: BoxDecoration(
                                                         color: const Color
-                                                                .fromARGB(
+                                                            .fromARGB(
                                                             104, 95, 94, 94),
                                                         borderRadius:
                                                             BorderRadius

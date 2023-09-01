@@ -203,7 +203,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: red,
-                                                    blurRadius: 20,
+                                                    blurRadius: 10,
                                                     blurStyle: BlurStyle.solid)
                                               ],
                                               borderRadius: BorderRadius.all(
@@ -242,7 +242,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: tran,
-                                                    blurRadius: 20,
+                                                    blurRadius: 3,
                                                     blurStyle: BlurStyle.solid)
                                               ],
                                               borderRadius: BorderRadius.all(
@@ -281,7 +281,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: tran,
-                                                    blurRadius: 20,
+                                                    blurRadius: 3,
                                                     blurStyle: BlurStyle.solid)
                                               ],
                                               borderRadius: BorderRadius.all(

@@ -5,10 +5,13 @@ import 'package:flutter_application_1/responsive/tablet/login%20ui%20final/tab_o
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../responsive/desktop/desktop_dashboard.dart';
-import '../responsive/tablet/tablet_dashboard.dart';
 import 'package:sizer/sizer.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

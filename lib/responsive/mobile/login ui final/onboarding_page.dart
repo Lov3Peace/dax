@@ -22,7 +22,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
           const ArtBoardScreen(),
           AnimatedPositioned(
             top: isSignInDialogShown ? -50 : 0,
-            duration: Duration(milliseconds: 240),
+            duration: const Duration(milliseconds: 240),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: SafeArea(
@@ -30,13 +30,13 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: Column(
                   children: [
-                    Spacer(
+                    const Spacer(
                       flex: 1,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 350,
                       child: Column(
-                        children: const [
+                        children: [
                           Padding(
                             padding: EdgeInsets.only(right: 60),
                             child: Text(
@@ -87,8 +87,9 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       ),
                     ),
 
-                    Spacer(),
+                    const Spacer(),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 15.0),

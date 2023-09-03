@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/pages/main.dart';
@@ -89,46 +91,110 @@ class _SignUpButtonState extends State<SignUpButton> {
             );
           },
           pageBuilder: (context, _, __) => Center(
+            // child: Container(
+            //   height: 70.h,
+            //   margin: const EdgeInsets.symmetric(horizontal: 16),
+            //   padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+            //   decoration: BoxDecoration(
+            //     color: Color.fromARGB(225, 50, 50, 50).withOpacity(0.95),
+            //     borderRadius: const BorderRadius.all(
+            //       Radius.circular(40),
+            //     ),
+            //   ),
+            //   child: Scaffold(
+            //     resizeToAvoidBottomInset: false,
+            //     backgroundColor: Colors.transparent,
+            //     body: SingleChildScrollView(
+            //       child: Column(
+            //         children: [
+            //           const Text(
+            //             "Sign Up",
+            //             style: TextStyle(
+            //               fontSize: 34,
+            //               fontFamily: "Gontserrat",
+            //               color: Colors.white,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //           const Padding(
+            //             padding: EdgeInsets.symmetric(vertical: 16.0),
+            //             child: Text(
+            //               "Sign Up to experience a new world for creative and collaborative endeavors!",
+            //               textAlign: TextAlign.center,
+            //               style: TextStyle(
+            //                 fontSize: 14,
+            //                 color: Colors.white,
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //             ),
+            //           ),
+            //           SignUpForm(),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
             child: Container(
               height: 70.h,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(225, 50, 50, 50).withOpacity(0.95),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(40),
-                ),
-              ),
-              child: Scaffold(
-                resizeToAvoidBottomInset: false,
-                backgroundColor: Colors.transparent,
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          fontSize: 34,
-                          fontFamily: "Gontserrat",
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.0),
-                        child: Text(
-                          "Sign Up to experience a new world for creative and collaborative endeavors!",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+              child: Material(
+                shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
+                color: const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
+                elevation: 2,
+                borderRadius: BorderRadius.circular(32),
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(24),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color.fromARGB(182, 31, 31, 31)),
+                            borderRadius: BorderRadius.circular(24),
                           ),
                         ),
                       ),
-                      SignUpForm(),
-                    ],
-                  ),
+                    ),
+                    Scaffold(
+                      resizeToAvoidBottomInset: false,
+                      backgroundColor: Colors.transparent,
+                      body: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                  fontSize: 34,
+                                  fontFamily: "Gontserrat",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 16.0),
+                              child: Text(
+                                "Sign Up to experience a new world for creative and collaborative endeavors!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SignUpForm(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

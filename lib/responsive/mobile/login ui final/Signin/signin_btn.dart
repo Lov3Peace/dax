@@ -46,7 +46,7 @@ class _SignInButtonState extends State<SignInButton> {
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [
                 BoxShadow(
-                    color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
+                    color: red, blurRadius: 10, blurStyle: BlurStyle.solid)
               ],
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(

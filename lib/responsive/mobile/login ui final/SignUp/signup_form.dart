@@ -25,50 +25,74 @@ class _SignUpFormState extends State<SignUpForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Email",
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Email",
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16,
+                left: 10,
+                right: 10,
+              ),
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
             ),
-            Text(
-              "Username",
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Username",
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16,
+                left: 10,
+                right: 10,
+              ),
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
             ),
-            Text(
-              "Password",
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Password",
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16,
+                left: 10,
+                right: 10,
+              ),
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
@@ -77,14 +101,18 @@ class _SignUpFormState extends State<SignUpForm> {
               height: 10,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text(
-                  "Remember Me",
+                const Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text(
+                    "Remember Me",
+                  ),
                 ),
                 Switch(
                     value: isSwitch,
                     activeColor: Colors.white,
-                    activeTrackColor: Color.fromARGB(255, 221, 83, 245),
+                    activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
                     onChanged: (bool newBool) {
                       setState(() {
                         isSwitch = newBool;
@@ -98,28 +126,6 @@ class _SignUpFormState extends State<SignUpForm> {
             SignButton(
               onTap: signinbtn,
             ),
-            // Text(
-            //   "Password",
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 8.0, bottom: 16),
-            //   child: TextFormField(
-            //     obscureText: true,
-            //     decoration: InputDecoration(
-            //       prefixIcon: SvgPicture.asset(
-            //         "images/Lock.svg",
-            //       ),
-            //       prefixIconColor: Colors.white,
-            //       enabledBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(
-            //           screenWidth / 4,
-            //         ),
-            //         borderSide:
-            //             BorderSide(color: Color.fromARGB(160, 41, 41, 41)),
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

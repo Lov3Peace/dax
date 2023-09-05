@@ -65,7 +65,7 @@ class _DockState extends State<Dock> with AnimationMixin {
                 //   offset: Offset(0, 0),
                 // )
               ]),
-          width: 75.w,
+          width: 90.w,
           height: 12.h,
           child: PageView(
             physics: const BouncingScrollPhysics(),

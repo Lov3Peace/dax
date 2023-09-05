@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/util/projects_stacks_list2.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:sizer/sizer.dart';
 import '../../pages/keyboards_deck.dart';
 import '../../pages/main.dart';
 import '../../util/dock.dart';
@@ -83,7 +84,7 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
                         deckName: 'Dashboard',
                         gradient1: tran,
                         gradient2: tran,
-                        neonGlow: tran,
+                        neonGlow: const Color.fromARGB(78, 4, 4, 4),
                         leftPad: 0,
                       ),
                     ),
@@ -96,7 +97,7 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
                         deckName: 's3rv',
                         gradient1: tran,
                         gradient2: tran,
-                        neonGlow: tran,
+                        neonGlow: const Color.fromARGB(78, 4, 4, 4),
                       ),
                     ),
                   ],

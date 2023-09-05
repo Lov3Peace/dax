@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/main.dart';
 import 'package:simple_animations/simple_animations.dart';
+import 'package:sizer/sizer.dart';
 import '../../mob_constants.dart';
 import 'signin_form.dart';
 
@@ -45,7 +48,7 @@ class _SignInButtonState extends State<SignInButton> {
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [
                 BoxShadow(
-                    color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
+                    color: red, blurRadius: 10, blurStyle: BlurStyle.solid)
               ],
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(
@@ -87,45 +90,67 @@ class _SignInButtonState extends State<SignInButton> {
           },
           pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 500,
-              margin: const EdgeInsets.symmetric(horizontal: 16),
+              height: 60.h,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(225, 50, 50, 50).withOpacity(0.99),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(40),
-                ),
-              ),
-              child: Scaffold(
-                resizeToAvoidBottomInset: false,
-                backgroundColor: Colors.transparent,
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: const [
-                      Text(
-                        "Sign in",
-                        style: TextStyle(
-                          fontSize: 34,
-                          fontFamily: "Gontserrat",
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 16.0),
-                        child: Text(
-                          "Have your personal Projects, Social Media, Finances, and News all at your finger tips! Omni's world is Endless!",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+              child: Material(
+                shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
+                color: const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
+                elevation: 2,
+                borderRadius: BorderRadius.circular(32),
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(24),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color.fromARGB(182, 31, 31, 31)),
+                            borderRadius: BorderRadius.circular(24),
                           ),
                         ),
                       ),
-                      SignInForm(),
-                    ],
-                  ),
+                    ),
+                    const Scaffold(
+                      resizeToAvoidBottomInset: false,
+                      backgroundColor: Colors.transparent,
+                      body: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: 10),
+                              child: Text(
+                                "Sign in",
+                                style: TextStyle(
+                                  fontSize: 34,
+                                  fontFamily: "Gontserrat",
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 16.0),
+                              child: Text(
+                                "Have your personal Projects, Social Media, Finances, and News all at your finger tips! Omni's world is Endless!",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SignInForm(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -96,7 +96,6 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                     borderRadius: BorderRadius.circular(32),
                     child: Stack(
                       children: [
-                        // Container(height: 5.h, color: red),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(24),
                           child: BackdropFilter(
@@ -105,17 +104,19 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                                 height: 85.h,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Color.fromARGB(182, 31, 31, 31)),
+                                      color: const Color.fromARGB(
+                                          182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
                           ),
                         ),
                         SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
                           child: Column(
                             children: [
                               //Stories
                               Padding(
-                                padding: EdgeInsets.only(right: 42.w, top: 2.h),
+                                padding: EdgeInsets.only(right: 42.w, top: 1.h),
                                 child: const Text(
                                   "Messages",
                                   style: TextStyle(
@@ -128,7 +129,8 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                                 height: 10.5.h,
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    physics: BouncingScrollPhysics(),
+                                    physics: const ScrollPhysics(
+                                        parent: BouncingScrollPhysics()),
                                     itemCount: people.length,
                                     itemBuilder: (context, index) {
                                       return BubbleStories(text: people[index]);
@@ -152,6 +154,8 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                                   child: Wrap(
                                     alignment: WrapAlignment.spaceEvenly,
                                     runAlignment: WrapAlignment.center,
+
+                                    //crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       //
                                       //All Button
@@ -220,7 +224,7 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: tran,
-                                                    blurRadius: 20,
+                                                    blurRadius: 3,
                                                     blurStyle: BlurStyle.solid)
                                               ],
                                               borderRadius: BorderRadius.all(
@@ -259,7 +263,7 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: tran,
-                                                    blurRadius: 20,
+                                                    blurRadius: 3,
                                                     blurStyle: BlurStyle.solid)
                                               ],
                                               borderRadius: BorderRadius.all(
@@ -277,11 +281,10 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                               SizedBox(height: 1.h),
                               //Container Housing Carousel slider
                               Padding(
-                                padding:
-                                    EdgeInsets.fromLTRB(4.w, .5.h, 4.w, 1.h),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  height: 45.h,
+                                  height: 50.h,
                                   width: 100.w,
                                   decoration: BoxDecoration(
                                     color: Color.fromARGB(162, 27, 27, 27)
@@ -347,11 +350,12 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
   }
 }
 
+// Chat Messages
 class ChatMessages extends StatelessWidget {
   ChatMessages({
     super.key,
   });
-  final List chatmessages = [
+  final List chats = [
     "Tiffany",
     "Mitch",
     "Cassandra",
@@ -372,9 +376,15 @@ class ChatMessages extends StatelessWidget {
           Radius.circular(15),
         ),
       ),
-      child: ListView.builder(
+      child: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemCount: chatmessages.length,
+        itemCount: chats.length,
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider(
+            height: 1,
+            thickness: 2,
+          );
+        },
         itemBuilder: (context, index) {
           return MyContainer();
         },
@@ -383,11 +393,12 @@ class ChatMessages extends StatelessWidget {
   }
 }
 
+//Group Messages
 class GroupMessages extends StatelessWidget {
   GroupMessages({
     super.key,
   });
-  final List groupmessages = [
+  final List groups = [
     "Tiffany",
     "Mitch",
     "Cassandra",
@@ -408,9 +419,15 @@ class GroupMessages extends StatelessWidget {
           Radius.circular(15),
         ),
       ),
-      child: ListView.builder(
+      child: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemCount: groupmessages.length,
+        itemCount: groups.length,
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider(
+            height: 1,
+            thickness: 2,
+          );
+        },
         itemBuilder: (context, index) {
           return MyContainer();
         },
@@ -419,6 +436,7 @@ class GroupMessages extends StatelessWidget {
   }
 }
 
+// All Messages
 class AllMessages extends StatelessWidget {
   AllMessages({
     super.key,
@@ -444,9 +462,15 @@ class AllMessages extends StatelessWidget {
           Radius.circular(15),
         ),
       ),
-      child: ListView.builder(
+      child: ListView.separated(
         physics: const BouncingScrollPhysics(),
         itemCount: allmessages.length,
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider(
+            height: 1,
+            thickness: 2,
+          );
+        },
         itemBuilder: (context, index) {
           return MyContainer();
         },

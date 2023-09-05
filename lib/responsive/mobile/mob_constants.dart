@@ -4,6 +4,7 @@ import 'package:flutter_application_1/pages/main.dart';
 import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 import 'mobile_finance_page.dart';
 import 'mobile_news_page.dart';
 import 'mobile_projects_page.dart';
@@ -77,7 +78,7 @@ class Deck extends StatelessWidget {
             //   )
           ],
         ),
-        constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080),
+        constraints: const BoxConstraints(),
         height: deckHeight,
         width: deckWidth,
         child: Stack(
@@ -113,8 +114,9 @@ class Deck extends StatelessWidget {
                 ],
               ),
             ),
+
             // Card label
-            //
+
             Positioned(
               bottom: 0,
               left: 0,
@@ -126,7 +128,7 @@ class Deck extends StatelessWidget {
                       boxShadow: [
                         BoxShadow(
                             color: neonGlow,
-                            blurRadius: 20,
+                            blurRadius: 7,
                             blurStyle: BlurStyle.solid)
                       ],
                       borderRadius:
@@ -183,7 +185,7 @@ AppBar mobAppBar() {
               deckName: 'Dashboard',
               gradient1: tran,
               gradient2: tran,
-              neonGlow: tran,
+              neonGlow: const Color.fromARGB(78, 4, 4, 4),
               leftPad: 0,
             ),
           ),
@@ -196,7 +198,7 @@ AppBar mobAppBar() {
               deckName: 's3rv',
               gradient1: tran,
               gradient2: tran,
-              neonGlow: tran,
+              neonGlow: const Color.fromARGB(78, 4, 4, 4),
             ),
           ),
         ],
@@ -565,10 +567,10 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         gradient1: red,
         gradient2: purp,
         neonGlow: red,
-        textConstraint: 300,
+        textConstraint: 200,
         image: Image.asset(
           'images/proj placeholder.webp',
-          height: screenWidth * 0.3,
+          height: 20.h,
         ),
         text: Text(
           'Collaborate and innovate.',
@@ -1386,6 +1388,116 @@ class ButtonColor extends StatelessWidget {
           'Log Out',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+      ),
+    );
+  }
+}
+
+class Stacks extends Deck {
+  Stacks(
+      {super.key,
+      required super.deckHeight,
+      required super.deckWidth,
+      required super.deckName,
+      required super.gradient1,
+      required super.gradient2,
+      required super.neonGlow});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(top: 20),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [
+            Color.fromARGB(164, 0, 0, 0),
+            Color.fromARGB(59, 15, 15, 15),
+          ], transform: GradientRotation(180)),
+          borderRadius: BorderRadius.circular(25),
+          border: Border.all(color: const Color.fromARGB(149, 41, 41, 41)),
+          boxShadow: const [],
+        ),
+        constraints: const BoxConstraints(),
+        height: deckHeight,
+        width: deckWidth,
+        child: Stack(
+          children: [
+            //
+            // Description text
+            //
+            Positioned(
+              left: 25,
+              top: 20,
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: text),
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: subText)
+                ],
+              ),
+            ),
+            Positioned(
+              left: 300,
+              bottom: 0,
+              child: Column(
+                children: [
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: image),
+                ],
+              ),
+            ),
+
+            // Card label
+
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(25, 0, 0, 25),
+                child: Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [gradient1, gradient2]),
+                      boxShadow: [
+                        BoxShadow(
+                            color: neonGlow,
+                            blurRadius: 7,
+                            blurStyle: BlurStyle.solid)
+                      ],
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20))),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    child: Text(
+                      deckName,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 1,
+                            ),
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 2,
+                            ),
+                          ]),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

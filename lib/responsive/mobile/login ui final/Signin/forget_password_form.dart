@@ -17,18 +17,28 @@ class ForgotPasswordForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Email",
+            const Padding(
+              padding: EdgeInsets.only(
+                left: 20,
+              ),
+              child: Text(
+                "Email",
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16,
+                left: 10,
+                right: 10,
+              ),
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
@@ -84,7 +94,7 @@ class _SendCodeButtonState extends State<SendCodeButton> {
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [
                 BoxShadow(
-                    color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
+                    color: red, blurRadius: 10, blurStyle: BlurStyle.solid)
               ],
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(

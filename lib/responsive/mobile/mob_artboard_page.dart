@@ -23,8 +23,8 @@ class _ArtBoardScreenState extends State<ArtBoardScreen> {
             child: BackdropFilter(
               //Now it looks perfecto
               filter: ImageFilter.blur(
-                sigmaX: 50,
-                sigmaY: 50,
+                sigmaX: 100,
+                sigmaY: 100,
               ),
               child: const SizedBox(),
             ),

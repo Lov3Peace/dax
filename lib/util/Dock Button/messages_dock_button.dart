@@ -82,10 +82,10 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
             child: Center(
               child: Container(
                 height: 85.h,
+                width: 91.w,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                padding: const EdgeInsets.symmetric(vertical: 32),
                 child: Hero(
                   tag: _heroMessagesWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
@@ -97,222 +97,233 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                     borderRadius: BorderRadius.circular(32),
                     child: Stack(
                       children: [
-                        // Container(height: 5.h, color: red),
                         ClipRRect(
                           borderRadius: BorderRadius.circular(24),
                           child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
-                              height: 85.h,
-                            ),
+                                height: 85.h,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: const Color.fromARGB(
+                                          182, 31, 31, 31)),
+                                  borderRadius: BorderRadius.circular(24),
+                                )),
                           ),
                         ),
-                        Column(
-                          children: [
-                            //Stories
-                            Padding(
-                              padding: EdgeInsets.only(right: 42.w),
-                              child: const Text(
-                                "Messages",
-                                style: TextStyle(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10.5.h,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  physics: const ScrollPhysics(
-                                      parent: BouncingScrollPhysics()),
-                                  itemCount: people.length,
-                                  itemBuilder: (context, index) {
-                                    return BubbleStories(text: people[index]);
-                                  }),
-                            ),
-
-                            //Container housing the tab buttons
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 6.5.h,
-                                decoration: BoxDecoration(
-                                  color: const Color.fromRGBO(42, 41, 41, 0.631)
-                                      .withOpacity(0.98),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(40),
+                        SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          child: Column(
+                            children: [
+                              //Stories
+                              Padding(
+                                padding: EdgeInsets.only(right: 42.w, top: 1.h),
+                                child: const Text(
+                                  "Messages",
+                                  style: TextStyle(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.w800,
                                   ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  //crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    //
-                                    //All Button
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          if (selectedIndex != 1) {
-                                            selectedIndex = 1;
-                                            isSelected = true;
-                                            currentColor = activeColor;
-                                          }
-                                        });
-
-                                        int pageIndex =
-                                            0; // Change this to the page index
-                                        _carouselController
-                                            .animateToPage(pageIndex);
-
-                                        // isSelected = false;
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 7.w, vertical: 1.h),
-                                        decoration: const BoxDecoration(
-                                            gradient: LinearGradient(
-                                                colors: [purp, red]),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: red,
-                                                  blurRadius: 3,
-                                                  blurStyle: BlurStyle.solid)
-                                            ],
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
-                                        child: const Text("All",
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                      ),
-                                    ),
-                                    //Group Button
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          if (selectedIndex != 1) {
-                                            selectedIndex = 1;
-                                            isSelected = true;
-                                            currentColor = activeColor;
-                                          }
-                                        });
-
-                                        int pageIndex =
-                                            1; // Change this to the page index
-                                        _carouselController
-                                            .animateToPage(pageIndex);
-
-                                        // isSelected = false;
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 6.w, vertical: 1.h),
-                                        decoration: const BoxDecoration(
-                                            gradient: LinearGradient(colors: [
-                                              Colors.black54,
-                                              Colors.black54
-                                            ]),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: tran,
-                                                  blurRadius: 20,
-                                                  blurStyle: BlurStyle.solid)
-                                            ],
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
-                                        child: const Text("Group",
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                      ),
-                                    ),
-                                    //Chat Button
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          if (selectedIndex != 1) {
-                                            selectedIndex = 1;
-                                            isSelected = true;
-                                            currentColor = activeColor;
-                                          }
-                                        });
-
-                                        int pageIndex =
-                                            2; // Change this to the page index
-                                        _carouselController
-                                            .animateToPage(pageIndex);
-
-                                        // isSelected = false;
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 6.w, vertical: 1.h),
-                                        decoration: const BoxDecoration(
-                                            gradient: LinearGradient(colors: [
-                                              Colors.black54,
-                                              Colors.black54
-                                            ]),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: tran,
-                                                  blurRadius: 20,
-                                                  blurStyle: BlurStyle.solid)
-                                            ],
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
-                                        child: const Text("Chat",
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ),
-                            ),
+                              SizedBox(
+                                height: 10.5.h,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    physics: const ScrollPhysics(
+                                        parent: BouncingScrollPhysics()),
+                                    itemCount: people.length,
+                                    itemBuilder: (context, index) {
+                                      return BubbleStories(text: people[index]);
+                                    }),
+                              ),
 
-                            SizedBox(height: 1.h),
-                            //Container Housing Carousel slider
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                height: 50.h,
-                                width: 100.w,
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(162, 27, 27, 27)
-                                      .withOpacity(0.85),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(35),
-                                  ),
-                                ),
-                                //Carousel Slider
-                                child: PageStorage(
-                                  bucket: messageBucket,
-                                  child: CarouselSlider(
-                                    carouselController: _carouselController,
-                                    options: CarouselOptions(
-                                      height: 53.h,
-                                      viewportFraction: 1,
-                                      enlargeCenterPage: true,
-                                      initialPage: _currentIndex,
-                                      onPageChanged: (index, _) {
-                                        setState(() {
-                                          _currentIndex = index;
-                                        });
-                                      },
+                              //Container housing the tab buttons
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  height: 6.5.h,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromRGBO(42, 41, 41, 0.631)
+                                            .withOpacity(0.98),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(40),
                                     ),
-                                    items: _carouselContainers.map((container) {
-                                      return Builder(
-                                        builder: (BuildContext context) {
-                                          return container;
+                                  ),
+                                  child: Wrap(
+                                    alignment: WrapAlignment.spaceEvenly,
+                                    runAlignment: WrapAlignment.center,
+
+                                    //crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      //
+                                      //All Button
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            if (selectedIndex != 1) {
+                                              selectedIndex = 1;
+                                              isSelected = true;
+                                              currentColor = activeColor;
+                                            }
+                                          });
+
+                                          int pageIndex =
+                                              0; // Change this to the page index
+                                          _carouselController
+                                              .animateToPage(pageIndex);
+
+                                          // isSelected = false;
                                         },
-                                      );
-                                    }).toList(),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 7.w, vertical: 1.h),
+                                          decoration: const BoxDecoration(
+                                              gradient: LinearGradient(
+                                                  colors: [purp, red]),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: red,
+                                                    blurRadius: 3,
+                                                    blurStyle: BlurStyle.solid)
+                                              ],
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20))),
+                                          child: const Text("All",
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                        ),
+                                      ),
+                                      //Group Button
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            if (selectedIndex != 1) {
+                                              selectedIndex = 1;
+                                              isSelected = true;
+                                              currentColor = activeColor;
+                                            }
+                                          });
+
+                                          int pageIndex =
+                                              1; // Change this to the page index
+                                          _carouselController
+                                              .animateToPage(pageIndex);
+
+                                          // isSelected = false;
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 6.w, vertical: 1.h),
+                                          decoration: const BoxDecoration(
+                                              gradient: LinearGradient(colors: [
+                                                Colors.black54,
+                                                Colors.black54
+                                              ]),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: tran,
+                                                    blurRadius: 3,
+                                                    blurStyle: BlurStyle.solid)
+                                              ],
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20))),
+                                          child: const Text("Group",
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                        ),
+                                      ),
+                                      //Chat Button
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            if (selectedIndex != 1) {
+                                              selectedIndex = 1;
+                                              isSelected = true;
+                                              currentColor = activeColor;
+                                            }
+                                          });
+
+                                          int pageIndex =
+                                              2; // Change this to the page index
+                                          _carouselController
+                                              .animateToPage(pageIndex);
+
+                                          // isSelected = false;
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 6.w, vertical: 1.h),
+                                          decoration: const BoxDecoration(
+                                              gradient: LinearGradient(colors: [
+                                                Colors.black54,
+                                                Colors.black54
+                                              ]),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: tran,
+                                                    blurRadius: 3,
+                                                    blurStyle: BlurStyle.solid)
+                                              ],
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20))),
+                                          child: const Text("Chat",
+                                              style: TextStyle(
+                                                  color: Colors.white)),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+
+                              SizedBox(height: 1.h),
+                              //Container Housing Carousel slider
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  height: 50.h,
+                                  width: 100.w,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(162, 27, 27, 27)
+                                        .withOpacity(0.85),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(35),
+                                    ),
+                                  ),
+                                  //Carousel Slider
+                                  child: PageStorage(
+                                    bucket: messageBucket,
+                                    child: CarouselSlider(
+                                      carouselController: _carouselController,
+                                      options: CarouselOptions(
+                                        height: 53.h,
+                                        viewportFraction: 1,
+                                        enlargeCenterPage: true,
+                                        initialPage: _currentIndex,
+                                        onPageChanged: (index, _) {
+                                          setState(() {
+                                            _currentIndex = index;
+                                          });
+                                        },
+                                      ),
+                                      items:
+                                          _carouselContainers.map((container) {
+                                        return Builder(
+                                          builder: (BuildContext context) {
+                                            return container;
+                                          },
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -340,11 +351,12 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
   }
 }
 
+// Chat Messages
 class ChatMessages extends StatelessWidget {
   ChatMessages({
     super.key,
   });
-  final List chatmessages = [
+  final List chats = [
     "Tiffany",
     "Mitch",
     "Cassandra",
@@ -365,9 +377,15 @@ class ChatMessages extends StatelessWidget {
           Radius.circular(15),
         ),
       ),
-      child: ListView.builder(
+      child: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemCount: chatmessages.length,
+        itemCount: chats.length,
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider(
+            height: 1,
+            thickness: 2,
+          );
+        },
         itemBuilder: (context, index) {
           return MyContainer();
         },
@@ -376,11 +394,12 @@ class ChatMessages extends StatelessWidget {
   }
 }
 
+//Group Messages
 class GroupMessages extends StatelessWidget {
   GroupMessages({
     super.key,
   });
-  final List groupmessages = [
+  final List groups = [
     "Tiffany",
     "Mitch",
     "Cassandra",
@@ -401,9 +420,15 @@ class GroupMessages extends StatelessWidget {
           Radius.circular(15),
         ),
       ),
-      child: ListView.builder(
+      child: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemCount: groupmessages.length,
+        itemCount: groups.length,
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider(
+            height: 1,
+            thickness: 2,
+          );
+        },
         itemBuilder: (context, index) {
           return MyContainer();
         },
@@ -412,6 +437,7 @@ class GroupMessages extends StatelessWidget {
   }
 }
 
+// All Messages
 class AllMessages extends StatelessWidget {
   AllMessages({
     super.key,
@@ -437,9 +463,15 @@ class AllMessages extends StatelessWidget {
           Radius.circular(15),
         ),
       ),
-      child: ListView.builder(
+      child: ListView.separated(
         physics: const BouncingScrollPhysics(),
         itemCount: allmessages.length,
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider(
+            height: 1,
+            thickness: 2,
+          );
+        },
         itemBuilder: (context, index) {
           return MyContainer();
         },
@@ -509,10 +541,10 @@ class MyContainer extends StatelessWidget {
           width: 100.h,
           decoration: BoxDecoration(
             color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.1),
-            border: Border.all(
-              color: Colors.white,
-              width: 1,
-            ),
+            // border: Border.all(
+            //   color: Colors.white,
+            //   width: 1,
+            // ),
             borderRadius: const BorderRadius.all(
               Radius.circular(15),
             ),

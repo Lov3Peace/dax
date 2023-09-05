@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_application_1/responsive/mobile/login%20ui%20final/onboarding_page.dart';
@@ -5,10 +6,20 @@ import 'package:flutter_application_1/responsive/tablet/login%20ui%20final/tab_o
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../responsive/desktop/desktop_dashboard.dart';
-import '../responsive/tablet/tablet_dashboard.dart';
 import 'package:sizer/sizer.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyC6cmRlApktLp8pr73JJ9ulx9TOxeYI4_o",
+            appId: "1:28990487504:web:1c7d24fea847542a88d7d5",
+            messagingSenderId: "28990487504",
+            projectId: "omni-fb089"));
+  }
+
   runApp(const MyApp());
 }
 
@@ -35,7 +46,7 @@ class MyApp extends StatelessWidget {
             fontFamily: GoogleFonts.montserrat().fontFamily,
             colorScheme:
                 const ColorScheme.dark(secondary: red, onSurface: Colors.white),
-            scaffoldBackgroundColor: Color.fromARGB(255, 17, 17, 17)),
+            scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
         // ignore: prefer_const_constructors
         home: ResponsiveLayout(
           mobileVersion: OnboardingScreen(),

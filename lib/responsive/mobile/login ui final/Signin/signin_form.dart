@@ -1,7 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../mob_constants.dart';
 import '../final_signin.dart';
@@ -33,12 +35,23 @@ class _SignInFormState extends State<SignInForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Username",
-              style: TextStyle(color: Colors.white),
+            const Padding(
+              padding: EdgeInsets.only(
+                left: 20,
+              ),
+              child: Text(
+                textAlign: TextAlign.start,
+                "Username",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16,
+                left: 10,
+                right: 10,
+              ),
               child: TextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -52,17 +65,25 @@ class _SignInFormState extends State<SignInForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
             ),
-            const Text(
-              "Password",
-              style: TextStyle(color: Colors.white),
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Password",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16,
+                left: 10,
+                right: 10,
+              ),
               child: TextFormField(
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -78,12 +99,13 @@ class _SignInFormState extends State<SignInForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
                   "Remember Me",
@@ -91,7 +113,7 @@ class _SignInFormState extends State<SignInForm> {
                 Switch(
                     value: isSwitch,
                     activeColor: Colors.white,
-                    activeTrackColor: Color.fromARGB(255, 221, 83, 245),
+                    activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
                     onChanged: (bool newBool) {
                       setState(() {
                         isSwitch = newBool;
@@ -103,14 +125,15 @@ class _SignInFormState extends State<SignInForm> {
                     onPressed: () {
                       control = Control.play;
                       Future.delayed(
-                        Duration(milliseconds: 400),
+                        const Duration(milliseconds: 400),
                         () {
                           //slide animation
                           showGeneralDialog(
                             barrierDismissible: true,
                             barrierLabel: "Sign in",
                             context: context,
-                            transitionDuration: Duration(milliseconds: 400),
+                            transitionDuration:
+                                const Duration(milliseconds: 400),
                             transitionBuilder: (_, animation, __, child) {
                               Tween<Offset> tween;
                               tween = Tween(
@@ -126,50 +149,75 @@ class _SignInFormState extends State<SignInForm> {
                             },
                             pageBuilder: (context, _, __) => Center(
                               child: Container(
-                                height: 500,
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 16),
+                                height: 60.h,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(32)),
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 32, horizontal: 24),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(225, 50, 50, 50)
-                                      .withOpacity(0.99),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(40),
-                                  ),
-                                ),
-                                child: Scaffold(
-                                  resizeToAvoidBottomInset: false,
-                                  backgroundColor: Colors.transparent,
-                                  body: SingleChildScrollView(
-                                    reverse: true,
-                                    child: Column(
-                                      children: const [
-                                        Text(
-                                          "Forgot Password",
-                                          style: TextStyle(
-                                            fontSize: 34,
-                                            fontFamily: "Gontserrat",
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 16.0),
-                                          child: Text(
-                                            "Please enter your email linked to the account!",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
+                                child: Material(
+                                  shadowColor:
+                                      const Color.fromRGBO(42, 41, 41, 0.631),
+                                  color: const Color.fromARGB(42, 55, 52, 52)
+                                      .withOpacity(0.7),
+                                  elevation: 2,
+                                  borderRadius: BorderRadius.circular(32),
+                                  child: Stack(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(24),
+                                        child: BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                              sigmaX: 20, sigmaY: 20),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: const Color.fromARGB(
+                                                      182, 31, 31, 31)),
+                                              borderRadius:
+                                                  BorderRadius.circular(24),
                                             ),
                                           ),
                                         ),
-                                        ForgotPasswordForm(),
-                                      ],
-                                    ),
+                                      ),
+                                      const Scaffold(
+                                        resizeToAvoidBottomInset: false,
+                                        backgroundColor: Colors.transparent,
+                                        body: SingleChildScrollView(
+                                          reverse: true,
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 10),
+                                                child: Text(
+                                                  "Forgot Password",
+                                                  style: TextStyle(
+                                                    fontSize: 34,
+                                                    fontFamily: "Gontserrat",
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 16.0),
+                                                child: Text(
+                                                  "Please enter your email linked to the account!",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ),
+                                              ForgotPasswordForm(),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

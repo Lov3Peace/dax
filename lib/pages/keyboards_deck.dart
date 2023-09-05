@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import '../util/decks.dart';
 import '../util/title_bubble.dart';
 import 'main.dart';
@@ -19,19 +20,19 @@ class _KeyboardsDeckState extends State<KeyboardsDeck> {
         backgroundColor: tran,
         shadowColor: tran,
         automaticallyImplyLeading: false,
-        leadingWidth: MediaQuery.of(context).size.width * .5,
+        leadingWidth: 5.h,
         flexibleSpace: Padding(
           padding: const EdgeInsets.fromLTRB(15, 25, 200, 0),
           child: Hero(
             tag: 'keyboards',
             flightShuttleBuilder: flightShuttleBuilder,
             child: TitleBubble(
-              deckHeight: MediaQuery.of(context).size.height * 0.1,
-              deckWidth: MediaQuery.of(context).size.width * 0.4,
+              deckHeight: 5.h,
+              deckWidth: 4.w,
               deckName: 'Keyboards',
               gradient1: tran,
               gradient2: tran,
-              neonGlow: tran,
+              neonGlow: const Color.fromARGB(78, 4, 4, 4),
               leftPad: 0,
             ),
           ),
@@ -49,8 +50,8 @@ class _KeyboardsDeckState extends State<KeyboardsDeck> {
             //   }));
             // },
             child: Deck(
-              deckHeight: MediaQuery.of(context).size.height * 0.80,
-              deckWidth: MediaQuery.of(context).size.width * 0.85,
+              deckHeight: 80.h,
+              deckWidth: 85.w,
               deckName: 'Notare',
               gradient1: red,
               gradient2: purp,
@@ -58,16 +59,16 @@ class _KeyboardsDeckState extends State<KeyboardsDeck> {
             ),
           ),
           Deck(
-            deckHeight: MediaQuery.of(context).size.height * 0.80,
-            deckWidth: MediaQuery.of(context).size.width * 0.85,
+            deckHeight: 80.h,
+            deckWidth: 85.w,
             deckName: 'Lily',
             gradient1: red,
             gradient2: purp,
             neonGlow: red,
           ),
           Deck(
-            deckHeight: MediaQuery.of(context).size.height * 0.80,
-            deckWidth: MediaQuery.of(context).size.width * 0.85,
+            deckHeight: 80.h,
+            deckWidth: 85.w,
             deckName: 'Moment',
             gradient1: red,
             gradient2: purp,

@@ -49,7 +49,7 @@ dependencies:
   uuid: ^3.0.4
   responsive_builder: ^0.4.3
   vertical_card_pager: ^1.5.0
-  google_fonts: ^4.0.4
+  google_fonts: ^3.0.1
   fade_out_particle: ^1.2.1
   widget_and_text_animator: ^1.0.9
   simple_animations: ^5.0.2

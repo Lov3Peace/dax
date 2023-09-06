@@ -179,13 +179,13 @@ class _SignInFormState extends State<SignInForm> {
                                           ),
                                         ),
                                       ),
-                                      const Scaffold(
+                                      Scaffold(
                                         resizeToAvoidBottomInset: false,
                                         backgroundColor: Colors.transparent,
                                         body: SingleChildScrollView(
                                           reverse: true,
                                           child: Column(
-                                            children: [
+                                            children: const [
                                               Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 10),

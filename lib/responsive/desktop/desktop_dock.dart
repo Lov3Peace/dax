@@ -10,6 +10,7 @@ import 'package:flutter_application_1/util/Dock%20Button/logout_dock_button.dart
 import 'package:flutter_application_1/util/Dock%20Button/messages_dock_button.dart';
 import 'package:flutter_application_1/util/Dock%20Button/settings_dock_button.dart';
 import 'package:flutter_application_1/util/Dock%20Button/wallet_dock_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -33,6 +34,7 @@ class DesktopDock extends StatefulWidget {
 class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
+
   void initState() {
     // TODO: implement initState
 
@@ -44,18 +46,18 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    Color hoverColor = Colors.white;
     return Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+        padding: EdgeInsets.fromLTRB(0, 0, 0.25.w, 0),
         child: Container(
           constraints: BoxConstraints(minHeight: 750),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [
-                Color.fromARGB(134, 10, 10, 10),
-                Color.fromARGB(230, 24, 24, 24),
+                Color.fromARGB(49, 30, 30, 30),
+                Color.fromARGB(70, 50, 50, 50),
               ], transform: GradientRotation(180)),
-              borderRadius: BorderRadius.circular(50),
-              border: Border.all(color: const Color.fromARGB(148, 37, 37, 37)),
+              border: Border.all(color: Color.fromARGB(147, 58, 58, 58)),
               boxShadow: const [
                 BoxShadow(
                   blurRadius: 5,
@@ -68,8 +70,8 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                 //   offset: Offset(0, 0),
                 // )
               ]),
-          width: 100,
-          height: 75.h,
+          width: 10.w,
+          height: 100.h,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -84,7 +86,20 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                   glow: widget.newGlow),
 
               //Messages
-              const MessagesWindowButton(),
+              TextButton(
+                onPressed: null,
+                child: Text(
+                  'Home',
+                  style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(fontSize: 36),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+                onHover: (value) {
+                  hoverColor = red;
+                },
+              ),
+              Divider(thickness: 3),
 
               //PAGE 2
 

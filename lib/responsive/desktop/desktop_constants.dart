@@ -1056,8 +1056,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
       headerTextSize = 48;
       subTextSize = 24;
     } else {
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
+      halfDeckWidth = 17.w;
+      deckWidth = 36.w;
       headerTextSize = 85;
       subTextSize = 30;
       labelTextSize = 22;

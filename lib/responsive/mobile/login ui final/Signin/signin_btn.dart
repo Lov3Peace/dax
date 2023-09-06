@@ -114,13 +114,13 @@ class _SignInButtonState extends State<SignInButton> {
                         ),
                       ),
                     ),
-                    const Scaffold(
+                    Scaffold(
                       resizeToAvoidBottomInset: false,
                       backgroundColor: Colors.transparent,
                       body: SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
+                          children: const [
                             Padding(
                               padding: EdgeInsets.only(top: 10),
                               child: Text(

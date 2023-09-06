@@ -89,7 +89,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
               const ArtBoardScreen(),
               Positioned.fill(
                 child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                    filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
                     child: const SizedBox()),
               ),
               GestureDetector(
@@ -134,14 +134,13 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                         // ),
                         Container(
                           height: 45.h,
-                          width: 75.w,
+                          width: 74.w,
                           constraints: const BoxConstraints(
                               minWidth: 1200, minHeight: 500),
                           child: AnimationLimiter(
                             child: ListView.builder(
-                              // shrinkWrap: true,
+                              shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-
                               itemCount: 3,
                               itemBuilder: (BuildContext context, int index) {
                                 return AnimationConfiguration.staggeredList(
@@ -189,13 +188,14 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                         ),
                         Container(
                           height: 45.h,
-                          width: 75.w,
+                          width: 74.w,
                           constraints: const BoxConstraints(
                               minWidth: 1200, minHeight: 500),
                           child: AnimationLimiter(
                             child: ListView.builder(
                               // shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
+
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) {
                                 return AnimationConfiguration.staggeredList(

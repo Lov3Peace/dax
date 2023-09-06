@@ -15,6 +15,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../util/Window Route/settings_window_route.dart';
 import '../../util/home_button.dart';
 
 class DesktopDock extends StatefulWidget {
@@ -71,60 +72,118 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                 // )
               ]),
           width: 10.w,
-          height: 100.h,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //
-              //Profile
-              DockButton(icon: Ionicons.person_circle_outline),
+          child: Padding(
+            padding: EdgeInsets.only(left: 1.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                //
+                //Profile
+                // DockButton(icon: Ionicons.person_circle_outline),
 
-              //Home
-              HomeButton(
-                  gradient1: widget.newGrad1,
-                  gradient2: widget.newGrad2,
-                  glow: widget.newGlow),
+                //Home
+                // HomeButton(
+                //     gradient1: widget.newGrad1,
+                //     gradient2: widget.newGrad2,
+                //     glow: widget.newGlow),
 
-              //Messages
-              TextButton(
-                onPressed: null,
-                child: Text(
-                  'Home',
-                  style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(fontSize: 36),
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white),
+                //Messages
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.5.h),
+                  child: TextButton(
+                    onPressed: null,
+                    child: Text(
+                      'Home',
+                      style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(fontSize: 3.sp),
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                    onHover: (value) {
+                      hoverColor = red;
+                    },
+                  ),
                 ),
-                onHover: (value) {
-                  hoverColor = red;
-                },
-              ),
-              Divider(thickness: 3),
+                Divider(thickness: 1, endIndent: 1.w),
 
-              //PAGE 2
+                //PAGE 2
 
-              //
-              //Settings
-              const SettingsWindowButton(),
+                //Settings
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                  child: SettingsWindowButton(
+                    dockIcon: Material(
+                      color: tran,
+                      child: TextButton.icon(
+                        onHover: (value) {
+                          if (value == true) {
+                            setState(() {
+                              hoverColor = red;
+                            });
+                          } else {
+                            hoverColor = Colors.white;
+                          }
+                        },
+                        icon: Icon(
+                          Ionicons.settings_sharp,
+                          size: 30,
+                          color: hoverColor,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(SettingsWindowRoute(builder: (context) {
+                            return const SettingsWindowPopupCard();
+                          }));
+                        },
+                        label: Text(
+                          'Settings',
+                          style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(fontSize: 3.sp),
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Divider(thickness: 1, endIndent: 1.w),
+                //Wallet
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                  child: const WalletWindowButton(),
+                ),
+                Divider(thickness: 1, endIndent: 1.w),
+                //Friends
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                  child: const FriendsWindowButton(),
+                ),
+                Divider(thickness: 1, endIndent: 1.w),
+                //PAGE 3
 
-              //Wallet
-              const WalletWindowButton(),
-
-              //Friends
-              const FriendsWindowButton(),
-
-              //PAGE 3
-
-              //
-              //Help
-              const HelpWindowButton(),
-
-              //About Us/Info
-              const InfoWindowButton(),
-
-              //Logout
-              const LogoutWindowButton(),
-            ],
+                //
+                //Help
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                  child: const HelpWindowButton(),
+                ),
+                Divider(thickness: 1, endIndent: 1.w),
+                //About Us/Info
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                  child: const InfoWindowButton(),
+                ),
+                Divider(thickness: 1, endIndent: 1.w),
+                //Logout
+                Spacer(),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 2.h),
+                  child: const LogoutWindowButton(),
+                ),
+              ],
+            ),
           ),
         ));
 

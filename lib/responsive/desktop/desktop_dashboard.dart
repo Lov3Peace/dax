@@ -174,7 +174,10 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                 Expanded(child: ProfileCard()),
                                               ],
                                             ),
-                                            deck2: ProjectsDeck(),
+                                            deck2: Hero(
+                                              child: ProjectsDeck(),
+                                              tag: 'projDeck',
+                                            ),
                                             deck3: FinancesDeck(),
                                           )[index],
                                         ),
@@ -193,9 +196,8 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                               minWidth: 1200, minHeight: 500),
                           child: AnimationLimiter(
                             child: ListView.builder(
-                              // shrinkWrap: true,
+                              shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) {
                                 return AnimationConfiguration.staggeredList(

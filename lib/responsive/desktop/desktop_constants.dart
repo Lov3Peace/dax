@@ -88,14 +88,7 @@ class Deck extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1.5.w),
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromARGB(255, 15, 15, 15).withOpacity(0.7),
-                      Color.fromARGB(255, 15, 15, 15).withOpacity(0.50),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  color: Color.fromARGB(255, 19, 21, 32).withOpacity(0.70),
 
                   border: Border.all(color: Color.fromARGB(182, 82, 82, 82)),
                   // boxShadow: const [
@@ -1041,18 +1034,18 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
       headerTextSize = 24;
       subTextSize = 16;
     } else if (screenWidth < 1500) {
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
+      halfDeckWidth = 17.w;
+      deckWidth = 36.w;
       headerTextSize = 30;
       textConstraint = halfDeckWidth * 0.7;
     } else if (screenWidth <= 1920) {
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
+      halfDeckWidth = 17.w;
+      deckWidth = 36.w;
       headerTextSize = 40;
       subTextSize = 22;
     } else if (screenWidth < 2600) {
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
+      halfDeckWidth = 17.w;
+      deckWidth = 36.w;
       headerTextSize = 48;
       subTextSize = 24;
     } else {

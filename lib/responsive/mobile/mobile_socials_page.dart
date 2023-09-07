@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import '../../pages/keyboards_deck.dart';
-import '../../pages/main.dart';
+import '../../main.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 import 'mob_artboard_page.dart';

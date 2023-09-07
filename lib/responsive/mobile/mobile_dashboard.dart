@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/main.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import 'package:simple_animations/simple_animations.dart';

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/auth_check.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import '../../../pages/main.dart';
+import '../../../main.dart';
 import '../mob_constants.dart';
 import '../mobile_dashboard.dart';
 

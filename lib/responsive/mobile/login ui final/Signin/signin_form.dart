@@ -1,11 +1,16 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/util/auth_check.dart';
+import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../mob_constants.dart';
+import '../../mobile_dashboard.dart';
 import '../final_signin.dart';
 import 'forget_password_form.dart';
 
@@ -23,6 +28,31 @@ class _SignInFormState extends State<SignInForm> {
   Control control = Control.stop;
   //Controls the switch
   bool isSwitch = false;
+
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _usernameController.text,
+        password: _passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   //Global Key
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -52,14 +82,8 @@ class _SignInFormState extends State<SignInForm> {
                 left: 10,
                 right: 10,
               ),
-              child: TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "";
-                  }
-                  return null;
-                },
-                onSaved: (username) {},
+              child: TextField(
+                controller: _usernameController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
@@ -84,15 +108,9 @@ class _SignInFormState extends State<SignInForm> {
                 left: 10,
                 right: 10,
               ),
-              child: TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "";
-                  }
-                  return null;
-                },
-                onSaved: (password) {},
-                obscureText: true,
+              child: TextField(
+                controller: _passwordController,
+                obscureText: false,
                 decoration: InputDecoration(
                   prefixIconColor: Colors.black,
                   enabledBorder: OutlineInputBorder(
@@ -101,6 +119,7 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                     borderSide: const BorderSide(color: Colors.white),
                   ),
+                  filled: true,
                 ),
               ),
             ),
@@ -237,8 +256,9 @@ class _SignInFormState extends State<SignInForm> {
             const SizedBox(
               height: 10,
             ),
-            SignButton(
-              onTap: signinbtn,
+            GestureDetector(
+              onTap: signIn,
+              child: Container(color: red, child: Text('sign in')),
             ),
           ],
         ),

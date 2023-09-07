@@ -8,7 +8,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../pages/main.dart';
+import '../../main.dart';
 import '../../util/dashboard_decks.dart';
 import 'tab_artboard_page.dart';
 

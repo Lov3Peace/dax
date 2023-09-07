@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../pages/main.dart';
+import '../main.dart';
 import 'decks.dart';
 
 class NewsDeck extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/main.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';

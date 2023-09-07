@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../pages/main.dart';
+import '../main.dart';
 
 class Background extends StatefulWidget {
   Background({super.key});

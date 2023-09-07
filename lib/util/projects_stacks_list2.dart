@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/tag_lists.dart';
-import '../pages/main.dart';
+import '../main.dart';
 import 'deck_height_value.dart';
 import 'decks.dart';
 

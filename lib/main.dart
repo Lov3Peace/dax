@@ -10,7 +10,7 @@ import 'responsive/desktop/desktop_dashboard.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   if (kIsWeb) {

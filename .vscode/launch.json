@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_application_1",
+            "name": "dax",
             "request": "launch",
             "type": "dart",
-            "program": "lib/pages/main.dart"
+            "program": "lib/main.dart"
         },
         {
             "name": "flutter_application_1 (profile mode)",

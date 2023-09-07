@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import '../util/decks.dart';
 import '../util/title_bubble.dart';
-import 'main.dart';
+import '../main.dart';
 
 class KeyboardsDeck extends StatefulWidget {
   const KeyboardsDeck({super.key});

@@ -27,8 +27,7 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
-dependency_overrides:
-    firebase_core_platform_interface: 4.5.1
+
     
 dependencies:
   flutter:
@@ -44,12 +43,12 @@ dependencies:
   local_hero: ^0.2.0
   flutter_villains: ^2.0.0
   animated_image_list: ^1.0.0
-  visibility_detector: ^0.3.3
+  visibility_detector: ^0.4.0+2
   get: ^4.6.5
-  uuid: ^3.0.4
-  responsive_builder: ^0.4.3
+  uuid: ^4.0.0
+  responsive_builder: ^0.7.0
   vertical_card_pager: ^1.5.0
-  google_fonts: ^3.0.1
+  google_fonts: ^5.1.0
   fade_out_particle: ^1.2.1
   widget_and_text_animator: ^1.0.9
   simple_animations: ^5.0.2
@@ -65,15 +64,17 @@ dependencies:
   rive: ^0.11.4
   responsive_framework: ^1.0.0
   responsive_sizer: ^3.1.1
-  flutter_staggered_grid_view: ^0.6.2
+  flutter_staggered_grid_view: ^0.7.0
   sizer: ^2.0.15
   easy_scroll_animation: ^1.0.2
-  flutter_svg: ^1.1.6
-  firebase_auth: ^3.3.14
+  flutter_svg: ^2.0.7
+  
   carousel_slider: ^4.2.1
   flutter_carousel_slider: ^1.1.0
   swipeable_button_view: ^0.0.2
-  intl: ^0.17.0
+  intl: ^0.18.1
+  firebase_auth: ^4.9.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_dashboard.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import '../../../pages/main.dart';
+import '../../../main.dart';
 import '../tab_constants.dart';
 
 class TabSignButton extends StatefulWidget {

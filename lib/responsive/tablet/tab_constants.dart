@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/main.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_finance_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_news_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dart';

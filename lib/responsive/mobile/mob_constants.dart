@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/main.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:google_fonts/google_fonts.dart';

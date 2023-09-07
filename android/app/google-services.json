@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "28990487504",
+    "project_id": "omni-fb089",
+    "storage_bucket": "omni-fb089.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28990487504:android:3f523e002b9987f388d7d5",
+        "android_client_info": {
+          "package_name": "com.app1.dax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28990487504-r427jdkei3ilk9nhvf709fv41tg6djgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhMAIJ7SbCi-Awo2NbImXlQvksGiZOLz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28990487504-r427jdkei3ilk9nhvf709fv41tg6djgo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "28990487504-k6ottft3a4l6p0u9e5q2s9lgkq4chhu4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app1.dax"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28990487504:android:ec2a2e6626b6e27088d7d5",
+        "android_client_info": {
+          "package_name": "com.testforjson.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28990487504-r427jdkei3ilk9nhvf709fv41tg6djgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhMAIJ7SbCi-Awo2NbImXlQvksGiZOLz8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28990487504-r427jdkei3ilk9nhvf709fv41tg6djgo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "28990487504-k6ottft3a4l6p0u9e5q2s9lgkq4chhu4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app1.dax"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

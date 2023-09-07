@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/main.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,7 +17,7 @@ class _MessagesState extends State<Messages> {
       constraints: const BoxConstraints(minWidth: 250, minHeight: 750),
       // margin: EdgeInsets.all(1.w),
       decoration: BoxDecoration(
-                  color: Color.fromARGB(185, 21, 19, 22),
+        color: Color.fromARGB(185, 21, 19, 22),
         borderRadius: BorderRadius.circular(1.w),
         border: Border.all(color: Color.fromARGB(147, 58, 58, 58)),
         boxShadow: const [

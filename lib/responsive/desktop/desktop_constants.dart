@@ -88,9 +88,9 @@ class Deck extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1.5.w),
-                  color: Color.fromARGB(255, 19, 21, 32).withOpacity(0.70),
+                  color: Color.fromARGB(185, 21, 19, 22),
 
-                  border: Border.all(color: Color.fromARGB(182, 82, 82, 82)),
+                  border: Border.all(color: Color.fromARGB(182, 75, 75, 75)),
                   // boxShadow: const [
                   // BoxShadow(
                   //   blurRadius: 5,
@@ -325,15 +325,8 @@ class TitleBubble extends StatelessWidget {
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(1.5.w),
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 15, 15, 15).withOpacity(0.7),
-              Color.fromARGB(255, 15, 15, 15).withOpacity(0.50),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          border: Border.all(color: Color.fromARGB(182, 82, 82, 82)),
+          color: Color.fromARGB(238, 21, 19, 22),
+          border: Border.all(color: Color.fromARGB(182, 73, 73, 73)),
         ),
         constraints: const BoxConstraints(
             maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 50),

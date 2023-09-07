@@ -10,6 +10,7 @@ import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
+  await Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(

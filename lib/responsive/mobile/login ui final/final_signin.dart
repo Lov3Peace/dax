@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desktop_dashboard.dart';
+import 'package:flutter_application_1/responsive/tablet/tablet_dashboard.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 import '../../../pages/main.dart';
@@ -67,10 +69,39 @@ class _SignButtonState extends State<SignButton> {
     setState(() {
       control = Control.play;
 
-      Future.delayed(const Duration(milliseconds: 200)).then((_) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-          return const MobileDashboard();
-        }));
+      Future.delayed(const Duration(milliseconds: 100)).then((_) {
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              animation =
+                  CurvedAnimation(parent: animation, curve: Curves.linear);
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            pageBuilder: (context, animation, secondaryAnimation) {
+              if (screenWidth < 550) {
+                // ignore: prefer_const_constructors
+                return MobileDashboard(
+                    // transitionAnimation: animation,
+                    );
+              } else if (screenWidth < 1100) {
+                // ignore: prefer_const_constructors
+                return TabletDashboard(
+                    // transitionAnimation: animation,
+                    );
+              } else {
+                // ignore: prefer_const_constructors
+                return DesktopDashboard(
+                    // transitionAnimation: animation,
+                    );
+              }
+            },
+            transitionDuration: const Duration(milliseconds: 300),
+          ),
+        );
       });
     });
   }

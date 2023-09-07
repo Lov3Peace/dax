@@ -54,10 +54,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
           constraints: BoxConstraints(minHeight: 750),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [
-                Color.fromARGB(49, 30, 30, 30),
-                Color.fromARGB(70, 50, 50, 50),
-              ], transform: GradientRotation(180)),
+              color: Color.fromARGB(185, 21, 19, 22),
               border: Border.all(color: Color.fromARGB(147, 58, 58, 58)),
               boxShadow: const [
                 BoxShadow(

@@ -85,13 +85,13 @@ class _DesktopDashboardState extends State<DesktopDashboard>
           constraints: const BoxConstraints(minWidth: 1200, minHeight: 1000),
           child: Stack(
             children: [
-              Background(),
+              // Background(),
               const ArtBoardScreen(),
-              Positioned.fill(
-                child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                    child: const SizedBox()),
-              ),
+              // Positioned.fill(
+              //   child: BackdropFilter(
+              //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+              //       child: const SizedBox()),
+              // ),
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -151,36 +151,32 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                     scale: 0.7,
                                     curve: Curves.easeOutBack,
                                     child: FadeInAnimation(
-                                      child: Container(
-                                        // constraints:
-                                        //     const BoxConstraints(minWidth: 500),
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              0.25.w, 0.25.w, 0.25.w, 0.25.w),
-                                          child: deskDashboardDecks1(
-                                            deck1: Column(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      0, 0, 0, 1.5.h),
-                                                  child: TitleBubble(
-                                                    deckHeight: 5.5.h,
-                                                    deckName: 'Dashboard',
-                                                    deckWidth: 18.w,
-                                                    textSize: 3.sp,
-                                                    leftPad: 30,
-                                                  ),
+                                      child: Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            0.25.w, 0.25.w, 0.25.w, 0.25.w),
+                                        child: deskDashboardDecks1(
+                                          deck1: Column(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    0, 0, 0, 1.5.h),
+                                                child: TitleBubble(
+                                                  deckHeight: 5.5.h,
+                                                  deckName: 'Dashboard',
+                                                  deckWidth: 18.w,
+                                                  textSize: 3.sp,
+                                                  leftPad: 30,
                                                 ),
-                                                Expanded(child: ProfileCard()),
-                                              ],
-                                            ),
-                                            deck2: Hero(
-                                              child: ProjectsDeck(),
-                                              tag: 'projDeck',
-                                            ),
-                                            deck3: FinancesDeck(),
-                                          )[index],
-                                        ),
+                                              ),
+                                              Expanded(child: ProfileCard()),
+                                            ],
+                                          ),
+                                          deck2: Hero(
+                                            child: ProjectsDeck(),
+                                            tag: 'projDeck',
+                                          ),
+                                          deck3: FinancesDeck(),
+                                        )[index],
                                       ),
                                     ),
                                   ),

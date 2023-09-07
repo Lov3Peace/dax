@@ -102,7 +102,12 @@ class _DockState extends State<Dock> with AnimationMixin {
                 children: [
                   //
                   //Settings
-                  const SettingsWindowButton(),
+                  SettingsWindowButton(
+                    dockIcon: const Icon(
+                      Ionicons.settings_sharp,
+                      size: 50,
+                    ),
+                  ),
 
                   //Wallet
                   const WalletWindowButton(),

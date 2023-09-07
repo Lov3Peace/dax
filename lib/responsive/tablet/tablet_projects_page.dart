@@ -9,7 +9,7 @@ import 'package:flutter_application_1/util/projects_stacks_list2.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import '../../pages/keyboards_deck.dart';
-import '../../pages/main.dart';
+import '../../main.dart';
 import '../../util/background.dart';
 
 class TabProjectsPage extends StatefulWidget {

@@ -6,7 +6,7 @@ import 'package:flutter_application_1/responsive/tablet/tab_constants.dart';
 import 'package:flutter_application_1/util/big_dock.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import '../../pages/keyboards_deck.dart';
-import '../../pages/main.dart';
+import '../../main.dart';
 import '../../util/background.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 

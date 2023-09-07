@@ -1,38 +1,30 @@
 PODS:
-  - Firebase/Auth (9.6.0):
+  - Firebase/Auth (10.12.0):
     - Firebase/CoreOnly
-    - FirebaseAuth (~> 9.6.0)
-  - Firebase/CoreOnly (9.6.0):
-    - FirebaseCore (= 9.6.0)
-  - firebase_auth (3.11.2):
-    - Firebase/Auth (= 9.6.0)
+    - FirebaseAuth (~> 10.12.0)
+  - Firebase/CoreOnly (10.12.0):
+    - FirebaseCore (= 10.12.0)
+  - firebase_auth (4.9.0):
+    - Firebase/Auth (= 10.12.0)
     - firebase_core
     - Flutter
-  - firebase_core (1.24.0):
-    - Firebase/CoreOnly (= 9.6.0)
+  - firebase_core (2.15.1):
+    - Firebase/CoreOnly (= 10.12.0)
     - Flutter
-  - FirebaseAuth (9.6.0):
-    - FirebaseCore (~> 9.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
-    - GoogleUtilities/Environment (~> 7.7)
-    - GTMSessionFetcher/Core (< 3.0, >= 1.7)
-  - FirebaseCore (9.6.0):
-    - FirebaseCoreDiagnostics (~> 9.0)
-    - FirebaseCoreInternal (~> 9.0)
-    - GoogleUtilities/Environment (~> 7.7)
-    - GoogleUtilities/Logger (~> 7.7)
-  - FirebaseCoreDiagnostics (9.6.0):
-    - GoogleDataTransport (< 10.0.0, >= 9.1.4)
-    - GoogleUtilities/Environment (~> 7.7)
-    - GoogleUtilities/Logger (~> 7.7)
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseCoreInternal (9.6.0):
-    - "GoogleUtilities/NSData+zlib (~> 7.7)"
+  - FirebaseAppCheckInterop (10.14.0)
+  - FirebaseAuth (10.12.0):
+    - FirebaseAppCheckInterop (~> 10.0)
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GTMSessionFetcher/Core (< 4.0, >= 2.1)
+  - FirebaseCore (10.12.0):
+    - FirebaseCoreInternal (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Logger (~> 7.8)
+  - FirebaseCoreInternal (10.14.0):
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - Flutter (1.0.0)
-  - GoogleDataTransport (9.2.5):
-    - GoogleUtilities/Environment (~> 7.7)
-    - nanopb (< 2.30910.0, >= 2.30908.0)
-    - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUtilities/AppDelegateSwizzler (7.11.5):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -48,12 +40,7 @@ PODS:
   - "GoogleUtilities/NSData+zlib (7.11.5)"
   - GoogleUtilities/Reachability (7.11.5):
     - GoogleUtilities/Logger
-  - GTMSessionFetcher/Core (2.3.0)
-  - nanopb (2.30909.0):
-    - nanopb/decode (= 2.30909.0)
-    - nanopb/encode (= 2.30909.0)
-  - nanopb/decode (2.30909.0)
-  - nanopb/encode (2.30909.0)
+  - GTMSessionFetcher/Core (3.1.1)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -74,14 +61,12 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Firebase
+    - FirebaseAppCheckInterop
     - FirebaseAuth
     - FirebaseCore
-    - FirebaseCoreDiagnostics
     - FirebaseCoreInternal
-    - GoogleDataTransport
     - GoogleUtilities
     - GTMSessionFetcher
-    - nanopb
     - PromisesObjC
 
 EXTERNAL SOURCES:
@@ -99,23 +84,21 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  Firebase: 5ae8b7cf8efce559a653aef0ad95bab3f427c351
-  firebase_auth: 07a4db69cfa447ac42cb7faa560fc100708b707c
-  firebase_core: 7c28ecc1e5dd74e03829ac3e9ff5ba3314e737a9
-  FirebaseAuth: e4a5d3c36e778e41141b91cc861103a441d80bcc
-  FirebaseCore: 2082fffcd855f95f883c0a1641133eb9bbe76d40
-  FirebaseCoreDiagnostics: 99a495094b10a57eeb3ae8efa1665700ad0bdaa6
-  FirebaseCoreInternal: bca76517fe1ed381e989f5e7d8abb0da8d85bed3
+  Firebase: 07150e75d142fb9399f6777fa56a187b17f833a0
+  firebase_auth: 097a2440d40bed75f4dfe4cb91b4d98349509b47
+  firebase_core: 4a3246a02f828a01c74a2c26427037786d90f17f
+  FirebaseAppCheckInterop: c87f1d5421c852413dd936b2b2340b21e62501a0
+  FirebaseAuth: a66c1e14ec58f41d154a4b41ce1a23ea00ad4805
+  FirebaseCore: f86a1394906b97ac445ae49c92552a9425831bed
+  FirebaseCoreInternal: d558159ee6cc4b823c2296ecc193de9f6d9a5bb3
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
-  GTMSessionFetcher: 3a63d75eecd6aa32c2fc79f578064e1214dfdec2
-  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
-  path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852
+  GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
+  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   rive_common: 8a159d68033a8b073e5853acc50f03aa486a2888
-  url_launcher_ios: fb12c43172927bb5cf75aeebd073f883801f1993
+  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
-PODFILE CHECKSUM: 7f8a045e39a7c71bcddbc52e02d03fe8690ad03a
+PODFILE CHECKSUM: 4a92bf30e3721c2516740bbe7af0fe0a7a4d5cda
 
 COCOAPODS: 1.12.1

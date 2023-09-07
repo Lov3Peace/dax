@@ -4,13 +4,15 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_application_1/responsive/mobile/login%20ui%20final/onboarding_page.dart';
 import 'package:flutter_application_1/responsive/tablet/login%20ui%20final/tab_onboarding_page.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
+import 'package:flutter_application_1/util/auth_check.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../responsive/desktop/desktop_dashboard.dart';
+import 'responsive/desktop/desktop_dashboard.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-Future main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
@@ -49,7 +51,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
         // ignore: prefer_const_constructors
         home: ResponsiveLayout(
-          mobileVersion: OnboardingScreen(),
+          mobileVersion: AuthCheck(),
           tabletVersion: TabOnboardingScreen(),
           desktopVersion: DesktopDashboard(),
         ),

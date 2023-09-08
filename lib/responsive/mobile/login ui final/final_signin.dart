@@ -39,28 +39,28 @@ class _SignButtonState extends State<SignButton> {
         );
       },
       child: GestureDetector(
-        onTap: pressed,
-        child: Container(
-          padding: const EdgeInsets.all(15),
-          margin: const EdgeInsets.symmetric(horizontal: 35),
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [purp, red]),
-              boxShadow: const [
-                BoxShadow(
-                    color: red, blurRadius: 10, blurStyle: BlurStyle.solid)
-              ],
-              borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
-          child: const Center(
-            child: Text(
-              'Sign In',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-            ),
+          // onTap: null,
+          // child: Container(
+          //   padding: const EdgeInsets.all(15),
+          //   margin: const EdgeInsets.symmetric(horizontal: 35),
+          //   decoration: BoxDecoration(
+          //       gradient: const LinearGradient(colors: [purp, red]),
+          //       boxShadow: const [
+          //         BoxShadow(
+          //             color: red, blurRadius: 10, blurStyle: BlurStyle.solid)
+          //       ],
+          //       borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
+          //   child: const Center(
+          //     child: Text(
+          //       'Sign In',
+          //       style: TextStyle(
+          //           color: Colors.white,
+          //           fontWeight: FontWeight.bold,
+          //           fontSize: 1),
+          //     ),
+          //   ),
+          // ),
           ),
-        ),
-      ),
     );
   }
 

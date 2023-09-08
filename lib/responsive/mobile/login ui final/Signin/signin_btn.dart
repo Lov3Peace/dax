@@ -90,6 +90,7 @@ class _SignInButtonState extends State<SignInButton> {
           pageBuilder: (context, _, __) => Center(
             child: Container(
               height: 60.h,
+              constraints: BoxConstraints(maxWidth: 1000, maxHeight: 500),
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
@@ -108,7 +109,8 @@ class _SignInButtonState extends State<SignInButton> {
                             height: 85.h,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: const Color.fromARGB(182, 31, 31, 31)),
+                                color: Color.fromARGB(182, 59, 59, 59),
+                              ),
                               borderRadius: BorderRadius.circular(24),
                             )),
                       ),

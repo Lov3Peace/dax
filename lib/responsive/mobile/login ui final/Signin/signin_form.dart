@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth_check.dart';
 import 'package:get/get_state_manager/src/simple/list_notifier.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../desktop/desktop_dashboard.dart';
@@ -40,25 +41,22 @@ class _SignInFormState extends State<SignInForm> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _usernameController.text, password: _passwordController.text);
 
-      Future.delayed(const Duration(milliseconds: 100)).then((_) {
-        Navigator.of(context).push(
-          PageRouteBuilder(
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) {
-              animation =
-                  CurvedAnimation(parent: animation, curve: Curves.linear);
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return AuthCheck();
-            },
-            transitionDuration: const Duration(milliseconds: 300),
-          ),
-        );
-      });
+      Navigator.of(context).push(
+        PageRouteBuilder(
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            animation =
+                CurvedAnimation(parent: animation, curve: Curves.linear);
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return AuthCheck();
+          },
+          transitionDuration: const Duration(milliseconds: 0),
+        ),
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print("user doesn't exist");
@@ -111,7 +109,9 @@ class _SignInFormState extends State<SignInForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(
+                      color: Color.fromARGB(182, 75, 75, 75),
+                    ),
                   ),
                 ),
               ),
@@ -127,8 +127,8 @@ class _SignInFormState extends State<SignInForm> {
               padding: const EdgeInsets.only(
                 top: 8.0,
                 bottom: 16,
-                left: 10,
-                right: 10,
+                left: 15,
+                right: 15,
               ),
               child: TextField(
                 controller: _passwordController,
@@ -139,9 +139,10 @@ class _SignInFormState extends State<SignInForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(
+                      color: Color.fromARGB(182, 75, 75, 75),
+                    ),
                   ),
-                  filled: true,
                 ),
               ),
             ),
@@ -276,25 +277,37 @@ class _SignInFormState extends State<SignInForm> {
             ),
             GestureDetector(
               onTap: signIn,
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(3, 2, 3, 2),
-                decoration: BoxDecoration(
-                    gradient: const LinearGradient(colors: [purp, red]),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: red,
-                          blurRadius: 10,
-                          blurStyle: BlurStyle.solid)
-                    ],
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(screenWidth / 4))),
-                child: const Center(
-                  child: Text(
-                    'Sign In',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                      gradient: LinearGradient(colors: [purp, red]),
+                      boxShadow: [
+                        BoxShadow(
+                            color: red,
+                            blurRadius: 7,
+                            blurStyle: BlurStyle.solid)
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                    child: Text(
+                      'Sign In',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          shadows: [
+                            const Shadow(
+                              color: red,
+                              blurRadius: 1,
+                            ),
+                            const Shadow(
+                              color: purp,
+                              blurRadius: 2,
+                            ),
+                          ]),
+                    ),
                   ),
                 ),
               ),

@@ -1,13 +1,14 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/util/projects_stacks_list2.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
+import 'package:supercharged/supercharged.dart';
 import '../../pages/keyboards_deck.dart';
 import '../../main.dart';
 import '../../util/dock.dart';
+import 'login ui final/Signin/signin_form.dart';
 import 'mob_artboard_page.dart';
 import 'mob_constants.dart';
 
@@ -94,7 +95,8 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
                       child: ProfileBubble(
                         deckHeight: screenHeight * 0.05,
                         deckWidth: screenWidth * 0.3,
-                        deckName: 's3rv',
+                        deckName:
+                            auth.currentUser!.email.toString().allBefore('@'),
                         gradient1: tran,
                         gradient2: tran,
                         neonGlow: const Color.fromARGB(78, 4, 4, 4),

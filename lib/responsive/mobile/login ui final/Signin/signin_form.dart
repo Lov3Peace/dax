@@ -15,6 +15,8 @@ import '../../mobile_dashboard.dart';
 import '../final_signin.dart';
 import 'forget_password_form.dart';
 
+final FirebaseAuth auth = FirebaseAuth.instance;
+
 class SignInForm extends StatefulWidget {
   const SignInForm({
     super.key,

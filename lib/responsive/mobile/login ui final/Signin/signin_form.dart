@@ -281,6 +281,7 @@ class _SignInFormState extends State<SignInForm> {
             Padding(
               padding: const EdgeInsets.only(left: 15),
               child: TactileButton(
+                onTap: signIn,
                 child: GradientContainer(
                   gradient1: purp,
                   gradient2: red,
@@ -289,7 +290,6 @@ class _SignInFormState extends State<SignInForm> {
                   neonGlow: red,
                   text: 'Sign In',
                   textSize: 14,
-                  onTap: signIn,
                 ),
               ),
             ),

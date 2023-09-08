@@ -12,7 +12,6 @@ class GradientContainer extends StatefulWidget {
     required this.gradient1,
     required this.gradient2,
     required this.neonGlow,
-    required Future Function() onTap,
   });
   double height;
   double width;

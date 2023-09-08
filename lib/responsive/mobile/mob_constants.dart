@@ -5,10 +5,13 @@ import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
+import 'package:supercharged/supercharged.dart';
 import 'mobile_finance_page.dart';
 import 'mobile_news_page.dart';
 import 'mobile_projects_page.dart';
 import 'mobile_socials_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../mobile/login ui final/Signin/signin_form.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)
 var screenHeight = window.physicalSize.height / window.devicePixelRatio;
@@ -195,7 +198,7 @@ AppBar mobAppBar() {
             child: ProfileBubble(
               deckHeight: screenHeight * 0.05,
               deckWidth: screenWidth * 0.3,
-              deckName: 's3rv',
+              deckName: auth.currentUser!.email.toString().allBefore('@'),
               gradient1: tran,
               gradient2: tran,
               neonGlow: const Color.fromARGB(78, 4, 4, 4),

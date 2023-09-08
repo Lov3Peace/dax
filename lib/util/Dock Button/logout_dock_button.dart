@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
@@ -123,6 +124,12 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
   //     ),
   //   );
   // }
+  Future signOut() async {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => OnboardingScreen()));
+
+    FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +175,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                         ),
                         Center(
                           child: SingleChildScrollView(
-                            physics: const NeverScrollableScrollPhysics(),
+                            physics: NeverScrollableScrollPhysics(),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -184,7 +191,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                   ),
                                   cursorColor: Colors.white,
                                 ),
-                                const TextField(
+                                TextField(
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: 'Would you like to log out?',
@@ -197,14 +204,8 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                   cursorColor: Colors.white,
                                 ),
                                 TextButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                OnboardingScreen()));
-                                  },
-                                  child: const ButtonColor(),
+                                  onPressed: signOut,
+                                  child: ButtonColor(),
                                 )
                               ],
                             ),

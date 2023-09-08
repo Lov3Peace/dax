@@ -10,6 +10,8 @@ import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
+import 'package:supercharged/supercharged.dart';
+import '../mobile/login ui final/Signin/signin_form.dart';
 import '../mobile/mobile_finance_page.dart';
 import '../mobile/mobile_news_page.dart';
 import '../mobile/mobile_projects_page.dart';
@@ -1586,7 +1588,7 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
         labelTextSize: labelTextSize,
         textConstraint: halfDeckWidth * 0.8,
         text: Text(
-          'Davon',
+          auth.currentUser!.email.toString().allBefore('@'),
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
               fontWeight: FontWeight.w600),

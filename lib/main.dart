@@ -1,18 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_application_1/responsive/mobile/login%20ui%20final/onboarding_page.dart';
-import 'package:flutter_application_1/responsive/tablet/login%20ui%20final/tab_onboarding_page.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:flutter_application_1/util/auth_check.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'responsive/desktop/desktop_dashboard.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-Future<void> main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: const FirebaseOptions(
@@ -20,6 +17,8 @@ Future<void> main() async {
             appId: "1:28990487504:web:1c7d24fea847542a88d7d5",
             messagingSenderId: "28990487504",
             projectId: "omni-fb089"));
+  } else {
+    await Firebase.initializeApp();
   }
 
   runApp(const MyApp());
@@ -52,8 +51,8 @@ class MyApp extends StatelessWidget {
         // ignore: prefer_const_constructors
         home: ResponsiveLayout(
           mobileVersion: AuthCheck(),
-          tabletVersion: TabOnboardingScreen(),
-          desktopVersion: DesktopDashboard(),
+          tabletVersion: AuthCheck(),
+          desktopVersion: AuthCheck(),
         ),
       ),
     );

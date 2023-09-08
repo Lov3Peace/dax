@@ -8,7 +8,8 @@ import 'package:flutter_application_1/util/auth_check.dart';
 import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-
+import '../../../desktop/desktop_dashboard.dart';
+import '../../../tablet/tablet_dashboard.dart';
 import '../../mob_constants.dart';
 import '../../mobile_dashboard.dart';
 import '../final_signin.dart';
@@ -35,14 +36,32 @@ class _SignInFormState extends State<SignInForm> {
   Future signIn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _usernameController.text,
-        password: _passwordController.text,
-      );
+          email: _usernameController.text, password: _passwordController.text);
+
+      Future.delayed(const Duration(milliseconds: 100)).then((_) {
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              animation =
+                  CurvedAnimation(parent: animation, curve: Curves.linear);
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return AuthCheck();
+            },
+            transitionDuration: const Duration(milliseconds: 300),
+          ),
+        );
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        print("user doesn't exist");
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        print('wrong password');
       }
     }
   }
@@ -64,6 +83,7 @@ class _SignInFormState extends State<SignInForm> {
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Padding(
               padding: EdgeInsets.only(
@@ -152,7 +172,7 @@ class _SignInFormState extends State<SignInForm> {
                             barrierLabel: "Sign in",
                             context: context,
                             transitionDuration:
-                                const Duration(milliseconds: 400),
+                                const Duration(milliseconds: 200),
                             transitionBuilder: (_, animation, __, child) {
                               Tween<Offset> tween;
                               tween = Tween(
@@ -174,10 +194,6 @@ class _SignInFormState extends State<SignInForm> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 32, horizontal: 24),
                                 child: Material(
-                                  shadowColor:
-                                      const Color.fromRGBO(42, 41, 41, 0.631),
-                                  color: const Color.fromARGB(42, 55, 52, 52)
-                                      .withOpacity(0.7),
                                   elevation: 2,
                                   borderRadius: BorderRadius.circular(32),
                                   child: Stack(
@@ -198,13 +214,13 @@ class _SignInFormState extends State<SignInForm> {
                                           ),
                                         ),
                                       ),
-                                      Scaffold(
+                                      const Scaffold(
                                         resizeToAvoidBottomInset: false,
                                         backgroundColor: Colors.transparent,
                                         body: SingleChildScrollView(
                                           reverse: true,
                                           child: Column(
-                                            children: const [
+                                            children: [
                                               Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 10),
@@ -258,20 +274,32 @@ class _SignInFormState extends State<SignInForm> {
             ),
             GestureDetector(
               onTap: signIn,
-              child: Container(color: red, child: Text('sign in')),
+              child: Container(
+                padding: const EdgeInsets.fromLTRB(3, 2, 3, 2),
+                decoration: BoxDecoration(
+                    gradient: const LinearGradient(colors: [purp, red]),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: red,
+                          blurRadius: 10,
+                          blurStyle: BlurStyle.solid)
+                    ],
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(screenWidth / 4))),
+                child: const Center(
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
-  }
-
-  void signinbtn() {
-    //first once the user taps sign in it shows the loading
-    if (_formKey.currentState!.validate()) {
-      //if eveerything looks good should show the sucess animation
-    } else {
-      //else it shows the error information
-    }
   }
 }

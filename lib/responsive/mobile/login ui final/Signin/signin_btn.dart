@@ -42,8 +42,7 @@ class _SignInButtonState extends State<SignInButton> {
       child: GestureDetector(
         onTap: pressed,
         child: Container(
-          padding: const EdgeInsets.all(20),
-          margin: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
               boxShadow: const [
@@ -96,7 +95,7 @@ class _SignInButtonState extends State<SignInButton> {
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               child: Material(
                 shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                color: const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
+                color: const Color.fromARGB(42, 55, 52, 52),
                 elevation: 2,
                 borderRadius: BorderRadius.circular(32),
                 child: Stack(
@@ -104,23 +103,24 @@ class _SignInButtonState extends State<SignInButton> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(24),
                       child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                         child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: const Color.fromARGB(182, 31, 31, 31)),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                        ),
+                            height: 85.h,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: const Color.fromARGB(182, 31, 31, 31)),
+                              borderRadius: BorderRadius.circular(24),
+                            )),
                       ),
                     ),
-                    Scaffold(
+                    const Scaffold(
                       resizeToAvoidBottomInset: false,
                       backgroundColor: Colors.transparent,
                       body: SingleChildScrollView(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: const [
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                             Padding(
                               padding: EdgeInsets.only(top: 10),
                               child: Text(
@@ -129,19 +129,7 @@ class _SignInButtonState extends State<SignInButton> {
                                   fontSize: 34,
                                   fontFamily: "Gontserrat",
                                   color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 16.0),
-                              child: Text(
-                                "Have your personal Projects, Social Media, Finances, and News all at your finger tips! Omni's world is Endless!",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.normal,
                                 ),
                               ),
                             ),

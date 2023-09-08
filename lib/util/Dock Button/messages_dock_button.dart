@@ -91,8 +91,7 @@ class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                    color:
-                        const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
+                    color: const Color.fromARGB(42, 55, 52, 52),
                     elevation: 2,
                     borderRadius: BorderRadius.circular(32),
                     child: Stack(

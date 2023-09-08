@@ -9,8 +9,8 @@ import '../Window Route/settings_window_route.dart';
 
 class SettingsWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  const SettingsWindowButton({super.key, required});
-
+  SettingsWindowButton({super.key, required, required this.dockIcon});
+  Widget dockIcon;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,17 +18,14 @@ class SettingsWindowButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(SettingsWindowRoute(builder: (context) {
-            return const _SettingsWindowPopupCard();
+            return const SettingsWindowPopupCard();
           }));
         },
-        child: const Hero(
-          tag: _heroSettingWindow,
+        child: Hero(
+          tag: heroSettingWindow,
           child: Material(
             color: tran,
-            child: Icon(
-              Ionicons.settings_sharp,
-              size: 50,
-            ),
+            child: dockIcon,
           ),
         ),
       ),
@@ -36,11 +33,11 @@ class SettingsWindowButton extends StatelessWidget {
   }
 }
 
-const String _heroSettingWindow = 'settings-window-hero';
+const String heroSettingWindow = 'settings-window-hero';
 
-class _SettingsWindowPopupCard extends StatelessWidget {
+class SettingsWindowPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
-  const _SettingsWindowPopupCard({Key? key}) : super(key: key);
+  const SettingsWindowPopupCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +54,7 @@ class _SettingsWindowPopupCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
-                  tag: _heroSettingWindow,
+                  tag: heroSettingWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),

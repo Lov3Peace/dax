@@ -16,9 +16,9 @@ class _BackgroundState extends State<Background> {
       decoration: const BoxDecoration(
           gradient: LinearGradient(
         colors: [
-          Color.fromARGB(255, 21, 22, 34),
-          Color.fromARGB(255, 24, 11, 27),
-          Color.fromARGB(255, 21, 22, 34),
+          Color.fromARGB(255, 11, 12, 18),
+          Color.fromARGB(255, 14, 6, 16),
+          Color.fromARGB(255, 12, 13, 20),
         ],
         transform: GradientRotation(180),
       )),

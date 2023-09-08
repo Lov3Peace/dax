@@ -21,7 +21,7 @@ class _ArtBoardScreenState extends State<ArtBoardScreen> {
           ),
           Positioned.fill(
             child: BackdropFilter(
-              //Now it looks perfecto
+              //Now it looks perfecto...sike no tf it doesn't
               filter: ImageFilter.blur(
                 sigmaX: 100,
                 sigmaY: 100,

@@ -5,10 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth_check.dart';
+import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:get/get_state_manager/src/simple/list_notifier.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../util/tactile_button.dart';
 import '../../../desktop/desktop_dashboard.dart';
 import '../../../tablet/tablet_dashboard.dart';
 import '../../mob_constants.dart';
@@ -276,40 +278,18 @@ class _SignInFormState extends State<SignInForm> {
             const SizedBox(
               height: 10,
             ),
-            GestureDetector(
-              onTap: signIn,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                      gradient: LinearGradient(colors: [purp, red]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: red,
-                            blurRadius: 7,
-                            blurStyle: BlurStyle.solid)
-                      ],
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                    child: Text(
-                      'Sign In',
-                      style: GoogleFonts.montserrat(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          shadows: [
-                            const Shadow(
-                              color: red,
-                              blurRadius: 1,
-                            ),
-                            const Shadow(
-                              color: purp,
-                              blurRadius: 2,
-                            ),
-                          ]),
-                    ),
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: TactileButton(
+                child: GradientContainer(
+                  gradient1: purp,
+                  gradient2: red,
+                  height: 10,
+                  width: 30,
+                  neonGlow: red,
+                  text: 'Sign In',
+                  textSize: 14,
+                  onTap: signIn,
                 ),
               ),
             ),
@@ -319,3 +299,26 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 }
+
+// class SignButton extends StatefulWidget {
+//   SignButton({super.key});
+
+//   @override
+//   State<SignButton> createState() => _SignButtonState();
+// }
+
+// class _SignButtonState extends State<SignButton> {
+//   //controlls button
+//   Control control = Control.stop;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+
+//   void reverseShrink() {
+//     setState(() {
+//       control = Control.playReverse;
+//     });
+//   }
+// }

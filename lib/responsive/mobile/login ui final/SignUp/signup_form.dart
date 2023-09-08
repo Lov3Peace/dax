@@ -123,9 +123,7 @@ class _SignUpFormState extends State<SignUpForm> {
             const SizedBox(
               height: 10,
             ),
-            SignButton(
-              onTap: signinbtn,
-            ),
+            SignButton(),
           ],
         ),
       ),

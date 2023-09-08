@@ -39,7 +39,8 @@ class _SignInFormState extends State<SignInForm> {
   Future signIn() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _usernameController.text, password: _passwordController.text);
+          email: '${_usernameController.text}@omni.com',
+          password: _passwordController.text);
 
       Navigator.of(context).push(
         PageRouteBuilder(

@@ -12,14 +12,14 @@ import 'forget_password_form.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 
-class LoginButton extends StatefulWidget {
-  LoginButton({super.key});
+class InitLoginButton extends StatefulWidget {
+  InitLoginButton({super.key});
 
   @override
-  State<LoginButton> createState() => _LoginButtonState();
+  State<InitLoginButton> createState() => _InitLoginButtonState();
 }
 
-class _LoginButtonState extends State<LoginButton> {
+class _InitLoginButtonState extends State<InitLoginButton> {
   bool isLoginDialogShown = false;
   //controlls button
   Control control = Control.stop;
@@ -41,32 +41,22 @@ class _LoginButtonState extends State<LoginButton> {
           child: child,
         );
       },
-      child: GestureDetector(
-        onTap: pressed,
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [purp, red]),
-              boxShadow: const [
-                BoxShadow(
-                    color: red, blurRadius: 10, blurStyle: BlurStyle.solid)
-              ],
-              borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
-          child: const Center(
-            child: Text(
-              'Login',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            ),
-          ),
+      child: TactileButton(
+        onTap: loadPopUp,
+        child: GradientContainer(
+          gradient1: purp,
+          gradient2: red,
+          height: 20,
+          width: 30,
+          neonGlow: red,
+          text: 'Login',
+          textSize: 16,
         ),
       ),
     );
   }
 
-  void pressed() {
+  void loadPopUp() {
     // toggle between control instructions
 
     control = Control.play;

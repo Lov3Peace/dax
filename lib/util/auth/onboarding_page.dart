@@ -90,7 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         padding: const EdgeInsets.symmetric(vertical: 15.0),
                         child: InitSignUpButton(),
                       ),
-                      LoginButton(),
+                      InitLoginButton(),
                     ],
                   ),
 

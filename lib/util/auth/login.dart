@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -20,38 +21,22 @@ class InitLoginButton extends StatefulWidget {
 }
 
 class _InitLoginButtonState extends State<InitLoginButton> {
-  bool isLoginDialogShown = false;
+  // bool isLoginDialogShown = false;
   //controlls button
   Control control = Control.stop;
 
   @override
   Widget build(BuildContext context) {
-    return CustomAnimationBuilder<double>(
-      control: control,
-      startPosition: 0,
-      tween: Tween(begin: 1.0, end: 0.8),
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.linear,
-      onCompleted: () {
-        reverseShrink();
-      },
-      builder: (context, value, child) {
-        return Transform.scale(
-          scale: value,
-          child: child,
-        );
-      },
-      child: TactileButton(
-        onTap: loadPopUp,
-        child: GradientContainer(
-          gradient1: purp,
-          gradient2: red,
-          height: 20,
-          width: 30,
-          neonGlow: red,
-          text: 'Login',
-          textSize: 16,
-        ),
+    return TactileButton(
+      onTap: loadPopUp,
+      child: GradientContainer(
+        gradient1: purp,
+        gradient2: red,
+        height: 20,
+        width: 30,
+        neonGlow: red,
+        text: 'Login',
+        textSize: 16,
       ),
     );
   }
@@ -82,7 +67,7 @@ class _InitLoginButtonState extends State<InitLoginButton> {
           pageBuilder: (context, _, __) => Center(
             child: Container(
               height: 60.h,
-              constraints: BoxConstraints(maxWidth: 1000, maxHeight: 500),
+              constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 500),
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
@@ -101,13 +86,13 @@ class _InitLoginButtonState extends State<InitLoginButton> {
                             height: 85.h,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Color.fromARGB(182, 59, 59, 59),
+                                color: const Color.fromARGB(182, 59, 59, 59),
                               ),
                               borderRadius: BorderRadius.circular(24),
                             )),
                       ),
                     ),
-                    const Scaffold(
+                    Scaffold(
                       resizeToAvoidBottomInset: false,
                       backgroundColor: Colors.transparent,
                       body: SingleChildScrollView(
@@ -140,16 +125,16 @@ class _InitLoginButtonState extends State<InitLoginButton> {
         );
       },
     );
-    setState(() {
-      isLoginDialogShown = true;
-    });
+    // setState(() {
+    //   isLoginDialogShown = true;
+    // });
   }
 
-  void reverseShrink() {
-    setState(() {
-      control = Control.playReverse;
-    });
-  }
+  // void reverseShrink() {
+  //   setState(() {
+  //     control = Control.playReverse;
+  //   });
+  // }
 
   void createaccbtn() {}
 }
@@ -173,7 +158,7 @@ class _LoginFormState extends State<LoginForm> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  Future Login() async {
+  Future login() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: '${_usernameController.text}@omni.com',
@@ -436,7 +421,7 @@ class _LoginFormState extends State<LoginForm> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: TactileButton(
-                  onTap: Login,
+                  onTap: login,
                   child: GradientContainer(
                     gradient1: purp,
                     gradient2: red,

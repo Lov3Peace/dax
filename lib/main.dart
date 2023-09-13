@@ -50,8 +50,11 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
         // ignore: prefer_const_constructors
         home: ResponsiveLayout(
+          // ignore: prefer_const_constructors
           mobileVersion: AuthCheck(),
+          // ignore: prefer_const_constructors
           tabletVersion: AuthCheck(),
+          // ignore: prefer_const_constructors
           desktopVersion: AuthCheck(),
         ),
       ),

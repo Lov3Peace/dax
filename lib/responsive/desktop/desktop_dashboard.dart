@@ -238,7 +238,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
 
   @override
   void dispose() {
-    controller.dispose();
+    // controller.dispose();
     super.dispose();
   }
 }

@@ -191,7 +191,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                   ),
                                   cursorColor: Colors.white,
                                 ),
-                                TextField(
+                                const TextField(
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: 'Would you like to log out?',

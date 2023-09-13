@@ -55,6 +55,8 @@ class _SignInFormState extends State<SignInForm> {
             );
           },
           pageBuilder: (context, animation, secondaryAnimation) {
+            print('Login Successful...');
+            // ignore: prefer_const_constructors
             return AuthCheck();
           },
           transitionDuration: const Duration(milliseconds: 0),
@@ -62,9 +64,9 @@ class _SignInFormState extends State<SignInForm> {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print("user doesn't exist");
+        print("User doesn't exist.");
       } else if (e.code == 'wrong-password') {
-        print('wrong password');
+        print('Wrong password.');
       }
     }
   }

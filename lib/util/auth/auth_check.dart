@@ -1,15 +1,21 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_dashboard.dart';
-import 'package:flutter_application_1/responsive/mobile/login%20ui%20final/onboarding_page.dart';
+import 'package:flutter_application_1/util/auth/signup.dart';
+import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_dashboard.dart';
-import '../responsive/mobile/mobile_dashboard.dart';
+import '../../responsive/mobile/mobile_dashboard.dart';
 
-class AuthCheck extends StatelessWidget {
+class AuthCheck extends StatefulWidget {
   const AuthCheck({super.key});
 
+  @override
+  State<AuthCheck> createState() => _AuthCheckState();
+}
+
+class _AuthCheckState extends State<AuthCheck> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

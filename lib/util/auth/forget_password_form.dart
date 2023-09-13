@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import '../../../../main.dart';
-import '../../mob_constants.dart';
+import '../../main.dart';
+import '../../responsive/mobile/mob_constants.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({

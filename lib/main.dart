@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
-import 'package:flutter_application_1/util/auth_check.dart';
+import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';

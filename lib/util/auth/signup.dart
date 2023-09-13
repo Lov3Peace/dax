@@ -246,7 +246,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white38),
                   ),
                 ),
               ),
@@ -295,7 +295,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white38),
                   ),
                 ),
               ),

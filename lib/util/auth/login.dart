@@ -212,6 +212,7 @@ class _LoginFormState extends State<LoginForm> {
         print("User doesn't exist.");
       } else if (e.code == 'wrong-password') {
         print('Wrong password.');
+        showErrorMessage(e.code);
       }
     }
   }
@@ -222,7 +223,7 @@ class _LoginFormState extends State<LoginForm> {
         context: (context),
         builder: (context) {
           return AlertDialog(
-            backgroundColor: purp,
+            backgroundColor: Color.fromARGB(182, 75, 75, 75),
             title: Center(
                 child: Text(
               message,
@@ -276,7 +277,7 @@ class _LoginFormState extends State<LoginForm> {
                       screenWidth / 4,
                     ),
                     borderSide: const BorderSide(
-                      color: Color.fromARGB(182, 75, 75, 75),
+                      color: Colors.white38,
                     ),
                   ),
                 ),
@@ -306,7 +307,7 @@ class _LoginFormState extends State<LoginForm> {
                       screenWidth / 4,
                     ),
                     borderSide: const BorderSide(
-                      color: Color.fromARGB(182, 75, 75, 75),
+                      color: Colors.white38,
                     ),
                   ),
                 ),

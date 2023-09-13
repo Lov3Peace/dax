@@ -113,7 +113,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
 
   @override
   void dispose() {
-    controller.dispose();
+    //controller.dispose();
     super.dispose();
   }
 }

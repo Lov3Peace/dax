@@ -58,8 +58,7 @@ class SettingsWindowPopupCard extends StatelessWidget {
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                    color:
-                        const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
+                    color: const Color.fromARGB(42, 55, 52, 52),
                     elevation: 2,
                     borderRadius: BorderRadius.circular(32),
                     child: Stack(
@@ -67,16 +66,15 @@ class SettingsWindowPopupCard extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(24),
                           child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
-                              height: 85.h,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color:
-                                        const Color.fromARGB(182, 31, 31, 31)),
-                                borderRadius: BorderRadius.circular(24),
-                              ),
-                            ),
+                                height: 85.h,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: const Color.fromARGB(
+                                          182, 31, 31, 31)),
+                                  borderRadius: BorderRadius.circular(24),
+                                )),
                           ),
                         ),
                       ],

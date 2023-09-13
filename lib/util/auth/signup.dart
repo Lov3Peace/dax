@@ -38,6 +38,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
         neonGlow: red,
         text: 'Sign Up',
         textSize: 16,
+        borderColor: tran,
       ),
     );
   }
@@ -323,6 +324,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     neonGlow: red,
                     text: 'Sign Up',
                     textSize: 14,
+                    borderColor: tran,
                   ),
                 ),
               ),

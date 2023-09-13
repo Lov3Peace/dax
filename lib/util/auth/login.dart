@@ -30,13 +30,14 @@ class _InitLoginButtonState extends State<InitLoginButton> {
     return TactileButton(
       onTap: loadPopUp,
       child: GradientContainer(
-        gradient1: purp,
-        gradient2: red,
+        gradient1: tran,
+        gradient2: tran,
         height: 20,
         width: 30,
-        neonGlow: red,
+        neonGlow: tran,
         text: 'Login',
         textSize: 16,
+        borderColor: Colors.white38,
       ),
     );
   }
@@ -92,7 +93,7 @@ class _InitLoginButtonState extends State<InitLoginButton> {
                             )),
                       ),
                     ),
-                    Scaffold(
+                    const Scaffold(
                       resizeToAvoidBottomInset: false,
                       backgroundColor: Colors.transparent,
                       body: SingleChildScrollView(
@@ -430,6 +431,7 @@ class _LoginFormState extends State<LoginForm> {
                     neonGlow: red,
                     text: 'Login',
                     textSize: 14,
+                    borderColor: tran,
                   ),
                 ),
               ),

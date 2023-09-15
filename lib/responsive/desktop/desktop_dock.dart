@@ -96,7 +96,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     child: Text(
                       'Home',
                       style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(fontSize: 3.sp),
+                          textStyle: TextStyle(fontSize: 2.sp),
                           fontWeight: FontWeight.w400,
                           color: Colors.white),
                     ),
@@ -139,7 +139,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                         label: Text(
                           'Settings',
                           style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(fontSize: 3.sp),
+                              textStyle: TextStyle(fontSize: 2.sp),
                               fontWeight: FontWeight.w400,
                               color: Colors.white),
                         ),

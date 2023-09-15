@@ -118,9 +118,4 @@ class _OnboardingScreenState extends State<OnboardingScreen>
       ),
     );
   }
-
-  void signupbtn() {}
-
-  // create user account page
-  void signinbtn() {}
 }

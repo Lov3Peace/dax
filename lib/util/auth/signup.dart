@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../main.dart';
@@ -68,7 +67,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
           },
           pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 60.h,
+              height: 75.h,
               constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 500),
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(32)),
@@ -154,7 +153,7 @@ class _SignUpFormState extends State<SignUpForm> {
   bool rememberMe = false;
   bool showLogin = true;
   //Controller for text fields
-  //final _emailController = TextEditingController();
+  final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -162,7 +161,7 @@ class _SignUpFormState extends State<SignUpForm> {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         //email: '${_usernameController.text}@omni.com',
-        email: '${_usernameController.text}@omni.com',
+        email: _emailController.text,
         password: _passwordController.text,
       );
 
@@ -196,6 +195,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   void dispose() {
+    _emailController.dispose();
     _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -211,6 +211,7 @@ class _SignUpFormState extends State<SignUpForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //Email for Signup
             const Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(
@@ -220,7 +221,34 @@ class _SignUpFormState extends State<SignUpForm> {
             Padding(
               padding: const EdgeInsets.only(
                 top: 8.0,
-                bottom: 16,
+                bottom: 8,
+                left: 10,
+                right: 10,
+              ),
+              child: TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(
+                      screenWidth / 4,
+                    ),
+                    borderSide: const BorderSide(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+
+            //Username for signup
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Username",
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 8,
                 left: 10,
                 right: 10,
               ),
@@ -236,30 +264,8 @@ class _SignUpFormState extends State<SignUpForm> {
                 ),
               ),
             ),
-            // const Padding(
-            //   padding: EdgeInsets.only(left: 20),
-            //   child: Text(
-            //     "Username",
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(
-            //     top: 8.0,
-            //     bottom: 16,
-            //     left: 10,
-            //     right: 10,
-            //   ),
-            //   child: TextFormField(
-            //     decoration: InputDecoration(
-            //       enabledBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(
-            //           screenWidth / 4,
-            //         ),
-            //         borderSide: const BorderSide(color: Colors.white),
-            //       ),
-            //     ),
-            //   ),
-            // ),
+
+            //Password for signup
             const Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(
@@ -269,7 +275,7 @@ class _SignUpFormState extends State<SignUpForm> {
             Padding(
               padding: const EdgeInsets.only(
                 top: 8.0,
-                bottom: 16,
+                bottom: 8,
                 left: 10,
                 right: 10,
               ),
@@ -288,6 +294,9 @@ class _SignUpFormState extends State<SignUpForm> {
             const SizedBox(
               height: 10,
             ),
+
+            //row for remeber me and switch
+            //need to connect this soon!
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -309,8 +318,11 @@ class _SignUpFormState extends State<SignUpForm> {
               ],
             ),
             const SizedBox(
-              height: 10,
+              height: 2,
             ),
+
+            //SignUp
+            // Signs us into the
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),

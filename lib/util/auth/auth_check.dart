@@ -4,7 +4,6 @@ import 'package:flutter_application_1/responsive/desktop/desktop_dashboard.dart'
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/auth/signup.dart';
 import 'package:flutter_application_1/util/auth/onboarding_page.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_dashboard.dart';
 import '../../responsive/mobile/mobile_dashboard.dart';
@@ -26,9 +25,9 @@ class _AuthCheckState extends State<AuthCheck> {
           if (snapshot.hasData) {
             // ignore: prefer_const_constructors
             return ResponsiveLayout(
-              mobileVersion: MobileDashboard(),
-              tabletVersion: TabletDashboard(),
-              desktopVersion: DesktopDashboard(),
+              mobileVersion: const MobileDashboard(),
+              tabletVersion: const TabletDashboard(),
+              desktopVersion: const DesktopDashboard(),
             );
           } else {
             return OnboardingScreen();

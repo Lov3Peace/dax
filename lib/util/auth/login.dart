@@ -289,6 +289,8 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
             ),
+
+            //Row that contains rememeber me and Forgot Password button
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -296,14 +298,17 @@ class _LoginFormState extends State<LoginForm> {
                   "Remember Me",
                 ),
                 Switch(
-                    value: isSwitch,
-                    activeColor: Colors.white,
-                    activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
-                    onChanged: (bool newBool) {
-                      setState(() {
-                        isSwitch = newBool;
-                      });
-                    }),
+                  value: isSwitch,
+                  activeColor: Colors.white,
+                  activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
+                  onChanged: (bool newBool) {
+                    setState(() {
+                      isSwitch = newBool;
+                    });
+                  },
+                ),
+
+                //Forgot password
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: TextButton(
@@ -340,6 +345,9 @@ class _LoginFormState extends State<LoginForm> {
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 32, horizontal: 24),
                                 child: Material(
+                                  shadowColor:
+                                      const Color.fromRGBO(42, 41, 41, 0.631),
+                                  color: const Color.fromARGB(42, 55, 52, 52),
                                   elevation: 2,
                                   borderRadius: BorderRadius.circular(32),
                                   child: Stack(
@@ -348,26 +356,26 @@ class _LoginFormState extends State<LoginForm> {
                                         borderRadius: BorderRadius.circular(24),
                                         child: BackdropFilter(
                                           filter: ImageFilter.blur(
-                                              sigmaX: 20, sigmaY: 20),
+                                              sigmaX: 10, sigmaY: 10),
                                           child: Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: const Color.fromARGB(
-                                                      182, 31, 31, 31)),
-                                              borderRadius:
-                                                  BorderRadius.circular(24),
-                                            ),
-                                          ),
+                                              height: 85.h,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: const Color.fromARGB(
+                                                        182, 31, 31, 31)),
+                                                borderRadius:
+                                                    BorderRadius.circular(24),
+                                              )),
                                         ),
                                       ),
-                                      const Scaffold(
+                                      Scaffold(
                                         resizeToAvoidBottomInset: false,
                                         backgroundColor: Colors.transparent,
                                         body: SingleChildScrollView(
                                           reverse: true,
                                           child: Column(
                                             children: [
-                                              Padding(
+                                              const Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 10),
                                                 child: Text(
@@ -380,7 +388,7 @@ class _LoginFormState extends State<LoginForm> {
                                                   ),
                                                 ),
                                               ),
-                                              Padding(
+                                              const Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 16.0),
                                                 child: Text(

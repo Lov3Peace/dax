@@ -12,7 +12,7 @@ double subTextSize = 14;
 double profBubTextSize = 20;
 double titleTextSize = 20;
 
-void responsiveMeth() {
+responsiveMeth() {
   var screenHeight = window.physicalSize.height / window.devicePixelRatio;
   var screenWidth = window.physicalSize.width / window.devicePixelRatio;
   if (screenWidth < 550) {

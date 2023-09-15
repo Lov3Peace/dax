@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -12,61 +13,36 @@ import 'forget_password_form.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 
-class LoginButton extends StatefulWidget {
-  LoginButton({super.key});
+class InitLoginButton extends StatefulWidget {
+  InitLoginButton({super.key});
 
   @override
-  State<LoginButton> createState() => _LoginButtonState();
+  State<InitLoginButton> createState() => _InitLoginButtonState();
 }
 
-class _LoginButtonState extends State<LoginButton> {
-  bool isLoginDialogShown = false;
+class _InitLoginButtonState extends State<InitLoginButton> {
+  // bool isLoginDialogShown = false;
   //controlls button
   Control control = Control.stop;
 
   @override
   Widget build(BuildContext context) {
-    return CustomAnimationBuilder<double>(
-      control: control,
-      startPosition: 0,
-      tween: Tween(begin: 1.0, end: 0.8),
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.linear,
-      onCompleted: () {
-        reverseShrink();
-      },
-      builder: (context, value, child) {
-        return Transform.scale(
-          scale: value,
-          child: child,
-        );
-      },
-      child: GestureDetector(
-        onTap: pressed,
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
-          decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [purp, red]),
-              boxShadow: const [
-                BoxShadow(
-                    color: red, blurRadius: 10, blurStyle: BlurStyle.solid)
-              ],
-              borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
-          child: const Center(
-            child: Text(
-              'Login',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16),
-            ),
-          ),
-        ),
+    return TactileButton(
+      onTap: loadPopUp,
+      child: GradientContainer(
+        gradient1: tran,
+        gradient2: tran,
+        height: 20,
+        width: 30,
+        neonGlow: tran,
+        text: 'Login',
+        textSize: 16,
+        borderColor: Colors.white38,
       ),
     );
   }
 
-  void pressed() {
+  void loadPopUp() {
     // toggle between control instructions
 
     control = Control.play;
@@ -92,7 +68,7 @@ class _LoginButtonState extends State<LoginButton> {
           pageBuilder: (context, _, __) => Center(
             child: Container(
               height: 60.h,
-              constraints: BoxConstraints(maxWidth: 1000, maxHeight: 500),
+              constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 500),
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
@@ -111,7 +87,7 @@ class _LoginButtonState extends State<LoginButton> {
                             height: 85.h,
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Color.fromARGB(182, 59, 59, 59),
+                                color: const Color.fromARGB(182, 59, 59, 59),
                               ),
                               borderRadius: BorderRadius.circular(24),
                             )),
@@ -150,16 +126,16 @@ class _LoginButtonState extends State<LoginButton> {
         );
       },
     );
-    setState(() {
-      isLoginDialogShown = true;
-    });
+    // setState(() {
+    //   isLoginDialogShown = true;
+    // });
   }
 
-  void reverseShrink() {
-    setState(() {
-      control = Control.playReverse;
-    });
-  }
+  // void reverseShrink() {
+  //   setState(() {
+  //     control = Control.playReverse;
+  //   });
+  // }
 
   void createaccbtn() {}
 }
@@ -183,7 +159,7 @@ class _LoginFormState extends State<LoginForm> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  Future Login() async {
+  Future login() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: '${_usernameController.text}@omni.com',
@@ -200,21 +176,20 @@ class _LoginFormState extends State<LoginForm> {
             );
           },
           pageBuilder: (context, animation, secondaryAnimation) {
-            return const AuthCheck();
+            print('Login Successful...');
+            // ignore: prefer_const_constructors
+            return AuthCheck();
           },
           transitionDuration: const Duration(milliseconds: 0),
         ),
       );
     } on FirebaseAuthException catch (e) {
-      //Pop loading circle
-      Navigator.maybePop(context);
-      //Show error Message
-      showErrorMessage(e.code);
-      // if (e.code == 'user-not-found') {
-      //   print("user doesn't exist");
-      // } else if (e.code == 'wrong-password') {
-      //   print('wrong password');
-      // }
+      if (e.code == 'user-not-found') {
+        print("User doesn't exist.");
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password.');
+        showErrorMessage(e.code);
+      }
     }
   }
 
@@ -224,7 +199,7 @@ class _LoginFormState extends State<LoginForm> {
         context: (context),
         builder: (context) {
           return AlertDialog(
-            backgroundColor: purp,
+            backgroundColor: Color.fromARGB(182, 75, 75, 75),
             title: Center(
                 child: Text(
               message,
@@ -278,7 +253,7 @@ class _LoginFormState extends State<LoginForm> {
                       screenWidth / 4,
                     ),
                     borderSide: const BorderSide(
-                      color: Color.fromARGB(182, 75, 75, 75),
+                      color: Colors.white38,
                     ),
                   ),
                 ),
@@ -308,7 +283,7 @@ class _LoginFormState extends State<LoginForm> {
                       screenWidth / 4,
                     ),
                     borderSide: const BorderSide(
-                      color: Color.fromARGB(182, 75, 75, 75),
+                      color: Colors.white38,
                     ),
                   ),
                 ),
@@ -447,7 +422,7 @@ class _LoginFormState extends State<LoginForm> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: TactileButton(
-                  onTap: Login,
+                  onTap: login,
                   child: GradientContainer(
                     gradient1: purp,
                     gradient2: red,
@@ -456,6 +431,7 @@ class _LoginFormState extends State<LoginForm> {
                     neonGlow: red,
                     text: 'Login',
                     textSize: 14,
+                    borderColor: tran,
                   ),
                 ),
               ),

@@ -22,38 +22,23 @@ class InitSignUpButton extends StatefulWidget {
 }
 
 class _InitSignUpButtonState extends State<InitSignUpButton> {
-  bool isSignUpDialogShown = false;
+  // bool isSignUpDialogShown = false;
   //controls button
   Control control = Control.stop;
 
   @override
   Widget build(BuildContext context) {
-    return CustomAnimationBuilder<double>(
-      control: control,
-      startPosition: 0,
-      tween: Tween(begin: 1.0, end: 0.8),
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.linear,
-      onCompleted: () {
-        reverseShrink();
-      },
-      builder: (context, value, child) {
-        return Transform.scale(
-          scale: value,
-          child: child,
-        );
-      },
-      child: TactileButton(
-        onTap: loadPopUp,
-        child: GradientContainer(
-          gradient1: purp,
-          gradient2: red,
-          height: 20,
-          width: 23,
-          neonGlow: red,
-          text: 'Sign Up',
-          textSize: 16,
-        ),
+    return TactileButton(
+      onTap: loadPopUp,
+      child: GradientContainer(
+        gradient1: purp,
+        gradient2: red,
+        height: 20,
+        width: 23,
+        neonGlow: red,
+        text: 'Sign Up',
+        textSize: 16,
+        borderColor: tran,
       ),
     );
   }
@@ -142,16 +127,16 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
         );
       },
     );
-    setState(() {
-      isSignUpDialogShown = true;
-    });
+    // setState(() {
+    //   isSignUpDialogShown = true;
+    // });
   }
 
-  void reverseShrink() {
-    setState(() {
-      control = Control.playReverse;
-    });
-  }
+  // void reverseShrink() {
+  //   setState(() {
+  //     control = Control.playReverse;
+  //   });
+  // }
 }
 
 //PopUp Card
@@ -229,7 +214,7 @@ class _SignUpFormState extends State<SignUpForm> {
             const Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(
-                "Email",
+                "Username",
               ),
             ),
             Padding(
@@ -246,7 +231,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white38),
                   ),
                 ),
               ),
@@ -295,7 +280,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white38),
                   ),
                 ),
               ),
@@ -339,6 +324,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     neonGlow: red,
                     text: 'Sign Up',
                     textSize: 14,
+                    borderColor: tran,
                   ),
                 ),
               ),

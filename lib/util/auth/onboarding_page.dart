@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
 import '../../responsive/mobile/mob_artboard_page.dart';
 import 'signup.dart';
@@ -6,12 +7,13 @@ import 'login.dart';
 
 class OnboardingScreen extends StatefulWidget {
   OnboardingScreen({super.key});
-  bool isSignInDialogShown = false;
+
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen>
     with AnimationMixin {
+  // bool isLoginDialogShown = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +21,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         children: [
           const ArtBoardScreen(),
           AnimatedPositioned(
-            top: widget.isSignInDialogShown ? -50 : 0,
+            top: 0,
             duration: const Duration(milliseconds: 240),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -31,6 +33,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   const SizedBox(
                     width: 350,
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(right: 60),
@@ -84,16 +87,20 @@ class _OnboardingScreenState extends State<OnboardingScreen>
 
                   const Spacer(),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15.0, horizontal: 20),
                         child: InitSignUpButton(),
                       ),
-                      LoginButton(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15.0, horizontal: 20),
+                        child: InitLoginButton(),
+                      ),
                     ],
                   ),
-
                   const SizedBox(
                     height: 80,
                     child: Padding(

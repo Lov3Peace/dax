@@ -48,9 +48,12 @@ class _TactileButtonState extends State<TactileButton> with AnimationMixin {
       },
       child: Listener(
         onPointerDown: (event) => pressed(),
-        child: GestureDetector(
-          onTap: widget.onTap,
-          child: widget.child,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: widget.onTap,
+            child: widget.child,
+          ),
         ),
       ),
     );

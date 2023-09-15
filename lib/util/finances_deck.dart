@@ -11,7 +11,7 @@ class FinancesDeck extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Deck(
-        deckHeight: MediaQuery.of(context).size.height * 0.22,
+        deckHeight: MediaQuery.of(context).size.height * 0.1,
         deckWidth: MediaQuery.of(context).size.width * 0.45,
         deckName: 'Finances',
         gradient1: const Color.fromARGB(255, 157, 255, 45),

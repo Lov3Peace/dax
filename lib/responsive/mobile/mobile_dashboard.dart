@@ -5,6 +5,7 @@ import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 import 'package:flutter_application_1/util/dock.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:sizer/sizer.dart';
 import '../../util/dashboard_decks.dart';
 import 'mob_artboard_page.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
@@ -60,46 +61,78 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
             },
             child: Column(
               children: [
-                Expanded(
-                  child: PageView(
-                    scrollDirection: Axis.vertical,
-                    physics: const BouncingScrollPhysics(),
-                    children: [
-                      AnimationLimiter(
-                        child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          padding: EdgeInsets.fromLTRB(
-                              MediaQuery.of(context).size.width * 0.035,
-                              90,
-                              MediaQuery.of(context).size.width * 0.035,
-                              15),
-                          itemCount: 3,
-                          itemBuilder: (BuildContext context, int index) {
-                            return AnimationConfiguration.staggeredList(
-                              delay: const Duration(milliseconds: 200),
-                              position: index,
-                              duration: const Duration(milliseconds: 700),
-                              child: ScaleAnimation(
-                                scale: 0.7,
-                                curve: Curves.easeOutBack,
-                                child: FadeInAnimation(
-                                  child: Column(
-                                    children: [
-                                      mobTabDashboardDecks(
-                                        ProjectsDeck(),
-                                        SocialsDeck(),
-                                        FinancesDeck(),
-                                        NewsDeck(),
-                                      )[index]
-                                    ],
-                                  ),
+                Container(
+                  height: 60.h,
+                  // color: red,
+                  child: AnimationLimiter(
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.fromLTRB(
+                          MediaQuery.of(context).size.width * 0.035,
+                          90,
+                          MediaQuery.of(context).size.width * 0.035,
+                          0),
+                      itemCount: 2,
+                      itemBuilder: (BuildContext context, int index) {
+                        return AnimationConfiguration.staggeredList(
+                          delay: const Duration(milliseconds: 200),
+                          position: index,
+                          duration: const Duration(milliseconds: 700),
+                          child: ScaleAnimation(
+                            scale: 0.7,
+                            curve: Curves.easeOutBack,
+                            child: FadeInAnimation(
+                              child: mobTabDashboardDecks1(
+                                ProjectsDeck(),
+                                SocialsDeck(),
+                              )[index],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 25.h,
+                  // color: red,
+                  child: AnimationLimiter(
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: 2,
+                      itemBuilder: (BuildContext context, int index) {
+                        return AnimationConfiguration.staggeredList(
+                          delay: const Duration(milliseconds: 200),
+                          position: index,
+                          duration: const Duration(milliseconds: 700),
+                          child: ScaleAnimation(
+                            scale: 0.7,
+                            curve: Curves.easeOutBack,
+                            child: FadeInAnimation(
+                              child: mobTabDashboardDecks2(
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      MediaQuery.of(context).size.width * 0.035,
+                                      0,
+                                      0,
+                                      15),
+                                  child: FinancesDeck(),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      MediaQuery.of(context).size.width * 0.035,
+                                      0,
+                                      0,
+                                      15),
+                                  child: NewsDeck(),
+                                ),
+                              )[index],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
                 Dock(newGlow: red, newGrad1: purp, newGrad2: red)

@@ -135,11 +135,11 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                         Container(
                           height: 45.h,
                           width: 74.w,
+                          // color: red,
                           constraints: const BoxConstraints(
                               minWidth: 1200, minHeight: 500),
                           child: AnimationLimiter(
                             child: ListView.builder(
-                              shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               itemCount: 3,
                               itemBuilder: (BuildContext context, int index) {
@@ -153,7 +153,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                     child: FadeInAnimation(
                                       child: Padding(
                                         padding: EdgeInsets.fromLTRB(
-                                            0.25.w, 0.25.w, 0.25.w, 0.25.w),
+                                            0.w, 0.0.w, 0, 0.0.w),
                                         child: deskDashboardDecks1(
                                           deck1: Column(
                                             children: [
@@ -163,7 +163,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                 child: TitleBubble(
                                                   deckHeight: 5.5.h,
                                                   deckName: 'Dashboard',
-                                                  deckWidth: 18.w,
+                                                  deckWidth: 18.5.w,
                                                   textSize: 3.sp,
                                                   leftPad: 30,
                                                 ),
@@ -171,10 +171,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                               Expanded(child: ProfileCard()),
                                             ],
                                           ),
-                                          deck2: Hero(
-                                            child: ProjectsDeck(),
-                                            tag: 'projDeck',
-                                          ),
+                                          deck2: ProjectsDeck(),
                                           deck3: FinancesDeck(),
                                         )[index],
                                       ),
@@ -192,7 +189,6 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                               minWidth: 1200, minHeight: 500),
                           child: AnimationLimiter(
                             child: ListView.builder(
-                              shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
                               itemCount: 2,
                               itemBuilder: (BuildContext context, int index) {
@@ -209,7 +205,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                         //     const BoxConstraints(minWidth: 500),
                                         child: Padding(
                                           padding: EdgeInsets.fromLTRB(
-                                              0.25.w, 0.25.w, 0.25.w, 0.25.w),
+                                              0.w, 0.0.w, 0, 0.0.w),
                                           child: deskDashboardDecks2(
                                             deck4: SocialsDeck(),
                                             deck5: NewsDeck(),
@@ -225,6 +221,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                         ),
                       ],
                     ),
+                    // ignore: prefer_const_constructors
                     Messages(),
                   ],
                 ),

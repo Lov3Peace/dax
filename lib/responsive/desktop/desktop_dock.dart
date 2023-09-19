@@ -3,13 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
-import 'package:flutter_application_1/util/Dock%20Button/friends_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/help_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/info_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/logout_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/messages_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/settings_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/wallet_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/friends_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/help_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/info_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/logout_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/messages_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/settings_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/wallet_dock_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
@@ -51,7 +51,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
   Widget build(BuildContext context) {
     Color hoverColor = Colors.white;
     return Padding(
-        padding: EdgeInsets.fromLTRB(0, 0, 0.25.w, 0),
+        padding: EdgeInsets.fromLTRB(0, 0, 0.w, 0),
         child: Container(
           constraints: BoxConstraints(minHeight: 750),
           clipBehavior: Clip.hardEdge,

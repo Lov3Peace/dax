@@ -124,9 +124,9 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                       color: tran,
                       child: TextButton.icon(
                         icon: Icon(
-                          Ionicons.settings_sharp,
+                          Ionicons.settings_outline,
                           size: 30,
-                          color: hoverColor,
+                          color: Colors.white70,
                         ),
                         onPressed: () {
                           Navigator.of(context)
@@ -157,9 +157,9 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                       color: tran,
                       child: TextButton.icon(
                         icon: Icon(
-                          Ionicons.wallet,
+                          Ionicons.wallet_outline,
                           size: 30,
-                          color: hoverColor,
+                          color: Colors.white70,
                         ),
                         onPressed: () {
                           Navigator.of(context)
@@ -190,9 +190,9 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                       color: tran,
                       child: TextButton.icon(
                         icon: Icon(
-                          Ionicons.people,
+                          Ionicons.people_outline,
                           size: 30,
-                          color: hoverColor,
+                          color: Colors.white70,
                         ),
                         onPressed: () {
                           Navigator.of(context)
@@ -226,9 +226,9 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                       color: tran,
                       child: TextButton.icon(
                         icon: Icon(
-                          Ionicons.help_circle_sharp,
+                          Ionicons.help_circle_outline,
                           size: 30,
-                          color: hoverColor,
+                          color: Colors.white70,
                         ),
                         onPressed: () {
                           Navigator.of(context)
@@ -259,9 +259,9 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                       color: tran,
                       child: TextButton.icon(
                         icon: Icon(
-                          Ionicons.information_circle,
+                          Ionicons.information_circle_outline,
                           size: 30,
-                          color: hoverColor,
+                          color: Colors.white70,
                         ),
                         onPressed: () {
                           Navigator.of(context)

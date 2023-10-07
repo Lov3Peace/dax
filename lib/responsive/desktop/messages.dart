@@ -14,7 +14,7 @@ class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(minWidth: 250, minHeight: 750),
+      constraints: const BoxConstraints(minWidth: 150, minHeight: 750),
       // margin: EdgeInsets.all(1.w),
       decoration: BoxDecoration(
         color: Color.fromARGB(185, 21, 19, 22),
@@ -36,6 +36,7 @@ class _MessagesState extends State<Messages> {
 
       height: 90.h,
       width: 15.w,
+      margin: EdgeInsets.only(right: 0.5.w),
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

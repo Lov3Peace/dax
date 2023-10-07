@@ -82,7 +82,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
         child: Container(
           height: 100.h,
           width: 100.w,
-          constraints: const BoxConstraints(minWidth: 1200, minHeight: 1000),
+          constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
           child: Stack(
             children: [
               // Background(),
@@ -137,7 +137,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                           width: 74.w,
                           // color: red,
                           constraints: const BoxConstraints(
-                              minWidth: 1200, minHeight: 450),
+                              minWidth: 1000, minHeight: 250),
                           child: AnimationLimiter(
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
@@ -186,7 +186,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                           height: 45.h,
                           width: 74.w,
                           constraints: const BoxConstraints(
-                              minWidth: 1200, minHeight: 450),
+                              minWidth: 700, minHeight: 250),
                           child: AnimationLimiter(
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,

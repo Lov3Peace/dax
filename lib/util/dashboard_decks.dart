@@ -5,10 +5,24 @@ mobTabDashboardDecks(proj, socs, fins, news) {
   List decks = [
     proj,
     socs,
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [fins, news],
-    )
+    fins,
+    news,
+  ];
+  return decks;
+}
+
+mobTabDashboardDecks1(fins, news) {
+  List decks = [
+    fins,
+    news,
+  ];
+  return decks;
+}
+
+mobTabDashboardDecks2(fins, news) {
+  List decks = [
+    fins,
+    news,
   ];
   return decks;
 }

@@ -2,14 +2,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
-import 'package:flutter_application_1/util/Dock%20Button/friends_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/help_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/info_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/logout_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/messages_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/settings_dock_button.dart';
-import 'package:flutter_application_1/util/Dock%20Button/wallet_dock_button.dart';
+import 'package:flutter_application_1/util/Window%20Route/friends_window_route.dart';
+import 'package:flutter_application_1/util/Window%20Route/help_window_route.dart';
+import 'package:flutter_application_1/util/Window%20Route/info_window_route.dart';
+import 'package:flutter_application_1/util/dock%20buttons/friends_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/help_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/info_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/logout_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/messages_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/settings_dock_button.dart';
+import 'package:flutter_application_1/util/dock%20buttons/wallet_dock_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
@@ -19,6 +21,11 @@ import 'package:sizer/sizer.dart';
 
 import '../../util/Window Route/settings_window_route.dart';
 import '../../util/home_button.dart';
+import 'desk_dock_buttons/desk_friends_dock_button.dart';
+import 'desk_dock_buttons/desk_help_dock_button.dart';
+import 'desk_dock_buttons/desk_info_dock_button.dart';
+import 'desk_dock_buttons/desk_settings_dock_button.dart';
+import 'desk_dock_buttons/desk_wallet_dock_button.dart';
 
 class DesktopDock extends StatefulWidget {
   DesktopDock({
@@ -51,7 +58,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
   Widget build(BuildContext context) {
     Color hoverColor = Colors.white;
     return Padding(
-        padding: EdgeInsets.fromLTRB(0, 0, 0.25.w, 0),
+        padding: EdgeInsets.fromLTRB(0, 0, 0.w, 0),
         child: Container(
           constraints: BoxConstraints(minHeight: 750),
           clipBehavior: Clip.hardEdge,
@@ -112,19 +119,10 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                 //Settings
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                  child: SettingsWindowButton(
+                  child: DeskSettingsWindowButton(
                     dockIcon: Material(
                       color: tran,
                       child: TextButton.icon(
-                        onHover: (value) {
-                          if (value == true) {
-                            setState(() {
-                              hoverColor = red;
-                            });
-                          } else {
-                            hoverColor = Colors.white;
-                          }
-                        },
                         icon: Icon(
                           Ionicons.settings_sharp,
                           size: 30,
@@ -133,15 +131,18 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                         onPressed: () {
                           Navigator.of(context)
                               .push(SettingsWindowRoute(builder: (context) {
-                            return const SettingsWindowPopupCard();
+                            return const DeskSettingsWindowPopupCard();
                           }));
                         },
-                        label: Text(
-                          'Settings',
-                          style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(fontSize: 2.sp),
-                              fontWeight: FontWeight.w400,
-                              color: Colors.white),
+                        label: Padding(
+                          padding: EdgeInsets.only(left: 0.5.w),
+                          child: Text(
+                            'Settings',
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(fontSize: 2.sp),
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
@@ -151,13 +152,67 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                 //Wallet
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                  child: const WalletWindowButton(),
+                  child: DeskWalletWindowButton(
+                    dockIcon: Material(
+                      color: tran,
+                      child: TextButton.icon(
+                        icon: Icon(
+                          Ionicons.wallet,
+                          size: 30,
+                          color: hoverColor,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(SettingsWindowRoute(builder: (context) {
+                            return DeskWalletWindowPopupCard();
+                          }));
+                        },
+                        label: Padding(
+                          padding: EdgeInsets.only(left: 0.5.w),
+                          child: Text(
+                            'Wallet',
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(fontSize: 2.sp),
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 Divider(thickness: 1, endIndent: 1.w),
                 //Friends
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                  child: const FriendsWindowButton(),
+                  child: DeskFriendsWindowButton(
+                    dockIcon: Material(
+                      color: tran,
+                      child: TextButton.icon(
+                        icon: Icon(
+                          Ionicons.people,
+                          size: 30,
+                          color: hoverColor,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(FriendsWindowRoute(builder: (context) {
+                            return DeskFriendsWindowPopupCard();
+                          }));
+                        },
+                        label: Padding(
+                          padding: EdgeInsets.only(left: 0.5.w),
+                          child: Text(
+                            'Connections',
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(fontSize: 2.sp),
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 Divider(thickness: 1, endIndent: 1.w),
                 //PAGE 3
@@ -166,13 +221,67 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                 //Help
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                  child: const HelpWindowButton(),
+                  child: DeskHelpWindowButton(
+                    dockIcon: Material(
+                      color: tran,
+                      child: TextButton.icon(
+                        icon: Icon(
+                          Ionicons.help_circle_sharp,
+                          size: 30,
+                          color: hoverColor,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(HelpWindowRoute(builder: (context) {
+                            return DeskHelpWindowPopupCard();
+                          }));
+                        },
+                        label: Padding(
+                          padding: EdgeInsets.only(left: 0.5.w),
+                          child: Text(
+                            'FAQs',
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(fontSize: 2.sp),
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 Divider(thickness: 1, endIndent: 1.w),
                 //About Us/Info
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                  child: const InfoWindowButton(),
+                  child: DeskInfoWindowButton(
+                    dockIcon: Material(
+                      color: tran,
+                      child: TextButton.icon(
+                        icon: Icon(
+                          Ionicons.information_circle,
+                          size: 30,
+                          color: hoverColor,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(InfoWindowRoute(builder: (context) {
+                            return DeskInfoWindowPopupCard();
+                          }));
+                        },
+                        label: Padding(
+                          padding: EdgeInsets.only(left: 0.5.w),
+                          child: Text(
+                            'About Us',
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(fontSize: 2.sp),
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 Divider(thickness: 1, endIndent: 1.w),
                 //Logout

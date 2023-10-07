@@ -7,46 +7,37 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-class WalletWindowButton extends StatelessWidget {
+class DeskWalletWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  const WalletWindowButton({super.key, required});
-
+  DeskWalletWindowButton({super.key, required, required this.dockIcon});
+  Widget dockIcon;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(WalletWindowRoute(builder: (context) {
-            return const _WalletWindowPopupCard();
-          }));
-        },
-        child: const Hero(
-          tag: _heroWalletWindow,
-          child: Material(
-            color: tran,
-            child: Icon(
-              Ionicons.wallet,
-              size: 50,
-            ),
-          ),
+      child: Hero(
+        tag: heroWalletWindow,
+        child: Material(
+          color: tran,
+          child: dockIcon,
         ),
       ),
     );
   }
 }
 
-const String _heroWalletWindow = 'Wallet-window-hero';
+const String heroWalletWindow = 'Wallet-window-hero';
 
-class _WalletWindowPopupCard extends StatefulWidget {
+class DeskWalletWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  const _WalletWindowPopupCard({Key? key}) : super(key: key);
+  const DeskWalletWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<_WalletWindowPopupCard> createState() => _WalletWindowPopupCardState();
+  State<DeskWalletWindowPopupCard> createState() =>
+      DeskWalletWindowPopupCardState();
 }
 
-class _WalletWindowPopupCardState extends State<_WalletWindowPopupCard> {
+class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
   bool isFinished = false;
 
   @override
@@ -64,7 +55,7 @@ class _WalletWindowPopupCardState extends State<_WalletWindowPopupCard> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
-                  tag: _heroWalletWindow,
+                  tag: heroWalletWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),

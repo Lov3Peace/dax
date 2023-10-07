@@ -24,7 +24,7 @@ var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 
 //responsive variables
 double deckHeight = 22.h;
-double deckWidth = 37.w;
+double deckWidth = 36.5.w;
 double halfDeckWidth = 18.w;
 double headerTextSize = 24;
 double subTextSize = 14;
@@ -1029,23 +1029,19 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
       headerTextSize = 24;
       subTextSize = 16;
     } else if (screenWidth < 1500) {
-      halfDeckWidth = 17.w;
-      deckWidth = 36.w;
+      deckWidth = 36.5.w;
       headerTextSize = 30;
       textConstraint = halfDeckWidth * 0.7;
     } else if (screenWidth <= 1920) {
-      halfDeckWidth = 17.w;
-      deckWidth = 36.w;
+      deckWidth = 36.5.w;
       headerTextSize = 40;
       subTextSize = 22;
     } else if (screenWidth < 2600) {
-      halfDeckWidth = 17.w;
-      deckWidth = 36.w;
+      deckWidth = 36.5.w;
       headerTextSize = 48;
       subTextSize = 24;
     } else {
-      halfDeckWidth = 17.w;
-      deckWidth = 36.w;
+      deckWidth = 36.5.w;
       headerTextSize = 85;
       subTextSize = 30;
       labelTextSize = 22;
@@ -1493,38 +1489,38 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    deckHeight = 22.h;
-    deckWidth = 40.w;
-    halfDeckWidth = 18.w;
-    labelTextSize = 16;
-    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
-    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
-    if (screenWidth < 550) {
-      deckHeight = screenHeight * 0.22;
-      headerTextSize = 24;
-      subTextSize = 16;
-    } else if (screenWidth < 1500) {
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 30;
-      textConstraint = halfDeckWidth * 0.7;
-    } else if (screenWidth <= 1920) {
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 40;
-      subTextSize = 22;
-    } else if (screenWidth < 2600) {
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 48;
-      subTextSize = 24;
-    } else {
-      halfDeckWidth = 18.w;
-      deckWidth = 37.w;
-      headerTextSize = 85;
-      subTextSize = 30;
-      labelTextSize = 22;
-    }
+    // deckHeight = 22.h;
+    // deckWidth = 40.w;
+    // halfDeckWidth = 18.w;
+    // labelTextSize = 16;
+    // var screenHeight = window.physicalSize.height / window.devicePixelRatio;
+    // var screenWidth = window.physicalSize.width / window.devicePixelRatio;
+    // if (screenWidth < 550) {
+    //   deckHeight = screenHeight * 0.22;
+    //   headerTextSize = 24;
+    //   subTextSize = 16;
+    // } else if (screenWidth < 1500) {
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 30;
+    //   textConstraint = halfDeckWidth * 0.7;
+    // } else if (screenWidth <= 1920) {
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 40;
+    //   subTextSize = 22;
+    // } else if (screenWidth < 2600) {
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 48;
+    //   subTextSize = 24;
+    // } else {
+    //   halfDeckWidth = 18.w;
+    //   deckWidth = 37.w;
+    //   headerTextSize = 85;
+    //   subTextSize = 30;
+    //   labelTextSize = 22;
+    // }
     return GestureDetector(
       onTap: () {
         setState(() {

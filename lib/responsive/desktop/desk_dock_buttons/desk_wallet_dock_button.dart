@@ -7,26 +7,19 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-class WalletWindowButton extends StatelessWidget {
+class DeskWalletWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  WalletWindowButton({super.key, required, required this.dockIcon});
+  DeskWalletWindowButton({super.key, required, required this.dockIcon});
   Widget dockIcon;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(WalletWindowRoute(builder: (context) {
-            return const WalletWindowPopupCard();
-          }));
-        },
-        child: Hero(
-          tag: heroWalletWindow,
-          child: Material(
-            color: tran,
-            child: dockIcon,
-          ),
+      child: Hero(
+        tag: heroWalletWindow,
+        child: Material(
+          color: tran,
+          child: dockIcon,
         ),
       ),
     );
@@ -35,15 +28,16 @@ class WalletWindowButton extends StatelessWidget {
 
 const String heroWalletWindow = 'Wallet-window-hero';
 
-class WalletWindowPopupCard extends StatefulWidget {
+class DeskWalletWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  const WalletWindowPopupCard({Key? key}) : super(key: key);
+  const DeskWalletWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<WalletWindowPopupCard> createState() => WalletWindowPopupCardState();
+  State<DeskWalletWindowPopupCard> createState() =>
+      DeskWalletWindowPopupCardState();
 }
 
-class WalletWindowPopupCardState extends State<WalletWindowPopupCard> {
+class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
   bool isFinished = false;
 
   @override

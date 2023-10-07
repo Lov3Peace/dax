@@ -165,7 +165,7 @@ class Deck extends StatelessWidget {
                         ],
                         borderRadius: BorderRadius.all(Radius.circular(500))),
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(2.w, 25, 2.w, 25),
+                      padding: EdgeInsets.fromLTRB(2.w, 20, 2.w, 20),
                       child: Text(
                         deckName,
                         style: GoogleFonts.montserrat(

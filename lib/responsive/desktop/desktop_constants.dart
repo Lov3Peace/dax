@@ -160,7 +160,7 @@ class Deck extends StatelessWidget {
                         boxShadow: [
                           BoxShadow(
                               color: neonGlow,
-                              blurRadius: 20,
+                              blurRadius: 17,
                               blurStyle: BlurStyle.solid)
                         ],
                         borderRadius: BorderRadius.all(Radius.circular(500))),

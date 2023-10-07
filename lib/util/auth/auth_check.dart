@@ -25,9 +25,9 @@ class _AuthCheckState extends State<AuthCheck> {
           if (snapshot.hasData) {
             // ignore: prefer_const_constructors
             return ResponsiveLayout(
-              mobileVersion: MobileDashboard(),
-              tabletVersion: TabletDashboard(),
-              desktopVersion: DesktopDashboard(),
+              mobileVersion: const MobileDashboard(),
+              tabletVersion: const TabletDashboard(),
+              desktopVersion: const DesktopDashboard(),
             );
           } else {
             return OnboardingScreen();

@@ -42,6 +42,7 @@ class DeskInfoWindowPopupCard extends StatelessWidget {
             child: Center(
               child: Container(
                 height: 85.h,
+                width: 75.w,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding:

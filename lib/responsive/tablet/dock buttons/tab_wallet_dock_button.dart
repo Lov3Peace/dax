@@ -4,22 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/Window%20Route/wallet_window_route.dart';
 import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
+
 import 'package:sizer/sizer.dart';
 
-class DeskWalletWindowButton extends StatelessWidget {
+class TabWalletWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  DeskWalletWindowButton({super.key, required, required this.dockIcon});
+  TabWalletWindowButton({super.key, required, required this.dockIcon});
   Widget dockIcon;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
-      child: Hero(
-        tag: heroWalletWindow,
-        child: Material(
-          color: tran,
-          child: dockIcon,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(WalletWindowRoute(builder: (context) {
+            return const TabWalletWindowPopupCard();
+          }));
+        },
+        child: Hero(
+          tag: heroWalletWindow,
+          child: Material(
+            color: tran,
+            child: dockIcon,
+          ),
         ),
       ),
     );
@@ -28,16 +35,16 @@ class DeskWalletWindowButton extends StatelessWidget {
 
 const String heroWalletWindow = 'Wallet-window-hero';
 
-class DeskWalletWindowPopupCard extends StatefulWidget {
+class TabWalletWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  const DeskWalletWindowPopupCard({Key? key}) : super(key: key);
+  const TabWalletWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<DeskWalletWindowPopupCard> createState() =>
-      DeskWalletWindowPopupCardState();
+  State<TabWalletWindowPopupCard> createState() =>
+      TabWalletWindowPopupCardState();
 }
 
-class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
+class TabWalletWindowPopupCardState extends State<TabWalletWindowPopupCard> {
   bool isFinished = false;
 
   @override
@@ -50,7 +57,6 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
             child: Center(
               child: Container(
                 height: 85.h,
-                width: 75.w,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding:

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
-import 'package:flutter_application_1/util/dock%20buttons/friends_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/help_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/info_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/logout_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/messages_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/settings_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/wallet_dock_button.dart';
+import 'package:flutter_application_1/responsive/mobile/mobile_constants.dart';
+
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-import 'home_button.dart';
+import '../../util/home_button.dart';
+import '../../util/logout_dock_button.dart';
+import 'mobile_dock_buttons/mob_friends_dock_button.dart';
+import 'mobile_dock_buttons/mob_help_dock_button.dart';
+import 'mobile_dock_buttons/mob_info_dock_button.dart';
+import 'mobile_dock_buttons/mob_messages_dock_button.dart';
+import 'mobile_dock_buttons/mob_settings_dock_button.dart';
+import 'mobile_dock_buttons/mob_wallet_dock_button.dart';
 
-class Dock extends StatefulWidget {
-  Dock({
+class MobDock extends StatefulWidget {
+  MobDock({
     super.key,
     required this.newGrad1,
     required this.newGrad2,
@@ -25,10 +25,10 @@ class Dock extends StatefulWidget {
   Color newGlow;
 
   @override
-  State<Dock> createState() => _DockState();
+  State<MobDock> createState() => _MobDockState();
 }
 
-class _DockState extends State<Dock> with AnimationMixin {
+class _MobDockState extends State<MobDock> with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
   void initState() {
@@ -89,7 +89,7 @@ class _DockState extends State<Dock> with AnimationMixin {
                       glow: widget.newGlow),
 
                   //Messages
-                  const MessagesWindowButton(),
+                  const MobMessagesWindowButton(),
                 ],
               ),
 
@@ -102,7 +102,7 @@ class _DockState extends State<Dock> with AnimationMixin {
                 children: [
                   //
                   //Settings
-                  SettingsWindowButton(
+                  MobSettingsWindowButton(
                     dockIcon: const Icon(
                       Ionicons.settings_sharp,
                       size: 50,
@@ -110,7 +110,7 @@ class _DockState extends State<Dock> with AnimationMixin {
                   ),
 
                   //Wallet
-                  WalletWindowButton(
+                  MobWalletWindowButton(
                     dockIcon: const Icon(
                       Ionicons.wallet,
                       size: 50,
@@ -118,7 +118,7 @@ class _DockState extends State<Dock> with AnimationMixin {
                   ),
 
                   //Friends
-                  const FriendsWindowButton(),
+                  const MobFriendsWindowButton(),
                 ],
               ),
 
@@ -131,10 +131,10 @@ class _DockState extends State<Dock> with AnimationMixin {
                 children: [
                   //
                   //Help
-                  const HelpWindowButton(),
+                  const MobHelpWindowButton(),
 
                   //About Us/Info
-                  const InfoWindowButton(),
+                  const MobInfoWindowButton(),
 
                   //Logout
                   const LogoutWindowButton(),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../main.dart';
-import '../../../mobile/mob_constants.dart';
+import '../../../mobile/mobile_constants.dart';
 import '../../../mobile/mobile_dashboard.dart';
 import '../SignIn/tab_signin_form.dart';
 import '../tab_final_signin.dart';

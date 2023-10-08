@@ -7,9 +7,9 @@ import 'package:flutter_application_1/util/Window%20Route/messages_window_route.
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-class MessagesWindowButton extends StatelessWidget {
+class TabMessagesWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  const MessagesWindowButton({super.key, required});
+  const TabMessagesWindowButton({super.key, required});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class MessagesWindowButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MessagesWindowRoute(builder: (context) {
-            return _MessagesWindowPopupCard();
+            return _TabMessagesWindowPopupCard();
           }));
         },
         child: const Hero(
@@ -39,16 +39,16 @@ class MessagesWindowButton extends StatelessWidget {
 const String _heroMessagesWindow = 'Message-window-hero';
 final messageBucket = PageStorageBucket();
 
-class _MessagesWindowPopupCard extends StatefulWidget {
+class _TabMessagesWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  _MessagesWindowPopupCard({Key? key}) : super(key: key);
+  _TabMessagesWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<_MessagesWindowPopupCard> createState() =>
+  State<_TabMessagesWindowPopupCard> createState() =>
       _MessagesWindowPopupCardState();
 }
 
-class _MessagesWindowPopupCardState extends State<_MessagesWindowPopupCard> {
+class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
   //List for People stories
   final List people = [
     "Tiffany",
@@ -479,6 +479,7 @@ class AllMessages extends StatelessWidget {
   }
 }
 
+//Bubble for profiel picture
 class BubbleStories extends StatelessWidget {
   const BubbleStories({
     super.key,

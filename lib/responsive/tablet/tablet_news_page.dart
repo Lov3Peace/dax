@@ -1,16 +1,12 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
-import 'package:flutter_application_1/responsive/tablet/tab_constants.dart';
-import 'package:flutter_application_1/util/big_dock.dart';
-import 'package:flutter_application_1/util/dock.dart';
+import 'package:flutter_application_1/responsive/tablet/tablet_constants.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
 import '../../pages/keyboards_deck.dart';
 import '../../main.dart';
 import '../../util/background.dart';
+import 'tablet_dock.dart';
 
 class TabNewsPage extends StatefulWidget {
   const TabNewsPage(
@@ -141,7 +137,7 @@ class _TabNewsPageState extends State<TabNewsPage> {
                 },
               ),
             ),
-            Dock(
+            TabDock(
               newGlow: blue,
               newGrad1: blue,
               newGrad2: purp,

@@ -1,16 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/tablet/tab_constants.dart';
-
-import 'package:flutter_application_1/util/background.dart';
-import 'package:flutter_application_1/util/dock.dart';
+import 'package:flutter_application_1/responsive/tablet/tablet_constants.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:sizer/sizer.dart';
-
 import '../../main.dart';
 import '../../util/dashboard_decks.dart';
-import 'tab_artboard_page.dart';
+import 'tablet_artboard_page.dart';
+import 'tablet_dock.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -107,7 +103,7 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
                       ],
                     ),
                   ),
-                  Dock(
+                  TabDock(
                     newGlow: red,
                     newGrad1: purp,
                     newGrad2: red,

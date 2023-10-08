@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import '../../../../../responsive/mobile/mob_constants.dart';
+import '../../../mobile/mobile_constants.dart';
 import 'tab_signup_form.dart';
 
 class TabSignUpButton extends StatefulWidget {

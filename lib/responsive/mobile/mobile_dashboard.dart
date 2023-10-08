@@ -1,13 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
-import 'package:flutter_application_1/util/dock.dart';
+import 'package:flutter_application_1/responsive/mobile/mobile_constants.dart';
+
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../util/dashboard_decks.dart';
 import 'mob_artboard_page.dart';
+import 'mobile_dock.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class MobileDashboard extends StatefulWidget {
@@ -135,7 +136,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                     ),
                   ),
                 ),
-                Dock(newGlow: red, newGrad1: purp, newGrad2: red)
+                MobDock(newGlow: red, newGrad1: purp, newGrad2: red)
               ],
             ),
           ),

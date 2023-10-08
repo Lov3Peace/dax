@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:flutter_application_1/util/auth/onboarding_page.dart';
+import 'package:flutter_application_1/util/auth/signup.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../tactile_button.dart';
-import '../../responsive/mobile/mob_constants.dart';
+import '../../responsive/mobile/mobile_constants.dart';
 import 'forget_password_form.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
@@ -30,11 +31,11 @@ class _InitLoginButtonState extends State<InitLoginButton> {
     return TactileButton(
       onTap: loadPopUp,
       child: GradientContainer(
-        gradient1: tran,
-        gradient2: tran,
+        gradient1: Colors.black54.withOpacity(1),
+        gradient2: Colors.black54.withOpacity(1),
         height: 20,
         width: 30,
-        neonGlow: tran,
+        neonGlow: Colors.white,
         text: 'Login',
         textSize: 16,
         borderColor: Colors.white38,
@@ -228,6 +229,7 @@ class _LoginFormState extends State<LoginForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //Username
             const Padding(
               padding: EdgeInsets.only(
                 left: 20,
@@ -259,6 +261,8 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
             ),
+
+            //Password
             const Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(
@@ -323,7 +327,7 @@ class _LoginFormState extends State<LoginForm> {
                             barrierLabel: "Login",
                             context: context,
                             transitionDuration:
-                                const Duration(milliseconds: 200),
+                                const Duration(milliseconds: 400),
                             transitionBuilder: (_, animation, __, child) {
                               Tween<Offset> tween;
                               tween = Tween(
@@ -443,6 +447,18 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Don't have an account yet?",
+                ),
+                InitSignUpButton()
+              ],
             ),
           ],
         ),

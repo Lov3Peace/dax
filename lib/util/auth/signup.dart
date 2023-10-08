@@ -9,7 +9,7 @@ import 'auth_check.dart';
 
 import '../gradient_container.dart';
 import '../tactile_button.dart';
-import '../../responsive/mobile/mob_constants.dart';
+import '../../responsive/mobile/mobile_constants.dart';
 
 //Actual BUTTON DAVON or PHIL Whatever the hell you want to be called these days.
 //if you ask me, you just formerly go by: Primate
@@ -27,17 +27,13 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
 
   @override
   Widget build(BuildContext context) {
-    return TactileButton(
-      onTap: loadPopUp,
-      child: GradientContainer(
-        gradient1: purp,
-        gradient2: red,
-        height: 20,
-        width: 23,
-        neonGlow: red,
-        text: 'Sign Up',
-        textSize: 16,
-        borderColor: tran,
+    return TextButton(
+      onPressed: loadPopUp,
+      child: Text(
+        "Sign Up!",
+        style: TextStyle(
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -68,7 +64,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
           pageBuilder: (context, _, __) => Center(
             child: Container(
               height: 75.h,
-              constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 500),
+              constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 550),
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
@@ -215,7 +211,7 @@ class _SignUpFormState extends State<SignUpForm> {
             const Padding(
               padding: EdgeInsets.only(left: 20),
               child: Text(
-                "Username",
+                "Email",
               ),
             ),
             Padding(
@@ -232,7 +228,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: const BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white38),
                   ),
                 ),
               ),

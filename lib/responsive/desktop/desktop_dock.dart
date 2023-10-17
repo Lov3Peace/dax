@@ -67,7 +67,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                 //   offset: Offset(0, 0),
                 // )
               ]),
-          width: 10.w,
+          width: 12.5.w,
           child: Padding(
             padding: EdgeInsets.only(left: 1.w),
             child: Column(
@@ -102,7 +102,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     },
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
 
                 //PAGE 2
 
@@ -138,7 +138,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //Wallet
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
@@ -171,7 +171,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //Friends
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
@@ -204,7 +204,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //PAGE 3
 
                 //
@@ -240,7 +240,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //About Us/Info
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
@@ -273,7 +273,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //Logout
                 Spacer(),
                 Padding(

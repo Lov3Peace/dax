@@ -5,22 +5,12 @@ import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/Window%20Route/friends_window_route.dart';
 import 'package:flutter_application_1/util/Window%20Route/help_window_route.dart';
 import 'package:flutter_application_1/util/Window%20Route/info_window_route.dart';
-import 'package:flutter_application_1/util/dock%20buttons/friends_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/help_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/info_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/logout_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/messages_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/settings_dock_button.dart';
-import 'package:flutter_application_1/util/dock%20buttons/wallet_dock_button.dart';
+import 'package:flutter_application_1/util/logout_dock_button.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../util/Window Route/settings_window_route.dart';
-import '../../util/home_button.dart';
 import 'desk_dock_buttons/desk_friends_dock_button.dart';
 import 'desk_dock_buttons/desk_help_dock_button.dart';
 import 'desk_dock_buttons/desk_info_dock_button.dart';
@@ -77,7 +67,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                 //   offset: Offset(0, 0),
                 // )
               ]),
-          width: 10.w,
+          width: 12.5.w,
           child: Padding(
             padding: EdgeInsets.only(left: 1.w),
             child: Column(
@@ -112,7 +102,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     },
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
 
                 //PAGE 2
 
@@ -148,7 +138,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //Wallet
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
@@ -181,7 +171,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //Friends
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
@@ -214,7 +204,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //PAGE 3
 
                 //
@@ -250,7 +240,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //About Us/Info
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
@@ -283,7 +273,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                     ),
                   ),
                 ),
-                Divider(thickness: 1, endIndent: 1.w),
+                //
                 //Logout
                 Spacer(),
                 Padding(

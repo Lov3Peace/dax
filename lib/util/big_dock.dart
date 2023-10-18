@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 import 'package:flutter_application_1/util/home_button.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:scale_button/scale_button.dart';
+
+import '../responsive/mobile/mobile_constants.dart';
 
 class BigDock extends StatefulWidget {
   BigDock(

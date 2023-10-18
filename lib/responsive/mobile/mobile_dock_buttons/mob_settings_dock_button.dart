@@ -2,35 +2,29 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/Window%20Route/help_window_route.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-class HelpWindowButton extends StatelessWidget {
-  /// {@macro add_todo_button}
-  const HelpWindowButton({super.key, required});
+import '../../../util/Window Route/settings_window_route.dart';
 
+class MobSettingsWindowButton extends StatelessWidget {
+  /// {@macro add_todo_button}
+  MobSettingsWindowButton({super.key, required, required this.dockIcon});
+  Widget dockIcon;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(HelpWindowRoute(builder: (context) {
-            return const _HelpWindowPopupCard();
+          Navigator.of(context).push(SettingsWindowRoute(builder: (context) {
+            return const MobSettingsWindowPopupCard();
           }));
         },
-        child: const Hero(
-          tag: _heroHelpWindow,
-          /*createRectTween: (begin, end) {
-            return Tween(begin: begin, end: end);
-          },*/
+        child: Hero(
+          tag: heroSettingWindow,
           child: Material(
             color: tran,
-            child: Icon(
-              Ionicons.help_circle_sharp,
-              size: 50,
-            ),
+            child: dockIcon,
           ),
         ),
       ),
@@ -38,11 +32,11 @@ class HelpWindowButton extends StatelessWidget {
   }
 }
 
-const String _heroHelpWindow = 'Help-window-hero';
+const String heroSettingWindow = 'settings-window-hero';
 
-class _HelpWindowPopupCard extends StatelessWidget {
+class MobSettingsWindowPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
-  const _HelpWindowPopupCard({Key? key}) : super(key: key);
+  const MobSettingsWindowPopupCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +53,7 @@ class _HelpWindowPopupCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
-                  tag: _heroHelpWindow,
+                  tag: heroSettingWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),

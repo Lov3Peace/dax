@@ -3,47 +3,54 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-
+import 'package:flutter_application_1/util/Window%20Route/messages_window_route.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../util/Window Route/friends_window_route.dart';
-
-class DeskFriendsWindowButton extends StatelessWidget {
+class MobMessagesWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  DeskFriendsWindowButton({super.key, required this.dockIcon});
-  Widget dockIcon;
+  const MobMessagesWindowButton({super.key, required});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
-      child: Hero(
-        tag: _heroFriendsWindow,
-        child: Material(
-          color: tran,
-          child: dockIcon,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(MessagesWindowRoute(builder: (context) {
+            return _MobMessagesWindowPopupCard();
+          }));
+        },
+        child: const Hero(
+          tag: _heroMessagesWindow,
+          child: Material(
+            color: tran,
+            child: Icon(
+              Ionicons.chatbox,
+              size: 50,
+            ),
+          ),
         ),
       ),
     );
   }
 }
 
-const String _heroFriendsWindow = 'Friends-window-hero';
-final friendsBucket = PageStorageBucket();
+const String _heroMessagesWindow = 'Message-window-hero';
+final messageBucket = PageStorageBucket();
 
-class DeskFriendsWindowPopupCard extends StatefulWidget {
+class _MobMessagesWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  DeskFriendsWindowPopupCard({Key? key}) : super(key: key);
+  _MobMessagesWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<DeskFriendsWindowPopupCard> createState() =>
-      _DeskFriendsWindowPopupCardState();
+  State<_MobMessagesWindowPopupCard> createState() =>
+      _MobMessagesWindowPopupCardState();
 }
 
-class _DeskFriendsWindowPopupCardState
-    extends State<DeskFriendsWindowPopupCard> {
-  TextEditingController _searchController = TextEditingController();
-  @override
+class _MobMessagesWindowPopupCardState
+    extends State<_MobMessagesWindowPopupCard> {
+  //List for People stories
   final List people = [
     "Tiffany",
     "Mitch",
@@ -53,14 +60,12 @@ class _DeskFriendsWindowPopupCardState
   ];
 
   int _currentIndex = 0;
-
   final List<Widget> _carouselContainers = [
     AllMessages(),
     GroupMessages(),
     ChatMessages(),
     // Add more containers as needed
   ];
-
   final CarouselController _carouselController = CarouselController();
 
   bool isSelected = false;
@@ -68,7 +73,6 @@ class _DeskFriendsWindowPopupCardState
   Color inactiveColor = tran;
   Color currentColor = tran;
   int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -79,10 +83,12 @@ class _DeskFriendsWindowPopupCardState
             child: Center(
               child: Container(
                 height: 85.h,
-                width: 75.w,
+                width: 91.w,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 child: Hero(
-                  tag: _heroFriendsWindow,
+                  tag: _heroMessagesWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -111,40 +117,25 @@ class _DeskFriendsWindowPopupCardState
                             children: [
                               //Stories
                               Padding(
-                                padding: EdgeInsets.only(right: 37.w, top: 1.h),
+                                padding: EdgeInsets.only(right: 42.w, top: 1.h),
                                 child: const Text(
-                                  "Connections",
+                                  "Messages",
                                   style: TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.w800,
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  top: 1.h,
-                                  right: 2.w,
-                                  left: 2.w,
-                                  bottom: 1.h,
-                                ),
-                                child: TextFormField(
-                                  controller: _searchController,
-                                  decoration: const InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(24),
-                                      ),
-                                      borderSide:
-                                          BorderSide(color: Colors.white),
-                                    ),
-                                    hintText: 'Search...',
-                                    suffixIcon: Icon(Icons.search),
-                                  ),
-                                  onChanged: (value) {
-                                    // Implement your search logic here
-                                    // You can use the 'value' variable to perform search operations
-                                  },
-                                ),
+                              SizedBox(
+                                height: 10.5.h,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    physics: const ScrollPhysics(
+                                        parent: BouncingScrollPhysics()),
+                                    itemCount: people.length,
+                                    itemBuilder: (context, index) {
+                                      return BubbleStories(text: people[index]);
+                                    }),
                               ),
 
                               //Container housing the tab buttons
@@ -164,6 +155,8 @@ class _DeskFriendsWindowPopupCardState
                                   child: Wrap(
                                     alignment: WrapAlignment.spaceEvenly,
                                     runAlignment: WrapAlignment.center,
+
+                                    //crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       //
                                       //All Button
@@ -193,7 +186,7 @@ class _DeskFriendsWindowPopupCardState
                                               boxShadow: [
                                                 BoxShadow(
                                                     color: red,
-                                                    blurRadius: 10,
+                                                    blurRadius: 3,
                                                     blurStyle: BlurStyle.solid)
                                               ],
                                               borderRadius: BorderRadius.all(
@@ -203,7 +196,7 @@ class _DeskFriendsWindowPopupCardState
                                                   color: Colors.white)),
                                         ),
                                       ),
-                                      //Favorites Button
+                                      //Group Button
                                       GestureDetector(
                                         onTap: () {
                                           setState(() {
@@ -223,7 +216,7 @@ class _DeskFriendsWindowPopupCardState
                                         },
                                         child: Container(
                                           padding: EdgeInsets.symmetric(
-                                              horizontal: 4.5.w, vertical: 1.h),
+                                              horizontal: 6.w, vertical: 1.h),
                                           decoration: const BoxDecoration(
                                               gradient: LinearGradient(colors: [
                                                 Colors.black54,
@@ -237,12 +230,12 @@ class _DeskFriendsWindowPopupCardState
                                               ],
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20))),
-                                          child: const Text("Favorites",
+                                          child: const Text("Group",
                                               style: TextStyle(
                                                   color: Colors.white)),
                                         ),
                                       ),
-                                      //Partners Button
+                                      //Chat Button
                                       GestureDetector(
                                         onTap: () {
                                           setState(() {
@@ -262,7 +255,7 @@ class _DeskFriendsWindowPopupCardState
                                         },
                                         child: Container(
                                           padding: EdgeInsets.symmetric(
-                                              horizontal: 4.5.w, vertical: 1.h),
+                                              horizontal: 6.w, vertical: 1.h),
                                           decoration: const BoxDecoration(
                                               gradient: LinearGradient(colors: [
                                                 Colors.black54,
@@ -276,7 +269,7 @@ class _DeskFriendsWindowPopupCardState
                                               ],
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(20))),
-                                          child: const Text("Partners",
+                                          child: const Text("Chat",
                                               style: TextStyle(
                                                   color: Colors.white)),
                                         ),
@@ -287,25 +280,23 @@ class _DeskFriendsWindowPopupCardState
                               ),
 
                               SizedBox(height: 1.h),
-
                               //Container Housing Carousel slider
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  height: 51.h,
+                                  height: 50.h,
                                   width: 100.w,
                                   decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromRGBO(27, 27, 27, 0.937)
-                                            .withOpacity(0.98),
+                                    color: Color.fromARGB(162, 27, 27, 27)
+                                        .withOpacity(0.85),
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(35),
                                     ),
                                   ),
                                   //Carousel Slider
                                   child: PageStorage(
-                                    bucket: friendsBucket,
+                                    bucket: messageBucket,
                                     child: CarouselSlider(
                                       carouselController: _carouselController,
                                       options: CarouselOptions(
@@ -351,7 +342,6 @@ class _DeskFriendsWindowPopupCardState
   void groupbtn() {}
 
   void chatbtn() {}
-
   void buttonPressed() {
     // toggle between control instructions
     setState(() {
@@ -359,20 +349,14 @@ class _DeskFriendsWindowPopupCardState
       currentColor = (isSelected == false) ? inactiveColor : activeColor;
     });
   }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
 }
 
-// Partner Connections
+// Chat Messages
 class ChatMessages extends StatelessWidget {
   ChatMessages({
     super.key,
   });
-  final List partners = [
+  final List chats = [
     "Tiffany",
     "Mitch",
     "Cassandra",
@@ -395,7 +379,7 @@ class ChatMessages extends StatelessWidget {
       ),
       child: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemCount: partners.length,
+        itemCount: chats.length,
         separatorBuilder: (BuildContext context, int index) {
           return const Divider(
             height: 1,
@@ -410,12 +394,12 @@ class ChatMessages extends StatelessWidget {
   }
 }
 
-// Favorite Connections
+//Group Messages
 class GroupMessages extends StatelessWidget {
   GroupMessages({
     super.key,
   });
-  final List favorites = [
+  final List groups = [
     "Tiffany",
     "Mitch",
     "Cassandra",
@@ -438,7 +422,7 @@ class GroupMessages extends StatelessWidget {
       ),
       child: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemCount: favorites.length,
+        itemCount: groups.length,
         separatorBuilder: (BuildContext context, int index) {
           return const Divider(
             height: 1,
@@ -453,12 +437,12 @@ class GroupMessages extends StatelessWidget {
   }
 }
 
-//All Connections
+// All Messages
 class AllMessages extends StatelessWidget {
   AllMessages({
     super.key,
   });
-  final List allconnections = [
+  final List allmessages = [
     "Tiffany",
     "Mitch",
     "Cassandra",
@@ -481,7 +465,7 @@ class AllMessages extends StatelessWidget {
       ),
       child: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemCount: allconnections.length,
+        itemCount: allmessages.length,
         separatorBuilder: (BuildContext context, int index) {
           return const Divider(
             height: 1,
@@ -491,6 +475,50 @@ class AllMessages extends StatelessWidget {
         itemBuilder: (context, index) {
           return MyContainer();
         },
+      ),
+    );
+  }
+}
+
+class BubbleStories extends StatelessWidget {
+  const BubbleStories({
+    super.key,
+    required this.text,
+  });
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              Container(
+                width: 55,
+                height: 55,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(colors: [purp, red]),
+                  shape: BoxShape.circle,
+                  color: Colors.grey,
+                ),
+              ),
+              Container(
+                width: 53,
+                height: 53,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+          Text(
+            text,
+          ),
+        ],
       ),
     );
   }
@@ -558,76 +586,6 @@ class MyContainer extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    "Tiffany",
-    "Mitch",
-    "Cassandra",
-    "Bluecheese",
-    "Johnny",
-  ];
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.clear),
-      onPressed: () {
-        close(context, null);
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var friends in searchTerms) {
-      if (friends.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(friends);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var friends in searchTerms) {
-      if (friends.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(friends);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
     );
   }
 }

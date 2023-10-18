@@ -7,13 +7,13 @@ import 'package:flutter_application_1/main.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../auth/onboarding_page.dart';
-import '../../responsive/mobile/mob_constants.dart';
-import '../Window Route/logout_window_route.dart';
+import '../../../util/Window Route/logout_window_route.dart';
+import '../../../util/auth/onboarding_page.dart';
+import '../mobile_constants.dart';
 
-class LogoutWindowButton extends StatelessWidget {
+class MobLogoutWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  const LogoutWindowButton({super.key, required});
+  const MobLogoutWindowButton({super.key, required});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class LogoutWindowButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(LogoutWindowRoute(builder: (context) {
-            return LogoutWindowPopupCard(
+            return MobLogoutWindowPopupCard(
               onPressed: () {},
             );
           }));
@@ -44,86 +44,20 @@ class LogoutWindowButton extends StatelessWidget {
 
 const String _heroLogoutWindow = 'Logout-window-hero';
 
-class LogoutWindowPopupCard extends StatefulWidget {
-  const LogoutWindowPopupCard({
+class MobLogoutWindowPopupCard extends StatefulWidget {
+  const MobLogoutWindowPopupCard({
     Key? key,
     required dynamic Function()? onPressed,
   }) : super(key: key);
   @override
-  State<LogoutWindowPopupCard> createState() => _LogoutwindowPopupCardState();
+  State<MobLogoutWindowPopupCard> createState() =>
+      _LogoutwindowPopupCardState();
   // TODO: implement createState
 }
 
 /// {@macro add_todo_popup_card}
-class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
+class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
     with AnimationMixin {
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Center(
-  //     child: Padding(
-  //       padding: const EdgeInsets.symmetric(horizontal: 30.0),
-  //       child: Hero(
-  //         tag: _heroLogoutWindow,
-  //         child: Material(
-  //           color: const Color.fromARGB(225, 50, 50, 50).withOpacity(0.95),
-  //           elevation: 2,
-  //           shape:
-  //               RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-  //           child: SingleChildScrollView(
-  //             child: Padding(
-  //               padding: const EdgeInsets.all(16.0),
-  //               child: Column(
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 children: [
-  //                   Container(
-  //                     margin: const EdgeInsets.symmetric(horizontal: 75.0),
-  //                     child: const Padding(
-  //                       padding: EdgeInsets.symmetric(horizontal: 50.0),
-  //                       child: TextField(
-  //                         decoration: InputDecoration(
-  //                           hintText: 'Logout',
-  //                           hintStyle: TextStyle(
-  //                               color: Colors.white,
-  //                               fontWeight: FontWeight.bold,
-  //                               fontSize: 18),
-  //                           border: InputBorder.none,
-  //                         ),
-  //                         cursorColor: Colors.white,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     margin: const EdgeInsets.symmetric(horizontal: 40),
-  //                     child: const TextField(
-  //                       decoration: InputDecoration(
-  //                         hintText: 'Would you like to log out?',
-  //                         hintStyle: TextStyle(
-  //                             color: Colors.white,
-  //                             fontWeight: FontWeight.bold,
-  //                             fontSize: 18),
-  //                         border: InputBorder.none,
-  //                       ),
-  //                       cursorColor: Colors.white,
-  //                     ),
-  //                   ),
-  //                   TextButton(
-  //                     onPressed: () {
-  //                       Navigator.push(
-  //                           context,
-  //                           MaterialPageRoute(
-  //                               builder: (context) => OnboardingScreen()));
-  //                     },
-  //                     child: const ButtonColor(),
-  //                   )
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
   Future signOut() async {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => OnboardingScreen()));

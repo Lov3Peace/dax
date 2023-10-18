@@ -2,30 +2,37 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-import '../Window Route/settings_window_route.dart';
+import '../../../util/Window Route/help_window_route.dart';
 
-class SettingsWindowButton extends StatelessWidget {
+class MobHelpWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  SettingsWindowButton({super.key, required, required this.dockIcon});
-  Widget dockIcon;
+  const MobHelpWindowButton({super.key, required});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(SettingsWindowRoute(builder: (context) {
-            return const SettingsWindowPopupCard();
+          Navigator.of(context).push(HelpWindowRoute(builder: (context) {
+            return const _MobHelpWindowPopupCard();
           }));
         },
-        child: Hero(
-          tag: heroSettingWindow,
+        child: const Hero(
+          tag: _heroHelpWindow,
+          /*createRectTween: (begin, end) {
+            return Tween(begin: begin, end: end);
+          },*/
           child: Material(
             color: tran,
-            child: dockIcon,
+            child: Icon(
+              Ionicons.help_circle_sharp,
+              size: 50,
+            ),
           ),
         ),
       ),
@@ -33,11 +40,11 @@ class SettingsWindowButton extends StatelessWidget {
   }
 }
 
-const String heroSettingWindow = 'settings-window-hero';
+const String _heroHelpWindow = 'Help-window-hero';
 
-class SettingsWindowPopupCard extends StatelessWidget {
+class _MobHelpWindowPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
-  const SettingsWindowPopupCard({Key? key}) : super(key: key);
+  const _MobHelpWindowPopupCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +61,7 @@ class SettingsWindowPopupCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
-                  tag: heroSettingWindow,
+                  tag: _heroHelpWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),

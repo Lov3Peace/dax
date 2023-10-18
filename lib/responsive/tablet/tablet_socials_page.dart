@@ -2,13 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_application_1/responsive/tablet/tab_constants.dart';
-import 'package:flutter_application_1/util/big_dock.dart';
-import 'package:flutter_application_1/util/dock.dart';
+import 'package:flutter_application_1/responsive/tablet/tablet_constants.dart';
+
 import '../../pages/keyboards_deck.dart';
 import '../../main.dart';
 import '../../util/background.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+
+import 'tablet_dock.dart';
 
 class TabSocialsPage extends StatefulWidget {
   const TabSocialsPage(
@@ -139,7 +140,7 @@ class _TabSocialsPageState extends State<TabSocialsPage> {
                 },
               ),
             ),
-            Dock(
+            TabDock(
               newGlow: orangeGlow,
               newGrad1: orange,
               newGrad2: purp,

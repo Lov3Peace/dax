@@ -7,81 +7,9 @@ import 'package:flutter_application_1/util/Window%20Route/info_window_route.dart
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-/*class SettingsDockButton extends StatefulWidget {
-  SettingsDockButton({super.key, required this.icon, this.onPressed});
-  IconData icon;
-  VoidCallback? onPressed;
-  @override
-  State<SettingsDockButton> createState() => _SettingsDockButtonState();
-}
-
-class _SettingsDockButtonState extends State<SettingsDockButton> {
-  Control control = Control.stop;
-  Color activeColor = Colors.white;
-  Color inactiveColor = Colors.white30;
-  Color currentColor = Colors.white30;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: tran,
-      child: CustomAnimationBuilder<double>(
-        control: control,
-        startPosition: 0,
-        tween: Tween(begin: 2, end: 1.5),
-        duration: const Duration(milliseconds: 150),
-        curve: Curves.linear,
-        onCompleted: () {
-          reverseShrink();
-        },
-        builder: (context, value, child) {
-          return Transform.scale(
-            scale: value,
-            child: child,
-          );
-        },
-        child: IconButton(
-          icon: Icon(widget.icon),
-          color: currentColor,
-          onPressed: toggleShrink,
-          highlightColor: tran,
-          splashColor: tran,
-        ),
-      ),
-    );
-  }
-
-  void toggleShrink() {
-    // toggle between control instructions
-    setState(() {
-      control = Control.play;
-      currentColor =
-          (currentColor == activeColor) ? inactiveColor : activeColor;
-    });
-  }
-
-  void reverseShrink() {
-    setState(() {
-      control = Control.playReverse;
-    });
-  }
-}*/
-
-class InfoWindowButton extends StatelessWidget {
+class MobInfoWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  const InfoWindowButton({super.key, required});
+  const MobInfoWindowButton({super.key, required});
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +18,7 @@ class InfoWindowButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(InfoWindowRoute(builder: (context) {
-            return const _InfoWindowPopupCard();
+            return const _MobInfoWindowPopupCard();
           }));
         },
         child: const Hero(
@@ -113,9 +41,9 @@ class InfoWindowButton extends StatelessWidget {
 
 const String _heroInfoWindow = 'Info-window-hero';
 
-class _InfoWindowPopupCard extends StatelessWidget {
+class _MobInfoWindowPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
-  const _InfoWindowPopupCard({Key? key}) : super(key: key);
+  const _MobInfoWindowPopupCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

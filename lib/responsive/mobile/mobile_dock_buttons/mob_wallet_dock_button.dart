@@ -7,9 +7,9 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-class WalletWindowButton extends StatelessWidget {
+class MobWalletWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  WalletWindowButton({super.key, required, required this.dockIcon});
+  MobWalletWindowButton({super.key, required, required this.dockIcon});
   Widget dockIcon;
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class WalletWindowButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(WalletWindowRoute(builder: (context) {
-            return const WalletWindowPopupCard();
+            return const MobWalletWindowPopupCard();
           }));
         },
         child: Hero(
@@ -35,15 +35,16 @@ class WalletWindowButton extends StatelessWidget {
 
 const String heroWalletWindow = 'Wallet-window-hero';
 
-class WalletWindowPopupCard extends StatefulWidget {
+class MobWalletWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  const WalletWindowPopupCard({Key? key}) : super(key: key);
+  const MobWalletWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<WalletWindowPopupCard> createState() => WalletWindowPopupCardState();
+  State<MobWalletWindowPopupCard> createState() =>
+      MobWalletWindowPopupCardState();
 }
 
-class WalletWindowPopupCardState extends State<WalletWindowPopupCard> {
+class MobWalletWindowPopupCardState extends State<MobWalletWindowPopupCard> {
   bool isFinished = false;
 
   @override

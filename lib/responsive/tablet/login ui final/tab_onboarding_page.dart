@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
 import 'package:sizer/sizer.dart';
-import '../tab_artboard_page.dart';
+import '../tablet_artboard_page.dart';
 import 'SignIn/tab_signin_btn.dart';
 import 'SignUp/tab_signup_btn.dart';
 

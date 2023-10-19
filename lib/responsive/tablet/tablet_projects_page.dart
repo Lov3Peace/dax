@@ -1,16 +1,13 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_application_1/responsive/tablet/tab_constants.dart';
-import 'package:flutter_application_1/util/big_dock.dart';
-import 'package:flutter_application_1/util/dock.dart';
-import 'package:flutter_application_1/util/projects_stacks_list2.dart';
+import 'package:flutter_application_1/responsive/tablet/tablet_constants.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import '../../pages/keyboards_deck.dart';
 import '../../main.dart';
 import '../../util/background.dart';
+import 'tablet_dock.dart';
 
 class TabProjectsPage extends StatefulWidget {
   final Animation<double> transitionAnimation;
@@ -141,7 +138,7 @@ class _TabProjectsPageState extends State<TabProjectsPage> {
                   },
                 ),
               ),
-              Dock(
+              TabDock(
                 newGlow: red,
                 newGrad1: red,
                 newGrad2: purp,

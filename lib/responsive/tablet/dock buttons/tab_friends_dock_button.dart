@@ -7,11 +7,11 @@ import 'package:flutter_application_1/main.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-import '../Window Route/friends_window_route.dart';
+import '../../../util/Window Route/friends_window_route.dart';
 
-class FriendsWindowButton extends StatelessWidget {
+class TabFriendsWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  const FriendsWindowButton({super.key, required});
+  const TabFriendsWindowButton({super.key, required});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class FriendsWindowButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(FriendsWindowRoute(builder: (context) {
-            return _FriendsWindowPopupCard();
+            return _TabFriendsWindowPopupCard();
           }));
         },
         child: const Hero(
@@ -41,16 +41,17 @@ class FriendsWindowButton extends StatelessWidget {
 const String _heroFriendsWindow = 'Friends-window-hero';
 final friendsBucket = PageStorageBucket();
 
-class _FriendsWindowPopupCard extends StatefulWidget {
+class _TabFriendsWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  _FriendsWindowPopupCard({Key? key}) : super(key: key);
+  _TabFriendsWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<_FriendsWindowPopupCard> createState() =>
-      _FriendsWindowPopupCardState();
+  State<_TabFriendsWindowPopupCard> createState() =>
+      _TabFriendsWindowPopupCardState();
 }
 
-class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
+class _TabFriendsWindowPopupCardState
+    extends State<_TabFriendsWindowPopupCard> {
   TextEditingController _searchController = TextEditingController();
   @override
   final List people = [

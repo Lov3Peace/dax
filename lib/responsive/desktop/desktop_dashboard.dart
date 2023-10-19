@@ -1,10 +1,8 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
-import 'package:flutter_application_1/util/background.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -134,7 +132,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                         // ),
                         Container(
                           height: 45.h,
-                          width: 74.w,
+                          width: 71.5.w,
                           // color: red,
                           constraints: const BoxConstraints(
                               minWidth: 1000, minHeight: 250),
@@ -163,7 +161,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                 child: TitleBubble(
                                                   deckHeight: 5.5.h,
                                                   deckName: 'Dashboard',
-                                                  deckWidth: 18.w,
+                                                  deckWidth: 16.75.w,
                                                   textSize: 3.sp,
                                                   leftPad: 30,
                                                 ),
@@ -184,7 +182,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                         ),
                         Container(
                           height: 45.h,
-                          width: 74.w,
+                          width: 71.5.w,
                           constraints: const BoxConstraints(
                               minWidth: 700, minHeight: 250),
                           child: AnimationLimiter(

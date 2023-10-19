@@ -86,20 +86,15 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                   ),
 
                   const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15.0, horizontal: 20),
-                        child: InitSignUpButton(),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15.0, horizontal: 20),
-                        child: InitLoginButton(),
-                      ),
-                    ],
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(
+                  //       vertical: 15.0, horizontal: 20),
+                  //   child: InitSignUpButton(),
+                  // ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 35.0, horizontal: 20),
+                    child: InitLoginButton(),
                   ),
                   const SizedBox(
                     height: 80,

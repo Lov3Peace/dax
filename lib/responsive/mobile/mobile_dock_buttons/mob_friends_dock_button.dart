@@ -9,19 +9,29 @@ import 'package:sizer/sizer.dart';
 
 import '../../../util/Window Route/friends_window_route.dart';
 
-class DeskFriendsWindowButton extends StatelessWidget {
+class MobFriendsWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  DeskFriendsWindowButton({super.key, required this.dockIcon});
-  Widget dockIcon;
+  const MobFriendsWindowButton({super.key, required});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
-      child: Hero(
-        tag: _heroFriendsWindow,
-        child: Material(
-          color: tran,
-          child: dockIcon,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(FriendsWindowRoute(builder: (context) {
+            return _MobFriendsWindowPopupCard();
+          }));
+        },
+        child: const Hero(
+          tag: _heroFriendsWindow,
+          child: Material(
+            color: tran,
+            child: Icon(
+              Ionicons.people,
+              size: 50,
+            ),
+          ),
         ),
       ),
     );
@@ -31,17 +41,17 @@ class DeskFriendsWindowButton extends StatelessWidget {
 const String _heroFriendsWindow = 'Friends-window-hero';
 final friendsBucket = PageStorageBucket();
 
-class DeskFriendsWindowPopupCard extends StatefulWidget {
+class _MobFriendsWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  DeskFriendsWindowPopupCard({Key? key}) : super(key: key);
+  _MobFriendsWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<DeskFriendsWindowPopupCard> createState() =>
-      _DeskFriendsWindowPopupCardState();
+  State<_MobFriendsWindowPopupCard> createState() =>
+      _MobFriendsWindowPopupCardState();
 }
 
-class _DeskFriendsWindowPopupCardState
-    extends State<DeskFriendsWindowPopupCard> {
+class _MobFriendsWindowPopupCardState
+    extends State<_MobFriendsWindowPopupCard> {
   TextEditingController _searchController = TextEditingController();
   @override
   final List people = [
@@ -79,7 +89,7 @@ class _DeskFriendsWindowPopupCardState
             child: Center(
               child: Container(
                 height: 85.h,
-                width: 75.w,
+                width: 91.w,
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 child: Hero(
                   tag: _heroFriendsWindow,

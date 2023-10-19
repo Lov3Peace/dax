@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/util/projects_stacks_list2.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
 import '../../pages/keyboards_deck.dart';
 import '../../main.dart';
-import '../../util/dock.dart';
 import '../../util/auth/login.dart';
 import 'mob_artboard_page.dart';
-import 'mob_constants.dart';
+import 'mobile_constants.dart';
+import 'mobile_dock.dart';
 
 final List<Widget> projStacks = ProjectStacks().mobProjectStacks;
 final List<Widget> projStacks2 = ProjectStacks2().projectStacks2;
@@ -145,7 +144,7 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
                   },
                 ),
               ),
-              Dock(
+              MobDock(
                 newGlow: red,
                 newGrad1: red,
                 newGrad2: purp,

@@ -10,7 +10,6 @@ import 'mobile_finance_page.dart';
 import 'mobile_news_page.dart';
 import 'mobile_projects_page.dart';
 import 'mobile_socials_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../../util/auth/login.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)

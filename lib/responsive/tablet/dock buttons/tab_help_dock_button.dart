@@ -6,19 +6,32 @@ import 'package:flutter_application_1/util/Window%20Route/help_window_route.dart
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-class DeskHelpWindowButton extends StatelessWidget {
+class TabHelpWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  DeskHelpWindowButton({super.key, required this.dockIcon});
-  Widget dockIcon;
+  const TabHelpWindowButton({super.key, required});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
-      child: Hero(
-        tag: _heroHelpWindow,
-        child: Material(
-          color: tran,
-          child: dockIcon,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(HelpWindowRoute(builder: (context) {
+            return const _TabHelpWindowPopupCard();
+          }));
+        },
+        child: const Hero(
+          tag: _heroHelpWindow,
+          /*createRectTween: (begin, end) {
+            return Tween(begin: begin, end: end);
+          },*/
+          child: Material(
+            color: tran,
+            child: Icon(
+              Ionicons.help_circle_sharp,
+              size: 50,
+            ),
+          ),
         ),
       ),
     );
@@ -27,9 +40,9 @@ class DeskHelpWindowButton extends StatelessWidget {
 
 const String _heroHelpWindow = 'Help-window-hero';
 
-class DeskHelpWindowPopupCard extends StatelessWidget {
+class _TabHelpWindowPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
-  const DeskHelpWindowPopupCard({Key? key}) : super(key: key);
+  const _TabHelpWindowPopupCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +54,6 @@ class DeskHelpWindowPopupCard extends StatelessWidget {
             child: Center(
               child: Container(
                 height: 85.h,
-                width: 75.w,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding:

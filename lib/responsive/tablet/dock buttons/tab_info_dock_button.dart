@@ -2,34 +2,48 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/Window%20Route/help_window_route.dart';
+
+import 'package:flutter_application_1/util/Window%20Route/info_window_route.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-class DeskHelpWindowButton extends StatelessWidget {
+class TabInfoWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  DeskHelpWindowButton({super.key, required this.dockIcon});
-  Widget dockIcon;
+  const TabInfoWindowButton({super.key, required});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
-      child: Hero(
-        tag: _heroHelpWindow,
-        child: Material(
-          color: tran,
-          child: dockIcon,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(InfoWindowRoute(builder: (context) {
+            return const _TabInfoWindowPopupCard();
+          }));
+        },
+        child: const Hero(
+          tag: _heroInfoWindow,
+          /*createRectTween: (begin, end) {
+            return Tween(begin: begin, end: end);
+          },*/
+          child: Material(
+            color: tran,
+            child: Icon(
+              Ionicons.information_circle_sharp,
+              size: 50,
+            ),
+          ),
         ),
       ),
     );
   }
 }
 
-const String _heroHelpWindow = 'Help-window-hero';
+const String _heroInfoWindow = 'Info-window-hero';
 
-class DeskHelpWindowPopupCard extends StatelessWidget {
+class _TabInfoWindowPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
-  const DeskHelpWindowPopupCard({Key? key}) : super(key: key);
+  const _TabInfoWindowPopupCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +55,12 @@ class DeskHelpWindowPopupCard extends StatelessWidget {
             child: Center(
               child: Container(
                 height: 85.h,
-                width: 75.w,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding:
                     const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
-                  tag: _heroHelpWindow,
+                  tag: _heroInfoWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),

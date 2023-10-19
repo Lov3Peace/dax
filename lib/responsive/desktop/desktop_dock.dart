@@ -5,7 +5,11 @@ import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/Window%20Route/friends_window_route.dart';
 import 'package:flutter_application_1/util/Window%20Route/help_window_route.dart';
 import 'package:flutter_application_1/util/Window%20Route/info_window_route.dart';
+import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:flutter_application_1/util/gradient_container.dart';
+import 'package:flutter_application_1/util/home_button.dart';
 import 'package:flutter_application_1/util/logout_dock_button.dart';
+import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -54,7 +58,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               color: Color.fromARGB(185, 21, 19, 22),
-              border: Border.all(color: Color.fromARGB(147, 58, 58, 58)),
+              border: Border.all(color: Color.fromARGB(60, 75, 75, 75)),
               boxShadow: const [
                 BoxShadow(
                   blurRadius: 5,
@@ -75,70 +79,64 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                //
-                //Profile
-                // DockButton(icon: Ionicons.person_circle_outline),
-
+                //Logo
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.h),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(1.5.w)),
+                      clipBehavior: Clip.hardEdge,
+                      child: Image.asset("images/omni-temp-logo.png",
+                          height: 5.w)),
+                ),
                 //Home
-                // HomeButton(
-                //     gradient1: widget.newGrad1,
-                //     gradient2: widget.newGrad2,
-                //     glow: widget.newGlow),
-
-                //Messages
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.5.h),
-                  child: TextButton(
-                    onPressed: null,
-                    child: Text(
-                      'Home',
-                      style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(fontSize: 2.sp),
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
-                    ),
-                    onHover: (value) {
-                      hoverColor = red;
-                    },
-                  ),
-                ),
-                //
-
-                //PAGE 2
-
-                //Settings
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 1.5.h),
                   child: DeskSettingsWindowButton(
                     dockIcon: Material(
                       color: tran,
-                      child: TextButton.icon(
-                        icon: Icon(
-                          Ionicons.settings_outline,
-                          size: 30,
-                          color: Colors.white70,
-                        ),
-                        onPressed: () {
-                          Navigator.of(context)
-                              .push(SettingsWindowRoute(builder: (context) {
-                            return const DeskSettingsWindowPopupCard();
-                          }));
-                        },
-                        label: Padding(
-                          padding: EdgeInsets.only(left: 0.5.w),
-                          child: Text(
-                            'Settings',
-                            style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(fontSize: 2.sp),
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white),
+                      child: TactileButton(
+                        child: TextButton.icon(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                                MaterialPageRoute(builder: (buildContext) {
+                              return AuthCheck();
+                            }));
+                          },
+                          icon: Icon(Icons.dashboard_rounded,
+                              size: 30, color: Colors.white),
+                          label: Padding(
+                            padding: EdgeInsets.only(left: 0.5.w),
+                            child: Text(
+                              'Home',
+                              style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(fontSize: 2.sp),
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white),
+                            ),
                           ),
                         ),
+                        // child: GradientContainer(
+                        //   borderColor: tran,
+                        //   gradient1: Colors.white10,
+                        //   gradient2: Colors.white12,
+                        //   height: 1.h,
+                        //   neonGlow: tran,
+                        //   text: 'Home',
+                        //   textSize: 2.sp,
+                        //   borderRadius: 2.w,
+                        //   width: 3.w,
+                        // ),
+                        // onTap: () {
+                        //   Navigator.of(context)
+                        //       .push(MaterialPageRoute(builder: (buildContext) {
+                        //     return AuthCheck();
+                        //   }));
+                        // },
                       ),
                     ),
                   ),
                 ),
-                //
+
                 //Wallet
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
@@ -149,7 +147,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                         icon: Icon(
                           Ionicons.wallet_outline,
                           size: 30,
-                          color: Colors.white70,
+                          color: Colors.white54,
                         ),
                         onPressed: () {
                           Navigator.of(context)
@@ -164,7 +162,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                             style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(fontSize: 2.sp),
                                 fontWeight: FontWeight.w400,
-                                color: Colors.white),
+                                color: Colors.white54),
                           ),
                         ),
                       ),
@@ -182,7 +180,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                         icon: Icon(
                           Ionicons.people_outline,
                           size: 30,
-                          color: Colors.white70,
+                          color: Colors.white54,
                         ),
                         onPressed: () {
                           Navigator.of(context)
@@ -197,17 +195,46 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                             style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(fontSize: 2.sp),
                                 fontWeight: FontWeight.w400,
-                                color: Colors.white),
+                                color: Colors.white54),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                //
-                //PAGE 3
+                //Settings
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                  child: DeskSettingsWindowButton(
+                    dockIcon: Material(
+                      color: tran,
+                      child: TextButton.icon(
+                        icon: Icon(
+                          Ionicons.settings_outline,
+                          size: 30,
+                          color: Colors.white54,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .push(SettingsWindowRoute(builder: (context) {
+                            return const DeskSettingsWindowPopupCard();
+                          }));
+                        },
+                        label: Padding(
+                          padding: EdgeInsets.only(left: 0.5.w),
+                          child: Text(
+                            'Settings',
+                            style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(fontSize: 2.sp),
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white54),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
 
-                //
                 //Help
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.5.h),
@@ -218,7 +245,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                         icon: Icon(
                           Ionicons.help_circle_outline,
                           size: 30,
-                          color: Colors.white70,
+                          color: Colors.white54,
                         ),
                         onPressed: () {
                           Navigator.of(context)
@@ -233,7 +260,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                             style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(fontSize: 2.sp),
                                 fontWeight: FontWeight.w400,
-                                color: Colors.white),
+                                color: Colors.white54),
                           ),
                         ),
                       ),
@@ -251,7 +278,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                         icon: Icon(
                           Ionicons.information_circle_outline,
                           size: 30,
-                          color: Colors.white70,
+                          color: Colors.white54,
                         ),
                         onPressed: () {
                           Navigator.of(context)
@@ -266,7 +293,7 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                             style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(fontSize: 2.sp),
                                 fontWeight: FontWeight.w400,
-                                color: Colors.white),
+                                color: Colors.white54),
                           ),
                         ),
                       ),

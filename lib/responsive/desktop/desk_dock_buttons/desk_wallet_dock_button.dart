@@ -444,6 +444,7 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                         textSize: 12,
                                                         borderColor:
                                                             Colors.white38,
+                                                        borderRadius: 500,
                                                       ),
                                                     ),
                                                   ),

@@ -25,7 +25,7 @@ var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 //responsive variables
 double deckHeight = 22.h;
 double deckWidth = 35.25.w;
-double halfDeckWidth = 16.75.w;
+double halfDeckWidth = 17.325.w;
 double headerTextSize = 24;
 double subTextSize = 14;
 double profBubTextSize = 20;
@@ -87,6 +87,8 @@ class Deck extends StatelessWidget {
                 blendMode: BlendMode.darken,
                 child: const SizedBox(),
               ),
+
+              //Deck Color with Glass Effect
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1.5.w),
@@ -1019,8 +1021,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
   @override
   Widget build(BuildContext context) {
     deckHeight = 22.h;
-    deckWidth = 40.w;
-    halfDeckWidth = 18.w;
+    deckWidth = 35.25.w;
+    halfDeckWidth = 17.325.w;
     labelTextSize = 16;
     var screenHeight = window.physicalSize.height / window.devicePixelRatio;
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
@@ -1029,19 +1031,19 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
       headerTextSize = 24;
       subTextSize = 16;
     } else if (screenWidth < 1500) {
-      deckWidth = 36.5.w;
+      deckWidth = 35.25.w;
       headerTextSize = 30;
       textConstraint = halfDeckWidth * 0.7;
     } else if (screenWidth <= 1920) {
-      deckWidth = 36.5.w;
+      deckWidth = 35.25.w;
       headerTextSize = 40;
       subTextSize = 22;
     } else if (screenWidth < 2600) {
-      deckWidth = 36.5.w;
+      deckWidth = 35.25.w;
       headerTextSize = 48;
       subTextSize = 24;
     } else {
-      deckWidth = 36.5.w;
+      deckWidth = 35.25.w;
       headerTextSize = 85;
       subTextSize = 30;
       labelTextSize = 22;

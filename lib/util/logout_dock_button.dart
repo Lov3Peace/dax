@@ -33,7 +33,7 @@ class LogoutWindowButton extends StatelessWidget {
             color: tran,
             child: Icon(
               Ionicons.log_out_outline,
-              size: 50,
+              size: 40,
             ),
           ),
         ),

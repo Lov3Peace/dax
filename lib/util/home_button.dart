@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../responsive/mobile/mobile_constants.dart';
 import '../responsive/desktop/desktop_dashboard.dart';
@@ -100,7 +101,7 @@ class _HomeButtonState extends State<HomeButton> {
         control = Control.play;
         Future.delayed(const Duration(milliseconds: 200)).then((_) {
           Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-            return DesktopDashboard();
+            return AuthCheck();
           }));
         });
       }

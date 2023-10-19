@@ -333,6 +333,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     text: 'Sign Up',
                     textSize: 14,
                     borderColor: tran,
+                    borderRadius: 500,
                   ),
                 ),
               ),

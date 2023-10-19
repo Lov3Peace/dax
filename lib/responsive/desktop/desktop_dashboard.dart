@@ -161,7 +161,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                 child: TitleBubble(
                                                   deckHeight: 5.5.h,
                                                   deckName: 'Dashboard',
-                                                  deckWidth: 16.75.w,
+                                                  deckWidth: 17.25.w,
                                                   textSize: 3.sp,
                                                   leftPad: 30,
                                                 ),

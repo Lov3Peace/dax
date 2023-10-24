@@ -31,14 +31,15 @@ class _InitLoginButtonState extends State<InitLoginButton> {
     return TactileButton(
       onTap: loadPopUp,
       child: GradientContainer(
-        gradient1: Colors.black54.withOpacity(1),
-        gradient2: Colors.black54.withOpacity(1),
+        gradient1: purp,
+        gradient2: red,
         height: 20,
-        width: 30,
-        neonGlow: Colors.white,
-        text: 'Login',
+        width: 50,
+        neonGlow: red,
+        text: 'Launch',
         textSize: 16,
-        borderColor: Colors.white38,
+        borderColor: tran,
+        borderRadius: 500,
       ),
     );
   }
@@ -444,6 +445,7 @@ class _LoginFormState extends State<LoginForm> {
                     text: 'Login',
                     textSize: 14,
                     borderColor: tran,
+                    borderRadius: 500,
                   ),
                 ),
               ),

@@ -102,6 +102,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
                     text: 'Reset Password',
                     textSize: 14,
                     borderColor: Colors.white,
+                    borderRadius: 500,
                   ),
                 ),
               ),

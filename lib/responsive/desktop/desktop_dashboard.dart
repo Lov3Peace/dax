@@ -161,7 +161,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                 child: TitleBubble(
                                                   deckHeight: 5.5.h,
                                                   deckName: 'Dashboard',
-                                                  deckWidth: 16.75.w,
+                                                  deckWidth: 17.25.w,
                                                   textSize: 3.sp,
                                                   leftPad: 30,
                                                 ),
@@ -200,7 +200,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                     child: FadeInAnimation(
                                       child: Padding(
                                         padding: EdgeInsets.fromLTRB(
-                                            0.25.w, 0.0.w, 0.25.w, 1.5.h),
+                                            0.25.w, 0.0.w, 0.25.w, 0.h),
                                         child: deskDashboardDecks2(
                                           deck4: SocialsDeck(),
                                           deck5: NewsDeck(),

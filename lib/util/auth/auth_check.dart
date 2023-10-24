@@ -25,8 +25,11 @@ class _AuthCheckState extends State<AuthCheck> {
           if (snapshot.hasData) {
             // ignore: prefer_const_constructors
             return ResponsiveLayout(
+              // ignore: prefer_const_constructors
               mobileVersion: MobileDashboard(),
+              // ignore: prefer_const_constructors
               tabletVersion: TabletDashboard(),
+              // ignore: prefer_const_constructors
               desktopVersion: DesktopDashboard(),
             );
           } else {

@@ -13,6 +13,7 @@ class GradientContainer extends StatefulWidget {
     required this.gradient2,
     required this.neonGlow,
     required this.borderColor,
+    required this.borderRadius,
   });
   double height;
   double width;
@@ -22,6 +23,7 @@ class GradientContainer extends StatefulWidget {
   Color gradient2;
   Color neonGlow;
   Color borderColor;
+  double borderRadius;
   @override
   State<GradientContainer> createState() => _GradientContainerState();
 }
@@ -39,7 +41,7 @@ class _GradientContainerState extends State<GradientContainer> {
                 blurRadius: 10,
                 blurStyle: BlurStyle.solid)
           ],
-          borderRadius: const BorderRadius.all(Radius.circular(500)),
+          borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
           border: Border.all(color: widget.borderColor)),
       child: Padding(
         padding: EdgeInsets.fromLTRB(

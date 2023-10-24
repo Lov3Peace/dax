@@ -29,7 +29,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: loadPopUp,
-      child: Text(
+      child: const Text(
         "Sign Up!",
         style: TextStyle(
           color: Colors.white,
@@ -43,7 +43,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
 
     control = Control.play;
     Future.delayed(
-      const Duration(milliseconds: 400),
+      const Duration(milliseconds: 200),
       () {
         //slide animation
         showGeneralDialog(
@@ -333,6 +333,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     text: 'Sign Up',
                     textSize: 14,
                     borderColor: tran,
+                    borderRadius: 500,
                   ),
                 ),
               ),

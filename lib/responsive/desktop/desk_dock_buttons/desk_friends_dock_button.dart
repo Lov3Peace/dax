@@ -3,32 +3,32 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:ionicons/ionicons.dart';
+import 'package:simple_animations/animation_builder/custom_animation_builder.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../util/Window Route/friends_window_route.dart';
 
 class DeskFriendsWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
-  DeskFriendsWindowButton({super.key, required this.dockIcon});
+  DeskFriendsWindowButton({super.key, required, required this.dockIcon});
   Widget dockIcon;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(0.0),
-      child: Hero(
-        tag: _heroFriendsWindow,
-        child: Material(
-          color: tran,
-          child: dockIcon,
-        ),
+      child: Material(
+        color: tran,
+        child: dockIcon,
       ),
     );
   }
 }
 
-const String _heroFriendsWindow = 'Friends-window-hero';
+//const String _heroFriendsWindow = 'Friends-window-hero';
 final friendsBucket = PageStorageBucket();
 
 class DeskFriendsWindowPopupCard extends StatefulWidget {
@@ -71,19 +71,60 @@ class _DeskFriendsWindowPopupCardState
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
-            child: Center(
-              child: Container(
-                height: 85.h,
-                width: 75.w,
-                padding: const EdgeInsets.symmetric(vertical: 32),
-                child: Hero(
-                  tag: _heroFriendsWindow,
-                  flightShuttleBuilder: flightShuttleBuilder,
+    return Material(
+      color: tran,
+      child: TextButton.icon(
+        icon: const Icon(
+          Ionicons.people_outline,
+          size: 30,
+          color: Colors.white54,
+        ),
+        onPressed: loadPopUp,
+        label: Padding(
+          padding: EdgeInsets.only(left: 0.5.w),
+          child: Text(
+            'Connections',
+            style: GoogleFonts.montserrat(
+                textStyle: TextStyle(fontSize: 2.sp),
+                fontWeight: FontWeight.w400,
+                color: Colors.white54),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void loadPopUp() {
+    // toggle between control instructions
+
+    control = Control.play;
+
+    //slide animation
+    showGeneralDialog(
+      barrierDismissible: true,
+      barrierLabel: "Connections",
+      context: context,
+      transitionDuration: const Duration(milliseconds: 1000),
+      transitionBuilder: (_, animation, __, child) {
+        Tween<Offset> tween;
+        tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
+        return SlideTransition(
+          position: tween.animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeInOutBack),
+          ),
+          child: child,
+        );
+      },
+      pageBuilder: (context, _, __) => Center(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+              child: Center(
+                child: Container(
+                  height: 85.h,
+                  width: 70.w,
+                  padding: const EdgeInsets.symmetric(vertical: 32),
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
                     color: const Color.fromARGB(42, 55, 52, 52),
@@ -340,8 +381,8 @@ class _DeskFriendsWindowPopupCardState
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

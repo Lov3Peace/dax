@@ -143,8 +143,8 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(
-                                      right: 1.5.w,
-                                      left: 1.5.w,
+                                      right: 1.w,
+                                      left: 1.w,
                                     ),
                                     child: Wrap(
                                       spacing: 1.5.w,
@@ -671,7 +671,7 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                           ),
                                           child: Container(
                                             height: 73.5.h,
-                                            width: 37.2.w,
+                                            width: 38.w,
                                             constraints: const BoxConstraints(
                                                 maxWidth: 700, minHeight: 250),
                                             decoration: const BoxDecoration(
@@ -691,7 +691,7 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                   //Container #1
                                                   Container(
                                                     height: 27.h,
-                                                    width: 40.w,
+                                                    width: 38.w,
                                                     constraints:
                                                         const BoxConstraints(
                                                             maxWidth: 700,
@@ -910,6 +910,94 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                               ),
                                                             ),
                                                           ),
+
+                                                          //Review Stream
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsets.only(
+                                                                    left: 2.w,
+                                                                    top: 5.h),
+                                                            child: Wrap(
+                                                              alignment:
+                                                                  WrapAlignment
+                                                                      .spaceBetween,
+                                                              crossAxisAlignment:
+                                                                  WrapCrossAlignment
+                                                                      .center,
+                                                              children: [
+                                                                //Upward Arrow
+                                                                const Icon(
+                                                                  Ionicons
+                                                                      .arrow_up_circle_outline,
+                                                                  size: 20,
+                                                                  color: Colors
+                                                                      .white70,
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          left:
+                                                                              1.h),
+                                                                  child: Text(
+                                                                    NumberFormat.simpleCurrency(
+                                                                            locale:
+                                                                                'en-US',
+                                                                            decimalDigits:
+                                                                                2)
+                                                                        .format(
+                                                                            5649),
+                                                                    style: const TextStyle(
+                                                                        fontSize:
+                                                                            20,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        color: Colors
+                                                                            .green),
+                                                                  ),
+                                                                ),
+
+                                                                //Downward Arrow
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          left:
+                                                                              2.w),
+                                                                  child:
+                                                                      const Icon(
+                                                                    Ionicons
+                                                                        .arrow_down_circle_outline,
+                                                                    size: 20,
+                                                                    color: Colors
+                                                                        .white70,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          left:
+                                                                              1.h),
+                                                                  child: Text(
+                                                                    NumberFormat.simpleCurrency(
+                                                                            locale:
+                                                                                'en-US',
+                                                                            decimalDigits:
+                                                                                2)
+                                                                        .format(
+                                                                            268),
+                                                                    style: const TextStyle(
+                                                                        fontSize:
+                                                                            20,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        color: Colors
+                                                                            .red),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -921,7 +1009,7 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                         top: 1.5.h),
                                                     child: Container(
                                                       height: 18.h,
-                                                      width: 40.w,
+                                                      width: 38.w,
                                                       constraints:
                                                           const BoxConstraints(
                                                               maxWidth: 700,
@@ -944,7 +1032,7 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                         top: 1.5.h),
                                                     child: Container(
                                                       height: 25.h,
-                                                      width: 40.w,
+                                                      width: 38.w,
                                                       constraints:
                                                           const BoxConstraints(
                                                               maxWidth: 700,

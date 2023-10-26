@@ -153,132 +153,24 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
                       //Friends
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                        child: DeskFriendsWindowButton(
-                          dockIcon: Material(
-                            color: tran,
-                            child: TextButton.icon(
-                              icon: Icon(
-                                Ionicons.people_outline,
-                                size: 30,
-                                color: Colors.white54,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                    FriendsWindowRoute(builder: (context) {
-                                  return DeskFriendsWindowPopupCard();
-                                }));
-                              },
-                              label: Padding(
-                                padding: EdgeInsets.only(left: 0.5.w),
-                                child: Text(
-                                  'Connections',
-                                  style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(fontSize: 2.sp),
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white54),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: DeskFriendsWindowPopupCard(),
                       ),
                       //Settings
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                        child: DeskSettingsWindowButton(
-                          dockIcon: Material(
-                            color: tran,
-                            child: TextButton.icon(
-                              icon: Icon(
-                                Ionicons.settings_outline,
-                                size: 30,
-                                color: Colors.white54,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                    SettingsWindowRoute(builder: (context) {
-                                  return const DeskSettingsWindowPopupCard();
-                                }));
-                              },
-                              label: Padding(
-                                padding: EdgeInsets.only(left: 0.5.w),
-                                child: Text(
-                                  'Settings',
-                                  style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(fontSize: 2.sp),
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white54),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: DeskSettingsWindowPopupCard(),
                       ),
 
                       //Help
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                        child: DeskHelpWindowButton(
-                          dockIcon: Material(
-                            color: tran,
-                            child: TextButton.icon(
-                              icon: Icon(
-                                Ionicons.help_circle_outline,
-                                size: 30,
-                                color: Colors.white54,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .push(HelpWindowRoute(builder: (context) {
-                                  return DeskHelpWindowPopupCard();
-                                }));
-                              },
-                              label: Padding(
-                                padding: EdgeInsets.only(left: 0.5.w),
-                                child: Text(
-                                  'FAQs',
-                                  style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(fontSize: 2.sp),
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white54),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: DeskHelpWindowPopupCard(),
                       ),
                       //
                       //About Us/Info
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                        child: DeskInfoWindowButton(
-                          dockIcon: Material(
-                            color: tran,
-                            child: TextButton.icon(
-                              icon: Icon(
-                                Ionicons.information_circle_outline,
-                                size: 30,
-                                color: Colors.white54,
-                              ),
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .push(InfoWindowRoute(builder: (context) {
-                                  return DeskInfoWindowPopupCard();
-                                }));
-                              },
-                              label: Padding(
-                                padding: EdgeInsets.only(left: 0.5.w),
-                                child: Text(
-                                  'About Us',
-                                  style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(fontSize: 2.sp),
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white54),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        child: DeskInfoWindowPopupCard(),
                       ),
                       //
                       //Logout

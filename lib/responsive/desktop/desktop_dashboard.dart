@@ -1,8 +1,11 @@
+import 'package:animated_image_list/photoViewerArbnb/PhotoViewerArbnb_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
+import 'package:indexed/indexed.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -43,37 +46,6 @@ class _DesktopDashboardState extends State<DesktopDashboard>
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-
-      // appBar: AppBar(
-      //   backgroundColor: tran,
-      //   shadowColor: tran,
-      //   automaticallyImplyLeading: false,
-      //   leadingWidth: screenWidth * 0.9,
-      //   toolbarHeight: lerpDouble(0, 18, 8),
-      //   flexibleSpace: Padding(
-      //     padding:
-      //         EdgeInsets.fromLTRB(screenWidth * .08, 0, screenWidth * .05, 0),
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //       children: [
-      //         Hero(
-      //           tag: 'title',
-      //           flightShuttleBuilder: flightShuttleBuilder,
-      //           child: TitleBubble(
-      //             deckHeight: 7.h,
-      //             deckWidth: 15.w,
-      //             deckName: 'Dashboard',
-      //             gradient1: tran,
-      //             gradient2: tran,
-      //             neonGlow: tran,
-      //             textSize: titleTextSize,
-      //             leftPad: 30,
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
       body: SingleChildScrollView(
         // physics: AlwaysScrollableScrollPhysics(),
 
@@ -85,141 +57,161 @@ class _DesktopDashboardState extends State<DesktopDashboard>
             children: [
               // Background(),
               const ArtBoardScreen(),
+              Indexer(
+                children: [
+                  Indexed(
+                    index: 2,
+                    child: DesktopDock(
+                      newGrad1: purp,
+                      newGrad2: red,
+                      newGlow: red,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 12.5.w,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          // Positioned(
+                          //   top: 100,
+                          //   left: 5.w,
+                          //   child: Hero(
+                          //     tag: 'title',
+                          //     flightShuttleBuilder: flightShuttleBuilder,
+                          //     child: TitleBubble(
+                          //       deckHeight: screenHeight * 0.07,
+                          //       deckWidth: screenWidth * 0.15,
+                          //       deckName: 'SMFH',
+                          //       gradient1: tran,
+                          //       gradient2: tran,
+                          //       neonGlow: tran,
+                          //       textSize: titleTextSize,
+                          //       leftPad: 30,
+                          //     ),
+                          //   ),
+                          // ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(left: 0.25.w, right: 0.25.w),
+                            child: Container(
+                              height: 45.h,
+                              width: 71.5.w,
+                              // color: red,
+                              constraints: const BoxConstraints(
+                                  minWidth: 1000, minHeight: 250),
+                              child: AnimationLimiter(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 3,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return AnimationConfiguration.staggeredList(
+                                      delay: const Duration(milliseconds: 200),
+                                      position: index,
+                                      duration:
+                                          const Duration(milliseconds: 700),
+                                      child: ScaleAnimation(
+                                        scale: 0.7,
+                                        curve: Curves.easeOutBack,
+                                        child: FadeInAnimation(
+                                          child: Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0.25.w, 0.0.w, 0.25.w, 1.5.h),
+                                            child: deskDashboardDecks1(
+                                              deck1: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(
+                                                            0, 0, 0, 1.5.h),
+                                                    child: TitleBubble(
+                                                      deckHeight: 5.5.h,
+                                                      deckName: 'Dashboard',
+                                                      deckWidth: 17.25.w,
+                                                      textSize: 3.sp,
+                                                      leftPad: 30,
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                      child: ProfileCard()),
+                                                ],
+                                              ),
+                                              deck2: ProjectsDeck(),
+                                              deck3: FinancesDeck(),
+                                            )[index],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.only(left: 0.25.w, right: 0.25.w),
+                            child: Container(
+                              height: 45.h,
+                              width: 71.5.w,
+                              constraints: const BoxConstraints(
+                                  minWidth: 700, minHeight: 250),
+                              child: AnimationLimiter(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 2,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return AnimationConfiguration.staggeredList(
+                                      delay: const Duration(milliseconds: 200),
+                                      position: index,
+                                      duration:
+                                          const Duration(milliseconds: 700),
+                                      child: ScaleAnimation(
+                                        scale: 0.7,
+                                        curve: Curves.easeOutBack,
+                                        child: FadeInAnimation(
+                                          child: Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0.25.w, 0.0.w, 0.25.w, 0.h),
+                                            child: deskDashboardDecks2(
+                                              deck4: SocialsDeck(),
+                                              deck5: NewsDeck(),
+                                            )[index],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      // ignore: prefer_const_constructors
+                      Messages(),
+                    ],
+                  ),
+                  Indexed(
+                    index: 1,
+                    child: Positioned(
+                      left: -70.w,
+                      child: WalletPopUp(),
+                    ),
+                  ),
+                ],
+              ),
+
               // Positioned.fill(
               //   child: BackdropFilter(
               //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
               //       child: const SizedBox()),
               // ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    controller.play();
-                  });
-                  Future.delayed(const Duration(milliseconds: 300)).then((_) {
-                    controller.playReverse();
-                  });
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    DesktopDock(
-                      newGrad1: purp,
-                      newGrad2: red,
-                      newGlow: red,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Positioned(
-                        //   top: 100,
-                        //   left: 5.w,
-                        //   child: Hero(
-                        //     tag: 'title',
-                        //     flightShuttleBuilder: flightShuttleBuilder,
-                        //     child: TitleBubble(
-                        //       deckHeight: screenHeight * 0.07,
-                        //       deckWidth: screenWidth * 0.15,
-                        //       deckName: 'SMFH',
-                        //       gradient1: tran,
-                        //       gradient2: tran,
-                        //       neonGlow: tran,
-                        //       textSize: titleTextSize,
-                        //       leftPad: 30,
-                        //     ),
-                        //   ),
-                        // ),
-                        Container(
-                          height: 45.h,
-                          width: 71.5.w,
-                          // color: red,
-                          constraints: const BoxConstraints(
-                              minWidth: 1000, minHeight: 250),
-                          child: AnimationLimiter(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 3,
-                              itemBuilder: (BuildContext context, int index) {
-                                return AnimationConfiguration.staggeredList(
-                                  delay: const Duration(milliseconds: 200),
-                                  position: index,
-                                  duration: const Duration(milliseconds: 700),
-                                  child: ScaleAnimation(
-                                    scale: 0.7,
-                                    curve: Curves.easeOutBack,
-                                    child: FadeInAnimation(
-                                      child: Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            0.25.w, 0.0.w, 0.25.w, 1.5.h),
-                                        child: deskDashboardDecks1(
-                                          deck1: Column(
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    0, 0, 0, 1.5.h),
-                                                child: TitleBubble(
-                                                  deckHeight: 5.5.h,
-                                                  deckName: 'Dashboard',
-                                                  deckWidth: 17.25.w,
-                                                  textSize: 3.sp,
-                                                  leftPad: 30,
-                                                ),
-                                              ),
-                                              Expanded(child: ProfileCard()),
-                                            ],
-                                          ),
-                                          deck2: ProjectsDeck(),
-                                          deck3: FinancesDeck(),
-                                        )[index],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 45.h,
-                          width: 71.5.w,
-                          constraints: const BoxConstraints(
-                              minWidth: 700, minHeight: 250),
-                          child: AnimationLimiter(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 2,
-                              itemBuilder: (BuildContext context, int index) {
-                                return AnimationConfiguration.staggeredList(
-                                  delay: const Duration(milliseconds: 200),
-                                  position: index,
-                                  duration: const Duration(milliseconds: 700),
-                                  child: ScaleAnimation(
-                                    scale: 0.7,
-                                    curve: Curves.easeOutBack,
-                                    child: FadeInAnimation(
-                                      child: Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            0.25.w, 0.0.w, 0.25.w, 0.h),
-                                        child: deskDashboardDecks2(
-                                          deck4: SocialsDeck(),
-                                          deck5: NewsDeck(),
-                                        )[index],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // ignore: prefer_const_constructors
-                    Messages(),
-                  ],
-                ),
-              ),
             ],
           ),
         ),

@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dar
 import 'package:flutter_application_1/responsive/tablet/tablet_socials_page.dart';
 import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rive/rive.dart' as r;
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
@@ -16,7 +16,6 @@ import '../mobile/mobile_finance_page.dart';
 import '../mobile/mobile_news_page.dart';
 import '../mobile/mobile_projects_page.dart';
 import '../mobile/mobile_socials_page.dart';
-import '../../responsive/desktop/desktop_dock.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)
 var screenHeight = window.physicalSize.height / window.devicePixelRatio;
@@ -49,6 +48,7 @@ class Deck extends StatelessWidget {
     this.image,
     this.onTap,
     this.subTextConstraint,
+    this.riveAnim,
     super.key,
   });
 
@@ -63,6 +63,7 @@ class Deck extends StatelessWidget {
   double? labelTextSize;
   double? textConstraint;
   double? subTextConstraint;
+  r.RiveAnimation? riveAnim;
   Image? image;
   VoidCallback? onTap;
   Color shadowColor = Colors.white;
@@ -136,14 +137,28 @@ class Deck extends StatelessWidget {
               //
               //Image
               Positioned(
-                left: 200,
+                left: deckWidth * 0.5,
                 bottom: 0,
                 child: Column(
                   children: [
                     Container(
-                        margin: const EdgeInsets.only(bottom: 5),
+                        margin: const EdgeInsets.only(bottom: 0),
                         width: textConstraint,
                         child: image),
+                  ],
+                ),
+              ),
+              Positioned(
+                left: deckWidth * 0.6,
+                bottom: deckHeight * 0.1,
+                child: Column(
+                  children: [
+                    Container(
+                        constraints: BoxConstraints(
+                            maxHeight: deckHeight, maxWidth: deckHeight),
+                        margin: const EdgeInsets.only(bottom: 5),
+                        width: textConstraint,
+                        child: riveAnim),
                   ],
                 ),
               ),
@@ -155,7 +170,8 @@ class Deck extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(2.w, 0, 0, 2.w),
                   child: Container(
-                    constraints: BoxConstraints(minHeight: 50, maxHeight: 160),
+                    constraints:
+                        const BoxConstraints(minHeight: 50, maxHeight: 160),
                     decoration: BoxDecoration(
                         gradient:
                             LinearGradient(colors: [gradient1, gradient2]),
@@ -165,7 +181,8 @@ class Deck extends StatelessWidget {
                               blurRadius: 17,
                               blurStyle: BlurStyle.solid)
                         ],
-                        borderRadius: BorderRadius.all(Radius.circular(500))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(500))),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(2.w, 20, 2.w, 20),
                       child: Text(
@@ -571,7 +588,6 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
           style: GoogleFonts.montserrat(
               textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
               fontWeight: FontWeight.w600),
-          maxLines: 3,
         ),
         subText: Text(
           'Post, join, or support independent projects anywhere in the world.',
@@ -579,6 +595,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
               textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
               fontWeight: FontWeight.w400),
         ),
+        riveAnim: const r.RiveAnimation.asset('rive/building_apartments.riv'),
       ),
     );
   }
@@ -875,6 +892,11 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
               fontWeight: FontWeight.w400),
         ),
         subTextConstraint: deckWidth * 0.6,
+        riveAnim: const r.RiveAnimation.asset(
+          "rive/twitter_rv.riv",
+          fit: BoxFit.fitWidth,
+        ),
+        // image: Image.asset('images/crest1.png'),
       ),
     );
   }

@@ -280,6 +280,7 @@ class _LoginFormState extends State<LoginForm> {
               ),
               child: TextField(
                 controller: _passwordController,
+                onSubmitted: (value) => login(),
                 obscureText: false,
                 decoration: InputDecoration(
                   prefixIconColor: Colors.black,
@@ -450,7 +451,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(

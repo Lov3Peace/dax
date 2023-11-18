@@ -66,7 +66,7 @@ class _DeskSettingsWindowPopupCardState
   void loadSettingsPopUp() {
     // toggle between control instructions
 
-    control = Control.play;
+    // control = Control.play;
 
     //slide animation
     showGeneralDialog(

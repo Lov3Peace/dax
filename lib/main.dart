@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/GlobalProvider.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -21,7 +23,10 @@ Future main() async {
     await Firebase.initializeApp();
   }
 
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => GlobalProvider(),
+    child: const MyApp(),
+  ));
 }
 
 const Color red = Color.fromARGB(255, 255, 85, 85);

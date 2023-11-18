@@ -1,357 +1,309 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/GlobalProvider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:indexed/indexed.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 //import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:simple_animations/animation_builder/custom_animation_builder.dart';
+import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../util/gradient_container.dart';
 import '../../../util/tactile_button.dart';
 
-class DeskWalletWindowButton extends StatelessWidget {
-  /// {@macro add_todo_button}
-  DeskWalletWindowButton({super.key, required, required this.dockIcon});
-  Widget dockIcon;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(0.0),
-      child: Material(
-        color: tran,
-        child: dockIcon,
-      ),
-    );
-  }
-}
-
 // const String heroWalletWindow = 'Wallet-window-hero';
+Control slideWallet = Control.stop;
 
-class DeskWalletWindowPopupCard extends StatefulWidget {
+class DeskWalletWindowPopupCard extends StatelessWidget {
   /// {@macro add_todo_popup_card}
-  const DeskWalletWindowPopupCard({Key? key}) : super(key: key);
+  DeskWalletWindowPopupCard({Key? key}) : super(key: key);
 
-  @override
-  State<DeskWalletWindowPopupCard> createState() =>
-      DeskWalletWindowPopupCardState();
-}
-
-class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
   bool isFinished = false;
 
   final walletIDController = TextEditingController();
   final reasonController = TextEditingController();
+
   @override
-  void dispose() {
-    walletIDController.dispose();
-    reasonController.dispose();
-    super.dispose();
+  Widget build(BuildContext context) {
+    // print(slideWallet);
+
+    return Material(
+      color: tran,
+      child: Stack(
+        children: [
+          TactileButton(
+            child: TextButton.icon(
+              icon: const Icon(
+                Ionicons.wallet_outline,
+                size: 30,
+                color: Colors.white54,
+              ),
+              onPressed: () {
+                final startSlide = context.read<GlobalProvider>();
+                startSlide.activateSlide();
+              },
+              label: Padding(
+                padding: EdgeInsets.only(left: 0.5.w),
+                child: Text(
+                  'Wallet',
+                  style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(fontSize: 2.sp),
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white54),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  // void slidePopUp() {
+  //   setState(() {
+
+  //   });
+// }
+}
+
+class WalletPopUp extends StatefulWidget {
+  WalletPopUp({super.key});
+
+  State<WalletPopUp> createState() => _WalletPopUpState();
+}
+
+final walletIDController = TextEditingController();
+final reasonController = TextEditingController();
+
+class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: tran,
-      child: TextButton.icon(
-        icon: const Icon(
-          Ionicons.wallet_outline,
-          size: 30,
-          color: Colors.white54,
-        ),
-        onPressed: loadWalletPopUp,
-        label: Padding(
-          padding: EdgeInsets.only(left: 0.5.w),
-          child: Text(
-            'Wallet',
-            style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
-                fontWeight: FontWeight.w400,
-                color: Colors.white54),
-          ),
-        ),
-      ),
-    );
-  }
-
-  void loadWalletPopUp() {
-    // toggle between control instructions
-
-    control = Control.play;
-
-    //slide animation
-    showGeneralDialog(
-      barrierDismissible: true,
-      barrierLabel: "Wallet",
-      context: context,
-      transitionDuration: const Duration(milliseconds: 1000),
-      transitionBuilder: (_, animation, __, child) {
-        Tween<Offset> tween;
-        tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
-        return SlideTransition(
-          position: tween.animate(
-            CurvedAnimation(parent: animation, curve: Curves.easeInOutBack),
-          ),
-          child: child,
-        );
-      },
-      pageBuilder: (context, _, __) => Center(
-        child: Indexer(
-          children: [
-            Indexed(
-              index: 0,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
-                    child: Center(
-                      child: Container(
-                        height: 85.h,
-                        width: 70.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(32)),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 32, horizontal: 24),
-                        child: Material(
-                          shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                          color: const Color.fromARGB(42, 55, 52, 52),
-                          elevation: 0,
-                          borderRadius: BorderRadius.circular(32),
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(24),
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                  child: Container(
-                                      height: 85.h,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: const Color.fromARGB(
-                                                182, 31, 31, 31)),
-                                        borderRadius: BorderRadius.circular(24),
-                                      )),
+    return Consumer<GlobalProvider>(
+        builder: (context, value, child) => CustomAnimationBuilder<double>(
+              control: value.slideControl,
+              startPosition: 0,
+              tween: Tween(begin: 0, end: 83.5.w),
+              duration: const Duration(milliseconds: 1250),
+              curve: Curves.easeInOutBack,
+              onCompleted: () {
+                final resetSlide = context.read<GlobalProvider>();
+                resetSlide.resetSlide();
+              },
+              builder: (context, value, child) {
+                return Transform.translate(
+                  offset: Offset(value, 0),
+                  child: child,
+                );
+              },
+              child: Center(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+                      child: Center(
+                        child: Container(
+                          height: 85.h,
+                          width: 70.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(32)),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 32, horizontal: 24),
+                          child: Material(
+                            shadowColor:
+                                const Color.fromRGBO(42, 41, 41, 0.631),
+                            color: const Color.fromARGB(42, 55, 52, 52),
+                            elevation: 0,
+                            borderRadius: BorderRadius.circular(32),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(24),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 10, sigmaY: 10),
+                                    child: Container(
+                                        height: 85.h,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  182, 31, 31, 31)),
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        )),
+                                  ),
                                 ),
-                              ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      right: 1.w,
-                                      left: 1.w,
-                                    ),
-                                    child: Wrap(
-                                      spacing: 1.5.w,
-                                      children: [
-                                        Stack(
-                                          alignment: Alignment.topCenter,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  EdgeInsets.only(top: 10.h),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        right: 1.w,
+                                        left: 1.w,
+                                      ),
+                                      child: Wrap(
+                                        spacing: 1.5.w,
+                                        children: [
+                                          Stack(
+                                            alignment: Alignment.topCenter,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 10.h),
 
-                                              // Container housing card data
-                                              child: Container(
-                                                height: 65.h,
-                                                width: 25.w,
-                                                constraints:
-                                                    const BoxConstraints(
-                                                        maxWidth: 500,
-                                                        minHeight: 250),
-                                                decoration: const BoxDecoration(
-                                                  color: Color.fromARGB(
-                                                      255, 39, 38, 38),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(40),
+                                                // Container housing card data
+                                                child: Container(
+                                                  height: 65.h,
+                                                  width: 25.w,
+                                                  constraints:
+                                                      const BoxConstraints(
+                                                          maxWidth: 500,
+                                                          minHeight: 250),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                    color: Color.fromARGB(
+                                                        255, 39, 38, 38),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(40),
+                                                    ),
                                                   ),
-                                                ),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    //Transfer Text
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                        top: 16.h,
-                                                        bottom: 1.h,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      //Transfer Text
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          top: 16.h,
+                                                          bottom: 1.h,
+                                                        ),
+                                                        child: const Center(
+                                                          child: Text(
+                                                            'Transfer',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 36),
+                                                          ),
+                                                        ),
                                                       ),
-                                                      child: const Center(
-                                                        child: Text(
-                                                          'Transfer',
+
+                                                      //Text for Pay to
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                bottom: 1.h,
+                                                                left: 2.5.w),
+                                                        child: const Text(
+                                                          'Pay to',
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .bold,
-                                                              fontSize: 36),
+                                                                      .bold),
                                                         ),
                                                       ),
-                                                    ),
 
-                                                    //Text for Pay to
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          bottom: 1.h,
-                                                          left: 2.5.w),
-                                                      child: const Text(
-                                                        'Pay to',
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    ),
-
-                                                    // Pay to Container
-                                                    Center(
-                                                      child: Container(
-                                                        height: 6.h,
-                                                        margin: EdgeInsets.only(
-                                                            bottom: 1.h),
-                                                        width: 23.w,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: const Color
-                                                                  .fromARGB(159,
-                                                                  28, 28, 28)
-                                                              .withOpacity(
-                                                                  0.98),
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                  .all(
-                                                            Radius.circular(20),
+                                                      // Pay to Container
+                                                      Center(
+                                                        child: Container(
+                                                          height: 6.h,
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  bottom: 1.h),
+                                                          width: 23.w,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: const Color
+                                                                    .fromARGB(
+                                                                    159,
+                                                                    28,
+                                                                    28,
+                                                                    28)
+                                                                .withOpacity(
+                                                                    0.98),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                    .all(
+                                                              Radius.circular(
+                                                                  20),
+                                                            ),
+                                                            border: const Border
+                                                                .fromBorderSide(
+                                                              BorderSide(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          72,
+                                                                          255,
+                                                                          255,
+                                                                          255)),
+                                                            ),
                                                           ),
-                                                          border: const Border
-                                                              .fromBorderSide(
-                                                            BorderSide(
+                                                          child:
+                                                              SingleChildScrollView(
+                                                            physics:
+                                                                const NeverScrollableScrollPhysics(),
+                                                            child: Column(
+                                                              children: [
+                                                                TextField(
+                                                                  controller:
+                                                                      walletIDController,
+                                                                  decoration:
+                                                                      const InputDecoration(
+                                                                          border:
+                                                                              InputBorder.none),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+
+                                                      //Guiding text for user
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                bottom: 3.5.h),
+                                                        child: const Center(
+                                                          child: Text(
+                                                            'Please enter the Wallet ID or destination email',
+                                                            style: TextStyle(
                                                                 color: Color
                                                                     .fromARGB(
-                                                                        72,
-                                                                        255,
-                                                                        255,
-                                                                        255)),
-                                                          ),
-                                                        ),
-                                                        child:
-                                                            SingleChildScrollView(
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          child: Column(
-                                                            children: [
-                                                              TextField(
-                                                                controller:
-                                                                    walletIDController,
-                                                                decoration:
-                                                                    const InputDecoration(
-                                                                        border:
-                                                                            InputBorder.none),
-                                                              ),
-                                                            ],
+                                                                        113,
+                                                                        158,
+                                                                        158,
+                                                                        158),
+                                                                fontSize: 10),
                                                           ),
                                                         ),
                                                       ),
-                                                    ),
 
-                                                    //Guiding text for user
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          bottom: 3.5.h),
-                                                      child: const Center(
-                                                        child: Text(
-                                                          'Please enter the Wallet ID or destination email',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      113,
-                                                                      158,
-                                                                      158,
-                                                                      158),
-                                                              fontSize: 10),
-                                                        ),
-                                                      ),
-                                                    ),
-
-                                                    //Column housing Amount and Reason
-                                                    Center(
-                                                      child: Wrap(
-                                                        alignment: WrapAlignment
-                                                            .center,
-                                                        children: [
-                                                          //Column containing "Amount" Container
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            1.h),
-                                                                child:
-                                                                    const Text(
-                                                                  'Amount',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                height: 6.h,
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        bottom:
-                                                                            1.h),
-                                                                width: 11.w,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: const Color
-                                                                          .fromARGB(
-                                                                          159,
-                                                                          28,
-                                                                          28,
-                                                                          28)
-                                                                      .withOpacity(
-                                                                          0.98),
-                                                                  borderRadius:
-                                                                      const BorderRadius
-                                                                          .all(
-                                                                    Radius
-                                                                        .circular(
-                                                                            20),
-                                                                  ),
-                                                                  border: const Border
-                                                                      .fromBorderSide(
-                                                                    BorderSide(
-                                                                        color: Color.fromARGB(
-                                                                            72,
-                                                                            255,
-                                                                            255,
-                                                                            255)),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-
-                                                          //Column containing "Reason" Container
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 1.w),
-                                                            child: Column(
+                                                      //Column housing Amount and Reason
+                                                      Center(
+                                                        child: Wrap(
+                                                          alignment:
+                                                              WrapAlignment
+                                                                  .center,
+                                                          children: [
+                                                            //Column containing "Amount" Container
+                                                            Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
@@ -363,7 +315,7 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                                               1.h),
                                                                   child:
                                                                       const Text(
-                                                                    'Reason',
+                                                                    'Amount',
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .white,
@@ -404,317 +356,215 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                                               255)),
                                                                     ),
                                                                   ),
-                                                                  child:
-                                                                      SingleChildScrollView(
-                                                                    physics:
-                                                                        const NeverScrollableScrollPhysics(),
-                                                                    child:
-                                                                        Column(
-                                                                      children: [
-                                                                        TextField(
-                                                                          controller:
-                                                                              reasonController,
-                                                                          decoration:
-                                                                              const InputDecoration(
-                                                                            border:
-                                                                                InputBorder.none,
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
                                                                 ),
                                                               ],
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
 
-                                                    //Row housing Commission and total amount
-                                                    Padding(
-                                                      padding: EdgeInsets.only(
-                                                          top: 2.w),
-                                                      child: Center(
-                                                        child: Wrap(
-                                                          alignment:
-                                                              WrapAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            //Commision Display
+                                                            //Column containing "Reason" Container
                                                             Padding(
                                                               padding: EdgeInsets
                                                                   .only(
-                                                                      right:
-                                                                          2.w),
-                                                              child:
-                                                                  const Column(
+                                                                      left:
+                                                                          1.w),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
                                                                 children: [
-                                                                  Text(
-                                                                      'Commission:'),
-                                                                  //Container(),
-                                                                ],
-                                                              ),
-                                                            ),
-
-                                                            const VerticalDivider(
-                                                              width: 100,
-                                                              color:
-                                                                  Colors.white,
-                                                              thickness: 2,
-                                                              indent: 50,
-                                                            ),
-
-                                                            //Total Display
-                                                            Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          2.w),
-                                                              child:
-                                                                  const Column(
-                                                                children: [
-                                                                  Text(
-                                                                      'Total:'),
-                                                                  //Container(),
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        bottom:
+                                                                            1.h),
+                                                                    child:
+                                                                        const Text(
+                                                                      'Reason',
+                                                                      style: TextStyle(
+                                                                          color: Colors
+                                                                              .white,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
+                                                                  ),
+                                                                  Container(
+                                                                    height: 6.h,
+                                                                    margin: EdgeInsets.only(
+                                                                        bottom:
+                                                                            1.h),
+                                                                    width: 11.w,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: const Color
+                                                                              .fromARGB(
+                                                                              159,
+                                                                              28,
+                                                                              28,
+                                                                              28)
+                                                                          .withOpacity(
+                                                                              0.98),
+                                                                      borderRadius:
+                                                                          const BorderRadius
+                                                                              .all(
+                                                                        Radius.circular(
+                                                                            20),
+                                                                      ),
+                                                                      border: const Border
+                                                                          .fromBorderSide(
+                                                                        BorderSide(
+                                                                            color: Color.fromARGB(
+                                                                                72,
+                                                                                255,
+                                                                                255,
+                                                                                255)),
+                                                                      ),
+                                                                    ),
+                                                                    child:
+                                                                        SingleChildScrollView(
+                                                                      physics:
+                                                                          const NeverScrollableScrollPhysics(),
+                                                                      child:
+                                                                          Column(
+                                                                        children: [
+                                                                          TextField(
+                                                                            controller:
+                                                                                reasonController,
+                                                                            decoration:
+                                                                                const InputDecoration(
+                                                                              border: InputBorder.none,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
                                                                 ],
                                                               ),
                                                             ),
                                                           ],
                                                         ),
                                                       ),
-                                                    ),
 
-                                                    //Send button
-                                                    Center(
-                                                      child: TactileButton(
-                                                        onTap: () {},
-                                                        child:
-                                                            GradientContainer(
-                                                          gradient1: blue,
-                                                          gradient2: const Color
-                                                              .fromARGB(
-                                                              255, 85, 221, 89),
-                                                          height: 15,
-                                                          width: 150,
-                                                          neonGlow: greenGlow,
-                                                          text: 'Send',
-                                                          textSize: 12,
-                                                          borderColor:
-                                                              Colors.white38,
-                                                          borderRadius: 500,
+                                                      //Row housing Commission and total amount
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 2.w),
+                                                        child: Center(
+                                                          child: Wrap(
+                                                            alignment:
+                                                                WrapAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              //Commision Display
+                                                              Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        right: 2
+                                                                            .w),
+                                                                child:
+                                                                    const Column(
+                                                                  children: [
+                                                                    Text(
+                                                                        'Commission:'),
+                                                                    //Container(),
+                                                                  ],
+                                                                ),
+                                                              ),
+
+                                                              const VerticalDivider(
+                                                                width: 100,
+                                                                color: Colors
+                                                                    .white,
+                                                                thickness: 2,
+                                                                indent: 50,
+                                                              ),
+
+                                                              //Total Display
+                                                              Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        right: 2
+                                                                            .w),
+                                                                child:
+                                                                    const Column(
+                                                                  children: [
+                                                                    Text(
+                                                                        'Total:'),
+                                                                    //Container(),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
 
-                                            //Actual Card of User
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                top: 2.h,
-                                              ),
-                                              child: Container(
-                                                height: 20.h,
-                                                width: 21.w,
-                                                decoration: BoxDecoration(
-                                                  gradient:
-                                                      const LinearGradient(
-                                                          colors: [
-                                                        blue,
-                                                        Color.fromARGB(
-                                                            255, 85, 221, 89),
-                                                      ]),
-                                                  boxShadow: const [
-                                                    BoxShadow(
-                                                        color: blue,
-                                                        blurRadius: 10,
-                                                        blurStyle:
-                                                            BlurStyle.solid)
-                                                  ],
-                                                  borderRadius:
-                                                      BorderRadius.circular(24),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: SingleChildScrollView(
-                                                    physics:
-                                                        const NeverScrollableScrollPhysics(),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  left: .5.w,
-                                                                  right: .5.w),
-                                                          child: SizedBox(
-                                                            width:
-                                                                double.infinity,
-                                                            child: Wrap(
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .spaceBetween,
-                                                              crossAxisAlignment:
-                                                                  WrapCrossAlignment
-                                                                      .center,
-                                                              children: [
-                                                                //Text for balance on card
-                                                                const Text(
-                                                                  'Balance',
-                                                                  style: TextStyle(
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          255,
-                                                                          255,
-                                                                          255),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          20),
-                                                                ),
-
-                                                                //Container housing User Id
-                                                                Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: const Color
-                                                                        .fromARGB(
-                                                                      0,
-                                                                      86,
-                                                                      81,
-                                                                      81,
-                                                                    ).withOpacity(
-                                                                        0.6),
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            24),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding:
-                                                                        EdgeInsets
-                                                                            .only(
-                                                                      top: 1.h,
-                                                                      right:
-                                                                          1.w,
-                                                                      left: 1.w,
-                                                                      bottom:
-                                                                          1.h,
-                                                                    ),
-                                                                    child:
-                                                                        const Text(
-                                                                      "katarina",
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .center,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Colors
-                                                                            .white,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                        fontSize:
-                                                                            18,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
+                                                      //Send button
+                                                      Center(
+                                                        child: TactileButton(
+                                                          onTap: () {
+                                                            final reverseSlide =
+                                                                context.read<
+                                                                    GlobalProvider>();
+                                                            reverseSlide
+                                                                .reverseSlide();
+                                                          },
+                                                          child:
+                                                              GradientContainer(
+                                                            gradient1: blue,
+                                                            gradient2:
+                                                                const Color
+                                                                    .fromARGB(
+                                                                    255,
+                                                                    85,
+                                                                    221,
+                                                                    89),
+                                                            height: 15,
+                                                            width: 150,
+                                                            neonGlow: greenGlow,
+                                                            text: 'Send',
+                                                            textSize: 12,
+                                                            borderColor:
+                                                                Colors.white38,
+                                                            borderRadius: 500,
                                                           ),
                                                         ),
-                                                        const SizedBox(),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                            bottom: 2.h,
-                                                            left: 2.w,
-                                                            top: 5.h,
-                                                          ),
-                                                          child: Text(
-                                                            NumberFormat.simpleCurrency(
-                                                                    locale:
-                                                                        'en-US',
-                                                                    decimalDigits:
-                                                                        2)
-                                                                .format(7837),
-                                                            style: const TextStyle(
-                                                                fontSize: 20,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
 
-                                        //Container Housing 3 Containers
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 2.h,
-                                          ),
-                                          child: Container(
-                                            height: 73.5.h,
-                                            width: 38.w,
-                                            constraints: const BoxConstraints(
-                                                maxWidth: 700, minHeight: 250),
-                                            decoration: const BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  0, 201, 58, 58),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(40),
-                                              ),
-                                            ),
-                                            child: SingleChildScrollView(
-                                              physics:
-                                                  const NeverScrollableScrollPhysics(),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  //Container #1
-                                                  Container(
-                                                    height: 27.h,
-                                                    width: 38.w,
-                                                    constraints:
-                                                        const BoxConstraints(
-                                                            maxWidth: 700,
-                                                            minHeight: 100),
-                                                    decoration: BoxDecoration(
-                                                      gradient:
-                                                          const LinearGradient(
-                                                              colors: [
-                                                            blue,
-                                                            Color.fromARGB(255,
-                                                                85, 221, 89),
-                                                          ]),
-                                                      // boxShadow: const [
-                                                      //   BoxShadow(
-                                                      //       color: blue,
-                                                      //       blurRadius: 10,
-                                                      //       blurStyle:
-                                                      //           BlurStyle.solid)
-                                                      // ],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30),
-                                                    ),
+                                              //Actual Card of User
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                  top: 2.h,
+                                                ),
+                                                child: Container(
+                                                  height: 20.h,
+                                                  width: 21.w,
+                                                  decoration: BoxDecoration(
+                                                    gradient:
+                                                        const LinearGradient(
+                                                            colors: [
+                                                          blue,
+                                                          Color.fromARGB(
+                                                              255, 85, 221, 89),
+                                                        ]),
+                                                    boxShadow: const [
+                                                      BoxShadow(
+                                                          color: blue,
+                                                          blurRadius: 10,
+                                                          blurStyle:
+                                                              BlurStyle.solid)
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            24),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
                                                     child:
                                                         SingleChildScrollView(
                                                       physics:
@@ -727,14 +577,12 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          //Balance Text and Deposit Button Wrap
                                                           Padding(
                                                             padding:
                                                                 EdgeInsets.only(
-                                                              left: 2.w,
-                                                              right: 2.w,
-                                                              top: 3.5.h,
-                                                            ),
+                                                                    left: .5.w,
+                                                                    right:
+                                                                        .5.w),
                                                             child: SizedBox(
                                                               width: double
                                                                   .infinity,
@@ -762,7 +610,7 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                                             20),
                                                                   ),
 
-                                                                  //Depsoit Button
+                                                                  //Container housing User Id
                                                                   Container(
                                                                     decoration:
                                                                         BoxDecoration(
@@ -776,7 +624,7 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                                           0.6),
                                                                       borderRadius:
                                                                           BorderRadius.circular(
-                                                                              5),
+                                                                              24),
                                                                     ),
                                                                     child:
                                                                         Padding(
@@ -793,23 +641,18 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                                             1.h,
                                                                       ),
                                                                       child:
-                                                                          TactileButton(
-                                                                        onTap:
-                                                                            () {},
-                                                                        child:
-                                                                            const Text(
-                                                                          "+",
-                                                                          textAlign:
-                                                                              TextAlign.center,
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                Colors.white,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            fontSize:
-                                                                                18,
-                                                                          ),
+                                                                          const Text(
+                                                                        "katarina",
+                                                                        textAlign:
+                                                                            TextAlign.center,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              Colors.white,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                          fontSize:
+                                                                              18,
                                                                         ),
                                                                       ),
                                                                     ),
@@ -818,410 +661,347 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                               ),
                                                             ),
                                                           ),
-
-                                                          //Card Balance and Withdraw Button Wrap
+                                                          const SizedBox(),
                                                           Padding(
                                                             padding:
                                                                 EdgeInsets.only(
+                                                              bottom: 2.h,
                                                               left: 2.w,
-                                                              right: 2.w,
-                                                              top: 2.h,
+                                                              top: 5.h,
                                                             ),
-                                                            child: SizedBox(
-                                                              width: double
-                                                                  .infinity,
-                                                              child: Wrap(
-                                                                alignment:
-                                                                    WrapAlignment
-                                                                        .spaceBetween,
-                                                                crossAxisAlignment:
-                                                                    WrapCrossAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  // Text display for Card balance
-                                                                  Text(
-                                                                    NumberFormat.simpleCurrency(
-                                                                            locale:
-                                                                                'en-US',
-                                                                            decimalDigits:
-                                                                                2)
-                                                                        .format(
-                                                                            7837),
-                                                                    style: const TextStyle(
-                                                                        fontSize:
-                                                                            36,
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ),
-
-                                                                  //Withdraw Button
-                                                                  Container(
-                                                                    decoration:
-                                                                        BoxDecoration(
-                                                                      color: const Color
-                                                                          .fromARGB(
-                                                                        0,
-                                                                        86,
-                                                                        81,
-                                                                        81,
-                                                                      ).withOpacity(
-                                                                          0.6),
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              5),
-                                                                    ),
-                                                                    child:
-                                                                        Padding(
-                                                                      padding:
-                                                                          EdgeInsets
-                                                                              .only(
-                                                                        top:
-                                                                            1.h,
-                                                                        right:
-                                                                            1.w,
-                                                                        left:
-                                                                            1.w,
-                                                                        bottom:
-                                                                            1.h,
-                                                                      ),
-                                                                      child:
-                                                                          TactileButton(
-                                                                        onTap:
-                                                                            () {},
-                                                                        child:
-                                                                            const Text(
-                                                                          "-",
-                                                                          textAlign:
-                                                                              TextAlign.center,
-                                                                          style:
-                                                                              TextStyle(
-                                                                            color:
-                                                                                Colors.white,
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            fontSize:
-                                                                                18,
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-
-                                                          //Review Stream
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 2.w,
-                                                                    top: 5.h),
-                                                            child: Wrap(
-                                                              alignment:
-                                                                  WrapAlignment
-                                                                      .spaceBetween,
-                                                              crossAxisAlignment:
-                                                                  WrapCrossAlignment
-                                                                      .center,
-                                                              children: [
-                                                                //Upward Arrow
-                                                                const Icon(
-                                                                  Ionicons
-                                                                      .arrow_up_circle_outline,
-                                                                  size: 20,
-                                                                  color: Colors
-                                                                      .white70,
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          left:
-                                                                              1.h),
-                                                                  child: Text(
-                                                                    NumberFormat.simpleCurrency(
-                                                                            locale:
-                                                                                'en-US',
-                                                                            decimalDigits:
-                                                                                2)
-                                                                        .format(
-                                                                            5649),
-                                                                    style: const TextStyle(
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        color: Colors
-                                                                            .green),
-                                                                  ),
-                                                                ),
-
-                                                                //Downward Arrow
-                                                                Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          left:
-                                                                              2.w),
-                                                                  child:
-                                                                      const Icon(
-                                                                    Ionicons
-                                                                        .arrow_down_circle_outline,
-                                                                    size: 20,
-                                                                    color: Colors
-                                                                        .white70,
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          left:
-                                                                              1.h),
-                                                                  child: Text(
-                                                                    NumberFormat.simpleCurrency(
-                                                                            locale:
-                                                                                'en-US',
-                                                                            decimalDigits:
-                                                                                2)
-                                                                        .format(
-                                                                            268),
-                                                                    style: const TextStyle(
-                                                                        fontSize:
-                                                                            20,
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .bold,
-                                                                        color: Colors
-                                                                            .red),
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                            child: Text(
+                                                              NumberFormat.simpleCurrency(
+                                                                      locale:
+                                                                          'en-US',
+                                                                      decimalDigits:
+                                                                          2)
+                                                                  .format(7837),
+                                                              style: const TextStyle(
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                           ),
                                                         ],
                                                       ),
                                                     ),
                                                   ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
 
-                                                  //Container #2
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 1.5.h),
-                                                    child: Container(
-                                                      height: 18.h,
+                                          //Container Housing 3 Containers
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: 2.h,
+                                            ),
+                                            child: Container(
+                                              height: 73.5.h,
+                                              width: 38.w,
+                                              constraints: const BoxConstraints(
+                                                  maxWidth: 700,
+                                                  minHeight: 250),
+                                              decoration: const BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    0, 201, 58, 58),
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(40),
+                                                ),
+                                              ),
+                                              child: SingleChildScrollView(
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    //Container #1
+                                                    Container(
+                                                      height: 27.h,
                                                       width: 38.w,
                                                       constraints:
                                                           const BoxConstraints(
                                                               maxWidth: 700,
                                                               minHeight: 100),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        color: Color.fromARGB(
-                                                            255, 39, 38, 38),
+                                                      decoration: BoxDecoration(
+                                                        gradient:
+                                                            const LinearGradient(
+                                                                colors: [
+                                                              blue,
+                                                              Color.fromARGB(
+                                                                  255,
+                                                                  85,
+                                                                  221,
+                                                                  89),
+                                                            ]),
+                                                        // boxShadow: const [
+                                                        //   BoxShadow(
+                                                        //       color: blue,
+                                                        //       blurRadius: 10,
+                                                        //       blurStyle:
+                                                        //           BlurStyle.solid)
+                                                        // ],
                                                         borderRadius:
-                                                            BorderRadius.all(
-                                                          Radius.circular(40),
-                                                        ),
+                                                            BorderRadius
+                                                                .circular(30),
                                                       ),
-                                                    ),
-                                                  ),
-
-                                                  //Container #3
-                                                  Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 1.5.h),
-                                                    child: Container(
-                                                      height: 25.h,
-                                                      width: 38.w,
-                                                      constraints:
-                                                          const BoxConstraints(
-                                                              maxWidth: 700,
-                                                              minHeight: 100),
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        color: Color.fromARGB(
-                                                            255, 39, 38, 38),
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                          Radius.circular(40),
-                                                        ),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                          left: 2.w,
-                                                          top: .5.h,
-                                                        ),
+                                                      child:
+                                                          SingleChildScrollView(
+                                                        physics:
+                                                            const NeverScrollableScrollPhysics(),
                                                         child: Column(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .spaceEvenly,
+                                                                  .spaceBetween,
                                                           children: [
-                                                            //Information Text
+                                                            //Balance Text and Deposit Button Wrap
                                                             Padding(
                                                               padding:
                                                                   EdgeInsets
                                                                       .only(
-                                                                bottom: .5.h,
+                                                                left: 2.w,
+                                                                right: 2.w,
+                                                                top: 3.5.h,
                                                               ),
-                                                              child: const Text(
-                                                                'Information:',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        36,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                            ),
-                                                            // Wallet ID for user
-                                                            TextButton.icon(
-                                                              icon: const Icon(
-                                                                Ionicons
-                                                                    .wallet_outline,
-                                                                size: 20,
-                                                                color: Colors
-                                                                    .white70,
-                                                              ),
-                                                              onPressed: () {},
-                                                              label: Text(
-                                                                'Wallet ID:',
-                                                                style: GoogleFonts
-                                                                    .montserrat(
-                                                                  textStyle: TextStyle(
-                                                                      fontSize:
-                                                                          2.sp),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400,
-                                                                  color: const Color
-                                                                      .fromARGB(
-                                                                      255,
-                                                                      255,
-                                                                      253,
-                                                                      253),
+                                                              child: SizedBox(
+                                                                width: double
+                                                                    .infinity,
+                                                                child: Wrap(
+                                                                  alignment:
+                                                                      WrapAlignment
+                                                                          .spaceBetween,
+                                                                  crossAxisAlignment:
+                                                                      WrapCrossAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    //Text for balance on card
+                                                                    const Text(
+                                                                      'Balance',
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              255,
+                                                                              255,
+                                                                              255),
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          fontSize:
+                                                                              20),
+                                                                    ),
+
+                                                                    //Depsoit Button
+                                                                    Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: const Color
+                                                                            .fromARGB(
+                                                                          0,
+                                                                          86,
+                                                                          81,
+                                                                          81,
+                                                                        ).withOpacity(
+                                                                            0.6),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                      ),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            EdgeInsets.only(
+                                                                          top: 1
+                                                                              .h,
+                                                                          right:
+                                                                              1.w,
+                                                                          left:
+                                                                              1.w,
+                                                                          bottom:
+                                                                              1.h,
+                                                                        ),
+                                                                        child:
+                                                                            TactileButton(
+                                                                          onTap:
+                                                                              () {},
+                                                                          child:
+                                                                              const Text(
+                                                                            "+",
+                                                                            textAlign:
+                                                                                TextAlign.center,
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 18,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
                                                                 ),
                                                               ),
                                                             ),
-                                                            // Safety Lock  for 2FA Check
-                                                            Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left:
-                                                                          1.h),
-                                                              child: Wrap(
-                                                                alignment:
-                                                                    WrapAlignment
-                                                                        .spaceBetween,
-                                                                crossAxisAlignment:
-                                                                    WrapCrossAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  const Icon(
-                                                                    Ionicons
-                                                                        .shield_checkmark_outline,
-                                                                    size: 20,
-                                                                    color: Colors
-                                                                        .white70,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 1
-                                                                            .h),
-                                                                    child: Text(
-                                                                      '2FA Enabled:',
-                                                                      style: GoogleFonts
-                                                                          .montserrat(
-                                                                        textStyle:
-                                                                            TextStyle(fontSize: 2.sp),
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: const Color
-                                                                            .fromARGB(
-                                                                            255,
-                                                                            255,
-                                                                            253,
-                                                                            253),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  // LiteRollingSwitch(
 
-                                                                  // ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            // Key for Card Acces
-                                                            //Will also be finger print accessible
+                                                            //Card Balance and Withdraw Button Wrap
                                                             Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left:
-                                                                          1.h),
-                                                              child: Wrap(
-                                                                alignment:
-                                                                    WrapAlignment
-                                                                        .spaceBetween,
-                                                                crossAxisAlignment:
-                                                                    WrapCrossAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  const Icon(
-                                                                    Ionicons
-                                                                        .lock_closed_outline,
-                                                                    size: 20,
-                                                                    color: Colors
-                                                                        .white70,
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 1
-                                                                            .h),
-                                                                    child: Text(
-                                                                      'Key:',
-                                                                      style: GoogleFonts
-                                                                          .montserrat(
-                                                                        textStyle:
-                                                                            TextStyle(fontSize: 2.sp),
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .only(
+                                                                left: 2.w,
+                                                                right: 2.w,
+                                                                top: 2.h,
+                                                              ),
+                                                              child: SizedBox(
+                                                                width: double
+                                                                    .infinity,
+                                                                child: Wrap(
+                                                                  alignment:
+                                                                      WrapAlignment
+                                                                          .spaceBetween,
+                                                                  crossAxisAlignment:
+                                                                      WrapCrossAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    // Text display for Card balance
+                                                                    Text(
+                                                                      NumberFormat.simpleCurrency(
+                                                                              locale: 'en-US',
+                                                                              decimalDigits: 2)
+                                                                          .format(7837),
+                                                                      style: const TextStyle(
+                                                                          fontSize:
+                                                                              36,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
+
+                                                                    //Withdraw Button
+                                                                    Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
                                                                         color: const Color
                                                                             .fromARGB(
-                                                                            255,
-                                                                            255,
-                                                                            253,
-                                                                            253),
+                                                                          0,
+                                                                          86,
+                                                                          81,
+                                                                          81,
+                                                                        ).withOpacity(
+                                                                            0.6),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
                                                                       ),
-                                                                    ),
-                                                                  ),
-                                                                  //"Change" tactile button allows for changing of password
-                                                                  Padding(
-                                                                    padding: EdgeInsets.only(
-                                                                        left: 25
-                                                                            .w),
-                                                                    child:
-                                                                        TactileButton(
-                                                                      onTap:
-                                                                          () {},
                                                                       child:
-                                                                          Container(
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
-                                                                          borderRadius:
-                                                                              const BorderRadius.all(
-                                                                            Radius.circular(40),
+                                                                          Padding(
+                                                                        padding:
+                                                                            EdgeInsets.only(
+                                                                          top: 1
+                                                                              .h,
+                                                                          right:
+                                                                              1.w,
+                                                                          left:
+                                                                              1.w,
+                                                                          bottom:
+                                                                              1.h,
+                                                                        ),
+                                                                        child:
+                                                                            TactileButton(
+                                                                          onTap:
+                                                                              () {},
+                                                                          child:
+                                                                              const Text(
+                                                                            "-",
+                                                                            textAlign:
+                                                                                TextAlign.center,
+                                                                            style:
+                                                                                TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              fontSize: 18,
+                                                                            ),
                                                                           ),
                                                                         ),
-                                                                        child: const Text(
-                                                                            'Change'),
                                                                       ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ),
+
+                                                            //Review Stream
+                                                            Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 2.w,
+                                                                      top: 5.h),
+                                                              child: Wrap(
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .spaceBetween,
+                                                                crossAxisAlignment:
+                                                                    WrapCrossAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  //Upward Arrow
+                                                                  const Icon(
+                                                                    Ionicons
+                                                                        .arrow_up_circle_outline,
+                                                                    size: 20,
+                                                                    color: Colors
+                                                                        .white70,
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        left: 1
+                                                                            .h),
+                                                                    child: Text(
+                                                                      NumberFormat.simpleCurrency(
+                                                                              locale: 'en-US',
+                                                                              decimalDigits: 2)
+                                                                          .format(5649),
+                                                                      style: const TextStyle(
+                                                                          fontSize:
+                                                                              20,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color:
+                                                                              Colors.green),
+                                                                    ),
+                                                                  ),
+
+                                                                  //Downward Arrow
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        left: 2
+                                                                            .w),
+                                                                    child:
+                                                                        const Icon(
+                                                                      Ionicons
+                                                                          .arrow_down_circle_outline,
+                                                                      size: 20,
+                                                                      color: Colors
+                                                                          .white70,
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(
+                                                                        left: 1
+                                                                            .h),
+                                                                    child: Text(
+                                                                      NumberFormat.simpleCurrency(
+                                                                              locale: 'en-US',
+                                                                              decimalDigits: 2)
+                                                                          .format(268),
+                                                                      style: const TextStyle(
+                                                                          fontSize:
+                                                                              20,
+                                                                          fontWeight: FontWeight
+                                                                              .bold,
+                                                                          color:
+                                                                              Colors.red),
                                                                     ),
                                                                   ),
                                                                 ],
@@ -1231,29 +1011,260 @@ class DeskWalletWindowPopupCardState extends State<DeskWalletWindowPopupCard> {
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+
+                                                    //Container #2
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 1.5.h),
+                                                      child: Container(
+                                                        height: 18.h,
+                                                        width: 38.w,
+                                                        constraints:
+                                                            const BoxConstraints(
+                                                                maxWidth: 700,
+                                                                minHeight: 100),
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color: Color.fromARGB(
+                                                              255, 39, 38, 38),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(40),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+
+                                                    //Container #3
+                                                    Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 1.5.h),
+                                                      child: Container(
+                                                        height: 25.h,
+                                                        width: 38.w,
+                                                        constraints:
+                                                            const BoxConstraints(
+                                                                maxWidth: 700,
+                                                                minHeight: 100),
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color: Color.fromARGB(
+                                                              255, 39, 38, 38),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(40),
+                                                          ),
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                            left: 2.w,
+                                                            top: .5.h,
+                                                          ),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceEvenly,
+                                                            children: [
+                                                              //Information Text
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .only(
+                                                                  bottom: .5.h,
+                                                                ),
+                                                                child:
+                                                                    const Text(
+                                                                  'Information:',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          36,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                ),
+                                                              ),
+                                                              // Wallet ID for user
+                                                              TextButton.icon(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Ionicons
+                                                                      .wallet_outline,
+                                                                  size: 20,
+                                                                  color: Colors
+                                                                      .white70,
+                                                                ),
+                                                                onPressed:
+                                                                    () {},
+                                                                label: Text(
+                                                                  'Wallet ID:',
+                                                                  style: GoogleFonts
+                                                                      .montserrat(
+                                                                    textStyle: TextStyle(
+                                                                        fontSize:
+                                                                            2.sp),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color: const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        255,
+                                                                        253,
+                                                                        253),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              // Safety Lock  for 2FA Check
+                                                              Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        left: 1
+                                                                            .h),
+                                                                child: Wrap(
+                                                                  alignment:
+                                                                      WrapAlignment
+                                                                          .spaceBetween,
+                                                                  crossAxisAlignment:
+                                                                      WrapCrossAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    const Icon(
+                                                                      Ionicons
+                                                                          .shield_checkmark_outline,
+                                                                      size: 20,
+                                                                      color: Colors
+                                                                          .white70,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsets.only(
+                                                                          left:
+                                                                              1.h),
+                                                                      child:
+                                                                          Text(
+                                                                        '2FA Enabled:',
+                                                                        style: GoogleFonts
+                                                                            .montserrat(
+                                                                          textStyle:
+                                                                              TextStyle(fontSize: 2.sp),
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              255,
+                                                                              255,
+                                                                              253,
+                                                                              253),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    // LiteRollingSwitch(
+
+                                                                    // ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              // Key for Card Acces
+                                                              //Will also be finger print accessible
+                                                              Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        left: 1
+                                                                            .h),
+                                                                child: Wrap(
+                                                                  alignment:
+                                                                      WrapAlignment
+                                                                          .spaceBetween,
+                                                                  crossAxisAlignment:
+                                                                      WrapCrossAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    const Icon(
+                                                                      Ionicons
+                                                                          .lock_closed_outline,
+                                                                      size: 20,
+                                                                      color: Colors
+                                                                          .white70,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsets.only(
+                                                                          left:
+                                                                              1.h),
+                                                                      child:
+                                                                          Text(
+                                                                        'Key:',
+                                                                        style: GoogleFonts
+                                                                            .montserrat(
+                                                                          textStyle:
+                                                                              TextStyle(fontSize: 2.sp),
+                                                                          fontWeight:
+                                                                              FontWeight.w400,
+                                                                          color: const Color
+                                                                              .fromARGB(
+                                                                              255,
+                                                                              255,
+                                                                              253,
+                                                                              253),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    //"Change" tactile button allows for changing of password
+                                                                    Padding(
+                                                                      padding: EdgeInsets.only(
+                                                                          left:
+                                                                              25.w),
+                                                                      child:
+                                                                          TactileButton(
+                                                                        onTap:
+                                                                            () {},
+                                                                        child:
+                                                                            Container(
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
+                                                                            borderRadius:
+                                                                                const BorderRadius.all(
+                                                                              Radius.circular(40),
+                                                                            ),
+                                                                          ),
+                                                                          child:
+                                                                              const Text('Change'),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            ));
   }
 }

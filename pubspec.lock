@@ -601,13 +601,13 @@ packages:
     source: hosted
     version: "2.1.6"
   provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: provider
-      sha256: cdbe7530b12ecd9eb455bdaa2fcb8d4dad22e80b8afb4798b41479d5ce26847f
+      sha256: "659adaefa8196fa2799d7ac3dca3c2e831e549dc40b082d07a599fe9150d75fc"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.5"
+    version: "6.1.0"
   responsive_builder:
     dependency: "direct main"
     description:
@@ -648,6 +648,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.6"
+  riverpod:
+    dependency: "direct main"
+    description:
+      name: riverpod
+      sha256: "2e84315036e64c59affaff7443dea51247bc2fe704461a32f26a27986fb63d55"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.5"
   scale_button:
     dependency: "direct main"
     description:
@@ -709,6 +717,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  state_notifier:
+    dependency: transitive
+    description:
+      name: state_notifier
+      sha256: b8677376aa54f2d7c58280d5a007f9e8774f1968d1fb1c096adcb4792fba29bb
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   stream_channel:
     dependency: transitive
     description:

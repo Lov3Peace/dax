@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/Window%20Route/friends_window_route.dart';
@@ -52,140 +54,133 @@ class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
   @override
   Widget build(BuildContext context) {
     Color hoverColor = Colors.white;
-    return Indexer(
-      children: [
-        Indexed(
-          index: 1,
-          child: Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0.w, 0),
-              child: Container(
-                constraints: BoxConstraints(minHeight: 750),
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(185, 21, 19, 22),
-                    border: Border.all(color: Color.fromARGB(60, 75, 75, 75)),
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 5,
-                        color: Color.fromARGB(255, 8, 8, 8),
-                        offset: Offset(0, 0),
-                      ),
-                      // BoxShadow(
-                      //   blurRadius: 10,
-                      //   color: Color.fromARGB(255, 37, 37, 37),
-                      //   offset: Offset(0, 0),
-                      // )
-                    ]),
-                width: 12.5.w,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 1.w),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      //Logo
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.h),
-                        child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(1.5.w)),
-                            clipBehavior: Clip.hardEdge,
-                            child: Image.asset("images/omni-temp-logo.png",
-                                height: 5.w)),
-                      ),
-                      //Home
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.5.h),
-                        child: DeskSettingsWindowButton(
-                          dockIcon: Material(
-                            color: tran,
-                            child: TactileButton(
-                              child: TextButton.icon(
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (buildContext) {
-                                    return AuthCheck();
-                                  }));
-                                },
-                                icon: Icon(Icons.dashboard_rounded,
-                                    size: 30, color: Colors.white),
-                                label: Padding(
-                                  padding: EdgeInsets.only(left: 0.5.w),
-                                  child: Text(
-                                    'Home',
-                                    style: GoogleFonts.montserrat(
-                                        textStyle: TextStyle(fontSize: 2.sp),
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white),
-                                  ),
+    return Padding(
+        padding: EdgeInsets.fromLTRB(0, 0, 0.w, 0),
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              constraints: BoxConstraints(minHeight: 750),
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                  color: Color.fromARGB(237, 21, 19, 22),
+                  border: Border.all(color: Color.fromARGB(182, 75, 75, 75)),
+                  boxShadow: const [
+                    // BoxShadow(
+                    //   blurRadius: 10,
+                    //   color: Color.fromARGB(255, 37, 37, 37),
+                    //   offset: Offset(0, 0),
+                    // )
+                  ]),
+              width: 12.5.w,
+              child: Padding(
+                padding: EdgeInsets.only(left: 1.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    //Logo
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.h),
+                      child: ClipRRect(
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(1.5.w)),
+                          clipBehavior: Clip.hardEdge,
+                          child: Image.asset("images/omni-temp-logo.png",
+                              height: 5.w)),
+                    ),
+                    //Home
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.5.h),
+                      child: DeskSettingsWindowButton(
+                        dockIcon: Material(
+                          color: tran,
+                          child: TactileButton(
+                            child: TextButton.icon(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (buildContext) {
+                                  return AuthCheck();
+                                }));
+                              },
+                              icon: Icon(Icons.dashboard_rounded,
+                                  size: 30, color: Colors.white),
+                              label: Padding(
+                                padding: EdgeInsets.only(left: 0.5.w),
+                                child: Text(
+                                  'Home',
+                                  style: GoogleFonts.montserrat(
+                                      textStyle: TextStyle(fontSize: 2.sp),
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white),
                                 ),
                               ),
-                              // child: GradientContainer(
-                              //   borderColor: tran,
-                              //   gradient1: Colors.white10,
-                              //   gradient2: Colors.white12,
-                              //   height: 1.h,
-                              //   neonGlow: tran,
-                              //   text: 'Home',
-                              //   textSize: 2.sp,
-                              //   borderRadius: 2.w,
-                              //   width: 3.w,
-                              // ),
-                              // onTap: () {
-                              //   Navigator.of(context)
-                              //       .push(MaterialPageRoute(builder: (buildContext) {
-                              //     return AuthCheck();
-                              //   }));
-                              // },
                             ),
+                            // child: GradientContainer(
+                            //   borderColor: tran,
+                            //   gradient1: Colors.white10,
+                            //   gradient2: Colors.white12,
+                            //   height: 1.h,
+                            //   neonGlow: tran,
+                            //   text: 'Home',
+                            //   textSize: 2.sp,
+                            //   borderRadius: 2.w,
+                            //   width: 3.w,
+                            // ),
+                            // onTap: () {
+                            //   Navigator.of(context)
+                            //       .push(MaterialPageRoute(builder: (buildContext) {
+                            //     return AuthCheck();
+                            //   }));
+                            // },
                           ),
                         ),
                       ),
+                    ),
 
-                      //Wallet
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                        child: DeskWalletWindowPopupCard(),
-                      ),
+                    //Wallet
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                      child: DeskWalletWindowPopupCard(),
+                    ),
 
-                      //
-                      //Friends
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                        child: DeskFriendsWindowPopupCard(),
-                      ),
-                      //Settings
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                        child: DeskSettingsWindowPopupCard(),
-                      ),
+                    //
+                    //Friends
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                      child: DeskFriendsWindowPopupCard(),
+                    ),
+                    //Settings
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                      child: DeskSettingsWindowPopupCard(),
+                    ),
 
-                      //Help
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                        child: DeskHelpWindowPopupCard(),
-                      ),
-                      //
-                      //About Us/Info
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 1.5.h),
-                        child: DeskInfoWindowPopupCard(),
-                      ),
-                      //
-                      //Logout
-                      Spacer(),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 2.h),
-                        child: const LogoutWindowButton(),
-                      ),
-                    ],
-                  ),
+                    //Help
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                      child: DeskHelpWindowPopupCard(),
+                    ),
+                    //
+                    //About Us/Info
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                      child: DeskInfoWindowPopupCard(),
+                    ),
+                    //
+                    //Logout
+                    Spacer(),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 2.h),
+                      child: TactileButton(child: const LogoutWindowButton()),
+                    ),
+                  ],
                 ),
-              )),
-        ),
-      ],
-    );
+              ),
+            ),
+          ),
+        ));
 
     // return Container(
     //   constraints: BoxConstraints(minHeight: 750),

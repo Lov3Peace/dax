@@ -24,11 +24,10 @@ class _TactileButtonState extends State<TactileButton> with AnimationMixin {
   void initState() {
     // TODO: implement initState
     scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    controller.stop();
+    // controller.stop();
     super.initState();
   }
 
-  Control control = Control.stop;
   @override
   Widget build(BuildContext context) {
     return CustomAnimationBuilder<double>(

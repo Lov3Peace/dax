@@ -30,7 +30,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
     return TextButton(
       onPressed: loadPopUp,
       child: const Text(
-        "Sign Up!",
+        "Need an account?",
         style: TextStyle(
           color: Colors.white,
         ),
@@ -172,7 +172,7 @@ class _SignUpFormState extends State<SignUpForm> {
             );
           },
           pageBuilder: (context, animation, secondaryAnimation) {
-            return const AuthCheck();
+            return AuthCheck();
           },
           transitionDuration: const Duration(milliseconds: 0),
         ),
@@ -277,6 +277,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               child: TextField(
                 controller: _passwordController,
+                onSubmitted: (value) => signUp(),
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(

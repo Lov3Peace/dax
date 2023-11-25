@@ -7,26 +7,13 @@ import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/animation_builder/custom_animation_builder.dart';
+import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../util/Window Route/friends_window_route.dart';
-
-class DeskFriendsWindowButton extends StatelessWidget {
-  /// {@macro add_todo_button}
-  DeskFriendsWindowButton({super.key, required, required this.dockIcon});
-  Widget dockIcon;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(0.0),
-      child: Material(
-        color: tran,
-        child: dockIcon,
-      ),
-    );
-  }
-}
+import 'GlobalProvider.dart';
 
 //const String _heroFriendsWindow = 'Friends-window-hero';
 final friendsBucket = PageStorageBucket();
@@ -42,6 +29,46 @@ class DeskFriendsWindowPopupCard extends StatefulWidget {
 
 class _DeskFriendsWindowPopupCardState
     extends State<DeskFriendsWindowPopupCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: tran,
+      child: TextButton.icon(
+        icon: const Icon(
+          Ionicons.people_outline,
+          size: 30,
+          color: Colors.white54,
+        ),
+        onPressed: () {
+          final startSlide = context.read<GlobalProvider>();
+          startSlide.friendActivateSlide();
+        },
+        label: Padding(
+          padding: EdgeInsets.only(left: 0.5.w),
+          child: Text(
+            'Connections',
+            style: GoogleFonts.montserrat(
+                textStyle: TextStyle(fontSize: 2.sp),
+                fontWeight: FontWeight.w400,
+                color: Colors.white54),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FriendsPopUp extends StatefulWidget {
+  FriendsPopUp({super.key});
+
+  State<FriendsPopUp> createState() => _FriendsPopUpState();
+}
+
+// final friendsIDController = TextEditingController();
+// final reasonController = TextEditingController();
+
+class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
+  //control = Control.play;
   TextEditingController _searchController = TextEditingController();
   @override
   final List people = [
@@ -68,323 +95,342 @@ class _DeskFriendsWindowPopupCardState
   Color inactiveColor = tran;
   Color currentColor = tran;
   int selectedIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: tran,
-      child: TextButton.icon(
-        icon: const Icon(
-          Ionicons.people_outline,
-          size: 30,
-          color: Colors.white54,
-        ),
-        onPressed: loadPopUp,
-        label: Padding(
-          padding: EdgeInsets.only(left: 0.5.w),
-          child: Text(
-            'Connections',
-            style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
-                fontWeight: FontWeight.w400,
-                color: Colors.white54),
-          ),
-        ),
-      ),
-    );
-  }
-
-  void loadPopUp() {
-    // toggle between control instructions
-
-    control = Control.play;
-
-    //slide animation
-    showGeneralDialog(
-      barrierDismissible: true,
-      barrierLabel: "Connections",
-      context: context,
-      transitionDuration: const Duration(milliseconds: 1000),
-      transitionBuilder: (_, animation, __, child) {
-        Tween<Offset> tween;
-        tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
-        return SlideTransition(
-          position: tween.animate(
-            CurvedAnimation(parent: animation, curve: Curves.easeInOutBack),
-          ),
-          child: child,
-        );
-      },
-      pageBuilder: (context, _, __) => Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+    return Consumer<GlobalProvider>(
+        builder: (context, value, child) => CustomAnimationBuilder<double>(
+              control: value.friendSlideControl,
+              startPosition: 0,
+              tween: Tween(begin: 0, end: 83.5.w),
+              duration: const Duration(milliseconds: 1250),
+              curve: Curves.easeInOutBack,
+              onCompleted: () {
+                final resetSlide = context.read<GlobalProvider>();
+                resetSlide.friendResetSlide();
+              },
+              builder: (context, value, child) {
+                return Transform.translate(
+                  offset: Offset(value, 0),
+                  child: child,
+                );
+              },
               child: Center(
-                child: Container(
-                  height: 85.h,
-                  width: 70.w,
-                  padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: Material(
-                    shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                    color: const Color.fromARGB(42, 55, 52, 52),
-                    elevation: 2,
-                    borderRadius: BorderRadius.circular(32),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(24),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                                height: 85.h,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color.fromARGB(
-                                          182, 31, 31, 31)),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+                      child: Center(
+                        child: Container(
+                          height: 85.h,
+                          width: 70.w,
+                          padding: const EdgeInsets.symmetric(vertical: 32),
+                          child: Material(
+                            shadowColor:
+                                const Color.fromRGBO(42, 41, 41, 0.631),
+                            color: const Color.fromARGB(42, 55, 52, 52),
+                            elevation: 2,
+                            borderRadius: BorderRadius.circular(32),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
                                   borderRadius: BorderRadius.circular(24),
-                                )),
-                          ),
-                        ),
-                        SingleChildScrollView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          child: Column(
-                            children: [
-                              //Stories
-                              Padding(
-                                padding: EdgeInsets.only(right: 37.w, top: 1.h),
-                                child: const Text(
-                                  "Connections",
-                                  style: TextStyle(
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.w800,
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 10, sigmaY: 10),
+                                    child: Container(
+                                        height: 85.h,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  182, 31, 31, 31)),
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        )),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  top: 1.h,
-                                  right: 2.w,
-                                  left: 2.w,
-                                  bottom: 1.h,
-                                ),
-                                child: TextFormField(
-                                  controller: _searchController,
-                                  decoration: const InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(24),
-                                      ),
-                                      borderSide:
-                                          BorderSide(color: Colors.white),
-                                    ),
-                                    hintText: 'Search...',
-                                    suffixIcon: Icon(Icons.search),
-                                  ),
-                                  onChanged: (value) {
-                                    // Implement your search logic here
-                                    // You can use the 'value' variable to perform search operations
-                                  },
-                                ),
-                              ),
-
-                              //Container housing the tab buttons
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  height: 6.5.h,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromRGBO(42, 41, 41, 0.631)
-                                            .withOpacity(0.98),
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(40),
-                                    ),
-                                  ),
-                                  child: Wrap(
-                                    alignment: WrapAlignment.spaceEvenly,
-                                    runAlignment: WrapAlignment.center,
+                                SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(
                                     children: [
-                                      //
-                                      //All Button
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            if (selectedIndex != 1) {
-                                              selectedIndex = 1;
-                                              isSelected = true;
-                                              currentColor = activeColor;
-                                            }
-                                          });
-
-                                          int pageIndex =
-                                              0; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
-
-                                          // isSelected = false;
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7.w, vertical: 1.h),
-                                          decoration: const BoxDecoration(
-                                              gradient: LinearGradient(
-                                                  colors: [purp, red]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: red,
-                                                    blurRadius: 10,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("All",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                      //Stories
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            right: 37.w, top: 1.h),
+                                        child: const Text(
+                                          "Connections",
+                                          style: TextStyle(
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w800,
+                                          ),
                                         ),
                                       ),
-                                      //Favorites Button
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            if (selectedIndex != 1) {
-                                              selectedIndex = 1;
-                                              isSelected = true;
-                                              currentColor = activeColor;
-                                            }
-                                          });
-
-                                          int pageIndex =
-                                              1; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
-
-                                          // isSelected = false;
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.5.w, vertical: 1.h),
-                                          decoration: const BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                Colors.black54,
-                                                Colors.black54
-                                              ]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: tran,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 1.h,
+                                          right: 2.w,
+                                          left: 2.w,
+                                          bottom: 1.h,
+                                        ),
+                                        child: TextFormField(
+                                          controller: _searchController,
+                                          decoration: const InputDecoration(
+                                            enabledBorder: OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("Favorites",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                                Radius.circular(24),
+                                              ),
+                                              borderSide: BorderSide(
+                                                  color: Colors.white),
+                                            ),
+                                            hintText: 'Search...',
+                                            suffixIcon: Icon(Icons.search),
+                                          ),
+                                          onChanged: (value) {
+                                            // Implement your search logic here
+                                            // You can use the 'value' variable to perform search operations
+                                          },
                                         ),
                                       ),
-                                      //Partners Button
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            if (selectedIndex != 1) {
-                                              selectedIndex = 1;
-                                              isSelected = true;
-                                              currentColor = activeColor;
-                                            }
-                                          });
 
-                                          int pageIndex =
-                                              2; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
-
-                                          // isSelected = false;
-                                        },
+                                      //Container housing the tab buttons
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.5.w, vertical: 1.h),
-                                          decoration: const BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                Colors.black54,
-                                                Colors.black54
-                                              ]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: tran,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("Partners",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                          height: 6.5.h,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: const Color.fromRGBO(
+                                                    42, 41, 41, 0.631)
+                                                .withOpacity(0.98),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(40),
+                                            ),
+                                          ),
+                                          child: Wrap(
+                                            alignment:
+                                                WrapAlignment.spaceEvenly,
+                                            runAlignment: WrapAlignment.center,
+                                            children: [
+                                              //
+                                              //All Button
+                                              GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    if (selectedIndex != 1) {
+                                                      selectedIndex = 1;
+                                                      isSelected = true;
+                                                      currentColor =
+                                                          activeColor;
+                                                    }
+                                                  });
+
+                                                  int pageIndex =
+                                                      0; // Change this to the page index
+                                                  _carouselController
+                                                      .animateToPage(pageIndex);
+
+                                                  // isSelected = false;
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 7.w,
+                                                      vertical: 1.h),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: [
+                                                                purp,
+                                                                red
+                                                              ]),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: red,
+                                                                blurRadius: 10,
+                                                                blurStyle:
+                                                                    BlurStyle
+                                                                        .solid)
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          20))),
+                                                  child: const Text("All",
+                                                      style: TextStyle(
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                              //Favorites Button
+                                              GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    if (selectedIndex != 1) {
+                                                      selectedIndex = 1;
+                                                      isSelected = true;
+                                                      currentColor =
+                                                          activeColor;
+                                                    }
+                                                  });
+
+                                                  int pageIndex =
+                                                      1; // Change this to the page index
+                                                  _carouselController
+                                                      .animateToPage(pageIndex);
+
+                                                  // isSelected = false;
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 4.5.w,
+                                                      vertical: 1.h),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: [
+                                                                Colors.black54,
+                                                                Colors.black54
+                                                              ]),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: tran,
+                                                                blurRadius: 3,
+                                                                blurStyle:
+                                                                    BlurStyle
+                                                                        .solid)
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          20))),
+                                                  child: const Text("Favorites",
+                                                      style: TextStyle(
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                              //Partners Button
+                                              GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    if (selectedIndex != 1) {
+                                                      selectedIndex = 1;
+                                                      isSelected = true;
+                                                      currentColor =
+                                                          activeColor;
+                                                    }
+                                                  });
+
+                                                  int pageIndex =
+                                                      2; // Change this to the page index
+                                                  _carouselController
+                                                      .animateToPage(pageIndex);
+
+                                                  // isSelected = false;
+                                                },
+                                                child: Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 4.5.w,
+                                                      vertical: 1.h),
+                                                  decoration:
+                                                      const BoxDecoration(
+                                                          gradient:
+                                                              LinearGradient(
+                                                                  colors: [
+                                                                Colors.black54,
+                                                                Colors.black54
+                                                              ]),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: tran,
+                                                                blurRadius: 3,
+                                                                blurStyle:
+                                                                    BlurStyle
+                                                                        .solid)
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
+                                                                          20))),
+                                                  child: const Text("Partners",
+                                                      style: TextStyle(
+                                                          color: Colors.white)),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+
+                                      SizedBox(height: 1.h),
+
+                                      //Container Housing Carousel slider
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(
+                                          clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                          height: 51.h,
+                                          width: 100.w,
+                                          decoration: BoxDecoration(
+                                            color: const Color.fromRGBO(
+                                                    27, 27, 27, 0.937)
+                                                .withOpacity(0.98),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(35),
+                                            ),
+                                          ),
+                                          //Carousel Slider
+                                          child: PageStorage(
+                                            bucket: friendsBucket,
+                                            child: CarouselSlider(
+                                              carouselController:
+                                                  _carouselController,
+                                              options: CarouselOptions(
+                                                height: 53.h,
+                                                viewportFraction: 1,
+                                                enlargeCenterPage: true,
+                                                initialPage: _currentIndex,
+                                                onPageChanged: (index, _) {
+                                                  setState(() {
+                                                    _currentIndex = index;
+                                                  });
+                                                },
+                                              ),
+                                              items: _carouselContainers
+                                                  .map((container) {
+                                                return Builder(
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return container;
+                                                  },
+                                                );
+                                              }).toList(),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ),
-
-                              SizedBox(height: 1.h),
-
-                              //Container Housing Carousel slider
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  height: 51.h,
-                                  width: 100.w,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromRGBO(27, 27, 27, 0.937)
-                                            .withOpacity(0.98),
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(35),
-                                    ),
-                                  ),
-                                  //Carousel Slider
-                                  child: PageStorage(
-                                    bucket: friendsBucket,
-                                    child: CarouselSlider(
-                                      carouselController: _carouselController,
-                                      options: CarouselOptions(
-                                        height: 53.h,
-                                        viewportFraction: 1,
-                                        enlargeCenterPage: true,
-                                        initialPage: _currentIndex,
-                                        onPageChanged: (index, _) {
-                                          setState(() {
-                                            _currentIndex = index;
-                                          });
-                                        },
-                                      ),
-                                      items:
-                                          _carouselContainers.map((container) {
-                                        return Builder(
-                                          builder: (BuildContext context) {
-                                            return container;
-                                          },
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            ));
   }
 
   void allbtn() {}

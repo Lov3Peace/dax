@@ -1,6 +1,10 @@
 import 'package:animated_image_list/photoViewerArbnb/PhotoViewerArbnb_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
@@ -11,6 +15,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../util/desk_dashboard_decks.dart';
 import '../mobile/mob_artboard_page.dart';
+
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class DesktopDashboard extends StatefulWidget {
@@ -202,6 +207,34 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                     child: Positioned(
                       left: -70.w,
                       child: WalletPopUp(),
+                    ),
+                  ),
+                  Indexed(
+                    index: 1,
+                    child: Positioned(
+                      left: -70.w,
+                      child: FriendsPopUp(),
+                    ),
+                  ),
+                  Indexed(
+                    index: 1,
+                    child: Positioned(
+                      left: -70.w,
+                      child: SettingsPopUp(),
+                    ),
+                  ),
+                  Indexed(
+                    index: 1,
+                    child: Positioned(
+                      left: -70.w,
+                      child: HelpPopUp(),
+                    ),
+                  ),
+                  Indexed(
+                    index: 1,
+                    child: Positioned(
+                      left: -70.w,
+                      child: InfoPopUp(),
                     ),
                   ),
                 ],

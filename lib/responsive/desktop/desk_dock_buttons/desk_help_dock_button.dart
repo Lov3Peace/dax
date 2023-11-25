@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/GlobalProvider.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:indexed/indexed.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,8 +29,6 @@ class DeskHelpWindowButton extends StatelessWidget {
   }
 }
 
-//const String _heroHelpWindow = 'Help-window-hero';
-
 class DeskHelpWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
   const DeskHelpWindowPopupCard({Key? key}) : super(key: key);
@@ -49,7 +49,10 @@ class _DeskHelpWindowPopupCardState extends State<DeskHelpWindowPopupCard> {
           size: 30,
           color: Colors.white54,
         ),
-        onPressed: loadInfoPopUp,
+        onPressed: () {
+          final startSlide = context.read<GlobalProvider>();
+          startSlide.helpActivateSlide();
+        },
         label: Padding(
           padding: EdgeInsets.only(left: 0.5.w),
           child: Text(
@@ -63,78 +66,93 @@ class _DeskHelpWindowPopupCardState extends State<DeskHelpWindowPopupCard> {
       ),
     );
   }
+}
 
-  void loadInfoPopUp() {
-    // toggle between control instructions
+class HelpPopUp extends StatefulWidget {
+  HelpPopUp({super.key});
 
-    control = Control.play;
+  State<HelpPopUp> createState() => _HelpPopUpState();
+}
 
-    //slide animation
-    showGeneralDialog(
-      barrierDismissible: true,
-      barrierLabel: "Help",
-      context: context,
-      transitionDuration: const Duration(milliseconds: 1000),
-      transitionBuilder: (_, animation, __, child) {
-        Tween<Offset> tween;
-        tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
-        return SlideTransition(
-          position: tween.animate(
-            CurvedAnimation(parent: animation, curve: Curves.easeInOutBack),
-          ),
-          child: child,
-        );
-      },
-      pageBuilder: (context, _, __) => Center(
-        child: Indexer(
-          children: [
-            Indexed(
-              index: 0,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
-                    child: Center(
-                      child: Container(
-                        height: 85.h,
-                        width: 70.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(32)),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 32, horizontal: 24),
-                        child: Material(
-                          shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                          color: const Color.fromARGB(42, 55, 52, 52),
-                          elevation: 2,
-                          borderRadius: BorderRadius.circular(32),
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(24),
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                  child: Container(
-                                    height: 85.h,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: const Color.fromARGB(
-                                              182, 31, 31, 31)),
-                                      borderRadius: BorderRadius.circular(24),
-                                    ),
+class _HelpPopUpState extends State<HelpPopUp> with AnimationMixin {
+  //control = Control.play;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<GlobalProvider>(
+      builder: (context, value, child) => CustomAnimationBuilder<double>(
+        control: value.helpSlideControl,
+        startPosition: 0,
+        tween: Tween(begin: 0, end: 83.5.w),
+        duration: const Duration(milliseconds: 1250),
+        curve: Curves.easeInOutBack,
+        onCompleted: () {
+          final resetSlide = context.read<GlobalProvider>();
+          resetSlide.helpResetSlide();
+        },
+        builder: (context, value, child) {
+          return Transform.translate(
+            offset: Offset(value, 0),
+            child: child,
+          );
+        },
+        child: Center(
+          child: Indexer(
+            children: [
+              Indexed(
+                index: 0,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+                      child: Center(
+                        child: Container(
+                          height: 85.h,
+                          width: 70.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(32)),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 32, horizontal: 24),
+                          child: Material(
+                            shadowColor:
+                                const Color.fromRGBO(42, 41, 41, 0.631),
+                            color: const Color.fromARGB(42, 55, 52, 52),
+                            elevation: 2,
+                            borderRadius: BorderRadius.circular(32),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(24),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                        sigmaX: 10, sigmaY: 10),
+                                    child: Container(
+                                        height: 85.h,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: const Color.fromARGB(
+                                                  182, 31, 31, 31)),
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        )),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

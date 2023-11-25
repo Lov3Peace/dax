@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/GlobalProvider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:indexed/indexed.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 //import 'package:lite_rolling_switch/lite_rolling_switch.dart';
-import 'package:simple_animations/animation_builder/custom_animation_builder.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../util/gradient_container.dart';
@@ -43,7 +41,7 @@ class DeskWalletWindowPopupCard extends StatelessWidget {
               ),
               onPressed: () {
                 final startSlide = context.read<GlobalProvider>();
-                startSlide.activateSlide();
+                startSlide.walletActivateSlide();
               },
               label: Padding(
                 padding: EdgeInsets.only(left: 0.5.w),
@@ -89,14 +87,14 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
         builder: (context, value, child) => CustomAnimationBuilder<double>(
-              control: value.slideControl,
+              control: value.walletSlideControl,
               startPosition: 0,
               tween: Tween(begin: 0, end: 83.5.w),
               duration: const Duration(milliseconds: 1250),
               curve: Curves.easeInOutBack,
               onCompleted: () {
                 final resetSlide = context.read<GlobalProvider>();
-                resetSlide.resetSlide();
+                resetSlide.walletResetSlide();
               },
               builder: (context, value, child) {
                 return Transform.translate(
@@ -506,7 +504,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                                 context.read<
                                                                     GlobalProvider>();
                                                             reverseSlide
-                                                                .reverseSlide();
+                                                                .walletReverseSlide();
                                                           },
                                                           child:
                                                               GradientContainer(

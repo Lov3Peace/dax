@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_project_page.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_socials_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_finance_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_news_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dart';
@@ -16,6 +18,8 @@ import '../mobile/mobile_finance_page.dart';
 import '../mobile/mobile_news_page.dart';
 import '../mobile/mobile_projects_page.dart';
 import '../mobile/mobile_socials_page.dart';
+import 'desk_finance_page.dart';
+import 'desk_news_page.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)
 var screenHeight = window.physicalSize.height / window.devicePixelRatio;
@@ -32,6 +36,7 @@ double titleTextSize = 20;
 double labelTextSize = 16;
 double? textConstraint = 500;
 double? subTextConstraint = 500;
+Color deckBorderColor = Color.fromARGB(182, 75, 75, 75);
 
 class Deck extends StatelessWidget {
   Deck({
@@ -95,7 +100,7 @@ class Deck extends StatelessWidget {
                   borderRadius: BorderRadius.circular(1.5.w),
                   color: Color.fromARGB(185, 21, 19, 22),
 
-                  border: Border.all(color: Color.fromARGB(182, 75, 75, 75)),
+                  border: Border.all(color: deckBorderColor),
                   // boxShadow: const [
                   // BoxShadow(
                   //   blurRadius: 5,
@@ -536,9 +541,9 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return MobProjectsPage(
-                      transitionAnimation: animation,
-                    );
+                    return DeskProjectsPageDash(
+                        //transitionAnimation: animation,
+                        );
                   }
                 },
                 transitionDuration: const Duration(milliseconds: 300),
@@ -840,9 +845,9 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return MobSocialsPage(
-                      transitionAnimation: animation,
-                    );
+                    return DeskSocialsPageDash(
+                        //transitionAnimation: animation,
+                        );
                   }
                 },
                 transitionDuration: const Duration(milliseconds: 300),
@@ -975,32 +980,32 @@ class SocialsStacks {
   ];
   List<Widget> deskSocialsStacks = [
     Deck(
-      deckHeight: 200,
-      deckWidth: 375,
+      deckHeight: 400,
+      deckWidth: 675,
       deckName: 'Instagram',
       gradient1: Colors.orange,
       gradient2: purp,
       neonGlow: Colors.deepOrange,
     ),
     Deck(
-      deckHeight: 200,
-      deckWidth: 375,
+      deckHeight: 400,
+      deckWidth: 675,
       deckName: 'Twitter',
       gradient1: const Color.fromARGB(255, 31, 154, 255),
       gradient2: const Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
     Deck(
-      deckHeight: 200,
-      deckWidth: 375,
+      deckHeight: 400,
+      deckWidth: 675,
       deckName: 'Facebook',
       gradient1: const Color.fromARGB(255, 12, 89, 255),
       gradient2: const Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
     Deck(
-      deckHeight: 200,
-      deckWidth: 375,
+      deckHeight: 400,
+      deckWidth: 675,
       deckName: 'TikTok',
       gradient1: const Color.fromARGB(255, 255, 63, 121),
       gradient2: Colors.cyanAccent,
@@ -1096,9 +1101,9 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return MobFinancePage(
-                      transitionAnimation: animation,
-                    );
+                    return DeskFinancesPageDash(
+                        //transitionAnimation: animation,
+                        );
                   }
                 },
                 transitionDuration: const Duration(milliseconds: 300),
@@ -1327,9 +1332,9 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return MobNewsPage(
-                      transitionAnimation: animation,
-                    );
+                    return DeskNewsPageDash(
+                        //transitionAnimation: animation,
+                        );
                   }
                 },
                 transitionDuration: const Duration(milliseconds: 300),

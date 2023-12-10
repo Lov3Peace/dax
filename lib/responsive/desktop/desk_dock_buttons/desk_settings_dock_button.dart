@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/GlobalProvider.dart';
@@ -12,62 +13,6 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../util/tactile_button.dart';
-
-class DeskSettingsWindowButton extends StatelessWidget {
-  /// {@macro add_todo_button}
-  DeskSettingsWindowButton({super.key, required, required this.dockIcon});
-  Widget dockIcon;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(0.0),
-      child: Material(
-        color: tran,
-        child: dockIcon,
-      ),
-    );
-  }
-}
-
-class DeskSettingsWindowPopupCard extends StatefulWidget {
-  /// {@macro add_todo_popup_card}
-  const DeskSettingsWindowPopupCard({Key? key}) : super(key: key);
-
-  @override
-  State<DeskSettingsWindowPopupCard> createState() =>
-      _DeskSettingsWindowPopupCardState();
-}
-
-class _DeskSettingsWindowPopupCardState
-    extends State<DeskSettingsWindowPopupCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: tran,
-      child: TextButton.icon(
-        icon: const Icon(
-          Ionicons.settings_outline,
-          size: 30,
-          color: Colors.white54,
-        ),
-        onPressed: () {
-          final startSlide = context.read<GlobalProvider>();
-          startSlide.settingActivateSlide();
-        },
-        label: Padding(
-          padding: EdgeInsets.only(left: 0.5.w),
-          child: Text(
-            'Settings',
-            style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
-                fontWeight: FontWeight.w400,
-                color: Colors.white54),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class SettingsPopUp extends StatefulWidget {
   SettingsPopUp({super.key});
@@ -156,6 +101,145 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
           ),
         ),
       ),
+    );
+  }
+}
+
+//
+// Hover aspect of setting button
+class DeskSettingsButtonHover extends StatefulWidget {
+  const DeskSettingsButtonHover({super.key});
+
+  @override
+  State<DeskSettingsButtonHover> createState() =>
+      _DeskSettingsButtonHoverState();
+}
+
+class _DeskSettingsButtonHoverState extends State<DeskSettingsButtonHover> {
+//
+// start hover is false
+  bool isHover = false;
+//
+//start active is false
+  bool isActive = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (event) {
+        setState(() {
+          isHover = true;
+        });
+      },
+      onExit: (event) {
+        setState(() {
+          isHover = false;
+        });
+      },
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            //
+            //activates the settings popup
+            final startSlide = context.read<GlobalProvider>();
+            startSlide.settingActivateSlide();
+            //
+            //gives the active color to be true
+            isActive = true;
+          });
+        },
+        child: AnimatedContainer(
+          padding: isActive
+              ? EdgeInsets.only(left: 10)
+              : isHover
+                  ? EdgeInsets.only(left: 10)
+                  : EdgeInsets.only(left: 0),
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: isActive
+                    ? Colors.black87
+                    : isHover
+                        ? Colors.black87
+                        : tran),
+            boxShadow: [
+              BoxShadow(
+                color: isActive
+                    ? Colors.white
+                    : (isHover ? Colors.grey.shade700 : tran),
+              ),
+            ],
+            color: tran,
+            borderRadius: const BorderRadius.all(Radius.circular(60)),
+          ),
+          duration: const Duration(milliseconds: 200),
+          width: 13.w,
+          height: 5.h,
+          alignment: Alignment.centerLeft,
+          child: addElement(),
+        ),
+      ),
+    );
+  }
+
+  addElement() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Icon(
+          Icons.settings_outlined,
+          color: isActive
+              ? Colors.black87
+              : (isHover ? Colors.black87 : Colors.white54),
+          size: 30,
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: .5.w),
+          child: Text(
+            'Settings',
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(fontSize: 2.sp),
+              fontWeight: FontWeight.w400,
+              color: isActive
+                  ? const Color.fromARGB(221, 28, 24, 24)
+                  : (isHover ? Colors.black87 : Colors.white54),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 4.w),
+          child: Stack(
+            children: [
+              Icon(
+                Icons.arrow_right_rounded,
+                color: isActive
+                    ? Colors.white
+                    : isHover
+                        ? Colors.black87
+                        : tran,
+                size: 35.0,
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    //
+                    //Reverses the popup card
+                    final startSlide = context.read<GlobalProvider>();
+                    startSlide.settingReverseSlide();
+                    //
+                    //gives the active color to be flase
+                    isActive = false;
+                  });
+                },
+                child: Icon(
+                  Icons.arrow_left_rounded,
+                  color: isActive ? Colors.black87 : tran,
+                  size: 35.0,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

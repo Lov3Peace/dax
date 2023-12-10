@@ -142,7 +142,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
             child: Center(
               child: Container(
                 height: 35.h,
-                width: 85.w,
+                width: 50.w,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding:
@@ -177,33 +177,31 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const TextField(
-                                  textAlign: TextAlign.center,
-                                  decoration: InputDecoration(
-                                    hintText: 'Logout',
-                                    hintStyle: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                    border: InputBorder.none,
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 2.h),
+                                  child: const Text(
+                                    "Logout",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  cursorColor: Colors.white,
                                 ),
-                                const TextField(
-                                  textAlign: TextAlign.center,
-                                  decoration: InputDecoration(
-                                    hintText: 'Would you like to log out?',
-                                    hintStyle: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
-                                    border: InputBorder.none,
+                                const Text(
+                                  "Would you like to sign out?",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  cursorColor: Colors.white,
                                 ),
-                                TextButton(
-                                  onPressed: signOut,
-                                  child: ButtonColor(),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 2.h),
+                                  child: TextButton(
+                                    onPressed: signOut,
+                                    child: ButtonColor(),
+                                  ),
                                 )
                               ],
                             ),

@@ -16,6 +16,11 @@ class GlobalProvider extends ChangeNotifier {
     this.infoSlideControl = Control.stop,
   });
 
+  void infoReverseSlide() {
+    infoSlideControl = Control.playReverse;
+    notifyListeners();
+  }
+
   void infoActivateSlide() {
     infoSlideControl = Control.play;
     notifyListeners();
@@ -36,6 +41,16 @@ class GlobalProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void helpReverseSlide() {
+    helpSlideControl = Control.playReverse;
+    notifyListeners();
+  }
+
+  void settingReverseSlide() {
+    settingSlideControl = Control.playReverse;
+    notifyListeners();
+  }
+
   void settingActivateSlide() {
     settingSlideControl = Control.play;
     notifyListeners();
@@ -48,6 +63,11 @@ class GlobalProvider extends ChangeNotifier {
 
   void friendActivateSlide() {
     friendSlideControl = Control.play;
+    notifyListeners();
+  }
+
+  void friendReverseSlide() {
+    friendSlideControl = Control.playReverse;
     notifyListeners();
   }
 

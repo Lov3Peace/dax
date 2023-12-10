@@ -123,7 +123,7 @@ class _MobDockState extends State<MobDock> with AnimationMixin {
               ),
 
               //PAGE 3
-              Wrap(
+              const Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 alignment: WrapAlignment.spaceEvenly,
                 runAlignment: WrapAlignment.center,
@@ -131,13 +131,13 @@ class _MobDockState extends State<MobDock> with AnimationMixin {
                 children: [
                   //
                   //Help
-                  const MobHelpWindowButton(),
+                  MobHelpWindowButton(),
 
                   //About Us/Info
-                  const MobInfoWindowButton(),
+                  MobInfoWindowButton(),
 
                   //Logout
-                  const LogoutWindowButton(),
+                  LogoutWindowButton(),
                 ],
               ),
             ],

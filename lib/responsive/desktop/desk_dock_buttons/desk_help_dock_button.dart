@@ -29,44 +29,44 @@ class DeskHelpWindowButton extends StatelessWidget {
   }
 }
 
-class DeskHelpWindowPopupCard extends StatefulWidget {
-  /// {@macro add_todo_popup_card}
-  const DeskHelpWindowPopupCard({Key? key}) : super(key: key);
+// class DeskHelpWindowPopupCard extends StatefulWidget {
+//   /// {@macro add_todo_popup_card}
+//   const DeskHelpWindowPopupCard({Key? key}) : super(key: key);
 
-  @override
-  State<DeskHelpWindowPopupCard> createState() =>
-      _DeskHelpWindowPopupCardState();
-}
+//   @override
+//   State<DeskHelpWindowPopupCard> createState() =>
+//       _DeskHelpWindowPopupCardState();
+// }
 
-class _DeskHelpWindowPopupCardState extends State<DeskHelpWindowPopupCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: tran,
-      child: TextButton.icon(
-        icon: const Icon(
-          Ionicons.help_circle_outline,
-          size: 30,
-          color: Colors.white54,
-        ),
-        onPressed: () {
-          final startSlide = context.read<GlobalProvider>();
-          startSlide.helpActivateSlide();
-        },
-        label: Padding(
-          padding: EdgeInsets.only(left: 0.5.w),
-          child: Text(
-            'FAQs',
-            style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
-                fontWeight: FontWeight.w400,
-                color: Colors.white54),
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class _DeskHelpWindowPopupCardState extends State<DeskHelpWindowPopupCard> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(
+//       color: tran,
+//       child: TextButton.icon(
+//         icon: const Icon(
+//           Ionicons.help_circle_outline,
+//           size: 30,
+//           color: Colors.white54,
+//         ),
+//         onPressed: () {
+//           final startSlide = context.read<GlobalProvider>();
+//           startSlide.helpActivateSlide();
+//         },
+//         label: Padding(
+//           padding: EdgeInsets.only(left: 0.5.w),
+//           child: Text(
+//             'FAQs',
+//             style: GoogleFonts.montserrat(
+//                 textStyle: TextStyle(fontSize: 2.sp),
+//                 fontWeight: FontWeight.w400,
+//                 color: Colors.white54),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class HelpPopUp extends StatefulWidget {
   HelpPopUp({super.key});
@@ -155,6 +155,144 @@ class _HelpPopUpState extends State<HelpPopUp> with AnimationMixin {
           ),
         ),
       ),
+    );
+  }
+}
+
+//
+// Hover aspect of setting button
+class DeskHelpButtonHover extends StatefulWidget {
+  const DeskHelpButtonHover({super.key});
+
+  @override
+  State<DeskHelpButtonHover> createState() => _DeskHelpButtonHoverState();
+}
+
+class _DeskHelpButtonHoverState extends State<DeskHelpButtonHover> {
+//
+// start hover is false
+  bool isHover = false;
+//
+//start active is false
+  bool isActive = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (event) {
+        setState(() {
+          isHover = true;
+        });
+      },
+      onExit: (event) {
+        setState(() {
+          isHover = false;
+        });
+      },
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            //
+            //activates the settings popup
+            final startSlide = context.read<GlobalProvider>();
+            startSlide.helpActivateSlide();
+            //
+            //gives the active color to be true
+            isActive = true;
+          });
+        },
+        child: AnimatedContainer(
+          padding: isActive
+              ? EdgeInsets.only(left: 10)
+              : isHover
+                  ? EdgeInsets.only(left: 10)
+                  : EdgeInsets.only(left: 0),
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: isActive
+                    ? Colors.black87
+                    : isHover
+                        ? Colors.black87
+                        : tran),
+            boxShadow: [
+              BoxShadow(
+                color: isActive
+                    ? Colors.white
+                    : (isHover ? Colors.grey.shade700 : tran),
+              ),
+            ],
+            color: tran,
+            borderRadius: const BorderRadius.all(Radius.circular(60)),
+          ),
+          duration: const Duration(milliseconds: 200),
+          width: 13.w,
+          height: 5.h,
+          alignment: Alignment.centerLeft,
+          child: addElement(),
+        ),
+      ),
+    );
+  }
+
+  addElement() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Icon(
+          Icons.help_outline,
+          color: isActive
+              ? Colors.black87
+              : (isHover ? Colors.black87 : Colors.white54),
+          size: 30,
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: .5.w),
+          child: Text(
+            'FAQs',
+            style: GoogleFonts.montserrat(
+              textStyle: TextStyle(fontSize: 2.sp),
+              fontWeight: FontWeight.w400,
+              color: isActive
+                  ? const Color.fromARGB(221, 28, 24, 24)
+                  : (isHover ? Colors.black87 : Colors.white54),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 5.w),
+          child: Stack(
+            children: [
+              Icon(
+                Icons.arrow_right_rounded,
+                color: isActive
+                    ? Colors.white
+                    : isHover
+                        ? Colors.black87
+                        : tran,
+                size: 35.0,
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    //
+                    //Reverses the popup card
+                    final startSlide = context.read<GlobalProvider>();
+                    startSlide.helpReverseSlide();
+                    //
+                    //gives the active color to be flase
+                    isActive = false;
+                  });
+                },
+                child: Icon(
+                  Icons.arrow_left_rounded,
+                  color: isActive ? Colors.black87 : tran,
+                  size: 35.0,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

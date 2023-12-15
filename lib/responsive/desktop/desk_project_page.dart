@@ -120,7 +120,11 @@ class _DeskProjectsPageDashState extends State<DeskProjectsPageDash>
                               color: tran,
                               child: const Column(
                                 children: [
-                                  DeskProjectsPage(),
+                                  Hero(
+                                    tag: "projects",
+                                    flightShuttleBuilder: flightShuttleBuilder,
+                                    child: DeskProjectsCont(),
+                                  ),
                                 ],
                               ),
                             ),
@@ -183,14 +187,14 @@ class _DeskProjectsPageDashState extends State<DeskProjectsPageDash>
   }
 }
 
-class DeskProjectsPage extends StatefulWidget {
-  const DeskProjectsPage({super.key});
+class DeskProjectsCont extends StatefulWidget {
+  const DeskProjectsCont({super.key});
 
   @override
-  State<DeskProjectsPage> createState() => _DeskProjectsPageState();
+  State<DeskProjectsCont> createState() => _DeskProjectsContState();
 }
 
-class _DeskProjectsPageState extends State<DeskProjectsPage> {
+class _DeskProjectsContState extends State<DeskProjectsCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -251,9 +255,18 @@ class ProjectsButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          FinancesButton(),
-          NewsButton(),
-          SocialsButton(),
+          Hero(
+              tag: "finances",
+              flightShuttleBuilder: flightShuttleBuilder,
+              child: FinancesButton()),
+          Hero(
+              tag: "news",
+              flightShuttleBuilder: flightShuttleBuilder,
+              child: NewsButton()),
+          Hero(
+              tag: "socials",
+              flightShuttleBuilder: flightShuttleBuilder,
+              child: SocialsButton()),
         ],
       ),
     );

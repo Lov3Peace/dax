@@ -8,6 +8,7 @@ import 'package:flutter_application_1/responsive/tablet/tablet_news_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_socials_page.dart';
 import 'package:flutter_application_1/util/deck_height_value.dart';
+import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rive/rive.dart' as r;
 import 'package:simple_animations/simple_animations.dart';
@@ -515,7 +516,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
     //   deckWidth = 37.w;
     //   headerTextSize = 10.sp;
     // }
-    return GestureDetector(
+    return TactileButton(
       onTap: () {
         setState(() {
           controller.play();
@@ -541,12 +542,13 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
+                    // ignore: prefer_const_constructors
                     return DeskProjectsPageDash(
                         //transitionAnimation: animation,
                         );
                   }
                 },
-                transitionDuration: const Duration(milliseconds: 300),
+                transitionDuration: const Duration(milliseconds: 1000),
               ),
             );
           });
@@ -555,69 +557,58 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
           });
         });
       },
-      child: ScaleTransition(
-        scale: scale,
-        child: AnimatedOpacity(
-            opacity: opacity.value,
-            duration: const Duration(milliseconds: 300),
-            child: projectDeck()),
-      ),
+      child: projectDeck(),
     );
   }
 
-  GestureDetector projectDeck({
+  Widget projectDeck({
     //required double deckHeight,
     //required double deckWidth,
     VoidCallback? onTap,
     Color? color,
   }) {
-    return GestureDetector(
-      child: Deck(
-        deckHeight: deckHeight,
-        deckWidth: deckWidth,
-        deckName: 'Projects',
-        gradient1: red,
-        gradient2: purp,
-        neonGlow: red,
-        labelTextSize: labelTextSize,
-        textConstraint: deckWidth * 0.7,
-        subTextConstraint: deckWidth * 0.6,
-        // image: Image.asset(
-        //   'images/proj placeholder.webp',
-        //   height: screenWidth * 0.1,
-        // ),
-        text: Text.rich(
-          const TextSpan(
-            text: 'Collaborate and innovate.',
-          ),
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
+    return Deck(
+      deckHeight: deckHeight,
+      deckWidth: deckWidth,
+      deckName: 'Projects',
+      gradient1: red,
+      gradient2: purp,
+      neonGlow: red,
+      labelTextSize: labelTextSize,
+      textConstraint: deckWidth * 0.7,
+      subTextConstraint: deckWidth * 0.6,
+      // image: Image.asset(
+      //   'images/proj placeholder.webp',
+      //   height: screenWidth * 0.1,
+      // ),
+      text: Text.rich(
+        const TextSpan(
+          text: 'Collaborate and innovate.',
         ),
-        subText: Text(
-          'Post, join, or support independent projects anywhere in the world.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
-              fontWeight: FontWeight.w400),
-        ),
-        riveAnim: const r.RiveAnimation.asset('rive/building_apartments.riv'),
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+            fontWeight: FontWeight.w600),
       ),
+      subText: Text(
+        'Post, join, or support independent projects anywhere in the world.',
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
+            fontWeight: FontWeight.w400),
+      ),
+      riveAnim: const r.RiveAnimation.asset('rive/building_apartments.riv'),
     );
   }
 }
 
 class ProjectStacks {
   List<Widget> mobProjectStacks = [
-    Hero(
-      tag: 'keyboards',
-      child: Deck(
-        deckHeight: 500,
-        deckWidth: 375,
-        deckName: 'Keyboards',
-        gradient1: purp,
-        gradient2: red,
-        neonGlow: red,
-      ),
+    Deck(
+      deckHeight: 500,
+      deckWidth: 375,
+      deckName: 'Keyboards',
+      gradient1: purp,
+      gradient2: red,
+      neonGlow: red,
     ),
     Deck(
       deckHeight: 500,
@@ -662,16 +653,13 @@ class ProjectStacks {
     const SizedBox(height: 150)
   ];
   List<Widget> tabProjectStacks = [
-    Hero(
-      tag: 'keyboards',
-      child: Deck(
-        deckHeight: 500,
-        deckWidth: 700,
-        deckName: 'Keyboards',
-        gradient1: purp,
-        gradient2: red,
-        neonGlow: red,
-      ),
+    Deck(
+      deckHeight: 500,
+      deckWidth: 700,
+      deckName: 'Keyboards',
+      gradient1: purp,
+      gradient2: red,
+      neonGlow: red,
     ),
     Deck(
       deckHeight: 500,
@@ -716,16 +704,13 @@ class ProjectStacks {
     const SizedBox(height: 150)
   ];
   List<Widget> deskProjectStacks = [
-    Hero(
-      tag: 'keyboards',
-      child: Deck(
-        deckHeight: 500,
-        deckWidth: 375,
-        deckName: 'Keyboards',
-        gradient1: purp,
-        gradient2: red,
-        neonGlow: red,
-      ),
+    Deck(
+      deckHeight: 500,
+      deckWidth: 375,
+      deckName: 'Keyboards',
+      gradient1: purp,
+      gradient2: red,
+      neonGlow: red,
     ),
     Deck(
       deckHeight: 500,
@@ -819,7 +804,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
     //   deckWidth = 37.w;
     //   headerTextSize = 10.sp;
     // }
-    return GestureDetector(
+    return TactileButton(
       onTap: () {
         setState(() {
           controller.play();
@@ -845,12 +830,13 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
+                    // ignore: prefer_const_constructors
                     return DeskSocialsPageDash(
                         //transitionAnimation: animation,
                         );
                   }
                 },
-                transitionDuration: const Duration(milliseconds: 300),
+                transitionDuration: const Duration(milliseconds: 700),
               ),
             );
           });
@@ -859,50 +845,41 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
           });
         });
       },
-      child: ScaleTransition(
-        scale: scale,
-        child: AnimatedOpacity(
-          opacity: opacity.value,
-          duration: const Duration(milliseconds: 300),
-          child: socialsDeck(),
-        ),
-      ),
+      child: socialsDeck(),
     );
   }
 
-  GestureDetector socialsDeck({
+  Widget socialsDeck({
     VoidCallback? onTap,
     Color? color,
   }) {
-    return GestureDetector(
-      child: Deck(
-        deckHeight: deckHeight,
-        deckWidth: deckWidth,
-        deckName: 'Socials',
-        gradient1: orange,
-        gradient2: purp,
-        neonGlow: orange,
-        labelTextSize: labelTextSize,
-        textConstraint: deckWidth * 0.9,
-        text: Text(
-          'All of your socials in one place.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
-        ),
-        subText: Text(
-          'Just link your social media accounts and access them all in one place.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
-              fontWeight: FontWeight.w400),
-        ),
-        subTextConstraint: deckWidth * 0.6,
-        riveAnim: const r.RiveAnimation.asset(
-          "rive/twitter_rv.riv",
-          fit: BoxFit.fitWidth,
-        ),
-        // image: Image.asset('images/crest1.png'),
+    return Deck(
+      deckHeight: deckHeight,
+      deckWidth: deckWidth,
+      deckName: 'Socials',
+      gradient1: orange,
+      gradient2: purp,
+      neonGlow: orange,
+      labelTextSize: labelTextSize,
+      textConstraint: deckWidth * 0.9,
+      text: Text(
+        'All of your socials in one place.',
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+            fontWeight: FontWeight.w600),
       ),
+      subText: Text(
+        'Just link your social media accounts and access them all in one place.',
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
+            fontWeight: FontWeight.w400),
+      ),
+      subTextConstraint: deckWidth * 0.6,
+      riveAnim: const r.RiveAnimation.asset(
+        "rive/twitter_rv.riv",
+        fit: BoxFit.fitWidth,
+      ),
+      // image: Image.asset('images/crest1.png'),
     );
   }
 }

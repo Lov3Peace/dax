@@ -1296,12 +1296,13 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
   addElement() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Icon(
           Icons.wallet_outlined,
           color: isActive
               ? Colors.black87
-              : (isHover ? Colors.black87 : Colors.white54),
+              : (isHover ? Color.fromARGB(241, 255, 255, 255) : Colors.white70),
           size: 30,
         ),
         Padding(
@@ -1313,7 +1314,7 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
               fontWeight: FontWeight.w400,
               color: isActive
                   ? const Color.fromARGB(221, 28, 24, 24)
-                  : (isHover ? Colors.black87 : Colors.white54),
+                  : (isHover ? Colors.white : Colors.white54),
             ),
           ),
         ),
@@ -1322,13 +1323,13 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
           child: Stack(
             children: [
               Icon(
-                Icons.arrow_right_rounded,
+                Icons.arrow_right_sharp,
                 color: isActive
-                    ? Colors.white
+                    ? Colors.white70
                     : isHover
-                        ? Colors.black87
+                        ? Color.fromARGB(241, 255, 255, 255)
                         : tran,
-                size: 35.0,
+                size: 30.0,
               ),
               GestureDetector(
                 onTap: () {
@@ -1343,9 +1344,9 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
                   });
                 },
                 child: Icon(
-                  Icons.arrow_left_rounded,
+                  Icons.cancel_rounded,
                   color: isActive ? Colors.black87 : tran,
-                  size: 35.0,
+                  size: 30.0,
                 ),
               ),
             ],

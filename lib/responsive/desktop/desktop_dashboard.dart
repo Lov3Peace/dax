@@ -145,8 +145,16 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                       child: ProfileCard()),
                                                 ],
                                               ),
-                                              deck2: ProjectsDeck(),
-                                              deck3: FinancesDeck(),
+                                              deck2: Hero(
+                                                  tag: "projects",
+                                                  flightShuttleBuilder:
+                                                      flightShuttleBuilder,
+                                                  child: ProjectsDeck()),
+                                              deck3: Hero(
+                                                  tag: "finances",
+                                                  flightShuttleBuilder:
+                                                      flightShuttleBuilder,
+                                                  child: FinancesDeck()),
                                             )[index],
                                           ),
                                         ),
@@ -184,8 +192,15 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                             padding: EdgeInsets.fromLTRB(
                                                 0.25.w, 0.0.w, 0.25.w, 0.h),
                                             child: deskDashboardDecks2(
-                                              deck4: SocialsDeck(),
-                                              deck5: NewsDeck(),
+                                              deck4: Hero(
+                                                tag: "socials",
+                                                child: SocialsDeck(),
+                                              ),
+                                              deck5: Hero(
+                                                  flightShuttleBuilder:
+                                                      flightShuttleBuilder,
+                                                  tag: "news",
+                                                  child: NewsDeck()),
                                             )[index],
                                           ),
                                         ),

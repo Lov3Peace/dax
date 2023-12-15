@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:flutter_application_1/responsive/mobile/mobile_constants.dart';
+import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 import '../../pages/keyboards_deck.dart';
 import '../../main.dart';
 import 'mob_artboard_page.dart';

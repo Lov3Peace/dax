@@ -8,7 +8,7 @@ import '../../pages/keyboards_deck.dart';
 import '../../main.dart';
 import '../../util/auth/login.dart';
 import 'mob_artboard_page.dart';
-import 'mobile_constants.dart';
+import 'mob_constants.dart';
 import 'mobile_dock.dart';
 
 final List<Widget> projStacks = ProjectStacks().mobProjectStacks;

@@ -9,7 +9,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../util/Window Route/logout_window_route.dart';
 import '../../../util/auth/onboarding_page.dart';
-import '../mobile_constants.dart';
+import '../mob_constants.dart';
 
 class MobLogoutWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}

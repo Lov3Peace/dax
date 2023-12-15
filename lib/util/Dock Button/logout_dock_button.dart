@@ -1,15 +1,14 @@
 import 'dart:ui';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-import 'auth/onboarding_page.dart';
-import '../responsive/mobile/mob_constants.dart';
-import 'Window Route/logout_window_route.dart';
+import '../../responsive/mobile/login ui final/onboarding_page.dart';
+import '../../responsive/mobile/mob_constants.dart';
+import '../Window Route/logout_window_route.dart';
 
 class LogoutWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
@@ -33,7 +32,7 @@ class LogoutWindowButton extends StatelessWidget {
             color: tran,
             child: Icon(
               Ionicons.log_out_outline,
-              size: 40,
+              size: 50,
             ),
           ),
         ),
@@ -124,12 +123,6 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
   //     ),
   //   );
   // }
-  Future signOut() async {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => OnboardingScreen()));
-
-    FirebaseAuth.instance.signOut();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +135,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
             child: Center(
               child: Container(
                 height: 35.h,
-                width: 50.w,
+                width: 85.w,
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding:
@@ -152,7 +145,8 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                    color: const Color.fromARGB(42, 55, 52, 52),
+                    color:
+                        const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
                     elevation: 2,
                     borderRadius: BorderRadius.circular(32),
                     child: Stack(
@@ -160,48 +154,57 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                         ClipRRect(
                           borderRadius: BorderRadius.circular(24),
                           child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                             child: Container(
-                                height: 85.h,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color.fromARGB(
-                                          182, 31, 31, 31)),
-                                  borderRadius: BorderRadius.circular(24),
-                                )),
+                              height: 85.h,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color:
+                                        const Color.fromARGB(182, 31, 31, 31)),
+                                borderRadius: BorderRadius.circular(24),
+                              ),
+                            ),
                           ),
                         ),
                         Center(
                           child: SingleChildScrollView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 2.h),
-                                  child: const Text(
-                                    "Logout",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                const TextField(
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+                                    hintText: 'Logout',
+                                    hintStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                    border: InputBorder.none,
                                   ),
+                                  cursorColor: Colors.white,
                                 ),
-                                const Text(
-                                  "Would you like to sign out?",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
+                                const TextField(
+                                  textAlign: TextAlign.center,
+                                  decoration: InputDecoration(
+                                    hintText: 'Would you like to log out?',
+                                    hintStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                    border: InputBorder.none,
                                   ),
+                                  cursorColor: Colors.white,
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 2.h),
-                                  child: TextButton(
-                                    onPressed: signOut,
-                                    child: ButtonColor(),
-                                  ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                OnboardingScreen()));
+                                  },
+                                  child: const ButtonColor(),
                                 )
                               ],
                             ),

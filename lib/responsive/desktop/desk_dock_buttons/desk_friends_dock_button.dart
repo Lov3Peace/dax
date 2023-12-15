@@ -761,34 +761,36 @@ class _DeskFriendsButtonHoverState extends State<DeskFriendsButtonHover> {
             isActive = true;
           });
         },
-        child: AnimatedContainer(
-          padding: isActive
-              ? EdgeInsets.only(left: 10)
-              : isHover
-                  ? EdgeInsets.only(left: 10)
-                  : EdgeInsets.only(left: 0),
-          decoration: BoxDecoration(
-            border: Border.all(
-                color: isActive
-                    ? Colors.black87
-                    : isHover
-                        ? Colors.black87
-                        : tran),
-            boxShadow: [
-              BoxShadow(
-                color: isActive
-                    ? Colors.white
-                    : (isHover ? Colors.grey.shade700 : tran),
-              ),
-            ],
-            color: tran,
-            borderRadius: const BorderRadius.all(Radius.circular(60)),
+        child: TactileButton(
+          child: AnimatedContainer(
+            padding: isActive
+                ? EdgeInsets.only(left: 10)
+                : isHover
+                    ? EdgeInsets.only(left: 10)
+                    : EdgeInsets.only(left: 0),
+            decoration: BoxDecoration(
+              border: Border.all(
+                  color: isActive
+                      ? Colors.black87
+                      : isHover
+                          ? Colors.black87
+                          : tran),
+              boxShadow: [
+                BoxShadow(
+                  color: isActive
+                      ? Colors.white
+                      : (isHover ? Colors.grey.shade700 : tran),
+                ),
+              ],
+              color: tran,
+              borderRadius: const BorderRadius.all(Radius.circular(60)),
+            ),
+            duration: const Duration(milliseconds: 200),
+            width: 13.w,
+            height: 5.h,
+            alignment: Alignment.centerLeft,
+            child: addElement(),
           ),
-          duration: const Duration(milliseconds: 200),
-          width: 13.w,
-          height: 5.h,
-          alignment: Alignment.centerLeft,
-          child: addElement(),
         ),
       ),
     );

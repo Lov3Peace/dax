@@ -209,10 +209,10 @@ class _DeskInfoButtonHoverState extends State<DeskInfoButtonHover> {
         child: TactileButton(
           child: AnimatedContainer(
             padding: isActive
-                ? EdgeInsets.only(left: 10)
+                ? const EdgeInsets.only(left: 10)
                 : isHover
-                    ? EdgeInsets.only(left: 10)
-                    : EdgeInsets.only(left: 0),
+                    ? const EdgeInsets.only(left: 10)
+                    : const EdgeInsets.only(left: 0),
             decoration: BoxDecoration(
               border: Border.all(
                   color: isActive
@@ -249,7 +249,7 @@ class _DeskInfoButtonHoverState extends State<DeskInfoButtonHover> {
           Icons.info_outline,
           color: isActive
               ? Colors.black87
-              : (isHover ? Colors.black87 : Colors.white54),
+              : (isHover ? Color.fromARGB(241, 255, 255, 255) : Colors.white70),
           size: 30,
         ),
         Padding(
@@ -261,7 +261,7 @@ class _DeskInfoButtonHoverState extends State<DeskInfoButtonHover> {
               fontWeight: FontWeight.w400,
               color: isActive
                   ? const Color.fromARGB(221, 28, 24, 24)
-                  : (isHover ? Colors.black87 : Colors.white54),
+                  : (isHover ? Colors.white : Colors.white54),
             ),
           ),
         ),
@@ -270,13 +270,13 @@ class _DeskInfoButtonHoverState extends State<DeskInfoButtonHover> {
           child: Stack(
             children: [
               Icon(
-                Icons.arrow_right_rounded,
+                Icons.arrow_right_sharp,
                 color: isActive
-                    ? Colors.white
+                    ? Colors.white70
                     : isHover
-                        ? Colors.black87
+                        ? Color.fromARGB(241, 255, 255, 255)
                         : tran,
-                size: 35.0,
+                size: 30.0,
               ),
               GestureDetector(
                 onTap: () {
@@ -291,9 +291,15 @@ class _DeskInfoButtonHoverState extends State<DeskInfoButtonHover> {
                   });
                 },
                 child: Icon(
-                  Icons.arrow_left_rounded,
-                  color: isActive ? Colors.black87 : tran,
-                  size: 35.0,
+                  Icons.cancel_rounded,
+                  color: (isActive && isHover)
+                      ? red
+                      : (isActive && !isHover)
+                          ? Colors.black87
+                          : (isHover)
+                              ? tran
+                              : tran,
+                  size: 30.0,
                 ),
               ),
             ],

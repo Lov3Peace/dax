@@ -90,7 +90,8 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
       children: [
         Icon(
           Icons.dashboard_rounded,
-          color: isHover ? Colors.black87 : Colors.white54,
+          color:
+              (isHover ? Color.fromARGB(241, 255, 255, 255) : Colors.white70),
           size: 30,
         ),
         Padding(
@@ -100,7 +101,7 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
             style: GoogleFonts.montserrat(
               textStyle: TextStyle(fontSize: 2.sp),
               fontWeight: FontWeight.w400,
-              color: isHover ? Colors.black87 : Colors.white54,
+              color: (isHover ? Colors.white : Colors.white54),
             ),
           ),
         ),

@@ -1345,7 +1345,13 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
                 },
                 child: Icon(
                   Icons.cancel_rounded,
-                  color: isActive ? Colors.black87 : tran,
+                  color: (isActive && isHover)
+                      ? red
+                      : (isActive && !isHover)
+                          ? Colors.black87
+                          : (isHover)
+                              ? tran
+                              : tran,
                   size: 30.0,
                 ),
               ),

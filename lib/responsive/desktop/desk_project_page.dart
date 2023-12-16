@@ -256,17 +256,17 @@ class ProjectsButtonHolder extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Hero(
-              tag: "finances",
+              tag: "socials",
               flightShuttleBuilder: flightShuttleBuilder,
-              child: FinancesButton()),
+              child: SocialsButton()),
           Hero(
               tag: "news",
               flightShuttleBuilder: flightShuttleBuilder,
               child: NewsButton()),
           Hero(
-              tag: "socials",
+              tag: "finances",
               flightShuttleBuilder: flightShuttleBuilder,
-              child: SocialsButton()),
+              child: FinancesButton()),
         ],
       ),
     );

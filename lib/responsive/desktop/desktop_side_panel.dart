@@ -131,30 +131,30 @@ class _DeskDockButtonsState extends State<DeskDockButtons> {
         children: [
           //Wallet
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 1.h),
+            padding: EdgeInsets.symmetric(vertical: 0.5.h),
             child: DeskWalletButtonHover(),
           ),
 
           //
           //Friends
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 1.h),
+            padding: EdgeInsets.symmetric(vertical: 0.5.h),
             child: DeskFriendsButtonHover(),
           ),
           //Settings
           Padding(
-              padding: EdgeInsets.symmetric(vertical: 1.h),
+              padding: EdgeInsets.symmetric(vertical: 0.5.h),
               child: DeskSettingsButtonHover()),
 
           //Help
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 1.h),
+            padding: EdgeInsets.symmetric(vertical: 0.5.h),
             child: DeskHelpButtonHover(),
           ),
           //
           //About Us/Info
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 1.h),
+            padding: EdgeInsets.symmetric(vertical: 0.5.h),
             child: DeskInfoButtonHover(),
           ),
         ],

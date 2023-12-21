@@ -197,7 +197,7 @@ class _DeskHelpButtonHoverState extends State<DeskHelpButtonHover> {
             //activates the settings popup
             if (!isActive) {
               final startSlide = context.read<GlobalProvider>();
-              startSlide.walletActivateSlide();
+              startSlide.helpActivateSlide();
               //
               //gives the active color to be true
               isActive = true;
@@ -240,80 +240,85 @@ class _DeskHelpButtonHoverState extends State<DeskHelpButtonHover> {
   }
 
   addElement() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(
-          Icons.help_outline,
-          color: isActive
-              ? Colors.black87
-              : (isHover ? Color.fromARGB(241, 255, 255, 255) : Colors.white70),
-          size: 30,
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: .5.w),
-          child: Text(
-            'FAQs',
-            style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: 2.sp),
-              fontWeight: FontWeight.w400,
-              color: isActive
-                  ? const Color.fromARGB(221, 28, 24, 24)
-                  : (isHover ? Colors.white : Colors.white54),
+    return Padding(
+      padding: EdgeInsets.only(left: 0.5.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.help_outline,
+            color: isActive
+                ? Colors.black87
+                : (isHover
+                    ? Color.fromARGB(241, 255, 255, 255)
+                    : Colors.white70),
+            size: 30,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: .5.w),
+            child: Text(
+              'FAQs',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(fontSize: 2.sp),
+                fontWeight: FontWeight.w400,
+                color: isActive
+                    ? const Color.fromARGB(221, 28, 24, 24)
+                    : (isHover ? Colors.white : Colors.white54),
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 5.w),
-          child: Stack(
-            children: [
-              Icon(
-                Icons.arrow_right_sharp,
-                color: isActive
-                    ? Colors.white70
-                    : isHover
-                        ? Color.fromARGB(241, 255, 255, 255)
-                        : tran,
-                size: 30.0,
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    //
-                    //Reverses the popup card
-                    final startSlide = context.read<GlobalProvider>();
-                    startSlide.walletReverseSlide();
-                    //
-                    //gives the active color to be flase
-                    isActive = false;
-                  });
-                },
-                child: MouseRegion(
-                  onEnter: (e) {
-                    setState(() {
-                      isHover2 = true;
-                    });
-                  },
-                  onExit: (e) {
-                    setState(() {
-                      isHover2 = false;
-                    });
-                  },
-                  child: Icon(
-                    Icons.cancel_rounded,
-                    color: (isActive && isHover2)
-                        ? red
-                        : (!isHover2 && isActive)
-                            ? Colors.black87
-                            : tran,
-                    size: 30.0,
-                  ),
+          Padding(
+            padding: EdgeInsets.only(left: 5.w),
+            child: Stack(
+              children: [
+                Icon(
+                  Icons.arrow_right_sharp,
+                  color: isActive
+                      ? Colors.white70
+                      : isHover
+                          ? Color.fromARGB(241, 255, 255, 255)
+                          : tran,
+                  size: 30.0,
                 ),
-              )
-            ],
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      //
+                      //Reverses the popup card
+                      final startSlide = context.read<GlobalProvider>();
+                      startSlide.helpReverseSlide();
+                      //
+                      //gives the active color to be flase
+                      isActive = false;
+                    });
+                  },
+                  child: MouseRegion(
+                    onEnter: (e) {
+                      setState(() {
+                        isHover2 = true;
+                      });
+                    },
+                    onExit: (e) {
+                      setState(() {
+                        isHover2 = false;
+                      });
+                    },
+                    child: Icon(
+                      Icons.cancel_rounded,
+                      color: (isActive && isHover2)
+                          ? red
+                          : (!isHover2 && isActive)
+                              ? Colors.black87
+                              : tran,
+                      size: 30.0,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

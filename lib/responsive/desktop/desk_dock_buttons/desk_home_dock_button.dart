@@ -32,6 +32,8 @@ class DeskHomeDockButton extends StatefulWidget {
 
 class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
   bool isHover = false;
+  bool isHover2 = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -1229,7 +1229,8 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
 //
 // start hover is false
   bool isHover = false;
-//
+  bool isHover2 = false;
+
 //start active is false
   bool isActive = false;
 
@@ -1251,11 +1252,13 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
           setState(() {
             //
             //activates the settings popup
-            final startSlide = context.read<GlobalProvider>();
-            startSlide.walletActivateSlide();
-            //
-            //gives the active color to be true
-            isActive = true;
+            if (!isActive) {
+              final startSlide = context.read<GlobalProvider>();
+              startSlide.walletActivateSlide();
+              //
+              //gives the active color to be true
+              isActive = true;
+            }
           });
         },
         child: TactileButton(
@@ -1343,18 +1346,28 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
                     isActive = false;
                   });
                 },
-                child: Icon(
-                  Icons.cancel_rounded,
-                  color: (isActive && isHover)
-                      ? red
-                      : (isActive && !isHover)
-                          ? Colors.black87
-                          : (isHover)
-                              ? tran
-                              : tran,
-                  size: 30.0,
+                child: MouseRegion(
+                  onEnter: (e) {
+                    setState(() {
+                      isHover2 = true;
+                    });
+                  },
+                  onExit: (e) {
+                    setState(() {
+                      isHover2 = false;
+                    });
+                  },
+                  child: Icon(
+                    Icons.cancel_rounded,
+                    color: (isActive && isHover2)
+                        ? red
+                        : (!isHover2 && isActive)
+                            ? Colors.black87
+                            : tran,
+                    size: 30.0,
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),

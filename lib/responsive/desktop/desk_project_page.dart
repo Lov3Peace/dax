@@ -7,7 +7,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
+import 'package:flutter_application_1/responsive/desktop/desktop_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 

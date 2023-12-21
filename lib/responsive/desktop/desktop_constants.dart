@@ -117,7 +117,7 @@ class Deck extends StatelessWidget {
                 ),
               ),
               //
-              // Description text
+              // Title/Description text
               Positioned(
                 left: 0,
                 top: 20,
@@ -498,6 +498,8 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
+    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
     // if (screenWidth < 550) {
     //   deckHeight = screenHeight * 0.22;
     //   headerTextSize = 24;
@@ -580,18 +582,17 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
       //   height: screenWidth * 0.1,
       // ),
       text: Text(
-        'All of your socials in one place.',
+        'Collaborate and innovate.',
         style: GoogleFonts.montserrat(
             textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
             fontWeight: FontWeight.w600),
       ),
       subText: Text(
-        'Just link your social media accounts and access them all in one place.',
+        'Post, join, or support independent projects anywhere in the world.',
         style: GoogleFonts.montserrat(
             textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
             fontWeight: FontWeight.w400),
       ),
-
       riveAnim: const r.RiveAnimation.asset('rive/building_apartments.riv'),
     );
   }
@@ -783,6 +784,8 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
+    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
     // if (screenWidth < 550) {
     //   deckHeight = screenHeight * 0.22;
     //   headerTextSize = 24;
@@ -831,7 +834,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
                         );
                   }
                 },
-                transitionDuration: const Duration(milliseconds: 1000),
+                transitionDuration: const Duration(milliseconds: 700),
               ),
             );
           });
@@ -1023,7 +1026,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
     deckWidth = 35.25.w;
     halfDeckWidth = 17.325.w;
     labelTextSize = 16;
-
+    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
+    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
     if (screenWidth < 550) {
       deckHeight = screenHeight * 0.22;
       headerTextSize = 24;
@@ -1259,6 +1263,8 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
+    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
     // if (screenWidth < 550) {
     //   deckHeight = screenHeight * 0.22;
     //   headerTextSize = 24;

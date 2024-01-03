@@ -71,7 +71,7 @@ class _DeskNewsPageDashState extends State<DeskNewsPageDash>
                   children: [
                     Indexed(
                       index: 2,
-                      child: DesktopDock(
+                      child: DesktopSidePanel(
                         newGrad1: purp,
                         newGrad2: red,
                         newGlow: red,
@@ -249,9 +249,21 @@ class NewsButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SocialsButton(),
-          ProjectsButton(),
-          FinancesButton(),
+          Hero(
+            tag: "socials",
+            child: SocialsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
+          Hero(
+            tag: "projects",
+            child: ProjectsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
+          Hero(
+            tag: "finances",
+            child: FinancesButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
         ],
       ),
     );

@@ -66,7 +66,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                 children: [
                   Indexed(
                     index: 2,
-                    child: DesktopDock(
+                    child: DesktopSidePanel(
                       newGrad1: purp,
                       newGrad2: red,
                       newGlow: red,
@@ -107,7 +107,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                               width: 71.5.w,
                               // color: red,
                               constraints: const BoxConstraints(
-                                  minWidth: 1000, minHeight: 250),
+                                  minWidth: 700, minHeight: 250),
                               child: AnimationLimiter(
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 
 import '../../../main.dart';
+import '../mobile/mobile_socials_page.dart';
+import '../tablet/tablet_socials_page.dart';
+import 'desk_socials_page.dart';
 
 //
 //Project Button
@@ -84,7 +88,40 @@ class SocialsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
-      onTap: () {},
+      onTap: () {
+        Future.delayed(const Duration(milliseconds: 100)).then((_) {
+          Navigator.of(context).push(
+            PageRouteBuilder(
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                animation =
+                    CurvedAnimation(parent: animation, curve: Curves.linear);
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+              pageBuilder: (context, animation, secondaryAnimation) {
+                if (screenWidth < 550) {
+                  return MobSocialsPage(
+                    transitionAnimation: animation,
+                  );
+                } else if (screenWidth < 1100) {
+                  return TabSocialsPage(
+                    transitionAnimation: animation,
+                  );
+                } else {
+                  // ignore: prefer_const_constructors
+                  return DeskSocialsPageDash(
+                      //transitionAnimation: animation,
+                      );
+                }
+              },
+              transitionDuration: const Duration(milliseconds: 800),
+            ),
+          );
+        });
+      },
       child: GradientContainer(
         gradient1: orange,
         gradient2: purp,

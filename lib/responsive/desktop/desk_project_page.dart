@@ -73,7 +73,7 @@ class _DeskProjectsPageDashState extends State<DeskProjectsPageDash>
                   children: [
                     Indexed(
                       index: 2,
-                      child: DesktopDock(
+                      child: DesktopSidePanel(
                         newGrad1: purp,
                         newGrad2: red,
                         newGlow: red,

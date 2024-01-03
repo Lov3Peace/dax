@@ -13,7 +13,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../util/Window Route/friends_window_route.dart';
-import 'GlobalProvider.dart';
+import '../../../util/GlobalProvider.dart';
 
 //const String _heroFriendsWindow = 'Friends-window-hero';
 final friendsBucket = PageStorageBucket();

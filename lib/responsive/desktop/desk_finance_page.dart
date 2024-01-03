@@ -68,7 +68,7 @@ class _DeskFinancesPageDashState extends State<DeskFinancesPageDash>
                   children: [
                     Indexed(
                       index: 2,
-                      child: DesktopDock(
+                      child: DesktopSidePanel(
                         newGrad1: purp,
                         newGrad2: red,
                         newGlow: red,
@@ -246,9 +246,21 @@ class FinancesButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          NewsButton(),
-          SocialsButton(),
-          ProjectsButton(),
+          Hero(
+            tag: "news",
+            child: NewsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
+          Hero(
+            tag: "socials",
+            child: SocialsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
+          Hero(
+            tag: "projects",
+            child: ProjectsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
         ],
       ),
     );

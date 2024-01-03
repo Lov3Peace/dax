@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/GlobalProvider.dart';
+import 'package:flutter_application_1/util/GlobalProvider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:indexed/indexed.dart';
 import 'package:ionicons/ionicons.dart';

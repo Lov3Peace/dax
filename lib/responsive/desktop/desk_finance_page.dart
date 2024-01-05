@@ -17,14 +17,14 @@ import '../mobile/mob_artboard_page.dart';
 
 import 'messages.dart';
 
-class DeskFinancesPageDash extends StatefulWidget {
-  const DeskFinancesPageDash({Key? key}) : super(key: key);
+class DeskFinancesPage extends StatefulWidget {
+  const DeskFinancesPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskFinancesPageDash> createState() => _DeskFinancesPageDashState();
+  State<DeskFinancesPage> createState() => _DeskFinancesPageState();
 }
 
-class _DeskFinancesPageDashState extends State<DeskFinancesPageDash>
+class _DeskFinancesPageState extends State<DeskFinancesPage>
     with AnimationMixin {
   //globals
   late Animation<double> scale;
@@ -178,14 +178,14 @@ class _DeskFinancesPageDashState extends State<DeskFinancesPageDash>
   }
 }
 
-class DeskFinancesPage extends StatefulWidget {
-  const DeskFinancesPage({super.key});
+class DeskFinancesCont extends StatefulWidget {
+  const DeskFinancesCont({super.key});
 
   @override
-  State<DeskFinancesPage> createState() => _DeskFinancesPageState();
+  State<DeskFinancesCont> createState() => _DeskFinancesContState();
 }
 
-class _DeskFinancesPageState extends State<DeskFinancesPage> {
+class _DeskFinancesContState extends State<DeskFinancesCont> {
   @override
   Widget build(BuildContext context) {
     return Container(

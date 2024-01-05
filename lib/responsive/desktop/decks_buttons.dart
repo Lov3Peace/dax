@@ -112,7 +112,7 @@ class SocialsButton extends StatelessWidget {
                   );
                 } else {
                   // ignore: prefer_const_constructors
-                  return DeskSocialsPageDash(
+                  return DeskSocialsPage(
                       //transitionAnimation: animation,
                       );
                 }

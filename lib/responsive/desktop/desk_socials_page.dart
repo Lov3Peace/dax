@@ -17,15 +17,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../mobile/mob_artboard_page.dart';
 
-class DeskSocialsPageDash extends StatefulWidget {
-  const DeskSocialsPageDash({Key? key}) : super(key: key);
+class DeskSocialsPage extends StatefulWidget {
+  const DeskSocialsPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskSocialsPageDash> createState() => _DeskSocialsPageDashState();
+  State<DeskSocialsPage> createState() => _DeskSocialsPageState();
 }
 
-class _DeskSocialsPageDashState extends State<DeskSocialsPageDash>
-    with AnimationMixin {
+class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;

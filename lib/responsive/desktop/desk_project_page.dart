@@ -19,14 +19,14 @@ import '../mobile/mob_artboard_page.dart';
 
 import 'messages.dart';
 
-class DeskProjectsPageDash extends StatefulWidget {
-  const DeskProjectsPageDash({Key? key}) : super(key: key);
+class DeskProjectsPage extends StatefulWidget {
+  const DeskProjectsPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskProjectsPageDash> createState() => _DeskProjectsPageDashState();
+  State<DeskProjectsPage> createState() => _DeskProjectsPageState();
 }
 
-class _DeskProjectsPageDashState extends State<DeskProjectsPageDash>
+class _DeskProjectsPageState extends State<DeskProjectsPage>
     with AnimationMixin {
   //globals
   late Animation<double> scale;

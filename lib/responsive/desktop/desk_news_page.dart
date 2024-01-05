@@ -17,15 +17,14 @@ import 'package:sizer/sizer.dart';
 import '../../pages/keyboards_deck.dart';
 import '../mobile/mob_artboard_page.dart';
 
-class DeskNewsPageDash extends StatefulWidget {
-  const DeskNewsPageDash({Key? key}) : super(key: key);
+class DeskNewsPage extends StatefulWidget {
+  const DeskNewsPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskNewsPageDash> createState() => _DeskNewsPageDashState();
+  State<DeskNewsPage> createState() => _DeskNewsPageState();
 }
 
-class _DeskNewsPageDashState extends State<DeskNewsPageDash>
-    with AnimationMixin {
+class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -118,7 +117,7 @@ class _DeskNewsPageDashState extends State<DeskNewsPageDash>
                               color: tran,
                               child: const Column(
                                 children: [
-                                  DeskNewsPage(),
+                                  DeskNewsCont(),
                                 ],
                               ),
                             ),
@@ -181,14 +180,14 @@ class _DeskNewsPageDashState extends State<DeskNewsPageDash>
   }
 }
 
-class DeskNewsPage extends StatefulWidget {
-  const DeskNewsPage({super.key});
+class DeskNewsCont extends StatefulWidget {
+  const DeskNewsCont({super.key});
 
   @override
-  State<DeskNewsPage> createState() => _DeskNewsPageState();
+  State<DeskNewsCont> createState() => _DeskNewsContState();
 }
 
-class _DeskNewsPageState extends State<DeskNewsPage> {
+class _DeskNewsContState extends State<DeskNewsCont> {
   @override
   Widget build(BuildContext context) {
     return Container(

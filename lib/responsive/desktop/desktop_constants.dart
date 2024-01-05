@@ -544,7 +544,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
                     );
                   } else {
                     // ignore: prefer_const_constructors
-                    return DeskProjectsPageDash(
+                    return DeskProjectsPage(
                         //transitionAnimation: animation,
                         );
                   }
@@ -830,7 +830,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
                     );
                   } else {
                     // ignore: prefer_const_constructors
-                    return DeskSocialsPageDash(
+                    return DeskSocialsPage(
                         //transitionAnimation: animation,
                         );
                   }
@@ -1077,7 +1077,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return DeskFinancesPageDash(
+                    return DeskFinancesPage(
                         //transitionAnimation: animation,
                         );
                   }
@@ -1301,7 +1301,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return DeskNewsPageDash(
+                    return DeskNewsPage(
                         //transitionAnimation: animation,
                         );
                   }

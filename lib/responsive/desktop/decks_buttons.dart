@@ -16,6 +16,7 @@ class ProjectsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
+      scale: 0.9,
       onTap: () {},
       child: GradientContainer(
         gradient1: red,
@@ -40,6 +41,7 @@ class NewsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
+      scale: 0.9,
       onTap: () {},
       child: GradientContainer(
         gradient1: blue,
@@ -64,6 +66,7 @@ class FinancesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
+      scale: 0.9,
       onTap: () {},
       child: GradientContainer(
         gradient1: green,
@@ -88,6 +91,7 @@ class SocialsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
+      scale: 0.9,
       onTap: () {
         Future.delayed(const Duration(milliseconds: 100)).then((_) {
           Navigator.of(context).push(

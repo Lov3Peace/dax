@@ -5,13 +5,10 @@ import 'package:simple_animations/simple_animations.dart';
 import '../util/gradient_container.dart';
 
 class TactileButton extends StatefulWidget {
-  TactileButton({
-    super.key,
-    required this.child,
-    this.onTap,
-  });
+  TactileButton(
+      {super.key, required this.child, this.onTap, this.scale = 0.95});
   VoidCallback? onTap;
-
+  double? scale;
   Widget child;
   State<TactileButton> createState() => _TactileButtonState();
 }
@@ -33,7 +30,7 @@ class _TactileButtonState extends State<TactileButton> with AnimationMixin {
     return CustomAnimationBuilder<double>(
       control: control,
       startPosition: 0,
-      tween: Tween(begin: 1.0, end: 0.8),
+      tween: Tween(begin: 1.0, end: widget.scale),
       duration: const Duration(milliseconds: 100),
       curve: Curves.linear,
       onCompleted: () {

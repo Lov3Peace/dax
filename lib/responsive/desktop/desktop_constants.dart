@@ -1276,6 +1276,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
     //   headerTextSize = 10.sp;
     // }
     return TactileButton(
+      scale: 0.95,
       onTap: () {
         setState(() {
           controller.play();

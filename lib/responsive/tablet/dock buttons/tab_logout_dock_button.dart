@@ -9,7 +9,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../util/Window Route/logout_window_route.dart';
 import '../../../util/auth/onboarding_page.dart';
-import '../../mobile/mobile_constants.dart';
+import '../../mobile/mob_constants.dart';
 
 class TabLogoutWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}

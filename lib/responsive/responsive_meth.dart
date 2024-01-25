@@ -3,37 +3,33 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'desktop/desktop_constants.dart';
 import 'dart:ui';
 
-double deckHeight = screenHeight * 0.22;
-double deckWidth = screenWidth * 0.45;
-double dynDeckWidth = screenWidth * 0.45;
-double halfDeckWidth = screenWidth * 0.45;
-double headerTextSize = 24;
-double subTextSize = 14;
-double profBubTextSize = 20;
-double titleTextSize = 20;
-
-responsiveMeth() {
+responsiveDeck() {
+  deckHeight = 22.h;
+  deckWidth = 35.25.w;
+  halfDeckWidth = 17.325.w;
+  labelTextSize = 16;
   var screenHeight = window.physicalSize.height / window.devicePixelRatio;
   var screenWidth = window.physicalSize.width / window.devicePixelRatio;
   if (screenWidth < 550) {
     deckHeight = screenHeight * 0.22;
     headerTextSize = 24;
     subTextSize = 16;
-  } else if (screenWidth < 1000) {
-    deckHeight = screenHeight * 0.24;
-    headerTextSize = headerTextSize * 2.30;
-    subTextSize = 14;
-  } else if (screenWidth < 1920) {
-    deckHeight = screenHeight * 0.40;
-    deckWidth = screenWidth * 0.45;
-    halfDeckWidth = screenWidth * 0.30;
-    headerTextSize = 70;
-    subTextSize = 30;
+  } else if (screenWidth < 1500) {
+    deckWidth = 35.25.w;
+    headerTextSize = 30;
+    textConstraint = halfDeckWidth * 0.7;
+  } else if (screenWidth <= 1920) {
+    deckWidth = 35.25.w;
+    headerTextSize = 40;
+    subTextSize = 22;
+  } else if (screenWidth < 2600) {
+    deckWidth = 35.25.w;
+    headerTextSize = 48;
+    subTextSize = 24;
   } else {
-    deckHeight = screenHeight * 0.40;
-    deckWidth = screenWidth * 0.45;
-    halfDeckWidth = screenWidth * 0.30;
-    headerTextSize = 10.sp;
+    deckWidth = 35.25.w;
+    headerTextSize = 85;
     subTextSize = 30;
+    labelTextSize = 22;
   }
 }

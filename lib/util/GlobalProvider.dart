@@ -46,17 +46,17 @@ class GlobalProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void settingReverseSlide() {
+  void settingsReverseSlide() {
     settingSlideControl = Control.playReverse;
     notifyListeners();
   }
 
-  void settingActivateSlide() {
+  void settingsActivateSlide() {
     settingSlideControl = Control.play;
     notifyListeners();
   }
 
-  void settingResetSlide() {
+  void settingsResetSlide() {
     settingSlideControl = Control.stop;
     notifyListeners();
   }

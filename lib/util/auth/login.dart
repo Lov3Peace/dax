@@ -9,7 +9,7 @@ import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../tactile_button.dart';
-import '../../responsive/mobile/mobile_constants.dart';
+import '../../responsive/mobile/mob_constants.dart';
 import 'forget_password_form.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;

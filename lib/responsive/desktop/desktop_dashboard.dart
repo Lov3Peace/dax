@@ -7,7 +7,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
+import 'package:flutter_application_1/responsive/desktop/desktop_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:indexed/indexed.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -66,7 +66,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                 children: [
                   Indexed(
                     index: 2,
-                    child: DesktopDock(
+                    child: DesktopSidePanel(
                       newGrad1: purp,
                       newGrad2: red,
                       newGlow: red,
@@ -107,7 +107,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                               width: 71.5.w,
                               // color: red,
                               constraints: const BoxConstraints(
-                                  minWidth: 1000, minHeight: 250),
+                                  minWidth: 700, minHeight: 250),
                               child: AnimationLimiter(
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
@@ -145,8 +145,16 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                       child: ProfileCard()),
                                                 ],
                                               ),
-                                              deck2: ProjectsDeck(),
-                                              deck3: FinancesDeck(),
+                                              deck2: Hero(
+                                                  tag: "projects",
+                                                  flightShuttleBuilder:
+                                                      flightShuttleBuilder,
+                                                  child: ProjectsDeck()),
+                                              deck3: Hero(
+                                                  tag: "finances",
+                                                  flightShuttleBuilder:
+                                                      flightShuttleBuilder,
+                                                  child: FinancesDeck()),
                                             )[index],
                                           ),
                                         ),
@@ -184,8 +192,15 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                             padding: EdgeInsets.fromLTRB(
                                                 0.25.w, 0.0.w, 0.25.w, 0.h),
                                             child: deskDashboardDecks2(
-                                              deck4: SocialsDeck(),
-                                              deck5: NewsDeck(),
+                                              deck4: Hero(
+                                                tag: "socials",
+                                                child: SocialsDeck(),
+                                              ),
+                                              deck5: Hero(
+                                                  flightShuttleBuilder:
+                                                      flightShuttleBuilder,
+                                                  tag: "news",
+                                                  child: NewsDeck()),
                                             )[index],
                                           ),
                                         ),

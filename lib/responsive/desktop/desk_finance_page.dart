@@ -6,7 +6,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
+import 'package:flutter_application_1/responsive/desktop/desktop_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -17,14 +17,14 @@ import '../mobile/mob_artboard_page.dart';
 
 import 'messages.dart';
 
-class DeskFinancesPageDash extends StatefulWidget {
-  const DeskFinancesPageDash({Key? key}) : super(key: key);
+class DeskFinancesPage extends StatefulWidget {
+  const DeskFinancesPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskFinancesPageDash> createState() => _DeskFinancesPageDashState();
+  State<DeskFinancesPage> createState() => _DeskFinancesPageState();
 }
 
-class _DeskFinancesPageDashState extends State<DeskFinancesPageDash>
+class _DeskFinancesPageState extends State<DeskFinancesPage>
     with AnimationMixin {
   //globals
   late Animation<double> scale;
@@ -68,7 +68,7 @@ class _DeskFinancesPageDashState extends State<DeskFinancesPageDash>
                   children: [
                     Indexed(
                       index: 2,
-                      child: DesktopDock(
+                      child: DesktopSidePanel(
                         newGrad1: purp,
                         newGrad2: red,
                         newGlow: red,
@@ -178,14 +178,14 @@ class _DeskFinancesPageDashState extends State<DeskFinancesPageDash>
   }
 }
 
-class DeskFinancesPage extends StatefulWidget {
-  const DeskFinancesPage({super.key});
+class DeskFinancesCont extends StatefulWidget {
+  const DeskFinancesCont({super.key});
 
   @override
-  State<DeskFinancesPage> createState() => _DeskFinancesPageState();
+  State<DeskFinancesCont> createState() => _DeskFinancesContState();
 }
 
-class _DeskFinancesPageState extends State<DeskFinancesPage> {
+class _DeskFinancesContState extends State<DeskFinancesCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -246,9 +246,21 @@ class FinancesButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          NewsButton(),
-          SocialsButton(),
-          ProjectsButton(),
+          Hero(
+            tag: "news",
+            child: NewsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
+          Hero(
+            tag: "socials",
+            child: SocialsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
+          Hero(
+            tag: "projects",
+            child: ProjectsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
         ],
       ),
     );

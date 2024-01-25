@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/GlobalProvider.dart';
+import 'package:flutter_application_1/util/GlobalProvider.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:google_fonts/google_fonts.dart';

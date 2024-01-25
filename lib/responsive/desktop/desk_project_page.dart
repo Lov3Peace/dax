@@ -7,7 +7,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
+import 'package:flutter_application_1/responsive/desktop/desktop_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 
@@ -19,14 +19,14 @@ import '../mobile/mob_artboard_page.dart';
 
 import 'messages.dart';
 
-class DeskProjectsPageDash extends StatefulWidget {
-  const DeskProjectsPageDash({Key? key}) : super(key: key);
+class DeskProjectsPage extends StatefulWidget {
+  const DeskProjectsPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskProjectsPageDash> createState() => _DeskProjectsPageDashState();
+  State<DeskProjectsPage> createState() => _DeskProjectsPageState();
 }
 
-class _DeskProjectsPageDashState extends State<DeskProjectsPageDash>
+class _DeskProjectsPageState extends State<DeskProjectsPage>
     with AnimationMixin {
   //globals
   late Animation<double> scale;
@@ -73,7 +73,7 @@ class _DeskProjectsPageDashState extends State<DeskProjectsPageDash>
                   children: [
                     Indexed(
                       index: 2,
-                      child: DesktopDock(
+                      child: DesktopSidePanel(
                         newGrad1: purp,
                         newGrad2: red,
                         newGlow: red,
@@ -120,7 +120,11 @@ class _DeskProjectsPageDashState extends State<DeskProjectsPageDash>
                               color: tran,
                               child: const Column(
                                 children: [
-                                  DeskProjectsPage(),
+                                  Hero(
+                                    tag: "projects",
+                                    flightShuttleBuilder: flightShuttleBuilder,
+                                    child: DeskProjectsCont(),
+                                  ),
                                 ],
                               ),
                             ),
@@ -183,14 +187,14 @@ class _DeskProjectsPageDashState extends State<DeskProjectsPageDash>
   }
 }
 
-class DeskProjectsPage extends StatefulWidget {
-  const DeskProjectsPage({super.key});
+class DeskProjectsCont extends StatefulWidget {
+  const DeskProjectsCont({super.key});
 
   @override
-  State<DeskProjectsPage> createState() => _DeskProjectsPageState();
+  State<DeskProjectsCont> createState() => _DeskProjectsContState();
 }
 
-class _DeskProjectsPageState extends State<DeskProjectsPage> {
+class _DeskProjectsContState extends State<DeskProjectsCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -251,9 +255,18 @@ class ProjectsButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          FinancesButton(),
-          NewsButton(),
-          SocialsButton(),
+          Hero(
+              tag: "socials",
+              flightShuttleBuilder: flightShuttleBuilder,
+              child: SocialsButton()),
+          Hero(
+              tag: "news",
+              flightShuttleBuilder: flightShuttleBuilder,
+              child: NewsButton()),
+          Hero(
+              tag: "finances",
+              flightShuttleBuilder: flightShuttleBuilder,
+              child: FinancesButton()),
         ],
       ),
     );

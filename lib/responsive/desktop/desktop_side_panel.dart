@@ -17,8 +17,8 @@ import 'desk_dock_buttons/desk_info_dock_button.dart';
 import 'desk_dock_buttons/desk_settings_dock_button.dart';
 import 'desk_dock_buttons/desk_wallet_dock_button.dart';
 
-class DesktopDock extends StatefulWidget {
-  DesktopDock({
+class DesktopSidePanel extends StatefulWidget {
+  DesktopSidePanel({
     super.key,
     required this.newGrad1,
     required this.newGrad2,
@@ -28,10 +28,11 @@ class DesktopDock extends StatefulWidget {
   Color newGrad2;
   Color newGlow;
   @override
-  State<DesktopDock> createState() => _DesktopDockState();
+  State<DesktopSidePanel> createState() => _DesktopSidePanelState();
 }
 
-class _DesktopDockState extends State<DesktopDock> with AnimationMixin {
+class _DesktopSidePanelState extends State<DesktopSidePanel>
+    with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
 
@@ -131,30 +132,30 @@ class _DeskDockButtonsState extends State<DeskDockButtons> {
         children: [
           //Wallet
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 1.h),
+            padding: EdgeInsets.symmetric(vertical: 0.5.h),
             child: DeskWalletButtonHover(),
           ),
 
           //
           //Friends
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 1.h),
+            padding: EdgeInsets.symmetric(vertical: 0.5.h),
             child: DeskFriendsButtonHover(),
           ),
           //Settings
           Padding(
-              padding: EdgeInsets.symmetric(vertical: 1.h),
+              padding: EdgeInsets.symmetric(vertical: 0.5.h),
               child: DeskSettingsButtonHover()),
 
           //Help
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 1.h),
+            padding: EdgeInsets.symmetric(vertical: 0.5.h),
             child: DeskHelpButtonHover(),
           ),
           //
           //About Us/Info
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 1.h),
+            padding: EdgeInsets.symmetric(vertical: 0.5.h),
             child: DeskInfoButtonHover(),
           ),
         ],

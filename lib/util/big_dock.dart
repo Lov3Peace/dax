@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/home_button.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../responsive/mobile/mobile_constants.dart';
+import '../responsive/mobile/mob_constants.dart';
 
 class BigDock extends StatefulWidget {
   BigDock(

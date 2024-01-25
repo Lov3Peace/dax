@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../main.dart';
-import '../../responsive/mobile/mobile_constants.dart';
+import '../../responsive/mobile/mob_constants.dart';
 import '../gradient_container.dart';
 import '../tactile_button.dart';
 

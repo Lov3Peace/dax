@@ -7,7 +7,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
+import 'package:flutter_application_1/responsive/desktop/desktop_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
@@ -17,15 +17,14 @@ import 'package:sizer/sizer.dart';
 import '../../pages/keyboards_deck.dart';
 import '../mobile/mob_artboard_page.dart';
 
-class DeskNewsPageDash extends StatefulWidget {
-  const DeskNewsPageDash({Key? key}) : super(key: key);
+class DeskNewsPage extends StatefulWidget {
+  const DeskNewsPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskNewsPageDash> createState() => _DeskNewsPageDashState();
+  State<DeskNewsPage> createState() => _DeskNewsPageState();
 }
 
-class _DeskNewsPageDashState extends State<DeskNewsPageDash>
-    with AnimationMixin {
+class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -71,7 +70,7 @@ class _DeskNewsPageDashState extends State<DeskNewsPageDash>
                   children: [
                     Indexed(
                       index: 2,
-                      child: DesktopDock(
+                      child: DesktopSidePanel(
                         newGrad1: purp,
                         newGrad2: red,
                         newGlow: red,
@@ -118,7 +117,7 @@ class _DeskNewsPageDashState extends State<DeskNewsPageDash>
                               color: tran,
                               child: const Column(
                                 children: [
-                                  DeskNewsPage(),
+                                  DeskNewsCont(),
                                 ],
                               ),
                             ),
@@ -181,14 +180,14 @@ class _DeskNewsPageDashState extends State<DeskNewsPageDash>
   }
 }
 
-class DeskNewsPage extends StatefulWidget {
-  const DeskNewsPage({super.key});
+class DeskNewsCont extends StatefulWidget {
+  const DeskNewsCont({super.key});
 
   @override
-  State<DeskNewsPage> createState() => _DeskNewsPageState();
+  State<DeskNewsCont> createState() => _DeskNewsContState();
 }
 
-class _DeskNewsPageState extends State<DeskNewsPage> {
+class _DeskNewsContState extends State<DeskNewsCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -249,9 +248,21 @@ class NewsButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SocialsButton(),
-          ProjectsButton(),
-          FinancesButton(),
+          Hero(
+            tag: "socials",
+            child: SocialsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
+          Hero(
+            tag: "projects",
+            child: ProjectsButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
+          Hero(
+            tag: "finances",
+            child: FinancesButton(),
+            flightShuttleBuilder: flightShuttleBuilder,
+          ),
         ],
       ),
     );

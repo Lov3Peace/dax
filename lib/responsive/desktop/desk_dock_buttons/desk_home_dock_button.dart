@@ -32,6 +32,8 @@ class DeskHomeDockButton extends StatefulWidget {
 
 class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
   bool isHover = false;
+  bool isHover2 = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -85,26 +87,30 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
   }
 
   addElement() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Icon(
-          Icons.dashboard_rounded,
-          color: isHover ? Colors.black87 : Colors.white54,
-          size: 30,
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: .5.w),
-          child: Text(
-            'Home',
-            style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: 2.sp),
-              fontWeight: FontWeight.w400,
-              color: isHover ? Colors.black87 : Colors.white54,
+    return Padding(
+      padding: EdgeInsets.only(left: 0.5.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.dashboard_rounded,
+            color:
+                (isHover ? Color.fromARGB(241, 255, 255, 255) : Colors.white70),
+            size: 30,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: .5.w),
+            child: Text(
+              'Home',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(fontSize: 2.sp),
+                fontWeight: FontWeight.w400,
+                color: (isHover ? Colors.white : Colors.white54),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

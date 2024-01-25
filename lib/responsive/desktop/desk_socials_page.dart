@@ -9,7 +9,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_dock.dart';
+import 'package:flutter_application_1/responsive/desktop/desktop_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:indexed/indexed.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -17,15 +17,14 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../mobile/mob_artboard_page.dart';
 
-class DeskSocialsPageDash extends StatefulWidget {
-  const DeskSocialsPageDash({Key? key}) : super(key: key);
+class DeskSocialsPage extends StatefulWidget {
+  const DeskSocialsPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskSocialsPageDash> createState() => _DeskSocialsPageDashState();
+  State<DeskSocialsPage> createState() => _DeskSocialsPageState();
 }
 
-class _DeskSocialsPageDashState extends State<DeskSocialsPageDash>
-    with AnimationMixin {
+class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -70,7 +69,7 @@ class _DeskSocialsPageDashState extends State<DeskSocialsPageDash>
                   children: [
                     Indexed(
                       index: 2,
-                      child: DesktopDock(
+                      child: DesktopSidePanel(
                         newGrad1: purp,
                         newGrad2: red,
                         newGlow: red,
@@ -117,7 +116,11 @@ class _DeskSocialsPageDashState extends State<DeskSocialsPageDash>
                               color: tran,
                               child: const Column(
                                 children: [
-                                  DeskSocialsPage(),
+                                  Hero(
+                                    tag: "socials",
+                                    child: DeskSocialsCont(),
+                                    flightShuttleBuilder: flightShuttleBuilder,
+                                  ),
                                 ],
                               ),
                             ),
@@ -180,16 +183,16 @@ class _DeskSocialsPageDashState extends State<DeskSocialsPageDash>
   }
 }
 
-class DeskSocialsPage extends StatefulWidget {
-  const DeskSocialsPage({
+class DeskSocialsCont extends StatefulWidget {
+  const DeskSocialsCont({
     super.key,
   });
 
   @override
-  State<DeskSocialsPage> createState() => _DeskSocialsPageState();
+  State<DeskSocialsCont> createState() => _DeskSocialsContState();
 }
 
-class _DeskSocialsPageState extends State<DeskSocialsPage> {
+class _DeskSocialsContState extends State<DeskSocialsCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -250,9 +253,9 @@ class SocialsButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ProjectsButton(),
-          FinancesButton(),
-          NewsButton(),
+          Hero(tag: "projects", child: ProjectsButton()),
+          Hero(tag: "finances", child: FinancesButton()),
+          Hero(tag: "news", child: NewsButton()),
         ],
       ),
     );

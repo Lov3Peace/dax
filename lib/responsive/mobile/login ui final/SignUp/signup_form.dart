@@ -2,22 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../main.dart';
-import '../../../mobile/mob_constants.dart';
-import '../../../mobile/mobile_dashboard.dart';
-import '../SignIn/tab_signin_form.dart';
-import '../tab_final_signin.dart';
 
-class TabSignUpForm extends StatefulWidget {
-  TabSignUpForm({
+import '../../mob_constants.dart';
+import '../final_signin.dart';
+
+class SignUpForm extends StatefulWidget {
+  SignUpForm({
     super.key,
   });
 
   @override
-  State<TabSignUpForm> createState() => _TabSignUpFormState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
-class _TabSignUpFormState extends State<TabSignUpForm> {
+class _SignUpFormState extends State<SignUpForm> {
   bool isSwitch = false;
 
   @override
@@ -27,50 +25,74 @@ class _TabSignUpFormState extends State<TabSignUpForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Email",
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Email",
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16,
+                left: 10,
+                right: 10,
+              ),
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
             ),
-            Text(
-              "Username",
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Username",
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16,
+                left: 10,
+                right: 10,
+              ),
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
             ),
-            Text(
-              "Password",
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Text(
+                "Password",
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 16),
+              padding: const EdgeInsets.only(
+                top: 8.0,
+                bottom: 16,
+                left: 10,
+                right: 10,
+              ),
               child: TextFormField(
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
@@ -79,14 +101,18 @@ class _TabSignUpFormState extends State<TabSignUpForm> {
               height: 10,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Text(
-                  "Remember Me",
+                const Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Text(
+                    "Remember Me",
+                  ),
                 ),
                 Switch(
                     value: isSwitch,
                     activeColor: Colors.white,
-                    activeTrackColor: Color.fromARGB(255, 221, 83, 245),
+                    activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
                     onChanged: (bool newBool) {
                       setState(() {
                         isSwitch = newBool;
@@ -97,31 +123,9 @@ class _TabSignUpFormState extends State<TabSignUpForm> {
             const SizedBox(
               height: 10,
             ),
-            TabSignButton(
+            SignButton(
               onTap: signinbtn,
             ),
-            // Text(
-            //   "Password",
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 8.0, bottom: 16),
-            //   child: TextFormField(
-            //     obscureText: true,
-            //     decoration: InputDecoration(
-            //       prefixIcon: SvgPicture.asset(
-            //         "images/Lock.svg",
-            //       ),
-            //       prefixIconColor: Colors.white,
-            //       enabledBorder: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(
-            //           screenWidth / 4,
-            //         ),
-            //         borderSide:
-            //             BorderSide(color: Color.fromARGB(160, 41, 41, 41)),
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),

@@ -9,7 +9,7 @@ import 'auth_check.dart';
 
 import '../gradient_container.dart';
 import '../tactile_button.dart';
-import '../../responsive/mobile/mobile_constants.dart';
+import '../../responsive/mobile/mob_constants.dart';
 
 //Actual BUTTON DAVON or PHIL Whatever the hell you want to be called these days.
 //if you ask me, you just formerly go by: Primate

@@ -549,7 +549,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
                         );
                   }
                 },
-                transitionDuration: const Duration(milliseconds: 1200),
+                transitionDuration: const Duration(milliseconds: 1000),
               ),
             );
           });
@@ -835,7 +835,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
                         );
                   }
                 },
-                transitionDuration: const Duration(milliseconds: 700),
+                transitionDuration: const Duration(milliseconds: 1000),
               ),
             );
           });

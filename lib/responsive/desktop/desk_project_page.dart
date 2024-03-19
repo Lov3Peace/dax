@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/decks_buttons.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_application_1/responsive/desktop/deck_buttons.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_
 import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desktop_side_panel.dart';
+import 'package:flutter_application_1/util/custom_curve.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 
@@ -108,10 +110,8 @@ class _DeskProjectsPageState extends State<DeskProjectsPage>
                                 //Houses Decks Buttons
                                 Container(
                                   color: tran,
-                                  child: const Column(
-                                    children: [
-                                      ProjectsButtonHolder(),
-                                    ],
+                                  child: Column(
+                                    children: [ProjectsButtonHolder()],
                                   ),
                                 ),
                               ],
@@ -234,7 +234,7 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
             ),
           );
         },
-      ),
+      ).animate().fadeIn(begin: 0.5, delay: Duration(milliseconds: 600)),
     );
   }
 }
@@ -255,18 +255,9 @@ class ProjectsButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Hero(
-              tag: "socials",
-              flightShuttleBuilder: flightShuttleBuilder,
-              child: SocialsButton()),
-          Hero(
-              tag: "news",
-              flightShuttleBuilder: flightShuttleBuilder,
-              child: NewsButton()),
-          Hero(
-              tag: "finances",
-              flightShuttleBuilder: flightShuttleBuilder,
-              child: FinancesButton()),
+          SocialsButton(),
+          NewsButton(),
+          FinancesButton(),
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/keyboards_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/decks_buttons.dart';
+import 'package:flutter_application_1/responsive/desktop/deck_buttons.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
@@ -253,9 +253,9 @@ class SocialsButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Hero(tag: "projects", child: ProjectsButton()),
-          Hero(tag: "finances", child: FinancesButton()),
-          Hero(tag: "news", child: NewsButton()),
+          ProjectsButton(),
+          FinancesButton(),
+          NewsButton(),
         ],
       ),
     );

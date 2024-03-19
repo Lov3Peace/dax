@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 class SoftClose extends Curve {
   final double count;
 
-  SoftClose({this.count = 3});
+  SoftClose({this.count = 0});
 
   // t = x
   @override
   double transformInternal(double t) {
-    var val = cos(count * 2 * pi * t) * 0.5 + 0.5;
+    var val = sin(1.7 * t);
     return val; //f(x)
   }
 }

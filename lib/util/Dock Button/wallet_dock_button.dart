@@ -389,7 +389,7 @@ class _WalletWindowPopupCardState extends State<_WalletWindowPopupCard> {
                                                               vertical: 1.h),
                                                       decoration: BoxDecoration(
                                                         color: const Color
-                                                                .fromARGB(
+                                                            .fromARGB(
                                                             104, 95, 94, 94),
                                                         borderRadius:
                                                             BorderRadius

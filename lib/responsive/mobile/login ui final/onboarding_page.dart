@@ -33,7 +33,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                     const Spacer(
                       flex: 1,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 350,
                       child: Column(
                         children: [

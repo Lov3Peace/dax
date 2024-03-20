@@ -1,20 +1,24 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/mobile/mobile_login/Signin/signin_form.dart';
+import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import '../../../main.dart';
-import '../mob_constants.dart';
-import '../mobile_dashboard.dart';
+import '../../../../main.dart';
+import '../../../../util/auth/auth_check.dart';
+import '../../mob_constants.dart';
+import '../../mobile_dashboard.dart';
 
-class SignButton extends StatefulWidget {
+class LoginLaunchButton extends StatefulWidget {
   final Function()? onTap;
 
-  SignButton({super.key, required this.onTap});
+  LoginLaunchButton({super.key, required this.onTap});
 
   @override
-  State<SignButton> createState() => _SignButtonState();
+  State<LoginLaunchButton> createState() => _LoginLaunchButtonState();
 }
 
-class _SignButtonState extends State<SignButton> {
+class _LoginLaunchButtonState extends State<LoginLaunchButton> {
   //controlls button
   Control control = Control.stop;
 
@@ -36,7 +40,7 @@ class _SignButtonState extends State<SignButton> {
         );
       },
       child: GestureDetector(
-        onTap: pressed,
+        onTap: widget.onTap,
         child: Container(
           padding: const EdgeInsets.all(15),
           margin: const EdgeInsets.symmetric(horizontal: 35),
@@ -49,7 +53,7 @@ class _SignButtonState extends State<SignButton> {
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(
             child: Text(
-              'Sign In',
+              'Launch',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -61,19 +65,6 @@ class _SignButtonState extends State<SignButton> {
     );
   }
 
-  void pressed() {
-    // toggle between control instructions
-
-    setState(() {
-      control = Control.play;
-
-      Future.delayed(const Duration(milliseconds: 200)).then((_) {
-        Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-          return const MobileDashboard();
-        }));
-      });
-    });
-  }
 
   void reverseShrink() {
     setState(() {

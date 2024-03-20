@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -60,7 +61,7 @@ class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard>
     with AnimationMixin {
   Future signOut() async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => OnboardingScreen()));
+        context, MaterialPageRoute(builder: (context) => MobileLaunchPage()));
 
     FirebaseAuth.instance.signOut();
   }
@@ -137,7 +138,7 @@ class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard>
                                 ),
                                 TextButton(
                                   onPressed: signOut,
-                                  child: ButtonColor(),
+                                  child: LogOutButton(),
                                 )
                               ],
                             ),

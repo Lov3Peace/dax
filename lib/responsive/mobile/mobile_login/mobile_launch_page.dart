@@ -1,18 +1,24 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
+import '../../../util/auth/auth_check.dart';
 import '../mob_artboard_page.dart';
 import 'SignUp/signup_btn.dart';
-import 'Signin/signin_btn.dart';
+import 'Signin/login_button.dart';
 
-class OnboardingScreen extends StatefulWidget {
-  OnboardingScreen({super.key});
+class MobileLaunchPage extends StatefulWidget {
+  MobileLaunchPage({super.key});
 
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
+  get login => null;
+
+  State<MobileLaunchPage> createState() => _MobileLaunchPageState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen>
+class _MobileLaunchPageState extends State<MobileLaunchPage>
     with AnimationMixin {
   bool isSignInDialogShown = false;
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +104,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           ),
                         ),
                         SignInButton(
-                          onTap: signinbtn,
+                          onTap: (){},
                         ),
                       ],
                     ),
@@ -124,6 +130,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
 
   void signupbtn() {}
 
+  
   // create user account page
-  void signinbtn() {}
+ 
 }

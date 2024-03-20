@@ -4,11 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../util/Window Route/logout_window_route.dart';
 import '../../../util/auth/onboarding_page.dart';
+import '../../responsive_layout.dart';
 import '../mob_constants.dart';
 
 class MobLogoutWindowButton extends StatelessWidget {
@@ -60,7 +62,8 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
     with AnimationMixin {
   Future signOut() async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => OnboardingScreen()));
+        context, MaterialPageRoute(builder: (context) =>                                                 ResponsiveLayout(mobileVersion: MobileLaunchPage(), tabletVersion: MobileLaunchPage(), desktopVersion: OnboardingScreen(),),),);
+;
 
     FirebaseAuth.instance.signOut();
   }
@@ -137,7 +140,7 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
                                 ),
                                 TextButton(
                                   onPressed: signOut,
-                                  child: ButtonColor(),
+                                  child: const LogOutButton(),
                                 )
                               ],
                             ),

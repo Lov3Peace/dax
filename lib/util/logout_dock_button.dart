@@ -200,7 +200,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                   padding: EdgeInsets.only(top: 2.h),
                                   child: TextButton(
                                     onPressed: signOut,
-                                    child: ButtonColor(),
+                                    child: LogOutButton(),
                                   ),
                                 )
                               ],

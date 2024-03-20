@@ -36,8 +36,8 @@ class _TabOnboardingScreenState extends State<TabOnboardingScreen>
                     ),
                     SizedBox(
                       width: 90.h,
-                      child: Column(
-                        children: const [
+                      child: const Column(
+                        children: [
                           Padding(
                             padding: EdgeInsets.only(right: 100),
                             child: Text(

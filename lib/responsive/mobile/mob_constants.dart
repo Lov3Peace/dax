@@ -1369,8 +1369,8 @@ class NewsStacks {
   ];
 }
 
-class ButtonColor extends StatelessWidget {
-  const ButtonColor({
+class LogOutButton extends StatelessWidget {
+  const LogOutButton({
     super.key,
   });
 

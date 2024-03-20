@@ -4,7 +4,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../mob_constants.dart';
-import '../final_signin.dart';
+import '../Signin/login_launch_button.dart';
 
 class SignUpForm extends StatefulWidget {
   SignUpForm({
@@ -123,7 +123,7 @@ class _SignUpFormState extends State<SignUpForm> {
             const SizedBox(
               height: 10,
             ),
-            SignButton(
+            LoginLaunchButton(
               onTap: signinbtn,
             ),
           ],

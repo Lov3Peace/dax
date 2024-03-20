@@ -1,12 +1,14 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../util/auth/auth_check.dart';
 import '../../mob_constants.dart';
-import '../final_signin.dart';
+import 'login_launch_button.dart';
 import 'forget_password_form.dart';
 
 class SignInForm extends StatefulWidget {
@@ -26,7 +28,8 @@ class _SignInFormState extends State<SignInForm> {
 
   //Global Key
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -53,12 +56,7 @@ class _SignInFormState extends State<SignInForm> {
                 right: 10,
               ),
               child: TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "";
-                  }
-                  return null;
-                },
+                controller: _usernameController,
                 onSaved: (username) {},
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -85,14 +83,8 @@ class _SignInFormState extends State<SignInForm> {
                 right: 10,
               ),
               child: TextFormField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "";
-                  }
-                  return null;
-                },
-                onSaved: (password) {},
-                obscureText: true,
+                controller: _passwordController,
+                obscureText: false,
                 decoration: InputDecoration(
                   prefixIconColor: Colors.black,
                   enabledBorder: OutlineInputBorder(
@@ -179,7 +171,7 @@ class _SignInFormState extends State<SignInForm> {
                                           ),
                                         ),
                                       ),
-                                      Scaffold(
+                                      const Scaffold(
                                         resizeToAvoidBottomInset: false,
                                         backgroundColor: Colors.transparent,
                                         body: SingleChildScrollView(
@@ -237,8 +229,8 @@ class _SignInFormState extends State<SignInForm> {
             const SizedBox(
               height: 10,
             ),
-            SignButton(
-              onTap: signinbtn,
+            LoginLaunchButton(
+              onTap: login,
             ),
           ],
         ),
@@ -246,12 +238,51 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
-  void signinbtn() {
-    //first once the user taps sign in it shows the loading
-    if (_formKey.currentState!.validate()) {
-      //if eveerything looks good should show the sucess animation
-    } else {
-      //else it shows the error information
+Future login() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: '${_usernameController.text}@omni.com',
+          password: _passwordController.text);
+
+      Navigator.of(context).push(
+        PageRouteBuilder(
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            animation =
+                CurvedAnimation(parent: animation, curve: Curves.linear);
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          pageBuilder: (context, animation, secondaryAnimation) {
+            print('Login Successful...');
+            // ignore: prefer_const_constructors
+            return AuthCheck();
+          },
+          transitionDuration: const Duration(milliseconds: 0),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print("User doesn't exist.");
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password.');
+        showErrorMessage(e.code);
+      }
     }
+  }
+    void showErrorMessage(String message) {
+    showDialog(
+        context: (context),
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: const Color.fromARGB(182, 75, 75, 75),
+            title: Center(
+                child: Text(
+              message,
+              style: const TextStyle(color: Colors.white),
+            )),
+          );
+        });
   }
 }

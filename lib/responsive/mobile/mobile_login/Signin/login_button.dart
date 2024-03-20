@@ -114,7 +114,7 @@ class _SignInButtonState extends State<SignInButton> {
                         ),
                       ),
                     ),
-                    Scaffold(
+                    const Scaffold(
                       resizeToAvoidBottomInset: false,
                       backgroundColor: Colors.transparent,
                       body: SingleChildScrollView(

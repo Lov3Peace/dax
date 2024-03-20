@@ -62,8 +62,16 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
     with AnimationMixin {
   Future signOut() async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) =>                                                 ResponsiveLayout(mobileVersion: MobileLaunchPage(), tabletVersion: MobileLaunchPage(), desktopVersion: OnboardingScreen(),),),);
-;
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResponsiveLayout(
+          mobileVersion: MobileLaunchPage(),
+          tabletVersion: OnboardingScreen(),
+          desktopVersion: OnboardingScreen(),
+        ),
+      ),
+    );
+    ;
 
     FirebaseAuth.instance.signOut();
   }

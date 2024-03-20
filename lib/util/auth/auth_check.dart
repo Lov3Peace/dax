@@ -34,7 +34,11 @@ class _AuthCheckState extends State<AuthCheck> {
               desktopVersion: DesktopDashboard(),
             );
           } else {
-            return ResponsiveLayout(desktopVersion: OnboardingScreen(), tabletVersion: OnboardingScreen(), mobileVersion: MobileLaunchPage(),);
+            return ResponsiveLayout(
+              desktopVersion: OnboardingScreen(),
+              tabletVersion: OnboardingScreen(),
+              mobileVersion: MobileLaunchPage(),
+            );
           }
         },
       ),

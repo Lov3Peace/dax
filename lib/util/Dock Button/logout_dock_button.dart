@@ -201,10 +201,15 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                 TextButton(
                                   onPressed: () {
                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                ResponsiveLayout(mobileVersion: MobileLaunchPage(), tabletVersion: MobileLaunchPage(), desktopVersion: OnboardingScreen(),),),);
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ResponsiveLayout(
+                                          mobileVersion: MobileLaunchPage(),
+                                          tabletVersion: MobileLaunchPage(),
+                                          desktopVersion: OnboardingScreen(),
+                                        ),
+                                      ),
+                                    );
                                   },
                                   child: const LogOutButton(),
                                 )

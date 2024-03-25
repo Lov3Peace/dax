@@ -7,7 +7,7 @@ class GlobalProvider extends ChangeNotifier {
   Control friendSlideControl;
   Control helpSlideControl;
   Control infoSlideControl;
-  String projectHeroTag;
+  String projectsHeroTag;
   String socialsHeroTag;
   String financesHeroTag;
   String newsHeroTag;
@@ -18,10 +18,10 @@ class GlobalProvider extends ChangeNotifier {
     this.settingSlideControl = Control.stop,
     this.helpSlideControl = Control.stop,
     this.infoSlideControl = Control.stop,
-    this.projectHeroTag = 'projectHeroOff',
-    this.socialsHeroTag = 'socialsHeroOff',
-    this.financesHeroTag = 'financesHeroOff',
-    this.newsHeroTag = 'newsHeroOff',
+    this.projectsHeroTag = 'projectsHero',
+    this.socialsHeroTag = 'socialsHero',
+    this.financesHeroTag = 'financesHero',
+    this.newsHeroTag = 'newsHero',
   });
 
   void infoReverseSlide() {
@@ -99,11 +99,19 @@ class GlobalProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void heroOff() {
+    projectsHeroTag = 'projectHero_Off';
+    socialsHeroTag = 'socialsHero_Off';
+    financesHeroTag = 'financesHero_Off';
+    newsHeroTag = 'newsHero_Off';
+    notifyListeners();
+  }
+
   void heroReset() {
-    projectHeroTag = 'projectHeroOff';
-    socialsHeroTag = 'socialsHeroOff';
-    financesHeroTag = 'financesHeroOff';
-    newsHeroTag = 'newsHeroOff';
+    projectsHeroTag = 'projectsHero';
+    socialsHeroTag = 'socialsHero';
+    financesHeroTag = 'financesHero';
+    newsHeroTag = 'newsHero';
     notifyListeners();
   }
 }

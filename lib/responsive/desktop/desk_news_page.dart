@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/deck_buttons.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
@@ -15,6 +15,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../pages/keyboards_deck.dart';
+import '../../util/GlobalProvider.dart';
 import '../mobile/mob_artboard_page.dart';
 
 class DeskNewsPage extends StatefulWidget {
@@ -113,11 +114,15 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
                                 ),
                               ],
                             ),
-                            Container(
+                           Container(
                               color: tran,
-                              child: const Column(
+                              child: Column(
                                 children: [
-                                  DeskNewsCont(),
+                                  Hero(
+                                    tag: GlobalProvider().newsHeroTag,
+                                    child: DeskNewsCont(),
+                                    flightShuttleBuilder: flightShuttleBuilder,
+                                  ),
                                 ],
                               ),
                             ),
@@ -248,21 +253,9 @@ class NewsButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Hero(
-            tag: "socials",
-            child: SocialsButton(),
-            flightShuttleBuilder: flightShuttleBuilder,
-          ),
-          Hero(
-            tag: "projects",
-            child: ProjectsButton(),
-            flightShuttleBuilder: flightShuttleBuilder,
-          ),
-          Hero(
-            tag: "finances",
-            child: FinancesButton(),
-            flightShuttleBuilder: flightShuttleBuilder,
-          ),
+          SocialsButton(),
+          ProjectsButton(),
+          FinancesButton(),
         ],
       ),
     );

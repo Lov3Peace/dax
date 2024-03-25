@@ -4,7 +4,7 @@ import 'package:flutter_application_1/main.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../mobile/mob_constants.dart';
-import '../../../desktop/desktop_dashboard.dart';
+import '../../../desktop/desk_dashboard.dart';
 import '../../../mobile/mobile_dashboard.dart';
 import '../../../responsive_layout.dart';
 import '../../tablet_dashboard.dart';

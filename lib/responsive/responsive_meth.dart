@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'desktop/desktop_constants.dart';
+import 'desktop/desk_constants.dart';
 import 'dart:ui';
 
 responsiveDeck() {

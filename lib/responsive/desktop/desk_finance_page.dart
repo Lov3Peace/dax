@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/deck_buttons.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../main.dart';
 import '../../pages/keyboards_deck.dart';
+import '../../util/GlobalProvider.dart';
 import '../mobile/mob_artboard_page.dart';
 
 import 'messages.dart';
@@ -44,127 +46,134 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      body: SingleChildScrollView(
-        child: Container(
-          height: 100.h,
-          width: 100.w,
-          constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
-          child: Stack(
-            children: [
-              const ArtBoardScreen(),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    controller.play();
-                  });
-                  Future.delayed(const Duration(milliseconds: 300)).then((_) {
-                    controller.playReverse();
-                  });
-                },
-                child: Indexer(
-                  children: [
-                    Indexed(
-                      index: 2,
-                      child: DesktopSidePanel(
-                        newGrad1: purp,
-                        newGrad2: red,
-                        newGlow: red,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 12.5.w,
+    return Consumer<GlobalProvider>(
+      builder: (context, value, child) => 
+      Scaffold(
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: SingleChildScrollView(
+          child: Container(
+            height: 100.h,
+            width: 100.w,
+            constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
+            child: Stack(
+              children: [
+                const ArtBoardScreen(),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      controller.play();
+                    });
+                    Future.delayed(const Duration(milliseconds: 300)).then((_) {
+                      controller.playReverse();
+                    });
+                  },
+                  child: Indexer(
+                    children: [
+                      Indexed(
+                        index: 2,
+                        child: DesktopSidePanel(
+                          newGrad1: purp,
+                          newGrad2: red,
+                          newGlow: red,
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                //
-                                // Title of Screen
-                                Padding(
-                                  padding: EdgeInsets.only(right: 23.6.w),
-                                  child: TitleBubble(
-                                    deckHeight: 5.5.h,
-                                    deckName: 'Finances',
-                                    deckWidth: 17.25.w,
-                                    textSize: 3.sp,
-                                    leftPad: 30,
-                                  ),
-                                ),
-                                //
-                                //Houses Decks Buttons
-                                Container(
-                                  color: tran,
-                                  child: const Column(
-                                    children: [
-                                      FinancesButtonHolder(),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              color: tran,
-                              child: const Column(
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 12.5.w,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  DeskFinancesPage(),
+                                  //
+                                  // Title of Screen
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 23.6.w),
+                                    child: TitleBubble(
+                                      deckHeight: 5.5.h,
+                                      deckName: 'Finances',
+                                      deckWidth: 17.25.w,
+                                      textSize: 3.sp,
+                                      leftPad: 30,
+                                    ),
+                                  ),
+                                  //
+                                  //Houses Decks Buttons
+                                  Container(
+                                    color: tran,
+                                    child: const Column(
+                                      children: [
+                                        FinancesButtonHolder(),
+                                      ],
+                                    ),
+                                  ),
                                 ],
                               ),
-                            ),
-                          ],
+                              Container(
+                                color: tran,
+                                child: Column(
+                                  children: [
+                                    Hero(
+                                      tag: GlobalProvider().financesHeroTag,
+                                      child: DeskFinancesCont(),
+                                      flightShuttleBuilder: flightShuttleBuilder,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+      
+                          // ignore: prefer_const_constructors
+                          Messages(),
+                        ],
+                      ),
+                      Indexed(
+                        index: 1,
+                        child: Positioned(
+                          left: -70.w,
+                          child: WalletPopUp(),
                         ),
-
-                        // ignore: prefer_const_constructors
-                        Messages(),
-                      ],
-                    ),
-                    Indexed(
-                      index: 1,
-                      child: Positioned(
-                        left: -70.w,
-                        child: WalletPopUp(),
                       ),
-                    ),
-                    Indexed(
-                      index: 1,
-                      child: Positioned(
-                        left: -70.w,
-                        child: FriendsPopUp(),
+                      Indexed(
+                        index: 1,
+                        child: Positioned(
+                          left: -70.w,
+                          child: FriendsPopUp(),
+                        ),
                       ),
-                    ),
-                    Indexed(
-                      index: 1,
-                      child: Positioned(
-                        left: -70.w,
-                        child: SettingsPopUp(),
+                      Indexed(
+                        index: 1,
+                        child: Positioned(
+                          left: -70.w,
+                          child: SettingsPopUp(),
+                        ),
                       ),
-                    ),
-                    Indexed(
-                      index: 1,
-                      child: Positioned(
-                        left: -70.w,
-                        child: HelpPopUp(),
+                      Indexed(
+                        index: 1,
+                        child: Positioned(
+                          left: -70.w,
+                          child: HelpPopUp(),
+                        ),
                       ),
-                    ),
-                    Indexed(
-                      index: 1,
-                      child: Positioned(
-                        left: -70.w,
-                        child: InfoPopUp(),
+                      Indexed(
+                        index: 1,
+                        child: Positioned(
+                          left: -70.w,
+                          child: InfoPopUp(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -246,21 +255,9 @@ class FinancesButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Hero(
-            tag: "news",
-            child: NewsButton(),
-            flightShuttleBuilder: flightShuttleBuilder,
-          ),
-          Hero(
-            tag: "socials",
-            child: SocialsButton(),
-            flightShuttleBuilder: flightShuttleBuilder,
-          ),
-          Hero(
-            tag: "projects",
-            child: ProjectsButton(),
-            flightShuttleBuilder: flightShuttleBuilder,
-          ),
+          NewsButton(),
+          SocialsButton(),
+          ProjectsButton(),
         ],
       ),
     );

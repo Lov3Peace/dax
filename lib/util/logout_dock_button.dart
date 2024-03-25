@@ -132,7 +132,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
         MaterialPageRoute(
           builder: (context) => ResponsiveLayout(
             mobileVersion: MobileLaunchPage(),
-            tabletVersion: MobileLaunchPage(),
+            tabletVersion: OnboardingScreen(),
             desktopVersion: OnboardingScreen(),
           ),
         ));

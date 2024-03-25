@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/desktop_dashboard.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dashboard.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/auth/signup.dart';

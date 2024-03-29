@@ -1,37 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/pages/keyboards_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 
+import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
-import 'package:flutter_application_1/util/custom_curve.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:flutter_application_1/responsive/desktop/messages.dart';
+import 'package:flutter_application_1/util/GlobalProvider.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
-
 import 'package:simple_animations/simple_animations.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../main.dart';
-import '../../pages/keyboards_deck.dart';
-import '../mobile/mob_artboard_page.dart';
-import '../../util/GlobalProvider.dart';
+import '../../mobile/mob_artboard_page.dart';
 
-import 'messages.dart';
-
-class DeskProjectsPage extends StatefulWidget {
-  const DeskProjectsPage({Key? key}) : super(key: key);
+class DeskHeroSocialsPage extends StatefulWidget {
+  const DeskHeroSocialsPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskProjectsPage> createState() => _DeskProjectsPageState();
+  State<DeskHeroSocialsPage> createState() => _DeskHeroSocialsPageState();
 }
 
-class _DeskProjectsPageState extends State<DeskProjectsPage>
-    with AnimationMixin {
+class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -43,17 +39,18 @@ class _DeskProjectsPageState extends State<DeskProjectsPage>
 
   @override
   void initState() {
-    // TODO: implement initState
     scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
     opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
     controller.stop();
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
-      builder: (context, value, child) => Scaffold(
+      builder: (context, value, child) => 
+      Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
         body: SingleChildScrollView(
@@ -102,7 +99,7 @@ class _DeskProjectsPageState extends State<DeskProjectsPage>
                                     padding: EdgeInsets.only(right: 23.6.w),
                                     child: TitleBubble(
                                       deckHeight: 5.5.h,
-                                      deckName: 'Projects',
+                                      deckName: 'Socials',
                                       deckWidth: 17.25.w,
                                       textSize: 3.sp,
                                       leftPad: 30,
@@ -113,7 +110,9 @@ class _DeskProjectsPageState extends State<DeskProjectsPage>
                                   Container(
                                     color: tran,
                                     child: const Column(
-                                      children: [ProjectsButtonHolder()],
+                                      children: [
+                                        SocialsButtonHolder(),
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -123,17 +122,16 @@ class _DeskProjectsPageState extends State<DeskProjectsPage>
                                 child: Column(
                                   children: [
                                     Hero(
-                                      tag: GlobalProvider().projectsHeroTag,
-                                      flightShuttleBuilder:
-                                          flightShuttleBuilder,
-                                      child: DeskProjectsCont(),
+                                      tag: GlobalProvider().socialsHeroTag,
+                                      child: DeskSocialsCont(),
+                                      flightShuttleBuilder: flightShuttleBuilder,
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
-
+      
                           // ignore: prefer_const_constructors
                           Messages(),
                         ],
@@ -191,14 +189,16 @@ class _DeskProjectsPageState extends State<DeskProjectsPage>
   }
 }
 
-class DeskProjectsCont extends StatefulWidget {
-  const DeskProjectsCont({super.key});
+class DeskSocialsCont extends StatefulWidget {
+  const DeskSocialsCont({
+    super.key,
+  });
 
   @override
-  State<DeskProjectsCont> createState() => _DeskProjectsContState();
+  State<DeskSocialsCont> createState() => _DeskSocialsContState();
 }
 
-class _DeskProjectsContState extends State<DeskProjectsCont> {
+class _DeskSocialsContState extends State<DeskSocialsCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -210,12 +210,12 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
         border: Border.all(color: deckBorderColor),
       ),
       child: ListView.builder(
-        itemExtent: 520,
+        itemExtent: 420,
         physics: const BouncingScrollPhysics(),
-        itemCount: ProjectStacks().deskProjectStacks.length,
+        itemCount: SocialsStacks().deskSocialsStacks.length,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
-            delay: const Duration(milliseconds: 200),
+            delay: const Duration(milliseconds: 500),
             position: index,
             duration: const Duration(milliseconds: 700),
             child: SlideAnimation(
@@ -231,20 +231,20 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
                             return const KeyboardsDeck();
                           }));
                         },
-                        child: ProjectStacks().deskProjectStacks[index]),
+                        child: SocialsStacks().deskSocialsStacks[index]),
                   ],
                 ),
               ),
             ),
           );
         },
-      ).animate().fadeIn(begin: 0.5, delay: Duration(milliseconds: 600)),
+      ),
     );
   }
 }
 
-class ProjectsButtonHolder extends StatelessWidget {
-  const ProjectsButtonHolder({super.key});
+class SocialsButtonHolder extends StatelessWidget {
+  const SocialsButtonHolder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -259,9 +259,9 @@ class ProjectsButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SocialsButton(),
-          NewsButton(),
+          ProjectsButton(),
           FinancesButton(),
+          NewsButton(),
         ],
       ),
     );

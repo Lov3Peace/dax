@@ -36,8 +36,6 @@ class _DesktopDashboardState extends State<DesktopDashboard>
   late AnimationController heightController;
   late AnimationController colorController;
 
-  //final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
-
   @override
   void initState() {
     // TODO: implement initState

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
@@ -6,27 +7,30 @@ import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
+
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
+import 'package:flutter_application_1/util/custom_curve.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
+
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../main.dart';
-import '../../pages/keyboards_deck.dart';
-import '../../util/GlobalProvider.dart';
-import '../mobile/mob_artboard_page.dart';
+import '../../../main.dart';
+import '../../../pages/keyboards_deck.dart';
+import '../../mobile/mob_artboard_page.dart';
+import '../../../util/GlobalProvider.dart';
 
-import 'messages.dart';
+import '../messages.dart';
 
-class DeskFinancesPage extends StatefulWidget {
-  const DeskFinancesPage({Key? key}) : super(key: key);
+class DeskHeroProjectsPage extends StatefulWidget {
+  const DeskHeroProjectsPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskFinancesPage> createState() => _DeskFinancesPageState();
+  State<DeskHeroProjectsPage> createState() => _DeskHeroProjectsPageState();
 }
 
-class _DeskFinancesPageState extends State<DeskFinancesPage>
+class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage>
     with AnimationMixin {
   //globals
   late Animation<double> scale;
@@ -35,20 +39,21 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
   late AnimationController heightController;
   late AnimationController colorController;
 
+  //final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
+
   @override
   void initState() {
+    // TODO: implement initState
     scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
     opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
     controller.stop();
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
-      builder: (context, value, child) => 
-      Scaffold(
+      builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
         body: SingleChildScrollView(
@@ -97,7 +102,7 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
                                     padding: EdgeInsets.only(right: 23.6.w),
                                     child: TitleBubble(
                                       deckHeight: 5.5.h,
-                                      deckName: 'Finances',
+                                      deckName: 'Projects',
                                       deckWidth: 17.25.w,
                                       textSize: 3.sp,
                                       leftPad: 30,
@@ -108,9 +113,7 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
                                   Container(
                                     color: tran,
                                     child: const Column(
-                                      children: [
-                                        FinancesButtonHolder(),
-                                      ],
+                                      children: [ProjectsBubbleDock()],
                                     ),
                                   ),
                                 ],
@@ -120,16 +123,17 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
                                 child: Column(
                                   children: [
                                     Hero(
-                                      tag: GlobalProvider().financesHeroTag,
-                                      child: DeskFinancesCont(),
-                                      flightShuttleBuilder: flightShuttleBuilder,
+                                      tag: GlobalProvider().projectsHeroTag,
+                                      flightShuttleBuilder:
+                                          flightShuttleBuilder,
+                                      child: DeskProjectsCont(),
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
-      
+
                           // ignore: prefer_const_constructors
                           Messages(),
                         ],
@@ -187,14 +191,14 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
   }
 }
 
-class DeskFinancesCont extends StatefulWidget {
-  const DeskFinancesCont({super.key});
+class DeskProjectsCont extends StatefulWidget {
+  const DeskProjectsCont({super.key});
 
   @override
-  State<DeskFinancesCont> createState() => _DeskFinancesContState();
+  State<DeskProjectsCont> createState() => _DeskProjectsContState();
 }
 
-class _DeskFinancesContState extends State<DeskFinancesCont> {
+class _DeskProjectsContState extends State<DeskProjectsCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -206,12 +210,12 @@ class _DeskFinancesContState extends State<DeskFinancesCont> {
         border: Border.all(color: deckBorderColor),
       ),
       child: ListView.builder(
-        itemExtent: 420,
+        itemExtent: 520,
         physics: const BouncingScrollPhysics(),
-        itemCount: FinancesStacks().deskFinancesStacks.length,
+        itemCount: ProjectStacks().deskProjectStacks.length,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
-            delay: const Duration(milliseconds: 200),
+            delay: const Duration(milliseconds: 500),
             position: index,
             duration: const Duration(milliseconds: 700),
             child: SlideAnimation(
@@ -227,20 +231,20 @@ class _DeskFinancesContState extends State<DeskFinancesCont> {
                             return const KeyboardsDeck();
                           }));
                         },
-                        child: FinancesStacks().deskFinancesStacks[index]),
+                        child: ProjectStacks().deskProjectStacks[index]),
                   ],
                 ),
               ),
             ),
           );
         },
-      ),
+      ).animate().fadeIn(begin: 0.5, delay: Duration(milliseconds: 600)),
     );
   }
 }
 
-class FinancesButtonHolder extends StatelessWidget {
-  const FinancesButtonHolder({super.key});
+class ProjectsBubbleDock extends StatelessWidget {
+  const ProjectsBubbleDock({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -255,9 +259,9 @@ class FinancesButtonHolder extends StatelessWidget {
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          NewsButton(),
           SocialsButton(),
-          ProjectsButton(),
+          NewsButton(),
+          FinancesButton(),
         ],
       ),
     );

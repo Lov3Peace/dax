@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../util/tactile_button.dart';
+import '../desk_constants.dart';
 
 class DeskHomeWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
@@ -54,10 +55,7 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
             },
             child: TactileButton(
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (buildContext) {
-                  return AuthCheck();
-                }));
+                goHome();
               },
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 200),
@@ -113,4 +111,24 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
       ),
     );
   }
+
+  void goHome() {
+    Navigator.of(context).push(
+              PageRouteBuilder(
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  animation =
+                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+                pageBuilder: (context, animation, secondaryAnimation) {
+                  return AuthCheck();
+                },
+                transitionDuration: const Duration(milliseconds: 1000),
+              ),
+            );
+          }
 }

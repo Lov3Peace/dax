@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/keyboards_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
@@ -17,7 +18,8 @@ import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../mobile/mob_artboard_page.dart';
+import '../../../util/custom_curve.dart';
+import '../../mobile/mob_artboard_page.dart';
 
 class DeskSocialsPage extends StatefulWidget {
   const DeskSocialsPage({Key? key}) : super(key: key);
@@ -214,7 +216,7 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
         itemCount: SocialsStacks().deskSocialsStacks.length,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
-            delay: const Duration(milliseconds: 200),
+            delay: const Duration(milliseconds: 500),
             position: index,
             duration: const Duration(milliseconds: 700),
             child: SlideAnimation(
@@ -255,12 +257,12 @@ class SocialsButtonHolder extends StatelessWidget {
         color: Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ProjectsButton(),
-          FinancesButton(),
-          NewsButton(),
+          ProjectsButton().animate().slideX(begin: 0.25, end: 0, delay: Duration(milliseconds: 200), duration: Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+          FinancesButton().animate().slideX(begin: 0.25, end: 0, delay: Duration(milliseconds: 400), duration: Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+          NewsButton().animate().slideX(begin: 0.25, end: 0, delay: Duration(milliseconds: 600), duration: Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
         ],
       ),
     );

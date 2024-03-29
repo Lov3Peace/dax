@@ -15,10 +15,10 @@ import '../tablet/tablet_finance_page.dart';
 import '../tablet/tablet_news_page.dart';
 import '../tablet/tablet_projects_page.dart';
 import '../tablet/tablet_socials_page.dart';
-import 'desk_finance_page.dart';
-import 'desk_news_page.dart';
-import 'desk_project_page.dart';
-import 'desk_socials_page.dart';
+import 'bubble_deck_pages/desk_finance_page.dart';
+import 'bubble_deck_pages/desk_news_page.dart';
+import 'bubble_deck_pages/desk_project_page.dart';
+import 'bubble_deck_pages/desk_socials_page.dart';
 
 //
 //Project Button
@@ -66,7 +66,7 @@ class ProjectsButton extends StatelessWidget {
                             );
                       }
                     },
-                    transitionDuration: const Duration(milliseconds: 800),
+                    transitionDuration: const Duration(milliseconds: 200),
                   ),
                 );
               });
@@ -134,7 +134,7 @@ class NewsButton extends StatelessWidget {
                             );
                       }
                     },
-                    transitionDuration: const Duration(milliseconds: 800),
+                    transitionDuration: const Duration(milliseconds: 200),
                   ),
                 );
               });
@@ -202,7 +202,7 @@ class FinancesButton extends StatelessWidget {
                             );
                       }
                     },
-                    transitionDuration: const Duration(milliseconds: 800),
+                    transitionDuration: const Duration(milliseconds: 200),
                   ),
                 );
               });
@@ -270,7 +270,7 @@ class SocialsButton extends StatelessWidget {
                           );
                     }
                   },
-                  transitionDuration: const Duration(milliseconds: 800),
+                  transitionDuration: const Duration(milliseconds: 200),
                 ),
               );
             });

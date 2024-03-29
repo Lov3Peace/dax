@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_project_page.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_socials_page.dart';
+import 'package:flutter_application_1/responsive/desktop/bubble_deck_pages/desk_project_page.dart';
+import 'package:flutter_application_1/responsive/desktop/bubble_deck_pages/desk_socials_page.dart';
 import 'package:flutter_application_1/responsive/responsive_meth.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_finance_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_news_page.dart';
@@ -20,8 +20,12 @@ import '../mobile/mobile_finance_page.dart';
 import '../mobile/mobile_news_page.dart';
 import '../mobile/mobile_projects_page.dart';
 import '../mobile/mobile_socials_page.dart';
-import 'desk_finance_page.dart';
-import 'desk_news_page.dart';
+import 'bubble_deck_pages/desk_finance_page.dart';
+import 'hero_deck_pages/desk_hero_finance_page.dart';
+import 'hero_deck_pages/desk_hero_news_page.dart';
+import 'hero_deck_pages/desk_hero_project_page.dart';
+import 'bubble_deck_pages/desk_news_page.dart';
+import 'hero_deck_pages/desk_hero_socials_page.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)
 var screenHeight = window.physicalSize.height / window.devicePixelRatio;
@@ -544,7 +548,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
                     );
                   } else {
                     // ignore: prefer_const_constructors
-                    return DeskProjectsPage(
+                    return DeskHeroProjectsPage(
                         //transitionAnimation: animation,
                         );
                   }
@@ -806,7 +810,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
     return TactileButton(
       onTap: () {
         setState(() {
-          controller.play();
+          // controller.play();s
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
@@ -830,7 +834,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
                     );
                   } else {
                     // ignore: prefer_const_constructors
-                    return DeskSocialsPage(
+                    return DeskHeroSocialsPage(
                         //transitionAnimation: animation,
                         );
                   }
@@ -1077,7 +1081,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return DeskFinancesPage(
+                    return DeskHeroFinancesPage(
                         //transitionAnimation: animation,
                         );
                   }
@@ -1302,7 +1306,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return DeskNewsPage(
+                    return DeskHeroNewsPage(
                         //transitionAnimation: animation,
                         );
                   }

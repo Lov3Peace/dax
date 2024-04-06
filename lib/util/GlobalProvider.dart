@@ -7,6 +7,10 @@ class GlobalProvider extends ChangeNotifier {
   Control friendSlideControl;
   Control helpSlideControl;
   Control infoSlideControl;
+  String projectsHeroTag;
+  String socialsHeroTag;
+  String financesHeroTag;
+  String newsHeroTag;
 
   GlobalProvider({
     this.friendSlideControl = Control.stop,
@@ -14,6 +18,10 @@ class GlobalProvider extends ChangeNotifier {
     this.settingSlideControl = Control.stop,
     this.helpSlideControl = Control.stop,
     this.infoSlideControl = Control.stop,
+    this.projectsHeroTag = 'projectsHero',
+    this.socialsHeroTag = 'socialsHero',
+    this.financesHeroTag = 'financesHero',
+    this.newsHeroTag = 'newsHero',
   });
 
   void infoReverseSlide() {
@@ -90,64 +98,20 @@ class GlobalProvider extends ChangeNotifier {
     walletSlideControl = Control.stop;
     notifyListeners();
   }
+
+  void heroOff() {
+    projectsHeroTag = 'projectHero_Off';
+    socialsHeroTag = 'socialsHero_Off';
+    financesHeroTag = 'financesHero_Off';
+    newsHeroTag = 'newsHero_Off';
+    notifyListeners();
+  }
+
+  void heroReset() {
+    projectsHeroTag = 'projectsHero';
+    socialsHeroTag = 'socialsHero';
+    financesHeroTag = 'financesHero';
+    newsHeroTag = 'newsHero';
+    notifyListeners();
+  }
 }
-
-// class WalletGlobalProvider extends ChangeNotifier {
-//   Control slideControl;
-//   WalletGlobalProvider({this.slideControl = Control.stop});
-
-//   void activateSlide() {
-//     slideControl = Control.play;
-//     notifyListeners();
-//   }
-
-//   void reverseSlide() {
-//     slideControl = Control.playReverse;
-//     notifyListeners();
-//   }
-
-//   void resetSlide() {
-//     slideControl = Control.stop;
-//     notifyListeners();
-//   }
-// }
-
-// class FriendsGlobalProvider extends ChangeNotifier {
-//   Control slideControl;
-//   FriendsGlobalProvider({this.slideControl = Control.stop});
-
-//   void activateSlide() {
-//     slideControl = Control.play;
-//     notifyListeners();
-//   }
-
-//   void reverseSlide() {
-//     slideControl = Control.playReverse;
-//     notifyListeners();
-//   }
-
-//   void resetSlide() {
-//     slideControl = Control.stop;
-//     notifyListeners();
-//   }
-// }
-
-// class SettingGlobalProvider extends ChangeNotifier {
-//   Control slideControl;
-//   SettingGlobalProvider({this.slideControl = Control.stop});
-
-//   void activateSlide() {
-//     slideControl = Control.play;
-//     notifyListeners();
-//   }
-
-//   void reverseSlide() {
-//     slideControl = Control.playReverse;
-//     notifyListeners();
-//   }
-
-//   void resetSlide() {
-//     slideControl = Control.stop;
-//     notifyListeners();
-//   }
-// }

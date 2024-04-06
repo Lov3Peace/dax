@@ -7,7 +7,7 @@ import 'package:rive/rive.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../responsive/desktop/desktop_constants.dart';
+import '../../responsive/desktop/desk_constants.dart';
 import '../../responsive/mobile/mob_artboard_page.dart';
 import '../gradient_container.dart';
 import '../tactile_button.dart';

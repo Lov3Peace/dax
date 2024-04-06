@@ -4,9 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
+import '../responsive/responsive_layout.dart';
 import 'auth/onboarding_page.dart';
 import '../responsive/mobile/mob_constants.dart';
 import 'Window Route/logout_window_route.dart';
@@ -126,7 +128,14 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
   // }
   Future signOut() async {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => OnboardingScreen()));
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResponsiveLayout(
+            mobileVersion: MobileLaunchPage(),
+            tabletVersion: OnboardingScreen(),
+            desktopVersion: OnboardingScreen(),
+          ),
+        ));
 
     FirebaseAuth.instance.signOut();
   }
@@ -200,7 +209,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                   padding: EdgeInsets.only(top: 2.h),
                                   child: TextButton(
                                     onPressed: signOut,
-                                    child: ButtonColor(),
+                                    child: LogOutButton(),
                                   ),
                                 )
                               ],

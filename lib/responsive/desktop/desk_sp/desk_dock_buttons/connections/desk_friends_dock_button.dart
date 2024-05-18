@@ -3,24 +3,24 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_all_messages.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_chat_messages.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_group_messages.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_animations/animation_builder/custom_animation_builder.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../util/Window Route/friends_window_route.dart';
-import '../../../util/GlobalProvider.dart';
+import '../../../../../util/GlobalProvider.dart';
 
 //const String _heroFriendsWindow = 'Friends-window-hero';
 final friendsBucket = PageStorageBucket();
 
 class DeskFriendsWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  DeskFriendsWindowPopupCard({Key? key}) : super(key: key);
+  const DeskFriendsWindowPopupCard({Key? key}) : super(key: key);
 
   @override
   State<DeskFriendsWindowPopupCard> createState() =>
@@ -59,17 +59,15 @@ class _DeskFriendsWindowPopupCardState
 }
 
 class FriendsPopUp extends StatefulWidget {
-  FriendsPopUp({super.key});
+  const FriendsPopUp({super.key});
 
+  @override
   State<FriendsPopUp> createState() => _FriendsPopUpState();
 }
 
-// final friendsIDController = TextEditingController();
-// final reasonController = TextEditingController();
-
 class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
   //control = Control.play;
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   @override
   final List people = [
     "Tiffany",
@@ -454,426 +452,26 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
   }
 }
 
-// Partner Connections
-class ChatMessages extends StatelessWidget {
-  ChatMessages({
-    super.key,
-  });
-  final List partners = [
-    "Tiffany",
-    "Mitch",
-    "Cassandra",
-    "Bluecheese",
-    "Johnny",
-    "susy",
-    "himothy",
-    "mario",
-  ];
+class Indicators extends StatelessWidget {
+  const Indicators({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 53.h,
-      width: 100.w,
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
-        ),
-      ),
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        itemCount: partners.length,
-        separatorBuilder: (BuildContext context, int index) {
-          return const Divider(
-            height: 1,
-            thickness: 2,
-          );
-        },
-        itemBuilder: (context, index) {
-          return MyContainer();
-        },
-      ),
-    );
-  }
-}
-
-// Favorite Connections
-class GroupMessages extends StatelessWidget {
-  GroupMessages({
-    super.key,
-  });
-  final List favorites = [
-    "Tiffany",
-    "Mitch",
-    "Cassandra",
-    "Bluecheese",
-    "Johnny",
-    "susy",
-    "himothy",
-    "mario",
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 70.h,
-      width: 100.w,
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
-        ),
-      ),
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        itemCount: favorites.length,
-        separatorBuilder: (BuildContext context, int index) {
-          return const Divider(
-            height: 1,
-            thickness: 2,
-          );
-        },
-        itemBuilder: (context, index) {
-          return MyContainer();
-        },
-      ),
-    );
-  }
-}
-
-//All Connections
-class AllMessages extends StatelessWidget {
-  AllMessages({
-    super.key,
-  });
-  final List allconnections = [
-    "Tiffany",
-    "Mitch",
-    "Cassandra",
-    "Bluecheese",
-    "Johnny",
-    "susy",
-    "himothy",
-    "mario",
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 53.h,
-      width: 100.w,
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
-        ),
-      ),
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        itemCount: allconnections.length,
-        separatorBuilder: (BuildContext context, int index) {
-          return const Divider(
-            height: 1,
-            thickness: 2,
-          );
-        },
-        itemBuilder: (context, index) {
-          return MyContainer();
-        },
-      ),
-    );
-  }
-}
-
-class MyContainer extends StatelessWidget {
-  MyContainer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: .5.h,
-        vertical: .3.h,
-      ),
-      child: GestureDetector(
-        onTap: () {},
-        child: Container(
-          height: 8.h,
-          width: 100.h,
-          decoration: BoxDecoration(
-            color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.1),
-            // border: Border.all(
-            //   color: Colors.white,
-            //   width: 1,
-            // ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(15),
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 1.h),
-            child: Stack(
-              children: [
-                Container(
-                  width: 13.w,
-                  height: 13.h,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(colors: [purp, red]),
-                    shape: BoxShape.circle,
-                    color: Colors.grey,
-                  ),
-                ),
-                Container(
-                  width: 12.5.w,
-                  height: 12.5.h,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.grey,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 4.h, left: 4.5.h),
-                  child: Container(
-                    width: 4.5.w,
-                    height: 4.5.h,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color.fromARGB(255, 118, 123, 118),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomSearchDelegate extends SearchDelegate {
-  List<String> searchTerms = [
-    "Tiffany",
-    "Mitch",
-    "Cassandra",
-    "Bluecheese",
-    "Johnny",
-  ];
-
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
-
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.clear),
-      onPressed: () {
-        close(context, null);
-      },
-    );
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var friends in searchTerms) {
-      if (friends.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(friends);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var friends in searchTerms) {
-      if (friends.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(friends);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
-        );
-      },
-    );
-  }
-}
-
-//
-// Hover aspect of setting button
-class DeskFriendsButtonHover extends StatefulWidget {
-  const DeskFriendsButtonHover({super.key});
-
-  @override
-  State<DeskFriendsButtonHover> createState() => _DeskFriendsButtonHoverState();
-}
-
-class _DeskFriendsButtonHoverState extends State<DeskFriendsButtonHover> {
-//
-// start hover is false
-  bool isHover = false;
-  bool isHover2 = false;
-
-//start active is false
-  bool isActive = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (event) {
-        setState(() {
-          isHover = true;
-        });
-      },
-      onExit: (event) {
-        setState(() {
-          isHover = false;
-        });
-      },
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            //
-            //activates the settings popup
-            if (!isActive) {
-              final startSlide = context.read<GlobalProvider>();
-              startSlide.friendActivateSlide();
-              //
-              //gives the active color to be true
-              isActive = true;
-            }
-          });
-        },
-        child: TactileButton(
-          child: AnimatedContainer(
-            padding: isActive
-                ? const EdgeInsets.only(left: 10)
-                : isHover
-                    ? const EdgeInsets.only(left: 10)
-                    : const EdgeInsets.only(left: 0),
-            decoration: BoxDecoration(
-              border: Border.all(
-                  color: isActive
-                      ? Colors.black87
-                      : isHover
-                          ? Colors.black87
-                          : tran),
-              boxShadow: [
-                BoxShadow(
-                  color: isActive
-                      ? Colors.white
-                      : (isHover ? Colors.grey.shade700 : tran),
-                ),
-              ],
-              color: tran,
-              borderRadius: const BorderRadius.all(Radius.circular(60)),
-            ),
-            duration: const Duration(milliseconds: 200),
-            width: 13.w,
-            height: 5.h,
-            alignment: Alignment.centerLeft,
-            child: addElement(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  addElement() {
-    return Padding(
-      padding: EdgeInsets.only(left: 0.5.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.start,
         children: [
-          Icon(
-            Icons.people_outlined,
-            color: isActive
-                ? Colors.black87
-                : (isHover
-                    ? Color.fromARGB(241, 255, 255, 255)
-                    : Colors.white70),
-            size: 30,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: .5.w),
-            child: Text(
-              'Connections',
-              style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
-                fontWeight: FontWeight.w400,
-                color: isActive
-                    ? const Color.fromARGB(221, 28, 24, 24)
-                    : (isHover ? Colors.white : Colors.white54),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 2.5.w),
-            child: Stack(
+          const Text('Bri'),
+          const Text('Tom'),
+          const Text('Skylar'),
+          Container(
+            child: Row(
               children: [
-                Icon(
-                  Icons.arrow_right_sharp,
-                  color: isActive
-                      ? Colors.white70
-                      : isHover
-                          ? Color.fromARGB(241, 255, 255, 255)
-                          : tran,
-                  size: 30.0,
+                SizedBox(
+                  height: 2.h,
+                  width: 3.w,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      //
-                      //Reverses the popup card
-                      final startSlide = context.read<GlobalProvider>();
-                      startSlide.friendReverseSlide();
-                      //
-                      //gives the active color to be flase
-                      isActive = false;
-                    });
-                  },
-                  child: MouseRegion(
-                    onEnter: (e) {
-                      setState(() {
-                        isHover2 = true;
-                      });
-                    },
-                    onExit: (e) {
-                      setState(() {
-                        isHover2 = false;
-                      });
-                    },
-                    child: Icon(
-                      Icons.cancel_rounded,
-                      color: (isActive && isHover2)
-                          ? red
-                          : (!isHover2 && isActive)
-                              ? Colors.black87
-                              : tran,
-                      size: 30.0,
-                    ),
-                  ),
-                )
+                Container(),
               ],
             ),
           ),

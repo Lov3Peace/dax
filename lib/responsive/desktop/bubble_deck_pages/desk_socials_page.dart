@@ -3,11 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/keyboards_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
+
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
@@ -20,6 +17,10 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../util/custom_curve.dart';
 import '../../mobile/mob_artboard_page.dart';
+import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
+import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
 
 class DeskSocialsPage extends StatefulWidget {
   const DeskSocialsPage({Key? key}) : super(key: key);
@@ -50,8 +51,7 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
-      builder: (context, value, child) => 
-      Scaffold(
+      builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
         body: SingleChildScrollView(
@@ -125,14 +125,15 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                                     Hero(
                                       tag: GlobalProvider().socialsHeroTag,
                                       child: DeskSocialsCont(),
-                                      flightShuttleBuilder: flightShuttleBuilder,
+                                      flightShuttleBuilder:
+                                          flightShuttleBuilder,
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
-      
+
                           // ignore: prefer_const_constructors
                           Messages(),
                         ],
@@ -260,9 +261,33 @@ class SocialsButtonHolder extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ProjectsButton().animate().slideX(begin: 0.25, end: 0, delay: Duration(milliseconds: 200), duration: Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          FinancesButton().animate().slideX(begin: 0.25, end: 0, delay: Duration(milliseconds: 400), duration: Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          NewsButton().animate().slideX(begin: 0.25, end: 0, delay: Duration(milliseconds: 600), duration: Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+          ProjectsButton()
+              .animate()
+              .slideX(
+                  begin: 0.25,
+                  end: 0,
+                  delay: Duration(milliseconds: 200),
+                  duration: Duration(milliseconds: 400),
+                  curve: SoftClose())
+              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+          FinancesButton()
+              .animate()
+              .slideX(
+                  begin: 0.25,
+                  end: 0,
+                  delay: Duration(milliseconds: 400),
+                  duration: Duration(milliseconds: 400),
+                  curve: SoftClose())
+              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+          NewsButton()
+              .animate()
+              .slideX(
+                  begin: 0.25,
+                  end: 0,
+                  delay: Duration(milliseconds: 600),
+                  duration: Duration(milliseconds: 400),
+                  curve: SoftClose())
+              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
         ],
       ),
     );

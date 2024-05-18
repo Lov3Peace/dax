@@ -1,121 +1,20 @@
-import 'dart:ui';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/GlobalProvider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:indexed/indexed.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_animations/simple_animations.dart';
-
 import 'package:sizer/sizer.dart';
 
-import '../../../util/tactile_button.dart';
+import '../../../../../main.dart';
+import '../../../../../util/GlobalProvider.dart';
+import '../../../../../util/tactile_button.dart';
 
-class SettingsPopUp extends StatefulWidget {
-  SettingsPopUp({super.key});
-
-  State<SettingsPopUp> createState() => _SettingsPopUpState();
-}
-
-class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
-  //control = Control.play;
+class DeskFriendsButtonHover extends StatefulWidget {
+  const DeskFriendsButtonHover({super.key});
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
-      builder: (context, value, child) => CustomAnimationBuilder<double>(
-        control: value.settingSlideControl,
-        startPosition: 0,
-        tween: Tween(begin: 0, end: 83.5.w),
-        duration: const Duration(milliseconds: 1250),
-        curve: Curves.easeInOutBack,
-        onCompleted: () {
-          final resetSlide = context.read<GlobalProvider>();
-          resetSlide.settingsResetSlide();
-        },
-        builder: (context, value, child) {
-          return Transform.translate(
-            offset: Offset(value, 0),
-            child: child,
-          );
-        },
-        child: Center(
-          child: Indexer(
-            children: [
-              Indexed(
-                index: 0,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
-                      child: Center(
-                        child: Container(
-                          height: 85.h,
-                          width: 70.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(32)),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 32, horizontal: 24),
-                          child: Material(
-                            shadowColor:
-                                const Color.fromRGBO(42, 41, 41, 0.631),
-                            color: const Color.fromARGB(42, 55, 52, 52),
-                            elevation: 2,
-                            borderRadius: BorderRadius.circular(32),
-                            child: Stack(
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(24),
-                                  child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: 10, sigmaY: 10),
-                                    child: Container(
-                                        height: 85.h,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: const Color.fromARGB(
-                                                  182, 31, 31, 31)),
-                                          borderRadius:
-                                              BorderRadius.circular(24),
-                                        )),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  State<DeskFriendsButtonHover> createState() => _DeskFriendsButtonHoverState();
 }
 
-//
-// Hover aspect of setting button
-class DeskSettingsButtonHover extends StatefulWidget {
-  const DeskSettingsButtonHover({super.key});
-
-  @override
-  State<DeskSettingsButtonHover> createState() =>
-      _DeskSettingsButtonHoverState();
-}
-
-class _DeskSettingsButtonHoverState extends State<DeskSettingsButtonHover> {
+class _DeskFriendsButtonHoverState extends State<DeskFriendsButtonHover> {
 //
 // start hover is false
   bool isHover = false;
@@ -144,7 +43,7 @@ class _DeskSettingsButtonHoverState extends State<DeskSettingsButtonHover> {
             //activates the settings popup
             if (!isActive) {
               final startSlide = context.read<GlobalProvider>();
-              startSlide.settingsActivateSlide();
+              startSlide.friendActivateSlide();
               //
               //gives the active color to be true
               isActive = true;
@@ -193,18 +92,18 @@ class _DeskSettingsButtonHoverState extends State<DeskSettingsButtonHover> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Icon(
-            Icons.settings_outlined,
+            Icons.people_outlined,
             color: isActive
                 ? Colors.black87
                 : (isHover
-                    ? Color.fromARGB(241, 255, 255, 255)
+                    ? const Color.fromARGB(241, 255, 255, 255)
                     : Colors.white70),
             size: 30,
           ),
           Padding(
             padding: EdgeInsets.only(left: .5.w),
             child: Text(
-              'Settings',
+              'Connections',
               style: GoogleFonts.montserrat(
                 textStyle: TextStyle(fontSize: 2.sp),
                 fontWeight: FontWeight.w400,
@@ -215,7 +114,7 @@ class _DeskSettingsButtonHoverState extends State<DeskSettingsButtonHover> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 4.w),
+            padding: EdgeInsets.only(left: 2.5.w),
             child: Stack(
               children: [
                 Icon(
@@ -223,7 +122,7 @@ class _DeskSettingsButtonHoverState extends State<DeskSettingsButtonHover> {
                   color: isActive
                       ? Colors.white70
                       : isHover
-                          ? Color.fromARGB(241, 255, 255, 255)
+                          ? const Color.fromARGB(241, 255, 255, 255)
                           : tran,
                   size: 30.0,
                 ),
@@ -233,7 +132,7 @@ class _DeskSettingsButtonHoverState extends State<DeskSettingsButtonHover> {
                       //
                       //Reverses the popup card
                       final startSlide = context.read<GlobalProvider>();
-                      startSlide.settingsReverseSlide();
+                      startSlide.friendReverseSlide();
                       //
                       //gives the active color to be flase
                       isActive = false;

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
+
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -18,6 +15,10 @@ import '../../../pages/keyboards_deck.dart';
 import '../../../util/GlobalProvider.dart';
 import '../../mobile/mob_artboard_page.dart';
 
+import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
+import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
 import '../messages.dart';
 
 class DeskHeroFinancesPage extends StatefulWidget {
@@ -48,8 +49,7 @@ class _DeskHeroFinancesPageState extends State<DeskHeroFinancesPage>
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
-      builder: (context, value, child) => 
-      Scaffold(
+      builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
         body: SingleChildScrollView(
@@ -123,14 +123,15 @@ class _DeskHeroFinancesPageState extends State<DeskHeroFinancesPage>
                                     Hero(
                                       tag: GlobalProvider().financesHeroTag,
                                       child: DeskFinancesCont(),
-                                      flightShuttleBuilder: flightShuttleBuilder,
+                                      flightShuttleBuilder:
+                                          flightShuttleBuilder,
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
-      
+
                           // ignore: prefer_const_constructors
                           Messages(),
                         ],

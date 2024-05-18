@@ -3,11 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/keyboards_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
+
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
@@ -19,6 +16,10 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../mobile/mob_artboard_page.dart';
+import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
+import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
 
 class DeskHeroSocialsPage extends StatefulWidget {
   const DeskHeroSocialsPage({Key? key}) : super(key: key);
@@ -27,7 +28,8 @@ class DeskHeroSocialsPage extends StatefulWidget {
   State<DeskHeroSocialsPage> createState() => _DeskHeroSocialsPageState();
 }
 
-class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with AnimationMixin {
+class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage>
+    with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -49,8 +51,7 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
-      builder: (context, value, child) => 
-      Scaffold(
+      builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
         body: SingleChildScrollView(
@@ -124,14 +125,15 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                                     Hero(
                                       tag: GlobalProvider().socialsHeroTag,
                                       child: DeskSocialsCont(),
-                                      flightShuttleBuilder: flightShuttleBuilder,
+                                      flightShuttleBuilder:
+                                          flightShuttleBuilder,
                                     ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
-      
+
                           // ignore: prefer_const_constructors
                           Messages(),
                         ],

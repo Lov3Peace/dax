@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
+
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
@@ -19,6 +16,10 @@ import '../../../pages/keyboards_deck.dart';
 import '../../../util/GlobalProvider.dart';
 import '../../../util/custom_curve.dart';
 import '../../mobile/mob_artboard_page.dart';
+import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
+import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
 
 class DeskNewsPage extends StatefulWidget {
   const DeskNewsPage({Key? key}) : super(key: key);
@@ -116,7 +117,7 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
                                 ),
                               ],
                             ),
-                           Container(
+                            Container(
                               color: tran,
                               child: Column(
                                 children: [
@@ -255,9 +256,33 @@ class NewsButtonHolder extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SocialsButton().animate().slideX(begin: 0.25, end: 0, delay: Duration(milliseconds: 200), duration: Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          FinancesButton().animate().slideX(begin: 0.25, end: 0, delay: Duration(milliseconds: 400), duration: Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          ProjectsButton().animate().slideX(begin: 0.25, end: 0, delay: Duration(milliseconds: 600), duration: Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+          SocialsButton()
+              .animate()
+              .slideX(
+                  begin: 0.25,
+                  end: 0,
+                  delay: Duration(milliseconds: 200),
+                  duration: Duration(milliseconds: 400),
+                  curve: SoftClose())
+              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+          FinancesButton()
+              .animate()
+              .slideX(
+                  begin: 0.25,
+                  end: 0,
+                  delay: Duration(milliseconds: 400),
+                  duration: Duration(milliseconds: 400),
+                  curve: SoftClose())
+              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+          ProjectsButton()
+              .animate()
+              .slideX(
+                  begin: 0.25,
+                  end: 0,
+                  delay: Duration(milliseconds: 600),
+                  duration: Duration(milliseconds: 400),
+                  curve: SoftClose())
+              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
         ],
       ),
     );

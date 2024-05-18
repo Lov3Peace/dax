@@ -1,11 +1,8 @@
 import 'package:animated_image_list/photoViewerArbnb/PhotoViewerArbnb_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_friends_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_help_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_info_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_settings_dock_button.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_buttons/desk_wallet_dock_button.dart';
+
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
@@ -17,6 +14,10 @@ import 'package:sizer/sizer.dart';
 import '../../util/GlobalProvider.dart';
 import '../../util/desk_dashboard_decks.dart';
 import '../mobile/mob_artboard_page.dart';
+import 'desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
+import 'desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
+import 'desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
+import 'desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -150,12 +151,14 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                   ],
                                                 ),
                                                 deck2: Hero(
-                                                    tag: GlobalProvider().projectsHeroTag,
+                                                    tag: GlobalProvider()
+                                                        .projectsHeroTag,
                                                     flightShuttleBuilder:
                                                         flightShuttleBuilder,
                                                     child: ProjectsDeck()),
                                                 deck3: Hero(
-                                                    tag: GlobalProvider().financesHeroTag,
+                                                    tag: GlobalProvider()
+                                                        .financesHeroTag,
                                                     flightShuttleBuilder:
                                                         flightShuttleBuilder,
                                                     child: FinancesDeck()),
@@ -201,13 +204,15 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                 deck4: Hero(
                                                   flightShuttleBuilder:
                                                       flightShuttleBuilder,
-                                                  tag: GlobalProvider().socialsHeroTag,
+                                                  tag: GlobalProvider()
+                                                      .socialsHeroTag,
                                                   child: SocialsDeck(),
                                                 ),
                                                 deck5: Hero(
                                                     flightShuttleBuilder:
                                                         flightShuttleBuilder,
-                                                    tag: GlobalProvider().newsHeroTag,
+                                                    tag: GlobalProvider()
+                                                        .newsHeroTag,
                                                     child: NewsDeck()),
                                               )[index],
                                             ),

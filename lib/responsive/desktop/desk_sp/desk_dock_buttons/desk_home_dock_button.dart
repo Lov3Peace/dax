@@ -5,8 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../util/tactile_button.dart';
-import '../desk_constants.dart';
+import '../../../../util/tactile_button.dart';
 
 class DeskHomeWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
@@ -58,10 +57,10 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
                 goHome();
               },
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 padding: isHover
-                    ? EdgeInsets.only(left: 10)
-                    : EdgeInsets.only(left: 0),
+                    ? const EdgeInsets.only(left: 10)
+                    : const EdgeInsets.only(left: 0),
                 decoration: BoxDecoration(
                   border: Border.all(color: isHover ? Colors.black87 : tran),
                   boxShadow: [
@@ -92,8 +91,9 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
         children: [
           Icon(
             Icons.dashboard_rounded,
-            color:
-                (isHover ? Color.fromARGB(241, 255, 255, 255) : Colors.white70),
+            color: (isHover
+                ? const Color.fromARGB(241, 255, 255, 255)
+                : Colors.white70),
             size: 30,
           ),
           Padding(
@@ -114,21 +114,19 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
 
   void goHome() {
     Navigator.of(context).push(
-              PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  return AuthCheck();
-                },
-                transitionDuration: const Duration(milliseconds: 1000),
-              ),
-            );
-          }
+      PageRouteBuilder(
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return const AuthCheck();
+        },
+        transitionDuration: const Duration(milliseconds: 1000),
+      ),
+    );
+  }
 }

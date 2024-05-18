@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/GlobalProvider.dart';
+import 'package:flutter_application_1/util/custom_curve.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
@@ -9,8 +10,8 @@ import 'package:provider/provider.dart';
 //import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../../util/gradient_container.dart';
-import '../../../util/tactile_button.dart';
+import '../../../../../util/gradient_container.dart';
+import '../../../../../util/tactile_button.dart';
 
 // const String heroWalletWindow = 'Wallet-window-hero';
 Control slideWallet = Control.stop;
@@ -40,7 +41,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
               startPosition: 0,
               tween: Tween(begin: 0, end: 88.5.w),
               duration: const Duration(milliseconds: 1250),
-              curve: Curves.easeInOutBack,
+              curve: SoftClose(),
               onCompleted: () {
                 final resetSlide = context.read<GlobalProvider>();
                 resetSlide.walletResetSlide();
@@ -110,7 +111,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                 // Container housing card data
                                                 child: Container(
                                                   height: 65.h,
-                                                  width: 25.w,
+                                                  width: 20.w,
                                                   // constraints:
                                                   //     const BoxConstraints(
                                                   //         maxWidth: 500,
@@ -133,7 +134,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                          top: 16.h,
+                                                          top: 15.h,
                                                           bottom: 1.h,
                                                         ),
                                                         child: const Center(
@@ -226,7 +227,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                bottom: 3.5.h),
+                                                                bottom: 1.h),
                                                         child: const Center(
                                                           child: Text(
                                                             'Please enter the Wallet ID or destination email',
@@ -394,7 +395,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                top: 2.w),
+                                                                top: 2.h),
                                                         child: Center(
                                                           child: Wrap(
                                                             alignment:
@@ -448,13 +449,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                       //Send button
                                                       Center(
                                                         child: TactileButton(
-                                                          onTap: () {
-                                                            final reverseSlide =
-                                                                context.read<
-                                                                    GlobalProvider>();
-                                                            reverseSlide
-                                                                .walletReverseSlide();
-                                                          },
+                                                          onTap: () {},
                                                           child:
                                                               GradientContainer(
                                                             gradient1: blue,
@@ -488,7 +483,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                 ),
                                                 child: Container(
                                                   height: 20.h,
-                                                  width: 30.w,
+                                                  width: 20.w,
                                                   decoration: BoxDecoration(
                                                     gradient:
                                                         const LinearGradient(

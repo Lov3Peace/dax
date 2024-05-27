@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_finance_page.dart';
 import 'package:flutter_application_1/util/GlobalProvider.dart';
@@ -28,48 +27,47 @@ class ProjectsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
-      builder: (context, value, child) => 
-      Hero(
+      builder: (context, value, child) => Hero(
         tag: value.projectsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
         child: TactileButton(
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-                final heroOff = context.read<GlobalProvider>();
-                heroOff.heroOff();
-                print(value.socialsHeroTag);
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      animation =
-                          CurvedAnimation(parent: animation, curve: Curves.linear);
-                      return FadeTransition(
-                        opacity: animation,
-                        child: child,
+              final heroOff = context.read<GlobalProvider>();
+              heroOff.heroOff();
+              print(value.socialsHeroTag);
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    animation = CurvedAnimation(
+                        parent: animation, curve: Curves.linear);
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    if (screenWidth < 550) {
+                      return MobProjectsPage(
+                        transitionAnimation: animation,
                       );
-                    },
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      if (screenWidth < 550) {
-                        return MobProjectsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else if (screenWidth < 1100) {
-                        return TabProjectsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else {
-                        // ignore: prefer_const_constructors
-                        return DeskProjectsPage(
-                            //transitionAnimation: animation,
-                            );
-                      }
-                    },
-                    transitionDuration: const Duration(milliseconds: 200),
-                  ),
-                );
-              });
+                    } else if (screenWidth < 1100) {
+                      return TabProjectsPage(
+                        transitionAnimation: animation,
+                      );
+                    } else {
+                      // ignore: prefer_const_constructors
+                      return DeskProjectsPage(
+                          //transitionAnimation: animation,
+                          );
+                    }
+                  },
+                  transitionDuration: const Duration(milliseconds: 200),
+                ),
+              );
+            });
           },
           child: GradientContainer(
             gradient1: red,
@@ -96,48 +94,47 @@ class NewsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
-      builder:(context, value, child) => 
-      Hero(
+      builder: (context, value, child) => Hero(
         tag: value.newsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
         child: TactileButton(
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-                final heroOff = context.read<GlobalProvider>();
-                heroOff.heroOff();
-                print(value.socialsHeroTag);
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      animation =
-                          CurvedAnimation(parent: animation, curve: Curves.linear);
-                      return FadeTransition(
-                        opacity: animation,
-                        child: child,
+              final heroOff = context.read<GlobalProvider>();
+              heroOff.heroOff();
+              print(value.socialsHeroTag);
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    animation = CurvedAnimation(
+                        parent: animation, curve: Curves.linear);
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    if (screenWidth < 550) {
+                      return MobNewsPage(
+                        transitionAnimation: animation,
                       );
-                    },
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      if (screenWidth < 550) {
-                        return MobNewsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else if (screenWidth < 1100) {
-                        return TabNewsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else {
-                        // ignore: prefer_const_constructors
-                        return DeskNewsPage(
-                            //transitionAnimation: animation,
-                            );
-                      }
-                    },
-                    transitionDuration: const Duration(milliseconds: 200),
-                  ),
-                );
-              });
+                    } else if (screenWidth < 1100) {
+                      return TabNewsPage(
+                        transitionAnimation: animation,
+                      );
+                    } else {
+                      // ignore: prefer_const_constructors
+                      return DeskNewsPage(
+                          //transitionAnimation: animation,
+                          );
+                    }
+                  },
+                  transitionDuration: const Duration(milliseconds: 200),
+                ),
+              );
+            });
           },
           child: GradientContainer(
             gradient1: blue,
@@ -164,48 +161,47 @@ class FinancesButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
-      builder: (context, value, child) => 
-       Hero(
+      builder: (context, value, child) => Hero(
         tag: value.financesHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
         child: TactileButton(
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-                final heroOff = context.read<GlobalProvider>();
-                heroOff.heroOff();
-                print(value.socialsHeroTag);
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      animation =
-                          CurvedAnimation(parent: animation, curve: Curves.linear);
-                      return FadeTransition(
-                        opacity: animation,
-                        child: child,
+              final heroOff = context.read<GlobalProvider>();
+              heroOff.heroOff();
+              print(value.socialsHeroTag);
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    animation = CurvedAnimation(
+                        parent: animation, curve: Curves.linear);
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                  pageBuilder: (context, animation, secondaryAnimation) {
+                    if (screenWidth < 550) {
+                      return MobFinancePage(
+                        transitionAnimation: animation,
                       );
-                    },
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      if (screenWidth < 550) {
-                        return MobFinancePage(
-                          transitionAnimation: animation,
-                        );
-                      } else if (screenWidth < 1100) {
-                        return TabFinancePage(
-                          transitionAnimation: animation,
-                        );
-                      } else {
-                        // ignore: prefer_const_constructors
-                        return DeskFinancesPage(
-                            //transitionAnimation: animation,
-                            );
-                      }
-                    },
-                    transitionDuration: const Duration(milliseconds: 200),
-                  ),
-                );
-              });
+                    } else if (screenWidth < 1100) {
+                      return TabFinancePage(
+                        transitionAnimation: animation,
+                      );
+                    } else {
+                      // ignore: prefer_const_constructors
+                      return DeskFinancesPage(
+                          //transitionAnimation: animation,
+                          );
+                    }
+                  },
+                  transitionDuration: const Duration(milliseconds: 200),
+                ),
+              );
+            });
           },
           child: GradientContainer(
             gradient1: green,
@@ -232,8 +228,7 @@ class SocialsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<GlobalProvider>(
-      builder: (context, value, child) => 
-      Hero(
+      builder: (context, value, child) => Hero(
         tag: value.socialsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
         child: TactileButton(
@@ -247,8 +242,8 @@ class SocialsButton extends StatelessWidget {
                 PageRouteBuilder(
                   transitionsBuilder:
                       (context, animation, secondaryAnimation, child) {
-                    animation =
-                        CurvedAnimation(parent: animation, curve: Curves.linear);
+                    animation = CurvedAnimation(
+                        parent: animation, curve: Curves.linear);
                     return FadeTransition(
                       opacity: animation,
                       child: child,

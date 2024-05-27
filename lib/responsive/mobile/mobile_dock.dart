@@ -31,6 +31,7 @@ class MobDock extends StatefulWidget {
 class _MobDockState extends State<MobDock> with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
+  @override
   void initState() {
     // TODO: implement initState
 

@@ -314,7 +314,7 @@ class TabWalletWindowPopupCardState extends State<TabWalletWindowPopupCard> {
                                 margin: EdgeInsets.all(1.75.h),
                                 height: 35.h,
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 39, 38, 38),
+                                  color: const Color.fromARGB(255, 39, 38, 38),
                                   borderRadius: BorderRadius.circular(24),
                                 ),
                                 child: SingleChildScrollView(
@@ -471,7 +471,8 @@ class TabWalletWindowPopupCardState extends State<TabWalletWindowPopupCard> {
                                                               horizontal: 3.w,
                                                               vertical: 1.h),
                                                       decoration: BoxDecoration(
-                                                        color: Color.fromARGB(
+                                                        color: const Color
+                                                            .fromARGB(
                                                             104, 95, 94, 94),
                                                         borderRadius:
                                                             BorderRadius
@@ -559,7 +560,8 @@ class TabWalletWindowPopupCardState extends State<TabWalletWindowPopupCard> {
                                                               horizontal: 3.w,
                                                               vertical: 1.h),
                                                       decoration: BoxDecoration(
-                                                        color: Color.fromARGB(
+                                                        color: const Color
+                                                            .fromARGB(
                                                             104, 95, 94, 94),
                                                         borderRadius:
                                                             BorderRadius

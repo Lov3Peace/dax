@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
@@ -203,7 +202,8 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => ResponsiveLayout(
+                                        builder: (context) =>
+                                            const ResponsiveLayout(
                                           mobileVersion: MobileLaunchPage(),
                                           tabletVersion: MobileLaunchPage(),
                                           desktopVersion: OnboardingScreen(),

@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/Window%20Route/friends_window_route.dart';
 import 'package:flutter_application_1/util/Window%20Route/info_window_route.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';

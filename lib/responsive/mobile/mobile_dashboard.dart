@@ -62,7 +62,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
             },
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   height: 60.h,
                   // color: red,
                   child: AnimationLimiter(
@@ -84,8 +84,8 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                             curve: Curves.easeOutBack,
                             child: FadeInAnimation(
                               child: mobTabDashboardDecks1(
-                                ProjectsDeck(),
-                                SocialsDeck(),
+                                const ProjectsDeck(),
+                                const SocialsDeck(),
                               )[index],
                             ),
                           ),
@@ -94,7 +94,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 25.h,
                   // color: red,
                   child: AnimationLimiter(
@@ -118,7 +118,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                                       0,
                                       0,
                                       15),
-                                  child: FinancesDeck(),
+                                  child: const FinancesDeck(),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(
@@ -126,7 +126,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                                       0,
                                       0,
                                       15),
-                                  child: NewsDeck(),
+                                  child: const NewsDeck(),
                                 ),
                               )[index],
                             ),

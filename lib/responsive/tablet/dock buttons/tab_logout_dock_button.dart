@@ -60,8 +60,8 @@ class TabLogoutWindowPopupCard extends StatefulWidget {
 class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard>
     with AnimationMixin {
   Future signOut() async {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MobileLaunchPage()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const MobileLaunchPage()));
 
     FirebaseAuth.instance.signOut();
   }
@@ -108,7 +108,7 @@ class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard>
                         ),
                         Center(
                           child: SingleChildScrollView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -138,7 +138,7 @@ class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard>
                                 ),
                                 TextButton(
                                   onPressed: signOut,
-                                  child: LogOutButton(),
+                                  child: const LogOutButton(),
                                 )
                               ],
                             ),

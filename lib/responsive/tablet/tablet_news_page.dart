@@ -21,6 +21,7 @@ class _TabNewsPageState extends State<TabNewsPage> {
 
   double _showAppBar = 1.0;
 
+  @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
@@ -104,7 +105,7 @@ class _TabNewsPageState extends State<TabNewsPage> {
           alignment: const AlignmentDirectional(0, 1),
           fit: StackFit.loose,
           children: [
-            Background(),
+            const Background(),
             AnimationLimiter(
               child: ListView.builder(
                 physics: const BouncingScrollPhysics(),

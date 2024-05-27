@@ -20,7 +20,7 @@ class FriendsWindowButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(FriendsWindowRoute(builder: (context) {
-            return _FriendsWindowPopupCard();
+            return const _FriendsWindowPopupCard();
           }));
         },
         child: const Hero(
@@ -43,7 +43,7 @@ final friendsBucket = PageStorageBucket();
 
 class _FriendsWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  _FriendsWindowPopupCard({Key? key}) : super(key: key);
+  const _FriendsWindowPopupCard({Key? key}) : super(key: key);
 
   @override
   State<_FriendsWindowPopupCard> createState() =>
@@ -51,7 +51,7 @@ class _FriendsWindowPopupCard extends StatefulWidget {
 }
 
 class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   @override
   final List people = [
     "Tiffany",
@@ -413,7 +413,7 @@ class ChatMessages extends StatelessWidget {
           );
         },
         itemBuilder: (context, index) {
-          return MyContainer();
+          return const MyContainer();
         },
       ),
     );
@@ -456,7 +456,7 @@ class GroupMessages extends StatelessWidget {
           );
         },
         itemBuilder: (context, index) {
-          return MyContainer();
+          return const MyContainer();
         },
       ),
     );
@@ -499,7 +499,7 @@ class AllMessages extends StatelessWidget {
           );
         },
         itemBuilder: (context, index) {
-          return MyContainer();
+          return const MyContainer();
         },
       ),
     );
@@ -507,7 +507,7 @@ class AllMessages extends StatelessWidget {
 }
 
 class MyContainer extends StatelessWidget {
-  MyContainer({super.key});
+  const MyContainer({super.key});
 
   @override
   Widget build(BuildContext context) {

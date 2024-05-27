@@ -4,7 +4,7 @@ import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/keyboards_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
@@ -124,9 +124,9 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                                   children: [
                                     Hero(
                                       tag: GlobalProvider().socialsHeroTag,
-                                      child: DeskSocialsCont(),
                                       flightShuttleBuilder:
                                           flightShuttleBuilder,
+                                      child: const DeskSocialsCont(),
                                     ),
                                   ],
                                 ),
@@ -142,35 +142,35 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: WalletPopUp(),
+                          child: const WalletPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: FriendsPopUp(),
+                          child: const FriendsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: SettingsPopUp(),
+                          child: const SettingsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: HelpPopUp(),
+                          child: const HelpPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: InfoPopUp(),
+                          child: const InfoPopUp(),
                         ),
                       ),
                     ],
@@ -208,7 +208,7 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
       width: 71.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1.5.w),
-        color: Color.fromARGB(185, 21, 19, 22),
+        color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
       child: ListView.builder(
@@ -255,39 +255,39 @@ class SocialsButtonHolder extends StatelessWidget {
       width: 30.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1.5.w),
-        color: Color.fromARGB(185, 21, 19, 22),
+        color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ProjectsButton()
+          const ProjectsButton()
               .animate()
               .slideX(
                   begin: 0.25,
                   end: 0,
-                  delay: Duration(milliseconds: 200),
-                  duration: Duration(milliseconds: 400),
-                  curve: SoftClose())
-              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          FinancesButton()
+                  delay: const Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 400),
+                  curve: const SoftClose())
+              .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
+          const FinancesButton()
               .animate()
               .slideX(
                   begin: 0.25,
                   end: 0,
-                  delay: Duration(milliseconds: 400),
-                  duration: Duration(milliseconds: 400),
-                  curve: SoftClose())
-              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          NewsButton()
+                  delay: const Duration(milliseconds: 400),
+                  duration: const Duration(milliseconds: 400),
+                  curve: const SoftClose())
+              .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
+          const NewsButton()
               .animate()
               .slideX(
                   begin: 0.25,
                   end: 0,
-                  delay: Duration(milliseconds: 600),
-                  duration: Duration(milliseconds: 400),
-                  curve: SoftClose())
-              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+                  delay: const Duration(milliseconds: 600),
+                  duration: const Duration(milliseconds: 400),
+                  curve: const SoftClose())
+              .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
         ],
       ),
     );

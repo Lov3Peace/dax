@@ -9,7 +9,7 @@ import 'tab_signup_form.dart';
 class TabSignUpButton extends StatefulWidget {
   final Function()? onTap;
 
-  TabSignUpButton({super.key, required this.onTap});
+  const TabSignUpButton({super.key, required this.onTap});
 
   @override
   State<TabSignUpButton> createState() => _TabSignUpButtonState();
@@ -68,14 +68,14 @@ class _TabSignUpButtonState extends State<TabSignUpButton> {
     control = Control.play;
 
     Future.delayed(
-      Duration(milliseconds: 400),
+      const Duration(milliseconds: 400),
       () {
         //slide animation
         showGeneralDialog(
           barrierDismissible: true,
           barrierLabel: "Create Account",
           context: context,
-          transitionDuration: Duration(milliseconds: 400),
+          transitionDuration: const Duration(milliseconds: 400),
           transitionBuilder: (_, animation, __, child) {
             Tween<Offset> tween;
             tween = Tween(begin: const Offset(0, 1), end: Offset.zero);
@@ -92,18 +92,18 @@ class _TabSignUpButtonState extends State<TabSignUpButton> {
               margin: const EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               decoration: BoxDecoration(
-                color: Color.fromARGB(225, 50, 50, 50).withOpacity(0.95),
+                color: const Color.fromARGB(225, 50, 50, 50).withOpacity(0.95),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(40),
                 ),
               ),
-              child: Scaffold(
+              child: const Scaffold(
                 resizeToAvoidBottomInset: false,
                 backgroundColor: Colors.transparent,
                 body: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const Text(
+                      Text(
                         "Sign Up",
                         style: TextStyle(
                           fontSize: 34,
@@ -112,7 +112,7 @@ class _TabSignUpButtonState extends State<TabSignUpButton> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.0),
                         child: Text(
                           "Sign Up to experience a new world for creative and collaborative endeavors!",

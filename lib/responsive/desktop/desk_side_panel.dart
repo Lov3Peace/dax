@@ -5,10 +5,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 
-import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:flutter_application_1/util/logout_dock_button.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
@@ -38,6 +36,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
   late Animation<double> scale;
   late Animation<double> opacity;
 
+  @override
   void initState() {
     // TODO: implement initState
 

@@ -8,7 +8,7 @@ import '../tablet_constants.dart';
 class TabSignButton extends StatefulWidget {
   final Function()? onTap;
 
-  TabSignButton({super.key, required this.onTap});
+  const TabSignButton({super.key, required this.onTap});
 
   @override
   State<TabSignButton> createState() => _TabSignButtonState();

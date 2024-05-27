@@ -2,7 +2,7 @@ import 'package:animated_image_list/photoViewerArbnb/PhotoViewerArbnb_screen.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
@@ -146,7 +146,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                         leftPad: 30,
                                                       ),
                                                     ),
-                                                    Expanded(
+                                                    const Expanded(
                                                         child: ProfileCard()),
                                                   ],
                                                 ),
@@ -155,13 +155,15 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                         .projectsHeroTag,
                                                     flightShuttleBuilder:
                                                         flightShuttleBuilder,
-                                                    child: ProjectsDeck()),
+                                                    child:
+                                                        const ProjectsDeck()),
                                                 deck3: Hero(
                                                     tag: GlobalProvider()
                                                         .financesHeroTag,
                                                     flightShuttleBuilder:
                                                         flightShuttleBuilder,
-                                                    child: FinancesDeck()),
+                                                    child:
+                                                        const FinancesDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -206,14 +208,14 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                       flightShuttleBuilder,
                                                   tag: GlobalProvider()
                                                       .socialsHeroTag,
-                                                  child: SocialsDeck(),
+                                                  child: const SocialsDeck(),
                                                 ),
                                                 deck5: Hero(
                                                     flightShuttleBuilder:
                                                         flightShuttleBuilder,
                                                     tag: GlobalProvider()
                                                         .newsHeroTag,
-                                                    child: NewsDeck()),
+                                                    child: const NewsDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -234,35 +236,35 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: WalletPopUp(),
+                        child: const WalletPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: FriendsPopUp(),
+                        child: const FriendsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: SettingsPopUp(),
+                        child: const SettingsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: HelpPopUp(),
+                        child: const HelpPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: InfoPopUp(),
+                        child: const InfoPopUp(),
                       ),
                     ),
                   ],

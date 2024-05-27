@@ -30,6 +30,7 @@ class TabDock extends StatefulWidget {
 class _TabDockState extends State<TabDock> with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
+  @override
   void initState() {
     // TODO: implement initState
 
@@ -122,7 +123,7 @@ class _TabDockState extends State<TabDock> with AnimationMixin {
               ),
 
               //PAGE 3
-              Wrap(
+              const Wrap(
                 crossAxisAlignment: WrapCrossAlignment.center,
                 alignment: WrapAlignment.spaceEvenly,
                 runAlignment: WrapAlignment.center,
@@ -130,13 +131,13 @@ class _TabDockState extends State<TabDock> with AnimationMixin {
                 children: [
                   //
                   //Help
-                  const TabHelpWindowButton(),
+                  TabHelpWindowButton(),
 
                   //About Us/Info
-                  const TabInfoWindowButton(),
+                  TabInfoWindowButton(),
 
                   //Logout
-                  const TabLogoutWindowButton(),
+                  TabLogoutWindowButton(),
                 ],
               ),
             ],

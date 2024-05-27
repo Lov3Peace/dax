@@ -17,8 +17,9 @@ import 'signup.dart';
 import 'login.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  OnboardingScreen({super.key});
+  const OnboardingScreen({super.key});
 
+  @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
@@ -58,7 +59,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                 BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
                   // blendMode: BlendMode.darken,
-                  child: SizedBox(),
+                  child: const SizedBox(),
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 10.h),
@@ -250,7 +251,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                                           )),
                                                     ),
                                                   ),
-                                                  Scaffold(
+                                                  const Scaffold(
                                                     resizeToAvoidBottomInset:
                                                         false,
                                                     backgroundColor:
@@ -259,7 +260,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                                       reverse: true,
                                                       child: Column(
                                                         children: [
-                                                          const Padding(
+                                                          Padding(
                                                             padding:
                                                                 EdgeInsets.only(
                                                                     top: 10),
@@ -277,7 +278,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                                               ),
                                                             ),
                                                           ),
-                                                          const Padding(
+                                                          Padding(
                                                             padding: EdgeInsets
                                                                 .symmetric(
                                                                     vertical:
@@ -342,8 +343,8 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                 borderRadius: 500,
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 50),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 50),
                               child: InitSignUpButton(),
                             )
                           ],

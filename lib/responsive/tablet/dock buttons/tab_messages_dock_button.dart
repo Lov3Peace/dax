@@ -18,7 +18,7 @@ class TabMessagesWindowButton extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.of(context).push(MessagesWindowRoute(builder: (context) {
-            return _TabMessagesWindowPopupCard();
+            return const _TabMessagesWindowPopupCard();
           }));
         },
         child: const Hero(
@@ -41,7 +41,7 @@ final messageBucket = PageStorageBucket();
 
 class _TabMessagesWindowPopupCard extends StatefulWidget {
   /// {@macro add_todo_popup_card}
-  _TabMessagesWindowPopupCard({Key? key}) : super(key: key);
+  const _TabMessagesWindowPopupCard({Key? key}) : super(key: key);
 
   @override
   State<_TabMessagesWindowPopupCard> createState() =>
@@ -287,7 +287,7 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                                   height: 50.h,
                                   width: 100.w,
                                   decoration: BoxDecoration(
-                                    color: Color.fromARGB(162, 27, 27, 27)
+                                    color: const Color.fromARGB(162, 27, 27, 27)
                                         .withOpacity(0.85),
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(35),
@@ -386,7 +386,7 @@ class ChatMessages extends StatelessWidget {
           );
         },
         itemBuilder: (context, index) {
-          return MyContainer();
+          return const MyContainer();
         },
       ),
     );
@@ -429,7 +429,7 @@ class GroupMessages extends StatelessWidget {
           );
         },
         itemBuilder: (context, index) {
-          return MyContainer();
+          return const MyContainer();
         },
       ),
     );
@@ -472,7 +472,7 @@ class AllMessages extends StatelessWidget {
           );
         },
         itemBuilder: (context, index) {
-          return MyContainer();
+          return const MyContainer();
         },
       ),
     );
@@ -525,7 +525,7 @@ class BubbleStories extends StatelessWidget {
 }
 
 class MyContainer extends StatelessWidget {
-  MyContainer({super.key});
+  const MyContainer({super.key});
 
   @override
   Widget build(BuildContext context) {

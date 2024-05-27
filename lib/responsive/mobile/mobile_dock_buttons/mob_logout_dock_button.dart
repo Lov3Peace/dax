@@ -64,14 +64,13 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ResponsiveLayout(
+        builder: (context) => const ResponsiveLayout(
           mobileVersion: MobileLaunchPage(),
           tabletVersion: OnboardingScreen(),
           desktopVersion: OnboardingScreen(),
         ),
       ),
     );
-    ;
 
     FirebaseAuth.instance.signOut();
   }
@@ -118,7 +117,7 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
                         ),
                         Center(
                           child: SingleChildScrollView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [

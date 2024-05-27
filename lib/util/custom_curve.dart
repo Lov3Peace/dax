@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class SoftClose extends Curve {
   final double count;
 
-  SoftClose({this.count = 0});
+  const SoftClose({this.count = 0});
 
   // t = x
   @override

@@ -1,14 +1,5 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
-import 'package:flutter_application_1/responsive/desktop/messages.dart';
-import 'package:flutter_application_1/util/background.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:sizer/sizer.dart';
-import '../../util/desk_dashboard_decks.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class LayoutTest extends StatefulWidget {
@@ -40,7 +31,7 @@ class _LayoutTestState extends State<LayoutTest> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         //   extendBodyBehindAppBar: true,
         //   appBar: AppBar(
         //     backgroundColor: tran,

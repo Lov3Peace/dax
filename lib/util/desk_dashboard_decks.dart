@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'decks.dart';
-
 deskDashboardDecks1({
   required Widget deck1,
   required Widget deck2,

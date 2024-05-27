@@ -345,7 +345,7 @@ class _DockButtonState extends State<DockButton> {
 
 //PROJECTS DECK ANIMATION
 class ProjectsDeck extends StatefulWidget {
-  ProjectsDeck({super.key});
+  const ProjectsDeck({super.key});
 
   @override
   State<ProjectsDeck> createState() => _ProjectsDeckState();
@@ -611,7 +611,7 @@ class ProjectStacks {
 
 //SOCIALS DECK ANIMATION
 class SocialsDeck extends StatefulWidget {
-  SocialsDeck({super.key});
+  const SocialsDeck({super.key});
 
   @override
   State<SocialsDeck> createState() => _SocialsDeckState();
@@ -814,7 +814,7 @@ class SocialsStacks {
 
 //FINACNES DECK ANIMATION
 class FinancesDeck extends StatefulWidget {
-  FinancesDeck({
+  const FinancesDeck({
     super.key,
   });
 
@@ -962,7 +962,7 @@ class FinancesStacks {
 
 //NEWS DECK ANIMATION
 class NewsDeck extends StatefulWidget {
-  NewsDeck({
+  const NewsDeck({
     super.key,
   });
 
@@ -1160,6 +1160,5 @@ class NewsStacks {
     const SizedBox(height: 150)
   ];
 }
-
 
 //lets run the app

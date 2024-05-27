@@ -20,6 +20,7 @@ class _MobFinancePageState extends State<MobFinancePage> {
   late ScrollController _scrollController;
   double _showAppBar = 1.0;
 
+  @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
@@ -50,6 +51,7 @@ class _MobFinancePageState extends State<MobFinancePage> {
     }
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,

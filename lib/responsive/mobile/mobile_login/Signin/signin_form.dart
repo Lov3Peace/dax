@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -27,7 +26,7 @@ class _SignInFormState extends State<SignInForm> {
   bool isSwitch = false;
 
   //Global Key
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   @override
@@ -238,7 +237,7 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
-Future login() async {
+  Future login() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: '${_usernameController.text}@omni.com',
@@ -271,7 +270,8 @@ Future login() async {
       }
     }
   }
-    void showErrorMessage(String message) {
+
+  void showErrorMessage(String message) {
     showDialog(
         context: (context),
         builder: (context) {

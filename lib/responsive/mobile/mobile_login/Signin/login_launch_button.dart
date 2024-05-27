@@ -1,18 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/mobile/mobile_login/Signin/signin_form.dart';
-import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 import '../../../../main.dart';
-import '../../../../util/auth/auth_check.dart';
 import '../../mob_constants.dart';
-import '../../mobile_dashboard.dart';
 
 class LoginLaunchButton extends StatefulWidget {
   final Function()? onTap;
 
-  LoginLaunchButton({super.key, required this.onTap});
+  const LoginLaunchButton({super.key, required this.onTap});
 
   @override
   State<LoginLaunchButton> createState() => _LoginLaunchButtonState();
@@ -64,7 +59,6 @@ class _LoginLaunchButtonState extends State<LoginLaunchButton> {
       ),
     );
   }
-
 
   void reverseShrink() {
     setState(() {

@@ -1,16 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
-import '../../../util/auth/auth_check.dart';
 import '../mob_artboard_page.dart';
 import 'SignUp/signup_btn.dart';
 import 'Signin/login_button.dart';
 
 class MobileLaunchPage extends StatefulWidget {
-  MobileLaunchPage({super.key});
+  const MobileLaunchPage({super.key});
 
   get login => null;
 
+  @override
   State<MobileLaunchPage> createState() => _MobileLaunchPageState();
 }
 
@@ -104,7 +103,7 @@ class _MobileLaunchPageState extends State<MobileLaunchPage>
                           ),
                         ),
                         SignInButton(
-                          onTap: (){},
+                          onTap: () {},
                         ),
                       ],
                     ),
@@ -130,7 +129,5 @@ class _MobileLaunchPageState extends State<MobileLaunchPage>
 
   void signupbtn() {}
 
-  
   // create user account page
- 
 }

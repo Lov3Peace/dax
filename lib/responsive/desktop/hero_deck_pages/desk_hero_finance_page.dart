@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -122,9 +122,9 @@ class _DeskHeroFinancesPageState extends State<DeskHeroFinancesPage>
                                   children: [
                                     Hero(
                                       tag: GlobalProvider().financesHeroTag,
-                                      child: DeskFinancesCont(),
                                       flightShuttleBuilder:
                                           flightShuttleBuilder,
+                                      child: const DeskFinancesCont(),
                                     ),
                                   ],
                                 ),
@@ -140,35 +140,35 @@ class _DeskHeroFinancesPageState extends State<DeskHeroFinancesPage>
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: WalletPopUp(),
+                          child: const WalletPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: FriendsPopUp(),
+                          child: const FriendsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: SettingsPopUp(),
+                          child: const SettingsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: HelpPopUp(),
+                          child: const HelpPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: InfoPopUp(),
+                          child: const InfoPopUp(),
                         ),
                       ),
                     ],
@@ -204,7 +204,7 @@ class _DeskFinancesContState extends State<DeskFinancesCont> {
       width: 71.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1.5.w),
-        color: Color.fromARGB(185, 21, 19, 22),
+        color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
       child: ListView.builder(
@@ -251,7 +251,7 @@ class FinancesButtonHolder extends StatelessWidget {
       width: 30.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1.5.w),
-        color: Color.fromARGB(185, 21, 19, 22),
+        color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
       child: const Row(

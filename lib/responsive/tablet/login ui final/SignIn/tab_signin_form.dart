@@ -1,10 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../main.dart';
 import '../../../mobile/mob_constants.dart';
-import '../../../mobile/mobile_dashboard.dart';
 import '../tab_final_signin.dart';
 import 'tab_forget_password_form.dart';
 
@@ -24,7 +20,7 @@ class _TabSignInFormState extends State<TabSignInForm> {
   bool isSwitch = false;
 
   //Global Key
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -152,12 +148,12 @@ class _TabSignInFormState extends State<TabSignInForm> {
                                         Radius.circular(40),
                                       ),
                                     ),
-                                    child: Scaffold(
+                                    child: const Scaffold(
                                       resizeToAvoidBottomInset: false,
                                       backgroundColor: Colors.transparent,
                                       body: SingleChildScrollView(
                                         child: Column(
-                                          children: const [
+                                          children: [
                                             Text(
                                               "Forgot Password",
                                               style: TextStyle(

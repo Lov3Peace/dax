@@ -33,7 +33,8 @@ class _BigDockState extends State<BigDock> {
                     Color.fromARGB(230, 24, 24, 24),
                   ], transform: GradientRotation(180)),
                   borderRadius: BorderRadius.circular(50),
-                  border: Border.all(color: Color.fromARGB(148, 29, 29, 29)),
+                  border:
+                      Border.all(color: const Color.fromARGB(148, 29, 29, 29)),
                   boxShadow: const [
                     BoxShadow(
                       blurRadius: 5,

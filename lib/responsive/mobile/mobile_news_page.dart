@@ -22,6 +22,7 @@ class _MobNewsPageState extends State<MobNewsPage> {
 
   double _showAppBar = 1.0;
 
+  @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../util/gradient_container.dart';
 
 class TactileButton extends StatefulWidget {
   TactileButton(
@@ -10,6 +7,7 @@ class TactileButton extends StatefulWidget {
   VoidCallback? onTap;
   double? scale;
   Widget child;
+  @override
   State<TactileButton> createState() => _TactileButtonState();
 }
 

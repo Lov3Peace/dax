@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../main.dart';
 
 class Deck extends StatelessWidget {
   Deck({
@@ -44,7 +42,7 @@ class Deck extends StatelessWidget {
             Color.fromARGB(194, 33, 33, 33),
           ], transform: GradientRotation(180)),
           borderRadius: BorderRadius.circular(25),
-          border: Border.all(color: Color.fromARGB(182, 60, 60, 60)),
+          border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
           boxShadow: const [
             // BoxShadow(
             //   blurRadius: 5,

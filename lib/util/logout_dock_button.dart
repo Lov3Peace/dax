@@ -130,7 +130,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ResponsiveLayout(
+          builder: (context) => const ResponsiveLayout(
             mobileVersion: MobileLaunchPage(),
             tabletVersion: OnboardingScreen(),
             desktopVersion: OnboardingScreen(),
@@ -182,7 +182,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                         ),
                         Center(
                           child: SingleChildScrollView(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -209,7 +209,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                   padding: EdgeInsets.only(top: 2.h),
                                   child: TextButton(
                                     onPressed: signOut,
-                                    child: LogOutButton(),
+                                    child: const LogOutButton(),
                                   ),
                                 )
                               ],

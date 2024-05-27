@@ -13,6 +13,7 @@ class TabProjectsPage extends StatefulWidget {
   final Animation<double> transitionAnimation;
   const TabProjectsPage({super.key, required this.transitionAnimation});
 
+  @override
   State<TabProjectsPage> createState() => _TabProjectsPageState();
 }
 
@@ -21,6 +22,7 @@ class _TabProjectsPageState extends State<TabProjectsPage> {
 
   double _showAppBar = 1.0;
 
+  @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
@@ -104,7 +106,7 @@ class _TabProjectsPageState extends State<TabProjectsPage> {
             alignment: const AlignmentDirectional(0, 1),
             fit: StackFit.loose,
             children: [
-              Background(),
+              const Background(),
               AnimationLimiter(
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),

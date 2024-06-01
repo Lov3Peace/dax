@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/GlobalProvider.dart';
-import 'package:flutter_application_1/util/custom_curve.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
@@ -11,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../util/gradient_container.dart';
+import '../../../../../util/soft_close.dart';
 import '../../../../../util/tactile_button.dart';
 
 // const String heroWalletWindow = 'Wallet-window-hero';

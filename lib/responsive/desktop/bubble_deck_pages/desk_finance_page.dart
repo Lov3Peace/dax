@@ -4,7 +4,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart'
 
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +13,7 @@ import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
 import '../../../util/GlobalProvider.dart';
-import '../../../util/custom_curve.dart';
+import '../../../util/soft_close.dart';
 import '../../mobile/mob_artboard_page.dart';
 
 import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
@@ -258,33 +258,9 @@ class FinancesButtonHolder extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SocialsButton()
-              .animate()
-              .slideX(
-                  begin: 0.25,
-                  end: 0,
-                  delay: Duration(milliseconds: 200),
-                  duration: Duration(milliseconds: 400),
-                  curve: SoftClose())
-              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          ProjectsButton()
-              .animate()
-              .slideX(
-                  begin: 0.25,
-                  end: 0,
-                  delay: Duration(milliseconds: 400),
-                  duration: Duration(milliseconds: 400),
-                  curve: SoftClose())
-              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          NewsButton()
-              .animate()
-              .slideX(
-                  begin: 0.25,
-                  end: 0,
-                  delay: Duration(milliseconds: 600),
-                  duration: Duration(milliseconds: 400),
-                  curve: SoftClose())
-              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+          const SocialsButton().animate().slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 200), duration: const Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
+          const ProjectsButton().animate().slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 400), duration: const Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
+          const NewsButton().animate().slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 600), duration: const Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
         ],
       ),
     );

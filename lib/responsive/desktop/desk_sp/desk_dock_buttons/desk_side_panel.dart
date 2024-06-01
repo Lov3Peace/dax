@@ -12,12 +12,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
-import 'desk_sp/desk_dock_buttons/connections/desk_friends_button_hover.dart';
-import 'desk_sp/desk_dock_buttons/desk_home_dock_button.dart';
-import 'desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
-import 'desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
-import 'desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
-import 'desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
+import 'connections/desk_friends_button_hover.dart';
+import 'desk_home_dock_button.dart';
+import 'help/desk_help_button_hover.dart';
+import 'info/desk_info_dock_button.dart';
+import 'settings/desk_settings_dock_button.dart';
+import 'wallet/desk_wallet_dock_button.dart';
 
 class DesktopSidePanel extends StatefulWidget {
   DesktopSidePanel({

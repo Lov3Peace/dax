@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
-import 'package:flutter_application_1/util/custom_curve.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
+import 'package:flutter_application_1/util/soft_close.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +20,7 @@ import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
 import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 import '../messages.dart';
 
 class DeskHeroProjectsPage extends StatefulWidget {

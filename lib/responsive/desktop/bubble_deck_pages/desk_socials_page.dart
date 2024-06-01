@@ -7,7 +7,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart'
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:flutter_application_1/util/GlobalProvider.dart';
 import 'package:indexed/indexed.dart';
@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../../util/custom_curve.dart';
+import '../../../util/soft_close.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';

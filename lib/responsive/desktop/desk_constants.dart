@@ -607,7 +607,7 @@ class ProjectStacks {
   List<Widget> mobProjectStacks = [
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 65.w,
       deckName: 'Keyboards',
       gradient1: purp,
       gradient2: red,
@@ -615,7 +615,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 65.w,
       deckName: 'Software Development',
       gradient1: purp,
       gradient2: red,
@@ -623,7 +623,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 65.w,
       deckName: 'Guitars',
       gradient1: purp,
       gradient2: red,
@@ -631,7 +631,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 65.w,
       deckName: 'Photography',
       gradient1: purp,
       gradient2: red,
@@ -639,7 +639,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 65.w,
       deckName: 'Art',
       gradient1: purp,
       gradient2: red,
@@ -647,7 +647,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 65.w,
       deckName: 'Film',
       gradient1: purp,
       gradient2: red,
@@ -709,7 +709,7 @@ class ProjectStacks {
   List<Widget> deskProjectStacks = [
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 60.w,
       deckName: 'Keyboards',
       gradient1: purp,
       gradient2: red,
@@ -717,7 +717,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 60.w,
       deckName: 'Software Development',
       gradient1: purp,
       gradient2: red,
@@ -725,7 +725,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 60.w,
       deckName: 'Guitars',
       gradient1: purp,
       gradient2: red,
@@ -733,7 +733,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 60.w,
       deckName: 'Photography',
       gradient1: purp,
       gradient2: red,
@@ -741,7 +741,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 60.w,
       deckName: 'Art',
       gradient1: purp,
       gradient2: red,
@@ -749,7 +749,7 @@ class ProjectStacks {
     ),
     Deck(
       deckHeight: 500,
-      deckWidth: 375,
+      deckWidth: 60.w,
       deckName: 'Film',
       gradient1: purp,
       gradient2: red,

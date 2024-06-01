@@ -3,11 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/keyboards_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
-
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:flutter_application_1/util/GlobalProvider.dart';
 import 'package:indexed/indexed.dart';
@@ -20,6 +17,7 @@ import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
 import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 
 class DeskHeroSocialsPage extends StatefulWidget {
   const DeskHeroSocialsPage({Key? key}) : super(key: key);

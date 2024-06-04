@@ -1,9 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/bubble_deck_pages/desk_project_page.dart';
-import 'package:flutter_application_1/responsive/desktop/bubble_deck_pages/desk_socials_page.dart';
-import 'package:flutter_application_1/responsive/responsive_meth.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_finance_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_news_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dart';
@@ -20,11 +17,9 @@ import '../mobile/mobile_finance_page.dart';
 import '../mobile/mobile_news_page.dart';
 import '../mobile/mobile_projects_page.dart';
 import '../mobile/mobile_socials_page.dart';
-import 'bubble_deck_pages/desk_finance_page.dart';
 import 'hero_deck_pages/desk_hero_finance_page.dart';
 import 'hero_deck_pages/desk_hero_news_page.dart';
 import 'hero_deck_pages/desk_hero_project_page.dart';
-import 'bubble_deck_pages/desk_news_page.dart';
 import 'hero_deck_pages/desk_hero_socials_page.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)
@@ -42,7 +37,7 @@ double titleTextSize = 20;
 double labelTextSize = 16;
 double? textConstraint = 500;
 double? subTextConstraint = 500;
-Color deckBorderColor = Color.fromARGB(182, 75, 75, 75);
+Color deckBorderColor = const Color.fromARGB(182, 75, 75, 75);
 
 class Deck extends StatelessWidget {
   Deck({
@@ -104,7 +99,7 @@ class Deck extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1.5.w),
-                  color: Color.fromARGB(185, 21, 19, 22),
+                  color: const Color.fromARGB(185, 21, 19, 22),
 
                   border: Border.all(color: deckBorderColor),
                   // boxShadow: const [
@@ -357,8 +352,8 @@ class TitleBubble extends StatelessWidget {
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(1.5.w),
-          color: Color.fromARGB(238, 21, 19, 22),
-          border: Border.all(color: Color.fromARGB(182, 73, 73, 73)),
+          color: const Color.fromARGB(238, 21, 19, 22),
+          border: Border.all(color: const Color.fromARGB(182, 73, 73, 73)),
         ),
         constraints: const BoxConstraints(
             maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 50),
@@ -474,7 +469,7 @@ class _DockButtonState extends State<DockButton> {
 
 //PROJECTS DECK ANIMATION
 class ProjectsDeck extends StatefulWidget {
-  ProjectsDeck({super.key});
+  const ProjectsDeck({super.key});
 
   @override
   State<ProjectsDeck> createState() => _ProjectsDeckState();
@@ -761,7 +756,7 @@ class ProjectStacks {
 
 //SOCIALS DECK ANIMATION
 class SocialsDeck extends StatefulWidget {
-  SocialsDeck({super.key});
+  const SocialsDeck({super.key});
 
   @override
   State<SocialsDeck> createState() => _SocialsDeckState();
@@ -997,7 +992,7 @@ class SocialsStacks {
 
 //FINACNES DECK ANIMATION
 class FinancesDeck extends StatefulWidget {
-  FinancesDeck({
+  const FinancesDeck({
     super.key,
   });
 
@@ -1081,7 +1076,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return DeskHeroFinancesPage(
+                    return const DeskHeroFinancesPage(
                         //transitionAnimation: animation,
                         );
                   }
@@ -1231,7 +1226,7 @@ class FinancesStacks {
 
 //NEWS DECK ANIMATION
 class NewsDeck extends StatefulWidget {
-  NewsDeck({
+  const NewsDeck({
     super.key,
   });
 
@@ -1306,7 +1301,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return DeskHeroNewsPage(
+                    return const DeskHeroNewsPage(
                         //transitionAnimation: animation,
                         );
                   }
@@ -1455,7 +1450,7 @@ class NewsStacks {
 }
 
 class ProfileCard extends StatefulWidget {
-  ProfileCard({
+  const ProfileCard({
     super.key,
   });
 

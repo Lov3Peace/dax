@@ -21,6 +21,7 @@ class _TabFinancePageState extends State<TabFinancePage> {
 
   double _showAppBar = 1.0;
 
+  @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
@@ -103,7 +104,7 @@ class _TabFinancePageState extends State<TabFinancePage> {
         alignment: const AlignmentDirectional(0, 1),
         fit: StackFit.loose,
         children: [
-          Background(),
+          const Background(),
           AnimationLimiter(
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),

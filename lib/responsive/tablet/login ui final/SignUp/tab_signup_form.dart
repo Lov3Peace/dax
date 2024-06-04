@@ -1,15 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_animations/simple_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../main.dart';
 import '../../../mobile/mob_constants.dart';
-import '../../../mobile/mobile_dashboard.dart';
-import '../SignIn/tab_signin_form.dart';
 import '../tab_final_signin.dart';
 
 class TabSignUpForm extends StatefulWidget {
-  TabSignUpForm({
+  const TabSignUpForm({
     super.key,
   });
 
@@ -27,7 +21,7 @@ class _TabSignUpFormState extends State<TabSignUpForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Email",
             ),
             Padding(
@@ -38,12 +32,12 @@ class _TabSignUpFormState extends State<TabSignUpForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
             ),
-            Text(
+            const Text(
               "Username",
             ),
             Padding(
@@ -54,12 +48,12 @@ class _TabSignUpFormState extends State<TabSignUpForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
             ),
-            Text(
+            const Text(
               "Password",
             ),
             Padding(
@@ -70,7 +64,7 @@ class _TabSignUpFormState extends State<TabSignUpForm> {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
@@ -86,7 +80,7 @@ class _TabSignUpFormState extends State<TabSignUpForm> {
                 Switch(
                     value: isSwitch,
                     activeColor: Colors.white,
-                    activeTrackColor: Color.fromARGB(255, 221, 83, 245),
+                    activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
                     onChanged: (bool newBool) {
                       setState(() {
                         isSwitch = newBool;

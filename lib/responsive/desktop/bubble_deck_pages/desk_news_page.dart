@@ -4,6 +4,7 @@ import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
@@ -122,8 +123,8 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
                                 children: [
                                   Hero(
                                     tag: GlobalProvider().newsHeroTag,
-                                    child: DeskNewsCont(),
                                     flightShuttleBuilder: flightShuttleBuilder,
+                                    child: const DeskNewsCont(),
                                   ),
                                 ],
                               ),
@@ -139,35 +140,35 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: WalletPopUp(),
+                        child: const WalletPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: FriendsPopUp(),
+                        child: const FriendsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: SettingsPopUp(),
+                        child: const SettingsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: HelpPopUp(),
+                        child: const HelpPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: InfoPopUp(),
+                        child: const InfoPopUp(),
                       ),
                     ),
                   ],
@@ -202,7 +203,7 @@ class _DeskNewsContState extends State<DeskNewsCont> {
       width: 71.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1.5.w),
-        color: Color.fromARGB(185, 21, 19, 22),
+        color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
       child: ListView.builder(
@@ -249,39 +250,39 @@ class NewsButtonHolder extends StatelessWidget {
       width: 30.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1.5.w),
-        color: Color.fromARGB(185, 21, 19, 22),
+        color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          SocialsButton()
+          const SocialsButton()
               .animate()
               .slideX(
                   begin: 0.25,
                   end: 0,
-                  delay: Duration(milliseconds: 200),
-                  duration: Duration(milliseconds: 400),
-                  curve: SoftClose())
-              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          FinancesButton()
+                  delay: const Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 400),
+                  curve: const SoftClose())
+              .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
+          const FinancesButton()
               .animate()
               .slideX(
                   begin: 0.25,
                   end: 0,
-                  delay: Duration(milliseconds: 400),
-                  duration: Duration(milliseconds: 400),
-                  curve: SoftClose())
-              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
-          ProjectsButton()
+                  delay: const Duration(milliseconds: 400),
+                  duration: const Duration(milliseconds: 400),
+                  curve: const SoftClose())
+              .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
+          const ProjectsButton()
               .animate()
               .slideX(
                   begin: 0.25,
                   end: 0,
-                  delay: Duration(milliseconds: 600),
-                  duration: Duration(milliseconds: 400),
-                  curve: SoftClose())
-              .fadeIn(begin: 0, duration: Duration(milliseconds: 500)),
+                  delay: const Duration(milliseconds: 600),
+                  duration: const Duration(milliseconds: 400),
+                  curve: const SoftClose())
+              .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
         ],
       ),
     );

@@ -14,7 +14,7 @@ import '../../responsive/mobile/mob_constants.dart';
 //Actual BUTTON DAVON or PHIL Whatever the hell you want to be called these days.
 //if you ask me, you just formerly go by: Primate
 class InitSignUpButton extends StatefulWidget {
-  InitSignUpButton({super.key});
+  const InitSignUpButton({super.key});
 
   @override
   State<InitSignUpButton> createState() => _InitSignUpButtonState();
@@ -89,7 +89,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
                             )),
                       ),
                     ),
-                    Scaffold(
+                    const Scaffold(
                       resizeToAvoidBottomInset: false,
                       backgroundColor: Colors.transparent,
                       body: SingleChildScrollView(
@@ -97,7 +97,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
                           // crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.only(top: 10),
                               child: Text(
                                 "Sign Up",
@@ -136,7 +136,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
 
 //PopUp Card
 class SignUpForm extends StatefulWidget {
-  SignUpForm({
+  const SignUpForm({
     super.key,
   });
 
@@ -172,7 +172,7 @@ class _SignUpFormState extends State<SignUpForm> {
             );
           },
           pageBuilder: (context, animation, secondaryAnimation) {
-            return AuthCheck();
+            return const AuthCheck();
           },
           transitionDuration: const Duration(milliseconds: 0),
         ),
@@ -198,7 +198,7 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   //Global Key
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

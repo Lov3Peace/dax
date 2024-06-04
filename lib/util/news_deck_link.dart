@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simple_animations/animation_controller_extension/animation_controller_extension.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../responsive/mobile/mobile_news_page.dart';
 import 'news_deck.dart';

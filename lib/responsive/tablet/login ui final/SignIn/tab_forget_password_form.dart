@@ -1,11 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../main.dart';
 import '../../../mobile/mob_constants.dart';
-import '../../../mobile/mobile_dashboard.dart';
-import 'tab_signin_form.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({
@@ -19,7 +15,7 @@ class ForgotPasswordForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Email",
             ),
             Padding(
@@ -30,7 +26,7 @@ class ForgotPasswordForm extends StatelessWidget {
                     borderRadius: BorderRadius.circular(
                       screenWidth / 4,
                     ),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                 ),
               ),
@@ -50,7 +46,7 @@ class ForgotPasswordForm extends StatelessWidget {
 class SendCodeButton extends StatefulWidget {
   final Function()? onTap;
 
-  SendCodeButton({super.key, required this.onTap});
+  const SendCodeButton({super.key, required this.onTap});
 
   @override
   State<SendCodeButton> createState() => _SendCodeButtonState();

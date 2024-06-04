@@ -5,17 +5,17 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 
-import 'package:flutter_application_1/util/logout_dock_button.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
-import 'connections/desk_friends_button_hover.dart';
-import 'desk_home_dock_button.dart';
-import 'help/desk_help_button_hover.dart';
-import 'info/desk_info_dock_button.dart';
-import 'settings/desk_settings_dock_button.dart';
-import 'wallet/desk_wallet_dock_button.dart';
+import 'desk_dock_buttons/connections/desk_friends_button_hover.dart';
+import 'desk_dock_buttons/desk_home_dock_button.dart';
+import 'desk_dock_buttons/desk_logout_dock_button.dart';
+import 'desk_dock_buttons/help/desk_help_button_hover.dart';
+import 'desk_dock_buttons/info/desk_info_dock_button.dart';
+import 'desk_dock_buttons/settings/desk_settings_dock_button.dart';
+import 'desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
 
 class DesktopSidePanel extends StatefulWidget {
   DesktopSidePanel({
@@ -101,7 +101,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
               Spacer(),
               Padding(
                 padding: EdgeInsets.only(bottom: 2.h),
-                child: TactileButton(child: const LogoutWindowButton()),
+                child: TactileButton(child: DesktopLogoutWindowButton()),
               ),
             ],
           ),
@@ -112,7 +112,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
 }
 
 //
-// Contains all buttonsin the dock
+// Contains all buttons in the dock
 class DeskDockButtons extends StatefulWidget {
   const DeskDockButtons({super.key});
 
@@ -131,32 +131,37 @@ class _DeskDockButtonsState extends State<DeskDockButtons> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          //Wallet
+          //
+          //Wallet button hover
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.5.h),
+            padding: EdgeInsets.symmetric(vertical: 1.5.h),
             child: DeskWalletButtonHover(),
           ),
-
           //
-          //Friends
+          //
+          //Friends Button Hover
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.5.h),
+            padding: EdgeInsets.symmetric(vertical: 1.5.h),
             child: DeskFriendsButtonHover(),
           ),
-          //Settings
+          //
+          //
+          //Settings button hover
           Padding(
-              padding: EdgeInsets.symmetric(vertical: 0.5.h),
-              child: DeskSettingsButtonHover()),
-
+            padding: EdgeInsets.symmetric(vertical: 1.5.h),
+            child: DeskSettingsButtonHover(),
+          ),
+          //
+          //
           //Help
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.5.h),
+            padding: EdgeInsets.symmetric(vertical: 1.5.h),
             child: DeskHelpButtonHover(),
           ),
           //
           //About Us/Info
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.5.h),
+            padding: EdgeInsets.symmetric(vertical: 1.5.h),
             child: DeskInfoButtonHover(),
           ),
         ],

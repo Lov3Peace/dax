@@ -13,7 +13,7 @@ import 'signup_form.dart';
 class SignUpButton extends StatefulWidget {
   final Function()? onTap;
 
-  SignUpButton({super.key, required this.onTap});
+  const SignUpButton({super.key, required this.onTap});
 
   @override
   State<SignUpButton> createState() => _SignUpButtonState();
@@ -72,14 +72,14 @@ class _SignUpButtonState extends State<SignUpButton> {
     control = Control.play;
 
     Future.delayed(
-      Duration(milliseconds: 400),
+      const Duration(milliseconds: 400),
       () {
         //slide animation
         showGeneralDialog(
           barrierDismissible: true,
           barrierLabel: "Create Account",
           context: context,
-          transitionDuration: Duration(milliseconds: 400),
+          transitionDuration: const Duration(milliseconds: 400),
           transitionBuilder: (_, animation, __, child) {
             Tween<Offset> tween;
             tween = Tween(begin: const Offset(0, 1), end: Offset.zero);
@@ -159,13 +159,13 @@ class _SignUpButtonState extends State<SignUpButton> {
                         ),
                       ),
                     ),
-                    Scaffold(
+                    const Scaffold(
                       resizeToAvoidBottomInset: false,
                       backgroundColor: Colors.transparent,
                       body: SingleChildScrollView(
                         child: Column(
                           children: [
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.only(top: 10),
                               child: Text(
                                 "Sign Up",
@@ -177,7 +177,7 @@ class _SignUpButtonState extends State<SignUpButton> {
                                 ),
                               ),
                             ),
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.symmetric(vertical: 16.0),
                               child: Text(
                                 "Sign Up to experience a new world for creative and collaborative endeavors!",

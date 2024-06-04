@@ -6,8 +6,9 @@ import 'SignIn/tab_signin_btn.dart';
 import 'SignUp/tab_signup_btn.dart';
 
 class TabOnboardingScreen extends StatefulWidget {
-  TabOnboardingScreen({super.key});
+  const TabOnboardingScreen({super.key});
 
+  @override
   State<TabOnboardingScreen> createState() => _TabOnboardingScreenState();
 }
 
@@ -23,7 +24,7 @@ class _TabOnboardingScreenState extends State<TabOnboardingScreen>
           const TabArtBoardScreen(),
           AnimatedPositioned(
             top: isSignInDialogShown ? -50 : 0,
-            duration: Duration(milliseconds: 240),
+            duration: const Duration(milliseconds: 240),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: SafeArea(
@@ -31,7 +32,7 @@ class _TabOnboardingScreenState extends State<TabOnboardingScreen>
                 padding: const EdgeInsets.symmetric(horizontal: 32.0),
                 child: Column(
                   children: [
-                    Spacer(
+                    const Spacer(
                       flex: 1,
                     ),
                     SizedBox(
@@ -88,13 +89,14 @@ class _TabOnboardingScreenState extends State<TabOnboardingScreen>
                       ),
                     ),
 
-                    Spacer(),
+                    const Spacer(),
                     Column(
                       children: [
                         Row(
                           children: [
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               child: TabSignUpButton(
                                 onTap: signupbtn,
                               ),

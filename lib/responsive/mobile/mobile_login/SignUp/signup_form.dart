@@ -1,13 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_animations/simple_animations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../mob_constants.dart';
 import '../Signin/login_launch_button.dart';
 
 class SignUpForm extends StatefulWidget {
-  SignUpForm({
+  const SignUpForm({
     super.key,
   });
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
@@ -58,7 +57,7 @@ class ForgotPasswordForm extends StatelessWidget {
 class SendCodeButton extends StatefulWidget {
   final Function()? onTap;
 
-  SendCodeButton({super.key, required this.onTap});
+  const SendCodeButton({super.key, required this.onTap});
 
   @override
   State<SendCodeButton> createState() => _SendCodeButtonState();

@@ -15,7 +15,7 @@ import 'forget_password_form.dart';
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 class InitLoginButton extends StatefulWidget {
-  InitLoginButton({super.key});
+  const InitLoginButton({super.key});
 
   @override
   State<InitLoginButton> createState() => _InitLoginButtonState();
@@ -201,7 +201,7 @@ class _LoginFormState extends State<LoginForm> {
         context: (context),
         builder: (context) {
           return AlertDialog(
-            backgroundColor: Color.fromARGB(182, 75, 75, 75),
+            backgroundColor: const Color.fromARGB(182, 75, 75, 75),
             title: Center(
                 child: Text(
               message,
@@ -219,7 +219,7 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   //Global Key
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -374,14 +374,14 @@ class _LoginFormState extends State<LoginForm> {
                                               )),
                                         ),
                                       ),
-                                      Scaffold(
+                                      const Scaffold(
                                         resizeToAvoidBottomInset: false,
                                         backgroundColor: Colors.transparent,
                                         body: SingleChildScrollView(
                                           reverse: true,
                                           child: Column(
                                             children: [
-                                              const Padding(
+                                              Padding(
                                                 padding:
                                                     EdgeInsets.only(top: 10),
                                                 child: Text(
@@ -394,7 +394,7 @@ class _LoginFormState extends State<LoginForm> {
                                                   ),
                                                 ),
                                               ),
-                                              const Padding(
+                                              Padding(
                                                 padding: EdgeInsets.symmetric(
                                                     vertical: 16.0),
                                                 child: Text(
@@ -454,10 +454,10 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   "Don't have an account yet?",
                 ),
                 InitSignUpButton()

@@ -4,6 +4,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'news_deck.dart';
 
 class StaggerAnim extends State<StatefulWidget> with AnimationMixin {
+  @override
   late AnimationController controller;
   late Animation<double> scale;
   late Animation<double> opacity;

@@ -18,6 +18,7 @@ class MobProjectsPage extends StatefulWidget {
   final Animation<double> transitionAnimation;
   const MobProjectsPage({super.key, required this.transitionAnimation});
 
+  @override
   State<MobProjectsPage> createState() => _MobProjectsPageState();
 }
 
@@ -26,6 +27,7 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
 
   double _showAppBar = 1.0;
 
+  @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();

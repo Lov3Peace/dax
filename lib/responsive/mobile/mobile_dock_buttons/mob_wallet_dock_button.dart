@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/Window%20Route/wallet_window_route.dart';
 import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
 class MobWalletWindowButton extends StatelessWidget {
@@ -314,7 +313,7 @@ class MobWalletWindowPopupCardState extends State<MobWalletWindowPopupCard> {
                                 margin: EdgeInsets.all(1.75.h),
                                 height: 35.h,
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 39, 38, 38),
+                                  color: const Color.fromARGB(255, 39, 38, 38),
                                   borderRadius: BorderRadius.circular(24),
                                 ),
                                 child: SingleChildScrollView(
@@ -471,7 +470,8 @@ class MobWalletWindowPopupCardState extends State<MobWalletWindowPopupCard> {
                                                               horizontal: 3.w,
                                                               vertical: 1.h),
                                                       decoration: BoxDecoration(
-                                                        color: Color.fromARGB(
+                                                        color: const Color
+                                                            .fromARGB(
                                                             104, 95, 94, 94),
                                                         borderRadius:
                                                             BorderRadius
@@ -559,7 +559,8 @@ class MobWalletWindowPopupCardState extends State<MobWalletWindowPopupCard> {
                                                               horizontal: 3.w,
                                                               vertical: 1.h),
                                                       decoration: BoxDecoration(
-                                                        color: Color.fromARGB(
+                                                        color: const Color
+                                                            .fromARGB(
                                                             104, 95, 94, 94),
                                                         borderRadius:
                                                             BorderRadius

@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
@@ -123,8 +123,8 @@ class _DeskHeroNewsPageState extends State<DeskHeroNewsPage>
                                 children: [
                                   Hero(
                                     tag: GlobalProvider().newsHeroTag,
-                                    child: DeskNewsCont(),
                                     flightShuttleBuilder: flightShuttleBuilder,
+                                    child: const DeskNewsCont(),
                                   ),
                                 ],
                               ),
@@ -140,35 +140,35 @@ class _DeskHeroNewsPageState extends State<DeskHeroNewsPage>
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: WalletPopUp(),
+                        child: const WalletPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: FriendsPopUp(),
+                        child: const FriendsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: SettingsPopUp(),
+                        child: const SettingsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: HelpPopUp(),
+                        child: const HelpPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: InfoPopUp(),
+                        child: const InfoPopUp(),
                       ),
                     ),
                   ],
@@ -203,7 +203,7 @@ class _DeskNewsContState extends State<DeskNewsCont> {
       width: 71.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1.5.w),
-        color: Color.fromARGB(185, 21, 19, 22),
+        color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
       child: ListView.builder(
@@ -250,7 +250,7 @@ class NewsButtonHolder extends StatelessWidget {
       width: 30.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1.5.w),
-        color: Color.fromARGB(185, 21, 19, 22),
+        color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
       child: const Row(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:indexed/indexed.dart';
 import 'package:sizer/sizer.dart';
@@ -22,9 +21,9 @@ class _MessagesState extends State<Messages> {
             constraints: const BoxConstraints(minWidth: 150, minHeight: 750),
             // margin: EdgeInsets.all(1.w),
             decoration: BoxDecoration(
-              color: Color.fromARGB(185, 21, 19, 22),
+              color: const Color.fromARGB(185, 21, 19, 22),
               borderRadius: BorderRadius.circular(1.w),
-              border: Border.all(color: Color.fromARGB(147, 58, 58, 58)),
+              border: Border.all(color: const Color.fromARGB(147, 58, 58, 58)),
               boxShadow: const [
                 // BoxShadow(
                 //   blurRadius: 5,
@@ -62,7 +61,7 @@ class _MessagesState extends State<Messages> {
                         const BoxConstraints(minWidth: 250, minHeight: 650),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(1.w),
-                      color: Color.fromARGB(197, 34, 31, 35),
+                      color: const Color.fromARGB(197, 34, 31, 35),
 
                       // boxShadow: const [
                       //   BoxShadow(

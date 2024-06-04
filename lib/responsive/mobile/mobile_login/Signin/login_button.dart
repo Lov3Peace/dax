@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -11,7 +10,7 @@ import 'signin_form.dart';
 class SignInButton extends StatefulWidget {
   final Function()? onTap;
 
-  SignInButton({super.key, required this.onTap});
+  const SignInButton({super.key, required this.onTap});
 
   @override
   State<SignInButton> createState() => _SignInButtonState();

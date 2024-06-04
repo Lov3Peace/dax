@@ -6,7 +6,7 @@ import '../gradient_container.dart';
 import '../tactile_button.dart';
 
 class ForgotPasswordForm extends StatefulWidget {
-  ForgotPasswordForm({
+  const ForgotPasswordForm({
     super.key,
   });
 
@@ -31,7 +31,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
       showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return const AlertDialog(
             content: Text('Password reset link sent!'),
           );
         },

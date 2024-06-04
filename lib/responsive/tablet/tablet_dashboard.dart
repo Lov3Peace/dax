@@ -87,10 +87,10 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
                                     child: Column(
                                       children: [
                                         mobTabDashboardDecks(
-                                          ProjectsDeck(),
-                                          SocialsDeck(),
-                                          FinancesDeck(),
-                                          NewsDeck(),
+                                          const ProjectsDeck(),
+                                          const SocialsDeck(),
+                                          const FinancesDeck(),
+                                          const NewsDeck(),
                                         )[index]
                                       ],
                                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
@@ -48,21 +49,16 @@ class _WalletC2State extends State<WalletC2> {
               Row(
                 children: [
                   Expanded(
-                    child: Card(
-                      elevation: 0,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          controller: _controller,
-                          enabled: _isEditable,
-                          obscureText: _isHidden,
-                          decoration: const InputDecoration(
-                            labelText: 'Linked Card',
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(40))),
-                          ),
-                        ),
+                    child: TextField(
+                      controller: _controller,
+                      enabled: _isEditable,
+                      obscureText: _isHidden,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(left: 1.w),
+                        labelText: 'Linked Card',
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.w))),
                       ),
                     ),
                   ),
@@ -70,21 +66,23 @@ class _WalletC2State extends State<WalletC2> {
                   Column(
                     children: [
                       ElevatedButton(
+                        style: ButtonStyle(overlayColor:MaterialStatePropertyAll(Colors.grey[800])),
                         onPressed: () {
                           setState(() {
                             _isEditable = !_isEditable;
                           });
                         },
-                        child: Text(_isEditable ? 'Save' : 'Edit'),
+                        child: Text(_isEditable ? 'Save' : 'Edit', style: TextStyle(color: Colors.white),),
                       ),
                       const SizedBox(height: 6),
                       ElevatedButton(
+                        style: ButtonStyle(overlayColor:MaterialStatePropertyAll(Colors.grey[800])),
                         onPressed: () {
                           setState(() {
                             _isHidden = !_isHidden;
                           });
                         },
-                        child: Text(_isHidden ? 'Show' : 'Hide'),
+                        child: Text(_isHidden ? 'Show' : 'Hide', style: const TextStyle(color: white),),
                       ),
                     ],
                   ),
@@ -94,6 +92,7 @@ class _WalletC2State extends State<WalletC2> {
                 color: Colors.grey,
                 indent: 0,
                 endIndent: 0,
+                thickness: 0.5,
               ),
               //
               //
@@ -116,17 +115,18 @@ class _WalletC2State extends State<WalletC2> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Multifactor Authenticaation',
+                        'Multifactor Authentication',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 12),
                       ),
                       Switch(
+                        trackOutlineWidth: const MaterialStatePropertyAll(0.75),
                         value: isSwitch,
                         activeColor: Colors.white,
                         activeTrackColor:
-                            const Color.fromARGB(255, 221, 83, 245),
+                            green,
                         onChanged: (bool newBool) {
                           setState(() {
                             isSwitch = newBool;
@@ -149,10 +149,11 @@ class _WalletC2State extends State<WalletC2> {
                             fontSize: 12),
                       ),
                       Switch(
+                        trackOutlineWidth: const MaterialStatePropertyAll(0.75),
                         value: isSwitch2,
                         activeColor: Colors.white,
                         activeTrackColor:
-                            const Color.fromARGB(255, 221, 83, 245),
+                            green,
                         onChanged: (bool newBool) {
                           setState(() {
                             isSwitch2 = newBool;
@@ -165,6 +166,7 @@ class _WalletC2State extends State<WalletC2> {
                     color: Colors.grey,
                     indent: 0,
                     endIndent: 0,
+                    thickness: 0.5,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,9 +189,9 @@ class _WalletC2State extends State<WalletC2> {
                           children: [
                             CurrentMonthText(),
                             ElevatedButton(
-                              //style: ButtonStyle(backgroundColor:Colors.white10),
+                              style: ButtonStyle(overlayColor:MaterialStatePropertyAll(Colors.grey[800])),
                               onPressed: () {},
-                              child: const Text('View'),
+                              child: const Text('View', style: TextStyle(color: white),),
                             ),
                           ],
                         ),

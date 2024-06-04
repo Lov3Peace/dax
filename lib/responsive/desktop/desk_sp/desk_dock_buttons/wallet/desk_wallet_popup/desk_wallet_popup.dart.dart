@@ -422,8 +422,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                     child: GradientContainer(
                                                       gradient1: blue,
                                                       gradient2:
-                                                          const Color.fromARGB(
-                                                              255, 85, 221, 89),
+                                                          green,
                                                       height: 15,
                                                       width: 150,
                                                       neonGlow: greenGlow,
@@ -452,8 +451,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                               gradient:
                                                   const LinearGradient(colors: [
                                                 blue,
-                                                Color.fromARGB(
-                                                    255, 85, 221, 89),
+                                                green,
                                               ]),
                                               boxShadow: const [
                                                 BoxShadow(

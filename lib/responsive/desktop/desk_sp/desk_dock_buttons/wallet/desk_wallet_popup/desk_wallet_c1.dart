@@ -40,6 +40,7 @@ class WalletC1 extends StatelessWidget {
                     fontSize: 16),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     'xxxx-4321',
@@ -49,9 +50,9 @@ class WalletC1 extends StatelessWidget {
                         fontSize: 12),
                   ),
                   ElevatedButton(
-                    //style: ButtonStyle(backgroundColor:Colors.white10),
+                    style: ButtonStyle(overlayColor:MaterialStatePropertyAll(Colors.grey[800])),
                     onPressed: () {},
-                    child: const Text('View'),
+                    child: const Text('View', style: TextStyle(color: Colors.white),),
                   ),
                 ],
               ),
@@ -63,6 +64,7 @@ class WalletC1 extends StatelessWidget {
                 color: Colors.grey,
                 indent: 0,
                 endIndent: 0,
+                thickness: 0.5,
               ),
 
               //
@@ -134,6 +136,7 @@ class WalletC1 extends StatelessWidget {
                 color: Colors.grey,
                 indent: 0,
                 endIndent: 0,
+                thickness: 0.5,
               ),
 
               //

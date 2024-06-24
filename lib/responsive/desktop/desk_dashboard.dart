@@ -1,23 +1,21 @@
-import 'package:animated_image_list/photoViewerArbnb/PhotoViewerArbnb_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../util/GlobalProvider.dart';
+import '../../util/ButtonState.dart';
 import '../../util/desk_dashboard_decks.dart';
 import '../mobile/mob_artboard_page.dart';
-import 'desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
-import 'desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
-import 'desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
-import 'desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
+import 'desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
+import 'desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
+import 'desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
+import 'desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -44,13 +42,14 @@ class _DesktopDashboardState extends State<DesktopDashboard>
     opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
     controller.stop();
     super.initState();
-    final heroReset = context.read<GlobalProvider>();
+
+    final heroReset = context.read<ButtonState>();
     heroReset.heroReset();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -151,14 +150,14 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                   ],
                                                 ),
                                                 deck2: Hero(
-                                                    tag: GlobalProvider()
+                                                    tag: ButtonState()
                                                         .projectsHeroTag,
                                                     flightShuttleBuilder:
                                                         flightShuttleBuilder,
                                                     child:
                                                         const ProjectsDeck()),
                                                 deck3: Hero(
-                                                    tag: GlobalProvider()
+                                                    tag: ButtonState()
                                                         .financesHeroTag,
                                                     flightShuttleBuilder:
                                                         flightShuttleBuilder,
@@ -206,14 +205,14 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                 deck4: Hero(
                                                   flightShuttleBuilder:
                                                       flightShuttleBuilder,
-                                                  tag: GlobalProvider()
+                                                  tag: ButtonState()
                                                       .socialsHeroTag,
                                                   child: const SocialsDeck(),
                                                 ),
                                                 deck5: Hero(
                                                     flightShuttleBuilder:
                                                         flightShuttleBuilder,
-                                                    tag: GlobalProvider()
+                                                    tag: ButtonState()
                                                         .newsHeroTag,
                                                     child: const NewsDeck()),
                                               )[index],

@@ -1,16 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/GlobalProvider.dart';
+import 'package:flutter_application_1/util/ButtonState.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 //import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../../util/gradient_container.dart';
-import '../../../../../../util/tactile_button.dart';
-import 'desk_wallet_c1.dart';
-import 'desk_wallet_c2.dart';
+import '../../../../../util/gradient_container.dart';
+import '../../../../../util/tactile_button.dart';
+import 'desk_wallet_sections/desk_wallet_c1.dart';
+import 'desk_wallet_sections/desk_wallet_c2.dart';
 
 Control slideWallet = Control.stop;
 
@@ -34,15 +34,15 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => CustomAnimationBuilder<double>(
         control: value.walletSlideControl,
         startPosition: 0,
-        tween: Tween(begin: 0, end: 88.5.w),
+        tween: Tween(begin: 0, end: 83.5.w),
         duration: const Duration(milliseconds: 1250),
         onCompleted: () {
-          final resetSlide = context.read<GlobalProvider>();
-          resetSlide.walletResetSlide();
+          final resetSlide = context.read<ButtonState>();
+          resetSlide.resetSlide(SlideType.wallet);
         },
         builder: (context, value, child) {
           return Transform.translate(

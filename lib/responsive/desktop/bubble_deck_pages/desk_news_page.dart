@@ -3,9 +3,9 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
@@ -13,13 +13,13 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../pages/keyboards_deck.dart';
-import '../../../util/GlobalProvider.dart';
+import '../../../util/ButtonState.dart';
 import '../../../util/custom_curve.dart';
 import '../../mobile/mob_artboard_page.dart';
-import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
-import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
+import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
+import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
+import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 
 class DeskNewsPage extends StatefulWidget {
   const DeskNewsPage({Key? key}) : super(key: key);
@@ -122,7 +122,7 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
                               child: Column(
                                 children: [
                                   Hero(
-                                    tag: GlobalProvider().newsHeroTag,
+                                    tag: ButtonState().newsHeroTag,
                                     flightShuttleBuilder: flightShuttleBuilder,
                                     child: const DeskNewsCont(),
                                   ),

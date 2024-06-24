@@ -1,210 +1,22 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel.dart';
+import 'package:flutter_application_1/util/ButtonState.dart';
 import 'package:indexed/indexed.dart';
-
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../main.dart';
-import '../../../../../util/GlobalProvider.dart';
-import '../../../../../util/tactile_button.dart';
-import 'help side panel/help_communies_button.dart';
-import 'help side panel/help_faqs_button.dart';
-import 'help side panel/help_news_button.dart';
-import 'help side panel/help_projects_button.dart';
-import 'help side panel/help_socials_button.dart';
-import 'help side panel/help_tips_tricks_button.dart';
-import 'help side panel/help_wallet_button.dart';
-
-//
-// Allows for the FAQs button to have hover and active characteristics
-//
-class DeskHelpButtonHover extends StatefulWidget {
-  const DeskHelpButtonHover({super.key});
-
-  @override
-  State<DeskHelpButtonHover> createState() => _DeskHelpButtonHoverState();
-}
-
-class _DeskHelpButtonHoverState extends State<DeskHelpButtonHover> {
-//
-// start hover is false
-  bool isHover = false;
-  bool isHover2 = false;
-
-//start active is false
-  bool isActive = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (event) {
-        setState(() {
-          isHover = true;
-        });
-      },
-      onExit: (event) {
-        setState(() {
-          isHover = false;
-        });
-      },
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            //
-            //activates the settings popup
-            if (!isActive) {
-              final startSlide = context.read<GlobalProvider>();
-              startSlide.helpActivateSlide();
-              //
-              //gives the active color to be true
-              isActive = true;
-            }
-          });
-        },
-        child: TactileButton(
-          child: AnimatedContainer(
-            padding: isActive
-                ? const EdgeInsets.only(left: 10)
-                : isHover
-                    ? const EdgeInsets.only(left: 10)
-                    : const EdgeInsets.only(left: 0),
-            decoration: BoxDecoration(
-              border: Border.all(
-                  color: isActive
-                      ? Colors.black87
-                      : isHover
-                          ? Colors.black87
-                          : tran),
-              boxShadow: [
-                BoxShadow(
-                  color: isActive
-                      ? Colors.white
-                      : (isHover ? Colors.grey.shade700 : tran),
-                ),
-              ],
-              color: tran,
-              borderRadius: const BorderRadius.all(Radius.circular(60)),
-            ),
-            duration: const Duration(milliseconds: 200),
-            width: 13.w,
-            height: 5.h,
-            alignment: Alignment.centerLeft,
-            child: addElement(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  addElement() {
-    return Padding(
-      padding: EdgeInsets.only(left: 0.5.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Icon(
-            Icons.help_outline,
-            color: isActive
-                ? Colors.black87
-                : (isHover
-                    ? const Color.fromARGB(241, 255, 255, 255)
-                    : Colors.white70),
-            size: 30,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: .5.w),
-            child: Text(
-              'FAQs',
-              style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
-                fontWeight: FontWeight.w400,
-                color: isActive
-                    ? const Color.fromARGB(221, 28, 24, 24)
-                    : (isHover ? Colors.white : Colors.white54),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 5.w),
-            child: Stack(
-              children: [
-                Icon(
-                  Icons.arrow_right_sharp,
-                  color: isActive
-                      ? Colors.white70
-                      : isHover
-                          ? const Color.fromARGB(241, 255, 255, 255)
-                          : tran,
-                  size: 30.0,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      //
-                      //Reverses the popup card
-                      final startSlide = context.read<GlobalProvider>();
-                      startSlide.helpReverseSlide();
-                      //
-                      //gives the active color to be flase
-                      isActive = false;
-                    });
-                  },
-                  child: MouseRegion(
-                    onEnter: (e) {
-                      setState(() {
-                        isHover2 = true;
-                      });
-                    },
-                    onExit: (e) {
-                      setState(() {
-                        isHover2 = false;
-                      });
-                    },
-                    child: Icon(
-                      Icons.cancel_rounded,
-                      color: (isActive && isHover2)
-                          ? red
-                          : (!isHover2 && isActive)
-                              ? Colors.black87
-                              : tran,
-                      size: 30.0,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+import 'help_side_panel_info/help_faqs_button.dart';
 
 //
 // Popup to the settings button of the dashboard side panel
 //
-class HelpPopUp extends StatefulWidget {
+class HelpPopUp extends StatelessWidget {
   const HelpPopUp({super.key});
 
   @override
-  State<HelpPopUp> createState() => _HelpPopUpState();
-}
-
-class _HelpPopUpState extends State<HelpPopUp> with AnimationMixin {
-  //control = Control.play;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => CustomAnimationBuilder<double>(
         control: value.helpSlideControl,
         startPosition: 0,
@@ -212,8 +24,8 @@ class _HelpPopUpState extends State<HelpPopUp> with AnimationMixin {
         duration: const Duration(milliseconds: 1250),
         curve: Curves.easeInOutBack,
         onCompleted: () {
-          final resetSlide = context.read<GlobalProvider>();
-          resetSlide.helpResetSlide();
+          final resetSlide = context.read<ButtonState>();
+          resetSlide.resetSlide(SlideType.help);
         },
         builder: (context, value, child) {
           return Transform.translate(
@@ -309,7 +121,7 @@ class _HelpPopUpState extends State<HelpPopUp> with AnimationMixin {
                                                       EdgeInsets.only(top: 2.h),
                                                   child: const Column(
                                                     children: [
-                                                      HelpSidePanelButtons(),
+                                                      FAQsSidePanelButtons(),
                                                     ],
                                                   ),
                                                 ),
@@ -372,83 +184,6 @@ class _HelpPopUpState extends State<HelpPopUp> with AnimationMixin {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-//
-// This holds all buttons within the side panel
-//
-class HelpSidePanelButtons extends StatefulWidget {
-  const HelpSidePanelButtons({super.key});
-
-  @override
-  State<HelpSidePanelButtons> createState() => _HelpSidePanelButtonsState();
-}
-
-class _HelpSidePanelButtonsState extends State<HelpSidePanelButtons> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: tran,
-      width: 13.w,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Text(
-            'Table of Contents :',
-            style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline),
-          ),
-          //
-          //FAQs
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.75.h),
-            child: const FAQs(),
-          ),
-
-          //
-          //Projects
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.75.h),
-            child: const Projects(),
-          ),
-          //
-          //Communities
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.75.h),
-            child: const Communities(),
-          ),
-          //
-          //Socials
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.75.h),
-            child: const Socials(),
-          ),
-          //
-          //News
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.75.h),
-            child: const News(),
-          ),
-          //
-          //Wallet
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.75.h),
-            child: const Wallet(),
-          ),
-          //
-          //Tips & Tricks
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.75.h),
-            child: const TipsTricks(),
-          ),
-        ],
       ),
     );
   }

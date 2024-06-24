@@ -40,6 +40,7 @@ class WalletC1 extends StatelessWidget {
                     fontSize: 16),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     'xxxx-4321',

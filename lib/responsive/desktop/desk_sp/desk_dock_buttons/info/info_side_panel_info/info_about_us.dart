@@ -1,124 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../../main.dart';
+// About Us Information
+class AboutUsInformation extends StatelessWidget {
+  const AboutUsInformation({super.key});
 
-//
-// FAQs button for the help side panel
-//
-class FAQs extends StatefulWidget {
-  const FAQs({super.key});
-
-  @override
-  State<FAQs> createState() => _FAQsState();
-}
-
-class _FAQsState extends State<FAQs> {
-//start active is false
-  bool isActive = false;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          //
-          //activates the settings popup
-          isActive = !isActive;
-        });
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 100),
-        decoration: BoxDecoration(
-          border: Border.all(color: isActive ? Colors.black87 : tran),
-          boxShadow: [
-            BoxShadow(color: isActive ? Colors.white : Colors.grey.shade700),
-          ],
-          color: tran,
-          borderRadius: const BorderRadius.all(Radius.circular(60)),
-        ),
-        width: isActive ? 11.w : 9.w,
-        height: 4.h,
-        alignment: Alignment.center,
-        child: addElement(),
-      ),
-    );
-  }
-
-  addElement() {
-    return Padding(
-      padding: EdgeInsets.only(left: isActive ? 4.75.w : 3.5.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            'FAQs',
-            style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
-                fontWeight: FontWeight.w400,
-                color: isActive
-                    ? const Color.fromARGB(221, 28, 24, 24)
-                    : Colors.white54),
-          ),
-          // Padding(
-          //   padding: EdgeInsets.only(left: 4.w),
-          //   child: Stack(
-          //     children: [
-          //       Icon(
-          //         Icons.arrow_right_sharp,
-          //         color: isActive ? Colors.white70 : tran,
-          //         size: 30.0,
-          //       ),
-          //       GestureDetector(
-          //         onTap: () {
-          //           setState(() {
-          //             //
-          //             //gives the active color to be flase
-          //             isActive = false;
-          //           });
-          //         },
-          //         child: MouseRegion(
-          //             // onEnter: (e) {
-          //             //   setState(() {
-          //             //     isHover2 = true;
-          //             //   });
-          //             // },
-          //             // onExit: (e) {
-          //             //   setState(() {
-          //             //     isHover2 = false;
-          //             //   });
-          //             // },
-          //             // child: Icon(
-          //             //   Icons.cancel_rounded,
-          //             //   color: (isActive && isHover2)
-          //             //       ? red
-          //             //       : (!isHover2 && isActive)
-          //             //           ? Colors.black87
-          //             //           : tran,
-          //             //   size: 30.0,
-          //             // ),
-          //             ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-        ],
-      ),
-    );
-  }
-}
-
-//
-// this houses all the information for the faqs button
-//
-class FAQsInformation extends StatefulWidget {
-  const FAQsInformation({super.key});
-
-  @override
-  State<FAQsInformation> createState() => _FAQsInformationState();
-}
-
-class _FAQsInformationState extends State<FAQsInformation> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -138,7 +24,7 @@ class _FAQsInformationState extends State<FAQsInformation> {
             Padding(
               padding: EdgeInsets.only(top: 2.h, left: 3.w),
               child: const Text(
-                'FAQs',
+                'About Us',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -166,7 +52,7 @@ class _FAQsInformationState extends State<FAQsInformation> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Q: How can I go hawda?'),
+                    const Text('Mission'),
                     Padding(
                       padding: EdgeInsets.only(top: 2.5.h, right: 1.5.w),
                       child: const Text(
@@ -199,7 +85,7 @@ class _FAQsInformationState extends State<FAQsInformation> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Q: Is going hawda mandatory?'),
+                    const Text('Origin'),
                     Padding(
                       padding: EdgeInsets.only(top: 2.5.h, right: 1.5.w),
                       child: const Text(
@@ -232,7 +118,7 @@ class _FAQsInformationState extends State<FAQsInformation> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Q: Will Lex ever go hawda?'),
+                    const Text('Founders'),
                     Padding(
                       padding: EdgeInsets.only(top: 2.5.h, right: 1.5.w),
                       child: const Text(

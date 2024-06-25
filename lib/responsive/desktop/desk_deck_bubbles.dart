@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_finance_page.dart';
-import 'package:flutter_application_1/util/GlobalProvider.dart';
+import 'package:flutter_application_1/util/ButtonState.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +26,7 @@ class ProjectsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Hero(
         tag: value.projectsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
@@ -34,7 +34,7 @@ class ProjectsButton extends StatelessWidget {
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<GlobalProvider>();
+              final heroOff = context.read<ButtonState>();
               heroOff.heroOff();
               print(value.socialsHeroTag);
               Navigator.of(context).push(
@@ -93,7 +93,7 @@ class NewsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Hero(
         tag: value.newsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
@@ -101,7 +101,7 @@ class NewsButton extends StatelessWidget {
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<GlobalProvider>();
+              final heroOff = context.read<ButtonState>();
               heroOff.heroOff();
               print(value.socialsHeroTag);
               Navigator.of(context).push(
@@ -160,7 +160,7 @@ class FinancesButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Hero(
         tag: value.financesHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
@@ -168,7 +168,7 @@ class FinancesButton extends StatelessWidget {
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<GlobalProvider>();
+              final heroOff = context.read<ButtonState>();
               heroOff.heroOff();
               print(value.socialsHeroTag);
               Navigator.of(context).push(
@@ -224,10 +224,10 @@ class FinancesButton extends StatelessWidget {
 //Socials Button
 class SocialsButton extends StatelessWidget {
   const SocialsButton({super.key});
-  get socsTag => GlobalProvider().socialsHeroTag;
+  get socsTag => ButtonState().socialsHeroTag;
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Hero(
         tag: value.socialsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
@@ -235,7 +235,7 @@ class SocialsButton extends StatelessWidget {
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<GlobalProvider>();
+              final heroOff = context.read<ButtonState>();
               heroOff.heroOff();
               print(value.socialsHeroTag);
               Navigator.of(context).push(

@@ -1,62 +1,17 @@
 import 'dart:ui';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_all_messages.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_chat_messages.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_group_messages.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import 'package:ionicons/ionicons.dart';
+import 'package:flutter_application_1/util/ButtonState.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../util/GlobalProvider.dart';
-
 //const String _heroFriendsWindow = 'Friends-window-hero';
 final friendsBucket = PageStorageBucket();
-
-class DeskFriendsWindowPopupCard extends StatefulWidget {
-  /// {@macro add_todo_popup_card}
-  const DeskFriendsWindowPopupCard({Key? key}) : super(key: key);
-
-  @override
-  State<DeskFriendsWindowPopupCard> createState() =>
-      _DeskFriendsWindowPopupCardState();
-}
-
-class _DeskFriendsWindowPopupCardState
-    extends State<DeskFriendsWindowPopupCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: tran,
-      child: TextButton.icon(
-        icon: const Icon(
-          Ionicons.people_outline,
-          size: 30,
-          color: Colors.white54,
-        ),
-        onPressed: () {
-          final startSlide = context.read<GlobalProvider>();
-          startSlide.friendActivateSlide();
-        },
-        label: Padding(
-          padding: EdgeInsets.only(left: 0.5.w),
-          child: Text(
-            'Connections',
-            style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
-                fontWeight: FontWeight.w400,
-                color: Colors.white54),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class FriendsPopUp extends StatefulWidget {
   const FriendsPopUp({super.key});
@@ -68,7 +23,6 @@ class FriendsPopUp extends StatefulWidget {
 class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
   //control = Control.play;
   final TextEditingController _searchController = TextEditingController();
-  @override
   final List people = [
     "Tiffany",
     "Mitch",
@@ -100,7 +54,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
         builder: (context, value, child) => CustomAnimationBuilder<double>(
               control: value.friendSlideControl,
               startPosition: 0,
@@ -108,8 +62,8 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
               duration: const Duration(milliseconds: 1250),
               curve: Curves.easeInOutBack,
               onCompleted: () {
-                final resetSlide = context.read<GlobalProvider>();
-                resetSlide.friendResetSlide();
+                final resetSlide = context.read<ButtonState>();
+                resetSlide.resetSlide(SlideType.friend);
               },
               builder: (context, value, child) {
                 return Transform.translate(

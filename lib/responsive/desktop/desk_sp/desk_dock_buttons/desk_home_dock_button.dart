@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'package:sizer/sizer.dart';
 
+import '../../../../util/ButtonState.dart';
 import '../../../../util/tactile_button.dart';
 
 class DeskHomeWindowButton extends StatelessWidget {
@@ -32,49 +34,64 @@ class DeskHomeDockButton extends StatefulWidget {
 
 class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
   bool isHover = false;
-  bool isHover2 = false;
 
   @override
   Widget build(BuildContext context) {
+    var buttonState = Provider.of<ButtonState>(context);
+    bool isActive = buttonState.activeDeskButtonId == 'home';
+    bool isHover = buttonState.hoverDeskButtonId == 'home';
+
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.5.h),
       child: DeskHomeWindowButton(
         dockIcon: Material(
-          color: tran,
+          color: Colors.transparent,
           child: MouseRegion(
             onEnter: (event) {
-              setState(() {
-                isHover = true;
-              });
+              buttonState.setHoverDeskButton('home');
             },
             onExit: (event) {
-              setState(() {
-                isHover = false;
-              });
+              buttonState.clearHoverDeskButton('home');
             },
-            child: TactileButton(
+            child: GestureDetector(
               onTap: () {
+                buttonState.setActiveDeskButton('home');
+                buttonState.resetAllButtons();
                 goHome();
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: isHover
+                padding: isActive || isHover
                     ? const EdgeInsets.only(left: 10)
                     : const EdgeInsets.only(left: 0),
                 decoration: BoxDecoration(
-                  border: Border.all(color: isHover ? Colors.black87 : tran),
+                  border: Border.all(
+                      color: isActive || isHover
+                          ? Colors.black87
+                          : Colors.transparent),
                   boxShadow: [
                     BoxShadow(
-                      color: (isHover ? Colors.grey.shade700 : tran),
+                      color: isActive
+                          ? Colors.white
+                          : isHover
+                              ? Colors.grey.shade700
+                              : Colors.transparent,
                     ),
                   ],
-                  color: tran,
+                  gradient: isActive
+                      ? const LinearGradient(
+                          colors: [red, purp],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        )
+                      : null,
+                  color: Colors.transparent,
                   borderRadius: const BorderRadius.all(Radius.circular(60)),
                 ),
                 width: 13.w,
                 height: 5.h,
                 alignment: Alignment.centerLeft,
-                child: addElement(),
+                child: addElement(isActive, isHover),
               ),
             ),
           ),
@@ -83,7 +100,7 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
     );
   }
 
-  addElement() {
+  Widget addElement(bool isActive, bool isHover) {
     return Padding(
       padding: EdgeInsets.only(left: 0.5.w),
       child: Row(
@@ -91,9 +108,11 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
         children: [
           Icon(
             Icons.dashboard_rounded,
-            color: (isHover
-                ? const Color.fromARGB(241, 255, 255, 255)
-                : Colors.white70),
+            color: isActive
+                ? Colors.white70
+                : isHover
+                    ? const Color.fromARGB(241, 255, 255, 255)
+                    : Colors.white70,
             size: 30,
           ),
           Padding(
@@ -103,7 +122,7 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
               style: GoogleFonts.montserrat(
                 textStyle: TextStyle(fontSize: 2.sp),
                 fontWeight: FontWeight.w400,
-                color: (isHover ? Colors.white : Colors.white54),
+                color: isActive ? Colors.white : Colors.white54,
               ),
             ),
           ),

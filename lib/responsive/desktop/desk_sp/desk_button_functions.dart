@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/ButtonState.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -85,24 +86,41 @@ class SlideButton extends StatelessWidget {
           });
         },
         child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
           padding: EdgeInsets.only(left: isActive || isHover ? 10 : 0),
           decoration: BoxDecoration(
             border: Border.all(
               color: isActive || isHover ? Colors.black87 : Colors.transparent,
             ),
-            boxShadow: [
-              BoxShadow(
-                color: isActive
-                    ? Colors.white
-                    : isHover
-                        ? Colors.grey.shade700
-                        : Colors.transparent,
-              ),
-            ],
-            color: Colors.transparent,
+            boxShadow: isActive
+                ? [
+                    const BoxShadow(
+                      color: Color.fromARGB(125, 155, 39, 176),
+                      spreadRadius: 2,
+                      blurRadius: 4,
+                      offset: Offset(0, 0), // changes position of shadow
+                    ),
+                  ]
+                : isHover
+                    ? [
+                        BoxShadow(
+                          color: Colors.grey.shade700,
+                          spreadRadius: 1,
+                          blurRadius: 0,
+                          // changes position of shadow
+                        ),
+                      ]
+                    : [],
+            gradient: isActive
+                ? const LinearGradient(
+                    colors: [red, purp],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
+            color: isActive ? null : Colors.transparent,
             borderRadius: BorderRadius.circular(60),
           ),
-          duration: const Duration(milliseconds: 200),
           width: 13.w,
           height: 5.h,
           alignment: Alignment.centerLeft,
@@ -114,7 +132,7 @@ class SlideButton extends StatelessWidget {
                 Icon(
                   icon,
                   color: isActive
-                      ? Colors.black87
+                      ? Colors.white
                       : isHover
                           ? const Color.fromARGB(241, 255, 255, 255)
                           : Colors.white70,
@@ -127,9 +145,7 @@ class SlideButton extends StatelessWidget {
                     style: GoogleFonts.montserrat(
                       textStyle: TextStyle(fontSize: 2.sp),
                       fontWeight: FontWeight.w400,
-                      color: isActive
-                          ? const Color.fromARGB(221, 28, 24, 24)
-                          : Colors.white54,
+                      color: isActive ? Colors.white : Colors.white54,
                     ),
                   ),
                 ),

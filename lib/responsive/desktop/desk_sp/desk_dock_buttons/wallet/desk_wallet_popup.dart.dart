@@ -40,6 +40,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
         startPosition: 0,
         tween: Tween(begin: 0, end: 83.5.w),
         duration: const Duration(milliseconds: 1250),
+        curve: Curves.easeInOutBack,
         onCompleted: () {
           final resetSlide = context.read<ButtonState>();
           resetSlide.resetSlide(SlideType.wallet);

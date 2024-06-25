@@ -26,186 +26,6 @@ enum SlideType {
   wallet,
 }
 
-// class ButtonState extends ChangeNotifier {
-//   ButtonState({
-//     // Alt desk side panel
-//     // this.friendSlideControl = Control.stop,
-//     // this.walletSlideControl = Control.stop,
-//     // this.settingSlideControl = Control.stop,
-//     // this.helpSlideControl = Control.stop,
-//     // this.infoSlideControl = Control.stop,
-
-//     //
-//     this.projectsHeroTag = 'projectsHero',
-//     this.socialsHeroTag = 'socialsHero',
-//     this.financesHeroTag = 'financesHero',
-//     this.newsHeroTag = 'newsHero',
-//   });
-//   void heroOff() {
-//     projectsHeroTag = 'projectHero_Off';
-//     socialsHeroTag = 'socialsHero_Off';
-//     financesHeroTag = 'financesHero_Off';
-//     newsHeroTag = 'newsHero_Off';
-//     notifyListeners();
-//   }
-
-//   void heroReset() {
-//     projectsHeroTag = 'projectsHero';
-//     socialsHeroTag = 'socialsHero';
-//     financesHeroTag = 'financesHero';
-//     newsHeroTag = 'newsHero';
-//     notifyListeners();
-//   }
-//   // // Alt Desk Side Panel
-//   // //
-//   // // Is the button active
-//   // bool isButton1Active = false;
-//   // bool isButton2Active = false;
-//   // bool isButton3Active = false;
-//   // bool isButton4Active = false;
-//   // bool isButton5Active = false;
-//   // //
-//   // // Are you hovering over the button
-//   // bool isButton1Hovered = false;
-//   // bool isButton2Hovered = false;
-//   // bool isButton3Hovered = false;
-//   // bool isButton4Hovered = false;
-//   // bool isButton5Hovered = false;
-
-//   // void toggleButtons(String buttonPressed) {
-//   //   isButton1Active = buttonPressed == 'Wallet';
-//   //   isButton2Active = buttonPressed == 'Connections';
-//   //   isButton3Active = buttonPressed == 'Settings';
-//   //   isButton4Active = buttonPressed == 'FAQs';
-//   //   isButton5Active = buttonPressed == 'Info';
-
-//   //   notifyListeners();
-//   // }
-
-//   // void setHover(String button, bool hover) {
-//   //   if (button == 'Wallet') {
-//   //     isButton1Hovered = hover;
-//   //   } else if (button == 'Connections') {
-//   //     isButton2Hovered = hover;
-//   //   } else if (button == 'Settings') {
-//   //     isButton3Hovered = hover;
-//   //   } else if (button == 'FAQs') {
-//   //     isButton4Hovered = hover;
-//   //   } else if (button == 'Info') {
-//   //     isButton5Hovered = hover;
-//   //   }
-//   //   notifyListeners();
-//   // }
-
-//   String activeDeskButtonId;
-//   String hoverDeskButtonId;
-//   Control infoSlideControl;
-//   Control helpSlideControl;
-//   Control settingSlideControl;
-//   Control friendSlideControl;
-//   Control walletSlideControl;
-
-//   void setHoverDeskButton(String id) {
-//     hoverDeskButtonId = id;
-//     notifyListeners();
-//   }
-
-//   void clearHoverDeskButton(String id) {
-//     if (hoverDeskButtonId == id) {
-//       hoverDeskButtonId = null;
-//       notifyListeners();
-//     }
-//   }
-
-//   void setActiveDeskButton(String id) {
-//     activeDeskButtonId = id;
-//     notifyListeners();
-//   }
-
-//   void callDeskFunctionForButton(String id) {
-//     switch (id) {
-//       case 'info':
-//         activateSlide(SlideType.info);
-//         break;
-//       case 'help':
-//         activateSlide(SlideType.help);
-//         break;
-//       case 'settings':
-//         activateSlide(SlideType.settings);
-//         break;
-//       case 'friend':
-//         activateSlide(SlideType.friend);
-//         break;
-//       case 'wallet':
-//         activateSlide(SlideType.wallet);
-//         break;
-//     }
-//   }
-
-//   void activateSlide(SlideType slideType) {
-//     switch (slideType) {
-//       case SlideType.info:
-//         infoSlideControl = Control.play;
-//         break;
-//       case SlideType.help:
-//         helpSlideControl = Control.play;
-//         break;
-//       case SlideType.settings:
-//         settingSlideControl = Control.play;
-//         break;
-//       case SlideType.friend:
-//         friendSlideControl = Control.play;
-//         break;
-//       case SlideType.wallet:
-//         walletSlideControl = Control.play;
-//         break;
-//     }
-//     notifyListeners();
-//   }
-
-//   void reverseSlide(SlideType slideType) {
-//     switch (slideType) {
-//       case SlideType.info:
-//         infoSlideControl = Control.playReverse;
-//         break;
-//       case SlideType.help:
-//         helpSlideControl = Control.playReverse;
-//         break;
-//       case SlideType.settings:
-//         settingSlideControl = Control.playReverse;
-//         break;
-//       case SlideType.friend:
-//         friendSlideControl = Control.playReverse;
-//         break;
-//       case SlideType.wallet:
-//         walletSlideControl = Control.playReverse;
-//         break;
-//     }
-//     notifyListeners();
-//   }
-
-//   void resetSlide(SlideType slideType) {
-//     switch (slideType) {
-//       case SlideType.info:
-//         infoSlideControl = Control.stop;
-//         break;
-//       case SlideType.help:
-//         helpSlideControl = Control.stop;
-//         break;
-//       case SlideType.settings:
-//         settingSlideControl = Control.stop;
-//         break;
-//       case SlideType.friend:
-//         friendSlideControl = Control.stop;
-//         break;
-//       case SlideType.wallet:
-//         walletSlideControl = Control.stop;
-//         break;
-//     }
-//     notifyListeners();
-//   }
-
-//}
 class ButtonState extends ChangeNotifier {
   // Slide control fields
   Control friendSlideControl;
@@ -337,6 +157,17 @@ class ButtonState extends ChangeNotifier {
         walletSlideControl = Control.stop;
         break;
     }
+    notifyListeners();
+  }
+
+  void resetAllButtons() {
+    resetSlide(SlideType.info);
+    resetSlide(SlideType.help);
+    resetSlide(SlideType.settings);
+    resetSlide(SlideType.friend);
+    resetSlide(SlideType.wallet);
+    activeDeskButtonId = null;
+    hoverDeskButtonId = null;
     notifyListeners();
   }
 

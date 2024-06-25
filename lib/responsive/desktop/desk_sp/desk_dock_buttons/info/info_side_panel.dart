@@ -16,19 +16,20 @@ class InfoSidePanelButtons extends StatelessWidget {
     return Container(
       color: tran,
       width: 13.w,
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          const Text(
             'Table of Contents :',
             style: TextStyle(
                 color: Colors.white70,
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline),
           ),
-          InfoButtonSidePanel()
+          SizedBox(height: 1.h),
+          const InfoButtonSidePanel()
         ],
       ),
     );
@@ -45,15 +46,15 @@ class InfoButtonSidePanel extends StatelessWidget {
       children: <Widget>[
         _buildButton(context, 'button1', 'About Us'),
         SizedBox(
-          height: 1.h,
+          height: 2.h,
         ),
         _buildButton(context, 'button2', 'Contact Us'),
         SizedBox(
-          height: 1.h,
+          height: 2.h,
         ),
         _buildButton(context, 'button3', 'Goals'),
         SizedBox(
-          height: 1.h,
+          height: 2.h,
         ),
         _buildButton(context, 'button4', 'Terms & Conditions'),
       ],
@@ -73,34 +74,29 @@ class InfoButtonSidePanel extends StatelessWidget {
         // buttonState.deactivateOtherButtons(
         //     buttonId); // Call the specific class for the button
       },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 100),
-        decoration: BoxDecoration(
-          border: Border.all(color: isActive ? Colors.black87 : tran),
-          boxShadow: [
-            BoxShadow(color: isActive ? Colors.white : Colors.grey.shade700),
-          ],
-          color: tran,
-          borderRadius: const BorderRadius.all(Radius.circular(60)),
-        ),
-        width: isActive ? 11.w : 9.w,
-        height: 4.h,
-        alignment: Alignment.center,
-        child: Padding(
-          padding: EdgeInsets.only(left: isActive ? 3.w : 2.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                infoButtonText,
-                style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(fontSize: 2.sp),
-                    fontWeight: FontWeight.w400,
-                    color: isActive
-                        ? const Color.fromARGB(221, 28, 24, 24)
-                        : Colors.white54),
-              ),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 100),
+          decoration: BoxDecoration(
+            border: Border.all(color: isActive ? Colors.black87 : tran),
+            boxShadow: [
+              BoxShadow(color: isActive ? Colors.white : Colors.grey.shade700),
             ],
+            color: tran,
+            borderRadius: const BorderRadius.all(Radius.circular(60)),
+          ),
+          width: isActive ? 13.w : 9.w,
+          height: 4.h,
+          alignment: Alignment.center,
+          child: Text(
+            infoButtonText,
+            style: GoogleFonts.montserrat(
+                textStyle: TextStyle(fontSize: 2.sp),
+                fontWeight: FontWeight.w400,
+                color: isActive
+                    ? const Color.fromARGB(221, 28, 24, 24)
+                    : Colors.white54),
           ),
         ),
       ),

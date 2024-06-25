@@ -121,7 +121,7 @@ class HelpPopUp extends StatelessWidget {
                                                       EdgeInsets.only(top: 2.h),
                                                   child: const Column(
                                                     children: [
-                                                      FAQsSidePanelButtons(),
+                                                      FAQsSidePanel(),
                                                     ],
                                                   ),
                                                 ),

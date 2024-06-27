@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+// The class the holds the information in the genral settings button
+// note: There is much editing that needs to happen in these section but ultimately
+// Ui must be created and better refined
 class GeneralSettingsInfo extends StatelessWidget {
   GeneralSettingsInfo({super.key});
 
@@ -29,15 +32,11 @@ class GeneralSettingsInfo extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 1.5.h),
                 child: const Text(
                   'General Settings',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 36),
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
                 ),
               ),
-              //
-              //
-              //Container #1 which holds the Username access
+
+              // Container #1 which holds the Username access
               Padding(
                 padding: EdgeInsets.only(bottom: 2.h),
                 child: Container(
@@ -57,9 +56,7 @@ class GeneralSettingsInfo extends StatelessWidget {
                         padding: EdgeInsets.only(
                           left: 2.w,
                         ),
-                        //
-                        //
-                        //This wrap contains the textfield and button that enables the editing of your username on the account
+                        // This wrap contains the textfield and button that enables the editing of your username on the account
                         child: Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           spacing: 2.w,
@@ -74,8 +71,7 @@ class GeneralSettingsInfo extends StatelessWidget {
                                 controller: _textController,
                                 enabled: _isEditingEnabled,
                                 decoration: const InputDecoration(
-                                  border:
-                                      InputBorder.none, //removes bottom line
+                                  border: InputBorder.none, //removes bottom line
                                 ),
                               ),
                             ),
@@ -106,9 +102,8 @@ class GeneralSettingsInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              //
-              //
-              //Container #2
+
+              // Container #2
               Padding(
                 padding: EdgeInsets.only(bottom: 2.h),
                 child: Container(
@@ -122,8 +117,7 @@ class GeneralSettingsInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              //
-              //
+
               //Container #3
               Padding(
                 padding: EdgeInsets.only(bottom: 2.h),

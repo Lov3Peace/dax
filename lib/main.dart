@@ -55,8 +55,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             fontFamily: GoogleFonts.montserrat().fontFamily,
-            colorScheme:
-                const ColorScheme.dark(secondary: red, onSurface: Colors.white),
+            colorScheme: const ColorScheme.dark(secondary: red, onSurface: Colors.white),
             scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
         // ignore: prefer_const_constructors
         home: ResponsiveLayout(

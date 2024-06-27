@@ -6,8 +6,9 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../../util/ButtonState.dart';
 
-class SettingsSidePanelButtons extends StatelessWidget {
-  const SettingsSidePanelButtons({super.key});
+// This class creates the complete side panle all together.
+class SettingsSidePanel extends StatelessWidget {
+  const SettingsSidePanel({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +22,19 @@ class SettingsSidePanelButtons extends StatelessWidget {
         children: [
           const Text(
             'Table of Contents :',
-            style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline),
+            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
           ),
           SizedBox(height: 1.h),
-          const SettingsSidePanel(),
+          const SettingsSidePanelButtons(),
         ],
       ),
     );
   }
 }
 
-class SettingsSidePanel extends StatelessWidget {
-  const SettingsSidePanel({super.key});
+// This class houses all the settings side panel buttons
+class SettingsSidePanelButtons extends StatelessWidget {
+  const SettingsSidePanelButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -67,15 +66,16 @@ class SettingsSidePanel extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(
-      BuildContext context, String setButtonId, String setButtonText) {
+  // This build creates a button and gives that button perimeters such as context
+  // button Id and button text, allowing for every button to be unique while having
+  // the same animations.
+  Widget _buildButton(BuildContext context, String setButtonId, String setButtonText) {
     var buttonState = Provider.of<ButtonState>(context);
     bool isActive = buttonState.activeSetButtonId == setButtonId;
 
     return GestureDetector(
       onTap: () {
-        buttonState.setActiveSetButton(
-            setButtonId); // Set the pressed button as active
+        buttonState.setActiveSetButton(setButtonId); // Set the pressed button as active
         buttonState.callSetClassForButton(setButtonId);
         // buttonState.deactivateOtherButtons(
         //     buttonId); // Call the specific class for the button
@@ -100,9 +100,7 @@ class SettingsSidePanel extends StatelessWidget {
             style: GoogleFonts.montserrat(
                 textStyle: TextStyle(fontSize: 2.sp),
                 fontWeight: FontWeight.w400,
-                color: isActive
-                    ? const Color.fromARGB(221, 28, 24, 24)
-                    : Colors.white54),
+                color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54),
           ),
         ),
       ),

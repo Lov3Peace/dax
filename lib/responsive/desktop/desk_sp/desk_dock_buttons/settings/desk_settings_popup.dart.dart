@@ -59,13 +59,10 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                         child: Container(
                           height: 85.h,
                           width: 70.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(32)),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 32, horizontal: 24),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                           child: Material(
-                            shadowColor:
-                                const Color.fromRGBO(42, 41, 41, 0.631),
+                            shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
                             color: const Color.fromARGB(42, 55, 52, 52),
                             elevation: 2,
                             borderRadius: BorderRadius.circular(32),
@@ -74,30 +71,26 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(24),
                                   child: BackdropFilter(
-                                    filter: ImageFilter.blur(
-                                        sigmaX: 10, sigmaY: 10),
+                                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                                     child: Container(
                                         height: 85.h,
                                         decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: const Color.fromARGB(
-                                                  182, 31, 31, 31)),
-                                          borderRadius:
-                                              BorderRadius.circular(24),
+                                          border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
+                                          borderRadius: BorderRadius.circular(24),
                                         )),
                                   ),
                                 ),
                                 Column(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 1.5.w, top: 1.h),
+                                      padding: EdgeInsets.only(left: 1.5.w, top: 1.h, bottom: 1.h),
                                       child: Wrap(
                                         spacing: 1.5.w,
                                         children: [
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            // This column houses both the title of the widget and also the settings side panel
+                                            // settings side panel is in its own file in the settings folder
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Padding(
                                                 padding: EdgeInsets.only(
@@ -106,218 +99,125 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                                                 ),
                                                 child: const Text(
                                                   'Settings',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 36),
+                                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
                                                 ),
                                               ),
                                               //
                                               //
-                                              //Container housing the settings panel buttons
+                                              //This container houses the settings panel buttons
                                               Container(
-                                                height: 67.5.h,
+                                                height: 66.h,
                                                 width: 15.w,
-                                                constraints:
-                                                    const BoxConstraints(
-                                                        maxWidth: 500,
-                                                        minHeight: 250),
+                                                constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
                                                 decoration: const BoxDecoration(
-                                                  color: Color.fromRGBO(
-                                                      17, 17, 17, 1),
-                                                  borderRadius:
-                                                      BorderRadius.all(
+                                                  color: Color.fromRGBO(17, 17, 17, 1),
+                                                  borderRadius: BorderRadius.all(
                                                     Radius.circular(20),
                                                   ),
                                                 ),
                                                 child: Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 2.h),
+                                                  padding: EdgeInsets.only(top: 2.h),
                                                   child: const Column(
                                                     children: [
-                                                      SettingsSidePanelButtons(),
+                                                      SettingsSidePanel(),
                                                     ],
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          //
-                                          //
-                                          //Container housing the profile attributes and settings containers
+                                          // This container houses the profile attributes and settings containers
                                           Container(
-                                            height: 75.h,
+                                            height: 74.5.h,
                                             width: 47.w,
                                             decoration: const BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  0, 207, 33, 33),
+                                              color: Color.fromARGB(0, 207, 33, 33),
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(20),
                                               ),
                                             ),
                                             child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
-                                                //
-                                                //
-                                                //container for profile attributes
+                                                // This container for profile attributes showing how long you have been a member
+                                                // profile name, and online status
                                                 Container(
                                                   height: 15.h,
                                                   width: 47.w,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    color: Color.fromRGBO(
-                                                        17, 17, 17, 1),
-                                                    borderRadius:
-                                                        BorderRadius.all(
+                                                  decoration: const BoxDecoration(
+                                                    color: Color.fromRGBO(17, 17, 17, 1),
+                                                    borderRadius: BorderRadius.all(
                                                       Radius.circular(20),
                                                     ),
                                                   ),
                                                   child: Padding(
-                                                    padding: EdgeInsets.only(
-                                                        top: 2.5.h,
-                                                        right: 1.5.w),
+                                                    padding: EdgeInsets.only(top: 1.h, right: 1.5.w, bottom: 1.h),
                                                     child: Wrap(
-                                                      alignment: WrapAlignment
-                                                          .spaceEvenly,
+                                                      alignment: WrapAlignment.spaceEvenly,
                                                       children: [
-                                                        //
-                                                        //
                                                         //Container housing profile picture and basic information
                                                         Container(
-                                                          height: 10.h,
+                                                          height: 13.h,
                                                           width: 20.w,
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    0,
-                                                                    184,
-                                                                    40,
-                                                                    40),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  20),
-                                                            ),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 0.25.h,
-                                                                    left: 1.w),
-                                                            child: Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                //
-                                                                //
-                                                                //Text showing profile id
-                                                                Text(
-                                                                  auth.currentUser!
-                                                                      .email
-                                                                      .toString()
-                                                                      .allBefore(
-                                                                          '@'),
-                                                                  style: GoogleFonts.montserrat(
-                                                                      textStyle: TextStyle(
-                                                                          fontSize:
-                                                                              headerTextSize,
-                                                                          height:
-                                                                              1.0),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600),
-                                                                ),
-                                                                const Text(
-                                                                    'Member since 07.17.2023'),
-                                                                //
-                                                                //
-                                                                //Row containing online status
-                                                                Row(
-                                                                  children: [
-                                                                    Container(
-                                                                      height:
-                                                                          2.h,
-                                                                      width:
-                                                                          1.w,
-                                                                      decoration:
-                                                                          const BoxDecoration(
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            9,
-                                                                            223,
-                                                                            41),
-                                                                        borderRadius:
-                                                                            BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              20),
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: EdgeInsets.only(
-                                                                          left:
-                                                                              0.5.w),
-                                                                      child: const Text(
-                                                                          'Online'),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-
-                                                        //
-                                                        //
-                                                        //Container housing badges achieved on profile so far
-                                                        Container(
-                                                          height: 10.h,
-                                                          width: 16.w,
-                                                          decoration:
-                                                              const BoxDecoration(
-                                                            color:
-                                                                Color.fromRGBO(
-                                                                    25,
-                                                                    25,
-                                                                    29,
-                                                                    1),
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  20),
+                                                          decoration: const BoxDecoration(
+                                                            color: Color.fromARGB(0, 184, 40, 40),
+                                                            borderRadius: BorderRadius.all(
+                                                              Radius.circular(20),
                                                             ),
                                                           ),
                                                           child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                            children: [
+                                                              // This Text shows the profile ID
+                                                              Text(
+                                                                auth.currentUser!.email.toString().allBefore('@'),
+                                                                style: GoogleFonts.montserrat(
+                                                                    textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+                                                                    fontWeight: FontWeight.w600),
+                                                              ),
+                                                              const Text('Member since 07.17.2023'),
+                                                              // This is the row containing online status
+                                                              // there will be 3 statuses all together being online, away, and offline.
+                                                              Row(
+                                                                children: [
+                                                                  Container(
+                                                                    height: 2.h,
+                                                                    width: 1.w,
+                                                                    decoration: const BoxDecoration(
+                                                                      color: Color.fromARGB(255, 9, 223, 41),
+                                                                      borderRadius: BorderRadius.all(
+                                                                        Radius.circular(20),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: EdgeInsets.only(left: 0.5.w),
+                                                                    child: const Text('Online'),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        //Container housing badges achieved on profile so far
+                                                        Container(
+                                                          height: 13.h,
+                                                          width: 16.w,
+                                                          decoration: const BoxDecoration(
+                                                            color: Color.fromRGBO(25, 25, 29, 1),
+                                                            borderRadius: BorderRadius.all(
+                                                              Radius.circular(20),
+                                                            ),
+                                                          ),
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
                                                               Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        top:
-                                                                            1.h,
-                                                                        left: 1
-                                                                            .w),
-                                                                child:
-                                                                    const Text(
+                                                                padding: EdgeInsets.only(top: 1.h, left: 1.w),
+                                                                child: const Text(
                                                                   'Badges Earned:',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                          .white,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      fontSize:
-                                                                          20),
+                                                                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
                                                                 ),
                                                               )
                                                             ],
@@ -329,7 +229,9 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                                                 ),
                                                 //
                                                 //
-                                                //container for settings
+                                                // This is the container that will be housing all general notes and information
+                                                // for each given button in the settings side panel.
+                                                // note: we are still designing the Ui for th ebuttons so the code for this will come much later.
                                                 GeneralSettingsInfo(),
                                               ],
                                             ),

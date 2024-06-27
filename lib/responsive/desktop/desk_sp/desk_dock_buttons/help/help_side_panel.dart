@@ -21,10 +21,7 @@ class FAQsSidePanel extends StatelessWidget {
         children: [
           const Text(
             'Table of Contents :',
-            style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline),
+            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
           ),
           SizedBox(height: 1.h),
           const FAQsSidePanelButtons(),
@@ -42,7 +39,7 @@ class FAQsSidePanelButtons extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        _buildButton(context, 'button1', 'FAQs'),
+        _buildButton(context, 'button1', 'Questions'),
         SizedBox(
           height: 1.h,
         ),
@@ -71,15 +68,13 @@ class FAQsSidePanelButtons extends StatelessWidget {
     );
   }
 
-  Widget _buildButton(
-      BuildContext context, String faqsButtonId, String faqsButtonText) {
+  Widget _buildButton(BuildContext context, String faqsButtonId, String faqsButtonText) {
     var buttonState = Provider.of<ButtonState>(context);
     bool isActive = buttonState.activeFAQsButtonId == faqsButtonId;
 
     return GestureDetector(
       onTap: () {
-        buttonState.setActiveFAQsButton(
-            faqsButtonId); // Set the pressed button as active
+        buttonState.setActiveFAQsButton(faqsButtonId); // Set the pressed button as active
         buttonState.callFAQsClassForButton(faqsButtonId);
         // buttonState.deactivateOtherButtons(
         //     buttonId); // Call the specific class for the button
@@ -104,9 +99,7 @@ class FAQsSidePanelButtons extends StatelessWidget {
             style: GoogleFonts.montserrat(
                 textStyle: TextStyle(fontSize: 2.sp),
                 fontWeight: FontWeight.w400,
-                color: isActive
-                    ? const Color.fromARGB(221, 28, 24, 24)
-                    : Colors.white54),
+                color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54),
           ),
         ),
       ),

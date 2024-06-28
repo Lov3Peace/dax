@@ -59,10 +59,8 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                   child: Container(
                     height: 85.h,
                     width: 70.w,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 32, horizontal: 24),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                    padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                     child: Material(
                       shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
                       color: const Color.fromARGB(42, 55, 52, 52),
@@ -77,9 +75,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                               child: Container(
                                   height: 85.h,
                                   decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: const Color.fromARGB(
-                                            182, 31, 31, 31)),
+                                    border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                     borderRadius: BorderRadius.circular(24),
                                   )),
                             ),
@@ -110,15 +106,13 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                             //         maxWidth: 500,
                                             //         minHeight: 250),
                                             decoration: const BoxDecoration(
-                                              color: Color.fromARGB(
-                                                  255, 39, 38, 38),
+                                              color: Color.fromARGB(255, 39, 38, 38),
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(40),
                                               ),
                                             ),
                                             child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 //Transfer Text
                                                 Padding(
@@ -129,25 +123,17 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                   child: const Center(
                                                     child: Text(
                                                       'Transfer',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 36),
+                                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
                                                     ),
                                                   ),
                                                 ),
 
                                                 //Text for Pay to
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 1.h, left: 2.5.w),
+                                                  padding: EdgeInsets.only(bottom: 1.h, left: 2.5.w),
                                                   child: const Text(
                                                     'Pay to',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                   ),
                                                 ),
 
@@ -155,44 +141,24 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                 Center(
                                                   child: Container(
                                                     height: 6.h,
-                                                    margin: EdgeInsets.only(
-                                                        bottom: 1.h),
+                                                    margin: EdgeInsets.only(bottom: 1.h),
                                                     width: 23.w,
                                                     decoration: BoxDecoration(
-                                                      color: const Color
-                                                              .fromARGB(
-                                                              159, 28, 28, 28)
-                                                          .withOpacity(0.98),
-                                                      borderRadius:
-                                                          const BorderRadius
-                                                              .all(
+                                                      color: const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
+                                                      borderRadius: const BorderRadius.all(
                                                         Radius.circular(20),
                                                       ),
-                                                      border: const Border
-                                                          .fromBorderSide(
-                                                        BorderSide(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    72,
-                                                                    255,
-                                                                    255,
-                                                                    255)),
+                                                      border: const Border.fromBorderSide(
+                                                        BorderSide(color: Color.fromARGB(72, 255, 255, 255)),
                                                       ),
                                                     ),
-                                                    child:
-                                                        SingleChildScrollView(
-                                                      physics:
-                                                          const NeverScrollableScrollPhysics(),
+                                                    child: SingleChildScrollView(
+                                                      physics: const NeverScrollableScrollPhysics(),
                                                       child: Column(
                                                         children: [
                                                           TextField(
-                                                            controller:
-                                                                walletIDController,
-                                                            decoration:
-                                                                const InputDecoration(
-                                                                    border:
-                                                                        InputBorder
-                                                                            .none),
+                                                            controller: walletIDController,
+                                                            decoration: const InputDecoration(border: InputBorder.none),
                                                           ),
                                                         ],
                                                       ),
@@ -202,18 +168,11 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
                                                 //Guiding text for user
                                                 Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 1.h),
+                                                  padding: EdgeInsets.only(bottom: 1.h),
                                                   child: const Center(
                                                     child: Text(
                                                       'Please enter the Wallet ID or destination email',
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              113,
-                                                              158,
-                                                              158,
-                                                              158),
-                                                          fontSize: 10),
+                                                      style: TextStyle(color: Color.fromARGB(113, 158, 158, 158), fontSize: 10),
                                                     ),
                                                   ),
                                                 ),
@@ -221,62 +180,30 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                 //Column housing Amount and Reason
                                                 Center(
                                                   child: Wrap(
-                                                    alignment:
-                                                        WrapAlignment.center,
+                                                    alignment: WrapAlignment.center,
                                                     children: [
                                                       //Column containing "Amount" Container
                                                       Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
                                                           Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    bottom:
-                                                                        1.h),
+                                                            padding: EdgeInsets.only(bottom: 1.h),
                                                             child: const Text(
                                                               'Amount',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                             ),
                                                           ),
                                                           Container(
                                                             height: 6.h,
-                                                            margin:
-                                                                EdgeInsets.only(
-                                                                    bottom:
-                                                                        1.h),
+                                                            margin: EdgeInsets.only(bottom: 1.h),
                                                             width: 11.w,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: const Color
-                                                                      .fromARGB(
-                                                                      159,
-                                                                      28,
-                                                                      28,
-                                                                      28)
-                                                                  .withOpacity(
-                                                                      0.98),
-                                                              borderRadius:
-                                                                  const BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    20),
+                                                            decoration: BoxDecoration(
+                                                              color: const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
+                                                              borderRadius: const BorderRadius.all(
+                                                                Radius.circular(20),
                                                               ),
-                                                              border: const Border
-                                                                  .fromBorderSide(
-                                                                BorderSide(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            72,
-                                                                            255,
-                                                                            255,
-                                                                            255)),
+                                                              border: const Border.fromBorderSide(
+                                                                BorderSide(color: Color.fromARGB(72, 255, 255, 255)),
                                                               ),
                                                             ),
                                                           ),
@@ -285,76 +212,38 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
                                                       //Column containing "Reason" Container
                                                       Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 1.w),
+                                                        padding: EdgeInsets.only(left: 1.w),
                                                         child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
                                                           children: [
                                                             Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      bottom:
-                                                                          1.h),
+                                                              padding: EdgeInsets.only(bottom: 1.h),
                                                               child: const Text(
                                                                 'Reason',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
+                                                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                               ),
                                                             ),
                                                             Container(
                                                               height: 6.h,
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      bottom:
-                                                                          1.h),
+                                                              margin: EdgeInsets.only(bottom: 1.h),
                                                               width: 11.w,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: const Color
-                                                                        .fromARGB(
-                                                                        159,
-                                                                        28,
-                                                                        28,
-                                                                        28)
-                                                                    .withOpacity(
-                                                                        0.98),
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                        .all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          20),
+                                                              decoration: BoxDecoration(
+                                                                color: const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
+                                                                borderRadius: const BorderRadius.all(
+                                                                  Radius.circular(20),
                                                                 ),
-                                                                border: const Border
-                                                                    .fromBorderSide(
-                                                                  BorderSide(
-                                                                      color: Color.fromARGB(
-                                                                          72,
-                                                                          255,
-                                                                          255,
-                                                                          255)),
+                                                                border: const Border.fromBorderSide(
+                                                                  BorderSide(color: Color.fromARGB(72, 255, 255, 255)),
                                                                 ),
                                                               ),
-                                                              child:
-                                                                  SingleChildScrollView(
-                                                                physics:
-                                                                    const NeverScrollableScrollPhysics(),
+                                                              child: SingleChildScrollView(
+                                                                physics: const NeverScrollableScrollPhysics(),
                                                                 child: Column(
                                                                   children: [
                                                                     TextField(
-                                                                      controller:
-                                                                          reasonController,
-                                                                      decoration:
-                                                                          const InputDecoration(
-                                                                        border:
-                                                                            InputBorder.none,
+                                                                      controller: reasonController,
+                                                                      decoration: const InputDecoration(
+                                                                        border: InputBorder.none,
                                                                       ),
                                                                     ),
                                                                   ],
@@ -370,22 +259,17 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
                                                 //Row housing Commission and total amount
                                                 Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 2.h),
+                                                  padding: EdgeInsets.only(top: 2.h),
                                                   child: Center(
                                                     child: Wrap(
-                                                      alignment: WrapAlignment
-                                                          .spaceBetween,
+                                                      alignment: WrapAlignment.spaceBetween,
                                                       children: [
                                                         //Commision Display
                                                         Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  right: 2.w),
+                                                          padding: EdgeInsets.only(right: 2.w),
                                                           child: const Column(
                                                             children: [
-                                                              Text(
-                                                                  'Commission:'),
+                                                              Text('Commission:'),
                                                               //Container(),
                                                             ],
                                                           ),
@@ -400,9 +284,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
                                                         //Total Display
                                                         Padding(
-                                                          padding:
-                                                              EdgeInsets.only(
-                                                                  right: 2.w),
+                                                          padding: EdgeInsets.only(right: 2.w),
                                                           child: const Column(
                                                             children: [
                                                               Text('Total:'),
@@ -421,15 +303,13 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                     onTap: () {},
                                                     child: GradientContainer(
                                                       gradient1: blue,
-                                                      gradient2:
-                                                          green,
+                                                      gradient2: green,
                                                       height: 15,
                                                       width: 150,
                                                       neonGlow: greenGlow,
                                                       text: 'Send',
                                                       textSize: 12,
-                                                      borderColor:
-                                                          Colors.white38,
+                                                      borderColor: Colors.white38,
                                                       borderRadius: 500,
                                                     ),
                                                   ),
@@ -448,104 +328,63 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                             height: 20.h,
                                             width: 20.w,
                                             decoration: BoxDecoration(
-                                              gradient:
-                                                  const LinearGradient(colors: [
+                                              gradient: const LinearGradient(colors: [
                                                 blue,
                                                 green,
                                               ]),
-                                              boxShadow: const [
-                                                BoxShadow(
-                                                    color: blue,
-                                                    blurRadius: 10,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(24),
+                                              boxShadow: const [BoxShadow(color: blue, blurRadius: 10, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.circular(24),
                                             ),
                                             child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
+                                              padding: const EdgeInsets.all(8.0),
                                               child: SingleChildScrollView(
-                                                physics:
-                                                    const NeverScrollableScrollPhysics(),
+                                                physics: const NeverScrollableScrollPhysics(),
                                                 child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                   children: [
                                                     Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: .5.w,
-                                                          right: .5.w),
+                                                      padding: EdgeInsets.only(left: .5.w, right: .5.w),
                                                       child: SizedBox(
                                                         width: double.infinity,
                                                         child: Wrap(
-                                                          alignment:
-                                                              WrapAlignment
-                                                                  .spaceBetween,
-                                                          crossAxisAlignment:
-                                                              WrapCrossAlignment
-                                                                  .center,
+                                                          alignment: WrapAlignment.spaceBetween,
+                                                          crossAxisAlignment: WrapCrossAlignment.center,
                                                           children: [
                                                             //Text for balance on card
                                                             const Text(
                                                               'Balance',
                                                               style: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          255,
-                                                                          255,
-                                                                          255),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
+                                                                  color: Color.fromARGB(255, 255, 255, 255),
+                                                                  fontWeight: FontWeight.bold,
                                                                   fontSize: 20),
                                                             ),
 
                                                             //Container housing User Id
                                                             Container(
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: const Color
-                                                                    .fromARGB(
+                                                              decoration: BoxDecoration(
+                                                                color: const Color.fromARGB(
                                                                   0,
                                                                   86,
                                                                   81,
                                                                   81,
-                                                                ).withOpacity(
-                                                                    0.6),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            24),
+                                                                ).withOpacity(0.6),
+                                                                borderRadius: BorderRadius.circular(24),
                                                               ),
                                                               child: Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .only(
+                                                                padding: EdgeInsets.only(
                                                                   top: 1.h,
                                                                   right: 1.w,
                                                                   left: 1.w,
                                                                   bottom: 1.h,
                                                                 ),
-                                                                child:
-                                                                    const Text(
+                                                                child: const Text(
                                                                   "katarina",
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                    fontSize:
-                                                                        18,
+                                                                  textAlign: TextAlign.center,
+                                                                  style: TextStyle(
+                                                                    color: Colors.white,
+                                                                    fontWeight: FontWeight.bold,
+                                                                    fontSize: 18,
                                                                   ),
                                                                 ),
                                                               ),
@@ -562,18 +401,8 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                         top: 5.h,
                                                       ),
                                                       child: Text(
-                                                        NumberFormat
-                                                                .simpleCurrency(
-                                                                    locale:
-                                                                        'en-US',
-                                                                    decimalDigits:
-                                                                        2)
-                                                            .format(7837),
-                                                        style: const TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                        NumberFormat.simpleCurrency(locale: 'en-US', decimalDigits: 2).format(7837),
+                                                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                                                       ),
                                                     ),
                                                   ],
@@ -600,11 +429,9 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                           ),
                                         ),
                                         child: SingleChildScrollView(
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
+                                          physics: const NeverScrollableScrollPhysics(),
                                           child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               //Container #1
                                               WalletC1(),

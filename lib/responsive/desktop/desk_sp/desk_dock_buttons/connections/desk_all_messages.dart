@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_profile_circle.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,21 +20,24 @@ class AllMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 53.h,
-      width: 100.w,
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(235, 32, 32, 40),
+        borderRadius: BorderRadius.all(
+          Radius.circular(24),
         ),
       ),
       child: ListView.separated(
+        // shrinkWrap: true,
+        padding: EdgeInsets.only(bottom: 12.h),
         physics: const BouncingScrollPhysics(),
         itemCount: allconnections.length,
         separatorBuilder: (BuildContext context, int index) {
-          return const Divider(
-            height: 1,
-            thickness: 2,
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 1.5.w),
+            child: Divider(
+              color: deckBorderColor,
+              thickness: 0.75,
+            ),
           );
         },
         itemBuilder: (context, index) {

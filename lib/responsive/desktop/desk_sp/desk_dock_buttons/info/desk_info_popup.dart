@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_button_functions.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -61,10 +62,14 @@ class InfoPopUp extends StatelessWidget {
                     Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: 1.w, top: .7.h, bottom: .7.h, right: 1.w),
+                          padding: EdgeInsets.only(top: .7.h, bottom: .7.h),
                           child: Wrap(
-                            spacing: 1.5.w,
+                            spacing: 1.w,
                             children: [
+                              // The reverse slide button allows for the slide and button to be reset at anytime
+                              // note: may need to work on spacing and padding to get the exact look we are
+                              // looking for.
+                              const ReverseSlideButton(deskButtonId: 'info', icon: Icons.arrow_left_rounded),
                               // This column houses the title of the popup along with the container
                               // that houses the class infosidepanel
                               Column(
@@ -83,7 +88,7 @@ class InfoPopUp extends StatelessWidget {
                                   ),
                                   Container(
                                     height: 68.h,
-                                    width: 15.w,
+                                    width: 14.w,
                                     constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
                                     decoration: const BoxDecoration(
                                       color: Color.fromRGBO(17, 17, 17, 1),
@@ -106,7 +111,7 @@ class InfoPopUp extends StatelessWidget {
                               // in the info side panel.
                               Container(
                                 height: 75.h,
-                                width: 48.25.w,
+                                width: 47.w,
                                 decoration: const BoxDecoration(
                                   color: Color.fromRGBO(17, 17, 17, 1),
                                   borderRadius: BorderRadius.all(

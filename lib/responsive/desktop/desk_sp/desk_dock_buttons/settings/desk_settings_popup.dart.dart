@@ -10,6 +10,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
 import '../../../desk_constants.dart';
+import '../../desk_button_functions.dart';
 import 'settings_side_panel.dart';
 
 class SettingsPopUp extends StatefulWidget {
@@ -83,13 +84,17 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                                 Column(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(left: 1.5.w, top: 1.h, bottom: 1.h),
+                                      padding: EdgeInsets.only(top: 1.h, bottom: 1.h),
                                       child: Wrap(
-                                        spacing: 1.5.w,
+                                        spacing: 1.w,
                                         children: [
+                                          // The reverse slide button allows for the slide and button to be reset at anytime
+                                          // note: may need to work on spacing and padding to get the exact look we are
+                                          // looking for.
+                                          const ReverseSlideButton(deskButtonId: 'settings', icon: Icons.arrow_left_rounded),
+                                          // This column houses both the title of the widget and also the settings side panel
+                                          // settings side panel is in its own file in the settings folder
                                           Column(
-                                            // This column houses both the title of the widget and also the settings side panel
-                                            // settings side panel is in its own file in the settings folder
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Padding(
@@ -107,7 +112,7 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                                               //This container houses the settings panel buttons
                                               Container(
                                                 height: 66.h,
-                                                width: 15.w,
+                                                width: 14.w,
                                                 constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
                                                 decoration: const BoxDecoration(
                                                   color: Color.fromRGBO(17, 17, 17, 1),

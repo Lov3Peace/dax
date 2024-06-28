@@ -157,3 +157,44 @@ class SlideButton extends StatelessWidget {
     );
   }
 }
+
+class ReverseSlideButton extends StatelessWidget {
+  final String deskButtonId;
+  final IconData icon;
+
+  const ReverseSlideButton({
+    required this.deskButtonId,
+    required this.icon,
+    Key? key,
+  }) : super(key: key);
+
+  Widget build(BuildContext context) {
+    var buttonState = Provider.of<ButtonState>(context);
+    final ValueNotifier<bool> isHovering = ValueNotifier(false);
+
+    return MouseRegion(
+      onEnter: (_) => isHovering.value = true,
+      onExit: (_) => isHovering.value = false,
+      child: ValueListenableBuilder(
+        valueListenable: isHovering,
+        builder: (context, value, child) {
+          return IconButton(
+            icon: ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return LinearGradient(
+                  colors: value ? [red, purp] : [Colors.white70, Colors.white70],
+                  tileMode: TileMode.mirror,
+                ).createShader(bounds);
+              },
+              child: Icon(icon, color: Colors.white),
+            ),
+            onPressed: () {
+              buttonState.reverseSlide(buttonState.getSlideType(deskButtonId));
+              buttonState.deactivateDeskButton();
+            },
+          );
+        },
+      ),
+    );
+  }
+}

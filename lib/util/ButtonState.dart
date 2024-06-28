@@ -16,6 +16,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_butto
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/privacy_settings.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/profile_settings.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/security_settings.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 enum SlideType {
@@ -73,6 +74,11 @@ class ButtonState extends ChangeNotifier {
       reverseSlide(getSlideType(activeDeskButtonId!));
     }
     activeDeskButtonId = id;
+    notifyListeners();
+  }
+
+  void deactivateDeskButton() {
+    activeDeskButtonId = null;
     notifyListeners();
   }
 

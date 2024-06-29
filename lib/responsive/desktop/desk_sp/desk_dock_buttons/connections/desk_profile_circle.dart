@@ -9,28 +9,32 @@ class ProfileCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // Padding(
+        //   padding: EdgeInsets.only(left: 1.75.w),
+        //   child: Container(
+        //     width: 7.w,
+        //     height: 7.h,
+        //     decoration: const BoxDecoration(
+        //       gradient: LinearGradient(colors: [purp, red]),
+        //       shape: BoxShape.circle,
+        //       // color: Colors.grey,
+        //     ),
+        //   ),
+        // ),
         Padding(
-          padding: EdgeInsets.only(left: 0.35.w),
+          padding: EdgeInsets.only(left: 1.5.w),
           child: Container(
             width: 7.w,
             height: 7.h,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [purp, red]),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey.shade800, width: 3),
               shape: BoxShape.circle,
-              // color: Colors.grey,
+              color: Colors.grey.shade700,
             ),
           ),
         ),
-        Container(
-          width: 7.w,
-          height: 7.h,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.grey,
-          ),
-        ),
         Padding(
-          padding: EdgeInsets.fromLTRB(4.5.w, 5.h, 0, 0),
+          padding: EdgeInsets.fromLTRB(5.5.w, 5.h, 0, 0),
           child: Container(
             width: 2.w,
             height: 2.h,

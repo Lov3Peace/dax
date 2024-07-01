@@ -28,8 +28,7 @@ class DesktopDashboard extends StatefulWidget {
   State<DesktopDashboard> createState() => _DesktopDashboardState();
 }
 
-class _DesktopDashboardState extends State<DesktopDashboard>
-    with AnimationMixin {
+class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -64,7 +63,7 @@ class _DesktopDashboardState extends State<DesktopDashboard>
             child: Stack(
               children: [
                 // Background(),
-                const ArtBoardScreen(),
+                ArtBoardScreen(),
                 Indexer(
                   children: [
                     Indexed(
@@ -103,41 +102,32 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                             //   ),
                             // ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(left: 0.25.w, right: 0.25.w),
+                              padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                               child: Container(
                                 height: 45.h,
                                 width: 71.5.w,
                                 // color: red,
-                                constraints: const BoxConstraints(
-                                    minWidth: 700, minHeight: 250),
+                                constraints: const BoxConstraints(minWidth: 700, minHeight: 250),
                                 child: AnimationLimiter(
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount: 3,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return AnimationConfiguration
-                                          .staggeredList(
-                                        delay:
-                                            const Duration(milliseconds: 200),
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return AnimationConfiguration.staggeredList(
+                                        delay: const Duration(milliseconds: 200),
                                         position: index,
-                                        duration:
-                                            const Duration(milliseconds: 700),
+                                        duration: const Duration(milliseconds: 700),
                                         child: ScaleAnimation(
                                           scale: 0.7,
                                           curve: Curves.easeOutBack,
                                           child: FadeInAnimation(
                                             child: Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  0.25.w, 0.0.w, 0.25.w, 1.5.h),
+                                              padding: EdgeInsets.fromLTRB(0.25.w, 0.0.w, 0.25.w, 1.5.h),
                                               child: deskDashboardDecks1(
                                                 deck1: Column(
                                                   children: [
                                                     Padding(
-                                                      padding:
-                                                          EdgeInsets.fromLTRB(
-                                                              0, 0, 0, 1.5.h),
+                                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 1.5.h),
                                                       child: TitleBubble(
                                                         deckHeight: 5.5.h,
                                                         deckName: 'Dashboard',
@@ -146,24 +136,17 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                                                         leftPad: 30,
                                                       ),
                                                     ),
-                                                    const Expanded(
-                                                        child: ProfileCard()),
+                                                    Expanded(child: ProfileCard()),
                                                   ],
                                                 ),
                                                 deck2: Hero(
-                                                    tag: GlobalProvider()
-                                                        .projectsHeroTag,
-                                                    flightShuttleBuilder:
-                                                        flightShuttleBuilder,
-                                                    child:
-                                                        const ProjectsDeck()),
+                                                    tag: GlobalProvider().projectsHeroTag,
+                                                    flightShuttleBuilder: flightShuttleBuilder,
+                                                    child: ProjectsDeck()),
                                                 deck3: Hero(
-                                                    tag: GlobalProvider()
-                                                        .financesHeroTag,
-                                                    flightShuttleBuilder:
-                                                        flightShuttleBuilder,
-                                                    child:
-                                                        const FinancesDeck()),
+                                                    tag: GlobalProvider().financesHeroTag,
+                                                    flightShuttleBuilder: flightShuttleBuilder,
+                                                    child: FinancesDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -175,47 +158,34 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                               ),
                             ),
                             Padding(
-                              padding:
-                                  EdgeInsets.only(left: 0.25.w, right: 0.25.w),
+                              padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                               child: Container(
                                 height: 45.h,
                                 width: 71.5.w,
-                                constraints: const BoxConstraints(
-                                    minWidth: 700, minHeight: 250),
+                                constraints: const BoxConstraints(minWidth: 700, minHeight: 250),
                                 child: AnimationLimiter(
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
                                     itemCount: 2,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return AnimationConfiguration
-                                          .staggeredList(
-                                        delay:
-                                            const Duration(milliseconds: 200),
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return AnimationConfiguration.staggeredList(
+                                        delay: const Duration(milliseconds: 200),
                                         position: index,
-                                        duration:
-                                            const Duration(milliseconds: 700),
+                                        duration: const Duration(milliseconds: 700),
                                         child: ScaleAnimation(
                                           scale: 0.7,
                                           curve: Curves.easeOutBack,
                                           child: FadeInAnimation(
                                             child: Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  0.25.w, 0.0.w, 0.25.w, 0.h),
+                                              padding: EdgeInsets.fromLTRB(0.25.w, 0.0.w, 0.25.w, 0.h),
                                               child: deskDashboardDecks2(
                                                 deck4: Hero(
-                                                  flightShuttleBuilder:
-                                                      flightShuttleBuilder,
-                                                  tag: GlobalProvider()
-                                                      .socialsHeroTag,
-                                                  child: const SocialsDeck(),
+                                                  flightShuttleBuilder: flightShuttleBuilder,
+                                                  tag: GlobalProvider().socialsHeroTag,
+                                                  child: SocialsDeck(),
                                                 ),
                                                 deck5: Hero(
-                                                    flightShuttleBuilder:
-                                                        flightShuttleBuilder,
-                                                    tag: GlobalProvider()
-                                                        .newsHeroTag,
-                                                    child: const NewsDeck()),
+                                                    flightShuttleBuilder: flightShuttleBuilder, tag: GlobalProvider().newsHeroTag, child: NewsDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -236,35 +206,35 @@ class _DesktopDashboardState extends State<DesktopDashboard>
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const WalletPopUp(),
+                        child: WalletPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const FriendsPopUp(),
+                        child: FriendsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const SettingsPopUp(),
+                        child: SettingsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const HelpPopUp(),
+                        child: HelpPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const InfoPopUp(),
+                        child: InfoPopUp(),
                       ),
                     ),
                   ],

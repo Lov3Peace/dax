@@ -12,38 +12,43 @@ class DeskButtonSidePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     //final buttonState = Provider.of<ButtonState>(context);
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
       children: [
-        const SlideButton(
-          deskButtonId: 'wallet',
-          icon: Icons.wallet,
-          deskButtonText: 'Wallet',
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SlideButton(
+              deskButtonId: 'wallet',
+              icon: Icons.wallet,
+              deskButtonText: 'Wallet',
+            ),
+            SizedBox(height: 2.h), // Adjusted the height to 2.h
+            const SlideButton(
+              deskButtonId: 'friend',
+              icon: Icons.person,
+              deskButtonText: 'Friend',
+            ),
+            SizedBox(height: 2.h), // Adjusted the height to 2.h
+            const SlideButton(
+              deskButtonId: 'settings',
+              icon: Icons.settings,
+              deskButtonText: 'Settings',
+            ),
+            SizedBox(height: 2.h), // Adjusted the height to 2.h
+            const SlideButton(
+              deskButtonId: 'help',
+              icon: Icons.help,
+              deskButtonText: 'Help',
+            ),
+            SizedBox(height: 2.h), // Adjusted the height to 2.h
+            const SlideButton(
+              deskButtonId: 'info',
+              icon: Icons.info,
+              deskButtonText: 'Info',
+            ),
+          ],
         ),
-        SizedBox(height: 2.h), // Adjusted the height to 2.h
-        const SlideButton(
-          deskButtonId: 'friend',
-          icon: Icons.person,
-          deskButtonText: 'Friend',
-        ),
-        SizedBox(height: 2.h), // Adjusted the height to 2.h
-        const SlideButton(
-          deskButtonId: 'settings',
-          icon: Icons.settings,
-          deskButtonText: 'Settings',
-        ),
-        SizedBox(height: 2.h), // Adjusted the height to 2.h
-        const SlideButton(
-          deskButtonId: 'help',
-          icon: Icons.help,
-          deskButtonText: 'Help',
-        ),
-        SizedBox(height: 2.h), // Adjusted the height to 2.h
-        const SlideButton(
-          deskButtonId: 'info',
-          icon: Icons.info,
-          deskButtonText: 'Info',
-        ),
+        // const DimOverlay(),
       ],
     );
   }
@@ -195,6 +200,54 @@ class ReverseSlideButton extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+// class DimOverlay extends StatelessWidget {
+//   const DimOverlay({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var buttonState = Provider.of<ButtonState>(context);
+
+//     return ValueListenableBuilder(
+//       valueListenable: buttonState.isDimmed,
+//       builder: (context, isDimmed, child) {
+//         return isDimmed
+//             ? Container(
+//                 color: Colors.black.withOpacity(0.5),
+//                 child: child,
+//               )
+//             : Container(
+//                 color: tran,
+//               );
+//       },
+//     );
+//   }
+// }
+class DimOverlay extends StatelessWidget {
+  const DimOverlay({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    var buttonState = Provider.of<ButtonState>(context);
+
+    return ValueListenableBuilder<bool>(
+      valueListenable: buttonState.isDimmed,
+      builder: (context, isDimmed, child) {
+        return AnimatedOpacity(
+          opacity: isDimmed ? 1.0 : 0.0,
+          duration: const Duration(milliseconds: 300), // Adjust the duration as needed
+          curve: Curves.easeInBack, // Apply a curve to the opacity transition
+          child: IgnorePointer(
+            ignoring: !isDimmed,
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -31,8 +31,7 @@ class DeskProjectsPage extends StatefulWidget {
   State<DeskProjectsPage> createState() => _DeskProjectsPageState();
 }
 
-class _DeskProjectsPageState extends State<DeskProjectsPage>
-    with AnimationMixin {
+class _DeskProjectsPageState extends State<DeskProjectsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -125,8 +124,7 @@ class _DeskProjectsPageState extends State<DeskProjectsPage>
                                   children: [
                                     Hero(
                                       tag: ButtonState().projectsHeroTag,
-                                      flightShuttleBuilder:
-                                          flightShuttleBuilder,
+                                      flightShuttleBuilder: flightShuttleBuilder,
                                       child: const DeskProjectsCont(),
                                     ),
                                   ],
@@ -227,8 +225,7 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return const KeyboardsDeck();
                           }));
                         },
@@ -269,7 +266,7 @@ class ProjectsBubbleDock extends StatelessWidget {
                   duration: const Duration(milliseconds: 400),
                   curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const FinancesButton()
+          const CommunityButton()
               .animate()
               .slideX(
                   begin: 0.25,

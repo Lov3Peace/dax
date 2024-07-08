@@ -28,8 +28,7 @@ class DeskHeroSocialsPage extends StatefulWidget {
   State<DeskHeroSocialsPage> createState() => _DeskHeroSocialsPageState();
 }
 
-class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage>
-    with AnimationMixin {
+class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -124,8 +123,7 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage>
                                   children: [
                                     Hero(
                                       tag: ButtonState().socialsHeroTag,
-                                      flightShuttleBuilder:
-                                          flightShuttleBuilder,
+                                      flightShuttleBuilder: flightShuttleBuilder,
                                       child: const DeskSocialsCont(),
                                     ),
                                   ],
@@ -228,8 +226,7 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return const KeyboardsDeck();
                           }));
                         },
@@ -262,7 +259,7 @@ class SocialsButtonHolder extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ProjectsButton(),
-          FinancesButton(),
+          CommunityButton(),
           NewsButton(),
         ],
       ),

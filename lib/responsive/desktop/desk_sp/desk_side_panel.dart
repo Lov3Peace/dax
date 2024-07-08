@@ -23,8 +23,7 @@ class DesktopSidePanel extends StatefulWidget {
   State<DesktopSidePanel> createState() => _DesktopSidePanelState();
 }
 
-class _DesktopSidePanelState extends State<DesktopSidePanel>
-    with AnimationMixin {
+class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
 
@@ -52,8 +51,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                       color: Color.fromARGB(237, 21, 19, 22),
-                      border:
-                          Border.all(color: Color.fromARGB(182, 75, 75, 75)),
+                      border: Border.all(color: Color.fromARGB(182, 75, 75, 75)),
                       boxShadow: const [
                         // BoxShadow(
                         //   blurRadius: 10,
@@ -81,8 +79,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(1.5.w)),
                     clipBehavior: Clip.hardEdge,
-                    child:
-                        Image.asset("images/omni-temp-logo.png", height: 5.w)),
+                    child: Image.asset("images/omni-temp-logo.png", height: 5.w)),
               ),
               //Home
               DeskHomeDockButton(),

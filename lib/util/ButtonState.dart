@@ -16,7 +16,6 @@ import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_butto
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/privacy_settings.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/profile_settings.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/security_settings.dart';
-import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 enum SlideType {
@@ -39,10 +38,13 @@ class ButtonState extends ChangeNotifier {
   String? activeDeskButtonId;
   String? hoverDeskButtonId;
 
+  // Dimming state
+  final ValueNotifier<bool> isDimmed = ValueNotifier(false);
+
   // Hero tags
   String projectsHeroTag;
   String socialsHeroTag;
-  String financesHeroTag;
+  String communityHeroTag;
   String newsHeroTag;
 
   ButtonState({
@@ -53,7 +55,7 @@ class ButtonState extends ChangeNotifier {
     this.infoSlideControl = Control.stop,
     this.projectsHeroTag = 'projectsHero',
     this.socialsHeroTag = 'socialsHero',
-    this.financesHeroTag = 'financesHero',
+    this.communityHeroTag = 'financesHero',
     this.newsHeroTag = 'newsHero',
   });
 
@@ -74,11 +76,13 @@ class ButtonState extends ChangeNotifier {
       reverseSlide(getSlideType(activeDeskButtonId!));
     }
     activeDeskButtonId = id;
+    updateDimState();
     notifyListeners();
   }
 
   void deactivateDeskButton() {
     activeDeskButtonId = null;
+    updateDimState();
     notifyListeners();
   }
 
@@ -121,6 +125,7 @@ class ButtonState extends ChangeNotifier {
         walletSlideControl = Control.play;
         break;
     }
+    updateDimState();
     notifyListeners();
   }
 
@@ -142,6 +147,7 @@ class ButtonState extends ChangeNotifier {
         walletSlideControl = Control.playReverse;
         break;
     }
+    updateDimState();
     notifyListeners();
   }
 
@@ -163,6 +169,7 @@ class ButtonState extends ChangeNotifier {
         walletSlideControl = Control.stop;
         break;
     }
+    updateDimState();
     notifyListeners();
   }
 
@@ -174,13 +181,22 @@ class ButtonState extends ChangeNotifier {
     resetSlide(SlideType.wallet);
     activeDeskButtonId = null;
     hoverDeskButtonId = null;
+    updateDimState();
     notifyListeners();
+  }
+
+  void updateDimState() {
+    isDimmed.value = friendSlideControl == Control.play ||
+        walletSlideControl == Control.play ||
+        settingSlideControl == Control.play ||
+        helpSlideControl == Control.play ||
+        infoSlideControl == Control.play;
   }
 
   void heroOff() {
     projectsHeroTag = 'projectsHero_Off';
     socialsHeroTag = 'socialsHero_Off';
-    financesHeroTag = 'financesHero_Off';
+    communityHeroTag = 'communityHero_Off';
     newsHeroTag = 'newsHero_Off';
     notifyListeners();
   }
@@ -188,7 +204,7 @@ class ButtonState extends ChangeNotifier {
   void heroReset() {
     projectsHeroTag = 'projectsHero';
     socialsHeroTag = 'socialsHero';
-    financesHeroTag = 'financesHero';
+    communityHeroTag = 'communityHero';
     newsHeroTag = 'newsHero';
     notifyListeners();
   }

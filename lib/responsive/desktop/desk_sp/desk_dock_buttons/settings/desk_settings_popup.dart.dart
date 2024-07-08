@@ -84,7 +84,10 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                                 Column(
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(top: 1.h, bottom: 1.h),
+                                      padding: EdgeInsets.only(
+                                        top: 1.h,
+                                        bottom: 1.h,
+                                      ),
                                       child: Wrap(
                                         spacing: 1.w,
                                         children: [

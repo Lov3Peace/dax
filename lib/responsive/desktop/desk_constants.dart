@@ -17,7 +17,7 @@ import '../mobile/mobile_finance_page.dart';
 import '../mobile/mobile_news_page.dart';
 import '../mobile/mobile_projects_page.dart';
 import '../mobile/mobile_socials_page.dart';
-import 'hero_deck_pages/desk_hero_finance_page.dart';
+import 'hero_deck_pages/desk_hero_community_page.dart';
 import 'hero_deck_pages/desk_hero_news_page.dart';
 import 'hero_deck_pages/desk_hero_project_page.dart';
 import 'hero_deck_pages/desk_hero_socials_page.dart';
@@ -127,8 +127,7 @@ class Deck extends StatelessWidget {
                     //Heading
                     Container(
                         constraints: BoxConstraints(maxWidth: deckWidth * 0.9),
-                        margin:
-                            EdgeInsets.fromLTRB(2.w, deckHeight * 0.12, 2.w, 0),
+                        margin: EdgeInsets.fromLTRB(2.w, deckHeight * 0.12, 2.w, 0),
                         width: textConstraint,
                         child: text),
                     //Subheading
@@ -147,10 +146,7 @@ class Deck extends StatelessWidget {
                 bottom: 0,
                 child: Column(
                   children: [
-                    Container(
-                        margin: const EdgeInsets.only(bottom: 0),
-                        width: textConstraint,
-                        child: image),
+                    Container(margin: const EdgeInsets.only(bottom: 0), width: textConstraint, child: image),
                   ],
                 ),
               ),
@@ -160,8 +156,7 @@ class Deck extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                        constraints: BoxConstraints(
-                            maxHeight: deckHeight, maxWidth: deckHeight),
+                        constraints: BoxConstraints(maxHeight: deckHeight, maxWidth: deckHeight),
                         margin: const EdgeInsets.only(bottom: 5),
                         width: textConstraint,
                         child: riveAnim),
@@ -176,37 +171,25 @@ class Deck extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(2.w, 0, 0, 2.w),
                   child: Container(
-                    constraints:
-                        const BoxConstraints(minHeight: 50, maxHeight: 160),
+                    constraints: const BoxConstraints(minHeight: 50, maxHeight: 160),
                     decoration: BoxDecoration(
-                        gradient:
-                            LinearGradient(colors: [gradient1, gradient2]),
-                        boxShadow: [
-                          BoxShadow(
-                              color: neonGlow,
-                              blurRadius: 17,
-                              blurStyle: BlurStyle.solid)
-                        ],
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(500))),
+                        gradient: LinearGradient(colors: [gradient1, gradient2]),
+                        boxShadow: [BoxShadow(color: neonGlow, blurRadius: 17, blurStyle: BlurStyle.solid)],
+                        borderRadius: const BorderRadius.all(Radius.circular(500))),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(2.w, 20, 2.w, 20),
                       child: Text(
                         deckName,
-                        style: GoogleFonts.montserrat(
-                            fontSize: labelTextSize,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: shadowColor,
-                                blurRadius: 1,
-                              ),
-                              Shadow(
-                                color: shadowColor,
-                                blurRadius: 2,
-                              ),
-                            ]),
+                        style: GoogleFonts.montserrat(fontSize: labelTextSize, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 1,
+                          ),
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 2,
+                          ),
+                        ]),
                       ),
                     ),
                   ),
@@ -280,12 +263,7 @@ class ProfileBubble extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
-                    boxShadow: [
-                      BoxShadow(
-                          color: neonGlow,
-                          blurRadius: 20,
-                          blurStyle: BlurStyle.solid)
-                    ],
+                    boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -295,20 +273,16 @@ class ProfileBubble extends StatelessWidget {
                       Image.asset('images/crest5.png', width: 35),
                       Text(
                         deckName,
-                        style: GoogleFonts.montserrat(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: shadowColor,
-                                blurRadius: 1,
-                              ),
-                              Shadow(
-                                color: shadowColor,
-                                blurRadius: 2,
-                              ),
-                            ]),
+                        style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 1,
+                          ),
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 2,
+                          ),
+                        ]),
                       ),
                     ],
                   ),
@@ -355,8 +329,7 @@ class TitleBubble extends StatelessWidget {
           color: const Color.fromARGB(238, 21, 19, 22),
           border: Border.all(color: const Color.fromARGB(182, 73, 73, 73)),
         ),
-        constraints: const BoxConstraints(
-            maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 50),
+        constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 50),
         height: deckHeight,
         width: deckWidth,
         child: Stack(
@@ -367,12 +340,7 @@ class TitleBubble extends StatelessWidget {
               child: Container(
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(colors: [tran, tran]),
-                    boxShadow: [
-                      BoxShadow(
-                          color: tran,
-                          blurRadius: 20,
-                          blurStyle: BlurStyle.solid)
-                    ],
+                    boxShadow: [BoxShadow(color: tran, blurRadius: 20, blurStyle: BlurStyle.solid)],
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -455,8 +423,7 @@ class _DockButtonState extends State<DockButton> {
     // toggle between control instructions
     setState(() {
       control = Control.play;
-      currentColor =
-          (currentColor == activeColor) ? inactiveColor : activeColor;
+      currentColor = (currentColor == activeColor) ? inactiveColor : activeColor;
     });
   }
 
@@ -523,10 +490,8 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -583,15 +548,11 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
       // ),
       text: Text(
         'Collaborate and innovate.',
-        style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-            fontWeight: FontWeight.w600),
+        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
       ),
       subText: Text(
         'Post, join, or support independent projects anywhere in the world.',
-        style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
-            fontWeight: FontWeight.w400),
+        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: subTextSize, height: 1.25), fontWeight: FontWeight.w400),
       ),
       riveAnim: const r.RiveAnimation.asset('rive/building_apartments.riv'),
     );
@@ -809,10 +770,8 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -862,15 +821,11 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
       textConstraint: deckWidth * 0.9,
       text: Text(
         'All of your socials in one place.',
-        style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-            fontWeight: FontWeight.w600),
+        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
       ),
       subText: Text(
         'Just link your social media accounts and access them all in one place.',
-        style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
-            fontWeight: FontWeight.w400),
+        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: subTextSize, height: 1.25), fontWeight: FontWeight.w400),
       ),
       subTextConstraint: deckWidth * 0.6,
       riveAnim: const r.RiveAnimation.asset(
@@ -991,16 +946,16 @@ class SocialsStacks {
 }
 
 //FINACNES DECK ANIMATION
-class FinancesDeck extends StatefulWidget {
-  const FinancesDeck({
+class CommunityDeck extends StatefulWidget {
+  const CommunityDeck({
     super.key,
   });
 
   @override
-  State<FinancesDeck> createState() => _FinancesDeckState();
+  State<CommunityDeck> createState() => _CommunityDeckState();
 }
 
-class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
+class _CommunityDeckState extends State<CommunityDeck> with AnimationMixin {
   @override
   late AnimationController controller;
   late Animation<double> scale;
@@ -1057,10 +1012,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -1076,7 +1029,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
                       transitionAnimation: animation,
                     );
                   } else {
-                    return const DeskHeroFinancesPage(
+                    return const DeskHeroCommunityPage(
                         //transitionAnimation: animation,
                         );
                   }
@@ -1090,34 +1043,32 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
           });
         });
       },
-      child: financesDeck(),
+      child: communityDeck(),
     );
   }
 
-  Widget financesDeck({VoidCallback? onTap, Color? color}) {
+  Widget communityDeck({VoidCallback? onTap, Color? color}) {
     return GestureDetector(
       child: Deck(
         deckHeight: 20.h,
         deckWidth: halfDeckWidth,
-        deckName: 'Finances',
+        deckName: 'Community',
         gradient1: green,
         gradient2: blue,
         neonGlow: green,
         labelTextSize: labelTextSize,
         textConstraint: halfDeckWidth * 0.8,
         text: Text(
-          'Manage your money.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
+          'Find Your Community.',
+          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
   }
 }
 
-class FinancesStacks {
-  List<Widget> mobFinancesStacks = [
+class CommunityStacks {
+  List<Widget> mobCommunityStacks = [
     Deck(
       deckHeight: 100,
       deckWidth: 375,
@@ -1168,7 +1119,7 @@ class FinancesStacks {
     ),
     const SizedBox(height: 150)
   ];
-  List<Widget> tabFinancesStacks = [
+  List<Widget> tabCommunityStacks = [
     Deck(
       deckHeight: 300,
       deckWidth: deckWidth * 0.85,
@@ -1195,7 +1146,7 @@ class FinancesStacks {
     ),
     const SizedBox(height: 150)
   ];
-  List<Widget> deskFinancesStacks = [
+  List<Widget> deskCommunityStacks = [
     Deck(
       deckHeight: 100,
       deckWidth: 375,
@@ -1282,10 +1233,8 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -1332,9 +1281,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
         textConstraint: deckWidth * 0.7,
         text: Text(
           'Stay up to date.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -1515,10 +1462,8 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -1571,9 +1516,7 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
       textConstraint: halfDeckWidth * 0.8,
       text: Text(
         auth.currentUser!.email.toString().allBefore('@'),
-        style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-            fontWeight: FontWeight.w600),
+        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
       ),
     );
   }

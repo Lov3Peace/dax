@@ -223,8 +223,7 @@ class _DeskNewsContState extends State<DeskNewsCont> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return const KeyboardsDeck();
                           }));
                         },
@@ -265,7 +264,7 @@ class NewsButtonHolder extends StatelessWidget {
                   duration: const Duration(milliseconds: 400),
                   curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const FinancesButton()
+          const CommunityButton()
               .animate()
               .slideX(
                   begin: 0.25,

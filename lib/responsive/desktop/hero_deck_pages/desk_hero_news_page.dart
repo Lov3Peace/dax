@@ -27,8 +27,7 @@ class DeskHeroNewsPage extends StatefulWidget {
   State<DeskHeroNewsPage> createState() => _DeskHeroNewsPageState();
 }
 
-class _DeskHeroNewsPageState extends State<DeskHeroNewsPage>
-    with AnimationMixin {
+class _DeskHeroNewsPageState extends State<DeskHeroNewsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -223,8 +222,7 @@ class _DeskNewsContState extends State<DeskNewsCont> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return const KeyboardsDeck();
                           }));
                         },
@@ -257,7 +255,7 @@ class NewsButtonHolder extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SocialsButton(),
-          FinancesButton(),
+          CommunityButton(),
           ProjectsButton(),
         ],
       ),

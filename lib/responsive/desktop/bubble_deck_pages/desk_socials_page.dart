@@ -124,8 +124,7 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                                   children: [
                                     Hero(
                                       tag: ButtonState().socialsHeroTag,
-                                      flightShuttleBuilder:
-                                          flightShuttleBuilder,
+                                      flightShuttleBuilder: flightShuttleBuilder,
                                       child: const DeskSocialsCont(),
                                     ),
                                   ],
@@ -228,8 +227,7 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return const KeyboardsDeck();
                           }));
                         },
@@ -270,7 +268,7 @@ class SocialsButtonHolder extends StatelessWidget {
                   duration: const Duration(milliseconds: 400),
                   curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const FinancesButton()
+          const CommunityButton()
               .animate()
               .slideX(
                   begin: 0.25,

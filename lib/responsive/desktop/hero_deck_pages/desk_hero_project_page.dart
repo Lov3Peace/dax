@@ -125,7 +125,7 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                                     Hero(
                                       tag: ButtonState().projectsHeroTag,
                                       flightShuttleBuilder: flightShuttleBuilder,
-                                      child: const DeskProjectsCont(),
+                                      child: DeskProjectsCont(),
                                     ),
                                   ],
                                 ),
@@ -141,35 +141,35 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const WalletPopUp(),
+                          child: WalletPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const FriendsPopUp(),
+                          child: FriendsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const SettingsPopUp(),
+                          child: SettingsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const HelpPopUp(),
+                          child: HelpPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const InfoPopUp(),
+                          child: InfoPopUp(),
                         ),
                       ),
                     ],
@@ -208,29 +208,32 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
-      child: ListView.builder(
-        itemExtent: 520,
+      child: GridView.builder(
         physics: const BouncingScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Number of columns
+          crossAxisSpacing: 20.0, // Horizontal spacing between items
+          mainAxisSpacing: 20.0, // Vertical spacing between items
+          childAspectRatio: 1.3, // Aspect ratio of the items
+        ),
         itemCount: ProjectStacks().deskProjectStacks.length,
         itemBuilder: (BuildContext context, int index) {
-          return AnimationConfiguration.staggeredList(
+          return AnimationConfiguration.staggeredGrid(
             delay: const Duration(milliseconds: 500),
             position: index,
             duration: const Duration(milliseconds: 700),
+            columnCount: 2, // Number of columns for staggered effect
             child: SlideAnimation(
               horizontalOffset: 100,
               curve: Curves.easeOutBack,
               child: FadeInAnimation(
-                child: Column(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                            return const KeyboardsDeck();
-                          }));
-                        },
-                        child: ProjectStacks().deskProjectStacks[index]),
-                  ],
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                      return const KeyboardsDeck();
+                    }));
+                  },
+                  child: ProjectStacks().deskProjectStacks[index],
                 ),
               ),
             ),

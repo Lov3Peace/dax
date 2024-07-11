@@ -197,6 +197,49 @@ class DeskProjectsCont extends StatefulWidget {
   State<DeskProjectsCont> createState() => _DeskProjectsContState();
 }
 
+// class _DeskProjectsContState extends State<DeskProjectsCont> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 80.h,
+//       width: 71.w,
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(1.5.w),
+//         color: const Color.fromARGB(185, 21, 19, 22),
+//         border: Border.all(color: deckBorderColor),
+//       ),
+//       child: ListView.builder(
+//         itemExtent: 520,
+//         physics: const BouncingScrollPhysics(),
+//         itemCount: ProjectStacks().deskProjectStacks.length,
+//         itemBuilder: (BuildContext context, int index) {
+//           return AnimationConfiguration.staggeredList(
+//             delay: const Duration(milliseconds: 500),
+//             position: index,
+//             duration: const Duration(milliseconds: 700),
+//             child: SlideAnimation(
+//               horizontalOffset: 100,
+//               curve: Curves.easeOutBack,
+//               child: FadeInAnimation(
+//                 child: Column(
+//                   children: [
+//                     GestureDetector(
+//                         onTap: () {
+//                           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+//                             return const KeyboardsDeck();
+//                           }));
+//                         },
+//                         child: ProjectStacks().deskProjectStacks[index]),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           );
+//         },
+//       ).animate().fadeIn(begin: 0.5, delay: const Duration(milliseconds: 600)),
+//     );
+//   }
+// }
 class _DeskProjectsContState extends State<DeskProjectsCont> {
   @override
   Widget build(BuildContext context) {
@@ -208,29 +251,32 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
-      child: ListView.builder(
-        itemExtent: 520,
+      child: GridView.builder(
         physics: const BouncingScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Number of columns
+          crossAxisSpacing: 20.0, // Horizontal spacing between items
+          mainAxisSpacing: 20.0, // Vertical spacing between items
+          childAspectRatio: 1.3, // Aspect ratio of the items
+        ),
         itemCount: ProjectStacks().deskProjectStacks.length,
         itemBuilder: (BuildContext context, int index) {
-          return AnimationConfiguration.staggeredList(
+          return AnimationConfiguration.staggeredGrid(
             delay: const Duration(milliseconds: 500),
             position: index,
             duration: const Duration(milliseconds: 700),
+            columnCount: 2, // Number of columns for staggered effect
             child: SlideAnimation(
               horizontalOffset: 100,
               curve: Curves.easeOutBack,
               child: FadeInAnimation(
-                child: Column(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                            return const KeyboardsDeck();
-                          }));
-                        },
-                        child: ProjectStacks().deskProjectStacks[index]),
-                  ],
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                      return const KeyboardsDeck();
+                    }));
+                  },
+                  child: ProjectStacks().deskProjectStacks[index],
                 ),
               ),
             ),

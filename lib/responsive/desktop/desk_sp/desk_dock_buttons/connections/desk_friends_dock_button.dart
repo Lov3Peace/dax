@@ -173,7 +173,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                   controller: _searchController,
                                   decoration: InputDecoration(
                                     filled: true,
-                                    fillColor: const Color.fromARGB(140, 32, 32, 40),
+                                    fillColor: const Color.fromARGB(70, 32, 32, 40),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(5.w),
@@ -198,7 +198,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                   height: 6.5.h,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                      color: const Color.fromARGB(140, 32, 32, 40),
+                                      color: const Color.fromARGB(70, 32, 32, 40),
                                       borderRadius: const BorderRadius.all(
                                         Radius.circular(40),
                                       ),
@@ -298,6 +298,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                     child: CarouselSlider(
                                       carouselController: _carouselController,
                                       options: CarouselOptions(
+                                        scrollPhysics: NeverScrollableScrollPhysics(),
                                         viewportFraction: 1,
                                         enlargeCenterPage: true,
                                         initialPage: _currentIndex,

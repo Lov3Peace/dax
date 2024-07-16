@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
@@ -16,12 +16,12 @@ import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
 import '../../mobile/mob_artboard_page.dart';
-import '../../../util/GlobalProvider.dart';
+import '../../../util/ButtonState.dart';
 
-import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
-import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
+import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
+import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
+import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 import '../messages.dart';
 
 class DeskProjectsPage extends StatefulWidget {
@@ -31,8 +31,7 @@ class DeskProjectsPage extends StatefulWidget {
   State<DeskProjectsPage> createState() => _DeskProjectsPageState();
 }
 
-class _DeskProjectsPageState extends State<DeskProjectsPage>
-    with AnimationMixin {
+class _DeskProjectsPageState extends State<DeskProjectsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -53,7 +52,7 @@ class _DeskProjectsPageState extends State<DeskProjectsPage>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -124,9 +123,8 @@ class _DeskProjectsPageState extends State<DeskProjectsPage>
                                 child: Column(
                                   children: [
                                     Hero(
-                                      tag: GlobalProvider().projectsHeroTag,
-                                      flightShuttleBuilder:
-                                          flightShuttleBuilder,
+                                      tag: ButtonState().projectsHeroTag,
+                                      flightShuttleBuilder: flightShuttleBuilder,
                                       child: const DeskProjectsCont(),
                                     ),
                                   ],
@@ -199,6 +197,49 @@ class DeskProjectsCont extends StatefulWidget {
   State<DeskProjectsCont> createState() => _DeskProjectsContState();
 }
 
+// class _DeskProjectsContState extends State<DeskProjectsCont> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 80.h,
+//       width: 71.w,
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(1.5.w),
+//         color: const Color.fromARGB(185, 21, 19, 22),
+//         border: Border.all(color: deckBorderColor),
+//       ),
+//       child: ListView.builder(
+//         itemExtent: 520,
+//         physics: const BouncingScrollPhysics(),
+//         itemCount: ProjectStacks().deskProjectStacks.length,
+//         itemBuilder: (BuildContext context, int index) {
+//           return AnimationConfiguration.staggeredList(
+//             delay: const Duration(milliseconds: 500),
+//             position: index,
+//             duration: const Duration(milliseconds: 700),
+//             child: SlideAnimation(
+//               horizontalOffset: 100,
+//               curve: Curves.easeOutBack,
+//               child: FadeInAnimation(
+//                 child: Column(
+//                   children: [
+//                     GestureDetector(
+//                         onTap: () {
+//                           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+//                             return const KeyboardsDeck();
+//                           }));
+//                         },
+//                         child: ProjectStacks().deskProjectStacks[index]),
+//                   ],
+//                 ),
+//               ),
+//             ),
+//           );
+//         },
+//       ).animate().fadeIn(begin: 0.5, delay: const Duration(milliseconds: 600)),
+//     );
+//   }
+// }
 class _DeskProjectsContState extends State<DeskProjectsCont> {
   @override
   Widget build(BuildContext context) {
@@ -210,30 +251,32 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
-      child: ListView.builder(
-        itemExtent: 520,
+      child: GridView.builder(
         physics: const BouncingScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Number of columns
+          crossAxisSpacing: 20.0, // Horizontal spacing between items
+          mainAxisSpacing: 20.0, // Vertical spacing between items
+          childAspectRatio: 1.3, // Aspect ratio of the items
+        ),
         itemCount: ProjectStacks().deskProjectStacks.length,
         itemBuilder: (BuildContext context, int index) {
-          return AnimationConfiguration.staggeredList(
+          return AnimationConfiguration.staggeredGrid(
             delay: const Duration(milliseconds: 500),
             position: index,
             duration: const Duration(milliseconds: 700),
+            columnCount: 2, // Number of columns for staggered effect
             child: SlideAnimation(
               horizontalOffset: 100,
               curve: Curves.easeOutBack,
               child: FadeInAnimation(
-                child: Column(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const KeyboardsDeck();
-                          }));
-                        },
-                        child: ProjectStacks().deskProjectStacks[index]),
-                  ],
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                      return const KeyboardsDeck();
+                    }));
+                  },
+                  child: ProjectStacks().deskProjectStacks[index],
                 ),
               ),
             ),
@@ -269,7 +312,7 @@ class ProjectsBubbleDock extends StatelessWidget {
                   duration: const Duration(milliseconds: 400),
                   curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const FinancesButton()
+          const CommunityButton()
               .animate()
               .slideX(
                   begin: 0.25,

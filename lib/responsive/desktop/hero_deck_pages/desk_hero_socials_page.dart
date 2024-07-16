@@ -3,22 +3,23 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/keyboards_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
+
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup.dart.dart';
+
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
-import 'package:flutter_application_1/util/GlobalProvider.dart';
+import 'package:flutter_application_1/util/ButtonState.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../mobile/mob_artboard_page.dart';
-import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
-import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
+import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
+import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
+import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 
 class DeskHeroSocialsPage extends StatefulWidget {
   const DeskHeroSocialsPage({Key? key}) : super(key: key);
@@ -27,8 +28,7 @@ class DeskHeroSocialsPage extends StatefulWidget {
   State<DeskHeroSocialsPage> createState() => _DeskHeroSocialsPageState();
 }
 
-class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage>
-    with AnimationMixin {
+class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -49,7 +49,7 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -122,9 +122,8 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage>
                                 child: Column(
                                   children: [
                                     Hero(
-                                      tag: GlobalProvider().socialsHeroTag,
-                                      flightShuttleBuilder:
-                                          flightShuttleBuilder,
+                                      tag: ButtonState().socialsHeroTag,
+                                      flightShuttleBuilder: flightShuttleBuilder,
                                       child: const DeskSocialsCont(),
                                     ),
                                   ],
@@ -227,8 +226,7 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return const KeyboardsDeck();
                           }));
                         },
@@ -261,7 +259,7 @@ class SocialsButtonHolder extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ProjectsButton(),
-          FinancesButton(),
+          CommunityButton(),
           NewsButton(),
         ],
       ),

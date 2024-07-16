@@ -1,4 +1,3 @@
-import 'package:animated_image_list/photoViewerArbnb/PhotoViewerArbnb_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
@@ -10,14 +9,14 @@ import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../util/GlobalProvider.dart';
+import '../../util/ButtonState.dart';
 import '../../util/desk_dashboard_decks.dart';
 import '../mobile/mob_artboard_page.dart';
-import 'desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
-import 'desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
-import 'desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
-import 'desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
-import 'desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
+import 'desk_sp/desk_button_functions.dart';
+import 'desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
+import 'desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
+import 'desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
+import 'desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -43,13 +42,14 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
     opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
     controller.stop();
     super.initState();
-    final heroReset = context.read<GlobalProvider>();
+
+    final heroReset = context.read<ButtonState>();
     heroReset.heroReset();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -140,13 +140,13 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                   ],
                                                 ),
                                                 deck2: Hero(
-                                                    tag: GlobalProvider().projectsHeroTag,
+                                                    tag: ButtonState().projectsHeroTag,
                                                     flightShuttleBuilder: flightShuttleBuilder,
                                                     child: ProjectsDeck()),
                                                 deck3: Hero(
-                                                    tag: GlobalProvider().financesHeroTag,
+                                                    tag: ButtonState().communityHeroTag,
                                                     flightShuttleBuilder: flightShuttleBuilder,
-                                                    child: FinancesDeck()),
+                                                    child: CommunityDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -157,6 +157,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                 ),
                               ),
                             ),
+
                             Padding(
                               padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                               child: Container(
@@ -181,11 +182,11 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                               child: deskDashboardDecks2(
                                                 deck4: Hero(
                                                   flightShuttleBuilder: flightShuttleBuilder,
-                                                  tag: GlobalProvider().socialsHeroTag,
+                                                  tag: ButtonState().socialsHeroTag,
                                                   child: SocialsDeck(),
                                                 ),
                                                 deck5: Hero(
-                                                    flightShuttleBuilder: flightShuttleBuilder, tag: GlobalProvider().newsHeroTag, child: NewsDeck()),
+                                                    flightShuttleBuilder: flightShuttleBuilder, tag: ButtonState().newsHeroTag, child: NewsDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -198,10 +199,12 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                             ),
                           ],
                         ),
+
                         // ignore: prefer_const_constructors
                         Messages(),
                       ],
                     ),
+                    DimOverlay(),
                     Indexed(
                       index: 1,
                       child: Positioned(

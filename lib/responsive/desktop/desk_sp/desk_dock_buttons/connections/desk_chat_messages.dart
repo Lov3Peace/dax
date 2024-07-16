@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_profile_circle.dart';
 import 'package:sizer/sizer.dart';
 

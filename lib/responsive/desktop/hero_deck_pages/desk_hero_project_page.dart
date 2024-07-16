@@ -15,13 +15,12 @@ import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
 import '../../mobile/mob_artboard_page.dart';
-import '../../../util/GlobalProvider.dart';
+import '../../../util/ButtonState.dart';
 
-import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
-import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/wallet/desk_wallet_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
+import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
+import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
+import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 import '../messages.dart';
 
 class DeskHeroProjectsPage extends StatefulWidget {
@@ -31,8 +30,7 @@ class DeskHeroProjectsPage extends StatefulWidget {
   State<DeskHeroProjectsPage> createState() => _DeskHeroProjectsPageState();
 }
 
-class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage>
-    with AnimationMixin {
+class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -53,7 +51,7 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -124,10 +122,9 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage>
                                 child: Column(
                                   children: [
                                     Hero(
-                                      tag: GlobalProvider().projectsHeroTag,
-                                      flightShuttleBuilder:
-                                          flightShuttleBuilder,
-                                      child: const DeskProjectsCont(),
+                                      tag: ButtonState().projectsHeroTag,
+                                      flightShuttleBuilder: flightShuttleBuilder,
+                                      child: DeskProjectsCont(),
                                     ),
                                   ],
                                 ),
@@ -143,35 +140,35 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage>
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const WalletPopUp(),
+                          child: WalletPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const FriendsPopUp(),
+                          child: FriendsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const SettingsPopUp(),
+                          child: SettingsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const HelpPopUp(),
+                          child: HelpPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const InfoPopUp(),
+                          child: InfoPopUp(),
                         ),
                       ),
                     ],
@@ -210,30 +207,32 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
-      child: ListView.builder(
-        itemExtent: 520,
+      child: GridView.builder(
         physics: const BouncingScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // Number of columns
+          crossAxisSpacing: 20.0, // Horizontal spacing between items
+          mainAxisSpacing: 20.0, // Vertical spacing between items
+          childAspectRatio: 1.3, // Aspect ratio of the items
+        ),
         itemCount: ProjectStacks().deskProjectStacks.length,
         itemBuilder: (BuildContext context, int index) {
-          return AnimationConfiguration.staggeredList(
+          return AnimationConfiguration.staggeredGrid(
             delay: const Duration(milliseconds: 500),
             position: index,
             duration: const Duration(milliseconds: 700),
+            columnCount: 2, // Number of columns for staggered effect
             child: SlideAnimation(
               horizontalOffset: 100,
               curve: Curves.easeOutBack,
               child: FadeInAnimation(
-                child: Column(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
-                            return const KeyboardsDeck();
-                          }));
-                        },
-                        child: ProjectStacks().deskProjectStacks[index]),
-                  ],
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                      return const KeyboardsDeck();
+                    }));
+                  },
+                  child: ProjectStacks().deskProjectStacks[index],
                 ),
               ),
             ),
@@ -262,7 +261,7 @@ class ProjectsBubbleDock extends StatelessWidget {
         children: [
           SocialsButton(),
           NewsButton(),
-          FinancesButton(),
+          CommunityButton(),
         ],
       ),
     );

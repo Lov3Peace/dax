@@ -4,15 +4,14 @@ import 'package:flutter_application_1/util/GlobalProvider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../util/gradient_container.dart';
-import '../../../../../util/soft_close.dart';
+import '../../../../../main.dart';
+import '../../../../../util/ButtonState.dart';
 import '../../../../../util/tactile_button.dart';
 
 //
 // Hover aspect of setting button
 class DeskWalletButtonHover extends StatefulWidget {
   const DeskWalletButtonHover({super.key});
-
   @override
   State<DeskWalletButtonHover> createState() => _DeskWalletButtonHoverState();
 }
@@ -22,10 +21,8 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
 // start hover is false
   bool isHover = false;
   bool isHover2 = false;
-
 //start active is false
   bool isActive = false;
-
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -45,8 +42,8 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
             //
             //activates the settings popup
             if (!isActive) {
-              final startSlide = context.read<GlobalProvider>();
-              startSlide.walletActivateSlide();
+              final startSlide = context.read<ButtonState>();
+              startSlide.activateSlide(SlideType.wallet);
               //
               //gives the active color to be true
               isActive = true;
@@ -69,9 +66,7 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
                           : tran),
               boxShadow: [
                 BoxShadow(
-                  color: isActive
-                      ? Colors.white
-                      : (isHover ? Colors.grey.shade700 : tran),
+                  color: isActive ? Colors.white : (isHover ? Colors.grey.shade700 : tran),
                 ),
               ],
               color: tran,
@@ -97,11 +92,7 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
         children: [
           Icon(
             Icons.wallet_outlined,
-            color: isActive
-                ? Colors.black87
-                : (isHover
-                    ? const Color.fromARGB(241, 255, 255, 255)
-                    : Colors.white70),
+            color: isActive ? Colors.black87 : (isHover ? const Color.fromARGB(241, 255, 255, 255) : Colors.white70),
             size: 30,
           ),
           Padding(
@@ -111,9 +102,7 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
               style: GoogleFonts.montserrat(
                 textStyle: TextStyle(fontSize: 2.sp),
                 fontWeight: FontWeight.w400,
-                color: isActive
-                    ? const Color.fromARGB(221, 28, 24, 24)
-                    : (isHover ? Colors.white : Colors.white54),
+                color: isActive ? const Color.fromARGB(221, 28, 24, 24) : (isHover ? Colors.white : Colors.white54),
               ),
             ),
           ),
@@ -135,8 +124,8 @@ class _DeskWalletButtonHoverState extends State<DeskWalletButtonHover> {
                     setState(() {
                       //
                       //Reverses the popup card
-                      final startSlide = context.read<GlobalProvider>();
-                      startSlide.walletReverseSlide();
+                      final startSlide = context.read<ButtonState>();
+                      startSlide.reverseSlide(SlideType.wallet);
                       //
                       //gives the active color to be flase
                       isActive = false;

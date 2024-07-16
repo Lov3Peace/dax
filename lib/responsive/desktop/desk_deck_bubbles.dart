@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_finance_page.dart';
-import 'package:flutter_application_1/util/GlobalProvider.dart';
+import 'package:flutter_application_1/util/ButtonState.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +14,7 @@ import '../tablet/tablet_finance_page.dart';
 import '../tablet/tablet_news_page.dart';
 import '../tablet/tablet_projects_page.dart';
 import '../tablet/tablet_socials_page.dart';
-import 'bubble_deck_pages/desk_finance_page.dart';
+import 'bubble_deck_pages/desk_community_page.dart';
 import 'bubble_deck_pages/desk_news_page.dart';
 import 'bubble_deck_pages/desk_project_page.dart';
 import 'bubble_deck_pages/desk_socials_page.dart';
@@ -26,7 +26,7 @@ class ProjectsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Hero(
         tag: value.projectsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
@@ -34,15 +34,13 @@ class ProjectsButton extends StatelessWidget {
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<GlobalProvider>();
+              final heroOff = context.read<ButtonState>();
               heroOff.heroOff();
               print(value.socialsHeroTag);
               Navigator.of(context).push(
                 PageRouteBuilder(
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    animation = CurvedAnimation(
-                        parent: animation, curve: Curves.linear);
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                     return FadeTransition(
                       opacity: animation,
                       child: child,
@@ -93,7 +91,7 @@ class NewsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Hero(
         tag: value.newsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
@@ -101,15 +99,13 @@ class NewsButton extends StatelessWidget {
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<GlobalProvider>();
+              final heroOff = context.read<ButtonState>();
               heroOff.heroOff();
               print(value.socialsHeroTag);
               Navigator.of(context).push(
                 PageRouteBuilder(
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    animation = CurvedAnimation(
-                        parent: animation, curve: Curves.linear);
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                     return FadeTransition(
                       opacity: animation,
                       child: child,
@@ -155,28 +151,26 @@ class NewsButton extends StatelessWidget {
 
 //
 //Finances Button
-class FinancesButton extends StatelessWidget {
-  const FinancesButton({super.key});
+class CommunityButton extends StatelessWidget {
+  const CommunityButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Hero(
-        tag: value.financesHeroTag,
+        tag: value.communityHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
         child: TactileButton(
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<GlobalProvider>();
+              final heroOff = context.read<ButtonState>();
               heroOff.heroOff();
               print(value.socialsHeroTag);
               Navigator.of(context).push(
                 PageRouteBuilder(
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    animation = CurvedAnimation(
-                        parent: animation, curve: Curves.linear);
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                     return FadeTransition(
                       opacity: animation,
                       child: child,
@@ -193,7 +187,7 @@ class FinancesButton extends StatelessWidget {
                       );
                     } else {
                       // ignore: prefer_const_constructors
-                      return DeskFinancesPage(
+                      return DeskCommunityPage(
                           //transitionAnimation: animation,
                           );
                     }
@@ -209,7 +203,7 @@ class FinancesButton extends StatelessWidget {
             height: 10,
             width: 30,
             neonGlow: greenGlow,
-            text: 'Finances',
+            text: 'Community',
             textSize: 12,
             borderColor: const Color.fromARGB(0, 255, 255, 255),
             borderRadius: 500,
@@ -224,10 +218,10 @@ class FinancesButton extends StatelessWidget {
 //Socials Button
 class SocialsButton extends StatelessWidget {
   const SocialsButton({super.key});
-  get socsTag => GlobalProvider().socialsHeroTag;
+  get socsTag => ButtonState().socialsHeroTag;
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Hero(
         tag: value.socialsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
@@ -235,15 +229,13 @@ class SocialsButton extends StatelessWidget {
           scale: 0.9,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<GlobalProvider>();
+              final heroOff = context.read<ButtonState>();
               heroOff.heroOff();
               print(value.socialsHeroTag);
               Navigator.of(context).push(
                 PageRouteBuilder(
-                  transitionsBuilder:
-                      (context, animation, secondaryAnimation, child) {
-                    animation = CurvedAnimation(
-                        parent: animation, curve: Curves.linear);
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                     return FadeTransition(
                       opacity: animation,
                       child: child,

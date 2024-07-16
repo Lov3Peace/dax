@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
@@ -12,25 +12,23 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
-import '../../../util/GlobalProvider.dart';
-import '../../../util/soft_close.dart';
+import '../../../util/ButtonState.dart';
 import '../../mobile/mob_artboard_page.dart';
 
-import '../desk_sp/desk_dock_buttons/connections/desk_friends_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/help/desk_help_button_hover.dart';
-import '../desk_sp/desk_dock_buttons/info/desk_info_dock_button.dart';
-import '../desk_sp/desk_dock_buttons/settings/desk_settings_dock_button.dart';
+import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
+import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
+import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
+import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 import '../messages.dart';
 
-class DeskFinancesPage extends StatefulWidget {
-  const DeskFinancesPage({Key? key}) : super(key: key);
+class DeskHeroCommunityPage extends StatefulWidget {
+  const DeskHeroCommunityPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskFinancesPage> createState() => _DeskFinancesPageState();
+  State<DeskHeroCommunityPage> createState() => _DeskHeroCommunityPageState();
 }
 
-class _DeskFinancesPageState extends State<DeskFinancesPage>
-    with AnimationMixin {
+class _DeskHeroCommunityPageState extends State<DeskHeroCommunityPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -49,7 +47,7 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<GlobalProvider>(
+    return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -99,7 +97,7 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
                                     padding: EdgeInsets.only(right: 23.6.w),
                                     child: TitleBubble(
                                       deckHeight: 5.5.h,
-                                      deckName: 'Finances',
+                                      deckName: 'Community',
                                       deckWidth: 17.25.w,
                                       textSize: 3.sp,
                                       leftPad: 30,
@@ -111,7 +109,7 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
                                     color: tran,
                                     child: const Column(
                                       children: [
-                                        FinancesButtonHolder(),
+                                        CommunityButtonHolder(),
                                       ],
                                     ),
                                   ),
@@ -122,10 +120,9 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
                                 child: Column(
                                   children: [
                                     Hero(
-                                      tag: GlobalProvider().financesHeroTag,
-                                      flightShuttleBuilder:
-                                          flightShuttleBuilder,
-                                      child: const DeskFinancesCont(),
+                                      tag: ButtonState().communityHeroTag,
+                                      flightShuttleBuilder: flightShuttleBuilder,
+                                      child: const DeskCommunityCont(),
                                     ),
                                   ],
                                 ),
@@ -190,14 +187,14 @@ class _DeskFinancesPageState extends State<DeskFinancesPage>
   }
 }
 
-class DeskFinancesCont extends StatefulWidget {
-  const DeskFinancesCont({super.key});
+class DeskCommunityCont extends StatefulWidget {
+  const DeskCommunityCont({super.key});
 
   @override
-  State<DeskFinancesCont> createState() => _DeskFinancesContState();
+  State<DeskCommunityCont> createState() => _DeskCommunityContState();
 }
 
-class _DeskFinancesContState extends State<DeskFinancesCont> {
+class _DeskCommunityContState extends State<DeskCommunityCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -211,7 +208,7 @@ class _DeskFinancesContState extends State<DeskFinancesCont> {
       child: ListView.builder(
         itemExtent: 420,
         physics: const BouncingScrollPhysics(),
-        itemCount: FinancesStacks().deskFinancesStacks.length,
+        itemCount: CommunityStacks().deskCommunityStacks.length,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
             delay: const Duration(milliseconds: 500),
@@ -225,12 +222,11 @@ class _DeskFinancesContState extends State<DeskFinancesCont> {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (context) {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return const KeyboardsDeck();
                           }));
                         },
-                        child: FinancesStacks().deskFinancesStacks[index]),
+                        child: CommunityStacks().deskCommunityStacks[index]),
                   ],
                 ),
               ),
@@ -242,8 +238,8 @@ class _DeskFinancesContState extends State<DeskFinancesCont> {
   }
 }
 
-class FinancesButtonHolder extends StatelessWidget {
-  const FinancesButtonHolder({super.key});
+class CommunityButtonHolder extends StatelessWidget {
+  const CommunityButtonHolder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -255,12 +251,12 @@ class FinancesButtonHolder extends StatelessWidget {
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SocialsButton().animate().slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 200), duration: const Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const ProjectsButton().animate().slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 400), duration: const Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const NewsButton().animate().slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 600), duration: const Duration(milliseconds: 400), curve: SoftClose()).fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
+          SocialsButton(),
+          ProjectsButton(),
+          NewsButton(),
         ],
       ),
     );

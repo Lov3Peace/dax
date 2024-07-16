@@ -1,21 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_button_functions.dart';
 import 'package:flutter_application_1/util/logout_dock_button.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
-import 'connections/desk_friends_button_hover.dart';
 import 'desk_home_dock_button.dart';
-import 'help/desk_help_button_hover.dart';
-import 'info/desk_info_dock_button.dart';
-import 'settings/desk_settings_dock_button.dart';
-import 'wallet/desk_wallet_dock_button.dart';
 
 class DesktopSidePanel extends StatefulWidget {
   DesktopSidePanel({
@@ -31,8 +24,7 @@ class DesktopSidePanel extends StatefulWidget {
   State<DesktopSidePanel> createState() => _DesktopSidePanelState();
 }
 
-class _DesktopSidePanelState extends State<DesktopSidePanel>
-    with AnimationMixin {
+class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
 
@@ -60,8 +52,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
                   clipBehavior: Clip.hardEdge,
                   decoration: BoxDecoration(
                       color: Color.fromARGB(237, 21, 19, 22),
-                      border:
-                          Border.all(color: Color.fromARGB(182, 75, 75, 75)),
+                      border: Border.all(color: Color.fromARGB(182, 75, 75, 75)),
                       boxShadow: const [
                         // BoxShadow(
                         //   blurRadius: 10,
@@ -89,8 +80,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(1.5.w)),
                     clipBehavior: Clip.hardEdge,
-                    child:
-                        Image.asset("images/omni-temp-logo.png", height: 5.w)),
+                    child: Image.asset("images/omni-temp-logo.png", height: 5.w)),
               ),
               //Home
               DeskHomeDockButton(),
@@ -113,14 +103,9 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
 
 //
 // Contains all buttonsin the dock
-class DeskDockButtons extends StatefulWidget {
+class DeskDockButtons extends StatelessWidget {
   const DeskDockButtons({super.key});
 
-  @override
-  State<DeskDockButtons> createState() => _DeskDockButtonsState();
-}
-
-class _DeskDockButtonsState extends State<DeskDockButtons> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -131,34 +116,7 @@ class _DeskDockButtonsState extends State<DeskDockButtons> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          //Wallet
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.5.h),
-            child: DeskWalletButtonHover(),
-          ),
-
-          //
-          //Friends
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.5.h),
-            child: DeskFriendsButtonHover(),
-          ),
-          //Settings
-          Padding(
-              padding: EdgeInsets.symmetric(vertical: 0.5.h),
-              child: DeskSettingsButtonHover()),
-
-          //Help
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.5.h),
-            child: DeskHelpButtonHover(),
-          ),
-          //
-          //About Us/Info
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 0.5.h),
-            child: DeskInfoButtonHover(),
-          ),
+          DeskButtonSidePanel(),
         ],
       ),
     );

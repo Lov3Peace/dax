@@ -13,7 +13,7 @@ import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
 import '../../../util/ButtonState.dart';
-import '../../../util/custom_curve.dart';
+import '../../../util/soft_close.dart';
 import '../../mobile/mob_artboard_page.dart';
 
 import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
@@ -257,30 +257,15 @@ class CommunityButtonHolder extends StatelessWidget {
         children: [
           const SocialsButton()
               .animate()
-              .slideX(
-                  begin: 0.25,
-                  end: 0,
-                  delay: const Duration(milliseconds: 200),
-                  duration: const Duration(milliseconds: 400),
-                  curve: const SoftClose())
+              .slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 200), duration: const Duration(milliseconds: 400), curve: SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
           const ProjectsButton()
               .animate()
-              .slideX(
-                  begin: 0.25,
-                  end: 0,
-                  delay: const Duration(milliseconds: 400),
-                  duration: const Duration(milliseconds: 400),
-                  curve: const SoftClose())
+              .slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 400), duration: const Duration(milliseconds: 400), curve: SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
           const NewsButton()
               .animate()
-              .slideX(
-                  begin: 0.25,
-                  end: 0,
-                  delay: const Duration(milliseconds: 600),
-                  duration: const Duration(milliseconds: 400),
-                  curve: const SoftClose())
+              .slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 600), duration: const Duration(milliseconds: 400), curve: SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
         ],
       ),

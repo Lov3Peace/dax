@@ -39,9 +39,11 @@ const Color purp = Color.fromARGB(255, 182, 47, 255);
 const Color blue = Color.fromARGB(255, 59, 193, 255);
 const Color orange = Colors.orange;
 const Color orangeGlow = Colors.deepOrange;
-const Color green = Color.fromARGB(255, 157, 255, 45);
-const Color greenGlow = Color.fromARGB(169, 136, 255, 0);
+const Color green = Color.fromARGB(255, 90, 255, 45);
+const Color greenGlow = Color.fromARGB(169, 34, 255, 0);
+const Color hoverGreen = Color.fromARGB(255, 170, 255, 147);
 const Color tran = Color.fromARGB(0, 0, 0, 0);
+const Color white = Colors.white;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

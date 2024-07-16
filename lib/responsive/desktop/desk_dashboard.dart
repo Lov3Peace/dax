@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +63,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
             child: Stack(
               children: [
                 // Background(),
-                const ArtBoardScreen(),
+                ArtBoardScreen(),
                 Indexer(
                   children: [
                     Indexed(
@@ -136,7 +136,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                         leftPad: 30,
                                                       ),
                                                     ),
-                                                    const Expanded(child: ProfileCard()),
+                                                    Expanded(child: ProfileCard()),
                                                   ],
                                                 ),
                                                 deck2: Hero(

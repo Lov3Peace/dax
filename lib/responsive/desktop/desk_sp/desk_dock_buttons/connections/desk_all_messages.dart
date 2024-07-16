@@ -1,5 +1,13 @@
+import 'package:animated_image_list/photoViewerArbnb/PhotoViewerArbnb_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/actions_buttons.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_profile_circle.dart';
+import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
 class AllMessages extends StatelessWidget {
@@ -19,26 +27,38 @@ class AllMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 53.h,
-      width: 100.w,
+      clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-        color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(15),
+          color: Color.fromARGB(70, 32, 32, 40),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(24),
+          ),
+          border: Border.all(color: deckBorderColor)),
+      child: SingleChildScrollView(
+        child: Container(
+          width: double.infinity,
+          child: DataTable(
+            dividerThickness: 0.25,
+            columnSpacing: 10.w,
+            horizontalMargin: 7.w,
+            columns: const [
+              DataColumn(label: Text('Username', style: TextStyle(color: Colors.grey))),
+              DataColumn(label: Text('Status', style: TextStyle(color: Colors.grey))),
+              DataColumn(label: Text('Last Seen', style: TextStyle(color: Colors.grey))),
+              DataColumn(label: Text('Actions', style: TextStyle(color: Colors.grey))),
+            ],
+            rows: [
+              DataRow(cells: [
+                DataCell(Text('[Username]')),
+                DataCell(Text('[Online/Offline]')),
+                DataCell(Text('[Time]')),
+                DataCell(
+                  ActionsButtons(),
+                ),
+              ]),
+            ],
+          ),
         ),
-      ),
-      child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
-        itemCount: allconnections.length,
-        separatorBuilder: (BuildContext context, int index) {
-          return const Divider(
-            height: 1,
-            thickness: 2,
-          );
-        },
-        itemBuilder: (context, index) {
-          return const ProfileCircle();
-        },
       ),
     );
   }

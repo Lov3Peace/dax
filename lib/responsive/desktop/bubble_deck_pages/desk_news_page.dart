@@ -14,7 +14,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../pages/keyboards_deck.dart';
 import '../../../util/ButtonState.dart';
-import '../../../util/custom_curve.dart';
+import '../../../util/soft_close.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';

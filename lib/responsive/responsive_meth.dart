@@ -1,5 +1,3 @@
-import 'package:responsive_sizer/responsive_sizer.dart';
-import 'desktop/desk_constants.dart';
 import 'dart:ui';
 
 responsiveDeck() {

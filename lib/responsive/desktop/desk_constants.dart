@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/profile_popup/desk_profile_popup.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_finance_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_news_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dart';
@@ -12,6 +13,7 @@ import 'package:rive/rive.dart' as r;
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
+import '../../util/ButtonState.dart';
 import '../../util/auth/login.dart';
 import '../mobile/mobile_finance_page.dart';
 import '../mobile/mobile_news_page.dart';
@@ -37,7 +39,7 @@ double titleTextSize = 20;
 double labelTextSize = 16;
 double? textConstraint = 500;
 double? subTextConstraint = 500;
-Color deckBorderColor = Color.fromARGB(182, 75, 75, 75);
+Color deckBorderColor = const Color.fromARGB(182, 75, 75, 75);
 
 class Deck extends StatelessWidget {
   final double deckHeight;
@@ -57,7 +59,7 @@ class Deck extends StatelessWidget {
   final Color shadowColor = Colors.white;
   final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
 
-  Deck({
+  const Deck({
     required this.deckHeight,
     required this.deckWidth,
     required this.deckName,
@@ -189,7 +191,7 @@ class ProfileBubble extends StatelessWidget {
   final Color shadowColor = Colors.white;
   final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
 
-  ProfileBubble({
+  const ProfileBubble({
     required this.deckHeight,
     required this.deckWidth,
     required this.deckName,
@@ -280,7 +282,7 @@ class TitleBubble extends StatelessWidget {
   final Color shadowColor = Colors.white;
   final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
 
-  TitleBubble({
+  const TitleBubble({
     required this.deckHeight,
     required this.deckWidth,
     required this.deckName,
@@ -340,7 +342,7 @@ class DockButton extends StatefulWidget {
   final IconData icon;
   final VoidCallback? onPressed;
 
-  DockButton({
+  const DockButton({
     required this.icon,
     this.onPressed,
     Key? key,
@@ -406,6 +408,7 @@ class ProjectsDeck extends StatefulWidget {
 }
 
 class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
+  @override
   late AnimationController controller;
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -1315,16 +1318,16 @@ class NewsStacks {
   ];
 }
 
-class ProfileCard extends StatefulWidget {
-  const ProfileCard({
+class MTProfileCard extends StatefulWidget {
+  const MTProfileCard({
     super.key,
   });
 
   @override
-  State<ProfileCard> createState() => _ProfileCardState();
+  State<MTProfileCard> createState() => _MTProfileCardState();
 }
 
-class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
+class _MTProfileCardState extends State<MTProfileCard> with AnimationMixin {
   @override
   late AnimationController controller;
   late Animation<double> scale;
@@ -1372,12 +1375,8 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
                     return MobFinancePage(
                       transitionAnimation: animation,
                     );
-                  } else if (screenWidth < 1100) {
-                    return TabFinancePage(
-                      transitionAnimation: animation,
-                    );
                   } else {
-                    return MobFinancePage(
+                    return TabFinancePage(
                       transitionAnimation: animation,
                     );
                   }
@@ -1390,6 +1389,91 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
             controller.reset();
           });
         });
+      },
+      child: ScaleTransition(
+        scale: scale,
+        child: AnimatedOpacity(
+          opacity: opacity.value,
+          duration: const Duration(milliseconds: 300),
+          child: profileCard(),
+        ),
+      ),
+    );
+  }
+
+  Widget profileCard({VoidCallback? onTap, Color? color}) {
+    return Deck(
+      deckHeight: 20.h,
+      deckWidth: halfDeckWidth,
+      deckName: '',
+      gradient1: tran,
+      gradient2: tran,
+      neonGlow: tran,
+      labelTextSize: labelTextSize,
+      textConstraint: halfDeckWidth * 0.8,
+      text: Text(
+        auth.currentUser!.email.toString().allBefore('@'),
+        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+      ),
+    );
+  }
+}
+
+class DProfileCard extends StatefulWidget {
+  const DProfileCard({super.key});
+
+  @override
+  State<DProfileCard> createState() => _DProfileCardState();
+}
+
+class _DProfileCardState extends State<DProfileCard> with AnimationMixin {
+  @override
+  late AnimationController controller;
+  late Animation<double> scale;
+  late Animation<double> opacity;
+  @override
+  void initState() {
+    // TODO: implement initState
+    // responsiveDeck();
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
+    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
+    controller.stop();
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // deckHeight = 22.h;
+    // deckWidth = 35.25.w;
+    // halfDeckWidth = 17.325.w;
+    // labelTextSize = 16;
+    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
+    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
+
+    return TactileButton(
+      onTap: () {
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            opaque: false,
+            barrierDismissible: true,
+            barrierColor: Colors.black54, // Dims the background
+            pageBuilder: (_, __, ___) => Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Center(
+                child: Hero(
+                  tag: ButtonState().profileHeroTag,
+                  flightShuttleBuilder: flightShuttleBuilder,
+                  child: ProfilePopup(),
+                ),
+              ),
+            ),
+          ),
+        );
       },
       child: ScaleTransition(
         scale: scale,

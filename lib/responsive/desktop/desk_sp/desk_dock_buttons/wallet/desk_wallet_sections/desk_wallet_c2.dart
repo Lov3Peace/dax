@@ -8,8 +8,8 @@ class WalletC2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _isEditable = false;
-    bool _isHidden = true;
+    bool isEditable = false;
+    bool isHidden = true;
     bool isSwitch = false;
     bool isSwitch2 = false;
 
@@ -30,7 +30,7 @@ class WalletC2 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildWalletAddressSection(setState, _isEditable, _isHidden),
+                  _buildWalletAddressSection(setState, isEditable, isHidden),
                   const Divider(color: Colors.grey),
                   _buildSecurityPrivacySection(setState, isSwitch, isSwitch2),
                   const Divider(color: Colors.grey),
@@ -44,7 +44,7 @@ class WalletC2 extends StatelessWidget {
     );
   }
 
-  Widget _buildWalletAddressSection(StateSetter setState, bool _isEditable, bool _isHidden) {
+  Widget _buildWalletAddressSection(StateSetter setState, bool isEditable, bool isHidden) {
     return Row(
       children: [
         Expanded(
@@ -54,8 +54,8 @@ class WalletC2 extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: _controller,
-                enabled: _isEditable,
-                obscureText: _isHidden,
+                enabled: isEditable,
+                obscureText: isHidden,
                 decoration: const InputDecoration(
                   labelText: 'Linked Card',
                   border: OutlineInputBorder(
@@ -70,13 +70,13 @@ class WalletC2 extends StatelessWidget {
         Column(
           children: [
             ElevatedButton(
-              onPressed: () => setState(() => _isEditable = !_isEditable),
-              child: Text(_isEditable ? 'Save' : 'Edit'),
+              onPressed: () => setState(() => isEditable = !isEditable),
+              child: Text(isEditable ? 'Save' : 'Edit'),
             ),
             const SizedBox(height: 6),
             ElevatedButton(
-              onPressed: () => setState(() => _isHidden = !_isHidden),
-              child: Text(_isHidden ? 'Show' : 'Hide'),
+              onPressed: () => setState(() => isHidden = !isHidden),
+              child: Text(isHidden ? 'Show' : 'Hide'),
             ),
           ],
         ),
@@ -160,7 +160,7 @@ class WalletC2 extends StatelessWidget {
 }
 
 class CurrentMonthText extends StatelessWidget {
-  CurrentMonthText({super.key});
+  const CurrentMonthText({super.key});
 
   @override
   Widget build(BuildContext context) {

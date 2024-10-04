@@ -1,9 +1,6 @@
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_all_messages.dart';
@@ -19,40 +16,40 @@ import 'package:sizer/sizer.dart';
 //const String _heroFriendsWindow = 'Friends-window-hero';
 final friendsBucket = PageStorageBucket();
 
-class DeskFriendsWindowPopupCard extends StatefulWidget {
-  /// {@macro add_todo_popup_card}
-  const DeskFriendsWindowPopupCard({Key? key}) : super(key: key);
+// class DeskFriendsWindowPopupCard extends StatefulWidget {
+//   /// {@macro add_todo_popup_card}
+//   const DeskFriendsWindowPopupCard({Key? key}) : super(key: key);
 
-  @override
-  State<DeskFriendsWindowPopupCard> createState() => _DeskFriendsWindowPopupCardState();
-}
+//   @override
+//   State<DeskFriendsWindowPopupCard> createState() => _DeskFriendsWindowPopupCardState();
+// }
 
-class _DeskFriendsWindowPopupCardState extends State<DeskFriendsWindowPopupCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: tran,
-      child: TextButton.icon(
-        icon: const Icon(
-          Ionicons.people_outline,
-          size: 30,
-          color: Colors.white54,
-        ),
-        onPressed: () {
-          final startSlide = context.read<ButtonState>();
-          startSlide.activateSlide(SlideType.friend);
-        },
-        label: Padding(
-          padding: EdgeInsets.only(left: 0.5.w),
-          child: Text(
-            'Connections',
-            style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 2.sp), fontWeight: FontWeight.w400, color: Colors.white54),
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class _DeskFriendsWindowPopupCardState extends State<DeskFriendsWindowPopupCard> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(
+//       color: tran,
+//       child: TextButton.icon(
+//         icon: const Icon(
+//           Ionicons.people_outline,
+//           size: 30,
+//           color: Colors.white54,
+//         ),
+//         onPressed: () {
+//           final startSlide = context.read<ButtonState>();
+//           startSlide.activateSlide(SlideType.friend);
+//         },
+//         label: Padding(
+//           padding: EdgeInsets.only(left: 0.5.w),
+//           child: Text(
+//             'Connections',
+//             style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 2.sp), fontWeight: FontWeight.w400, color: Colors.white54),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class FriendsPopUp extends StatefulWidget {
   const FriendsPopUp({super.key});
@@ -119,7 +116,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 77.h,
                     width: 71.w,
                     // padding: const EdgeInsets.symmetric(vertical: 32),
@@ -249,8 +246,8 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                           padding: EdgeInsets.symmetric(horizontal: 4.5.w, vertical: 1.h),
                                           decoration: BoxDecoration(
                                               gradient: LinearGradient(colors: [Colors.grey.shade900, Colors.grey.shade800]),
-                                              boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
-                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                              boxShadow: const [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: const BorderRadius.all(Radius.circular(20))),
                                           child: const Text("Favorites", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
@@ -274,8 +271,8 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                           padding: EdgeInsets.symmetric(horizontal: 4.5.w, vertical: 1.h),
                                           decoration: BoxDecoration(
                                               gradient: LinearGradient(colors: [Colors.grey.shade900, Colors.grey.shade800]),
-                                              boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
-                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                              boxShadow: const [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: const BorderRadius.all(Radius.circular(20))),
                                           child: const Text("Partners", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
@@ -294,7 +291,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                     child: CarouselSlider(
                                       carouselController: _carouselController,
                                       options: CarouselOptions(
-                                        scrollPhysics: NeverScrollableScrollPhysics(),
+                                        scrollPhysics: const NeverScrollableScrollPhysics(),
                                         viewportFraction: 1,
                                         enlargeCenterPage: true,
                                         initialPage: _currentIndex,

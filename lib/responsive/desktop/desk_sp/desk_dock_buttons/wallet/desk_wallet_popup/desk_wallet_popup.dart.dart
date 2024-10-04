@@ -9,8 +9,8 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../../util/gradient_container.dart';
 import '../../../../../../util/tactile_button.dart';
-import 'desk_wallet_c1.dart';
-import 'desk_wallet_c2.dart';
+import '../desk_wallet_sections/desk_wallet_c1.dart';
+import '../desk_wallet_sections/desk_wallet_c2.dart';
 
 Control slideWallet = Control.stop;
 

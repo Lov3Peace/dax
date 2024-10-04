@@ -7,7 +7,7 @@ import 'package:sizer/sizer.dart';
 class GeneralSettingsInfo extends StatelessWidget {
   GeneralSettingsInfo({super.key});
 
-  TextEditingController _textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
   bool _isEditingEnabled = false;
 
   @override

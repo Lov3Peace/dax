@@ -17,7 +17,7 @@ class ActionsButtons extends StatelessWidget {
             padding: EdgeInsets.fromLTRB(1.w, 0.5.w, 1.w, 0.5.w),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(1.5.w)), gradient: LinearGradient(colors: [purp, Colors.purple.shade300])),
-            child: Icon(
+            child: const Icon(
               Ionicons.chatbubble_sharp,
               size: 20,
             ),

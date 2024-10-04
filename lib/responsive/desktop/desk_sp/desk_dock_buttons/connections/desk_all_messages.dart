@@ -29,13 +29,13 @@ class AllMessages extends StatelessWidget {
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
-          color: Color.fromARGB(70, 32, 32, 40),
+          color: const Color.fromARGB(70, 32, 32, 40),
           borderRadius: const BorderRadius.all(
             Radius.circular(24),
           ),
           border: Border.all(color: deckBorderColor)),
       child: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: DataTable(
             dividerThickness: 0.25,
@@ -47,7 +47,7 @@ class AllMessages extends StatelessWidget {
               DataColumn(label: Text('Last Seen', style: TextStyle(color: Colors.grey))),
               DataColumn(label: Text('Actions', style: TextStyle(color: Colors.grey))),
             ],
-            rows: [
+            rows: const [
               DataRow(cells: [
                 DataCell(Text('[Username]')),
                 DataCell(Text('[Online/Offline]')),

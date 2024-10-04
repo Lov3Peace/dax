@@ -5,7 +5,6 @@ import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
-import 'package:flutter_application_1/util/soft_close.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
@@ -124,7 +123,7 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                                     Hero(
                                       tag: ButtonState().projectsHeroTag,
                                       flightShuttleBuilder: flightShuttleBuilder,
-                                      child: DeskProjectsCont(),
+                                      child: const DeskProjectsCont(),
                                     ),
                                   ],
                                 ),
@@ -140,35 +139,35 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: WalletPopUp(),
+                          child: const WalletPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: FriendsPopUp(),
+                          child: const FriendsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: SettingsPopUp(),
+                          child: const SettingsPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: HelpPopUp(),
+                          child: const HelpPopUp(),
                         ),
                       ),
                       Indexed(
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: InfoPopUp(),
+                          child: const InfoPopUp(),
                         ),
                       ),
                     ],
@@ -209,7 +208,7 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
       ),
       child: GridView.builder(
         physics: const BouncingScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // Number of columns
           crossAxisSpacing: 20.0, // Horizontal spacing between items
           mainAxisSpacing: 20.0, // Vertical spacing between items

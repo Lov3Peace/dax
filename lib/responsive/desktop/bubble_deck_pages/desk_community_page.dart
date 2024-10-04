@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -20,6 +19,7 @@ import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
 import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
+import '../desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import '../messages.dart';
 
 class DeskCommunityPage extends StatefulWidget {
@@ -257,15 +257,30 @@ class CommunityButtonHolder extends StatelessWidget {
         children: [
           const SocialsButton()
               .animate()
-              .slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 200), duration: const Duration(milliseconds: 400), curve: SoftClose())
+              .slideX(
+                  begin: 0.25,
+                  end: 0,
+                  delay: const Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 400),
+                  curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
           const ProjectsButton()
               .animate()
-              .slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 400), duration: const Duration(milliseconds: 400), curve: SoftClose())
+              .slideX(
+                  begin: 0.25,
+                  end: 0,
+                  delay: const Duration(milliseconds: 400),
+                  duration: const Duration(milliseconds: 400),
+                  curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
           const NewsButton()
               .animate()
-              .slideX(begin: 0.25, end: 0, delay: const Duration(milliseconds: 600), duration: const Duration(milliseconds: 400), curve: SoftClose())
+              .slideX(
+                  begin: 0.25,
+                  end: 0,
+                  delay: const Duration(milliseconds: 600),
+                  duration: const Duration(milliseconds: 400),
+                  curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
         ],
       ),

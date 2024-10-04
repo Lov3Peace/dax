@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
-import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import 'package:flutter_application_1/util/auth/signup.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -71,8 +70,7 @@ class _InitLoginButtonState extends State<InitLoginButton> {
             child: Container(
               height: 60.h,
               constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 500),
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(32)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               child: Material(
                 shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -163,15 +161,12 @@ class _LoginFormState extends State<LoginForm> {
 
   Future login() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: '${_usernameController.text}@omni.com',
-          password: _passwordController.text);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: '${_usernameController.text}@omni.com', password: _passwordController.text);
 
       Navigator.of(context).push(
         PageRouteBuilder(
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            animation =
-                CurvedAnimation(parent: animation, curve: Curves.linear);
+            animation = CurvedAnimation(parent: animation, curve: Curves.linear);
             return FadeTransition(
               opacity: animation,
               child: child,
@@ -328,17 +323,13 @@ class _LoginFormState extends State<LoginForm> {
                             barrierDismissible: true,
                             barrierLabel: "Login",
                             context: context,
-                            transitionDuration:
-                                const Duration(milliseconds: 400),
+                            transitionDuration: const Duration(milliseconds: 400),
                             transitionBuilder: (_, animation, __, child) {
                               Tween<Offset> tween;
-                              tween = Tween(
-                                  begin: const Offset(0, -1), end: Offset.zero);
+                              tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
                               return SlideTransition(
                                 position: tween.animate(
-                                  CurvedAnimation(
-                                      parent: animation,
-                                      curve: Curves.easeInOut),
+                                  CurvedAnimation(parent: animation, curve: Curves.easeInOut),
                                 ),
                                 child: child,
                               );
@@ -346,13 +337,10 @@ class _LoginFormState extends State<LoginForm> {
                             pageBuilder: (context, _, __) => Center(
                               child: Container(
                                 height: 60.h,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(32)),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 32, horizontal: 24),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                                 child: Material(
-                                  shadowColor:
-                                      const Color.fromRGBO(42, 41, 41, 0.631),
+                                  shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
                                   color: const Color.fromARGB(42, 55, 52, 52),
                                   elevation: 2,
                                   borderRadius: BorderRadius.circular(32),
@@ -361,16 +349,12 @@ class _LoginFormState extends State<LoginForm> {
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(24),
                                         child: BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                              sigmaX: 10, sigmaY: 10),
+                                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                                           child: Container(
                                               height: 85.h,
                                               decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: const Color.fromARGB(
-                                                        182, 31, 31, 31)),
-                                                borderRadius:
-                                                    BorderRadius.circular(24),
+                                                border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
+                                                borderRadius: BorderRadius.circular(24),
                                               )),
                                         ),
                                       ),
@@ -382,8 +366,7 @@ class _LoginFormState extends State<LoginForm> {
                                           child: Column(
                                             children: [
                                               Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 10),
+                                                padding: EdgeInsets.only(top: 10),
                                                 child: Text(
                                                   "Forgot Password",
                                                   style: TextStyle(
@@ -395,8 +378,7 @@ class _LoginFormState extends State<LoginForm> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 16.0),
+                                                padding: EdgeInsets.symmetric(vertical: 16.0),
                                                 child: Text(
                                                   "Please enter your email linked to the account!",
                                                   textAlign: TextAlign.center,

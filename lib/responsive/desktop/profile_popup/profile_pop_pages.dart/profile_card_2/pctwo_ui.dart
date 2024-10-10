@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/bio/bio_ui.dart';
+import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/goals/goals_ui.dart';
+import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/showcase/showcase_ui.dart';
+import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/skills/skills_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
@@ -52,6 +55,7 @@ class PC2 extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             border: Border.all(color: Colors.white70),
           ),
+          child: SkillsUI(),
         ),
       ],
     );
@@ -65,6 +69,9 @@ class PC2 extends StatelessWidget {
         color: const Color.fromARGB(255, 34, 38, 42),
         border: Border.all(color: Colors.white70),
         borderRadius: BorderRadius.circular(30),
+      ),
+      child: Center(
+        child: UploadShowcase(),
       ),
     );
   }
@@ -89,6 +96,19 @@ class PC2 extends StatelessWidget {
             color: const Color.fromARGB(255, 34, 38, 42),
             border: Border.all(color: Colors.white70),
             borderRadius: BorderRadius.circular(30),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Goals",
+                  style: TextStyle(color: white, fontSize: 28, fontWeight: FontWeight.bold),
+                ),
+                GoalsUi(),
+              ],
+            ),
           ),
         ),
       ],

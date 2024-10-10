@@ -25,28 +25,14 @@ class PC3 extends StatelessWidget {
   }
 
   Widget buildSecondContainer() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          height: 21.5.h,
-          width: 19.w,
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 34, 38, 42),
-            borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: Colors.white70),
-          ),
-        ),
-        Container(
-          height: 21.5.h,
-          width: 19.w,
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 34, 38, 42),
-            borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: Colors.white70),
-          ),
-        ),
-      ],
+    return Container(
+      height: 44.h,
+      width: 18.w,
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 34, 38, 42),
+        border: Border.all(color: Colors.white70),
+        borderRadius: BorderRadius.circular(30),
+      ),
     );
   }
 

@@ -10,6 +10,8 @@ import '../../../../../../util/gradient_container.dart';
 import 'showcase_bloc.dart';
 
 class UploadShowcase extends StatelessWidget {
+  const UploadShowcase({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -19,7 +21,7 @@ class UploadShowcase extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Showcase',
               style: TextStyle(
                 fontSize: 24,
@@ -32,7 +34,7 @@ class UploadShowcase extends StatelessWidget {
             BlocBuilder<UploadBloc, UploadState>(
               builder: (context, state) {
                 if (state.uploadedFiles.isEmpty) {
-                  return Text(
+                  return const Text(
                     'Upload attachments like personal achievements, resume, transcript, or even photos...',
                     style: TextStyle(fontSize: 16),
                   );
@@ -45,7 +47,7 @@ class UploadShowcase extends StatelessWidget {
                           return ListTile(
                             title: Text(file.path.split('/').last),
                             trailing: IconButton(
-                              icon: Icon(Icons.delete),
+                              icon: const Icon(Icons.delete),
                               onPressed: () {
                                 BlocProvider.of<UploadBloc>(context).add(FileRemoved(file));
                               },

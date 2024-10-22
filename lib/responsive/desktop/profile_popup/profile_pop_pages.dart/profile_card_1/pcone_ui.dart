@@ -21,7 +21,7 @@ class PC1 extends StatelessWidget {
             "images/creator.png",
             height: 38.h,
           ),
-          Text(
+          const Text(
             "Creator",
             style: TextStyle(color: white, fontSize: 36, fontWeight: FontWeight.bold),
           ),

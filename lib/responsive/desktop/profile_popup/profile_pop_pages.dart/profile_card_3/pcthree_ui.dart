@@ -1,5 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/billing/billing_ui.dart';
+import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/general/general.ui.dart';
+import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/notifications/notify_ui.dart';
+import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/security/security_ui.dart';
+
 import 'package:sizer/sizer.dart';
 
 class PC3 extends StatelessWidget {
@@ -21,6 +25,7 @@ class PC3 extends StatelessWidget {
         border: Border.all(color: Colors.white70),
         borderRadius: BorderRadius.circular(30),
       ),
+      child: GeneralUi(),
     );
   }
 
@@ -33,6 +38,7 @@ class PC3 extends StatelessWidget {
         border: Border.all(color: Colors.white70),
         borderRadius: BorderRadius.circular(30),
       ),
+      child: SecurityUi(),
     );
   }
 
@@ -48,6 +54,7 @@ class PC3 extends StatelessWidget {
             border: Border.all(color: Colors.white70),
             borderRadius: BorderRadius.circular(30),
           ),
+          child: ParentWidget(),
         ),
         Container(
           height: 21.5.h,
@@ -57,6 +64,7 @@ class PC3 extends StatelessWidget {
             border: Border.all(color: Colors.white70),
             borderRadius: BorderRadius.circular(30),
           ),
+          child: BillingUi(),
         ),
       ],
     );

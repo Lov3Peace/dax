@@ -3,13 +3,13 @@ import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_p
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/goals/goals_ui.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/showcase/showcase_ui.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/skills/skills_ui.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:sizer/sizer.dart';
 
 import '../../../../../main.dart';
 
 class PC2 extends StatelessWidget {
-  PC2({super.key});
+  const PC2({super.key});
 
   BoxDecoration containerDecoration(Color color) {
     return BoxDecoration(
@@ -17,9 +17,6 @@ class PC2 extends StatelessWidget {
       borderRadius: BorderRadius.circular(30),
     );
   }
-
-  final TextEditingController _controller = TextEditingController();
-  final ValueNotifier<bool> _isTextFieldActive = ValueNotifier(false);
 
   Widget buildFirstContainer() {
     return Column(
@@ -34,7 +31,7 @@ class PC2 extends StatelessWidget {
             border: Border.all(color: Colors.white70),
           ),
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

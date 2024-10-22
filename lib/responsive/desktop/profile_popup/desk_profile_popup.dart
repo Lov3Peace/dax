@@ -18,15 +18,13 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 final profileBucket = PageStorageBucket();
 
 class ProfilePopup extends StatefulWidget {
-  ProfilePopup({super.key});
+  const ProfilePopup({super.key});
 
   @override
   State<ProfilePopup> createState() => _ProfilePopupState();
 }
 
 class _ProfilePopupState extends State<ProfilePopup> {
-  final CarouselController _controller = CarouselController();
-
   int _currentIndex = 0;
 
   final ValueNotifier<int> currentIndex = ValueNotifier<int>(0);
@@ -112,7 +110,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
                             itemBuilder: (context, index, realIndex) {
                               return AnimatedOpacity(
                                 opacity: _currentIndex == index ? 1.0 : 0.0,
-                                duration: Duration(milliseconds: 800), // Adjust fade duration
+                                duration: const Duration(milliseconds: 800), // Adjust fade duration
                                 curve: Curves.easeInOut, // Smooth transition curve
                                 child: _buildCarouselItem(index),
                               );
@@ -157,11 +155,11 @@ class _ProfilePopupState extends State<ProfilePopup> {
 
   Widget _buildCarouselItem(int index) {
     if (index == 0) {
-      return PC1();
+      return const PC1();
     } else if (index == 1) {
       return PC2();
     } else {
-      return PC3();
+      return const PC3();
     }
   }
 
@@ -229,7 +227,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
             children: state.titles
                 .map((title) => Text(
                       title,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ))
                 .toList(growable: true),
           );
@@ -272,7 +270,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
             children: state.projects
                 .map((project) => Text(
                       project,
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ))
                 .toList(),
           );

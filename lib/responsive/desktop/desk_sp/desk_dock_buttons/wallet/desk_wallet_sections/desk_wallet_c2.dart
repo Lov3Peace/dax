@@ -147,7 +147,7 @@ class WalletC2 extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CurrentMonthText(),
+            const CurrentMonthText(),
             ElevatedButton(
               onPressed: () {},
               child: const Text('View'),

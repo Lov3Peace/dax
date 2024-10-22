@@ -7,8 +7,6 @@ import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_butto
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_chat_messages.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_group_messages.dart';
 import 'package:flutter_application_1/util/ButtonState.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -349,26 +347,24 @@ class Indicators extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.start,
-        children: [
-          const Text('Bri'),
-          const Text('Tom'),
-          const Text('Skylar'),
-          Container(
-            child: Row(
-              children: [
-                SizedBox(
-                  height: 2.h,
-                  width: 3.w,
-                ),
-                Container(),
-              ],
-            ),
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.start,
+      children: [
+        const Text('Bri'),
+        const Text('Tom'),
+        const Text('Skylar'),
+        Container(
+          child: Row(
+            children: [
+              SizedBox(
+                height: 2.h,
+                width: 3.w,
+              ),
+              Container(),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

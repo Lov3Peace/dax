@@ -548,7 +548,7 @@ class ProjectStacks {
   ];
 
   final List<Widget> tabProjectStacks = [
-    Deck(
+    const Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Keyboards',
@@ -556,7 +556,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    Deck(
+    const Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Software Development',
@@ -564,7 +564,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    Deck(
+    const Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Guitars',
@@ -572,7 +572,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    Deck(
+    const Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Photography',
@@ -580,7 +580,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    Deck(
+    const Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Art',
@@ -588,7 +588,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    Deck(
+    const Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Film',
@@ -682,7 +682,6 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 
     return TactileButton(
@@ -761,7 +760,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
 
 class SocialsStacks {
   List<Widget> mobSocialsStacks = [
-    Deck(
+    const Deck(
       deckHeight: 200,
       deckWidth: 375,
       deckName: 'Instagram',
@@ -769,29 +768,29 @@ class SocialsStacks {
       gradient2: purp,
       neonGlow: Colors.deepOrange,
     ),
-    Deck(
+    const Deck(
       deckHeight: 200,
       deckWidth: 375,
       deckName: 'Twitter',
-      gradient1: const Color.fromARGB(255, 31, 154, 255),
-      gradient2: const Color.fromARGB(255, 151, 205, 255),
+      gradient1: Color.fromARGB(255, 31, 154, 255),
+      gradient2: Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
-    Deck(
+    const Deck(
       deckHeight: 200,
       deckWidth: 375,
       deckName: 'Facebook',
-      gradient1: const Color.fromARGB(255, 12, 89, 255),
-      gradient2: const Color.fromARGB(255, 151, 205, 255),
+      gradient1: Color.fromARGB(255, 12, 89, 255),
+      gradient2: Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
-    Deck(
+    const Deck(
       deckHeight: 200,
       deckWidth: 375,
       deckName: 'TikTok',
-      gradient1: const Color.fromARGB(255, 255, 63, 121),
+      gradient1: Color.fromARGB(255, 255, 63, 121),
       gradient2: Colors.cyanAccent,
-      neonGlow: const Color.fromARGB(255, 255, 91, 140),
+      neonGlow: Color.fromARGB(255, 255, 91, 140),
     ),
     const SizedBox(height: 150)
   ];
@@ -831,7 +830,7 @@ class SocialsStacks {
     const SizedBox(height: 150)
   ];
   List<Widget> deskSocialsStacks = [
-    Deck(
+    const Deck(
       deckHeight: 400,
       deckWidth: 675,
       deckName: 'Instagram',
@@ -839,29 +838,29 @@ class SocialsStacks {
       gradient2: purp,
       neonGlow: Colors.deepOrange,
     ),
-    Deck(
+    const Deck(
       deckHeight: 400,
       deckWidth: 675,
       deckName: 'Twitter',
-      gradient1: const Color.fromARGB(255, 31, 154, 255),
-      gradient2: const Color.fromARGB(255, 151, 205, 255),
+      gradient1: Color.fromARGB(255, 31, 154, 255),
+      gradient2: Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
-    Deck(
+    const Deck(
       deckHeight: 400,
       deckWidth: 675,
       deckName: 'Facebook',
-      gradient1: const Color.fromARGB(255, 12, 89, 255),
-      gradient2: const Color.fromARGB(255, 151, 205, 255),
+      gradient1: Color.fromARGB(255, 12, 89, 255),
+      gradient2: Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
-    Deck(
+    const Deck(
       deckHeight: 400,
       deckWidth: 675,
       deckName: 'TikTok',
-      gradient1: const Color.fromARGB(255, 255, 63, 121),
+      gradient1: Color.fromARGB(255, 255, 63, 121),
       gradient2: Colors.cyanAccent,
-      neonGlow: const Color.fromARGB(255, 255, 91, 140),
+      neonGlow: Color.fromARGB(255, 255, 91, 140),
     ),
     const SizedBox(height: 150)
   ];
@@ -903,7 +902,7 @@ class _CommunityDeckState extends State<CommunityDeck> with AnimationMixin {
     // deckWidth = 35.25.w;
     // halfDeckWidth = 17.325.w;
     // labelTextSize = 16;
-    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
+
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
     // if (screenWidth < 550) {
     //   deckHeight = screenHeight * 0.22;
@@ -991,13 +990,13 @@ class _CommunityDeckState extends State<CommunityDeck> with AnimationMixin {
 
 class CommunityStacks {
   List<Widget> mobCommunityStacks = [
-    Deck(
+    const Deck(
       deckHeight: 100,
       deckWidth: 375,
       deckName: 'Balance',
-      gradient1: const Color.fromARGB(255, 157, 255, 45),
-      gradient2: const Color.fromARGB(255, 59, 193, 255),
-      neonGlow: const Color.fromARGB(129, 157, 255, 45),
+      gradient1: Color.fromARGB(255, 157, 255, 45),
+      gradient2: Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
       deckHeight: DeckHeight().deckHeight,
@@ -1069,13 +1068,13 @@ class CommunityStacks {
     const SizedBox(height: 150)
   ];
   List<Widget> deskCommunityStacks = [
-    Deck(
+    const Deck(
       deckHeight: 100,
       deckWidth: 375,
       deckName: 'Balance',
-      gradient1: const Color.fromARGB(255, 157, 255, 45),
-      gradient2: const Color.fromARGB(255, 59, 193, 255),
-      neonGlow: const Color.fromARGB(129, 157, 255, 45),
+      gradient1: Color.fromARGB(255, 157, 255, 45),
+      gradient2: Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
       deckHeight: DeckHeight().deckHeight,
@@ -1129,7 +1128,6 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
     // if (screenWidth < 550) {
     //   deckHeight = screenHeight * 0.22;
@@ -1212,37 +1210,37 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
 
 class NewsStacks {
   List<Widget> mobNewsStacks = [
-    Deck(
+    const Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Trending',
-      gradient1: const Color.fromARGB(255, 59, 193, 255),
+      gradient1: Color.fromARGB(255, 59, 193, 255),
       gradient2: purp,
-      neonGlow: const Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    Deck(
+    const Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Local News',
-      gradient1: const Color.fromARGB(255, 59, 193, 255),
+      gradient1: Color.fromARGB(255, 59, 193, 255),
       gradient2: purp,
-      neonGlow: const Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    Deck(
+    const Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'World News',
-      gradient1: const Color.fromARGB(255, 59, 193, 255),
+      gradient1: Color.fromARGB(255, 59, 193, 255),
       gradient2: purp,
-      neonGlow: const Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    Deck(
+    const Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Economic News',
-      gradient1: const Color.fromARGB(255, 59, 193, 255),
+      gradient1: Color.fromARGB(255, 59, 193, 255),
       gradient2: purp,
-      neonGlow: const Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
     const SizedBox(height: 150)
   ];
@@ -1282,37 +1280,37 @@ class NewsStacks {
     const SizedBox(height: 150)
   ];
   List<Widget> deskNewsStacks = [
-    Deck(
+    const Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Trending',
-      gradient1: const Color.fromARGB(255, 59, 193, 255),
+      gradient1: Color.fromARGB(255, 59, 193, 255),
       gradient2: purp,
-      neonGlow: const Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    Deck(
+    const Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Local News',
-      gradient1: const Color.fromARGB(255, 59, 193, 255),
+      gradient1: Color.fromARGB(255, 59, 193, 255),
       gradient2: purp,
-      neonGlow: const Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    Deck(
+    const Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'World News',
-      gradient1: const Color.fromARGB(255, 59, 193, 255),
+      gradient1: Color.fromARGB(255, 59, 193, 255),
       gradient2: purp,
-      neonGlow: const Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    Deck(
+    const Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Economic News',
-      gradient1: const Color.fromARGB(255, 59, 193, 255),
+      gradient1: Color.fromARGB(255, 59, 193, 255),
       gradient2: purp,
-      neonGlow: const Color.fromARGB(255, 59, 193, 255),
+      neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
     const SizedBox(height: 150)
   ];
@@ -1353,7 +1351,7 @@ class _MTProfileCardState extends State<MTProfileCard> with AnimationMixin {
     // deckWidth = 35.25.w;
     // halfDeckWidth = 17.325.w;
     // labelTextSize = 16;
-    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
+
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 
     return TactileButton(
@@ -1452,8 +1450,6 @@ class _DProfileCardState extends State<DProfileCard> with AnimationMixin {
     // deckWidth = 35.25.w;
     // halfDeckWidth = 17.325.w;
     // labelTextSize = 16;
-    var screenHeight = window.physicalSize.height / window.devicePixelRatio;
-    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
 
     return TactileButton(
       onTap: () {
@@ -1468,7 +1464,7 @@ class _DProfileCardState extends State<DProfileCard> with AnimationMixin {
                 child: Hero(
                   tag: ButtonState().profileHeroTag,
                   flightShuttleBuilder: flightShuttleBuilder,
-                  child: ProfilePopup(),
+                  child: const ProfilePopup(),
                 ),
               ),
             ),

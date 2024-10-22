@@ -7,6 +7,8 @@ import 'bio_state.dart';
 class BioTextField extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
 
+  BioTextField({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -46,7 +48,7 @@ class BioTextField extends StatelessWidget {
                             // Dispatch the SaveBio event when text changes
                             context.read<BioBloc>().add(SaveBio(text));
                           },
-                          style: TextStyle(fontSize: 16.0),
+                          style: const TextStyle(fontSize: 16.0),
                           decoration: InputDecoration(
                             border: InputBorder.none, // No border or underline
                             focusedBorder: InputBorder.none, // No border when focused

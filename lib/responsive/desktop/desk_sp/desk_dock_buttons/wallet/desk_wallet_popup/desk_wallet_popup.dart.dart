@@ -434,7 +434,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               //Container #1
-                                              WalletC1(),
+                                              const WalletC1(),
 
                                               //Container #2
                                               WalletC2(),

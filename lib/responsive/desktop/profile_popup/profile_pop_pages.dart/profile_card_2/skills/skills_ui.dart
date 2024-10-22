@@ -45,6 +45,8 @@ class SkillsUI extends StatelessWidget {
     'Translation', 'Copywriting', 'SEO', 'Interior Design'
   ];
 
+  SkillsUI({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -54,11 +56,11 @@ class SkillsUI extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Skills',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
               child: BlocBuilder<SkillsBloc, List<String>>(
                 builder: (context, skills) {
@@ -66,8 +68,8 @@ class SkillsUI extends StatelessWidget {
                     itemCount: skills.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        margin: EdgeInsets.symmetric(vertical: 8),
-                        padding: EdgeInsets.all(16),
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(8),
@@ -77,10 +79,10 @@ class SkillsUI extends StatelessWidget {
                           children: [
                             Text(
                               skills[index],
-                              style: TextStyle(fontSize: 18),
+                              style: const TextStyle(fontSize: 18),
                             ),
                             IconButton(
-                              icon: Icon(Icons.remove_circle_outline),
+                              icon: const Icon(Icons.remove_circle_outline),
                               onPressed: () {
                                 BlocProvider.of<SkillsBloc>(context).removeSkill(index);
                               },
@@ -93,7 +95,7 @@ class SkillsUI extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(
               child: TactileButton(
                 onTap: () => {_showSelectSkillDialog(context)},
@@ -122,13 +124,13 @@ class SkillsUI extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Select Skills'),
+          title: const Text('Select Skills'),
           content: SingleChildScrollView(
             child: Column(
               children: skillsList.map((skill) {
                 return Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
-                  padding: EdgeInsets.all(16),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(9, 238, 238, 238),
                     borderRadius: BorderRadius.circular(8),
@@ -137,7 +139,7 @@ class SkillsUI extends StatelessWidget {
                     children: [
                       Text(
                         skill,
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
                       TactileButton(
                         onTap: () {

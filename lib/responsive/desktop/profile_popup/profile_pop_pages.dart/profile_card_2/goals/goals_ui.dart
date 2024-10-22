@@ -9,6 +9,8 @@ class GoalsUi extends StatelessWidget {
   final TextEditingController _goalController = TextEditingController();
   final TextEditingController _timeFrameController = TextEditingController();
 
+  GoalsUi({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -19,7 +21,7 @@ class GoalsUi extends StatelessWidget {
           children: [
             TextField(
               controller: _goalController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Enter your goal here',
                 border: InputBorder.none, // This removes the underline
               ),
@@ -31,7 +33,7 @@ class GoalsUi extends StatelessWidget {
                 }
               },
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             BlocBuilder<GoalBloc, GoalState>(
               builder: (context, state) {
                 if (state is GoalListState && state.goals.isNotEmpty) {
@@ -47,7 +49,7 @@ class GoalsUi extends StatelessWidget {
                               ? Text('Time frame: $timeFrame')
                               : TextField(
                                   controller: _timeFrameController,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     hintText: 'Enter time frame',
                                   ),
                                   onSubmitted: (timeValue) {
@@ -64,7 +66,7 @@ class GoalsUi extends StatelessWidget {
                     ),
                   );
                 } else {
-                  return Text("No goals added yet.");
+                  return const Text("No goals added yet.");
                 }
               },
             ),

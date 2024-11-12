@@ -54,7 +54,7 @@ class PC3 extends StatelessWidget {
             border: Border.all(color: Colors.white70),
             borderRadius: BorderRadius.circular(30),
           ),
-          child: ParentWidget(),
+          child: NotificationsUi(),
         ),
         Container(
           height: 21.5.h,

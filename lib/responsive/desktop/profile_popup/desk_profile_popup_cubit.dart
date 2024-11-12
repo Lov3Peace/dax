@@ -1,7 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc() : super(ProfileInitial());
+  ProfileBloc() : super(ProfileInitial()) {
+    // Initialize with dummy data
+    add(UpdateTitles(['Developer', 'Designer', 'Manager']));
+    add(UpdateCrests(['assets/creator.png', 'assets/master.png', 'assets/diamond.png']));
+    add(UpdateProjects(['Project A', 'Project B', 'Project C']));
+  }
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {

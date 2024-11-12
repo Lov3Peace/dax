@@ -205,6 +205,38 @@ class SecurityUi extends StatelessWidget {
     };
   }
 
+  final ValueNotifier<bool> _mfaEnabled = ValueNotifier(false);
+  final ValueNotifier<bool> _privateAccountEnabled = ValueNotifier(false);
+
+  SecurityUi() {
+    _loadMFAPreference();
+    _loadPrivateAccountPreference();
+  }
+
+  // Load PayPal switch state from SharedPreferences
+  Future<void> _loadMFAPreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _mfaEnabled.value = prefs.getBool('mfaEnabled') ?? false;
+  }
+
+  // Save PayPal switch state to SharedPreferences
+  Future<void> _saveMFAPreference(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('mfaEnabled', value);
+  }
+
+  // Load PayPal switch state from SharedPreferences
+  Future<void> _loadPrivateAccountPreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _privateAccountEnabled.value = prefs.getBool('privateAccountEnabled') ?? false;
+  }
+
+  // Save PayPal switch state to SharedPreferences
+  Future<void> _savePrivateAccountPreference(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('privateAccountEnabled', value);
+  }
+
   // Save preference to SharedPreferences
   Future<void> _savePreference(String key, dynamic value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -294,18 +326,26 @@ class SecurityUi extends StatelessWidget {
               ),
 
               // MFA Toggle with StatefulBuilder for immediate switch response
-              StatefulBuilder(
-                builder: (context, setState) {
-                  return SwitchListTile(
-                    title: const Text('MFA'),
-                    value: mfaEnabled,
-                    onChanged: (bool value) async {
-                      setState(() {
-                        _savePreference('mfaEnabled', value);
-                      });
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'MFA',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  ValueListenableBuilder<bool>(
+                    valueListenable: _mfaEnabled,
+                    builder: (context, value, child) {
+                      return Switch(
+                        value: value,
+                        onChanged: (bool newValue) {
+                          _mfaEnabled.value = newValue;
+                          _saveMFAPreference(newValue);
+                        },
+                      );
                     },
-                  );
-                },
+                  ),
+                ],
               ),
 
               const Divider(color: Color.fromARGB(168, 255, 255, 255)),
@@ -355,18 +395,26 @@ class SecurityUi extends StatelessWidget {
               const Divider(color: Color.fromARGB(168, 255, 255, 255)),
 
               // Privacy Toggle with StatefulBuilder for immediate switch response
-              StatefulBuilder(
-                builder: (context, setState) {
-                  return SwitchListTile(
-                    title: const Text('Private Account'),
-                    value: privateAccountEnabled,
-                    onChanged: (bool value) async {
-                      setState(() {
-                        _savePreference('privateAccountEnabled', value);
-                      });
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Private Account',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  ValueListenableBuilder<bool>(
+                    valueListenable: _privateAccountEnabled,
+                    builder: (context, value, child) {
+                      return Switch(
+                        value: value,
+                        onChanged: (bool newValue) {
+                          _privateAccountEnabled.value = newValue;
+                          _savePrivateAccountPreference(newValue);
+                        },
+                      );
                     },
-                  );
-                },
+                  ),
+                ],
               ),
             ],
           ),

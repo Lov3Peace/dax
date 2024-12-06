@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../util/ButtonState.dart';
+import '../../../desk_constants.dart';
 import 'info_side_panel.dart';
 import 'info_side_panel_info/info_about_us.dart';
 
@@ -17,7 +18,7 @@ class InfoPopUp extends StatelessWidget {
       builder: (context, value, child) => CustomAnimationBuilder<double>(
         control: value.infoSlideControl,
         startPosition: 0,
-        tween: Tween(begin: 0, end: 83.5.w),
+        tween: Tween(begin: 0, end: 83.w),
         duration: const Duration(milliseconds: 1250),
         curve: Curves.easeInOutBack,
         onCompleted: () {
@@ -29,19 +30,18 @@ class InfoPopUp extends StatelessWidget {
             child: child,
           );
         },
-        child: Center(
-          child: Padding(
-            padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
-            child: Container(
-              height: 85.h,
-              width: 70.w,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(32),
-              ),
-              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+        child: Container(
+          height: 100.h,
+          width: 71.w,
+          alignment: Alignment.center,
+          child: Stack(alignment: Alignment.center, children: [
+            SizedBox(
+              height: 77.h,
+              width: 71.w,
+              // padding: const EdgeInsets.symmetric(vertical: 32),
               child: Material(
                 shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                color: const Color.fromARGB(42, 55, 52, 52),
+                color: const Color.fromARGB(140, 20, 20, 30),
                 elevation: 2,
                 borderRadius: BorderRadius.circular(32),
                 child: Stack(
@@ -49,14 +49,13 @@ class InfoPopUp extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(24),
                       child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                         child: Container(
-                          height: 85.h,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                        ),
+                            // height: 85.h,
+                            decoration: BoxDecoration(
+                          border: Border.all(color: deckBorderColor),
+                          borderRadius: BorderRadius.circular(24),
+                        )),
                       ),
                     ),
                     Column(
@@ -111,7 +110,7 @@ class InfoPopUp extends StatelessWidget {
                               // in the info side panel.
                               Container(
                                 height: 75.h,
-                                width: 47.w,
+                                width: 50.w,
                                 decoration: const BoxDecoration(
                                   color: Color.fromRGBO(17, 17, 17, 1),
                                   borderRadius: BorderRadius.all(
@@ -122,7 +121,7 @@ class InfoPopUp extends StatelessWidget {
                                   // The container that holds the information
                                   child: Container(
                                     height: 71.h,
-                                    width: 45.w,
+                                    width: 48.w,
                                     decoration: const BoxDecoration(
                                       color: Color.fromRGBO(25, 25, 29, 1),
                                       borderRadius: BorderRadius.all(
@@ -142,7 +141,7 @@ class InfoPopUp extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          ]),
         ),
       ),
     );

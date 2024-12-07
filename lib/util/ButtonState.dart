@@ -46,18 +46,19 @@ class ButtonState extends ChangeNotifier {
   String socialsHeroTag;
   String communityHeroTag;
   String newsHeroTag;
+  String profileHeroTag;
 
-  ButtonState({
-    this.friendSlideControl = Control.stop,
-    this.walletSlideControl = Control.stop,
-    this.settingSlideControl = Control.stop,
-    this.helpSlideControl = Control.stop,
-    this.infoSlideControl = Control.stop,
-    this.projectsHeroTag = 'projectsHero',
-    this.socialsHeroTag = 'socialsHero',
-    this.communityHeroTag = 'financesHero',
-    this.newsHeroTag = 'newsHero',
-  });
+  ButtonState(
+      {this.friendSlideControl = Control.stop,
+      this.walletSlideControl = Control.stop,
+      this.settingSlideControl = Control.stop,
+      this.helpSlideControl = Control.stop,
+      this.infoSlideControl = Control.stop,
+      this.projectsHeroTag = 'projectsHero',
+      this.socialsHeroTag = 'socialsHero',
+      this.communityHeroTag = 'financesHero',
+      this.newsHeroTag = 'newsHero',
+      this.profileHeroTag = 'profileHero'});
 
   void setHoverDeskButton(String id) {
     hoverDeskButtonId = id;
@@ -198,6 +199,7 @@ class ButtonState extends ChangeNotifier {
     socialsHeroTag = 'socialsHero_Off';
     communityHeroTag = 'communityHero_Off';
     newsHeroTag = 'newsHero_Off';
+    profileHeroTag = 'profileHero_Off';
     notifyListeners();
   }
 
@@ -206,6 +208,7 @@ class ButtonState extends ChangeNotifier {
     socialsHeroTag = 'socialsHero';
     communityHeroTag = 'communityHero';
     newsHeroTag = 'newsHero';
+    profileHeroTag = 'profileHero';
     notifyListeners();
   }
 

@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
 class WalletC1 extends StatelessWidget {
-  WalletC1({Key? key}) : super(key: key);
+  const WalletC1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

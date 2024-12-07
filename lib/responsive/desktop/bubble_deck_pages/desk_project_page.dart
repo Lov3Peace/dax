@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/util/soft_close.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
@@ -253,7 +253,7 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
       ),
       child: GridView.builder(
         physics: const BouncingScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // Number of columns
           crossAxisSpacing: 20.0, // Horizontal spacing between items
           mainAxisSpacing: 20.0, // Vertical spacing between items

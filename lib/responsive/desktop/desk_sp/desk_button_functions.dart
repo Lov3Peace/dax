@@ -173,6 +173,7 @@ class ReverseSlideButton extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     var buttonState = Provider.of<ButtonState>(context);
     final ValueNotifier<bool> isHovering = ValueNotifier(false);

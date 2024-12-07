@@ -63,7 +63,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
             child: Stack(
               children: [
                 // Background(),
-                ArtBoardScreen(),
+                const ArtBoardScreen(),
                 Indexer(
                   children: [
                     Indexed(
@@ -136,17 +136,17 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                         leftPad: 30,
                                                       ),
                                                     ),
-                                                    Expanded(child: ProfileCard()),
+                                                    const Expanded(child: DProfileCard()),
                                                   ],
                                                 ),
                                                 deck2: Hero(
                                                     tag: ButtonState().projectsHeroTag,
                                                     flightShuttleBuilder: flightShuttleBuilder,
-                                                    child: ProjectsDeck()),
+                                                    child: const ProjectsDeck()),
                                                 deck3: Hero(
                                                     tag: ButtonState().communityHeroTag,
                                                     flightShuttleBuilder: flightShuttleBuilder,
-                                                    child: CommunityDeck()),
+                                                    child: const CommunityDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -183,10 +183,12 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                 deck4: Hero(
                                                   flightShuttleBuilder: flightShuttleBuilder,
                                                   tag: ButtonState().socialsHeroTag,
-                                                  child: SocialsDeck(),
+                                                  child: const SocialsDeck(),
                                                 ),
                                                 deck5: Hero(
-                                                    flightShuttleBuilder: flightShuttleBuilder, tag: ButtonState().newsHeroTag, child: NewsDeck()),
+                                                    flightShuttleBuilder: flightShuttleBuilder,
+                                                    tag: ButtonState().newsHeroTag,
+                                                    child: const NewsDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -204,40 +206,40 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                         Messages(),
                       ],
                     ),
-                    DimOverlay(),
+                    const DimOverlay(),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: WalletPopUp(),
+                        child: const WalletPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: FriendsPopUp(),
+                        child: const FriendsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: SettingsPopUp(),
+                        child: const SettingsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: HelpPopUp(),
+                        child: const HelpPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: InfoPopUp(),
+                        child: const InfoPopUp(),
                       ),
                     ),
                   ],

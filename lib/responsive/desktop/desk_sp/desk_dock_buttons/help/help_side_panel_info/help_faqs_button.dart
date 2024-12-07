@@ -9,7 +9,7 @@ class FAQsInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 72.5.h,
-      width: 45.w,
+      width: 48.w,
       decoration: const BoxDecoration(
         color: Color.fromRGBO(25, 25, 29, 1),
         borderRadius: BorderRadius.all(Radius.circular(20)),

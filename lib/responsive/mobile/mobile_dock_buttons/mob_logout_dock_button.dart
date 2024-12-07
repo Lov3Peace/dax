@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
@@ -52,14 +51,12 @@ class MobLogoutWindowPopupCard extends StatefulWidget {
     required dynamic Function()? onPressed,
   }) : super(key: key);
   @override
-  State<MobLogoutWindowPopupCard> createState() =>
-      _LogoutwindowPopupCardState();
+  State<MobLogoutWindowPopupCard> createState() => _LogoutwindowPopupCardState();
   // TODO: implement createState
 }
 
 /// {@macro add_todo_popup_card}
-class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
-    with AnimationMixin {
+class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard> with AnimationMixin {
   Future signOut() async {
     Navigator.push(
       context,
@@ -87,10 +84,8 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
               child: Container(
                 height: 35.h,
                 width: 85.w,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
                   tag: _heroLogoutWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
@@ -108,9 +103,7 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
                             child: Container(
                                 height: 85.h,
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color.fromARGB(
-                                          182, 31, 31, 31)),
+                                  border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
                           ),
@@ -125,10 +118,7 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: 'Logout',
-                                    hintStyle: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
+                                    hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
                                     border: InputBorder.none,
                                   ),
                                   cursorColor: Colors.white,
@@ -137,10 +127,7 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: 'Would you like to log out?',
-                                    hintStyle: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18),
+                                    hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
                                     border: InputBorder.none,
                                   ),
                                   cursorColor: Colors.white,

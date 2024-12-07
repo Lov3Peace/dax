@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../util/ButtonState.dart';
-import '../../../../util/tactile_button.dart';
 
 class DeskHomeWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
@@ -61,14 +60,9 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: isActive || isHover
-                    ? const EdgeInsets.only(left: 10)
-                    : const EdgeInsets.only(left: 0),
+                padding: isActive || isHover ? const EdgeInsets.only(left: 10) : const EdgeInsets.only(left: 0),
                 decoration: BoxDecoration(
-                  border: Border.all(
-                      color: isActive || isHover
-                          ? Colors.black87
-                          : Colors.transparent),
+                  border: Border.all(color: isActive || isHover ? Colors.black87 : Colors.transparent),
                   boxShadow: [
                     BoxShadow(
                       color: isActive

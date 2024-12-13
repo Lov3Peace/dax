@@ -165,7 +165,7 @@ class _DeskHeroCommunityPageState extends State<DeskHeroCommunityPage> with Anim
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const InfoPopUp(),
+                          child: InfoPopUp(),
                         ),
                       ),
                     ],

@@ -1,19 +1,24 @@
 import 'dart:ui';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_button_functions.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_about_us.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_contact_us.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_goals.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_terms_conditions.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../util/ButtonState.dart';
 import '../../../desk_constants.dart';
 import 'info_side_panel.dart';
-import 'info_side_panel_info/info_about_us.dart';
 
 class InfoPopUp extends StatelessWidget {
-  const InfoPopUp({super.key});
+  InfoPopUp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final buttonState = Provider.of<ButtonState>(context);
     return Consumer<ButtonState>(
       builder: (context, value, child) => CustomAnimationBuilder<double>(
         control: value.infoSlideControl,
@@ -119,16 +124,22 @@ class InfoPopUp extends StatelessWidget {
                                 ),
                                 child: Center(
                                   // The container that holds the information
-                                  child: Container(
-                                    height: 71.h,
-                                    width: 48.w,
-                                    decoration: const BoxDecoration(
-                                      color: Color.fromRGBO(25, 25, 29, 1),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
+                                  child: CarouselSlider(
+                                    carouselController: buttonState.carouselController,
+                                    items: [
+                                      AboutUsInformation(),
+                                      ContactUsInformation(),
+                                      GoalsInformation(),
+                                      TermsConditionsInformation(),
+                                    ],
+                                    options: CarouselOptions(
+                                      height: 100.h,
+                                      viewportFraction: 0.7,
+                                      enlargeCenterPage: true,
+                                      onPageChanged: (index, reason) {
+                                        buttonState.setSlide(index);
+                                      },
                                     ),
-                                    child: const AboutUsInformation(),
                                   ),
                                 ),
                               ),

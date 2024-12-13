@@ -168,7 +168,7 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const InfoPopUp(),
+                        child: InfoPopUp(),
                       ),
                     ),
                   ],

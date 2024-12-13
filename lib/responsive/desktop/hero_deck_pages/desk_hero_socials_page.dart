@@ -166,7 +166,7 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const InfoPopUp(),
+                          child: InfoPopUp(),
                         ),
                       ),
                     ],

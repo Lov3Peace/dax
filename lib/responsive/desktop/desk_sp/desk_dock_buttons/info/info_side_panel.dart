@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/ButtonState.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../main.dart';
@@ -57,28 +56,24 @@ class InfoSidePanelButtons extends StatelessWidget {
     );
   }
 
-  // This build creates a button and gives that button perimeters such as context
-  // button Id and button text, allowing for every button to be unique while having
-  // the same animations.
   Widget _buildButton(BuildContext context, String infoButtonId, String infoButtonText) {
     var buttonState = Provider.of<ButtonState>(context);
     bool isActive = buttonState.activeInfoButtonId == infoButtonId;
 
     return GestureDetector(
       onTap: () {
-        buttonState.setActiveInfoButton(infoButtonId); // Set the pressed button as active
-        buttonState.callInfoClassForButton(infoButtonId);
+        buttonState.setActiveInfoButton(infoButtonId);
       },
       child: Align(
         alignment: Alignment.centerLeft,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 100),
           decoration: BoxDecoration(
-            border: Border.all(color: isActive ? Colors.black87 : tran),
+            border: Border.all(color: isActive ? Colors.black87 : Colors.transparent),
             boxShadow: [
               BoxShadow(color: isActive ? Colors.white : Colors.grey.shade700),
             ],
-            color: tran,
+            color: Colors.transparent,
             borderRadius: const BorderRadius.all(Radius.circular(60)),
           ),
           width: isActive ? 13.w : 9.w,
@@ -86,10 +81,11 @@ class InfoSidePanelButtons extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             infoButtonText,
-            style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
-                fontWeight: FontWeight.w400,
-                color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54),
+            style: TextStyle(
+              fontSize: 2.sp,
+              fontWeight: FontWeight.w400,
+              color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54,
+            ),
           ),
         ),
       ),

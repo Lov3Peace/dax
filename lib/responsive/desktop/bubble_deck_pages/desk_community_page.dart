@@ -167,7 +167,7 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const InfoPopUp(),
+                          child: InfoPopUp(),
                         ),
                       ),
                     ],

@@ -16,7 +16,7 @@ import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
 import '../../mobile/mob_artboard_page.dart';
-import '../../../util/ButtonState.dart';
+import '../../../util/button_state.dart';
 
 import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';

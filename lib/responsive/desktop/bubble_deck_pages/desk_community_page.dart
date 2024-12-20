@@ -11,7 +11,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
-import '../../../util/ButtonState.dart';
+import '../../../util/button_state.dart';
 import '../../../util/soft_close.dart';
 import '../../mobile/mob_artboard_page.dart';
 

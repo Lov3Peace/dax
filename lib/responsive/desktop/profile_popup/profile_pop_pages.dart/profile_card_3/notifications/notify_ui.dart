@@ -131,7 +131,7 @@ THIS IS THE NOTIFICATION UI THAT IMPLEMENTS BLOC
 */
 
 class NotificationsUi extends StatefulWidget {
-  const NotificationsUi({super.key});
+  NotificationsUi({super.key});
 
   @override
   _NotificationsUiState createState() => _NotificationsUiState();
@@ -167,7 +167,7 @@ class _NotificationsUiState extends State<NotificationsUi> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -179,7 +179,7 @@ class _NotificationsUiState extends State<NotificationsUi> {
             ),
           ),
           SwitchListTile(
-            title: const Text('Messages'),
+            title: Text('Messages'),
             value: _messagesEnabled,
             onChanged: (bool value) {
               setState(() {
@@ -189,7 +189,7 @@ class _NotificationsUiState extends State<NotificationsUi> {
             },
           ),
           SwitchListTile(
-            title: const Text('Friend Requests'),
+            title: Text('Friend Requests'),
             value: _friendRequestsEnabled,
             onChanged: (bool value) {
               setState(() {
@@ -199,7 +199,7 @@ class _NotificationsUiState extends State<NotificationsUi> {
             },
           ),
           SwitchListTile(
-            title: const Text('Transactions'),
+            title: Text('Transactions'),
             value: _transactionsEnabled,
             onChanged: (bool value) {
               setState(() {

@@ -7,7 +7,7 @@ import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_p
 import 'package:sizer/sizer.dart';
 
 class PC3 extends StatelessWidget {
-  const PC3({super.key});
+  PC3({super.key});
 
   BoxDecoration containerDecoration(Color color) {
     return BoxDecoration(

@@ -9,7 +9,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_butto
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../../util/ButtonState.dart';
+import '../../../../../util/button_state.dart';
 import '../../../desk_constants.dart';
 import 'info_side_panel.dart';
 
@@ -134,7 +134,7 @@ class InfoPopUp extends StatelessWidget {
                                     ],
                                     options: CarouselOptions(
                                       height: 100.h,
-                                      viewportFraction: 0.7,
+                                      viewportFraction: 0.9,
                                       enlargeCenterPage: true,
                                       onPageChanged: (index, reason) {
                                         buttonState.setSlide(index);

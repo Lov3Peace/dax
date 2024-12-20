@@ -7,7 +7,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart'
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
-import 'package:flutter_application_1/util/ButtonState.dart';
+import 'package:flutter_application_1/util/button_state.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';

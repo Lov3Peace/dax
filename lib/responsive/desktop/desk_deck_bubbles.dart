@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_finance_page.dart';
-import 'package:flutter_application_1/util/ButtonState.dart';
+import 'package:flutter_application_1/util/button_state.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:provider/provider.dart';

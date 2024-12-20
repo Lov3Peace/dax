@@ -3,7 +3,7 @@ import 'package:flutter_application_1/main.dart';
 import 'package:sizer/sizer.dart';
 
 class PC1 extends StatelessWidget {
-  const PC1({super.key});
+  PC1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +21,9 @@ class PC1 extends StatelessWidget {
             "images/creator.png",
             height: 38.h,
           ),
-          const Text(
+          Text(
             "Creator",
-            style: TextStyle(color: white, fontSize: 36, fontWeight: FontWeight.bold),
+            style: TextStyle(color: white, fontSize: 5.sp, fontWeight: FontWeight.bold),
           ),
         ],
       ),

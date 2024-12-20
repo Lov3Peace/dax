@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../../util/ButtonState.dart';
+import '../../../../util/button_state.dart';
 
 class DeskHomeWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}

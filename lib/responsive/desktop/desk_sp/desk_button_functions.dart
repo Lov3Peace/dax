@@ -5,56 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class DeskButtonSidePanel extends StatelessWidget {
-  const DeskButtonSidePanel({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    //final buttonState = Provider.of<ButtonState>(context);
-
-    return Stack(
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SlideButton(
-              deskButtonId: 'wallet',
-              icon: Icons.wallet,
-              deskButtonText: 'Wallet',
-            ),
-            SizedBox(height: 2.h), // Adjusted the height to 2.h
-            const SlideButton(
-              deskButtonId: 'friend',
-              icon: Icons.person,
-              deskButtonText: 'Friend',
-            ),
-            SizedBox(height: 2.h), // Adjusted the height to 2.h
-            const SlideButton(
-              deskButtonId: 'settings',
-              icon: Icons.settings,
-              deskButtonText: 'Settings',
-            ),
-            SizedBox(height: 2.h), // Adjusted the height to 2.h
-            const SlideButton(
-              deskButtonId: 'help',
-              icon: Icons.help,
-              deskButtonText: 'Help',
-            ),
-            SizedBox(height: 2.h), // Adjusted the height to 2.h
-            const SlideButton(
-              deskButtonId: 'info',
-              icon: Icons.info,
-              deskButtonText: 'Info',
-            ),
-          ],
-        ),
-        // const DimOverlay(),
-      ],
-    );
-  }
-}
-
-class SlideButton extends StatelessWidget {
+class SlideButton extends StatefulWidget {
   final String deskButtonId;
   final IconData icon;
   final String deskButtonText;
@@ -67,28 +18,34 @@ class SlideButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<SlideButton> createState() => _SlideButtonState();
+}
+
+class _SlideButtonState extends State<SlideButton> {
+  bool isHover = false;
+  @override
   Widget build(BuildContext context) {
     var buttonState = Provider.of<ButtonState>(context);
-    bool isActive = buttonState.activeDeskButtonId == deskButtonId;
-    bool isHover = buttonState.hoverDeskButtonId == deskButtonId;
+    bool isActive = buttonState.activeDeskButtonId == widget.deskButtonId;
 
     return MouseRegion(
+      cursor: SystemMouseCursors.click,
       onEnter: (event) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          buttonState.setHoverDeskButton(deskButtonId);
+        setState(() {
+          isHover = true;
+          // print(isHover);
         });
       },
       onExit: (event) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          buttonState.clearHoverDeskButton(deskButtonId);
+        setState(() {
+          isHover = false;
+          // print(isHover);
         });
       },
       child: GestureDetector(
         onTap: () {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            buttonState.setActiveDeskButton(deskButtonId);
-            buttonState.callDeskFunctionForButton(deskButtonId);
-          });
+          buttonState.setActiveDeskButton(widget.deskButtonId);
+          buttonState.callDeskFunctionForButton(widget.deskButtonId);
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -135,7 +92,7 @@ class SlideButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Icon(
-                  icon,
+                  widget.icon,
                   color: isActive
                       ? Colors.white
                       : isHover
@@ -146,7 +103,7 @@ class SlideButton extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: .5.w),
                   child: Text(
-                    deskButtonText,
+                    widget.deskButtonText,
                     style: GoogleFonts.montserrat(
                       textStyle: TextStyle(fontSize: 2.sp),
                       fontWeight: FontWeight.w400,
@@ -188,7 +145,7 @@ class ReverseSlideButton extends StatelessWidget {
             icon: ShaderMask(
               shaderCallback: (Rect bounds) {
                 return LinearGradient(
-                  colors: value ? [red, purp] : [Colors.white70, Colors.white70],
+                  colors: value != null ? [red, purp] : [Colors.white70, Colors.white70],
                   tileMode: TileMode.mirror,
                 ).createShader(bounds);
               },

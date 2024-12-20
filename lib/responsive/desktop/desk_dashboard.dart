@@ -104,6 +104,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                             Padding(
                               padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                               child: Container(
+                                clipBehavior: Clip.none,
                                 height: 45.h,
                                 width: 71.5.w,
                                 // color: red,
@@ -122,7 +123,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                           curve: Curves.easeOutBack,
                                           child: FadeInAnimation(
                                             child: Padding(
-                                              padding: EdgeInsets.fromLTRB(0.25.w, 0.0.w, 0.25.w, 1.5.h),
+                                              padding: EdgeInsets.fromLTRB(0.25.w, 0.5.h, 0.25.w, 0.5.h),
                                               child: deskDashboardDecks1(
                                                 deck1: Column(
                                                   children: [
@@ -161,6 +162,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                             Padding(
                               padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                               child: Container(
+                                clipBehavior: Clip.none,
                                 height: 45.h,
                                 width: 71.5.w,
                                 constraints: const BoxConstraints(minWidth: 700, minHeight: 250),
@@ -178,7 +180,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                           curve: Curves.easeOutBack,
                                           child: FadeInAnimation(
                                             child: Padding(
-                                              padding: EdgeInsets.fromLTRB(0.25.w, 0.0.w, 0.25.w, 0.h),
+                                              padding: EdgeInsets.fromLTRB(0.25.w, 0.5.h, 0.25.w, 0.5.h),
                                               child: deskDashboardDecks2(
                                                 deck4: Hero(
                                                   flightShuttleBuilder: flightShuttleBuilder,

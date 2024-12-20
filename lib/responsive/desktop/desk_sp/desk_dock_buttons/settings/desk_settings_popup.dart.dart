@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/general_settings.dart';
-import 'package:flutter_application_1/util/ButtonState.dart';
+import 'package:flutter_application_1/util/button_state.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:indexed/indexed.dart';

@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
-import '../../util/ButtonState.dart';
+import '../../util/button_state.dart';
 import '../../util/desk_dashboard_decks.dart';
 import '../mobile/mob_artboard_page.dart';
 import 'desk_sp/desk_button_functions.dart';
@@ -239,7 +239,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const InfoPopUp(),
+                        child: InfoPopUp(),
                       ),
                     ),
                   ],

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../util/ButtonState.dart';
+import '../../../../../util/button_state.dart';
 
 // This class creates the complete side panle all together.
 class SettingsSidePanel extends StatelessWidget {

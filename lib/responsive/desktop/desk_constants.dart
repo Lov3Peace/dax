@@ -13,7 +13,7 @@ import 'package:rive/rive.dart' as r;
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
-import '../../util/ButtonState.dart';
+import '../../util/button_state.dart';
 import '../../util/auth/login.dart';
 import '../mobile/mobile_finance_page.dart';
 import '../mobile/mobile_news_page.dart';
@@ -1464,7 +1464,7 @@ class _DProfileCardState extends State<DProfileCard> with AnimationMixin {
                 child: Hero(
                   tag: ButtonState().profileHeroTag,
                   flightShuttleBuilder: flightShuttleBuilder,
-                  child: const ProfilePopup(),
+                  child: ProfilePopup(),
                 ),
               ),
             ),

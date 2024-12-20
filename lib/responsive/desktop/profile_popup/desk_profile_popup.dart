@@ -283,7 +283,6 @@
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_1/pcone_ui.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/pctwo_ui.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/pcthree_ui.dart';
@@ -313,7 +312,7 @@ class ProfileNotifier extends ChangeNotifier {
 
 // ProfilePopup UI
 class ProfilePopup extends StatefulWidget {
-  const ProfilePopup({super.key});
+  ProfilePopup({super.key});
 
   @override
   State<ProfilePopup> createState() => _ProfilePopupState();
@@ -333,7 +332,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(32),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 24, horizontal: 20),
             child: Material(
               shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
               color: const Color.fromARGB(42, 55, 52, 52),
@@ -343,13 +342,13 @@ class _ProfilePopupState extends State<ProfilePopup> {
                 children: [
                   _buildBackgroundBlur(),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         _buildTopRow(context),
                         SizedBox(height: 1.h),
                         _buildCarousel(),
-                        const Divider(color: Colors.white, endIndent: 150, indent: 150, thickness: 0.5),
+                        Divider(color: Colors.white, endIndent: 150, indent: 150, thickness: 0.5),
                         SizedBox(height: 1.h),
                         _buildInfoSections(),
                       ],
@@ -428,12 +427,12 @@ class _ProfilePopupState extends State<ProfilePopup> {
   Widget _buildCarouselItem(int index) {
     switch (index) {
       case 0:
-        return const PC1();
+        return PC1();
       case 1:
         return PC2();
       case 2:
       default:
-        return const PC3();
+        return PC3();
     }
   }
 
@@ -483,9 +482,9 @@ class _ProfilePopupState extends State<ProfilePopup> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _buildSection('Titles', notifier.titles.map((title) => _buildTitleButton(title)).toList()),
-              _buildSection('Crests', notifier.crests.map((crest) => _buildCrestImage(crest)).toList(), horizontal: true),
-              _buildSection('Projects', notifier.projects.map((project) => _buildProjectText(project)).toList()),
+              _buildSection(notifier.titles.map((title) => _buildTitleButton(title)).toList()),
+              _buildSection(notifier.crests.map((crest) => _buildCrestImage(crest)).toList(), horizontal: true),
+              _buildSection(notifier.projects.map((project) => _buildProjectText(project)).toList()),
             ],
           );
         },
@@ -493,14 +492,14 @@ class _ProfilePopupState extends State<ProfilePopup> {
     );
   }
 
-  Widget _buildSection(String title, List<Widget> items, {bool horizontal = false}) {
+  Widget _buildSection(List<Widget> items, {bool horizontal = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-        ),
+        // Text(
+        //   title,
+        //   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+        // ),
         SizedBox(height: 0.5.h),
         horizontal
             ? Row(
@@ -523,28 +522,25 @@ class _ProfilePopupState extends State<ProfilePopup> {
     ];
     final gradient = gradientColors[title.hashCode % gradientColors.length];
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
-      child: TactileButton(
-        onTap: () {},
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: gradient),
-            borderRadius: BorderRadius.circular(24),
-            boxShadow: [
-              BoxShadow(
-                color: gradient[0].withOpacity(0.6),
-                blurRadius: 10,
-                spreadRadius: 2,
-                offset: Offset(0, 0),
-              ),
-            ],
-          ),
-          child: Text(
-            title,
-            style: const TextStyle(color: Colors.white, fontSize: 16),
-          ),
+    return TactileButton(
+      onTap: () {},
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(colors: gradient),
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: gradient[0].withOpacity(0.6),
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 0),
+            ),
+          ],
+        ),
+        child: Text(
+          title,
+          style: const TextStyle(color: Colors.white, fontSize: 12),
         ),
       ),
     );
@@ -552,7 +548,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
 
   Widget _buildCrestImage(String imagePath) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      padding: EdgeInsets.symmetric(horizontal: 4.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: Image.asset(imagePath, height: 4.5.w, fit: BoxFit.cover),
@@ -562,7 +558,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
 
   Widget _buildProjectText(String project) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: EdgeInsets.symmetric(vertical: 4.0),
       child: Text(
         project,
         style: const TextStyle(color: Colors.white, fontSize: 16),

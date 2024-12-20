@@ -9,7 +9,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../../main.dart';
 
 class PC2 extends StatelessWidget {
-  const PC2({super.key});
+  PC2({super.key});
 
   BoxDecoration containerDecoration(Color color) {
     return BoxDecoration(

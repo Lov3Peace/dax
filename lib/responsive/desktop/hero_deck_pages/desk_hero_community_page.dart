@@ -10,7 +10,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
-import '../../../util/ButtonState.dart';
+import '../../../util/button_state.dart';
 import '../../mobile/mob_artboard_page.dart';
 
 import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
@@ -165,7 +165,7 @@ class _DeskHeroCommunityPageState extends State<DeskHeroCommunityPage> with Anim
                         index: 1,
                         child: Positioned(
                           left: -70.w,
-                          child: const InfoPopUp(),
+                          child: InfoPopUp(),
                         ),
                       ),
                     ],

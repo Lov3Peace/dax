@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_communies_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_faqs_button.dart';
@@ -216,22 +217,51 @@ class ButtonState extends ChangeNotifier {
   //
   //Info Side Panel
   String _activeInfoButtonId = '';
+  int _currentIndex = 0;
+  final CarouselController _carouselController = CarouselController();
 
   String get activeInfoButtonId => _activeInfoButtonId;
+  int get currentIndex => _currentIndex;
+  CarouselController get carouselController => _carouselController;
 
   void setActiveInfoButton(String infoButtonId) {
     _activeInfoButtonId = infoButtonId;
     notifyListeners();
+    _navigateToSlide(infoButtonId);
+  }
+
+  void setSlide(int index) {
+    _currentIndex = index;
+    notifyListeners();
+  }
+
+  void goToSlide(int index) {
+    _carouselController.animateToPage(index);
+    setSlide(index);
+  }
+
+  void _navigateToSlide(String infoButtonId) {
+    final Map<String, int> buttonToSlideMap = {
+      'button1': 0, // 'About Us'
+      'button2': 1, // 'Contact Us'
+      'button3': 2, // 'Goals'
+      'button4': 3, // 'Terms & Conditions'
+    };
+
+    final index = buttonToSlideMap[infoButtonId];
+    if (index != null) {
+      goToSlide(index);
+    }
   }
 
   void callInfoClassForButton(String infoButtonId) {
-    if (infoButtonId == 'About Us') {
+    if (infoButtonId == 'button1') {
       const AboutUsInformation();
-    } else if (infoButtonId == 'Contact Us') {
+    } else if (infoButtonId == 'button2') {
       const ContactUsInformation();
-    } else if (infoButtonId == 'Goals') {
+    } else if (infoButtonId == 'button3') {
       const GoalsInformation();
-    } else if (infoButtonId == 'Terms & Conditions') {
+    } else if (infoButtonId == 'button4') {
       const TermsConditionsInformation();
     }
   }

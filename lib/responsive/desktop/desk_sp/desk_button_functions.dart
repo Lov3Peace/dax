@@ -184,9 +184,14 @@ class ReverseSlideButton extends StatelessWidget {
 //     );
 //   }
 // }
-class DimOverlay extends StatelessWidget {
+class DimOverlay extends StatefulWidget {
   const DimOverlay({super.key});
 
+  @override
+  State<DimOverlay> createState() => _DimOverlayState();
+}
+
+class _DimOverlayState extends State<DimOverlay> {
   @override
   Widget build(BuildContext context) {
     var buttonState = Provider.of<ButtonState>(context);

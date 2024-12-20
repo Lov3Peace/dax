@@ -38,7 +38,6 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
   Widget build(BuildContext context) {
     var buttonState = Provider.of<ButtonState>(context);
     bool isActive = buttonState.activeDeskButtonId == 'home';
-    bool isHover = buttonState.hoverDeskButtonId == 'home';
 
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.5.h),
@@ -46,11 +45,16 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
         dockIcon: Material(
           color: Colors.transparent,
           child: MouseRegion(
+            cursor: SystemMouseCursors.click,
             onEnter: (event) {
-              buttonState.setHoverDeskButton('home');
+              setState(() {
+                isHover = true;
+              });
             },
             onExit: (event) {
-              buttonState.clearHoverDeskButton('home');
+              setState(() {
+                isHover = false;
+              });
             },
             child: GestureDetector(
               onTap: () {

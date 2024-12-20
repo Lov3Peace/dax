@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class TactileButton extends StatefulWidget {
-  TactileButton(
-      {super.key, required this.child, this.onTap, this.scale = 0.95});
+  TactileButton({super.key, required this.child, this.onTap, this.scale = 0.95});
   VoidCallback? onTap;
   double? scale;
   Widget child;
@@ -22,6 +22,8 @@ class _TactileButtonState extends State<TactileButton> with AnimationMixin {
     // controller.stop();
     super.initState();
   }
+
+  double hoverScale = 1.0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +45,20 @@ class _TactileButtonState extends State<TactileButton> with AnimationMixin {
       child: Listener(
         onPointerDown: (event) => pressed(),
         child: MouseRegion(
+          onEnter: (event) => setState(() {
+            hoverScale = 1.01;
+          }),
+          onExit: (event) => setState(() {
+            hoverScale = 1.0;
+          }),
           cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: widget.onTap,
-            child: widget.child,
+          child: AnimatedScale(
+            duration: const Duration(milliseconds: 100),
+            scale: hoverScale,
+            child: GestureDetector(
+              onTap: widget.onTap,
+              child: widget.child,
+            ),
           ),
         ),
       ),

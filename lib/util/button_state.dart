@@ -40,7 +40,7 @@ class ButtonState extends ChangeNotifier {
   String? hoverDeskButtonId;
 
   // Dimming state
-  final ValueNotifier<bool> isDimmed = ValueNotifier(false);
+  ValueNotifier<bool> isDimmed = ValueNotifier(false);
 
   // Hero tags
   String projectsHeroTag;

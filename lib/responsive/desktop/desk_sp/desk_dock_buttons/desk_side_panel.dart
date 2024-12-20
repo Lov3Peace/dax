@@ -8,6 +8,7 @@ import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
+import '../desk_side_panel.dart';
 import 'desk_home_dock_button.dart';
 
 class DesktopSidePanel extends StatefulWidget {

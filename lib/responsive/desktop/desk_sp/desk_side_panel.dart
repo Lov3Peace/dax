@@ -100,6 +100,55 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
   }
 }
 
+class DeskButtonSidePanel extends StatelessWidget {
+  const DeskButtonSidePanel({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    //final buttonState = Provider.of<ButtonState>(context);
+
+    return Stack(
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SlideButton(
+              deskButtonId: 'wallet',
+              icon: Icons.wallet,
+              deskButtonText: 'Wallet',
+            ),
+            SizedBox(height: 2.h), // Adjusted the height to 2.h
+            const SlideButton(
+              deskButtonId: 'friend',
+              icon: Icons.person,
+              deskButtonText: 'Friend',
+            ),
+            SizedBox(height: 2.h), // Adjusted the height to 2.h
+            const SlideButton(
+              deskButtonId: 'settings',
+              icon: Icons.settings,
+              deskButtonText: 'Settings',
+            ),
+            SizedBox(height: 2.h), // Adjusted the height to 2.h
+            const SlideButton(
+              deskButtonId: 'help',
+              icon: Icons.help,
+              deskButtonText: 'Help',
+            ),
+            SizedBox(height: 2.h), // Adjusted the height to 2.h
+            const SlideButton(
+              deskButtonId: 'info',
+              icon: Icons.info,
+              deskButtonText: 'Info',
+            ),
+          ],
+        ),
+        // const DimOverlay(),
+      ],
+    );
+  }
+}
+
 //
 // Contains all buttonsin the dock
 class DeskDockButtons extends StatelessWidget {

@@ -140,7 +140,8 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
           );
         },
         pageBuilder: (context, animation, secondaryAnimation) {
-          return const AuthCheck();
+          // ignore: prefer_const_constructors
+          return AuthCheck();
         },
         transitionDuration: const Duration(milliseconds: 1000),
       ),

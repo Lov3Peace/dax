@@ -65,8 +65,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
             child: Container(
               height: 75.h,
               constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 550),
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(32)),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               child: Material(
                 shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -164,15 +163,15 @@ class _SignUpFormState extends State<SignUpForm> {
       Navigator.of(context).push(
         PageRouteBuilder(
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            animation =
-                CurvedAnimation(parent: animation, curve: Curves.linear);
+            animation = CurvedAnimation(parent: animation, curve: Curves.linear);
             return FadeTransition(
               opacity: animation,
               child: child,
             );
           },
           pageBuilder: (context, animation, secondaryAnimation) {
-            return const AuthCheck();
+            // ignore: prefer_const_constructors
+            return AuthCheck();
           },
           transitionDuration: const Duration(milliseconds: 0),
         ),
@@ -183,8 +182,7 @@ class _SignUpFormState extends State<SignUpForm> {
       } else if (e.code == 'wrong-password') {
         print('wrong password');
       } else if (e.code == 'weak-password') {
-        print(
-            'Weak Password. Please try 6 or more characters with special characters.');
+        print('Weak Password. Please try 6 or more characters with special characters.');
       }
     }
   }

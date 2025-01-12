@@ -59,11 +59,11 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
           child: Container(
             height: 100.h,
             width: 100.w,
-            constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
+            constraints: BoxConstraints(minWidth: 1200, minHeight: 500),
             child: Stack(
               children: [
                 // Background(),
-                const ArtBoardScreen(),
+                ArtBoardScreen(),
                 Indexer(
                   children: [
                     Indexed(
@@ -83,24 +83,6 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // Positioned(
-                            //   top: 100,
-                            //   left: 5.w,
-                            //   child: Hero(
-                            //     tag: 'title',
-                            //     flightShuttleBuilder: flightShuttleBuilder,
-                            //     child: TitleBubble(
-                            //       deckHeight: screenHeight * 0.07,
-                            //       deckWidth: screenWidth * 0.15,
-                            //       deckName: 'SMFH',
-                            //       gradient1: tran,
-                            //       gradient2: tran,
-                            //       neonGlow: tran,
-                            //       textSize: titleTextSize,
-                            //       leftPad: 30,
-                            //     ),
-                            //   ),
-                            // ),
                             Padding(
                               padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                               child: Container(
@@ -108,7 +90,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                 height: 45.h,
                                 width: 71.5.w,
                                 // color: red,
-                                constraints: const BoxConstraints(minWidth: 700, minHeight: 250),
+                                constraints: BoxConstraints(minWidth: 700, minHeight: 250),
                                 child: AnimationLimiter(
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
@@ -137,17 +119,17 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                         leftPad: 30,
                                                       ),
                                                     ),
-                                                    const Expanded(child: DProfileCard()),
+                                                    Expanded(child: DProfileCard()),
                                                   ],
                                                 ),
                                                 deck2: Hero(
                                                     tag: ButtonState().projectsHeroTag,
                                                     flightShuttleBuilder: flightShuttleBuilder,
-                                                    child: const ProjectsDeck()),
+                                                    child: ProjectsDeck()),
                                                 deck3: Hero(
                                                     tag: ButtonState().communityHeroTag,
                                                     flightShuttleBuilder: flightShuttleBuilder,
-                                                    child: const CommunityDeck()),
+                                                    child: CommunityDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -158,14 +140,13 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                 ),
                               ),
                             ),
-
                             Padding(
                               padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                               child: Container(
                                 clipBehavior: Clip.none,
                                 height: 45.h,
                                 width: 71.5.w,
-                                constraints: const BoxConstraints(minWidth: 700, minHeight: 250),
+                                constraints: BoxConstraints(minWidth: 700, minHeight: 250),
                                 child: AnimationLimiter(
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
@@ -185,12 +166,10 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                 deck4: Hero(
                                                   flightShuttleBuilder: flightShuttleBuilder,
                                                   tag: ButtonState().socialsHeroTag,
-                                                  child: const SocialsDeck(),
+                                                  child: SocialsDeck(),
                                                 ),
                                                 deck5: Hero(
-                                                    flightShuttleBuilder: flightShuttleBuilder,
-                                                    tag: ButtonState().newsHeroTag,
-                                                    child: const NewsDeck()),
+                                                    flightShuttleBuilder: flightShuttleBuilder, tag: ButtonState().newsHeroTag, child: NewsDeck()),
                                               )[index],
                                             ),
                                           ),
@@ -208,33 +187,33 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                         Messages(),
                       ],
                     ),
-                    const DimOverlay(),
+                    DimOverlay(),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const WalletPopUp(),
+                        child: WalletPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const FriendsPopUp(),
+                        child: FriendsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const SettingsPopUp(),
+                        child: SettingsPopUp(),
                       ),
                     ),
                     Indexed(
                       index: 1,
                       child: Positioned(
                         left: -70.w,
-                        child: const HelpPopUp(),
+                        child: HelpPopUp(),
                       ),
                     ),
                     Indexed(
@@ -250,7 +229,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                 // Positioned.fill(
                 //   child: BackdropFilter(
                 //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                //       child: const SizedBox()),
+                //       child:  SizedBox()),
                 // ),
               ],
             ),

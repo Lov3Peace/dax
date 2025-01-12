@@ -29,9 +29,9 @@ final double screenHeight = window.physicalSize.height / window.devicePixelRatio
 final double screenWidth = window.physicalSize.width / window.devicePixelRatio;
 
 // Responsive variables
-final double deckHeight = 22.h;
-final double deckWidth = 35.25.w;
-final double halfDeckWidth = 17.325.w;
+double deckHeight = 22.h;
+double deckWidth = 35.25.w;
+double halfDeckWidth = 17.325.w;
 double headerTextSize = 24;
 double subTextSize = 14;
 double profBubTextSize = 20;

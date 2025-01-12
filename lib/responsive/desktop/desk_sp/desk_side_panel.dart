@@ -49,16 +49,14 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
                 child: Container(
                   constraints: BoxConstraints(minHeight: 750),
                   clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(237, 21, 19, 22),
-                      border: Border.all(color: Color.fromARGB(182, 75, 75, 75)),
-                      boxShadow: const [
-                        // BoxShadow(
-                        //   blurRadius: 10,
-                        //   color: Color.fromARGB(255, 37, 37, 37),
-                        //   offset: Offset(0, 0),
-                        // )
-                      ]),
+                  decoration:
+                      BoxDecoration(color: Color.fromARGB(237, 21, 19, 22), border: Border.all(color: Color.fromARGB(182, 75, 75, 75)), boxShadow: [
+                    // BoxShadow(
+                    //   blurRadius: 10,
+                    //   color: Color.fromARGB(255, 37, 37, 37),
+                    //   offset: Offset(0, 0),
+                    // )
+                  ]),
                   width: 12.5.w,
                 ),
               ),
@@ -90,7 +88,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
               Spacer(),
               Padding(
                 padding: EdgeInsets.only(bottom: 2.h),
-                child: TactileButton(child: const LogoutWindowButton()),
+                child: TactileButton(child: LogoutWindowButton()),
               ),
             ],
           ),
@@ -112,31 +110,31 @@ class DeskButtonSidePanel extends StatelessWidget {
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SlideButton(
+            SlideButton(
               deskButtonId: 'wallet',
               icon: Icons.wallet,
               deskButtonText: 'Wallet',
             ),
             SizedBox(height: 2.h), // Adjusted the height to 2.h
-            const SlideButton(
+            SlideButton(
               deskButtonId: 'friend',
               icon: Icons.person,
               deskButtonText: 'Friend',
             ),
             SizedBox(height: 2.h), // Adjusted the height to 2.h
-            const SlideButton(
+            SlideButton(
               deskButtonId: 'settings',
               icon: Icons.settings,
               deskButtonText: 'Settings',
             ),
             SizedBox(height: 2.h), // Adjusted the height to 2.h
-            const SlideButton(
+            SlideButton(
               deskButtonId: 'help',
               icon: Icons.help,
               deskButtonText: 'Help',
             ),
             SizedBox(height: 2.h), // Adjusted the height to 2.h
-            const SlideButton(
+            SlideButton(
               deskButtonId: 'info',
               icon: Icons.info,
               deskButtonText: 'Info',

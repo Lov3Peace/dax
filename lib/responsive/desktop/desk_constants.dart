@@ -41,9 +41,9 @@ double? textConstraint = 500;
 double? subTextConstraint = 500;
 Color deckBorderColor = const Color.fromARGB(182, 75, 75, 75);
 
-class Deck extends StatelessWidget {
-  final double deckHeight;
-  final double deckWidth;
+class Deck extends StatefulWidget {
+  double deckHeight;
+  double deckWidth;
   final String deckName;
   final Color gradient1;
   final Color gradient2;
@@ -56,10 +56,8 @@ class Deck extends StatelessWidget {
   final r.RiveAnimation? riveAnim;
   final Image? image;
   final VoidCallback? onTap;
-  final Color shadowColor = Colors.white;
-  final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
 
-  const Deck({
+  Deck({
     required this.deckHeight,
     required this.deckWidth,
     required this.deckName,
@@ -78,22 +76,31 @@ class Deck extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<Deck> createState() => _DeckState();
+}
+
+class _DeckState extends State<Deck> {
+  final Color shadowColor = Colors.white;
+
+  final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(1.5.w),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Container(
           color: Colors.transparent,
-          height: deckHeight,
-          width: deckWidth,
+          height: widget.deckHeight,
+          width: widget.deckWidth,
           child: Stack(
             children: [
               BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                 blendMode: BlendMode.darken,
-                child: const SizedBox(),
+                child: SizedBox(),
               ),
               Container(
                 decoration: BoxDecoration(
@@ -109,37 +116,37 @@ class Deck extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      constraints: BoxConstraints(maxWidth: deckWidth * 0.9),
-                      margin: EdgeInsets.fromLTRB(2.w, deckHeight * 0.12, 2.w, 0),
-                      width: textConstraint,
-                      child: text,
+                      constraints: BoxConstraints(maxWidth: widget.deckWidth * 0.9),
+                      margin: EdgeInsets.fromLTRB(2.w, widget.deckHeight * 0.12, 2.w, 0),
+                      width: widget.textConstraint,
+                      child: widget.text,
                     ),
                     Container(
-                      constraints: BoxConstraints(maxWidth: deckWidth * 0.9),
+                      constraints: BoxConstraints(maxWidth: widget.deckWidth * 0.9),
                       margin: EdgeInsets.fromLTRB(2.w, 0.5.w, 2.w, 0),
-                      width: subTextConstraint,
-                      child: subText,
+                      width: widget.subTextConstraint,
+                      child: widget.subText,
                     )
                   ],
                 ),
               ),
               Positioned(
-                left: deckWidth * 0.5,
+                left: widget.deckWidth * 0.5,
                 bottom: 0,
                 child: Container(
-                  margin: const EdgeInsets.only(bottom: 0),
-                  width: textConstraint,
-                  child: image,
+                  margin: EdgeInsets.only(bottom: 0),
+                  width: widget.textConstraint,
+                  child: widget.image,
                 ),
               ),
               Positioned(
-                left: deckWidth * 0.6,
-                bottom: deckHeight * 0.1,
+                left: widget.deckWidth * 0.6,
+                bottom: widget.deckHeight * 0.1,
                 child: Container(
-                  constraints: BoxConstraints(maxHeight: deckHeight, maxWidth: deckHeight),
-                  margin: const EdgeInsets.only(bottom: 5),
-                  width: textConstraint,
-                  child: riveAnim,
+                  constraints: BoxConstraints(maxHeight: widget.deckHeight, maxWidth: widget.deckHeight),
+                  margin: EdgeInsets.only(bottom: 5),
+                  width: widget.textConstraint,
+                  child: widget.riveAnim,
                 ),
               ),
               Positioned(
@@ -148,18 +155,18 @@ class Deck extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(2.w, 0, 0, 2.w),
                   child: Container(
-                    constraints: const BoxConstraints(minHeight: 50, maxHeight: 160),
+                    constraints: BoxConstraints(minHeight: 50, maxHeight: 160),
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(colors: [gradient1, gradient2]),
-                      boxShadow: [BoxShadow(color: neonGlow, blurRadius: 17, blurStyle: BlurStyle.solid)],
-                      borderRadius: const BorderRadius.all(Radius.circular(500)),
+                      gradient: LinearGradient(colors: [widget.gradient1, widget.gradient2]),
+                      boxShadow: [BoxShadow(color: widget.neonGlow, blurRadius: 17, blurStyle: BlurStyle.solid)],
+                      borderRadius: BorderRadius.all(Radius.circular(500)),
                     ),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(2.w, 20, 2.w, 20),
                       child: Text(
-                        deckName,
+                        widget.deckName,
                         style: GoogleFonts.montserrat(
-                          fontSize: labelTextSize,
+                          fontSize: widget.labelTextSize,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                           shadows: [
@@ -180,7 +187,7 @@ class Deck extends StatelessWidget {
   }
 }
 
-class ProfileBubble extends StatelessWidget {
+class ProfileBubble extends StatefulWidget {
   final double deckHeight;
   final double deckWidth;
   final String deckName;
@@ -188,8 +195,6 @@ class ProfileBubble extends StatelessWidget {
   final Color gradient2;
   final Color neonGlow;
   final VoidCallback? onTap;
-  final Color shadowColor = Colors.white;
-  final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
 
   const ProfileBubble({
     required this.deckHeight,
@@ -203,9 +208,18 @@ class ProfileBubble extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<ProfileBubble> createState() => _ProfileBubbleState();
+}
+
+class _ProfileBubbleState extends State<ProfileBubble> {
+  final Color shadowColor = Colors.white;
+
+  final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -229,8 +243,8 @@ class ProfileBubble extends StatelessWidget {
           ],
         ),
         constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080),
-        height: deckHeight,
-        width: deckWidth,
+        height: widget.deckHeight,
+        width: widget.deckWidth,
         child: Stack(
           alignment: Alignment.centerRight,
           children: [
@@ -238,8 +252,8 @@ class ProfileBubble extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [gradient1, gradient2]),
-                  boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
+                  gradient: LinearGradient(colors: [widget.gradient1, widget.gradient2]),
+                  boxShadow: [BoxShadow(color: widget.neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Padding(
@@ -249,7 +263,7 @@ class ProfileBubble extends StatelessWidget {
                     children: [
                       Image.asset('images/crest5.png', width: 35),
                       Text(
-                        deckName,
+                        widget.deckName,
                         style: GoogleFonts.montserrat(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -272,15 +286,13 @@ class ProfileBubble extends StatelessWidget {
   }
 }
 
-class TitleBubble extends StatelessWidget {
+class TitleBubble extends StatefulWidget {
   final double deckHeight;
   final double deckWidth;
   final String deckName;
   final double textSize;
   final double leftPad;
   final VoidCallback? onTap;
-  final Color shadowColor = Colors.white;
-  final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
 
   const TitleBubble({
     required this.deckHeight,
@@ -293,9 +305,18 @@ class TitleBubble extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<TitleBubble> createState() => _TitleBubbleState();
+}
+
+class _TitleBubbleState extends State<TitleBubble> {
+  final Color shadowColor = Colors.white;
+
+  final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -305,13 +326,13 @@ class TitleBubble extends StatelessWidget {
           border: Border.all(color: const Color.fromARGB(182, 73, 73, 73)),
         ),
         constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 50),
-        height: deckHeight,
-        width: deckWidth,
+        height: widget.deckHeight,
+        width: widget.deckWidth,
         child: Stack(
           alignment: Alignment.centerLeft,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(leftPad, 0, 0, 0),
+              padding: EdgeInsets.fromLTRB(widget.leftPad, 0, 0, 0),
               child: Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent]),
@@ -321,9 +342,9 @@ class TitleBubble extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
-                    deckName,
+                    widget.deckName,
                     style: GoogleFonts.montserrat(
-                      fontSize: textSize,
+                      fontSize: widget.textSize,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
@@ -400,100 +421,6 @@ class _DockButtonState extends State<DockButton> {
   }
 }
 
-class ProjectsDeck extends StatefulWidget {
-  const ProjectsDeck({Key? key}) : super(key: key);
-
-  @override
-  _ProjectsDeckState createState() => _ProjectsDeckState();
-}
-
-class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
-  @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
-
-  @override
-  void initState() {
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TactileButton(
-      onTap: () {
-        setState(() {
-          controller.play();
-          Future.delayed(const Duration(milliseconds: 100)).then((_) {
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobProjectsPage(transitionAnimation: animation);
-                  } else if (screenWidth < 1100) {
-                    return TabProjectsPage(transitionAnimation: animation);
-                  } else {
-                    return const DeskHeroProjectsPage();
-                  }
-                },
-                transitionDuration: const Duration(milliseconds: 1000),
-              ),
-            );
-          });
-          Future.delayed(const Duration(milliseconds: 500)).then((_) {
-            controller.reset();
-          });
-        });
-      },
-      child: projectDeck(),
-    );
-  }
-
-  Widget projectDeck({VoidCallback? onTap, Color? color}) {
-    return Deck(
-      deckHeight: deckHeight,
-      deckWidth: deckWidth,
-      deckName: 'Projects',
-      gradient1: red,
-      gradient2: purp,
-      neonGlow: red,
-      labelTextSize: labelTextSize,
-      textConstraint: deckWidth * 0.7,
-      subTextConstraint: deckWidth * 0.6,
-      text: Text(
-        'Collaborate and innovate.',
-        style: GoogleFonts.montserrat(
-          textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      subText: Text(
-        'Post, join, or support independent projects anywhere in the world.',
-        style: GoogleFonts.montserrat(
-          textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
-          fontWeight: FontWeight.w400,
-        ),
-      ),
-      riveAnim: const r.RiveAnimation.asset('rive/building_apartments.riv'),
-    );
-  }
-}
-
 class ProjectStacks {
   final List<Widget> mobProjectStacks = [
     Deck(
@@ -548,7 +475,7 @@ class ProjectStacks {
   ];
 
   final List<Widget> tabProjectStacks = [
-    const Deck(
+    Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Keyboards',
@@ -556,7 +483,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    const Deck(
+    Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Software Development',
@@ -564,7 +491,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    const Deck(
+    Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Guitars',
@@ -572,7 +499,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    const Deck(
+    Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Photography',
@@ -580,7 +507,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    const Deck(
+    Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Art',
@@ -588,7 +515,7 @@ class ProjectStacks {
       gradient2: red,
       neonGlow: red,
     ),
-    const Deck(
+    Deck(
       deckHeight: 500,
       deckWidth: 700,
       deckName: 'Film',
@@ -652,115 +579,9 @@ class ProjectStacks {
   ];
 }
 
-//SOCIALS DECK ANIMATION
-class SocialsDeck extends StatefulWidget {
-  const SocialsDeck({super.key});
-
-  @override
-  State<SocialsDeck> createState() => _SocialsDeckState();
-}
-
-class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
-  @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
-
-    return TactileButton(
-      onTap: () {
-        setState(() {
-          // controller.play();s
-          Future.delayed(const Duration(milliseconds: 100)).then((_) {
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobSocialsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabSocialsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    // ignore: prefer_const_constructors
-                    return DeskHeroSocialsPage(
-                        //transitionAnimation: animation,
-                        );
-                  }
-                },
-                transitionDuration: const Duration(milliseconds: 1000),
-              ),
-            );
-          });
-          Future.delayed(const Duration(milliseconds: 500)).then((_) {
-            controller.reset();
-          });
-        });
-      },
-      child: socialsDeck(),
-    );
-  }
-
-  Widget socialsDeck({
-    VoidCallback? onTap,
-    Color? color,
-  }) {
-    return Deck(
-      deckHeight: deckHeight,
-      deckWidth: deckWidth,
-      deckName: 'Socials',
-      gradient1: orange,
-      gradient2: purp,
-      neonGlow: orange,
-      labelTextSize: labelTextSize,
-      textConstraint: deckWidth * 0.9,
-      text: Text(
-        'All of your socials in one place.',
-        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
-      ),
-      subText: Text(
-        'Just link your social media accounts and access them all in one place.',
-        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: subTextSize, height: 1.25), fontWeight: FontWeight.w400),
-      ),
-      subTextConstraint: deckWidth * 0.6,
-      riveAnim: const r.RiveAnimation.asset(
-        "rive/twitter_rv.riv",
-        fit: BoxFit.fitWidth,
-      ),
-      // image: Image.asset('images/crest1.png'),
-    );
-  }
-}
-
 class SocialsStacks {
   List<Widget> mobSocialsStacks = [
-    const Deck(
+    Deck(
       deckHeight: 200,
       deckWidth: 375,
       deckName: 'Instagram',
@@ -768,7 +589,7 @@ class SocialsStacks {
       gradient2: purp,
       neonGlow: Colors.deepOrange,
     ),
-    const Deck(
+    Deck(
       deckHeight: 200,
       deckWidth: 375,
       deckName: 'Twitter',
@@ -776,7 +597,7 @@ class SocialsStacks {
       gradient2: Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
-    const Deck(
+    Deck(
       deckHeight: 200,
       deckWidth: 375,
       deckName: 'Facebook',
@@ -784,7 +605,7 @@ class SocialsStacks {
       gradient2: Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
-    const Deck(
+    Deck(
       deckHeight: 200,
       deckWidth: 375,
       deckName: 'TikTok',
@@ -830,7 +651,7 @@ class SocialsStacks {
     const SizedBox(height: 150)
   ];
   List<Widget> deskSocialsStacks = [
-    const Deck(
+    Deck(
       deckHeight: 400,
       deckWidth: 675,
       deckName: 'Instagram',
@@ -838,7 +659,7 @@ class SocialsStacks {
       gradient2: purp,
       neonGlow: Colors.deepOrange,
     ),
-    const Deck(
+    Deck(
       deckHeight: 400,
       deckWidth: 675,
       deckName: 'Twitter',
@@ -846,7 +667,7 @@ class SocialsStacks {
       gradient2: Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
-    const Deck(
+    Deck(
       deckHeight: 400,
       deckWidth: 675,
       deckName: 'Facebook',
@@ -854,7 +675,7 @@ class SocialsStacks {
       gradient2: Color.fromARGB(255, 151, 205, 255),
       neonGlow: Colors.blue,
     ),
-    const Deck(
+    Deck(
       deckHeight: 400,
       deckWidth: 675,
       deckName: 'TikTok',
@@ -867,130 +688,10 @@ class SocialsStacks {
 }
 
 //FINACNES DECK ANIMATION
-class CommunityDeck extends StatefulWidget {
-  const CommunityDeck({
-    super.key,
-  });
-
-  @override
-  State<CommunityDeck> createState() => _CommunityDeckState();
-}
-
-class _CommunityDeckState extends State<CommunityDeck> with AnimationMixin {
-  @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // deckHeight = 22.h;
-    // deckWidth = 35.25.w;
-    // halfDeckWidth = 17.325.w;
-    // labelTextSize = 16;
-
-    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
-    // if (screenWidth < 550) {
-    //   deckHeight = screenHeight * 0.22;
-    //   headerTextSize = 24;
-    //   subTextSize = 16;
-    // } else if (screenWidth < 1500) {
-    //   deckWidth = 35.25.w;
-    //   headerTextSize = 30;
-    //   textConstraint = halfDeckWidth * 0.7;
-    // } else if (screenWidth <= 1920) {
-    //   deckWidth = 35.25.w;
-    //   headerTextSize = 40;
-    //   subTextSize = 22;
-    // } else if (screenWidth < 2600) {
-    //   deckWidth = 35.25.w;
-    //   headerTextSize = 48;
-    //   subTextSize = 24;
-    // } else {
-    //   deckWidth = 35.25.w;
-    //   headerTextSize = 85;
-    //   subTextSize = 30;
-    //   labelTextSize = 22;
-    // }
-    return TactileButton(
-      onTap: () {
-        setState(() {
-          controller.play();
-          Future.delayed(const Duration(milliseconds: 100)).then((_) {
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobFinancePage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabFinancePage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    return const DeskHeroCommunityPage(
-                        //transitionAnimation: animation,
-                        );
-                  }
-                },
-                transitionDuration: const Duration(milliseconds: 700),
-              ),
-            );
-          });
-          Future.delayed(const Duration(milliseconds: 500)).then((_) {
-            controller.reset();
-          });
-        });
-      },
-      child: communityDeck(),
-    );
-  }
-
-  Widget communityDeck({VoidCallback? onTap, Color? color}) {
-    return GestureDetector(
-      child: Deck(
-        deckHeight: 20.h,
-        deckWidth: halfDeckWidth,
-        deckName: 'Community',
-        gradient1: green,
-        gradient2: blue,
-        neonGlow: green,
-        labelTextSize: labelTextSize,
-        textConstraint: halfDeckWidth * 0.8,
-        text: Text(
-          'Find Your Community.',
-          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
-        ),
-      ),
-    );
-  }
-}
 
 class CommunityStacks {
   List<Widget> mobCommunityStacks = [
-    const Deck(
+    Deck(
       deckHeight: 100,
       deckWidth: 375,
       deckName: 'Balance',
@@ -1068,7 +769,7 @@ class CommunityStacks {
     const SizedBox(height: 150)
   ];
   List<Widget> deskCommunityStacks = [
-    const Deck(
+    Deck(
       deckHeight: 100,
       deckWidth: 375,
       deckName: 'Balance',
@@ -1097,120 +798,10 @@ class CommunityStacks {
 }
 
 //NEWS DECK ANIMATION
-class NewsDeck extends StatefulWidget {
-  const NewsDeck({
-    super.key,
-  });
-
-  @override
-  State<NewsDeck> createState() => _NewsDeckState();
-}
-
-class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
-  @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var screenWidth = window.physicalSize.width / window.devicePixelRatio;
-    // if (screenWidth < 550) {
-    //   deckHeight = screenHeight * 0.22;
-    //   headerTextSize = 24;
-    //   subTextSize = 16;
-    // } else if (screenWidth < 1000) {
-    //   deckHeight = 40.h;
-    //   halfDeckWidth = 18.w;
-    //   deckWidth = 37.w;
-    //   headerTextSize = 10.sp;
-    //   subTextSize = 14;
-    // } else {
-    //   deckHeight = 40.h;
-    //   halfDeckWidth = 18.w;
-    //   deckWidth = 37.w;
-    //   headerTextSize = 10.sp;
-    // }
-    return TactileButton(
-      scale: 0.95,
-      onTap: () {
-        setState(() {
-          controller.play();
-          Future.delayed(const Duration(milliseconds: 100)).then((_) {
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobNewsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabNewsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    return const DeskHeroNewsPage(
-                        //transitionAnimation: animation,
-                        );
-                  }
-                },
-                transitionDuration: const Duration(milliseconds: 700),
-              ),
-            );
-          });
-          Future.delayed(const Duration(milliseconds: 500)).then((_) {
-            controller.reset();
-          });
-        });
-      },
-      child: newsDeck(),
-    );
-  }
-
-  Widget newsDeck({VoidCallback? onTap, Color? color}) {
-    return GestureDetector(
-      child: Deck(
-        deckHeight: deckHeight,
-        deckWidth: deckWidth,
-        deckName: 'News',
-        gradient1: blue,
-        gradient2: purp,
-        neonGlow: blue,
-        labelTextSize: labelTextSize,
-        textConstraint: deckWidth * 0.7,
-        text: Text(
-          'Stay up to date.',
-          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
-        ),
-      ),
-    );
-  }
-}
 
 class NewsStacks {
   List<Widget> mobNewsStacks = [
-    const Deck(
+    Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Trending',
@@ -1218,7 +809,7 @@ class NewsStacks {
       gradient2: purp,
       neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    const Deck(
+    Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Local News',
@@ -1226,7 +817,7 @@ class NewsStacks {
       gradient2: purp,
       neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    const Deck(
+    Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'World News',
@@ -1234,7 +825,7 @@ class NewsStacks {
       gradient2: purp,
       neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    const Deck(
+    Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Economic News',
@@ -1280,7 +871,7 @@ class NewsStacks {
     const SizedBox(height: 150)
   ];
   List<Widget> deskNewsStacks = [
-    const Deck(
+    Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Trending',
@@ -1288,7 +879,7 @@ class NewsStacks {
       gradient2: purp,
       neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    const Deck(
+    Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Local News',
@@ -1296,7 +887,7 @@ class NewsStacks {
       gradient2: purp,
       neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    const Deck(
+    Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'World News',
@@ -1304,7 +895,7 @@ class NewsStacks {
       gradient2: purp,
       neonGlow: Color.fromARGB(255, 59, 193, 255),
     ),
-    const Deck(
+    Deck(
       deckHeight: 225,
       deckWidth: 375,
       deckName: 'Economic News',
@@ -1387,89 +978,6 @@ class _MTProfileCardState extends State<MTProfileCard> with AnimationMixin {
             controller.reset();
           });
         });
-      },
-      child: ScaleTransition(
-        scale: scale,
-        child: AnimatedOpacity(
-          opacity: opacity.value,
-          duration: const Duration(milliseconds: 300),
-          child: profileCard(),
-        ),
-      ),
-    );
-  }
-
-  Widget profileCard({VoidCallback? onTap, Color? color}) {
-    return Deck(
-      deckHeight: 20.h,
-      deckWidth: halfDeckWidth,
-      deckName: '',
-      gradient1: tran,
-      gradient2: tran,
-      neonGlow: tran,
-      labelTextSize: labelTextSize,
-      textConstraint: halfDeckWidth * 0.8,
-      text: Text(
-        auth.currentUser!.email.toString().allBefore('@'),
-        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
-      ),
-    );
-  }
-}
-
-class DProfileCard extends StatefulWidget {
-  const DProfileCard({super.key});
-
-  @override
-  State<DProfileCard> createState() => _DProfileCardState();
-}
-
-class _DProfileCardState extends State<DProfileCard> with AnimationMixin {
-  @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
-  @override
-  void initState() {
-    // TODO: implement initState
-    // responsiveDeck();
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
-
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // deckHeight = 22.h;
-    // deckWidth = 35.25.w;
-    // halfDeckWidth = 17.325.w;
-    // labelTextSize = 16;
-
-    return TactileButton(
-      onTap: () {
-        Navigator.of(context).push(
-          PageRouteBuilder(
-            opaque: false,
-            barrierDismissible: true,
-            barrierColor: Colors.black54, // Dims the background
-            pageBuilder: (_, __, ___) => Scaffold(
-              backgroundColor: Colors.transparent,
-              body: Center(
-                child: Hero(
-                  tag: ButtonState().profileHeroTag,
-                  flightShuttleBuilder: flightShuttleBuilder,
-                  child: ProfilePopup(),
-                ),
-              ),
-            ),
-          ),
-        );
       },
       child: ScaleTransition(
         scale: scale,

@@ -4,7 +4,6 @@ import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart'
 
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/util/soft_close.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -22,6 +21,7 @@ import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
 import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
+import '../desk_sp/desk_side_panel.dart';
 import '../messages.dart';
 
 class DeskProjectsPage extends StatefulWidget {

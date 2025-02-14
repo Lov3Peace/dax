@@ -4,7 +4,6 @@ import 'package:flutter_application_1/responsive/desktop/dashboard/news_deck.dar
 import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,6 +23,7 @@ import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
 import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
+import '../desk_sp/desk_side_panel.dart';
 import '../hero_deck_pages/desk_hero_socials_page.dart';
 import 'package:rive/rive.dart' as r;
 

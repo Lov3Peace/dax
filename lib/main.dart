@@ -37,6 +37,7 @@ Future main() async {
 
 const Color red = Color.fromARGB(255, 255, 85, 85);
 const Color purp = Color.fromARGB(255, 182, 47, 255);
+const Color pink = Color.fromARGB(255, 255, 155, 253);
 const Color blue = Color.fromARGB(255, 59, 193, 255);
 const Color orange = Colors.orange;
 const Color orangeGlow = Colors.deepOrange;

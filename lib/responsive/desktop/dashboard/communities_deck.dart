@@ -93,9 +93,9 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> with AnimationMixin {
         deckHeight: 22.h,
         deckWidth: width,
         deckName: 'Communities',
-        gradient1: green,
-        gradient2: blue,
-        neonGlow: green,
+        gradient1: red,
+        gradient2: orange,
+        neonGlow: red,
         labelTextSize: labelTextSize,
         textConstraint: width * 0.8,
         text: Text(

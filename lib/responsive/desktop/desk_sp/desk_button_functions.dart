@@ -49,7 +49,7 @@ class _SlideButtonState extends State<SlideButton> {
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: EdgeInsets.only(left: isActive || isHover ? 10 : 0),
+          padding: EdgeInsets.only(left: isActive || isHover ? 0 : 0),
           decoration: BoxDecoration(
             border: Border.all(
               color: isActive || isHover ? Colors.black87 : Colors.transparent,
@@ -75,7 +75,7 @@ class _SlideButtonState extends State<SlideButton> {
                     : [],
             gradient: isActive
                 ? const LinearGradient(
-                    colors: [red, purp],
+                    colors: [red, pink],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   )
@@ -87,7 +87,7 @@ class _SlideButtonState extends State<SlideButton> {
           height: 5.h,
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: EdgeInsets.only(left: 0.5.w),
+            padding: EdgeInsets.only(left: 1.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -98,10 +98,10 @@ class _SlideButtonState extends State<SlideButton> {
                       : isHover
                           ? const Color.fromARGB(241, 255, 255, 255)
                           : Colors.white70,
-                  size: 30,
+                  size: 3.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: .5.w),
+                  padding: EdgeInsets.only(left: 0.5.w),
                   child: Text(
                     widget.deskButtonText,
                     style: GoogleFonts.montserrat(

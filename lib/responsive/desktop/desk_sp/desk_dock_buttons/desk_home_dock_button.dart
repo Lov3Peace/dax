@@ -9,14 +9,14 @@ import 'package:sizer/sizer.dart';
 
 import '../../../../util/button_state.dart';
 
-class DeskHomeDockButton extends StatefulWidget {
-  const DeskHomeDockButton({super.key});
+class DeskHomeButton extends StatefulWidget {
+  const DeskHomeButton({super.key});
 
   @override
-  State<DeskHomeDockButton> createState() => _DeskHomeDockButtonState();
+  State<DeskHomeButton> createState() => _DeskHomeButtonState();
 }
 
-class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
+class _DeskHomeButtonState extends State<DeskHomeButton> {
   bool isHover = false;
 
   @override
@@ -40,27 +40,76 @@ class _DeskHomeDockButtonState extends State<DeskHomeDockButton> {
       },
       child: GestureDetector(
         onTap: () {
+          buttonState.setActiveDeskButton('home');
+          buttonState.resetAllButtons();
           goHome();
         },
-        child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            // padding: EdgeInsets.only(left: isActive || isHover ? 10 : 0),
-            decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                  color: tran,
-                  spreadRadius: 1,
-                  blurRadius: 0,
-                  // changes position of shadow
+        child: Stack(
+          children: [
+            // Container(
+            //   color: red,
+            //   width: double.infinity,
+            //   height: 3.h,
+            // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    // padding: EdgeInsets.only(left: isActive || isHover ? 10 : 0),
+                    decoration: BoxDecoration(
+                      boxShadow: const [
+                        BoxShadow(
+                          color: tran,
+                          spreadRadius: 1,
+                          blurRadius: 0,
+                          // changes position of shadow
+                        ),
+                      ],
+                      gradient: const LinearGradient(colors: [red, pink]),
+                      // color: LinearGradient(colors: colors),
+                      borderRadius: BorderRadius.circular(60),
+                    ),
+                    height: 4.h,
+                    // margin: isHover ? EdgeInsets.only(right: 7.w) : EdgeInsets.only(right: 0.w),
+                  ),
                 ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  width: isHover ? 1.w : 11.15.w,
+                  height: 2.h,
+                )
               ],
-              gradient: const LinearGradient(colors: [red, pink]),
-              // color: LinearGradient(colors: colors),
-              borderRadius: BorderRadius.circular(60),
             ),
-            width: 8.w,
-            height: 1.h,
-            margin: isHover ? EdgeInsets.only(right: 7.w) : EdgeInsets.only(right: 0.w)),
+            Positioned(
+              top: 0.5.h,
+              left: 0.5.w,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 0.5.w),
+                    child: Icon(
+                      Icons.dashboard_rounded,
+                      size: 3.h,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 0.5.w),
+                    child: Text(
+                      'Home',
+                      style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(fontSize: 2.sp),
+                        fontWeight: FontWeight.w400,
+                        color: isActive ? Colors.white : Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

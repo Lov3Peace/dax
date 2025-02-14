@@ -55,7 +55,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
           ]),
           width: 12.5.w,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 1.w),
+            padding: EdgeInsets.only(left: 1.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,7 +107,8 @@ class SidePanelButtons extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        DeskHomeDockButton(),
+        DeskHomeButton(),
+        SizedBox(height: 2.h),
         SlideButton(
           deskButtonId: 'wallet',
           icon: Icons.wallet,

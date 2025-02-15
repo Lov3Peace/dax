@@ -6,6 +6,7 @@ import 'package:flutter_application_1/main.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
+import '../../responsive/mobile/mob_artboard_page.dart';
 import '../gradient_container.dart';
 import '../tactile_button.dart';
 import 'auth_check.dart';
@@ -35,10 +36,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
       body: Stack(
         children: [
           // const ArtBoardScreen(),
-          const RiveAnimation.asset(
-            'rive/anime_girl.riv',
-            fit: BoxFit.fill,
-          ),
+          // const RiveAnimation.asset(
+          //   'rive/anime_girl.riv',
+          //   fit: BoxFit.fill,
+          // ),
+          Image.asset("E:images/bright-blue-yellow-orbs.jpg"),
 
           Container(
             clipBehavior: Clip.hardEdge,

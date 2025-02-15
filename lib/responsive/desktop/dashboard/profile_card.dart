@@ -87,7 +87,11 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
       textConstraint: halfDeckWidth * 0.8,
       text: Text(
         auth.currentUser!.email.toString().allBefore('@'),
-        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontSize: 6.5.sp,
+            ),
+            fontWeight: FontWeight.w600),
       ),
     );
   }

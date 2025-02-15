@@ -100,7 +100,7 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> with AnimationMixin {
         textConstraint: width * 0.8,
         text: Text(
           'Find Your Community.',
-          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 5.sp), fontWeight: FontWeight.w600),
         ),
       ),
     );

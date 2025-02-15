@@ -49,16 +49,13 @@ class _MessagesState extends State<Messages> {
                   padding: EdgeInsets.fromLTRB(1.w, 1.5.w, 1.w, 1.w),
                   child: Text(
                     'Messages',
-                    style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(fontSize: 5.sp, height: 1.0),
-                        fontWeight: FontWeight.w600),
+                    style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 5.sp, height: 1.0), fontWeight: FontWeight.w600),
                   ),
                 ),
                 Expanded(
                   child: Container(
                     margin: EdgeInsets.fromLTRB(1.w, 0, 1.w, 2.w),
-                    constraints:
-                        const BoxConstraints(minWidth: 250, minHeight: 650),
+                    constraints: const BoxConstraints(minWidth: 250, minHeight: 650),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(1.w),
                       color: const Color.fromARGB(197, 34, 31, 35),

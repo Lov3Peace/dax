@@ -16,12 +16,12 @@ class _ArtBoardScreenState extends State<ArtBoardScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          const RiveAnimation.asset(
-            "rive/mobile_artboard.riv",
-          ),
+          // const RiveAnimation.asset(
+          //   "rive/mobile_artboard.riv",
+          // ),
+          Image.asset("images/bright-blue-yellow-orbs.jpg"),
           Positioned.fill(
             child: BackdropFilter(
-              //Now it looks perfecto...sike no tf it doesn't
               filter: ImageFilter.blur(
                 sigmaX: 100,
                 sigmaY: 100,

@@ -77,11 +77,7 @@ class _DeskProjectsPageState extends State<DeskProjectsPage> with AnimationMixin
                     children: [
                       Indexed(
                         index: 2,
-                        child: DesktopSidePanel(
-                          newGrad1: purp,
-                          newGrad2: red,
-                          newGlow: red,
-                        ),
+                        child: DesktopSidePanel(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -90,7 +90,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
       text: Text(
         'Collaborate and innovate.',
         style: GoogleFonts.montserrat(
-          textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+          textStyle: TextStyle(fontSize: 7.sp),
           fontWeight: FontWeight.w600,
         ),
       ),

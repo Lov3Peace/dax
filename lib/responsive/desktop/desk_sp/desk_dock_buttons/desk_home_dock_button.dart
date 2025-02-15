@@ -21,9 +21,6 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
 
   @override
   Widget build(BuildContext context) {
-    var buttonState = Provider.of<ButtonState>(context);
-    bool isActive = buttonState.activeDeskButtonId == 'home';
-
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (event) {
@@ -40,50 +37,32 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
       },
       child: GestureDetector(
         onTap: () {
-          buttonState.setActiveDeskButton('home');
-          buttonState.resetAllButtons();
           goHome();
         },
         child: Stack(
           children: [
-            // Container(
-            //   color: red,
-            //   width: double.infinity,
-            //   height: 3.h,
-            // ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(colors: [red, pink]),
+                    borderRadius: BorderRadius.circular(60),
+                  ),
+                  width: isHover ? 11.15.w : 0.25.w,
+                  height: 5.h,
+                ),
                 Expanded(
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    // padding: EdgeInsets.only(left: isActive || isHover ? 10 : 0),
-                    decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                          color: tran,
-                          spreadRadius: 1,
-                          blurRadius: 0,
-                          // changes position of shadow
-                        ),
-                      ],
-                      gradient: const LinearGradient(colors: [red, pink]),
-                      // color: LinearGradient(colors: colors),
-                      borderRadius: BorderRadius.circular(60),
-                    ),
-                    height: 4.h,
-                    // margin: isHover ? EdgeInsets.only(right: 7.w) : EdgeInsets.only(right: 0.w),
+                    // color: blue,
+                    height: 2.h,
                   ),
                 ),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  width: isHover ? 1.w : 11.15.w,
-                  height: 2.h,
-                )
               ],
             ),
             Positioned(
-              top: 0.5.h,
+              top: 1.h,
               left: 0.5.w,
               child: Row(
                 children: [
@@ -101,7 +80,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
                       style: GoogleFonts.montserrat(
                         textStyle: TextStyle(fontSize: 2.sp),
                         fontWeight: FontWeight.w400,
-                        color: isActive ? Colors.white : Colors.white,
+                        color: Colors.white,
                       ),
                     ),
                   ),

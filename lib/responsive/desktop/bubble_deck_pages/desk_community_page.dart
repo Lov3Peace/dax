@@ -73,11 +73,7 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
                     children: [
                       Indexed(
                         index: 2,
-                        child: DesktopSidePanel(
-                          newGrad1: purp,
-                          newGrad2: red,
-                          newGlow: red,
-                        ),
+                        child: DesktopSidePanel(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -95,6 +95,7 @@ class _DeckState extends State<Deck> {
           color: Colors.transparent,
           height: widget.deckHeight,
           width: widget.deckWidth,
+          // constraints: const BoxConstraints(minHeight: 750),
           child: Stack(
             children: [
               BackdropFilter(

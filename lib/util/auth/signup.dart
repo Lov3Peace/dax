@@ -10,6 +10,7 @@ import 'auth_check.dart';
 import '../gradient_container.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 //Actual BUTTON DAVON or PHIL Whatever the hell you want to be called these days.
 //if you ask me, you just formerly go by: Primate
@@ -30,7 +31,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
     return TextButton(
       onPressed: loadPopUp,
       child: const Text(
-        "Need an account?",
+        "Sign Up?",
         style: TextStyle(
           color: Colors.white,
         ),
@@ -47,78 +48,72 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
       () {
         //slide animation
         showGeneralDialog(
-          barrierDismissible: true,
-          barrierLabel: "Sign Up",
-          context: context,
-          transitionDuration: const Duration(milliseconds: 400),
-          transitionBuilder: (_, animation, __, child) {
-            Tween<Offset> tween;
-            tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
-            return SlideTransition(
-              position: tween.animate(
-                CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-              ),
-              child: child,
-            );
-          },
-          pageBuilder: (context, _, __) => Center(
-            child: Container(
-              height: 75.h,
-              constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 550),
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
-              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-              child: Material(
-                shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                color: const Color.fromARGB(42, 55, 52, 52),
-                elevation: 2,
-                borderRadius: BorderRadius.circular(32),
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(24),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Container(
-                            height: 85.h,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: const Color.fromARGB(182, 59, 59, 59),
-                              ),
-                              borderRadius: BorderRadius.circular(24),
-                            )),
-                      ),
-                    ),
-                    const Scaffold(
-                      resizeToAvoidBottomInset: false,
-                      backgroundColor: Colors.transparent,
-                      body: SingleChildScrollView(
-                        child: Column(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                  fontSize: 34,
-                                  fontFamily: "Gontserrat",
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.normal,
+            barrierDismissible: true,
+            barrierLabel: "Sign Up",
+            context: context,
+            transitionDuration: const Duration(milliseconds: 500),
+            // transitionBuilder: (_, animation, __, child) {
+            //   Tween<Offset> tween;
+            //   tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
+            //   return SlideTransition(
+            //     position: tween.animate(
+            //       CurvedAnimation(parent: animation, curve: Curves.easeInOutBack),
+            //     ),
+            //     child: child,
+            //   );
+            // },
+            pageBuilder: (context, _, __) => Center(
+                    child: Container(
+                  height: 75.h,
+                  constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 550),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                  padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                  child: Material(
+                    shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
+                    color: const Color.fromARGB(42, 55, 52, 52),
+                    elevation: 2,
+                    borderRadius: BorderRadius.circular(32),
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(24),
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                            child: Container(
+                                height: 85.h,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color.fromARGB(182, 59, 59, 59),
+                                  ),
+                                  borderRadius: BorderRadius.circular(24),
+                                )),
+                          ),
+                        ),
+                        const SingleChildScrollView(
+                          child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Text(
+                                  "Sign Up",
+                                  style: TextStyle(
+                                    fontSize: 34,
+                                    fontFamily: "Gontserrat",
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.normal,
+                                  ),
                                 ),
                               ),
-                            ),
-                            SignUpForm(),
-                          ],
+                              SignUpForm()
+                            ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        );
+                  ),
+                ).animate().slideX(begin: -1, end: 0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOutBack)));
       },
     );
     // setState(() {

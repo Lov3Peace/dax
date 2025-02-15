@@ -2,24 +2,25 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_button_functions.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/sp_button_template.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:flutter_application_1/util/logout_dock_button.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
+import '../desk_constants.dart';
+import 'desk_dock_buttons/connections/desk_connections_popup.dart';
 import 'desk_dock_buttons/desk_home_dock_button.dart';
+import 'desk_dock_buttons/help/desk_help_popup.dart';
+import 'desk_dock_buttons/info/desk_info_popup.dart';
+import 'desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 
 class DesktopSidePanel extends StatefulWidget {
   DesktopSidePanel({
     super.key,
-    required this.newGrad1,
-    required this.newGrad2,
-    required this.newGlow,
   });
-  Color newGrad1;
-  Color newGrad2;
-  Color newGlow;
+
   @override
   State<DesktopSidePanel> createState() => _DesktopSidePanelState();
 }
@@ -42,11 +43,11 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
   Widget build(BuildContext context) {
     return ClipRect(
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: Container(
           constraints: BoxConstraints(minHeight: 750),
           clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(color: Color.fromARGB(237, 21, 19, 22), border: Border.all(color: Color.fromARGB(182, 75, 75, 75)), boxShadow: [
+          decoration: BoxDecoration(color: const Color.fromARGB(185, 21, 19, 22), border: Border.all(color: deckBorderColor), boxShadow: [
             // BoxShadow(
             //   blurRadius: 10,
             //   color: Color.fromARGB(255, 37, 37, 37),
@@ -105,38 +106,39 @@ class SidePanelButtons extends StatelessWidget {
     //final buttonState = Provider.of<ButtonState>(context);
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DeskHomeButton(),
         SizedBox(height: 2.h),
-        SlideButton(
-          deskButtonId: 'wallet',
+        SpButtonTemplate(
           icon: Icons.wallet,
           deskButtonText: 'Wallet',
+          child: WalletPopUp(),
         ),
         SizedBox(height: 2.h), // Adjusted the height to 2.h
-        SlideButton(
-          deskButtonId: 'friend',
+        SpButtonTemplate(
           icon: Icons.person,
-          deskButtonText: 'Friend',
+          deskButtonText: 'Connections',
+          child: FriendsPopUp(),
         ),
         SizedBox(height: 2.h), // Adjusted the height to 2.h
-        SlideButton(
-          deskButtonId: 'settings',
+        SpButtonTemplate(
           icon: Icons.settings,
           deskButtonText: 'Settings',
+          child: SettingsPopUp(),
         ),
         SizedBox(height: 2.h), // Adjusted the height to 2.h
-        SlideButton(
-          deskButtonId: 'help',
+        SpButtonTemplate(
           icon: Icons.help,
           deskButtonText: 'Help',
+          child: HelpPopUp(),
         ),
         SizedBox(height: 2.h), // Adjusted the height to 2.h
-        SlideButton(
-          deskButtonId: 'info',
+        SpButtonTemplate(
           icon: Icons.info,
           deskButtonText: 'Info',
+          child: InfoPopUp(),
         ),
       ],
     );

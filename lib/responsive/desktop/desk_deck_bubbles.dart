@@ -166,7 +166,6 @@ class CommunityButton extends StatelessWidget {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
               final heroOff = context.read<ButtonState>();
               heroOff.heroOff();
-              print(value.socialsHeroTag);
               Navigator.of(context).push(
                 PageRouteBuilder(
                   transitionsBuilder: (context, animation, secondaryAnimation, child) {

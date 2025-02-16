@@ -101,7 +101,7 @@ class _DeckState extends State<Deck> {
           color: Colors.transparent,
           height: widget.deckHeight,
           width: widget.deckWidth,
-          constraints: const BoxConstraints(minHeight: 750),
+          // constraints: const BoxConstraints(minHeight: 750),
 
           //Blur
           child: Stack(
@@ -166,8 +166,9 @@ class _DeckState extends State<Deck> {
               Positioned(
                 left: widget.deckWidth * 0.6,
                 bottom: widget.deckHeight * 0.1,
+                // bottom: widget.deckWidth * 0.05,
                 child: Container(
-                  constraints: BoxConstraints(maxHeight: widget.deckHeight, maxWidth: widget.deckHeight),
+                  constraints: BoxConstraints(maxHeight: widget.deckWidth * 0.3, maxWidth: widget.deckWidth * 0.3),
                   margin: EdgeInsets.only(bottom: 5),
                   width: widget.textConstraint,
                   child: widget.riveAnim,

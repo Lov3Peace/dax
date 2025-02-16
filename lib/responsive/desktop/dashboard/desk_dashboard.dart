@@ -59,7 +59,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
           child: Container(
             height: 100.h,
             // width: 100.w,
-            constraints: BoxConstraints(minWidth: 1200, minHeight: 1080),
+            constraints: BoxConstraints(minWidth: 1200, minHeight: 900),
             child: Stack(
               children: [
                 // Background(),
@@ -70,7 +70,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                     DesktopSidePanel(),
                     Container(
                       height: 90.h,
-                      constraints: BoxConstraints(minHeight: 1080),
+                      constraints: BoxConstraints(minHeight: 900),
                       child: Row(
                         children: [
                           Column(
@@ -80,7 +80,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                               Padding(
                                 padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                                 child: Container(
-                                  constraints: const BoxConstraints(minHeight: 500),
+                                  constraints: const BoxConstraints(minHeight: 450),
                                   height: 45.h,
                                   width: 71.5.w,
                                   // color: red,
@@ -136,7 +136,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                               Padding(
                                 padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                                 child: Container(
-                                  constraints: const BoxConstraints(minHeight: 500),
+                                  constraints: const BoxConstraints(minHeight: 450),
                                   // clipBehavior: Clip.none,
                                   height: 45.h,
                                   width: 71.5.w,
@@ -180,7 +180,10 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                             ],
                           ),
                           // ignore: prefer_const_constructors
-                          Messages(),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 0.25.w),
+                            child: Messages(),
+                          ),
                         ],
                       ),
                     ),

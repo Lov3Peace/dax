@@ -101,7 +101,7 @@ class _DeckState extends State<Deck> {
           color: Colors.transparent,
           height: widget.deckHeight,
           width: widget.deckWidth,
-          // constraints: const BoxConstraints(minHeight: 750),
+          constraints: const BoxConstraints(minHeight: 750),
 
           //Blur
           child: Stack(
@@ -117,6 +117,7 @@ class _DeckState extends State<Deck> {
                   color: deckColor,
                   border: Border.all(color: deckBorderColor),
                 ),
+                constraints: const BoxConstraints(minHeight: 500),
               ),
 
               //Heading and Subheading Text

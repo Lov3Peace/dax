@@ -98,6 +98,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
         neonGlow: blue,
         labelTextSize: labelTextSize,
         textConstraint: width * 0.7,
+        subTextConstraint: width * 0.7,
         headingText: 'Stay up to date.',
         subText: 'Add your preferred news source to get news updates to your feed.',
       ),

@@ -80,12 +80,9 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
                 SizedBox(
                   height: 5.h,
                 ),
-                //Home
-
                 SidePanelButtons(),
-                //
-                //Logout
                 Spacer(),
+                //Logout
                 Padding(
                   padding: EdgeInsets.only(bottom: 2.h),
                   child: TactileButton(child: LogoutWindowButton()),

@@ -39,11 +39,11 @@ class _TitleBubbleState extends State<TitleBubble> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(1.5.w),
+          borderRadius: BorderRadius.circular(3.w),
           color: deckColor,
           border: Border.all(color: deckBorderColor),
         ),
-        constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 50),
+        constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 75),
         height: widget.deckHeight,
         width: widget.deckWidth,
         child: Stack(

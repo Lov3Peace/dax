@@ -57,7 +57,8 @@ class _MessagesState extends State<Messages> {
                   constraints: const BoxConstraints(minWidth: 250, minHeight: 650),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(1.w),
-                    color: const Color.fromARGB(197, 34, 31, 35),
+                    color: Color.fromARGB(64, 30, 30, 30),
+                    border: Border.all(color: deckBorderColor),
 
                     // boxShadow: const [
                     //   BoxShadow(

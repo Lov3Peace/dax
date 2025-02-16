@@ -17,6 +17,9 @@ import '../../../pages/keyboards_deck.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../../../util/button_state.dart';
 
+import '../dashboard/projects_deck.dart';
+import '../dashboard/title_bubble.dart';
+import '../desk_decks.dart';
 import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
@@ -255,7 +258,7 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
           mainAxisSpacing: 20.0, // Vertical spacing between items
           childAspectRatio: 1.3, // Aspect ratio of the items
         ),
-        itemCount: ProjectStacks().deskProjectStacks.length,
+        itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredGrid(
             delay: const Duration(milliseconds: 500),
@@ -272,7 +275,7 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
                       return const KeyboardsDeck();
                     }));
                   },
-                  child: ProjectStacks().deskProjectStacks[index],
+                  child: ProjectsDeck(),
                 ),
               ),
             ),

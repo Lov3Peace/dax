@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../desk_constants.dart';
+import '../../../desk_decks.dart';
 import 'help_side_panel_info/help_faqs_button.dart';
 
 // Popup to the FAQs button of the dashboard side panel

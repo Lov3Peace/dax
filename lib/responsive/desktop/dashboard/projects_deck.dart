@@ -6,7 +6,7 @@ import '../../../main.dart';
 import '../../../util/tactile_button.dart';
 import '../../mobile/mobile_projects_page.dart';
 import '../../tablet/tablet_projects_page.dart';
-import '../desk_constants.dart';
+import '../desk_decks.dart';
 import '../hero_deck_pages/desk_hero_project_page.dart';
 import 'package:rive/rive.dart' as r;
 
@@ -53,9 +53,9 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
                   );
                 },
                 pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
+                  if (100.w < 550) {
                     return MobProjectsPage(transitionAnimation: animation);
-                  } else if (screenWidth < 1100) {
+                  } else if (100.w < 1100) {
                     return TabProjectsPage(transitionAnimation: animation);
                   } else {
                     return const DeskHeroProjectsPage();
@@ -75,32 +75,18 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
   }
 
   Widget projectDeck({VoidCallback? onTap, Color? color}) {
-    double width = 35.25.w;
-    double height = 22.h;
     return Deck(
-      deckHeight: height,
-      deckWidth: width,
+      deckHeight: deckHeight,
+      deckWidth: deckWidth,
       deckName: 'Projects',
       gradient1: red,
-      gradient2: purp,
+      gradient2: pink,
       neonGlow: red,
       labelTextSize: labelTextSize,
-      textConstraint: width * 0.7,
-      subTextConstraint: width * 0.6,
-      text: Text(
-        'Collaborate and innovate.',
-        style: GoogleFonts.montserrat(
-          textStyle: TextStyle(fontSize: 7.sp),
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      subText: Text(
-        'Post, join, or support independent projects anywhere in the world.',
-        style: GoogleFonts.montserrat(
-          textStyle: TextStyle(fontSize: subTextSize, height: 1.25),
-          fontWeight: FontWeight.w400,
-        ),
-      ),
+      textConstraint: deckWidth * 0.7,
+      subTextConstraint: deckWidth * 0.6,
+      headingText: 'Collaborate and innovate.',
+      subText: 'Post, join, or support independent projects anywhere in the world.',
       riveAnim: const r.RiveAnimation.asset('rive/building_apartments.riv'),
     );
   }

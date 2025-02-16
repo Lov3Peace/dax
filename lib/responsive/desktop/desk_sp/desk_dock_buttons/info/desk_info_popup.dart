@@ -10,6 +10,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../util/button_state.dart';
 import '../../../desk_constants.dart';
+import '../../../desk_decks.dart';
 import 'info_side_panel.dart';
 
 class InfoPopUp extends StatelessWidget {

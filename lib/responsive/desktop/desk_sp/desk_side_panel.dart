@@ -10,6 +10,7 @@ import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../desk_constants.dart';
+import '../desk_decks.dart';
 import 'desk_dock_buttons/connections/desk_connections_popup.dart';
 import 'desk_dock_buttons/desk_home_dock_button.dart';
 import 'desk_dock_buttons/help/desk_help_popup.dart';

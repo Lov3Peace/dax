@@ -9,7 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
+import '../../../dashboard/desk_dashboard.dart';
 import '../../../desk_constants.dart';
+import '../../../desk_decks.dart';
 import 'settings_side_panel.dart';
 
 class SettingsPopUp extends StatefulWidget {

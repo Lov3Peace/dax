@@ -7,8 +7,11 @@ import '../../../util/tactile_button.dart';
 import '../../mobile/mobile_socials_page.dart';
 import '../../tablet/tablet_socials_page.dart';
 import '../desk_constants.dart';
+import '../desk_decks.dart';
 import '../hero_deck_pages/desk_hero_socials_page.dart';
 import 'package:rive/rive.dart' as r;
+
+import 'desk_dashboard.dart';
 
 class SocialsDeck extends StatefulWidget {
   const SocialsDeck({super.key});
@@ -88,6 +91,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
   }) {
     double width = 35.25.w;
     double height = 22.h;
+
     return Deck(
       deckHeight: height,
       deckWidth: width,
@@ -97,14 +101,8 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
       neonGlow: orange,
       labelTextSize: labelTextSize,
       textConstraint: width * 0.9,
-      text: Text(
-        'All of your socials in one place.',
-        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
-      ),
-      subText: Text(
-        'Just link your social media accounts and access them all in one place.',
-        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: subTextSize, height: 1.25), fontWeight: FontWeight.w400),
-      ),
+      headingText: 'All of your socials in one place.',
+      subText: 'Just link your social media accounts and access them all in one place.',
       subTextConstraint: width * 0.6,
       riveAnim: const r.RiveAnimation.asset(
         "rive/twitter_rv.riv",

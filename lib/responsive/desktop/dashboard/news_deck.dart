@@ -6,8 +6,10 @@ import '../../../main.dart';
 import '../../../util/tactile_button.dart';
 import '../../mobile/mobile_news_page.dart';
 import '../../tablet/tablet_news_page.dart';
+import '../desk_decks.dart';
 import '../desk_constants.dart';
 import '../hero_deck_pages/desk_hero_news_page.dart';
+import './desk_dashboard.dart';
 
 class NewsDeck extends StatefulWidget {
   const NewsDeck({
@@ -96,10 +98,8 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
         neonGlow: blue,
         labelTextSize: labelTextSize,
         textConstraint: width * 0.7,
-        text: Text(
-          'Stay up to date.',
-          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
-        ),
+        headingText: 'Stay up to date.',
+        subText: 'Add your preferred news source to get news updates to your feed.',
       ),
     );
   }

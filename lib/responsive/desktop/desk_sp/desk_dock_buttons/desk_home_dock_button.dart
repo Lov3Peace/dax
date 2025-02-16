@@ -49,7 +49,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
                     gradient: const LinearGradient(colors: [red, pink]),
                     borderRadius: BorderRadius.circular(60),
                   ),
-                  width: isHover ? 11.15.w : 0.25.w,
+                  width: isHover ? 10.w : 0.25.w,
                   height: 5.h,
                 ),
                 Expanded(

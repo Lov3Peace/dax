@@ -11,6 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../desk_decks.dart';
+
 //const String _heroFriendsWindow = 'Friends-window-hero';
 final friendsBucket = PageStorageBucket();
 

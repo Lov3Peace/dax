@@ -10,6 +10,7 @@ import 'package:sizer/sizer.dart';
 import '../../../../../../util/gradient_container.dart';
 import '../../../../../../util/tactile_button.dart';
 import '../../../../desk_constants.dart';
+import '../../../../desk_decks.dart';
 import '../desk_wallet_sections/desk_wallet_c1.dart';
 import '../desk_wallet_sections/desk_wallet_c2.dart';
 

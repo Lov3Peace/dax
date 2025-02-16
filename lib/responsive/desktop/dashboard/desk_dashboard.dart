@@ -4,32 +4,22 @@ import 'package:flutter_application_1/responsive/desktop/dashboard/news_deck.dar
 import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../util/button_state.dart';
 import '../../../util/desk_dashboard_decks.dart';
-import '../../../util/tactile_button.dart';
 import '../../mobile/mob_artboard_page.dart';
-import '../../mobile/mobile_socials_page.dart';
-import '../../tablet/tablet_socials_page.dart';
-import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
-import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
-import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
-import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 import '../desk_sp/desk_side_panel.dart';
-import '../hero_deck_pages/desk_hero_socials_page.dart';
-import 'package:rive/rive.dart' as r;
 
 import 'communities_deck.dart';
 import 'projects_deck.dart';
+import 'title_bubble.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
+double headerTextSize = 24;
 
 class DesktopDashboard extends StatefulWidget {
   const DesktopDashboard({Key? key}) : super(key: key);

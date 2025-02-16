@@ -7,6 +7,7 @@ import '../../../util/tactile_button.dart';
 import '../../mobile/mobile_finance_page.dart';
 import '../../tablet/tablet_finance_page.dart';
 import '../desk_constants.dart';
+import '../desk_decks.dart';
 import '../hero_deck_pages/desk_hero_community_page.dart';
 
 class CommunitiesDeck extends StatefulWidget {
@@ -87,21 +88,19 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> with AnimationMixin {
   }
 
   Widget communityDeck({VoidCallback? onTap, Color? color}) {
-    double width = 17.325.w;
     return GestureDetector(
       child: Deck(
         deckHeight: 22.h,
-        deckWidth: width,
+        deckWidth: halfDeckWidth,
         deckName: 'Communities',
         gradient1: red,
         gradient2: orange,
         neonGlow: red,
         labelTextSize: labelTextSize,
-        textConstraint: width * 0.8,
-        text: Text(
-          'Find Your Community.',
-          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 5.sp), fontWeight: FontWeight.w600),
-        ),
+        textConstraint: halfDeckWidth,
+        subTextConstraint: halfDeckWidth * 0.6,
+        headingText: 'Find your community.',
+        subText: "Connect with others and say what's on your mind.",
       ),
     );
   }

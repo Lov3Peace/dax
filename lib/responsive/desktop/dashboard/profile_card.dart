@@ -8,6 +8,7 @@ import '../../../util/auth/login.dart';
 import '../../../util/button_state.dart';
 import '../../../util/tactile_button.dart';
 import '../desk_constants.dart';
+import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 
 class ProfileCard extends StatefulWidget {
@@ -85,14 +86,8 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
       neonGlow: tran,
       labelTextSize: labelTextSize,
       textConstraint: halfDeckWidth * 0.8,
-      text: Text(
-        auth.currentUser!.email.toString().allBefore('@'),
-        style: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              fontSize: 6.5.sp,
-            ),
-            fontWeight: FontWeight.w600),
-      ),
+      headingText: auth.currentUser!.email.toString().allBefore('@'),
+      subText: '',
     );
   }
 }

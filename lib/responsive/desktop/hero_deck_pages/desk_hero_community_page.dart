@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
@@ -12,6 +13,8 @@ import '../../../pages/keyboards_deck.dart';
 import '../../../util/button_state.dart';
 import '../../mobile/mob_artboard_page.dart';
 
+import '../dashboard/title_bubble.dart';
+import '../desk_decks.dart';
 import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
@@ -203,7 +206,7 @@ class _DeskCommunityContState extends State<DeskCommunityCont> {
       child: ListView.builder(
         itemExtent: 420,
         physics: const BouncingScrollPhysics(),
-        itemCount: CommunityStacks().deskCommunityStacks.length,
+        itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
             delay: const Duration(milliseconds: 500),
@@ -221,7 +224,7 @@ class _DeskCommunityContState extends State<DeskCommunityCont> {
                             return const KeyboardsDeck();
                           }));
                         },
-                        child: CommunityStacks().deskCommunityStacks[index]),
+                        child: CommunitiesDeck()),
                   ],
                 ),
               ),

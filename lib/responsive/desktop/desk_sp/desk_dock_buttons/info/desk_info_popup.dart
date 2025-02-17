@@ -14,13 +14,13 @@ import '../../../desk_decks.dart';
 import 'info_side_panel.dart';
 
 class InfoPopUp extends StatelessWidget {
-  InfoPopUp({super.key});
+  const InfoPopUp({super.key});
 
   @override
   Widget build(BuildContext context) {
     final buttonState = Provider.of<ButtonState>(context);
     return Container(
-      height: 100.h,
+      // height: 100.h,
       width: 71.w,
       alignment: Alignment.center,
       child: Stack(alignment: Alignment.center, children: [

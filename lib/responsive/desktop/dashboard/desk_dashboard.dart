@@ -30,22 +30,13 @@ class DesktopDashboard extends StatefulWidget {
 
 class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin {
   //globals
-  late Animation<double> scale;
-  late Animation<double> opacity;
-  late AnimationController widthController;
-  late AnimationController heightController;
-  late AnimationController colorController;
-
   @override
   void initState() {
     // TODO: implement initState
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
     super.initState();
 
-    final heroReset = context.read<ButtonState>();
-    heroReset.heroReset();
+    // final heroReset = context.read<ButtonState>();
+    // heroReset.heroReset();
   }
 
   @override
@@ -69,7 +60,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                   children: [
                     DesktopSidePanel(),
                     Container(
-                      height: 90.h,
+                      height: 90.sp,
                       constraints: BoxConstraints(minHeight: 900),
                       child: Row(
                         children: [
@@ -81,7 +72,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                 padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                                 child: Container(
                                   constraints: const BoxConstraints(minHeight: 450),
-                                  height: 45.h,
+                                  height: 45.sp,
                                   width: 71.5.w,
                                   // color: red,
                                   child: AnimationLimiter(
@@ -105,7 +96,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                       Padding(
                                                         padding: EdgeInsets.only(bottom: 0.5.w),
                                                         child: TitleBubble(
-                                                          deckHeight: 5.5.h,
+                                                          deckHeight: 3.sp,
                                                           deckName: 'Dashboard',
                                                           deckWidth: 17.25.w,
                                                           textSize: 4.sp,
@@ -138,7 +129,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                 child: Container(
                                   constraints: const BoxConstraints(minHeight: 450),
                                   // clipBehavior: Clip.none,
-                                  height: 45.h,
+                                  height: 45.sp,
                                   width: 71.5.w,
                                   // constraints: BoxConstraints(minWidth: 700, minHeight: 800),
                                   child: AnimationLimiter(

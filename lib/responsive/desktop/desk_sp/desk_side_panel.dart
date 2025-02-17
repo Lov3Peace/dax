@@ -12,7 +12,7 @@ import 'package:sizer/sizer.dart';
 import '../desk_constants.dart';
 import '../desk_decks.dart';
 import 'desk_dock_buttons/connections/desk_connections_popup.dart';
-import 'desk_dock_buttons/desk_home_dock_button.dart';
+import 'desk_dock_buttons/desk_home_button.dart';
 import 'desk_dock_buttons/help/desk_help_popup.dart';
 import 'desk_dock_buttons/info/desk_info_popup.dart';
 import 'desk_dock_buttons/settings/desk_settings_popup.dart.dart';
@@ -33,9 +33,6 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
   @override
   void initState() {
     // TODO: implement initState
-
-    scale = Tween<double>(begin: 1.0, end: 0.7).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
 
     super.initState();
   }
@@ -65,7 +62,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
               children: [
                 //Logo
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 5.h, 0, 1.h),
+                  padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
                   child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(1.5.w)),
                       clipBehavior: Clip.hardEdge,
@@ -78,7 +75,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
                 //   endIndent: 2.w,
                 // ),
                 SizedBox(
-                  height: 5.h,
+                  height: 50,
                 ),
                 SidePanelButtons(),
                 Spacer(),
@@ -108,31 +105,31 @@ class SidePanelButtons extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DeskHomeButton(),
-        SizedBox(height: 2.h),
+        SizedBox(height: 20),
         SpButtonTemplate(
           icon: Icons.wallet,
           deskButtonText: 'Wallet',
           child: WalletPopUp(),
         ),
-        SizedBox(height: 2.h), // Adjusted the height to 2.h
+        SizedBox(height: 20), // Adjusted the height to 20
         SpButtonTemplate(
           icon: Icons.person,
           deskButtonText: 'Connections',
           child: FriendsPopUp(),
         ),
-        SizedBox(height: 2.h), // Adjusted the height to 2.h
+        SizedBox(height: 20), // Adjusted the height to 20
         SpButtonTemplate(
           icon: Icons.settings,
           deskButtonText: 'Settings',
           child: SettingsPopUp(),
         ),
-        SizedBox(height: 2.h), // Adjusted the height to 2.h
+        SizedBox(height: 20), // Adjusted the height to 20
         SpButtonTemplate(
           icon: Icons.help,
           deskButtonText: 'Help',
           child: HelpPopUp(),
         ),
-        SizedBox(height: 2.h), // Adjusted the height to 2.h
+        SizedBox(height: 20), // Adjusted the height to 20
         SpButtonTemplate(
           icon: Icons.info,
           deskButtonText: 'Info',

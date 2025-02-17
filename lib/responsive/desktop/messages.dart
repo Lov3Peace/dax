@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:indexed/indexed.dart';
@@ -57,7 +58,7 @@ class _MessagesState extends State<Messages> {
                   constraints: const BoxConstraints(minWidth: 250, minHeight: 650),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(1.w),
-                    color: Color.fromARGB(64, 30, 30, 30),
+                    color: tran,
                     border: Border.all(color: deckBorderColor),
 
                     // boxShadow: const [

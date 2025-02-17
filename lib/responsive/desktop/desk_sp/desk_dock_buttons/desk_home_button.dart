@@ -50,19 +50,19 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
                     borderRadius: BorderRadius.circular(60),
                   ),
                   width: isHover ? 10.w : 0.25.w,
-                  height: 5.h,
+                  height: 7.sp,
                 ),
                 Expanded(
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     // color: blue,
-                    height: 2.h,
+                    height: 7.sp,
                   ),
                 ),
               ],
             ),
             Positioned(
-              top: 1.h,
+              top: 1.sp,
               left: 0.5.w,
               child: Row(
                 children: [
@@ -70,7 +70,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
                     padding: EdgeInsets.only(left: 0.5.w),
                     child: Icon(
                       Icons.dashboard_rounded,
-                      size: 3.h,
+                      size: 5.sp,
                     ),
                   ),
                   Padding(

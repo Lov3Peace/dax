@@ -67,7 +67,7 @@ class _DeckState extends State<Deck> {
 
   @override
   Widget build(BuildContext context) {
-    deckHeight = 22.h;
+    deckHeight = 22.sp;
     deckWidth = 35.25.w;
     halfDeckWidth = 17.325.w;
     headerTextSize = 6.5.sp;
@@ -101,7 +101,7 @@ class _DeckState extends State<Deck> {
           color: Colors.transparent,
           height: widget.deckHeight,
           width: widget.deckWidth,
-          // constraints: const BoxConstraints(minHeight: 750),
+          constraints: const BoxConstraints(minWidth: 250),
 
           //Blur
           child: Stack(
@@ -140,7 +140,7 @@ class _DeckState extends State<Deck> {
                     // Subheading Text
                     Container(
                       constraints: BoxConstraints(maxWidth: widget.deckWidth * 0.9),
-                      margin: EdgeInsets.fromLTRB(2.w, 0.5.w, 2.w, 0),
+                      margin: EdgeInsets.fromLTRB(2.w, 0.5.sp, 2.w, 0),
                       width: widget.subTextConstraint,
                       child: Text(
                         widget.subText,
@@ -180,7 +180,7 @@ class _DeckState extends State<Deck> {
                 bottom: 0,
                 left: 0,
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(2.w, 0, 0, 2.w),
+                  padding: EdgeInsets.fromLTRB(2.w, 0, 0, 7.sp),
                   child: Container(
                     constraints: BoxConstraints(minHeight: 50, maxHeight: 160),
                     decoration: BoxDecoration(

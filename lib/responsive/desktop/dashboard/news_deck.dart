@@ -90,8 +90,8 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
     double height = 22.h;
     return GestureDetector(
       child: Deck(
-        deckHeight: height,
-        deckWidth: width,
+        deckHeight: deckHeight,
+        deckWidth: deckWidth,
         deckName: 'News',
         gradient1: blue,
         gradient2: purp,

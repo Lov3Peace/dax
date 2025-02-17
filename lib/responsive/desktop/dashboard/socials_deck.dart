@@ -22,26 +22,19 @@ class SocialsDeck extends StatefulWidget {
 
 class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
   @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
   @override
   void initState() {
     // TODO: implement initState
-
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    deckHeight = 22.sp;
+    deckWidth = 35.25.w;
+    halfDeckWidth = 17.325.w;
+    labelTextSize = 16;
     return TactileButton(
       onTap: () {
         setState(() {
@@ -89,21 +82,18 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
     VoidCallback? onTap,
     Color? color,
   }) {
-    double width = 35.25.w;
-    double height = 22.h;
-
     return Deck(
-      deckHeight: height,
-      deckWidth: width,
+      deckHeight: deckHeight,
+      deckWidth: deckWidth,
       deckName: 'Socials',
       gradient1: orange,
       gradient2: purp,
       neonGlow: orange,
       labelTextSize: labelTextSize,
-      textConstraint: width * 0.9,
+      textConstraint: deckWidth * 0.9,
       headingText: 'All of your socials in one place.',
       subText: 'Just link your social media accounts and access them all in one place.',
-      subTextConstraint: width * 0.6,
+      subTextConstraint: deckWidth * 0.6,
       riveAnim: const r.RiveAnimation.asset(
         "rive/twitter_rv.riv",
         fit: BoxFit.fitWidth,

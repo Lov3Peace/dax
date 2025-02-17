@@ -60,7 +60,7 @@ class _SpButtonTemplateState extends State<SpButtonTemplate> {
             borderRadius: BorderRadius.circular(60),
           ),
           width: 10.w,
-          height: 5.h,
+          height: 3.w,
           child: Padding(
             padding: EdgeInsets.only(left: 1.w),
             child: Row(

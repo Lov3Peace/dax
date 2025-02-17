@@ -78,7 +78,7 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
 
   Widget profileCard({VoidCallback? onTap, Color? color}) {
     return Deck(
-      deckHeight: 20.h,
+      deckHeight: deckHeight,
       deckWidth: halfDeckWidth,
       deckName: '',
       gradient1: tran,

@@ -43,7 +43,7 @@ class _TitleBubbleState extends State<TitleBubble> {
           color: deckColor,
           border: Border.all(color: deckBorderColor),
         ),
-        constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 75),
+        constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 55),
         height: widget.deckHeight,
         width: widget.deckWidth,
         child: Stack(

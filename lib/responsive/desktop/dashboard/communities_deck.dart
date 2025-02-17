@@ -41,7 +41,7 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    deckHeight = 22.h;
+    deckHeight = 22.sp;
     deckWidth = 35.25.w;
     halfDeckWidth = 17.325.w;
     labelTextSize = 16;
@@ -90,7 +90,7 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> with AnimationMixin {
   Widget communityDeck({VoidCallback? onTap, Color? color}) {
     return GestureDetector(
       child: Deck(
-        deckHeight: 22.h,
+        deckHeight: deckHeight,
         deckWidth: halfDeckWidth,
         deckName: 'Communities',
         gradient1: red,

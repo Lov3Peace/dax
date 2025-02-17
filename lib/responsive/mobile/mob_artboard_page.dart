@@ -22,10 +22,11 @@ class _ArtBoardScreenState extends State<ArtBoardScreen> {
           // ),
           // Image.asset("images/bright-blue-yellow-orbs.jpg"),
           // Image.asset("images/aperture-vintage-GlsKHybjdS0-unsplash.jpg"),
-          Image.asset("images/bright-blue-yellow-orbs.jpg"),
+          // Image.asset("images/bright-blue-yellow-orbs.jpg"),
+          Image.asset("images/aperture-vintage-3FS0H6gB3uY-unsplash.jpg"),
           Opacity(
-            child: Image.asset("images/aperture-vintage-3FS0H6gB3uY-unsplash.jpg"),
-            opacity: 0.3,
+            child: Image.asset("images/bright-blue-yellow-orbs.jpg"),
+            opacity: 0.7,
           ),
           Positioned.fill(
             child: BackdropFilter(

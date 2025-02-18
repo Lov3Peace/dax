@@ -15,6 +15,9 @@ import '../../../pages/keyboards_deck.dart';
 import '../../../util/button_state.dart';
 import '../../../util/soft_close.dart';
 import '../../mobile/mob_artboard_page.dart';
+import '../dashboard/news_deck.dart';
+import '../dashboard/title_bubble.dart';
+import '../desk_decks.dart';
 import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
@@ -74,11 +77,7 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
                   children: [
                     Indexed(
                       index: 2,
-                      child: DesktopSidePanel(
-                        newGrad1: purp,
-                        newGrad2: red,
-                        newGlow: red,
-                      ),
+                      child: DesktopSidePanel(),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,7 +208,7 @@ class _DeskNewsContState extends State<DeskNewsCont> {
       child: ListView.builder(
         itemExtent: 420,
         physics: const BouncingScrollPhysics(),
-        itemCount: NewsStacks().deskNewsStacks.length,
+        itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
             delay: const Duration(milliseconds: 500),
@@ -227,7 +226,7 @@ class _DeskNewsContState extends State<DeskNewsCont> {
                             return const KeyboardsDeck();
                           }));
                         },
-                        child: NewsStacks().deskNewsStacks[index]),
+                        child: NewsDeck()),
                   ],
                 ),
               ),

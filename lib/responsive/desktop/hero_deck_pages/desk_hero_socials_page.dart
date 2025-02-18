@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/keyboards_deck.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:indexed/indexed.dart';
@@ -13,11 +13,14 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../mobile/mob_artboard_page.dart';
+import '../dashboard/title_bubble.dart';
+import '../desk_decks.dart';
 import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
 import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 import '../desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
+import '../desk_sp/desk_side_panel.dart';
 
 class DeskHeroSocialsPage extends StatefulWidget {
   const DeskHeroSocialsPage({Key? key}) : super(key: key);
@@ -72,11 +75,7 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                     children: [
                       Indexed(
                         index: 2,
-                        child: DesktopSidePanel(
-                          newGrad1: purp,
-                          newGrad2: red,
-                          newGlow: red,
-                        ),
+                        child: DesktopSidePanel(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -210,7 +209,7 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
       child: ListView.builder(
         itemExtent: 420,
         physics: const BouncingScrollPhysics(),
-        itemCount: SocialsStacks().deskSocialsStacks.length,
+        itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
             delay: const Duration(milliseconds: 500),
@@ -228,7 +227,7 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
                             return const KeyboardsDeck();
                           }));
                         },
-                        child: SocialsStacks().deskSocialsStacks[index]),
+                        child: SocialsDeck()),
                   ],
                 ),
               ),

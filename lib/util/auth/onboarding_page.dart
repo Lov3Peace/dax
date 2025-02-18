@@ -1,11 +1,15 @@
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
+import '../../responsive/mobile/mob_artboard_page.dart';
 import '../gradient_container.dart';
 import '../tactile_button.dart';
 import 'auth_check.dart';
@@ -32,33 +36,41 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // const ArtBoardScreen(),
-          const RiveAnimation.asset(
-            'rive/anime_girl.riv',
-            fit: BoxFit.fill,
-          ),
-
-          Container(
-            clipBehavior: Clip.hardEdge,
-            width: 40.w,
-            height: 100.h,
-            padding: EdgeInsets.only(left: 5.w, right: 10.w),
-            decoration: BoxDecoration(
-                border: Border.all(
-              color: const Color.fromARGB(184, 59, 54, 61),
-            )),
-            child: Stack(
-              children: [
-                BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
-                  // blendMode: BlendMode.darken,
-                  child: const SizedBox(),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 10.h),
-                  child: Column(
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            // const ArtBoardScreen(),
+            // const RiveAnimation.asset(
+            //   'rive/anime_girl.riv',
+            //   fit: BoxFit.fill,
+            // ),
+            SizedBox(
+              height: 100.h,
+              width: 100.w,
+              child: Image.asset(
+                "images/colorful-ripple-red-yellow.jpg",
+                fit: BoxFit.fill,
+              ),
+            ),
+            // Main Container w/ Blur
+            Container(
+              clipBehavior: Clip.hardEdge,
+              width: 40.w,
+              height: 100.h,
+              constraints: BoxConstraints(minHeight: 900, minWidth: 500),
+              padding: EdgeInsets.only(left: 5.w, right: 10.w),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: const Color.fromARGB(184, 59, 54, 61),
+              )),
+              child: Stack(
+                children: [
+                  BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
+                    // blendMode: BlendMode.darken,
+                    child: SizedBox(),
+                  ),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -66,248 +78,254 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            constraints: BoxConstraints(maxHeight: 5.w),
+                            width: 10.w,
+                            // constraints: BoxConstraints(maxHeight: 5.w),
                             // color: red,
                             child: Image.asset(
                               "images/omni-temp-logo.png",
                               fit: BoxFit.contain,
                             ),
                           ),
-                          const Text(
+                          Text(
                             'Omni',
-                            style: TextStyle(fontSize: 70, fontWeight: FontWeight.w400),
+                            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 100,
+                      SizedBox(
+                        height: 10.sp,
                       ),
                       //Username
                       Padding(
                         padding: EdgeInsets.only(left: 0.75.w),
-                        child: const Text(
+                        child: Text(
                           textAlign: TextAlign.start,
                           "Username",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(color: Colors.white, fontSize: 4.sp),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                          top: 8.0,
-                          bottom: 10,
+                          // top: 2.sp,
+                          // bottom: 3.sp,
                           left: 0.75.w,
-                          right: 15,
+                          right: 0.75.w,
                         ),
                         child: TextField(
                           controller: _usernameController,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color.fromARGB(151, 255, 255, 255),
-                                width: 0.5,
+                                width: 0.05.w,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: 3.sp,
                       ),
 
                       //Password
                       Padding(
-                        padding: EdgeInsets.only(left: 0.75.w, top: 2.h),
-                        child: const Text(
+                        padding: EdgeInsets.only(left: 0.75.w, top: 3.sp),
+                        child: Text(
                           "Password",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(color: Colors.white, fontSize: 4.sp),
                           textAlign: TextAlign.start,
                         ),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                          top: 8.0,
-                          bottom: 10,
+                          // top: 2.sp,
+                          // bottom: 3.sp,
                           left: 0.75.w,
-                          right: 15,
+                          right: 0.75.w,
                         ),
                         child: TextField(
                           controller: _passwordController,
                           onSubmitted: (value) => login(),
                           obscureText: true,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             prefixIconColor: Colors.black,
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromARGB(151, 255, 255, 255), width: 0.5),
+                              borderSide: BorderSide(color: Color.fromARGB(151, 255, 255, 255), width: 0.05.w),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ),
+                      SizedBox(height: 5.sp),
 
                       //Row that contains rememeber me and Forgot Password button
-                      Padding(
-                        padding: EdgeInsets.only(left: 0.75.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Remember Me",
-                            ),
-                            Switch(
-                              value: isSwitch,
-                              activeColor: Colors.white,
-                              activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
-                              onChanged: (bool newBool) {
-                                setState(() {
-                                  isSwitch = newBool;
-                                });
-                              },
-                            ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // spacing: 1.w,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Remember Me",
+                                style: TextStyle(fontSize: 3.sp),
+                              ),
 
-                            //Forgot password
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: TextButton(
-                                onPressed: () {
-                                  control = Control.play;
-                                  Future.delayed(
-                                    const Duration(milliseconds: 400),
-                                    () {
-                                      //slide animation
-                                      showGeneralDialog(
-                                        barrierDismissible: true,
-                                        barrierLabel: "Login",
-                                        context: context,
-                                        transitionDuration: const Duration(milliseconds: 400),
-                                        transitionBuilder: (_, animation, __, child) {
-                                          Tween<Offset> tween;
-                                          tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
-                                          return SlideTransition(
-                                            position: tween.animate(
-                                              CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-                                            ),
-                                            child: child,
-                                          );
-                                        },
-                                        pageBuilder: (context, _, __) => Center(
-                                          child: Container(
-                                            height: 60.h,
-                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                                            padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-                                            child: Material(
-                                              shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                                              color: const Color.fromARGB(42, 55, 52, 52),
-                                              elevation: 2,
-                                              borderRadius: BorderRadius.circular(32),
-                                              child: Stack(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius: BorderRadius.circular(24),
-                                                    child: BackdropFilter(
-                                                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                                      child: Container(
-                                                          height: 85.h,
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
-                                                            borderRadius: BorderRadius.circular(24),
-                                                          )),
-                                                    ),
+                              // Have to wrap Switch like this to change size...weird
+                              Container(
+                                padding: EdgeInsets.only(left: 0.5.w),
+                                width: 3.5.w,
+                                // height: 30,
+                                child: FittedBox(
+                                  fit: BoxFit.fill,
+                                  child: Switch(
+                                    thumbIcon: MaterialStatePropertyAll(Icon(Icons.lock_outline)),
+                                    value: isSwitch,
+                                    activeColor: Colors.white,
+                                    activeTrackColor: pink,
+                                    onChanged: (bool newBool) {
+                                      setState(() {
+                                        isSwitch = newBool;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          //Forgot password
+                          TactileButton(
+                            scale: 1.1,
+                            child: TextButton(
+                              onPressed: () {
+                                Future.delayed(
+                                  const Duration(milliseconds: 400),
+                                  () {
+                                    //slide animation
+                                    showGeneralDialog(
+                                      barrierDismissible: true,
+                                      barrierLabel: "Login",
+                                      context: context,
+                                      transitionDuration: const Duration(milliseconds: 400),
+                                      transitionBuilder: (_, animation, __, child) {
+                                        Tween<Offset> tween;
+                                        tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
+                                        return SlideTransition(
+                                          position: tween.animate(
+                                            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+                                          ),
+                                          child: child,
+                                        );
+                                      },
+                                      pageBuilder: (context, _, __) => Center(
+                                        child: Container(
+                                          height: 60.sp,
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                                          padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                                          child: Material(
+                                            shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
+                                            color: const Color.fromARGB(42, 55, 52, 52),
+                                            elevation: 2,
+                                            borderRadius: BorderRadius.circular(32),
+                                            child: Stack(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius: BorderRadius.circular(24),
+                                                  child: BackdropFilter(
+                                                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                                    child: Container(
+                                                        height: 85.h,
+                                                        decoration: BoxDecoration(
+                                                          border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
+                                                          borderRadius: BorderRadius.circular(24),
+                                                        )),
                                                   ),
-                                                  const Scaffold(
-                                                    resizeToAvoidBottomInset: false,
-                                                    backgroundColor: Colors.transparent,
-                                                    body: SingleChildScrollView(
-                                                      reverse: true,
-                                                      child: Column(
-                                                        children: [
-                                                          Padding(
-                                                            padding: EdgeInsets.only(top: 10),
-                                                            child: Text(
-                                                              "Forgot Password",
-                                                              style: TextStyle(
-                                                                fontSize: 34,
-                                                                fontFamily: "Gontserrat",
-                                                                color: Colors.white,
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
-                                                            ),
+                                                ),
+                                                SingleChildScrollView(
+                                                  reverse: true,
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding: EdgeInsets.only(top: 10),
+                                                        child: Text(
+                                                          "Forgot Password",
+                                                          style: TextStyle(
+                                                            fontSize: 34,
+                                                            fontFamily: "Gontserrat",
+                                                            color: Colors.white,
+                                                            fontWeight: FontWeight.bold,
                                                           ),
-                                                          Padding(
-                                                            padding: EdgeInsets.symmetric(vertical: 16.0),
-                                                            child: Text(
-                                                              "Please enter your email linked to the account!",
-                                                              textAlign: TextAlign.center,
-                                                              style: TextStyle(
-                                                                fontSize: 14,
-                                                                color: Colors.white,
-                                                                fontWeight: FontWeight.bold,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          ForgotPasswordForm(),
-                                                        ],
+                                                        ),
                                                       ),
-                                                    ),
+                                                      Padding(
+                                                        padding: EdgeInsets.symmetric(vertical: 2.sp),
+                                                        child: Text(
+                                                          "Please enter your email linked to the account!",
+                                                          textAlign: TextAlign.center,
+                                                          style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: Colors.white,
+                                                            fontWeight: FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      ForgotPasswordForm(),
+                                                    ],
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
-                                      );
-                                    },
-                                  );
-                                },
-                                child: const Text(
-                                  "Forgot Password?",
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Text(
+                                "Forgot Password?",
+                                style: TextStyle(color: Colors.white, fontSize: 3.sp),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 50,
+                      SizedBox(
+                        height: 12.sp,
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: 0.75.w),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TactileButton(
+                              scale: 1.05,
                               onTap: login,
                               child: GradientContainer(
-                                gradient1: purp,
-                                gradient2: red,
-                                height: 10,
-                                width: 30,
+                                gradient1: red,
+                                gradient2: pink,
+                                height: 2.sp,
+                                width: 3.w,
                                 neonGlow: red,
                                 text: 'Launch',
-                                textSize: 14,
+                                textSize: 3.sp,
                                 borderColor: tran,
-                                borderRadius: 500,
+                                borderRadius: 5.sp,
                               ),
                             ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 50),
+                            TactileButton(
+                              scale: 1.1,
                               child: InitSignUpButton(),
                             )
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

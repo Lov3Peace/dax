@@ -15,6 +15,9 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../util/soft_close.dart';
 import '../../mobile/mob_artboard_page.dart';
+import '../dashboard/socials_deck.dart';
+import '../dashboard/title_bubble.dart';
+import '../desk_decks.dart';
 import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
 import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
 import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
@@ -74,11 +77,7 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                     children: [
                       Indexed(
                         index: 2,
-                        child: DesktopSidePanel(
-                          newGrad1: purp,
-                          newGrad2: red,
-                          newGlow: red,
-                        ),
+                        child: DesktopSidePanel(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -212,7 +211,7 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
       child: ListView.builder(
         itemExtent: 420,
         physics: const BouncingScrollPhysics(),
-        itemCount: SocialsStacks().deskSocialsStacks.length,
+        itemCount: 3,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredList(
             delay: const Duration(milliseconds: 500),
@@ -230,7 +229,7 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
                             return const KeyboardsDeck();
                           }));
                         },
-                        child: SocialsStacks().deskSocialsStacks[index]),
+                        child: SocialsDeck()),
                   ],
                 ),
               ),

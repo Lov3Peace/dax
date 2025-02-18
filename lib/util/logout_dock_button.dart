@@ -18,24 +18,21 @@ class LogoutWindowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(0.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(LogoutWindowRoute(builder: (context) {
-            return LogoutWindowPopupCard(
-              onPressed: () {},
-            );
-          }));
-        },
-        child: const Hero(
-          tag: _heroLogoutWindow,
-          child: Material(
-            color: tran,
-            child: Icon(
-              Ionicons.log_out_outline,
-              size: 40,
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(LogoutWindowRoute(builder: (context) {
+          return LogoutWindowPopupCard(
+            onPressed: () {},
+          );
+        }));
+      },
+      child: Hero(
+        tag: _heroLogoutWindow,
+        child: Material(
+          color: tran,
+          child: Icon(
+            Ionicons.log_out_outline,
+            size: 5.sp,
           ),
         ),
       ),
@@ -128,7 +125,8 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const ResponsiveLayout(
+          // ignore: prefer_const_constructors
+          builder: (context) => ResponsiveLayout(
             mobileVersion: MobileLaunchPage(),
             tabletVersion: OnboardingScreen(),
             desktopVersion: OnboardingScreen(),

@@ -69,14 +69,8 @@ class Deck extends StatelessWidget {
               top: 20,
               child: Column(
                 children: [
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: text),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: subText)
+                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: text),
+                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: subText)
                 ],
               ),
             ),
@@ -85,10 +79,7 @@ class Deck extends StatelessWidget {
               bottom: 0,
               child: Column(
                 children: [
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: image),
+                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: image),
                 ],
               ),
             ),
@@ -102,32 +93,22 @@ class Deck extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [gradient1, gradient2]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: neonGlow,
-                            blurRadius: 20,
-                            blurStyle: BlurStyle.solid)
-                      ],
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20))),
+                      boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
+                      borderRadius: const BorderRadius.all(Radius.circular(20))),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Text(
                       deckName,
-                      style: GoogleFonts.montserrat(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(
-                              color: shadowColor,
-                              blurRadius: 1,
-                            ),
-                            Shadow(
-                              color: shadowColor,
-                              blurRadius: 2,
-                            ),
-                          ]),
+                      style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                        Shadow(
+                          color: shadowColor,
+                          blurRadius: 1,
+                        ),
+                        Shadow(
+                          color: shadowColor,
+                          blurRadius: 2,
+                        ),
+                      ]),
                     ),
                   ),
                 ),

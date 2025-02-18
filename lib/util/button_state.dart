@@ -19,28 +19,8 @@ import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_butto
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/security_settings.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-enum SlideType {
-  info,
-  help,
-  settings,
-  friend,
-  wallet,
-}
-
 class ButtonState extends ChangeNotifier {
   // Slide control fields
-  Control friendSlideControl;
-  Control walletSlideControl;
-  Control settingSlideControl;
-  Control helpSlideControl;
-  Control infoSlideControl;
-
-// Active and hover desk button IDs
-  String? activeDeskButtonId;
-  String? hoverDeskButtonId;
-
-  // Dimming state
-  ValueNotifier<bool> isDimmed = ValueNotifier(false);
 
   // Hero tags
   String projectsHeroTag;
@@ -50,150 +30,11 @@ class ButtonState extends ChangeNotifier {
   String profileHeroTag;
 
   ButtonState(
-      {this.friendSlideControl = Control.stop,
-      this.walletSlideControl = Control.stop,
-      this.settingSlideControl = Control.stop,
-      this.helpSlideControl = Control.stop,
-      this.infoSlideControl = Control.stop,
-      this.projectsHeroTag = 'projectsHero',
+      {this.projectsHeroTag = 'projectsHero',
       this.socialsHeroTag = 'socialsHero',
       this.communityHeroTag = 'financesHero',
       this.newsHeroTag = 'newsHero',
       this.profileHeroTag = 'profileHero'});
-
-  void setHoverDeskButton(String id) {
-    hoverDeskButtonId = id;
-    notifyListeners();
-  }
-
-  void clearHoverDeskButton(String id) {
-    if (hoverDeskButtonId == id) {
-      hoverDeskButtonId = null;
-      notifyListeners();
-    }
-  }
-
-  void setActiveDeskButton(String id) {
-    if (activeDeskButtonId != null && activeDeskButtonId != id) {
-      reverseSlide(getSlideType(activeDeskButtonId!));
-    }
-    activeDeskButtonId = id;
-    updateDimState();
-    notifyListeners();
-  }
-
-  void deactivateDeskButton() {
-    activeDeskButtonId = null;
-    updateDimState();
-    notifyListeners();
-  }
-
-  SlideType getSlideType(String id) {
-    switch (id) {
-      case 'info':
-        return SlideType.info;
-      case 'help':
-        return SlideType.help;
-      case 'settings':
-        return SlideType.settings;
-      case 'friend':
-        return SlideType.friend;
-      case 'wallet':
-        return SlideType.wallet;
-      default:
-        throw Exception('Unknown desk button ID');
-    }
-  }
-
-  void callDeskFunctionForButton(String id) {
-    activateSlide(getSlideType(id));
-  }
-
-  void activateSlide(SlideType slideType) {
-    switch (slideType) {
-      case SlideType.info:
-        infoSlideControl = Control.play;
-        break;
-      case SlideType.help:
-        helpSlideControl = Control.play;
-        break;
-      case SlideType.settings:
-        settingSlideControl = Control.play;
-        break;
-      case SlideType.friend:
-        friendSlideControl = Control.play;
-        break;
-      case SlideType.wallet:
-        walletSlideControl = Control.play;
-        break;
-    }
-    updateDimState();
-    notifyListeners();
-  }
-
-  void reverseSlide(SlideType slideType) {
-    switch (slideType) {
-      case SlideType.info:
-        infoSlideControl = Control.playReverse;
-        break;
-      case SlideType.help:
-        helpSlideControl = Control.playReverse;
-        break;
-      case SlideType.settings:
-        settingSlideControl = Control.playReverse;
-        break;
-      case SlideType.friend:
-        friendSlideControl = Control.playReverse;
-        break;
-      case SlideType.wallet:
-        walletSlideControl = Control.playReverse;
-        break;
-    }
-    updateDimState();
-    notifyListeners();
-  }
-
-  void resetSlide(SlideType slideType) {
-    switch (slideType) {
-      case SlideType.info:
-        infoSlideControl = Control.stop;
-        break;
-      case SlideType.help:
-        helpSlideControl = Control.stop;
-        break;
-      case SlideType.settings:
-        settingSlideControl = Control.stop;
-        break;
-      case SlideType.friend:
-        friendSlideControl = Control.stop;
-        break;
-      case SlideType.wallet:
-        walletSlideControl = Control.stop;
-        break;
-    }
-    updateDimState();
-    notifyListeners();
-  }
-
-  void resetAllButtons() {
-    resetSlide(SlideType.info);
-    resetSlide(SlideType.help);
-    resetSlide(SlideType.settings);
-    resetSlide(SlideType.friend);
-    resetSlide(SlideType.wallet);
-    activeDeskButtonId = null;
-    hoverDeskButtonId = null;
-    updateDimState();
-    notifyListeners();
-  }
-
-  void updateDimState() {
-    isDimmed.value = friendSlideControl == Control.play ||
-        walletSlideControl == Control.play ||
-        settingSlideControl == Control.play ||
-        helpSlideControl == Control.play ||
-        infoSlideControl == Control.play;
-  }
 
   void heroOff() {
     projectsHeroTag = 'projectsHero_Off';

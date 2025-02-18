@@ -50,7 +50,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
           child: Container(
             height: 100.h,
             // width: 100.w,
-            constraints: const BoxConstraints(minHeight: 900),
+            constraints: 100.w > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
             child: Stack(
               children: [
                 // Background(),
@@ -60,8 +60,8 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                   children: [
                     DesktopSidePanel(),
                     Container(
-                      height: 90.sp,
-                      constraints: const BoxConstraints(minHeight: 900),
+                      height: 90.h,
+                      constraints: 100.w > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                       child: Row(
                         children: [
                           Column(
@@ -73,8 +73,8 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                               Padding(
                                 padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                                 child: Container(
-                                  constraints: const BoxConstraints(minHeight: 450),
-                                  height: 45.sp,
+                                  constraints: 100.w > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
+                                  height: 45.h,
                                   width: 71.5.w,
                                   // color: red,
                                   child: AnimationLimiter(
@@ -102,7 +102,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                           deckName: 'Dashboard',
                                                           deckWidth: halfDeckWidth,
                                                           textSize: 4.sp,
-                                                          leftPad: 1.sp,
+                                                          leftPad: 4.sp,
                                                         ),
                                                       ),
                                                       Expanded(child: ProfileCard()),
@@ -131,11 +131,9 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                               Padding(
                                 padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                                 child: Container(
-                                  constraints: const BoxConstraints(minHeight: 450),
-                                  // clipBehavior: Clip.none,
-                                  height: 45.sp,
+                                  constraints: 100.w > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
+                                  height: 45.h,
                                   width: 71.5.w,
-                                  // constraints: BoxConstraints(minWidth: 700, minHeight: 800),
                                   child: AnimationLimiter(
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,

@@ -41,7 +41,7 @@ class _TitleBubbleState extends State<TitleBubble> {
           color: deckColor,
           border: Border.all(color: deckBorderColor),
         ),
-        constraints: const BoxConstraints(maxHeight: 600, minHeight: 55),
+        constraints: 100.w > 1920 ? BoxConstraints(minHeight: 110) : BoxConstraints(minHeight: 55),
         height: widget.deckHeight,
         width: widget.deckWidth,
         child: Stack(
@@ -50,10 +50,10 @@ class _TitleBubbleState extends State<TitleBubble> {
             Padding(
               padding: EdgeInsets.fromLTRB(widget.leftPad, 0, 0, 0),
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent]),
                   boxShadow: [BoxShadow(color: Colors.transparent, blurRadius: 20, blurStyle: BlurStyle.solid)],
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: BorderRadius.all(Radius.circular(20.sp)),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),

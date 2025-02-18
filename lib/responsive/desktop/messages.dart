@@ -18,7 +18,7 @@ class _MessagesState extends State<Messages> {
     return Indexer(
       children: [
         Container(
-          constraints: BoxConstraints(minWidth: 150, minHeight: 900),
+          constraints: 100.w > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
           // margin: EdgeInsets.all(1.w),
           decoration: BoxDecoration(
             color: deckColor,

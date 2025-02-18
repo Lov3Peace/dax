@@ -102,7 +102,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                           deckName: 'Dashboard',
                                                           deckWidth: halfDeckWidth,
                                                           textSize: 4.sp,
-                                                          leftPad: 4.sp,
+                                                          leftPad: 100.w > 1920 ? 4.sp : 2.sp,
                                                         ),
                                                       ),
                                                       Expanded(child: ProfileCard()),
@@ -132,6 +132,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                 padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                                 child: Container(
                                   constraints: 100.w > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
+                                  // clipBehavior: Clip.none,
                                   height: 45.h,
                                   width: 71.5.w,
                                   child: AnimationLimiter(

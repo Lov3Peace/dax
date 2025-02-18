@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/desk_dashboard.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
@@ -96,21 +98,6 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
   }
 
   void goHome() {
-    Navigator.of(context).push(
-      PageRouteBuilder(
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-          return FadeTransition(
-            opacity: animation,
-            child: child,
-          );
-        },
-        pageBuilder: (context, animation, secondaryAnimation) {
-          // ignore: prefer_const_constructors
-          return AuthCheck();
-        },
-        transitionDuration: const Duration(milliseconds: 1000),
-      ),
-    );
+    Get.to(DesktopDashboard(), routeName: '/', transition: Transition.native);
   }
 }

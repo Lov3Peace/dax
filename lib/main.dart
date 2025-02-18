@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     timeDilation = 1;
     return Sizer(
-      builder: (context, orientation, deviceType) => MaterialApp(
+      builder: (context, orientation, deviceType) => GetMaterialApp(
         //builder: (context, widget) => ResponsiveBreakpoints.builder(child: ClampingScrollWrapper.builder(context, widget!), breakpoints: []),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

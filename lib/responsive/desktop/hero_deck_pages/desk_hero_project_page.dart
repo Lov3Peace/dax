@@ -34,20 +34,12 @@ class DeskHeroProjectsPage extends StatefulWidget {
 
 class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with AnimationMixin {
   //globals
-  late Animation<double> scale;
-  late Animation<double> opacity;
-  late AnimationController widthController;
-  late AnimationController heightController;
-  late AnimationController colorController;
 
   //final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
 
   @override
   void initState() {
     // TODO: implement initState
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
     super.initState();
   }
 
@@ -134,41 +126,6 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                           Messages(),
                         ],
                       ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const WalletPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const FriendsPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const SettingsPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const HelpPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: InfoPopUp(),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -230,7 +187,11 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
                       return const KeyboardsDeck();
                     }));
                   },
-                  child: ProjectsDeck(),
+                  child: Container(
+                    height: 40.h,
+                    width: 30.w,
+                    color: red,
+                  ),
                 ),
               ),
             ),

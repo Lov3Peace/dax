@@ -35,15 +35,13 @@ class _TitleBubbleState extends State<TitleBubble> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: widget.onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
+      child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(3.w),
           color: deckColor,
           border: Border.all(color: deckBorderColor),
         ),
-        constraints: const BoxConstraints(maxHeight: 600, maxWidth: 1080, minWidth: 250, minHeight: 55),
+        constraints: const BoxConstraints(maxHeight: 600, minHeight: 55),
         height: widget.deckHeight,
         width: widget.deckWidth,
         child: Stack(

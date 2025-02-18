@@ -12,10 +12,10 @@ import 'package:sizer/sizer.dart';
 double deckHeight = 22.h;
 double deckWidth = 35.25.w;
 double halfDeckWidth = 17.325.w;
+double headerTextSize = 5.sp;
 double subTextSize = 14;
 double profBubTextSize = 20;
-double titleTextSize = 20;
-double labelTextSize = 16;
+double labelTextSize = 2.sp;
 double textConstraint = 500;
 double subTextConstraint = 500;
 Color deckBorderColor = const Color.fromARGB(182, 75, 75, 75);
@@ -63,7 +63,6 @@ class _DeckState extends State<Deck> {
   final Color shadowColor = Colors.white;
 
   final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
-  double headerTextSize = 5.sp;
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +72,7 @@ class _DeckState extends State<Deck> {
     headerTextSize = 6.5.sp;
     subTextSize = 2.5.sp;
     profBubTextSize = 20;
-    titleTextSize = 20;
-    labelTextSize = 16;
+    labelTextSize = 3.sp;
     textConstraint = 500;
     subTextConstraint = 500;
 
@@ -101,7 +99,7 @@ class _DeckState extends State<Deck> {
           color: Colors.transparent,
           height: widget.deckHeight,
           width: widget.deckWidth,
-          constraints: const BoxConstraints(minWidth: 250),
+          // constraints: const BoxConstraints(minWidth: 250),
 
           //Blur
           child: Stack(
@@ -186,7 +184,7 @@ class _DeckState extends State<Deck> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [widget.gradient1, widget.gradient2]),
                       boxShadow: [BoxShadow(color: widget.neonGlow, blurRadius: 17, blurStyle: BlurStyle.solid)],
-                      borderRadius: BorderRadius.all(Radius.circular(500)),
+                      borderRadius: BorderRadius.all(Radius.circular(10.sp)),
                     ),
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(2.w, 20, 2.w, 20),

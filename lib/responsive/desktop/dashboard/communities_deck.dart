@@ -21,30 +21,14 @@ class CommunitiesDeck extends StatefulWidget {
 
 class _CommunitiesDeckState extends State<CommunitiesDeck> with AnimationMixin {
   @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
-  @override
   void initState() {
     // TODO: implement initState
-
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    deckHeight = 22.sp;
-    deckWidth = 35.25.w;
-    halfDeckWidth = 17.325.w;
-    labelTextSize = 16;
     return TactileButton(
       onTap: () {
         setState(() {
@@ -88,6 +72,11 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> with AnimationMixin {
   }
 
   Widget communityDeck({VoidCallback? onTap, Color? color}) {
+    // values set in desk_decks.dart
+    deckHeight = deckHeight;
+    deckWidth = deckWidth;
+    halfDeckWidth = halfDeckWidth;
+    labelTextSize = labelTextSize;
     return GestureDetector(
       child: Deck(
         deckHeight: deckHeight,

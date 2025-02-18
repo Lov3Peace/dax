@@ -4,13 +4,14 @@ import 'package:flutter_application_1/responsive/desktop/dashboard/news_deck.dar
 import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sizer/sizer.dart';
 import '../../../util/button_state.dart';
-import '../../../util/desk_dashboard_decks.dart';
+import '../../../util/desk_dash_lists.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../desk_sp/desk_side_panel.dart';
 
@@ -19,7 +20,6 @@ import 'projects_deck.dart';
 import 'title_bubble.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
-double headerTextSize = 24;
 
 class DesktopDashboard extends StatefulWidget {
   const DesktopDashboard({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
           child: Container(
             height: 100.h,
             // width: 100.w,
-            constraints: BoxConstraints(minWidth: 1200, minHeight: 900),
+            constraints: const BoxConstraints(minHeight: 900),
             child: Stack(
               children: [
                 // Background(),
@@ -61,13 +61,15 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                     DesktopSidePanel(),
                     Container(
                       height: 90.sp,
-                      constraints: BoxConstraints(minHeight: 900),
+                      constraints: const BoxConstraints(minHeight: 900),
                       child: Row(
                         children: [
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              // This padding adds a little bit more to the left for the side panel
+                              // and the right for messages
                               Padding(
                                 padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                                 child: Container(
@@ -94,13 +96,13 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                                   deck1: Column(
                                                     children: [
                                                       Padding(
-                                                        padding: EdgeInsets.only(bottom: 0.5.w),
+                                                        padding: EdgeInsets.only(bottom: 1.5.sp),
                                                         child: TitleBubble(
                                                           deckHeight: 3.sp,
                                                           deckName: 'Dashboard',
-                                                          deckWidth: 17.25.w,
+                                                          deckWidth: halfDeckWidth,
                                                           textSize: 4.sp,
-                                                          leftPad: 30,
+                                                          leftPad: 1.sp,
                                                         ),
                                                       ),
                                                       Expanded(child: ProfileCard()),
@@ -124,6 +126,8 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
                                   ),
                                 ),
                               ),
+                              // This padding adds a little bit more to the left for the side panel
+                              // and the right for messages
                               Padding(
                                 padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
                                 child: Container(

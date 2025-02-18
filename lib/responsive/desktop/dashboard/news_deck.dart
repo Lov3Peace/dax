@@ -43,7 +43,6 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
-      scale: 0.95,
       onTap: () {
         setState(() {
           controller.play();
@@ -86,8 +85,11 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
   }
 
   Widget newsDeck({VoidCallback? onTap, Color? color}) {
-    double width = 35.25.w;
-    double height = 22.h;
+    // values set in desk_decks.dart
+    deckHeight = deckHeight;
+    deckWidth = deckWidth;
+    halfDeckWidth = halfDeckWidth;
+    labelTextSize = labelTextSize;
     return GestureDetector(
       child: Deck(
         deckHeight: deckHeight,
@@ -97,8 +99,8 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
         gradient2: purp,
         neonGlow: blue,
         labelTextSize: labelTextSize,
-        textConstraint: width * 0.7,
-        subTextConstraint: width * 0.7,
+        textConstraint: deckWidth * 0.7,
+        subTextConstraint: deckWidth * 0.7,
         headingText: 'Stay up to date.',
         subText: 'Add your preferred news source to get news updates to your feed.',
       ),

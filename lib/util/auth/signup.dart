@@ -30,11 +30,9 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: loadPopUp,
-      child: const Text(
+      child: Text(
         "Sign Up?",
-        style: TextStyle(
-          color: Colors.white,
-        ),
+        style: TextStyle(color: Colors.white, fontSize: 3.sp),
       ),
     );
   }

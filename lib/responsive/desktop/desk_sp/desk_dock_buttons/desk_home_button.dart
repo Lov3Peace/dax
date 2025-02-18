@@ -61,6 +61,8 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
                 ),
               ],
             ),
+            // Since they're not in a row, have to use Positioned. This allows
+            // the animated container to pass under the icon
             Positioned(
               top: 1.sp,
               left: 0.5.w,

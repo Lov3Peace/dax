@@ -31,10 +31,6 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    deckHeight = 22.sp;
-    deckWidth = 35.25.w;
-    halfDeckWidth = 17.325.w;
-    labelTextSize = 16;
     return TactileButton(
       onTap: () {
         setState(() {
@@ -78,10 +74,12 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
     );
   }
 
-  Widget socialsDeck({
-    VoidCallback? onTap,
-    Color? color,
-  }) {
+  Widget socialsDeck({VoidCallback? onTap, Color? color}) {
+    // values set in desk_decks.dart
+    deckHeight = deckHeight;
+    deckWidth = deckWidth;
+    halfDeckWidth = halfDeckWidth;
+    labelTextSize = labelTextSize;
     return Deck(
       deckHeight: deckHeight,
       deckWidth: deckWidth,

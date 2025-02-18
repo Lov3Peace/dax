@@ -40,7 +40,7 @@ class _MessagesState extends State<Messages> {
 
           // height: 90.h,
           width: 15.w,
-          margin: EdgeInsets.only(right: 0.5.w),
+          // margin: EdgeInsets.only(right: 0.5.w),
 
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

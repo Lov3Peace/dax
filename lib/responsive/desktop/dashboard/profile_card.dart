@@ -20,63 +20,43 @@ class ProfileCard extends StatefulWidget {
 
 class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
   @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
-  @override
   void initState() {
     // TODO: implement initState
-    // responsiveDeck();
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // deckHeight = 22.h;
-    // deckWidth = 35.25.w;
-    // halfDeckWidth = 17.325.w;
-    // labelTextSize = 16;
-
     return TactileButton(
-      onTap: () {
-        Navigator.of(context).push(
-          PageRouteBuilder(
-            opaque: false,
-            barrierDismissible: true,
-            barrierColor: Colors.black54, // Dims the background
-            pageBuilder: (_, __, ___) => Scaffold(
-              backgroundColor: Colors.transparent,
-              body: Center(
-                child: Hero(
-                  tag: ButtonState().profileHeroTag,
-                  flightShuttleBuilder: flightShuttleBuilder,
-                  child: ProfilePopup(),
+        onTap: () {
+          Navigator.of(context).push(
+            PageRouteBuilder(
+              opaque: false,
+              barrierDismissible: true,
+              barrierColor: Colors.black54, // Dims the background
+              pageBuilder: (_, __, ___) => Scaffold(
+                backgroundColor: Colors.transparent,
+                body: Center(
+                  child: Hero(
+                    tag: ButtonState().profileHeroTag,
+                    flightShuttleBuilder: flightShuttleBuilder,
+                    child: ProfilePopup(),
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-      },
-      child: ScaleTransition(
-        scale: scale,
-        child: AnimatedOpacity(
-          opacity: opacity.value,
-          duration: const Duration(milliseconds: 300),
-          child: profileCard(),
-        ),
-      ),
-    );
+          );
+        },
+        child: profileCard());
   }
 
   Widget profileCard({VoidCallback? onTap, Color? color}) {
+    // values set in desk_decks.dart
+    deckHeight = deckHeight;
+    deckWidth = deckWidth;
+    halfDeckWidth = halfDeckWidth;
+    labelTextSize = labelTextSize;
     return Deck(
       deckHeight: deckHeight,
       deckWidth: halfDeckWidth,

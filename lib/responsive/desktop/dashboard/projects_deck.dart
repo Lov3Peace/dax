@@ -19,20 +19,7 @@ class ProjectsDeck extends StatefulWidget {
 
 class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
   @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
-
-  @override
   void initState() {
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
-
     super.initState();
   }
 
@@ -75,6 +62,11 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
   }
 
   Widget projectDeck({VoidCallback? onTap, Color? color}) {
+    // values set in desk_decks.dart
+    deckHeight = deckHeight;
+    deckWidth = deckWidth;
+    halfDeckWidth = halfDeckWidth;
+    labelTextSize = labelTextSize;
     return Deck(
       deckHeight: deckHeight,
       deckWidth: deckWidth,

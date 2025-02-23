@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/desk_hero_project_page.dart';
 import 'package:flutter_application_1/util/button_state.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -44,7 +46,8 @@ class _SpButtonTemplateState extends State<SpButtonTemplate> {
       },
       child: GestureDetector(
         onTap: () {
-          slideIn();
+          // slideIn();
+          Get.to(() => DeskHeroProjectsPage());
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
@@ -97,12 +100,14 @@ class _SpButtonTemplateState extends State<SpButtonTemplate> {
       () {
         //slide animation
         showGeneralDialog(
-            barrierDismissible: true,
-            barrierLabel: "Test",
-            context: context,
-            // transitionDuration: const Duration(milliseconds: 200),
-            pageBuilder: (context, _, __) => Center(
-                child: widget.child.animate().slideX(begin: -1, end: 0, curve: Curves.easeOutBack, duration: const Duration(milliseconds: 500))));
+          barrierDismissible: true,
+          barrierLabel: "PopUp",
+          context: context,
+          // transitionDuration: const Duration(milliseconds: 200),
+          pageBuilder: (context, _, __) => Center(
+            child: widget.child.animate().slideX(begin: -1, end: 0, curve: Curves.easeOutBack, duration: const Duration(milliseconds: 500)),
+          ),
+        );
       },
     );
   }

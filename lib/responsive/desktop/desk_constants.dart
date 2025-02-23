@@ -19,7 +19,7 @@ import '../mobile/mobile_finance_page.dart';
 import '../mobile/mobile_news_page.dart';
 import '../mobile/mobile_projects_page.dart';
 import '../mobile/mobile_socials_page.dart';
-import 'hero_deck_pages/desk_hero_community_page.dart';
+import 'hero_deck_pages/desk_hero_communities_page.dart';
 import 'hero_deck_pages/desk_hero_news_page.dart';
 import 'hero_deck_pages/desk_hero_project_page.dart';
 import 'hero_deck_pages/desk_hero_socials_page.dart';

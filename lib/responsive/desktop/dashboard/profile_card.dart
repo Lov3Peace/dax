@@ -11,20 +11,8 @@ import '../desk_constants.dart';
 import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 
-class ProfileCard extends StatefulWidget {
+class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
-
-  @override
-  State<ProfileCard> createState() => _ProfileCardState();
-}
-
-class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class TactileButton extends StatefulWidget {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/desk_dashboard.dart';
+import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/desk_hero_communities_page.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -98,6 +100,13 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
   }
 
   void goHome() {
-    Get.to(DesktopDashboard(), routeName: '/', transition: Transition.native);
+    Get.to(
+      () => DesktopDashboard(),
+      routeName: '/',
+      transition: Transition.fadeIn,
+      duration: Duration(milliseconds: 300),
+      fullscreenDialog: true,
+      preventDuplicates: false,
+    );
   }
 }

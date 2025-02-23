@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:sizer/sizer.dart';
@@ -20,22 +21,10 @@ class NewsDeck extends StatefulWidget {
   State<NewsDeck> createState() => _NewsDeckState();
 }
 
-class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
-  @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
+class _NewsDeckState extends State<NewsDeck> {
   @override
   void initState() {
     // TODO: implement initState
-
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
 
     super.initState();
   }
@@ -44,41 +33,9 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        setState(() {
-          controller.play();
-          Future.delayed(const Duration(milliseconds: 100)).then((_) {
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobNewsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabNewsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    return const DeskHeroNewsPage(
-                        //transitionAnimation: animation,
-                        );
-                  }
-                },
-                transitionDuration: const Duration(milliseconds: 700),
-              ),
-            );
-          });
-          Future.delayed(const Duration(milliseconds: 500)).then((_) {
-            controller.reset();
-          });
-        });
+        if (100.w > 550) {
+          Get.to(() => DeskHeroNewsPage(), routeName: '/projects', duration: Duration(milliseconds: 300));
+        }
       },
       child: newsDeck(),
     );

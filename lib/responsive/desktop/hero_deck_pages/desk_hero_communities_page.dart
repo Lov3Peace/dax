@@ -23,14 +23,14 @@ import '../desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.
 import '../desk_sp/desk_side_panel.dart';
 import '../messages.dart';
 
-class DeskHeroCommunityPage extends StatefulWidget {
-  const DeskHeroCommunityPage({Key? key}) : super(key: key);
+class DeskHeroCommunitiesPage extends StatefulWidget {
+  const DeskHeroCommunitiesPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskHeroCommunityPage> createState() => _DeskHeroCommunityPageState();
+  State<DeskHeroCommunitiesPage> createState() => _DeskHeroCommunitiesPageState();
 }
 
-class _DeskHeroCommunityPageState extends State<DeskHeroCommunityPage> with AnimationMixin {
+class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -40,10 +40,6 @@ class _DeskHeroCommunityPageState extends State<DeskHeroCommunityPage> with Anim
 
   @override
   void initState() {
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
-
     super.initState();
   }
 
@@ -62,14 +58,7 @@ class _DeskHeroCommunityPageState extends State<DeskHeroCommunityPage> with Anim
               children: [
                 const ArtBoardScreen(),
                 GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      controller.play();
-                    });
-                    Future.delayed(const Duration(milliseconds: 300)).then((_) {
-                      controller.playReverse();
-                    });
-                  },
+                  onTap: () {},
                   child: Indexer(
                     children: [
                       Indexed(

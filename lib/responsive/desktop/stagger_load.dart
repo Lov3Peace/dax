@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/projects_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/util/desk_dash_lists.dart';
-import 'package:sizer/sizer.dart';
-
-import '../../main.dart';
 
 class StaggerLoad extends StatelessWidget {
   const StaggerLoad({
@@ -42,11 +34,13 @@ class StaggerLoad extends StatelessWidget {
               .animate()
               .fadeIn(
                 duration: Duration(milliseconds: duration),
-                delay: Duration(milliseconds: (index + 1) * delay * layer),
+                // delay: Duration(milliseconds: (layer * ((index + 1) * delay)) + delay),
+                delay: Duration(milliseconds: ((2 * layer) + (index + layer)) * delay),
+                // (2(0+1) * 200) + 200 = 800
               )
               .scale(
                 duration: Duration(milliseconds: duration),
-                delay: Duration(milliseconds: (index + 1) * delay * layer),
+                delay: Duration(milliseconds: ((2 * layer) + (index + layer)) * delay),
                 begin: Offset(1.0, 1.0),
                 end: Offset(scale, scale),
               )

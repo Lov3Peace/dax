@@ -81,8 +81,8 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                         layer: 1,
                                         scale: 1.03,
                                         scrollDirection: Axis.horizontal,
-                                        duration: 300,
-                                        delay: 200,
+                                        duration: 200,
+                                        delay: 100,
                                         padding: EdgeInsets.all(0.25.w),
                                         widgets: [
                                           //
@@ -117,8 +117,8 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                         layer: 2,
                                         scale: 1.03,
                                         scrollDirection: Axis.horizontal,
-                                        duration: 300,
-                                        delay: 200,
+                                        duration: 200,
+                                        delay: 100,
                                         padding: EdgeInsets.all(0.25.w),
                                         widgets: [
                                           SocialsDeck(),

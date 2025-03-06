@@ -1,6 +1,15 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/news_deck.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projects_deck.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/test_container.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/stagger_load.dart';
 import 'package:sizer/sizer.dart';
@@ -9,6 +18,7 @@ import '../desk_sp/desk_side_panel.dart';
 import 'package:rive/rive.dart' as r;
 
 import '../messages.dart';
+import 'title_bubble.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -51,83 +61,75 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                   DesktopSidePanel(),
                   Container(
                     height: 90.h,
+                    // width: 71.5.w,
                     constraints: 100.w > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                    //
+                    // Row for Decks + Messages
                     child: Row(
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          // crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // This padding adds a little bit more to the left for the side panel
-                            // and the right for messages
-                            Padding(
-                              padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
-                              child: Container(
-                                constraints: 100.w > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
-                                height: 45.h,
-                                width: 71.5.w,
-                                // color: red,
-                                child: Padding(
-                                  padding: EdgeInsets.all(0.25.w),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: StaggerLoad(scrollDirection: Axis.horizontal, duration: 500, widgets: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 0.25.w),
+                          child: Column(
+                            children: [
+                              //
+                              // Row for Title, Profile, Projects, and Communities Decks
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    //
+                                    // Stagger Load Animation
+                                    StaggerLoad(
+                                        layer: 1,
+                                        scale: 1.03,
+                                        scrollDirection: Axis.horizontal,
+                                        duration: 300,
+                                        delay: 200,
+                                        padding: EdgeInsets.all(0.25.w),
+                                        widgets: [
+                                          //
+                                          //Column of Title Bubble and Profile Card
+                                          Column(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(bottom: 0.25.w),
+                                                child: TitleBubble(
+                                                  deckHeight: 3.sp,
+                                                  deckName: 'Dashboard',
+                                                  deckWidth: halfDeckWidth,
+                                                  textSize: 4.sp,
+                                                  leftPad: 4.sp,
+                                                ),
+                                              ),
+                                              Expanded(child: ProfileCard()),
+                                            ],
+                                          ),
                                           ProjectsDeck(),
+                                          CommunitiesDeck(),
                                         ]),
-                                      ),
-                                    ],
-                                  ),
+                                  ],
                                 ),
                               ),
-                            ),
-
-                            // This padding adds a little bit more to the left for the side panel
-                            // and the right for messages
-                            Padding(
-                              padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
-                              child: Container(
-                                constraints: 100.w > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
-                                // clipBehavior: Clip.none,
-                                height: 45.h,
-                                // width: 71.5.w,
-                                // child: AnimationLimiter(
-                                //   child: ListView.builder(
-                                //     scrollDirection: Axis.horizontal,
-                                //     itemCount: 2,
-                                //     itemBuilder: (BuildContext context, int index) {
-                                //       return AnimationConfiguration.staggeredList(
-                                //         delay: const Duration(milliseconds: 200),
-                                //         position: index,
-                                //         duration: const Duration(milliseconds: 700),
-                                //         child: ScaleAnimation(
-                                //           scale: 0.7,
-                                //           curve: Curves.easeOutBack,
-                                //           child: FadeInAnimation(
-                                //             child: Padding(
-                                //               padding: EdgeInsets.all(0.25.w),
-                                //               child: deskDashboardDecks2(
-                                //                 deck4: Hero(
-                                //                   flightShuttleBuilder: flightShuttleBuilder,
-                                //                   tag: ButtonState().socialsHeroTag,
-                                //                   child: SocialsDeck(),
-                                //                 ),
-                                //                 deck5: Hero(
-                                //                   flightShuttleBuilder: flightShuttleBuilder,
-                                //                   tag: ButtonState().newsHeroTag,
-                                //                   child: NewsDeck(),
-                                //                 ),
-                                //               )[index],
-                                //             ),
-                                //           ),
-                                //         ),
-                                //       );
-                                //     },
-                                //   ),
-                                // ),
+                              //
+                              // Row for Socials and News Decks
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    StaggerLoad(
+                                        layer: 2,
+                                        scale: 1.03,
+                                        scrollDirection: Axis.horizontal,
+                                        duration: 300,
+                                        delay: 200,
+                                        padding: EdgeInsets.all(0.25.w),
+                                        widgets: [
+                                          SocialsDeck(),
+                                          NewsDeck(),
+                                        ]),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         // // ignore: prefer_const_constructors
                         Padding(
@@ -156,7 +158,6 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
 
   @override
   void dispose() {
-    // controller.dispose();
     super.dispose();
   }
 }

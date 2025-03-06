@@ -104,7 +104,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
       () => DesktopDashboard(),
       routeName: '/',
       transition: Transition.fadeIn,
-      duration: Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 500),
       fullscreenDialog: true,
       preventDuplicates: false,
     );

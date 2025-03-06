@@ -82,7 +82,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                         scale: 1.03,
                                         scrollDirection: Axis.horizontal,
                                         duration: 200,
-                                        delay: 100,
+                                        delay: 75,
                                         padding: EdgeInsets.all(0.25.w),
                                         widgets: [
                                           //
@@ -118,7 +118,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                         scale: 1.03,
                                         scrollDirection: Axis.horizontal,
                                         duration: 200,
-                                        delay: 100,
+                                        delay: 75,
                                         padding: EdgeInsets.all(0.25.w),
                                         widgets: [
                                           SocialsDeck(),
@@ -133,7 +133,14 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                         // // ignore: prefer_const_constructors
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 0.25.w),
-                          child: Messages(),
+                          child: StaggerLoad(
+                            widgets: [Messages()],
+                            duration: 200,
+                            delay: 75,
+                            layer: 3,
+                            scale: 1.03,
+                            scrollDirection: Axis.horizontal,
+                          ),
                         ),
                       ],
                     ),

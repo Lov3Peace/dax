@@ -100,13 +100,12 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
   }
 
   void goHome() {
-    Get.to(
-      () => DesktopDashboard(),
-      routeName: '/',
-      transition: Transition.fadeIn,
-      duration: Duration(milliseconds: 500),
-      fullscreenDialog: true,
-      preventDuplicates: false,
-    );
+    Get.to(() => DesktopDashboard(),
+        routeName: '/',
+        transition: Transition.fadeIn,
+        duration: Duration(milliseconds: 200),
+        fullscreenDialog: true,
+        preventDuplicates: false,
+        popGesture: true);
   }
 }

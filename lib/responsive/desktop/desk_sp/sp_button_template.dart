@@ -46,8 +46,7 @@ class _SpButtonTemplateState extends State<SpButtonTemplate> {
       },
       child: GestureDetector(
         onTap: () {
-          // slideIn();
-          Get.to(() => DeskHeroProjectsPage());
+          slideIn();
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),

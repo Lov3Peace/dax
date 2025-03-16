@@ -333,24 +333,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
   Future login() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: '${_usernameController.text}@omni.com', password: _passwordController.text);
-
-      Navigator.of(context).push(
-        PageRouteBuilder(
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          pageBuilder: (context, animation, secondaryAnimation) {
-            print('Login Successful...');
-            // ignore: prefer_const_constructors
-            return AuthCheck();
-          },
-          transitionDuration: const Duration(milliseconds: 0),
-        ),
-      );
+      Navigator.pushNamed(context, '/');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print("User doesn't exist.");

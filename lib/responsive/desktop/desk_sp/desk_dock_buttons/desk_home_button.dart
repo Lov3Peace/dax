@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/desk_dashboard.dart';
-import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/desk_hero_communities_page.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:provider/provider.dart';
-
+import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../../util/button_state.dart';
 
 class DeskHomeButton extends StatefulWidget {
   const DeskHomeButton({super.key});
@@ -41,7 +36,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
       },
       child: GestureDetector(
         onTap: () {
-          goHome();
+          Navigator.pushNamed(context, '/');
         },
         child: Stack(
           children: [
@@ -97,15 +92,5 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
         ),
       ),
     );
-  }
-
-  void goHome() {
-    Get.to(() => DesktopDashboard(),
-        routeName: '/',
-        transition: Transition.fadeIn,
-        duration: Duration(milliseconds: 200),
-        fullscreenDialog: true,
-        preventDuplicates: false,
-        popGesture: true);
   }
 }

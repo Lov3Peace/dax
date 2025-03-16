@@ -105,7 +105,6 @@ class InfoPopUp extends StatelessWidget {
                             child: Center(
                               // The container that holds the information
                               child: CarouselSlider(
-                                carouselController: buttonState.carouselController,
                                 items: [
                                   AboutUsInformation(),
                                   ContactUsInformation(),

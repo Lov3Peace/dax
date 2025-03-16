@@ -1,14 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:flutter_application_1/util/web/routes.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'responsive/desktop/hero_deck_pages/desk_hero_project_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,22 +60,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     timeDilation = 1;
     return Sizer(
-      builder: (context, orientation, deviceType) => GetMaterialApp(
-        //builder: (context, widget) => ResponsiveBreakpoints.builder(child: ClampingScrollWrapper.builder(context, widget!), breakpoints: []),
+      builder: (context, orientation, deviceType) => MaterialApp(
+        routes: routes,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             fontFamily: GoogleFonts.montserrat().fontFamily,
             colorScheme: const ColorScheme.dark(secondary: red, onSurface: Colors.white),
             scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
         // ignore: prefer_const_constructors
-        home: ResponsiveLayout(
-          // ignore: prefer_const_constructors
-          mobileVersion: AuthCheck(),
-          // ignore: prefer_const_constructors
-          tabletVersion: AuthCheck(),
-          // ignore: prefer_const_constructors
-          desktopVersion: AuthCheck(),
-        ),
+        // home: ResponsiveLayout(
+        //   // ignore: prefer_const_constructors
+        //   mobileVersion: AuthCheck(),
+        //   // ignore: prefer_const_constructors
+        //   tabletVersion: AuthCheck(),
+        //   // ignore: prefer_const_constructors
+        //   desktopVersion: AuthCheck(),
+        // ),
       ),
     );
   }

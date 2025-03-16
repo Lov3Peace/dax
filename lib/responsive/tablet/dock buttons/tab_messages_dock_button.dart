@@ -44,8 +44,7 @@ class _TabMessagesWindowPopupCard extends StatefulWidget {
   const _TabMessagesWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<_TabMessagesWindowPopupCard> createState() =>
-      _MessagesWindowPopupCardState();
+  State<_TabMessagesWindowPopupCard> createState() => _MessagesWindowPopupCardState();
 }
 
 class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
@@ -65,7 +64,7 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
     ChatMessages(),
     // Add more containers as needed
   ];
-  final CarouselController _carouselController = CarouselController();
+  final CarouselSliderController _CarouselSliderController = CarouselSliderController();
 
   bool isSelected = false;
   Color activeColor = tran;
@@ -83,8 +82,7 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
               child: Container(
                 height: 85.h,
                 width: 91.w,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 child: Hero(
                   tag: _heroMessagesWindow,
@@ -103,9 +101,7 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                             child: Container(
                                 height: 85.h,
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color.fromARGB(
-                                          182, 31, 31, 31)),
+                                  border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
                           ),
@@ -129,8 +125,7 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                                 height: 10.5.h,
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    physics: const ScrollPhysics(
-                                        parent: BouncingScrollPhysics()),
+                                    physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
                                     itemCount: people.length,
                                     itemBuilder: (context, index) {
                                       return BubbleStories(text: people[index]);
@@ -144,9 +139,7 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                                   height: 6.5.h,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromRGBO(42, 41, 41, 0.631)
-                                            .withOpacity(0.98),
+                                    color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(40),
                                     ),
@@ -169,30 +162,18 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                                             }
                                           });
 
-                                          int pageIndex =
-                                              0; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
+                                          int pageIndex = 0; // Change this to the page index
+                                          _CarouselSliderController.animateToPage(pageIndex);
 
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 1.h),
                                           decoration: const BoxDecoration(
-                                              gradient: LinearGradient(
-                                                  colors: [purp, red]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: red,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("All",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                              gradient: LinearGradient(colors: [purp, red]),
+                                              boxShadow: [BoxShadow(color: red, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                          child: const Text("All", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
                                       //Group Button
@@ -206,32 +187,18 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                                             }
                                           });
 
-                                          int pageIndex =
-                                              1; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
+                                          int pageIndex = 1; // Change this to the page index
+                                          _CarouselSliderController.animateToPage(pageIndex);
 
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 6.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.h),
                                           decoration: const BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                Colors.black54,
-                                                Colors.black54
-                                              ]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: tran,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("Group",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                              gradient: LinearGradient(colors: [Colors.black54, Colors.black54]),
+                                              boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                          child: const Text("Group", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
                                       //Chat Button
@@ -245,32 +212,18 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                                             }
                                           });
 
-                                          int pageIndex =
-                                              2; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
+                                          int pageIndex = 2; // Change this to the page index
+                                          _CarouselSliderController.animateToPage(pageIndex);
 
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 6.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.h),
                                           decoration: const BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                Colors.black54,
-                                                Colors.black54
-                                              ]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: tran,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("Chat",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                              gradient: LinearGradient(colors: [Colors.black54, Colors.black54]),
+                                              boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                          child: const Text("Chat", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
                                     ],
@@ -287,8 +240,7 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                                   height: 50.h,
                                   width: 100.w,
                                   decoration: BoxDecoration(
-                                    color: const Color.fromARGB(162, 27, 27, 27)
-                                        .withOpacity(0.85),
+                                    color: const Color.fromARGB(162, 27, 27, 27).withOpacity(0.85),
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(35),
                                     ),
@@ -297,7 +249,6 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                                   child: PageStorage(
                                     bucket: messageBucket,
                                     child: CarouselSlider(
-                                      carouselController: _carouselController,
                                       options: CarouselOptions(
                                         height: 53.h,
                                         viewportFraction: 1,
@@ -309,8 +260,7 @@ class _MessagesWindowPopupCardState extends State<_TabMessagesWindowPopupCard> {
                                           });
                                         },
                                       ),
-                                      items:
-                                          _carouselContainers.map((container) {
+                                      items: _carouselContainers.map((container) {
                                         return Builder(
                                           builder: (BuildContext context) {
                                             return container;

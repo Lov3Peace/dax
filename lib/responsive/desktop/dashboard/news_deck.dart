@@ -33,9 +33,7 @@ class _NewsDeckState extends State<NewsDeck> {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        if (100.w > 550) {
-          Get.to(() => DeskHeroNewsPage(), routeName: '/projects', duration: Duration(milliseconds: 300));
-        }
+        Navigator.pushNamed(context, '/news');
       },
       child: newsDeck(),
     );

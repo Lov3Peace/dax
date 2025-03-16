@@ -46,12 +46,10 @@ class _MobFriendsWindowPopupCard extends StatefulWidget {
   const _MobFriendsWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<_MobFriendsWindowPopupCard> createState() =>
-      _MobFriendsWindowPopupCardState();
+  State<_MobFriendsWindowPopupCard> createState() => _MobFriendsWindowPopupCardState();
 }
 
-class _MobFriendsWindowPopupCardState
-    extends State<_MobFriendsWindowPopupCard> {
+class _MobFriendsWindowPopupCardState extends State<_MobFriendsWindowPopupCard> {
   final TextEditingController _searchController = TextEditingController();
   @override
   final List people = [
@@ -71,7 +69,7 @@ class _MobFriendsWindowPopupCardState
     // Add more containers as needed
   ];
 
-  final CarouselController _carouselController = CarouselController();
+  final CarouselSliderController _CarouselSliderController = CarouselSliderController();
 
   bool isSelected = false;
   Color activeColor = tran;
@@ -108,9 +106,7 @@ class _MobFriendsWindowPopupCardState
                             child: Container(
                                 height: 85.h,
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color.fromARGB(
-                                          182, 31, 31, 31)),
+                                  border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
                           ),
@@ -144,8 +140,7 @@ class _MobFriendsWindowPopupCardState
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(24),
                                       ),
-                                      borderSide:
-                                          BorderSide(color: Colors.white),
+                                      borderSide: BorderSide(color: Colors.white),
                                     ),
                                     hintText: 'Search...',
                                     suffixIcon: Icon(Icons.search),
@@ -164,9 +159,7 @@ class _MobFriendsWindowPopupCardState
                                   height: 6.5.h,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromRGBO(42, 41, 41, 0.631)
-                                            .withOpacity(0.98),
+                                    color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(40),
                                     ),
@@ -187,30 +180,18 @@ class _MobFriendsWindowPopupCardState
                                             }
                                           });
 
-                                          int pageIndex =
-                                              0; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
+                                          int pageIndex = 0; // Change this to the page index
+                                          _CarouselSliderController.animateToPage(pageIndex);
 
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 1.h),
                                           decoration: const BoxDecoration(
-                                              gradient: LinearGradient(
-                                                  colors: [purp, red]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: red,
-                                                    blurRadius: 10,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("All",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                              gradient: LinearGradient(colors: [purp, red]),
+                                              boxShadow: [BoxShadow(color: red, blurRadius: 10, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                          child: const Text("All", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
                                       //Favorites Button
@@ -224,32 +205,18 @@ class _MobFriendsWindowPopupCardState
                                             }
                                           });
 
-                                          int pageIndex =
-                                              1; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
+                                          int pageIndex = 1; // Change this to the page index
+                                          _CarouselSliderController.animateToPage(pageIndex);
 
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.5.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 4.5.w, vertical: 1.h),
                                           decoration: const BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                Colors.black54,
-                                                Colors.black54
-                                              ]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: tran,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("Favorites",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                              gradient: LinearGradient(colors: [Colors.black54, Colors.black54]),
+                                              boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                          child: const Text("Favorites", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
                                       //Partners Button
@@ -263,32 +230,18 @@ class _MobFriendsWindowPopupCardState
                                             }
                                           });
 
-                                          int pageIndex =
-                                              2; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
+                                          int pageIndex = 2; // Change this to the page index
+                                          _CarouselSliderController.animateToPage(pageIndex);
 
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 4.5.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 4.5.w, vertical: 1.h),
                                           decoration: const BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                Colors.black54,
-                                                Colors.black54
-                                              ]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: tran,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("Partners",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                              gradient: LinearGradient(colors: [Colors.black54, Colors.black54]),
+                                              boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                          child: const Text("Partners", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
                                     ],
@@ -306,9 +259,7 @@ class _MobFriendsWindowPopupCardState
                                   height: 51.h,
                                   width: 100.w,
                                   decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromRGBO(27, 27, 27, 0.937)
-                                            .withOpacity(0.98),
+                                    color: const Color.fromRGBO(27, 27, 27, 0.937).withOpacity(0.98),
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(35),
                                     ),
@@ -317,7 +268,6 @@ class _MobFriendsWindowPopupCardState
                                   child: PageStorage(
                                     bucket: friendsBucket,
                                     child: CarouselSlider(
-                                      carouselController: _carouselController,
                                       options: CarouselOptions(
                                         height: 53.h,
                                         viewportFraction: 1,
@@ -329,8 +279,7 @@ class _MobFriendsWindowPopupCardState
                                           });
                                         },
                                       ),
-                                      items:
-                                          _carouselContainers.map((container) {
+                                      items: _carouselContainers.map((container) {
                                         return Builder(
                                           builder: (BuildContext context) {
                                             return container;

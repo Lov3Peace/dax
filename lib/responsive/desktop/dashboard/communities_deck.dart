@@ -33,9 +33,7 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        if (100.w > 550) {
-          Get.to(() => DeskHeroCommunitiesPage(), routeName: '/projects', duration: Duration(milliseconds: 300));
-        }
+        Navigator.pushNamed(context, '/communities');
       },
       child: communityDeck(),
     );

@@ -19,7 +19,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
   Widget build(BuildContext context) {
     return TactileButton(
         onTap: () {
-          Get.to(() => DeskHeroProjectsPage(), routeName: '/projects', duration: Duration(milliseconds: 300));
+          Navigator.pushNamed(context, '/projects');
         },
         child: projectDeck());
   }

@@ -78,7 +78,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
     // Add more containers as needed
   ];
 
-  final CarouselController _carouselController = CarouselController();
+  final CarouselSliderController _CarouselSliderController = CarouselSliderController();
 
   bool isSelected = false;
   Color activeColor = tran;
@@ -196,7 +196,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                   });
 
                                   int pageIndex = 0; // Change this to the page index
-                                  _carouselController.animateToPage(pageIndex);
+                                  _CarouselSliderController.animateToPage(pageIndex);
 
                                   // isSelected = false;
                                 },
@@ -221,7 +221,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                   });
 
                                   int pageIndex = 1; // Change this to the page index
-                                  _carouselController.animateToPage(pageIndex);
+                                  _CarouselSliderController.animateToPage(pageIndex);
 
                                   // isSelected = false;
                                 },
@@ -246,7 +246,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                   });
 
                                   int pageIndex = 2; // Change this to the page index
-                                  _carouselController.animateToPage(pageIndex);
+                                  _CarouselSliderController.animateToPage(pageIndex);
 
                                   // isSelected = false;
                                 },
@@ -272,7 +272,6 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                           child: PageStorage(
                             bucket: friendsBucket,
                             child: CarouselSlider(
-                              carouselController: _carouselController,
                               options: CarouselOptions(
                                 scrollPhysics: const NeverScrollableScrollPhysics(),
                                 viewportFraction: 1,

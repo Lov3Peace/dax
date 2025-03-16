@@ -33,42 +33,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        setState(() {
-          // controller.play();s
-          Future.delayed(const Duration(milliseconds: 100)).then((_) {
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobSocialsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabSocialsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    // ignore: prefer_const_constructors
-                    return DeskHeroSocialsPage(
-                        //transitionAnimation: animation,
-                        );
-                  }
-                },
-                transitionDuration: const Duration(milliseconds: 1000),
-              ),
-            );
-          });
-          Future.delayed(const Duration(milliseconds: 500)).then((_) {
-            controller.reset();
-          });
-        });
+        Navigator.pushNamed(context, '/socials');
       },
       child: socialsDeck(),
     );

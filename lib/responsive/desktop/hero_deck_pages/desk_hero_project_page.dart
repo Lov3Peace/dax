@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projects_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
@@ -10,7 +12,6 @@ import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
 
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
 import '../../mobile/mob_artboard_page.dart';
@@ -47,93 +48,53 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
   Widget build(BuildContext context) {
     return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        body: SingleChildScrollView(
-          child: Container(
-            height: 100.h,
-            width: 100.w,
-            constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
-            child: Stack(
+          extendBodyBehindAppBar: true,
+          extendBody: true,
+          body: WebUITemplate(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const ArtBoardScreen(),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      controller.play();
-                    });
-                    Future.delayed(const Duration(milliseconds: 300)).then((_) {
-                      controller.playReverse();
-                    });
-                  },
-                  child: Indexer(
-                    children: [
-                      Indexed(
-                        index: 2,
-                        child: DesktopSidePanel(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    //
+                    // Title of Screen
+                    Padding(
+                      padding: EdgeInsets.only(right: 23.6.w(context)),
+                      child: TitleBubble(
+                        deckHeight: 5.5.h(context),
+                        deckName: 'Projects',
+                        deckWidth: 17.25.w(context),
+                        textSize: 3.sp(context),
+                        leftPad: 30,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 12.5.w,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  //
-                                  // Title of Screen
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 23.6.w),
-                                    child: TitleBubble(
-                                      deckHeight: 5.5.h,
-                                      deckName: 'Projects',
-                                      deckWidth: 17.25.w,
-                                      textSize: 3.sp,
-                                      leftPad: 30,
-                                    ),
-                                  ),
-                                  //
-                                  //Houses Decks Buttons
-                                  Container(
-                                    color: tran,
-                                    child: const Column(
-                                      children: [ProjectsBubbleDock()],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                color: tran,
-                                child: Column(
-                                  children: [
-                                    Hero(
-                                      tag: ButtonState().projectsHeroTag,
-                                      flightShuttleBuilder: flightShuttleBuilder,
-                                      child: const DeskProjectsCont(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          // ignore: prefer_const_constructors
-                          Messages(),
-                        ],
+                    ),
+                    //
+                    //Houses Decks Buttons
+                    Container(
+                      color: tran,
+                      child: const Column(
+                        children: [ProjectsBubbleDock()],
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  color: tran,
+                  child: Column(
+                    children: [
+                      Hero(
+                        tag: ButtonState().projectsHeroTag,
+                        flightShuttleBuilder: flightShuttleBuilder,
+                        child: DeskProjectsCont(),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-          ),
-        ),
-      ),
+          )),
     );
   }
 
@@ -155,10 +116,10 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
-      width: 71.w,
+      height: 80.h(context),
+      width: 71.w(context),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.5.w),
+        borderRadius: BorderRadius.circular(1.5.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
@@ -188,8 +149,8 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
                     }));
                   },
                   child: Container(
-                    height: 40.h,
-                    width: 30.w,
+                    height: 40.h(context),
+                    width: 30.w(context),
                     color: red,
                   ),
                 ),
@@ -208,10 +169,10 @@ class ProjectsBubbleDock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 6.5.h,
-      width: 30.w,
+      height: 6.5.h(context),
+      width: 30.w(context),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.5.w),
+        borderRadius: BorderRadius.circular(1.5.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),

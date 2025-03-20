@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:indexed/indexed.dart';
-import 'package:sizer/sizer.dart';
 
 class Messages extends StatefulWidget {
   const Messages({super.key});
@@ -18,11 +18,11 @@ class _MessagesState extends State<Messages> {
     return Indexer(
       children: [
         Container(
-          constraints: 100.w > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
-          // margin: EdgeInsets.all(1.w),
+          constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
+          // margin: EdgeInsets.all(1.w(context)),
           decoration: BoxDecoration(
             color: deckColor,
-            borderRadius: BorderRadius.circular(1.w),
+            borderRadius: BorderRadius.circular(1.w(context)),
             border: Border.all(color: const Color.fromARGB(147, 58, 58, 58)),
             boxShadow: const [
               // BoxShadow(
@@ -38,26 +38,26 @@ class _MessagesState extends State<Messages> {
             ],
           ),
 
-          // height: 90.h,
-          width: 15.w,
-          // margin: EdgeInsets.only(right: 0.5.w),
+          // height: 90.h(context),
+          width: 15.w(context),
+          // margin: EdgeInsets.only(right: 0.5.w(context)),
 
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(1.w, 1.5.w, 1.w, 1.w),
+                padding: EdgeInsets.fromLTRB(1.w(context), 1.5.w(context), 1.w(context), 1.w(context)),
                 child: Text(
                   'Messages',
-                  style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 5.sp, height: 1.0), fontWeight: FontWeight.w600),
+                  style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 5.sp(context), height: 1.0), fontWeight: FontWeight.w600),
                 ),
               ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.fromLTRB(1.w, 0, 1.w, 2.w),
+                  margin: EdgeInsets.fromLTRB(1.w(context), 0, 1.w(context), 2.w(context)),
                   constraints: const BoxConstraints(minWidth: 250, minHeight: 650),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(1.w),
+                    borderRadius: BorderRadius.circular(1.w(context)),
                     color: tran,
                     border: Border.all(color: deckBorderColor),
 

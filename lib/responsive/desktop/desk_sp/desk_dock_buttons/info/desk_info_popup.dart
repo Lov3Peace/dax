@@ -1,13 +1,13 @@
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_about_us.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_contact_us.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_goals.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_terms_conditions.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../../../../util/button_state.dart';
 import '../../../desk_constants.dart';
 import '../../../desk_decks.dart';
@@ -20,13 +20,13 @@ class InfoPopUp extends StatelessWidget {
   Widget build(BuildContext context) {
     final buttonState = Provider.of<ButtonState>(context);
     return Container(
-      // height: 100.h,
-      width: 71.w,
+      // height: 100.h(context),
+      width: 71.w(context),
       alignment: Alignment.center,
       child: Stack(alignment: Alignment.center, children: [
         SizedBox(
-          height: 77.h,
-          width: 71.w,
+          height: 77.h(context),
+          width: 71.w(context),
           // padding: const EdgeInsets.symmetric(vertical: 32),
           child: Material(
             shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -40,7 +40,7 @@ class InfoPopUp extends StatelessWidget {
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                     child: Container(
-                        // height: 85.h,
+                        // height: 85.h(context),
                         decoration: BoxDecoration(
                       border: Border.all(color: deckBorderColor),
                       borderRadius: BorderRadius.circular(24),
@@ -50,9 +50,9 @@ class InfoPopUp extends StatelessWidget {
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: .7.h, bottom: .7.h),
+                      padding: EdgeInsets.only(top: .7.h(context), bottom: .7.h(context)),
                       child: Wrap(
-                        spacing: 1.w,
+                        spacing: 1.w(context),
                         children: [
                           // This column houses the title of the popup along with the container
                           // that houses the class infosidepanel
@@ -60,7 +60,7 @@ class InfoPopUp extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsets.only(bottom: .5.h),
+                                padding: EdgeInsets.only(bottom: .5.h(context)),
                                 child: const Text(
                                   'Info',
                                   style: TextStyle(
@@ -71,8 +71,8 @@ class InfoPopUp extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                height: 68.h,
-                                width: 14.w,
+                                height: 68.h(context),
+                                width: 14.w(context),
                                 constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
                                 decoration: const BoxDecoration(
                                   color: Color.fromRGBO(17, 17, 17, 1),
@@ -81,7 +81,7 @@ class InfoPopUp extends StatelessWidget {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.only(top: 2.h),
+                                  padding: EdgeInsets.only(top: 2.h(context)),
                                   child: const Column(
                                     children: [
                                       InfoSidePanel(),
@@ -94,8 +94,8 @@ class InfoPopUp extends StatelessWidget {
                           // This container houses the container that holds the information for the specified button selected
                           // in the info side panel.
                           Container(
-                            height: 75.h,
-                            width: 50.w,
+                            height: 75.h(context),
+                            width: 50.w(context),
                             decoration: const BoxDecoration(
                               color: Color.fromRGBO(17, 17, 17, 1),
                               borderRadius: BorderRadius.all(
@@ -112,7 +112,7 @@ class InfoPopUp extends StatelessWidget {
                                   TermsConditionsInformation(),
                                 ],
                                 options: CarouselOptions(
-                                  height: 100.h,
+                                  height: 100.h(context),
                                   viewportFraction: 0.9,
                                   enlargeCenterPage: true,
                                   onPageChanged: (index, reason) {

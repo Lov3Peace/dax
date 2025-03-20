@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import '../util/decks.dart';
 import '../util/title_bubble.dart';
 import '../main.dart';
@@ -20,15 +20,15 @@ class _KeyboardsDeckState extends State<KeyboardsDeck> {
         backgroundColor: tran,
         shadowColor: tran,
         automaticallyImplyLeading: false,
-        leadingWidth: 5.h,
+        leadingWidth: 5.h(context),
         flexibleSpace: Padding(
           padding: const EdgeInsets.fromLTRB(15, 25, 200, 0),
           child: Hero(
             tag: 'keyboards',
             flightShuttleBuilder: flightShuttleBuilder,
             child: TitleBubble(
-              deckHeight: 5.h,
-              deckWidth: 4.w,
+              deckHeight: 5.h(context),
+              deckWidth: 4.w(context),
               deckName: 'Keyboards',
               gradient1: tran,
               gradient2: tran,
@@ -50,8 +50,8 @@ class _KeyboardsDeckState extends State<KeyboardsDeck> {
             //   }));
             // },
             child: Deck(
-              deckHeight: 80.h,
-              deckWidth: 85.w,
+              deckHeight: 80.h(context),
+              deckWidth: 85.w(context),
               deckName: 'Notare',
               gradient1: red,
               gradient2: purp,
@@ -59,16 +59,16 @@ class _KeyboardsDeckState extends State<KeyboardsDeck> {
             ),
           ),
           Deck(
-            deckHeight: 80.h,
-            deckWidth: 85.w,
+            deckHeight: 80.h(context),
+            deckWidth: 85.w(context),
             deckName: 'Lily',
             gradient1: red,
             gradient2: purp,
             neonGlow: red,
           ),
           Deck(
-            deckHeight: 80.h,
-            deckWidth: 85.w,
+            deckHeight: 80.h(context),
+            deckWidth: 85.w(context),
             deckName: 'Moment',
             gradient1: red,
             gradient2: purp,

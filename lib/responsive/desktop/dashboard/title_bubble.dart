@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sizer/sizer.dart';
 
 import '../desk_decks.dart';
 
@@ -37,11 +38,11 @@ class _TitleBubbleState extends State<TitleBubble> {
       onTap: widget.onTap,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(3.w),
+          borderRadius: BorderRadius.circular(3.w(context)),
           color: deckColor,
           border: Border.all(color: deckBorderColor),
         ),
-        constraints: 100.w > 1920 ? BoxConstraints(minHeight: 110) : BoxConstraints(minHeight: 55),
+        constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 110) : BoxConstraints(minHeight: 55),
         height: widget.deckHeight,
         width: widget.deckWidth,
         child: Stack(
@@ -53,7 +54,7 @@ class _TitleBubbleState extends State<TitleBubble> {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent]),
                   boxShadow: [BoxShadow(color: Colors.transparent, blurRadius: 20, blurStyle: BlurStyle.solid)],
-                  borderRadius: BorderRadius.all(Radius.circular(20.sp)),
+                  borderRadius: BorderRadius.all(Radius.circular(20.sp(context))),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),

@@ -1,11 +1,11 @@
 import 'dart:ui';
-
+import '../../util/imports.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 
 import 'package:ionicons/ionicons.dart';
-import 'package:sizer/sizer.dart';
 
 import '../Window Route/friends_window_route.dart';
 
@@ -83,11 +83,11 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+            padding: EdgeInsets.only(bottom: 10.h(context), top: 4.h(context)),
             child: Center(
               child: Container(
-                height: 85.h,
-                width: 91.w,
+                height: 85.h(context),
+                width: 91.w(context),
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 child: Hero(
                   tag: _heroFriendsWindow,
@@ -104,7 +104,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
-                                height: 85.h,
+                                height: 85.h(context),
                                 decoration: BoxDecoration(
                                   border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
@@ -117,7 +117,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                             children: [
                               //Stories
                               Padding(
-                                padding: EdgeInsets.only(right: 37.w, top: 1.h),
+                                padding: EdgeInsets.only(right: 37.w(context), top: 1.h(context)),
                                 child: const Text(
                                   "Connections",
                                   style: TextStyle(
@@ -128,10 +128,10 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(
-                                  top: 1.h,
-                                  right: 2.w,
-                                  left: 2.w,
-                                  bottom: 1.h,
+                                  top: 1.h(context),
+                                  right: 2.w(context),
+                                  left: 2.w(context),
+                                  bottom: 1.h(context),
                                 ),
                                 child: TextFormField(
                                   controller: _searchController,
@@ -156,7 +156,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 6.5.h,
+                                  height: 6.5.h(context),
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
@@ -186,7 +186,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 7.w(context), vertical: 1.h(context)),
                                           decoration: const BoxDecoration(
                                               gradient: LinearGradient(colors: [purp, red]),
                                               boxShadow: [BoxShadow(color: red, blurRadius: 10, blurStyle: BlurStyle.solid)],
@@ -211,7 +211,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 4.5.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 4.5.w(context), vertical: 1.h(context)),
                                           decoration: const BoxDecoration(
                                               gradient: LinearGradient(colors: [Colors.black54, Colors.black54]),
                                               boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
@@ -236,7 +236,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(horizontal: 4.5.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 4.5.w(context), vertical: 1.h(context)),
                                           decoration: const BoxDecoration(
                                               gradient: LinearGradient(colors: [Colors.black54, Colors.black54]),
                                               boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
@@ -249,15 +249,15 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                                 ),
                               ),
 
-                              SizedBox(height: 1.h),
+                              SizedBox(height: 1.h(context)),
 
                               //Container Housing Carousel slider
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  height: 51.h,
-                                  width: 100.w,
+                                  height: 51.h(context),
+                                  width: 100.w(context),
                                   decoration: BoxDecoration(
                                     color: const Color.fromRGBO(27, 27, 27, 0.937).withOpacity(0.98),
                                     borderRadius: const BorderRadius.all(
@@ -269,7 +269,7 @@ class _FriendsWindowPopupCardState extends State<_FriendsWindowPopupCard> {
                                     bucket: friendsBucket,
                                     child: CarouselSlider(
                                       options: CarouselOptions(
-                                        height: 53.h,
+                                        height: 53.h(context),
                                         viewportFraction: 1,
                                         enlargeCenterPage: true,
                                         initialPage: _currentIndex,
@@ -344,8 +344,8 @@ class ChatMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 53.h,
-      width: 100.w,
+      height: 53.h(context),
+      width: 100.w(context),
       decoration: BoxDecoration(
         color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
         borderRadius: const BorderRadius.all(
@@ -387,8 +387,8 @@ class GroupMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70.h,
-      width: 100.w,
+      height: 70.h(context),
+      width: 100.w(context),
       decoration: BoxDecoration(
         color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
         borderRadius: const BorderRadius.all(
@@ -430,8 +430,8 @@ class AllMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 53.h,
-      width: 100.w,
+      height: 53.h(context),
+      width: 100.w(context),
       decoration: BoxDecoration(
         color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
         borderRadius: const BorderRadius.all(
@@ -462,14 +462,14 @@ class MyContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: .5.h,
-        vertical: .3.h,
+        horizontal: .5.h(context),
+        vertical: .3.h(context),
       ),
       child: GestureDetector(
         onTap: () {},
         child: Container(
-          height: 8.h,
-          width: 100.h,
+          height: 8.h(context),
+          width: 100.h(context),
           decoration: BoxDecoration(
             color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.1),
             // border: Border.all(
@@ -481,12 +481,12 @@ class MyContainer extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 1.h),
+            padding: EdgeInsets.symmetric(horizontal: 1.h(context)),
             child: Stack(
               children: [
                 Container(
-                  width: 13.w,
-                  height: 13.h,
+                  width: 13.w(context),
+                  height: 13.h(context),
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(colors: [purp, red]),
                     shape: BoxShape.circle,
@@ -494,18 +494,18 @@ class MyContainer extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 12.5.w,
-                  height: 12.5.h,
+                  width: 12.5.w(context),
+                  height: 12.5.h(context),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.grey,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 4.h, left: 4.5.h),
+                  padding: EdgeInsets.only(top: 4.h(context), left: 4.5.h(context)),
                   child: Container(
-                    width: 4.5.w,
-                    height: 4.5.h,
+                    width: 4.5.w(context),
+                    height: 4.5.h(context),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color.fromARGB(255, 118, 123, 118),

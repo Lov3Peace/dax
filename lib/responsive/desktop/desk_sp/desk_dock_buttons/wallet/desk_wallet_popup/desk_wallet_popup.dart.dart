@@ -1,12 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 //import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../../../../../util/gradient_container.dart';
 import '../../../../../../util/tactile_button.dart';
 import '../../../../desk_constants.dart';
@@ -37,15 +37,15 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.h,
-      width: 71.w,
+      height: 100.h(context),
+      width: 71.w(context),
       alignment: Alignment.center,
       child: Stack(
         alignment: Alignment.center,
         children: [
           SizedBox(
-            height: 77.h,
-            width: 71.w,
+            height: 77.h(context),
+            width: 71.w(context),
             // padding: const EdgeInsets.symmetric(vertical: 32),
             child: Material(
               shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -59,7 +59,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                       child: Container(
-                          // height: 85.h,
+                          // height: 85.h(context),
                           decoration: BoxDecoration(
                         border: Border.all(color: deckBorderColor),
                         borderRadius: BorderRadius.circular(24),
@@ -71,22 +71,22 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                          right: 1.w,
-                          left: 1.w,
+                          right: 1.w(context),
+                          left: 1.w(context),
                         ),
                         child: Wrap(
-                          spacing: 1.5.w,
+                          spacing: 1.5.w(context),
                           children: [
                             Stack(
                               alignment: Alignment.topCenter,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(top: 10.h),
+                                  padding: EdgeInsets.only(top: 10.h(context)),
 
                                   // Container housing card data
                                   child: Container(
-                                    height: 65.h,
-                                    width: 30.w,
+                                    height: 65.h(context),
+                                    width: 30.w(context),
                                     // constraints:
                                     //     const BoxConstraints(
                                     //         maxWidth: 500,
@@ -103,8 +103,8 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                         //Transfer Text
                                         Padding(
                                           padding: EdgeInsets.only(
-                                            top: 15.h,
-                                            bottom: 1.h,
+                                            top: 15.h(context),
+                                            bottom: 1.h(context),
                                           ),
                                           child: const Center(
                                             child: Text(
@@ -116,7 +116,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
                                         //Text for Pay to
                                         Padding(
-                                          padding: EdgeInsets.only(bottom: 1.h, left: 2.5.w),
+                                          padding: EdgeInsets.only(bottom: 1.h(context), left: 2.5.w(context)),
                                           child: const Text(
                                             'Pay to',
                                             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -126,9 +126,9 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                         // Pay to Container
                                         Center(
                                           child: Container(
-                                            height: 6.h,
-                                            margin: EdgeInsets.only(bottom: 1.h),
-                                            width: 23.w,
+                                            height: 6.h(context),
+                                            margin: EdgeInsets.only(bottom: 1.h(context)),
+                                            width: 23.w(context),
                                             decoration: BoxDecoration(
                                               color: const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
                                               borderRadius: const BorderRadius.all(
@@ -154,7 +154,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
                                         //Guiding text for user
                                         Padding(
-                                          padding: EdgeInsets.only(bottom: 1.h),
+                                          padding: EdgeInsets.only(bottom: 1.h(context)),
                                           child: const Center(
                                             child: Text(
                                               'Please enter the Wallet ID or destination email',
@@ -173,16 +173,16 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Padding(
-                                                    padding: EdgeInsets.only(bottom: 1.h),
+                                                    padding: EdgeInsets.only(bottom: 1.h(context)),
                                                     child: const Text(
                                                       'Amount',
                                                       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                     ),
                                                   ),
                                                   Container(
-                                                    height: 6.h,
-                                                    margin: EdgeInsets.only(bottom: 1.h),
-                                                    width: 11.w,
+                                                    height: 6.h(context),
+                                                    margin: EdgeInsets.only(bottom: 1.h(context)),
+                                                    width: 11.w(context),
                                                     decoration: BoxDecoration(
                                                       color: const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
                                                       borderRadius: const BorderRadius.all(
@@ -198,21 +198,21 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
                                               //Column containing "Reason" Container
                                               Padding(
-                                                padding: EdgeInsets.only(left: 1.w),
+                                                padding: EdgeInsets.only(left: 1.w(context)),
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Padding(
-                                                      padding: EdgeInsets.only(bottom: 1.h),
+                                                      padding: EdgeInsets.only(bottom: 1.h(context)),
                                                       child: const Text(
                                                         'Reason',
                                                         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                                                       ),
                                                     ),
                                                     Container(
-                                                      height: 6.h,
-                                                      margin: EdgeInsets.only(bottom: 1.h),
-                                                      width: 11.w,
+                                                      height: 6.h(context),
+                                                      margin: EdgeInsets.only(bottom: 1.h(context)),
+                                                      width: 11.w(context),
                                                       decoration: BoxDecoration(
                                                         color: const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
                                                         borderRadius: const BorderRadius.all(
@@ -245,14 +245,14 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
                                         //Row housing Commission and total amount
                                         Padding(
-                                          padding: EdgeInsets.only(top: 2.h),
+                                          padding: EdgeInsets.only(top: 2.h(context)),
                                           child: Center(
                                             child: Wrap(
                                               alignment: WrapAlignment.spaceBetween,
                                               children: [
                                                 //Commision Display
                                                 Padding(
-                                                  padding: EdgeInsets.only(right: 2.w),
+                                                  padding: EdgeInsets.only(right: 2.w(context)),
                                                   child: const Column(
                                                     children: [
                                                       Text('Commission:'),
@@ -270,7 +270,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
 
                                                 //Total Display
                                                 Padding(
-                                                  padding: EdgeInsets.only(right: 2.w),
+                                                  padding: EdgeInsets.only(right: 2.w(context)),
                                                   child: const Column(
                                                     children: [
                                                       Text('Total:'),
@@ -308,11 +308,11 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                 //Actual Card of User
                                 Padding(
                                   padding: EdgeInsets.only(
-                                    top: 2.h,
+                                    top: 2.h(context),
                                   ),
                                   child: Container(
-                                    height: 20.h,
-                                    width: 20.w,
+                                    height: 20.h(context),
+                                    width: 20.w(context),
                                     decoration: BoxDecoration(
                                       gradient: const LinearGradient(colors: [
                                         blue,
@@ -330,7 +330,7 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.only(left: .5.w, right: .5.w),
+                                              padding: EdgeInsets.only(left: .5.w(context), right: .5.w(context)),
                                               child: SizedBox(
                                                 width: double.infinity,
                                                 child: Wrap(
@@ -357,10 +357,10 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                       ),
                                                       child: Padding(
                                                         padding: EdgeInsets.only(
-                                                          top: 1.h,
-                                                          right: 1.w,
-                                                          left: 1.w,
-                                                          bottom: 1.h,
+                                                          top: 1.h(context),
+                                                          right: 1.w(context),
+                                                          left: 1.w(context),
+                                                          bottom: 1.h(context),
                                                         ),
                                                         child: const Text(
                                                           "katarina",
@@ -380,9 +380,9 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                             const SizedBox(),
                                             Padding(
                                               padding: EdgeInsets.only(
-                                                bottom: 2.h,
-                                                left: 2.w,
-                                                top: 5.h,
+                                                bottom: 2.h(context),
+                                                left: 2.w(context),
+                                                top: 5.h(context),
                                               ),
                                               child: Text(
                                                 NumberFormat.simpleCurrency(locale: 'en-US', decimalDigits: 2).format(7837),
@@ -401,11 +401,11 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                             //Logistics Container
                             Padding(
                               padding: EdgeInsets.only(
-                                top: 1.h,
+                                top: 1.h(context),
                               ),
                               child: Container(
-                                height: 73.5.h,
-                                width: 33.w,
+                                height: 73.5.h(context),
+                                width: 33.w(context),
                                 decoration: const BoxDecoration(
                                   color: Color.fromARGB(0, 194, 36, 36),
                                   borderRadius: BorderRadius.all(

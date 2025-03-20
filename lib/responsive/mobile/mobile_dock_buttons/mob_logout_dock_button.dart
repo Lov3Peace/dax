@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../../util/Window Route/logout_window_route.dart';
 import '../../../util/auth/onboarding_page.dart';
 import '../../responsive_layout.dart';
@@ -79,11 +79,11 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard> with A
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+            padding: EdgeInsets.only(bottom: 10.h(context), top: 4.h(context)),
             child: Center(
               child: Container(
-                height: 35.h,
-                width: 85.w,
+                height: 35.h(context),
+                width: 85.w(context),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
@@ -101,7 +101,7 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard> with A
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
-                                height: 85.h,
+                                height: 85.h(context),
                                 decoration: BoxDecoration(
                                   border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),

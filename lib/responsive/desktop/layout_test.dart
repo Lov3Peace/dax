@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/simple_animations.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
 
@@ -66,8 +67,8 @@ class _LayoutTestState extends State<LayoutTest> with AnimationMixin {
         //   body: ListView(
         //     children: [
         //       Container(
-        //         height: 90.h,
-        //         width: 100.w,
+        //         height: 90.h(context),
+        //         width: 100.w(context),
         //         constraints: const BoxConstraints(minWidth: 2000, minHeight: 1000),
         //         child: Stack(
         //           children: [
@@ -100,19 +101,19 @@ class _LayoutTestState extends State<LayoutTest> with AnimationMixin {
         //                       scrollDirection: Axis.vertical,
         //                       children: [
         //                         Padding(
-        //                           padding: EdgeInsets.all(.5.w),
+        //                           padding: EdgeInsets.all(.5.w(context)),
         //                           child: Column(
         //                             children: [
         //                               Container(
-        //                                 height: 40.h,
-        //                                 width: 75.w,
+        //                                 height: 40.h(context),
+        //                                 width: 75.w(context),
         //                                 constraints: const BoxConstraints(
         //                                     minWidth: 800, minHeight: 600),
         //                                 child: AnimationLimiter(
         //                                   child: ListView.builder(
         //                                     shrinkWrap: true,
         //                                     padding: EdgeInsets.fromLTRB(
-        //                                         3.5.w, 0, 3.5.w, 0),
+        //                                         3.5.w(context), 0, 3.5.w(context), 0),
         //                                     scrollDirection: Axis.horizontal,
         //                                     itemCount: 3,
         //                                     itemBuilder:
@@ -146,8 +147,8 @@ class _LayoutTestState extends State<LayoutTest> with AnimationMixin {
         //                                 ),
         //                               ),
         //                               Container(
-        //                                 height: 40.h,
-        //                                 width: 75.w,
+        //                                 height: 40.h(context),
+        //                                 width: 75.w(context),
         //                                 constraints: const BoxConstraints(
         //                                     minWidth: 800, minHeight: 600),
         //                                 child: AnimationLimiter(
@@ -227,16 +228,16 @@ class _LayoutTestState extends State<LayoutTest> with AnimationMixin {
         //                   //                             child: Row(
         //                   //                               children: [
         //                   //                                 Container(
-        //                   //                                     height: 40.h,
-        //                   //                                     width: 25.w,
+        //                   //                                     height: 40.h(context),
+        //                   //                                     width: 25.w(context),
         //                   //                                     color: red),
         //                   //                                 Container(
-        //                   //                                     height: 40.h,
-        //                   //                                     width: 25.w,
+        //                   //                                     height: 40.h(context),
+        //                   //                                     width: 25.w(context),
         //                   //                                     color: purp),
         //                   //                                 Container(
-        //                   //                                     height: 40.h,
-        //                   //                                     width: 25.w,
+        //                   //                                     height: 40.h(context),
+        //                   //                                     width: 25.w(context),
         //                   //                                     color: blue),
         //                   //                               ],
         //                   //                             )),

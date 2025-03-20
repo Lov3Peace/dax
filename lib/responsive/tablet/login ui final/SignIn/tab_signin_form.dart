@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../mobile/mob_constants.dart';
 import '../tab_final_signin.dart';
@@ -97,8 +98,7 @@ class _TabSignInFormState extends State<TabSignInForm> {
                     Switch(
                         value: isSwitch,
                         activeColor: Colors.white,
-                        activeTrackColor:
-                            const Color.fromARGB(255, 221, 83, 245),
+                        activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
                         onChanged: (bool newBool) {
                           setState(() {
                             isSwitch = newBool;
@@ -117,18 +117,13 @@ class _TabSignInFormState extends State<TabSignInForm> {
                                 barrierDismissible: true,
                                 barrierLabel: "Sign in",
                                 context: context,
-                                transitionDuration:
-                                    const Duration(milliseconds: 400),
+                                transitionDuration: const Duration(milliseconds: 400),
                                 transitionBuilder: (_, animation, __, child) {
                                   Tween<Offset> tween;
-                                  tween = Tween(
-                                      begin: const Offset(0, -1),
-                                      end: Offset.zero);
+                                  tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
                                   return SlideTransition(
                                     position: tween.animate(
-                                      CurvedAnimation(
-                                          parent: animation,
-                                          curve: Curves.easeInOut),
+                                      CurvedAnimation(parent: animation, curve: Curves.easeInOut),
                                     ),
                                     child: child,
                                   );
@@ -136,14 +131,10 @@ class _TabSignInFormState extends State<TabSignInForm> {
                                 pageBuilder: (context, _, __) => Center(
                                   child: Container(
                                     height: 500,
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 32, horizontal: 24),
+                                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                                    padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                                     decoration: BoxDecoration(
-                                      color:
-                                          const Color.fromARGB(225, 50, 50, 50)
-                                              .withOpacity(0.99),
+                                      color: const Color.fromARGB(225, 50, 50, 50).withOpacity(0.99),
                                       borderRadius: const BorderRadius.all(
                                         Radius.circular(40),
                                       ),
@@ -164,8 +155,7 @@ class _TabSignInFormState extends State<TabSignInForm> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 16.0),
+                                              padding: EdgeInsets.symmetric(vertical: 16.0),
                                               child: Text(
                                                 "Please enter your email linked to the account!",
                                                 textAlign: TextAlign.center,

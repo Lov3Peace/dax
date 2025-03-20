@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../util/Window Route/settings_window_route.dart';
 
@@ -44,14 +44,12 @@ class TabSettingsWindowPopupCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+            padding: EdgeInsets.only(bottom: 10.h(context), top: 4.h(context)),
             child: Center(
               child: Container(
-                height: 85.h,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                height: 85.h(context),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
                   tag: heroSettingWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
@@ -67,11 +65,9 @@ class TabSettingsWindowPopupCard extends StatelessWidget {
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
-                                height: 85.h,
+                                height: 85.h(context),
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color.fromARGB(
-                                          182, 31, 31, 31)),
+                                  border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
                           ),

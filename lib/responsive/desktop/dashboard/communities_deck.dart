@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../util/tactile_button.dart';
 import '../../mobile/mobile_finance_page.dart';
@@ -41,10 +41,15 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
 
   Widget communityDeck({VoidCallback? onTap, Color? color}) {
     // values set in desk_decks.dart
-    deckHeight = deckHeight;
-    deckWidth = deckWidth;
-    halfDeckWidth = halfDeckWidth;
-    labelTextSize = labelTextSize;
+    double deckHeight = 22.sp(context);
+    double deckWidth = 35.25.w(context);
+    double halfDeckWidth = 17.325.w(context);
+    double headerTextSize = 6.5.sp(context);
+    subTextSize = 2.5.sp(context);
+    profBubTextSize = 20;
+    double labelTextSize = 3.sp(context);
+    textConstraint = 500;
+    subTextConstraint = 500;
     return GestureDetector(
       child: Deck(
         deckHeight: deckHeight,

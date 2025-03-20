@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_application_1/util/imports.dart';
 
 // The class the holds the information in the genral settings button
 // note: There is much editing that needs to happen in these section but ultimately
@@ -13,8 +13,8 @@ class GeneralSettingsInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 58.h,
-      width: 47.w,
+      height: 58.h(context),
+      width: 47.w(context),
       decoration: const BoxDecoration(
         color: Color.fromRGBO(17, 17, 17, 1),
         borderRadius: BorderRadius.all(
@@ -22,14 +22,14 @@ class GeneralSettingsInfo extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.only(top: 2.h, left: 2.w),
+        padding: EdgeInsets.only(top: 2.h(context), left: 2.w(context)),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(bottom: 1.5.h),
+                padding: EdgeInsets.only(bottom: 1.5.h(context)),
                 child: const Text(
                   'General Settings',
                   style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
@@ -38,10 +38,10 @@ class GeneralSettingsInfo extends StatelessWidget {
 
               // Container #1 which holds the Username access
               Padding(
-                padding: EdgeInsets.only(bottom: 2.h),
+                padding: EdgeInsets.only(bottom: 2.h(context)),
                 child: Container(
-                  height: 16.h,
-                  width: 43.w,
+                  height: 16.h(context),
+                  width: 43.w(context),
                   decoration: const BoxDecoration(
                     color: Color.fromRGBO(25, 25, 29, 1),
                     borderRadius: BorderRadius.all(
@@ -54,19 +54,19 @@ class GeneralSettingsInfo extends StatelessWidget {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                          left: 2.w,
+                          left: 2.w(context),
                         ),
                         // This wrap contains the textfield and button that enables the editing of your username on the account
                         child: Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
-                          spacing: 2.w,
+                          spacing: 2.w(context),
                           children: [
                             const Text(
                               'Username:',
                             ),
                             SizedBox(
                               height: 10,
-                              width: 25.w,
+                              width: 25.w(context),
                               child: TextField(
                                 controller: _textController,
                                 enabled: _isEditingEnabled,
@@ -92,7 +92,7 @@ class GeneralSettingsInfo extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                          left: 2.w,
+                          left: 2.w(context),
                         ),
                         child: const Text(
                           'Placeholder',
@@ -105,10 +105,10 @@ class GeneralSettingsInfo extends StatelessWidget {
 
               // Container #2
               Padding(
-                padding: EdgeInsets.only(bottom: 2.h),
+                padding: EdgeInsets.only(bottom: 2.h(context)),
                 child: Container(
-                  height: 16.h,
-                  width: 43.w,
+                  height: 16.h(context),
+                  width: 43.w(context),
                   decoration: const BoxDecoration(
                     color: Color.fromRGBO(25, 25, 29, 1),
                     borderRadius: BorderRadius.all(
@@ -120,10 +120,10 @@ class GeneralSettingsInfo extends StatelessWidget {
 
               //Container #3
               Padding(
-                padding: EdgeInsets.only(bottom: 2.h),
+                padding: EdgeInsets.only(bottom: 2.h(context)),
                 child: Container(
-                  height: 40.h,
-                  width: 43.w,
+                  height: 40.h(context),
+                  width: 43.w(context),
                   decoration: const BoxDecoration(
                     color: Color.fromRGBO(25, 25, 29, 1),
                     borderRadius: BorderRadius.all(

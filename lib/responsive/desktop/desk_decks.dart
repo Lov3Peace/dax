@@ -1,21 +1,21 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rive/rive.dart' as r;
-import 'package:sizer/sizer.dart';
 
 // Global variables for all decks. Must be declared here so decks
 // can access the values. Also declared in the build so they can
 // be responsive.
 
-double deckHeight = 22.h;
-double deckWidth = 35.25.w;
-double halfDeckWidth = 17.325.w;
-double headerTextSize = 5.sp;
+// double deckHeight = 22.h(context);
+// double deckWidth = 35.25.w(context);
+// double halfDeckWidth = 17.325.w(context);
+// double headerTextSize = 5.sp(context);
 double subTextSize = 14;
 double profBubTextSize = 20;
-double labelTextSize = 2.sp;
+// double labelTextSize = 2.sp(context);
 double textConstraint = 500;
 double subTextConstraint = 500;
 Color deckBorderColor = const Color.fromARGB(182, 75, 75, 75);
@@ -66,34 +66,34 @@ class _DeckState extends State<Deck> {
 
   @override
   Widget build(BuildContext context) {
-    deckHeight = 22.sp;
-    deckWidth = 35.25.w;
-    halfDeckWidth = 17.325.w;
-    headerTextSize = 6.5.sp;
-    subTextSize = 2.5.sp;
+    double deckHeight = 22.sp(context);
+    double deckWidth = 35.25.w(context);
+    double halfDeckWidth = 17.325.w(context);
+    double headerTextSize = 6.5.sp(context);
+    subTextSize = 2.5.sp(context);
     profBubTextSize = 20;
-    labelTextSize = 3.sp;
+    double labelTextSize = 3.sp(context);
     textConstraint = 500;
     subTextConstraint = 500;
 
     //Responsive if statements for text and constraints
-    // if (100.w > 1920 && 100.h > 1080) {
+    // if (100.w(context) > 1920 && 100.h(context) > 1080) {
     //   headerTextSize = 82;
     //   subTextSize = 36;
-    //   print(100.w);
-    //   print(100.h);
+    //   print(100.w(context));
+    //   print(100.h(context));
     // } else {
-    //   headerTextSize = 7.sp;
-    //   subTextSize = 3.sp;
-    //   print(100.w);
-    //   print(100.h);
+    //   headerTextSize = 7.sp(context);
+    //   subTextSize = 3.sp(context);
+    //   print(100.w(context));
+    //   print(100.h(context));
     // }
     return GestureDetector(
       onTap: widget.onTap,
 
       // Main Container
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(1.5.w),
+        borderRadius: BorderRadius.circular(1.5.w(context)),
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: Container(
           color: Colors.transparent,
@@ -111,7 +111,7 @@ class _DeckState extends State<Deck> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.5.w),
+                  borderRadius: BorderRadius.circular(1.5.w(context)),
                   color: deckColor,
                   border: Border.all(color: deckBorderColor),
                 ),
@@ -128,7 +128,7 @@ class _DeckState extends State<Deck> {
                     // Heading Text
                     Container(
                       constraints: BoxConstraints(maxWidth: widget.deckWidth * 0.9),
-                      margin: EdgeInsets.fromLTRB(2.w, widget.deckHeight * 0.12, 2.w, 0),
+                      margin: EdgeInsets.fromLTRB(2.w(context), widget.deckHeight * 0.12, 2.w(context), 0),
                       width: widget.textConstraint,
                       child: Text(
                         widget.headingText,
@@ -138,7 +138,7 @@ class _DeckState extends State<Deck> {
                     // Subheading Text
                     Container(
                       constraints: BoxConstraints(maxWidth: widget.deckWidth * 0.9),
-                      margin: EdgeInsets.fromLTRB(2.w, 0.5.sp, 2.w, 0),
+                      margin: EdgeInsets.fromLTRB(2.w(context), 0.5.sp(context), 2.w(context), 0),
                       width: widget.subTextConstraint,
                       child: Text(
                         widget.subText,
@@ -178,16 +178,16 @@ class _DeckState extends State<Deck> {
                 bottom: 0,
                 left: 0,
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(2.w, 0, 0, 7.sp),
+                  padding: EdgeInsets.fromLTRB(2.w(context), 0, 0, 7.sp(context)),
                   child: Container(
                     constraints: BoxConstraints(minHeight: 50, maxHeight: 160),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [widget.gradient1, widget.gradient2]),
                       boxShadow: [BoxShadow(color: widget.neonGlow, blurRadius: 17, blurStyle: BlurStyle.solid)],
-                      borderRadius: BorderRadius.all(Radius.circular(10.sp)),
+                      borderRadius: BorderRadius.all(Radius.circular(10.sp(context))),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(2.w, 20, 2.w, 20),
+                      padding: EdgeInsets.fromLTRB(2.w(context), 20, 2.w(context), 20),
                       child: Text(
                         widget.deckName,
                         style: GoogleFonts.montserrat(

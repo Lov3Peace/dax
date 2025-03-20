@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/billing/billing_ui.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/general/general.ui.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/notifications/notify_ui.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/security/security_ui.dart';
-
-import 'package:sizer/sizer.dart';
 
 class PC3 extends StatelessWidget {
   PC3({super.key});
@@ -16,10 +15,10 @@ class PC3 extends StatelessWidget {
     );
   }
 
-  Widget buildFirstContainer() {
+  Widget buildFirstContainer(context) {
     return Container(
-      height: 44.h,
-      width: 18.w,
+      height: 44.h(context),
+      width: 18.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 34, 38, 42),
         border: Border.all(color: Colors.white70),
@@ -29,10 +28,10 @@ class PC3 extends StatelessWidget {
     );
   }
 
-  Widget buildSecondContainer() {
+  Widget buildSecondContainer(context) {
     return Container(
-      height: 44.h,
-      width: 18.w,
+      height: 44.h(context),
+      width: 18.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 34, 38, 42),
         border: Border.all(color: Colors.white70),
@@ -42,13 +41,13 @@ class PC3 extends StatelessWidget {
     );
   }
 
-  Widget buildThirdContainer() {
+  Widget buildThirdContainer(context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          height: 21.5.h,
-          width: 19.w,
+          height: 21.5.h(context),
+          width: 19.w(context),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 34, 38, 42),
             border: Border.all(color: Colors.white70),
@@ -57,8 +56,8 @@ class PC3 extends StatelessWidget {
           child: NotificationsUi(),
         ),
         Container(
-          height: 21.5.h,
-          width: 19.w,
+          height: 21.5.h(context),
+          width: 19.w(context),
           decoration: BoxDecoration(
             color: const Color.fromARGB(255, 34, 38, 42),
             border: Border.all(color: Colors.white70),
@@ -73,28 +72,28 @@ class PC3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 45.h,
+      height: 45.h(context),
       decoration: containerDecoration(const Color.fromARGB(182, 31, 31, 31)),
       child: Wrap(
-        spacing: .5.w,
+        spacing: .5.w(context),
         children: [
           Container(
-            height: 44.h,
-            width: 18.w,
+            height: 44.h(context),
+            width: 18.w(context),
             decoration: containerDecoration(const Color.fromARGB(0, 224, 6, 6)),
-            child: buildFirstContainer(),
+            child: buildFirstContainer(context),
           ),
           Container(
-            height: 44.h,
-            width: 18.w,
+            height: 44.h(context),
+            width: 18.w(context),
             decoration: containerDecoration(const Color.fromARGB(0, 224, 6, 6)),
-            child: buildSecondContainer(),
+            child: buildSecondContainer(context),
           ),
           Container(
-            height: 44.h,
-            width: 18.w,
+            height: 44.h(context),
+            width: 18.w(context),
             decoration: containerDecoration(const Color.fromARGB(0, 224, 6, 6)),
-            child: buildThirdContainer(),
+            child: buildThirdContainer(context),
           ),
         ],
       ),

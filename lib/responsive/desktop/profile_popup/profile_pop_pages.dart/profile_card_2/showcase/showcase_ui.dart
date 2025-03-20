@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:sizer/sizer.dart';
 import '../../../../../../util/gradient_container.dart';
 import 'showcase_bloc.dart';
 
@@ -29,7 +29,7 @@ class UploadShowcase extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 1.h,
+              height: 1.h(context),
             ),
             BlocBuilder<UploadBloc, UploadState>(
               builder: (context, state) {
@@ -61,7 +61,7 @@ class UploadShowcase extends StatelessWidget {
               },
             ),
             SizedBox(
-              height: 2.h,
+              height: 2.h(context),
             ),
             TactileButton(
               onTap: () {

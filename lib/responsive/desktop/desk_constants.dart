@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/desk_profile_popup.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_finance_page.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rive/rive.dart' as r;
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
 import '../../util/button_state.dart';
 import '../../util/auth/login.dart';
@@ -223,9 +223,9 @@ class _MTProfileCardState extends State<MTProfileCard> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    // deckHeight = 22.h;
-    // deckWidth = 35.25.w;
-    // halfDeckWidth = 17.325.w;
+    // deckHeight = 22.h(context);
+    // deckWidth = 35.25.w(context);
+    // halfDeckWidth = 17.325.w(context);
     // labelTextSize = 16;
 
     var screenWidth = window.physicalSize.width / window.devicePixelRatio;
@@ -276,8 +276,17 @@ class _MTProfileCardState extends State<MTProfileCard> with AnimationMixin {
   }
 
   Widget profileCard({VoidCallback? onTap, Color? color}) {
+    double deckHeight = 22.sp(context);
+    double deckWidth = 35.25.w(context);
+    double halfDeckWidth = 17.325.w(context);
+    double headerTextSize = 6.5.sp(context);
+    subTextSize = 2.5.sp(context);
+    profBubTextSize = 20;
+    double labelTextSize = 3.sp(context);
+    textConstraint = 500;
+    subTextConstraint = 500;
     return Deck(
-      deckHeight: 20.h,
+      deckHeight: 20.h(context),
       deckWidth: halfDeckWidth,
       deckName: '',
       gradient1: tran,

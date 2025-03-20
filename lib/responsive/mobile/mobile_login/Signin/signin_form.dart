@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../util/auth/auth_check.dart';
 import '../../mob_constants.dart';
@@ -123,33 +123,25 @@ class _SignInFormState extends State<SignInForm> {
                             barrierDismissible: true,
                             barrierLabel: "Sign in",
                             context: context,
-                            transitionDuration:
-                                const Duration(milliseconds: 400),
+                            transitionDuration: const Duration(milliseconds: 400),
                             transitionBuilder: (_, animation, __, child) {
                               Tween<Offset> tween;
-                              tween = Tween(
-                                  begin: const Offset(0, -1), end: Offset.zero);
+                              tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
                               return SlideTransition(
                                 position: tween.animate(
-                                  CurvedAnimation(
-                                      parent: animation,
-                                      curve: Curves.easeInOut),
+                                  CurvedAnimation(parent: animation, curve: Curves.easeInOut),
                                 ),
                                 child: child,
                               );
                             },
                             pageBuilder: (context, _, __) => Center(
                               child: Container(
-                                height: 60.h,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(32)),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 32, horizontal: 24),
+                                height: 60.h(context),
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                                 child: Material(
-                                  shadowColor:
-                                      const Color.fromRGBO(42, 41, 41, 0.631),
-                                  color: const Color.fromARGB(42, 55, 52, 52)
-                                      .withOpacity(0.7),
+                                  shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
+                                  color: const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
                                   elevation: 2,
                                   borderRadius: BorderRadius.circular(32),
                                   child: Stack(
@@ -157,15 +149,11 @@ class _SignInFormState extends State<SignInForm> {
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(24),
                                         child: BackdropFilter(
-                                          filter: ImageFilter.blur(
-                                              sigmaX: 20, sigmaY: 20),
+                                          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: const Color.fromARGB(
-                                                      182, 31, 31, 31)),
-                                              borderRadius:
-                                                  BorderRadius.circular(24),
+                                              border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
+                                              borderRadius: BorderRadius.circular(24),
                                             ),
                                           ),
                                         ),
@@ -178,8 +166,7 @@ class _SignInFormState extends State<SignInForm> {
                                           child: Column(
                                             children: [
                                               Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 10),
+                                                padding: EdgeInsets.only(top: 10),
                                                 child: Text(
                                                   "Forgot Password",
                                                   style: TextStyle(
@@ -191,8 +178,7 @@ class _SignInFormState extends State<SignInForm> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: 16.0),
+                                                padding: EdgeInsets.symmetric(vertical: 16.0),
                                                 child: Text(
                                                   "Please enter your email linked to the account!",
                                                   textAlign: TextAlign.center,
@@ -239,15 +225,12 @@ class _SignInFormState extends State<SignInForm> {
 
   Future login() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: '${_usernameController.text}@omni.com',
-          password: _passwordController.text);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: '${_usernameController.text}@omni.com', password: _passwordController.text);
 
       Navigator.of(context).push(
         PageRouteBuilder(
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            animation =
-                CurvedAnimation(parent: animation, curve: Curves.linear);
+            animation = CurvedAnimation(parent: animation, curve: Curves.linear);
             return FadeTransition(
               opacity: animation,
               child: child,

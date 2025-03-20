@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_application_1/util/button_state.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 class SpButtonTemplate extends StatefulWidget {
   final IconData icon;
@@ -61,24 +61,24 @@ class _SpButtonTemplateState extends State<SpButtonTemplate> {
                 : null,
             borderRadius: BorderRadius.circular(60),
           ),
-          width: 10.w,
-          height: 3.w,
+          width: 10.w(context),
+          height: 3.w(context),
           child: Padding(
-            padding: EdgeInsets.only(left: 1.w),
+            padding: EdgeInsets.only(left: 1.w(context)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Icon(
                   widget.icon,
                   color: isHover ? Colors.white : Colors.white54,
-                  size: 5.sp,
+                  size: 5.sp(context),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 0.5.w),
+                  padding: EdgeInsets.only(left: 0.5.w(context)),
                   child: Text(
                     widget.deskButtonText,
                     style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(fontSize: 2.sp),
+                      textStyle: TextStyle(fontSize: 2.sp(context)),
                       fontWeight: FontWeight.w400,
                       color: isHover ? Colors.white : Colors.white54,
                     ),

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/desk_dashboard.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:sizer/sizer.dart';
 
 class DeskHomeButton extends StatefulWidget {
   const DeskHomeButton({super.key});
@@ -48,14 +49,14 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
                     gradient: const LinearGradient(colors: [red, pink]),
                     borderRadius: BorderRadius.circular(60),
                   ),
-                  width: isHover ? 10.w : 0.25.w,
-                  height: 7.sp,
+                  width: isHover ? 10.w(context) : 0.25.w(context),
+                  height: 7.sp(context),
                 ),
                 Expanded(
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     // color: blue,
-                    height: 7.sp,
+                    height: 7.sp(context),
                   ),
                 ),
               ],
@@ -63,23 +64,23 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
             // Since they're not in a row, have to use Positioned. This allows
             // the animated container to pass under the icon
             Positioned(
-              top: 1.sp,
-              left: 0.5.w,
+              top: 1.sp(context),
+              left: 0.5.w(context),
               child: Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 0.5.w),
+                    padding: EdgeInsets.only(left: 0.5.w(context)),
                     child: Icon(
                       Icons.dashboard_rounded,
-                      size: 5.sp,
+                      size: 5.sp(context),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 0.5.w),
+                    padding: EdgeInsets.only(left: 0.5.w(context)),
                     child: Text(
                       'Home',
                       style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(fontSize: 2.sp),
+                        textStyle: TextStyle(fontSize: 2.sp(context)),
                         fontWeight: FontWeight.w400,
                         color: Colors.white,
                       ),

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/sp_button_template.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:flutter_application_1/util/logout_dock_button.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../desk_constants.dart';
 import '../desk_decks.dart';
 import 'desk_dock_buttons/connections/desk_connections_popup.dart';
@@ -52,9 +52,9 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
             //   offset: Offset(0, 0),
             // )
           ]),
-          width: 12.5.w,
+          width: 12.5.w(context),
           child: Padding(
-            padding: EdgeInsets.only(left: 1.w),
+            padding: EdgeInsets.only(left: 1.w(context)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,24 +64,24 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
                   child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(1.5.w)),
+                      borderRadius: BorderRadius.all(Radius.circular(1.5.w(context))),
                       clipBehavior: Clip.hardEdge,
-                      child: Image.asset("images/omni-temp-logo.png", height: 5.w)),
+                      child: Image.asset("images/omni-temp-logo.png", height: 5.w(context))),
                 ),
                 // Divider(
                 //   color: Colors.grey,
                 //   thickness: 0.5,
-                //   indent: 1.w,
-                //   endIndent: 2.w,
+                //   indent: 1.w(context),
+                //   endIndent: 2.w(context),
                 // ),
                 SizedBox(
-                  height: 5.sp,
+                  height: 5.sp(context),
                 ),
                 SidePanelButtons(),
                 Spacer(),
                 //Logout
                 Padding(
-                  padding: EdgeInsets.only(bottom: 2.sp),
+                  padding: EdgeInsets.only(bottom: 2.sp(context)),
                   child: TactileButton(child: LogoutWindowButton()),
                 ),
               ],

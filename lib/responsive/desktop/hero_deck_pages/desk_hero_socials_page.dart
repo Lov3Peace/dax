@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/pages/keyboards_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.dart';
@@ -11,7 +12,6 @@ import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../dashboard/title_bubble.dart';
 import '../desk_decks.dart';
@@ -56,8 +56,8 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
         extendBody: true,
         body: SingleChildScrollView(
           child: Container(
-            height: 100.h,
-            width: 100.w,
+            height: 100.h(context),
+            width: 100.w(context),
             constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
             child: Stack(
               children: [
@@ -71,19 +71,16 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                       controller.playReverse();
                     });
                   },
-                  child: Indexer(
+                  child: Row(
                     children: [
-                      Indexed(
-                        index: 2,
-                        child: DesktopSidePanel(),
-                      ),
+                      DesktopSidePanel(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            width: 12.5.w,
-                          ),
+                          // SizedBox(
+                          //   width: 12.5.w(context),
+                          // ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -93,12 +90,12 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                                   //
                                   // Title of Screen
                                   Padding(
-                                    padding: EdgeInsets.only(right: 23.6.w),
+                                    padding: EdgeInsets.only(right: 23.6.w(context)),
                                     child: TitleBubble(
-                                      deckHeight: 5.5.h,
+                                      deckHeight: 5.5.h(context),
                                       deckName: 'Socials',
-                                      deckWidth: 17.25.w,
-                                      textSize: 3.sp,
+                                      deckWidth: 17.25.w(context),
+                                      textSize: 3.sp(context),
                                       leftPad: 30,
                                     ),
                                   ),
@@ -133,41 +130,6 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                           Messages(),
                         ],
                       ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const WalletPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const FriendsPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const SettingsPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const HelpPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: InfoPopUp(),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -199,10 +161,10 @@ class _DeskSocialsContState extends State<DeskSocialsCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
-      width: 71.w,
+      height: 80.h(context),
+      width: 71.w(context),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.5.w),
+        borderRadius: BorderRadius.circular(1.5.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
@@ -245,10 +207,10 @@ class SocialsButtonHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 6.5.h,
-      width: 30.w,
+      height: 6.5.h(context),
+      width: 30.w(context),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.5.w),
+        borderRadius: BorderRadius.circular(1.5.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),

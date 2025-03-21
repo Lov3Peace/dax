@@ -51,16 +51,12 @@ class WebUITemplate extends StatelessWidget {
                     //
                     // Row for Decks + Messages
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 0.25.w(context)),
-                          //
-                          // Row for Decks, Stacks, Cards, etc.
-                          child: Column(
-                            children: [child],
-                          ),
-                        ),
+                            padding: EdgeInsets.symmetric(horizontal: 0.25.w(context)),
+                            //
+                            // Row for Decks, Stacks, Cards, etc.
+                            child: child),
                         // // ignore: prefer_const_constructors
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 0.25.w(context)),

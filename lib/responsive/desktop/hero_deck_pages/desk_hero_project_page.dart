@@ -1,30 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/projects_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
 
 import 'package:simple_animations/simple_animations.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
-import '../../mobile/mob_artboard_page.dart';
 import '../../../util/button_state.dart';
 
 import '../dashboard/title_bubble.dart';
 import '../desk_decks.dart';
-import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
-import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
-import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
-import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
-import '../desk_sp/desk_side_panel.dart';
-import '../messages.dart';
 
 class DeskHeroProjectsPage extends StatefulWidget {
   const DeskHeroProjectsPage({Key? key}) : super(key: key);
@@ -52,33 +43,35 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
           extendBody: true,
           body: WebUITemplate(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    //
-                    // Title of Screen
-                    Padding(
-                      padding: EdgeInsets.only(right: 23.6.w(context)),
-                      child: TitleBubble(
+                Container(
+                  width: 71.w(context),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      //
+                      // Title of Screen
+                      TitleBubble(
                         deckHeight: 5.5.h(context),
                         deckName: 'Projects',
                         deckWidth: 17.25.w(context),
                         textSize: 3.sp(context),
                         leftPad: 30,
                       ),
-                    ),
-                    //
-                    //Houses Decks Buttons
-                    Container(
-                      color: tran,
-                      child: const Column(
-                        children: [ProjectsBubbleDock()],
+
+                      //
+                      //Houses Decks Buttons
+                      Container(
+                        color: tran,
+                        child: const Column(
+                          children: [ProjectsBubbleDock()],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Container(
                   color: tran,
@@ -118,11 +111,6 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
     return Container(
       height: 80.h(context),
       width: 71.w(context),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.5.w(context)),
-        color: const Color.fromARGB(185, 21, 19, 22),
-        border: Border.all(color: deckBorderColor),
-      ),
       child: GridView.builder(
         physics: const BouncingScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -131,7 +119,7 @@ class _DeskProjectsContState extends State<DeskProjectsCont> {
           mainAxisSpacing: 20.0, // Vertical spacing between items
           childAspectRatio: 1.3, // Aspect ratio of the items
         ),
-        itemCount: 3,
+        itemCount: 4,
         itemBuilder: (BuildContext context, int index) {
           return AnimationConfiguration.staggeredGrid(
             delay: const Duration(milliseconds: 500),

@@ -58,7 +58,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
         physics: const AlwaysScrollableScrollPhysics(),
         child: Container(
           height: 100.h(context),
-          // width: 100.w(context),
+          width: 100.w(context),
           constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
           child: Stack(
             children: [
@@ -70,7 +70,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                   DesktopSidePanel(),
                   Container(
                     height: 90.h(context),
-                    // width: 71.5.w(context),
+                    // width: 87.5.w(context),
                     constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                     //
                     // Row for Decks + Messages

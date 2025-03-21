@@ -62,76 +62,66 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
             child: Stack(
               children: [
                 const ArtBoardScreen(),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      controller.play();
-                    });
-                    Future.delayed(const Duration(milliseconds: 300)).then((_) {
-                      controller.playReverse();
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      DesktopSidePanel(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // SizedBox(
-                          //   width: 12.5.w(context),
-                          // ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  //
-                                  // Title of Screen
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 23.6.w(context)),
-                                    child: TitleBubble(
-                                      deckHeight: 5.5.h(context),
-                                      deckName: 'Socials',
-                                      deckWidth: 17.25.w(context),
-                                      textSize: 3.sp(context),
-                                      leftPad: 30,
-                                    ),
+                Row(
+                  children: [
+                    DesktopSidePanel(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // SizedBox(
+                        //   width: 12.5.w(context),
+                        // ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                //
+                                // Title of Screen
+                                Padding(
+                                  padding: EdgeInsets.only(right: 23.6.w(context)),
+                                  child: TitleBubble(
+                                    deckHeight: 5.5.h(context),
+                                    deckName: 'Socials',
+                                    deckWidth: 17.25.w(context),
+                                    textSize: 3.sp(context),
+                                    leftPad: 30,
                                   ),
-                                  //
-                                  //Houses Decks Buttons
-                                  Container(
-                                    color: tran,
-                                    child: const Column(
-                                      children: [
-                                        SocialsButtonHolder(),
-                                      ],
-                                    ),
+                                ),
+                                //
+                                //Houses Decks Buttons
+                                Container(
+                                  color: tran,
+                                  child: const Column(
+                                    children: [
+                                      SocialsButtonHolder(),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              color: tran,
+                              child: Column(
+                                children: [
+                                  Hero(
+                                    tag: ButtonState().socialsHeroTag,
+                                    flightShuttleBuilder: flightShuttleBuilder,
+                                    child: const DeskSocialsCont(),
                                   ),
                                 ],
                               ),
-                              Container(
-                                color: tran,
-                                child: Column(
-                                  children: [
-                                    Hero(
-                                      tag: ButtonState().socialsHeroTag,
-                                      flightShuttleBuilder: flightShuttleBuilder,
-                                      child: const DeskSocialsCont(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
+                        ),
 
-                          // ignore: prefer_const_constructors
-                          Messages(),
-                        ],
-                      ),
-                    ],
-                  ),
+                        // ignore: prefer_const_constructors
+                        Messages(),
+                      ],
+                    ),
+                  ],
                 ),
               ],
             ),

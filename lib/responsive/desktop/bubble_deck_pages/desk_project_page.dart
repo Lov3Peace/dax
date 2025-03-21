@@ -81,7 +81,7 @@ class _DeskProjectsPageState extends State<DeskProjectsPage> with AnimationMixin
                       DesktopSidePanel(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
                             width: 12.5.w(context),

@@ -7,8 +7,8 @@ class TestContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      width: 100,
+      height: 50.h(context),
+      width: 35.w(context),
       color: color,
     );
   }

@@ -42,37 +42,32 @@ class WebUITemplate extends StatelessWidget {
               ArtBoardScreen(),
 
               Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   DesktopSidePanel(),
                   Container(
                     height: 90.h(context),
                     // width: 71.5.w(context),
-                    constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                    constraints:
+                        100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                     //
-                    // Row for Decks + Messages
-                    child: Row(
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 0.25.w(context)),
-                            //
-                            // Row for Decks, Stacks, Cards, etc.
-                            child: child),
-                        // // ignore: prefer_const_constructors
-                        Padding(
-                          padding: EdgeInsets.symmetric(vertical: 0.25.w(context)),
-                          child: StaggerLoad(
-                            widgets: [Messages()],
-                            duration: 200,
-                            delay: 75,
-                            layer: 3,
-                            scale: 1.03,
-                            scrollDirection: Axis.horizontal,
-                          ),
-                        ),
-                      ],
+                    // *** Content goes here ***
+                    child: Padding(
+                        padding: EdgeInsets.all(0.25.w(context)),
+                        //
+                        // Row for Decks, Stacks, Cards, etc.
+                        child: child),
+                  ),
+                  Container(
+                    height: 90.h(context),
+                    // width: 71.5.w(context),
+                    constraints:
+                        100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                    child: Padding(
+                      padding: EdgeInsets.all(0.25.w(context)),
+                      child: Messages(),
                     ),
                   ),
-
                   // ignore: prefer_const_constructors
                 ],
               ),

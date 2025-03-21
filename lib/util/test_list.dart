@@ -2,7 +2,7 @@ import 'package:flutter_application_1/util/test_container.dart';
 
 import '../main.dart';
 
-List big_list = [
+List test_big_list = [
   TestContainer(color: red),
   TestContainer(color: pink),
   TestContainer(color: purp),

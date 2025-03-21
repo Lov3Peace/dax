@@ -12,6 +12,7 @@ class StaggerLoad extends StatelessWidget {
     required this.scale,
     required this.layer,
     this.padding,
+    this.physics,
   });
   final List widgets;
   final double scale;
@@ -20,6 +21,7 @@ class StaggerLoad extends StatelessWidget {
   final int delay;
   final Axis scrollDirection;
   final EdgeInsets? padding;
+  final ScrollPhysics? physics;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class StaggerLoad extends StatelessWidget {
         shrinkWrap: true,
         itemCount: widgets.length,
         scrollDirection: scrollDirection,
+        physics: physics,
         itemBuilder: (context, index) {
           return Container(
             padding: padding,
@@ -37,7 +40,7 @@ class StaggerLoad extends StatelessWidget {
                 duration: Duration(milliseconds: duration),
                 // delay: Duration(milliseconds: (layer * ((index + 1) * delay)) + delay),
                 delay: Duration(milliseconds: ((2 * layer) + (index + layer)) * delay),
-                // (2(0+1) * 200) + 200 = 800
+                // Ex. (2(1) + (2+1) * 200 = 1200
               )
               .scale(
                 duration: Duration(milliseconds: duration),

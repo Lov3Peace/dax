@@ -84,7 +84,7 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                       childHeight: 50.h(context),
                       childWidth: 35.w(context),
                       padding: EdgeInsets.all(0.5.w(context)),
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                     ),
                   ),
                 ],

@@ -25,20 +25,20 @@ class LargeStaggerLoad extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: widgets.length,
-      itemBuilder: ((context, index) => Container(
-            width: childWidth,
-            height: childHeight,
-            child: StaggerLoad(
-              duration: 300,
-              widgets: [widgets[index], widgets[(index + 1) * 2]],
-              scrollDirection: Axis.horizontal,
-              delay: 200,
-              scale: 1.03,
-              layer: 1,
-              padding: padding,
-              physics: physics,
-            ),
-          )),
+      itemBuilder: (context, index) => Container(
+        width: childWidth,
+        height: childHeight,
+        child: StaggerLoad(
+          duration: 300,
+          widgets: [widgets[index * 2], widgets[(index * 2) + 1]],
+          scrollDirection: Axis.horizontal,
+          delay: index == 1 ? 300 : 200,
+          scale: 1.02,
+          layer: 1,
+          padding: padding,
+          physics: physics,
+        ),
+      ),
     );
   }
 }

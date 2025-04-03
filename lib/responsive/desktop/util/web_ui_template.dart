@@ -64,7 +64,7 @@ class WebUITemplate extends StatelessWidget {
                     constraints:
                         100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                     child: Padding(
-                      padding: EdgeInsets.all(0.25.w(context)),
+                      padding: EdgeInsets.all(0.5.w(context)),
                       child: Messages(),
                     ),
                   ),

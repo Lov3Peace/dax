@@ -24,13 +24,21 @@ class LargeStaggerLoad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: widgets.length,
+      itemCount: ((widgets.length / 2)).ceil(),
       itemBuilder: (context, index) => Container(
         width: childWidth,
         height: childHeight,
         child: StaggerLoad(
           duration: 300,
-          widgets: [widgets[index * 2], widgets[(index * 2) + 1]],
+          // had to use math and conditions for this. If the length of the
+          // list is an odd number, only return the last item in the final
+          // row (each row has two columns/items). Otherwise, return the item of the
+          // list that has the index of (this listview's index * 2) for the first
+          // column, and ((this listview's index * 2) + 1) for the second column (i think
+          // this might scale with the amount of columns; like for 3 columns it would be
+          // (this listview's index * 3) but im not sure yet; will test)
+          widgets:
+              (index * 2) + 1 >= widgets.length ? [widgets[index * 2]] : [widgets[index * 2], widgets[(index * 2) + 1]],
           scrollDirection: Axis.horizontal,
           delay: index == 1 ? 300 : 200,
           scale: 1.02,

@@ -27,32 +27,33 @@ class StaggerLoad extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         shrinkWrap: true,
-        itemCount: widgets.length,
+        itemCount: widgets.length, // the length of the listview is the length of the list passed into it
         scrollDirection: scrollDirection,
         physics: physics,
         itemBuilder: (context, index) {
           return Container(
             padding: padding,
-            child: widgets[index],
+            child: widgets[index], //
+            // animation chaining
           )
               .animate()
               .fadeIn(
                 duration: Duration(milliseconds: duration),
-                // delay: Duration(milliseconds: (layer * ((index + 1) * delay)) + delay),
                 delay: Duration(milliseconds: ((2 * layer) + (index + layer)) * delay),
-                // Ex. (2(1) + (2+1) * 200 = 1200
+                // eg. (2(2) + (1+2)) * 200 = 1400 [if the index=1 and layer=2 and delay=200]
               )
               .scale(
                 duration: Duration(milliseconds: duration),
                 delay: Duration(milliseconds: ((2 * layer) + (index + layer)) * delay),
                 begin: Offset(1.0, 1.0),
-                end: Offset(scale, scale),
+                end: Offset(scale, scale), // initial scale (eg. 1.0 => 1.05)
               )
               .then()
               .scale(
                 duration: Duration(milliseconds: duration),
                 begin: Offset(scale, scale),
-                end: Offset(1.0 / scale, 1.0 / scale),
+                end: Offset(1.0 / scale,
+                    1.0 / scale), // eg. 1.0/1.05 to get original scale value (resetting it to normal val of 1.0)
               );
         });
   }

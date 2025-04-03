@@ -22,8 +22,8 @@ import '../messages.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
-class WebUITemplate extends StatelessWidget {
-  const WebUITemplate({Key? key, required this.child}) : super(key: key);
+class WebUiTemplate extends StatelessWidget {
+  const WebUiTemplate({Key? key, required this.child}) : super(key: key);
   final Widget child;
   @override
   Widget build(BuildContext context) {

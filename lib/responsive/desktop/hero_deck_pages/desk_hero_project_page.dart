@@ -42,7 +42,7 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
       builder: (context, value, child) => Scaffold(
           extendBodyBehindAppBar: true,
           extendBody: true,
-          body: WebUITemplate(
+          body: WebUiTemplate(
             //Column for Title, Dock Buttons, and Content
             child: Container(
               height: 90.h(context),

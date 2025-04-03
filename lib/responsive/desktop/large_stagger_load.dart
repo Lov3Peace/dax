@@ -40,7 +40,7 @@ class LargeStaggerLoad extends StatelessWidget {
           widgets:
               (index * 2) + 1 >= widgets.length ? [widgets[index * 2]] : [widgets[index * 2], widgets[(index * 2) + 1]],
           scrollDirection: Axis.horizontal,
-          delay: index == 1 ? 300 : 200,
+          delay: index <= 1 ? ((index + 1).abs() * 100) : 200, // experimenting with this
           scale: 1.02,
           layer: 1,
           padding: padding,

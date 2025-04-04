@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../util/home_button.dart';
 import 'dock buttons/tab_friends_dock_button.dart';
 import 'dock buttons/tab_help_dock_button.dart';
@@ -65,8 +65,8 @@ class _TabDockState extends State<TabDock> with AnimationMixin {
                 //   offset: Offset(0, 0),
                 // )
               ]),
-          width: 90.w,
-          height: 12.h,
+          width: 90.w(context),
+          height: 12.h(context),
           child: PageView(
             physics: const BouncingScrollPhysics(),
             clipBehavior: Clip.antiAlias,
@@ -83,10 +83,7 @@ class _TabDockState extends State<TabDock> with AnimationMixin {
                   DockButton(icon: Ionicons.person_circle_outline),
 
                   //Home
-                  HomeButton(
-                      gradient1: widget.newGrad1,
-                      gradient2: widget.newGrad2,
-                      glow: widget.newGlow),
+                  HomeButton(gradient1: widget.newGrad1, gradient2: widget.newGrad2, glow: widget.newGlow),
 
                   //Messages
                   const TabMessagesWindowButton(),

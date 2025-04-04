@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
 
 import '../../../../util/Window Route/logout_window_route.dart';
@@ -36,12 +36,9 @@ class DesktopLogoutWindowButton extends StatelessWidget {
           tag: _heroLogoutWindow,
           child: TactileButton(
             child: AnimatedContainer(
-              padding: isHover
-                  ? const EdgeInsets.only(left: 10)
-                  : const EdgeInsets.only(left: 0),
+              padding: isHover ? const EdgeInsets.only(left: 10) : const EdgeInsets.only(left: 0),
               decoration: BoxDecoration(
-                border:
-                    Border.all(color: const Color.fromARGB(104, 255, 255, 255)),
+                border: Border.all(color: const Color.fromARGB(104, 255, 255, 255)),
                 boxShadow: const [
                   BoxShadow(color: tran),
                 ],
@@ -49,9 +46,9 @@ class DesktopLogoutWindowButton extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(60)),
               ),
               duration: const Duration(milliseconds: 200),
-              width: 10.w,
-              height: 5.h,
-              child: addElement(),
+              width: 10.w(context),
+              height: 5.h(context),
+              child: addElement(context),
             ),
           ),
         ),
@@ -59,7 +56,7 @@ class DesktopLogoutWindowButton extends StatelessWidget {
     );
   }
 
-  addElement() {
+  addElement(context) {
     return Row(
       children: [
         const Icon(
@@ -70,8 +67,8 @@ class DesktopLogoutWindowButton extends StatelessWidget {
         Stack(
           children: [
             Container(
-              width: 4.w,
-              height: 4.h,
+              width: 4.w(context),
+              height: 4.h(context),
               decoration: const BoxDecoration(
                 gradient: LinearGradient(colors: [purp, red]),
                 shape: BoxShape.circle,
@@ -79,8 +76,8 @@ class DesktopLogoutWindowButton extends StatelessWidget {
               ),
             ),
             Container(
-              width: 3.75.w,
-              height: 3.75.h,
+              width: 3.75.w(context),
+              height: 3.75.h(context),
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey,
@@ -91,7 +88,7 @@ class DesktopLogoutWindowButton extends StatelessWidget {
         Text(
           auth.currentUser!.email.toString().allBefore('@'),
           style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: 4.sp),
+            textStyle: TextStyle(fontSize: 4.sp(context)),
             fontWeight: FontWeight.w400,
             color: (isHover ? Colors.white : Colors.white54),
           ),
@@ -114,8 +111,7 @@ class LogoutWindowPopupCard extends StatefulWidget {
 }
 
 /// {@macro add_todo_popup_card}
-class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
-    with AnimationMixin {
+class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with AnimationMixin {
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -123,22 +119,19 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+            padding: EdgeInsets.only(bottom: 10.h(context), top: 4.h(context)),
             child: Center(
               child: Container(
-                height: 35.h,
-                width: 45.w,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                height: 35.h(context),
+                width: 45.w(context),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
                   tag: _heroLogoutWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                    color:
-                        const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
+                    color: const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
                     elevation: 2,
                     borderRadius: BorderRadius.circular(32),
                     child: Stack(
@@ -148,11 +141,9 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                             child: Container(
-                              height: 85.h,
+                              height: 85.h(context),
                               decoration: BoxDecoration(
-                                border: Border.all(
-                                    color:
-                                        const Color.fromARGB(182, 31, 31, 31)),
+                                border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                 borderRadius: BorderRadius.circular(24),
                               ),
                             ),
@@ -173,7 +164,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: 1.h),
+                                  padding: EdgeInsets.only(top: 1.h(context)),
                                   child: const Text(
                                     'Would you like to logout?',
                                     style: TextStyle(
@@ -184,14 +175,10 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: 1.5.h),
+                                  padding: EdgeInsets.only(top: 1.5.h(context)),
                                   child: TextButton(
                                     onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const OnboardingScreen()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const OnboardingScreen()));
                                     },
                                     child: const Placeholder(),
                                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 
 import 'package:flutter_application_1/main.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -44,18 +45,12 @@ class _TabSignUpButtonState extends State<TabSignUpButton> {
           margin: const EdgeInsets.symmetric(horizontal: 90),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
-              boxShadow: const [
-                BoxShadow(
-                    color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
-              ],
+              boxShadow: const [BoxShadow(color: red, blurRadius: 20, blurStyle: BlurStyle.solid)],
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(
             child: Text(
               'Sign Up',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),
         ),

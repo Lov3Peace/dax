@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../../main.dart';
 import '../../../mobile/mob_constants.dart';
@@ -80,18 +81,12 @@ class _SendCodeButtonState extends State<SendCodeButton> {
           margin: const EdgeInsets.symmetric(horizontal: 35),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
-              boxShadow: const [
-                BoxShadow(
-                    color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
-              ],
+              boxShadow: const [BoxShadow(color: red, blurRadius: 20, blurStyle: BlurStyle.solid)],
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(
             child: Text(
               'Send Code',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),
         ),

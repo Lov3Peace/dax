@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
 import '../../../main.dart';
 import '../../../util/auth/login.dart';
@@ -11,20 +11,8 @@ import '../desk_constants.dart';
 import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 
-class ProfileCard extends StatefulWidget {
+class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
-
-  @override
-  State<ProfileCard> createState() => _ProfileCardState();
-}
-
-class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +36,20 @@ class _ProfileCardState extends State<ProfileCard> with AnimationMixin {
             ),
           );
         },
-        child: profileCard());
+        child: profileCard(context: context));
   }
 
-  Widget profileCard({VoidCallback? onTap, Color? color}) {
+  Widget profileCard({VoidCallback? onTap, Color? color, context}) {
     // values set in desk_decks.dart
-    deckHeight = deckHeight;
-    deckWidth = deckWidth;
-    halfDeckWidth = halfDeckWidth;
-    labelTextSize = labelTextSize;
+    double deckHeight = 22.sp(context);
+    double deckWidth = 35.25.w(context);
+    double halfDeckWidth = 17.325.w(context);
+    double headerTextSize = 6.5.sp(context);
+    subTextSize = 2.5.sp(context);
+    profBubTextSize = 20;
+    double labelTextSize = 3.sp(context);
+    textConstraint = 500;
+    subTextConstraint = 500;
     return Deck(
       deckHeight: deckHeight,
       deckWidth: halfDeckWidth,

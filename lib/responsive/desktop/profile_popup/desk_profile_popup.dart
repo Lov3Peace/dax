@@ -1,6 +1,7 @@
 // import 'dart:ui';
 // import 'package:carousel_slider/carousel_slider.dart';
 // import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 // import 'package:flutter_application_1/main.dart';
 // import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_1/pcone_ui.dart';
 // import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/pctwo_ui.dart';
@@ -8,8 +9,7 @@
 // import 'package:flutter_application_1/util/auth/login.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:google_fonts/google_fonts.dart';
-// import 'package:sizer/sizer.dart';
-// import 'package:supercharged/supercharged.dart';
+// // import 'package:supercharged/supercharged.dart';
 // import '../../../util/tactile_button.dart';
 // import '../desk_sp/desk_dock_buttons/connections/desk_profile_circle.dart';
 // import 'desk_profile_popup_cubit.dart';
@@ -35,10 +35,10 @@
 //       create: (_) => ProfileBloc(),
 //       child: Center(
 //         child: Padding(
-//           padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+//           padding: EdgeInsets.only(bottom: 10.h(context), top: 4.h(context)),
 //           child: Container(
-//             height: 80.h,
-//             width: 60.w,
+//             height: 80.h(context),
+//             width: 60.w(context),
 //             decoration: BoxDecoration(
 //               borderRadius: BorderRadius.circular(32),
 //             ),
@@ -55,7 +55,7 @@
 //                     child: BackdropFilter(
 //                       filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
 //                       child: Container(
-//                         height: 85.h,
+//                         height: 85.h(context),
 //                         decoration: BoxDecoration(
 //                           border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
 //                           borderRadius: BorderRadius.circular(24),
@@ -69,8 +69,8 @@
 //                       children: [
 //                         Padding(
 //                           padding: EdgeInsets.only(
-//                             right: 1.w,
-//                             left: 1.w,
+//                             right: 1.w(context),
+//                             left: 1.w(context),
 //                           ),
 //                           child: Row(
 //                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,13 +93,13 @@
 //                           ),
 //                         ),
 //                         SizedBox(
-//                           height: 2.h,
+//                           height: 2.h(context),
 //                         ),
 //                         Listener(
 //                           child: CarouselSlider.builder(
 //                             itemCount: 3, // Number of items
 //                             options: CarouselOptions(
-//                               height: 45.h, // Adjust height as necessary
+//                               height: 45.h(context), // Adjust height as necessary
 //                               viewportFraction: 1.0, // Each item takes full width
 //                               onPageChanged: (index, reason) {
 //                                 setState(() {
@@ -124,12 +124,12 @@
 //                           thickness: 0.5,
 //                         ),
 //                         SizedBox(
-//                           height: 2.h,
+//                           height: 2.h(context),
 //                         ),
 //                         Padding(
 //                           padding: EdgeInsets.only(
-//                             right: 1.w,
-//                             left: 1.w,
+//                             right: 1.w(context),
+//                             left: 1.w(context),
 //                           ),
 //                           child: Row(
 //                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -169,7 +169,7 @@
 //         Navigator.pop(context); // This will close the popup
 //       },
 //       child: Container(
-//         width: 9.w,
+//         width: 9.w(context),
 //         decoration: BoxDecoration(
 //           border: Border.all(
 //             color: const Color.fromARGB(136, 134, 143, 151), // Replace with your desired border color
@@ -178,7 +178,7 @@
 //           borderRadius: BorderRadius.circular(32), // Optional: to give rounded corners
 //         ),
 //         constraints: BoxConstraints(
-//           maxWidth: 9.w,
+//           maxWidth: 9.w(context),
 //         ),
 //         // Adjust padding as needed
 //         child: Row(
@@ -204,8 +204,8 @@
 
 //   Widget _buildContainer() {
 //     return Container(
-//       height: 5.h,
-//       width: 10.w,
+//       height: 5.h(context),
+//       width: 10.w(context),
 //       decoration: BoxDecoration(
 //         border: Border.all(
 //           color: const Color.fromARGB(136, 134, 143, 151), // Replace with your desired border color
@@ -256,7 +256,7 @@
 //       borderRadius: BorderRadius.circular(16),
 //       child: Image.asset(
 //         imagePath,
-//         height: 4.5.w,
+//         height: 4.5.w(context),
 //         fit: BoxFit.cover,
 //       ),
 //     );
@@ -283,13 +283,13 @@
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_1/pcone_ui.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_2/pctwo_ui.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/profile_card_3/pcthree_ui.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
 import '../../../util/tactile_button.dart';
 import '../desk_sp/desk_dock_buttons/connections/desk_profile_circle.dart';
@@ -325,10 +325,10 @@ class _ProfilePopupState extends State<ProfilePopup> {
       create: (_) => ProfileNotifier(),
       child: Center(
         child: Padding(
-          padding: EdgeInsets.only(bottom: 8.h, top: 3.h),
+          padding: EdgeInsets.only(bottom: 8.h(context), top: 3.h(context)),
           child: Container(
-            height: 80.h,
-            width: 60.w,
+            height: 80.h(context),
+            width: 60.w(context),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(32),
             ),
@@ -346,10 +346,10 @@ class _ProfilePopupState extends State<ProfilePopup> {
                     child: Column(
                       children: [
                         _buildTopRow(context),
-                        SizedBox(height: 1.h),
+                        SizedBox(height: 1.h(context)),
                         _buildCarousel(),
                         Divider(color: Colors.white, endIndent: 150, indent: 150, thickness: 0.5),
-                        SizedBox(height: 1.h),
+                        SizedBox(height: 1.h(context)),
                         _buildInfoSections(),
                       ],
                     ),
@@ -369,7 +369,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
-          height: 85.h,
+          height: 85.h(context),
           decoration: BoxDecoration(
             border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
             borderRadius: BorderRadius.circular(24),
@@ -381,7 +381,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
 
   Widget _buildTopRow(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 1.w),
+      padding: EdgeInsets.symmetric(horizontal: 1.w(context)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -407,7 +407,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
         return CarouselSlider.builder(
           itemCount: 3,
           options: CarouselOptions(
-            height: 45.h,
+            height: 45.h(context),
             viewportFraction: 1.0,
             onPageChanged: (index, reason) {
               notifier.updateIndex(index);
@@ -440,12 +440,12 @@ class _ProfilePopupState extends State<ProfilePopup> {
     return TactileButton(
       onTap: () => Navigator.pop(context),
       child: Container(
-        width: 9.w,
+        width: 9.w(context),
         decoration: BoxDecoration(
           border: Border.all(color: const Color.fromARGB(136, 134, 143, 151)),
           borderRadius: BorderRadius.circular(32),
         ),
-        constraints: BoxConstraints(maxWidth: 9.w),
+        constraints: BoxConstraints(maxWidth: 9.w(context)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -464,8 +464,8 @@ class _ProfilePopupState extends State<ProfilePopup> {
 
   Widget _buildContainer() {
     return Container(
-      height: 5.h,
-      width: 10.w,
+      height: 5.h(context),
+      width: 10.w(context),
       decoration: BoxDecoration(
         border: Border.all(color: const Color.fromARGB(136, 134, 143, 151)),
         borderRadius: BorderRadius.circular(32),
@@ -475,7 +475,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
 
   Widget _buildInfoSections() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 1.w),
+      padding: EdgeInsets.symmetric(horizontal: 1.w(context)),
       child: Consumer<ProfileNotifier>(
         builder: (context, notifier, child) {
           return Row(
@@ -500,7 +500,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
         //   title,
         //   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
         // ),
-        SizedBox(height: 0.5.h),
+        SizedBox(height: 0.5.h(context)),
         horizontal
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -551,7 +551,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
       padding: EdgeInsets.symmetric(horizontal: 4.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
-        child: Image.asset(imagePath, height: 4.5.w, fit: BoxFit.cover),
+        child: Image.asset(imagePath, height: 4.5.w(context), fit: BoxFit.cover),
       ),
     );
   }

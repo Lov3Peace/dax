@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
 import '../../../util/button_state.dart';
@@ -18,11 +16,6 @@ import '../../mobile/mob_artboard_page.dart';
 import '../dashboard/communities_deck.dart';
 import '../dashboard/title_bubble.dart';
 import '../desk_decks.dart';
-import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
-import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
-import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
-import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
-import '../desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import '../messages.dart';
 
 class DeskCommunityPage extends StatefulWidget {
@@ -57,8 +50,8 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
         extendBody: true,
         body: SingleChildScrollView(
           child: Container(
-            height: 100.h,
-            width: 100.w,
+            height: 100.h(context),
+            width: 100.w(context),
             constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
             child: Stack(
               children: [
@@ -72,18 +65,15 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
                       controller.playReverse();
                     });
                   },
-                  child: Indexer(
+                  child: Row(
                     children: [
-                      Indexed(
-                        index: 2,
-                        child: DesktopSidePanel(),
-                      ),
+                      DesktopSidePanel(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 12.5.w,
+                            width: 12.5.w(context),
                           ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -94,12 +84,12 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
                                   //
                                   // Title of Screen
                                   Padding(
-                                    padding: EdgeInsets.only(right: 23.6.w),
+                                    padding: EdgeInsets.only(right: 23.6.w(context)),
                                     child: TitleBubble(
-                                      deckHeight: 5.5.h,
+                                      deckHeight: 5.5.h(context),
                                       deckName: 'Community',
-                                      deckWidth: 17.25.w,
-                                      textSize: 3.sp,
+                                      deckWidth: 17.25.w(context),
+                                      textSize: 3.sp(context),
                                       leftPad: 30,
                                     ),
                                   ),
@@ -134,41 +124,6 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
                           Messages(),
                         ],
                       ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const WalletPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const FriendsPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const SettingsPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: const HelpPopUp(),
-                        ),
-                      ),
-                      Indexed(
-                        index: 1,
-                        child: Positioned(
-                          left: -70.w,
-                          child: InfoPopUp(),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -198,10 +153,10 @@ class _DeskCommunityContState extends State<DeskCommunityCont> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.h,
-      width: 71.w,
+      height: 80.h(context),
+      width: 71.w(context),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.5.w),
+        borderRadius: BorderRadius.circular(1.5.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
@@ -244,10 +199,10 @@ class CommunityButtonHolder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 6.5.h,
-      width: 30.w,
+      height: 6.5.h(context),
+      width: 30.w(context),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.5.w),
+        borderRadius: BorderRadius.circular(1.5.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),

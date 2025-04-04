@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
@@ -35,16 +36,14 @@ class _MobFinancePageState extends State<MobFinancePage> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.userScrollDirection ==
-        ScrollDirection.reverse) {
+    if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
       setState(() {
         // Calculate the new opacity based on the scroll offset
         _showAppBar = 1.0 - (_scrollController.offset / 100.0);
         // Limit the opacity value between 0.0 and 1.0
         _showAppBar = _showAppBar.clamp(0.0, 1.0);
       });
-    } else if (_scrollController.position.userScrollDirection ==
-        ScrollDirection.forward) {
+    } else if (_scrollController.position.userScrollDirection == ScrollDirection.forward) {
       setState(() {
         _showAppBar = 1.0;
       });
@@ -62,8 +61,7 @@ class _MobFinancePageState extends State<MobFinancePage> {
         leadingWidth: screenWidth * 0.9,
         toolbarHeight: lerpDouble(0, 10, 8),
         flexibleSpace: Padding(
-          padding:
-              EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
+          padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
           child: Opacity(
             opacity: _showAppBar,
             child: Row(
@@ -122,8 +120,7 @@ class _MobFinancePageState extends State<MobFinancePage> {
                         children: [
                           GestureDetector(
                               onTap: () {
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: (context) {
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                                   return const KeyboardsDeck();
                                 }));
                               },

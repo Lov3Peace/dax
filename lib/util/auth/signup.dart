@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../main.dart';
 import 'auth_check.dart';
 
@@ -32,7 +32,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
       onPressed: loadPopUp,
       child: Text(
         "Sign Up?",
-        style: TextStyle(color: Colors.white, fontSize: 3.sp),
+        style: TextStyle(color: Colors.white, fontSize: 3.sp(context)),
       ),
     );
   }
@@ -62,7 +62,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
             // },
             pageBuilder: (context, _, __) => Center(
                     child: Container(
-                  height: 75.h,
+                  height: 75.h(context),
                   constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 550),
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
                   padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
@@ -78,7 +78,7 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
-                                height: 85.h,
+                                height: 85.h(context),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color: const Color.fromARGB(182, 59, 59, 59),

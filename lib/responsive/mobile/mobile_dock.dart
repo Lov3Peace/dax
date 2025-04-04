@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../util/home_button.dart';
 import '../../util/logout_dock_button.dart';
 import 'mobile_dock_buttons/mob_friends_dock_button.dart';
@@ -66,8 +66,8 @@ class _MobDockState extends State<MobDock> with AnimationMixin {
                 //   offset: Offset(0, 0),
                 // )
               ]),
-          width: 90.w,
-          height: 12.h,
+          width: 90.w(context),
+          height: 12.h(context),
           child: PageView(
             physics: const BouncingScrollPhysics(),
             clipBehavior: Clip.antiAlias,
@@ -84,10 +84,7 @@ class _MobDockState extends State<MobDock> with AnimationMixin {
                   DockButton(icon: Ionicons.person_circle_outline),
 
                   //Home
-                  HomeButton(
-                      gradient1: widget.newGrad1,
-                      gradient2: widget.newGrad2,
-                      glow: widget.newGlow),
+                  HomeButton(gradient1: widget.newGrad1, gradient2: widget.newGrad2, glow: widget.newGlow),
 
                   //Messages
                   const MobMessagesWindowButton(),

@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_application_1/util/button_state.dart';
-import 'package:flutter_application_1/responsive/responsive_layout.dart';
-import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:flutter_application_1/responsive/desktop/util/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'responsive/desktop/util/error_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,7 @@ Future main() async {
 
         // Add more providers as needed
       ],
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
@@ -53,24 +54,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     timeDilation = 1;
-    return Sizer(
-      builder: (context, orientation, deviceType) => MaterialApp(
-        //builder: (context, widget) => ResponsiveBreakpoints.builder(child: ClampingScrollWrapper.builder(context, widget!), breakpoints: []),
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            fontFamily: GoogleFonts.montserrat().fontFamily,
-            colorScheme: const ColorScheme.dark(secondary: red, onSurface: Colors.white),
-            scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
-        // ignore: prefer_const_constructors
-        home: ResponsiveLayout(
-          // ignore: prefer_const_constructors
-          mobileVersion: AuthCheck(),
-          // ignore: prefer_const_constructors
-          tabletVersion: AuthCheck(),
-          // ignore: prefer_const_constructors
-          desktopVersion: AuthCheck(),
-        ),
+    return MaterialApp(
+      initialRoute: '/',
+      onGenerateRoute: (settings) => PageRouteBuilder(
+        settings: settings,
+        pageBuilder: (context, animation, secondaryAnimation) => routes[settings.name]!,
+        fullscreenDialog: true,
       ),
+      onUnknownRoute: (settings) => PageRouteBuilder(
+        settings: settings,
+        pageBuilder: (context, animation, secondaryAnimation) => ErrorPage(),
+        fullscreenDialog: true,
+      ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          fontFamily: GoogleFonts.montserrat().fontFamily,
+          colorScheme: const ColorScheme.dark(secondary: red, onSurface: Colors.white),
+          scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
     );
   }
 }

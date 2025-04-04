@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_finance_page.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_news_page.dart';
@@ -128,12 +129,7 @@ class ProfileBubble extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
-                    boxShadow: [
-                      BoxShadow(
-                          color: neonGlow,
-                          blurRadius: 20,
-                          blurStyle: BlurStyle.solid)
-                    ],
+                    boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -143,20 +139,16 @@ class ProfileBubble extends StatelessWidget {
                       Image.asset('images/crest5.png', width: 35),
                       Text(
                         deckName,
-                        style: GoogleFonts.montserrat(
-                            fontSize: profBubTextSize,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: shadowColor,
-                                blurRadius: 1,
-                              ),
-                              Shadow(
-                                color: shadowColor,
-                                blurRadius: 2,
-                              ),
-                            ]),
+                        style: GoogleFonts.montserrat(fontSize: profBubTextSize, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 1,
+                          ),
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 2,
+                          ),
+                        ]),
                       ),
                     ],
                   ),
@@ -234,31 +226,22 @@ class TitleBubble extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
-                    boxShadow: [
-                      BoxShadow(
-                          color: neonGlow,
-                          blurRadius: 20,
-                          blurStyle: BlurStyle.solid)
-                    ],
+                    boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
                     deckName,
-                    style: GoogleFonts.montserrat(
-                        fontSize: titleTextSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 1,
-                          ),
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 2,
-                          ),
-                        ]),
+                    style: GoogleFonts.montserrat(fontSize: titleTextSize, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                      Shadow(
+                        color: shadowColor,
+                        blurRadius: 1,
+                      ),
+                      Shadow(
+                        color: shadowColor,
+                        blurRadius: 2,
+                      ),
+                    ]),
                   ),
                 ),
               ),
@@ -331,8 +314,7 @@ class _DockButtonState extends State<DockButton> {
     // toggle between control instructions
     setState(() {
       control = Control.play;
-      currentColor =
-          (currentColor == activeColor) ? inactiveColor : activeColor;
+      currentColor = (currentColor == activeColor) ? inactiveColor : activeColor;
     });
   }
 
@@ -381,10 +363,8 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -406,10 +386,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
       },
       child: ScaleTransition(
         scale: scale,
-        child: AnimatedOpacity(
-            opacity: opacity.value,
-            duration: const Duration(milliseconds: 300),
-            child: projectDeck()),
+        child: AnimatedOpacity(opacity: opacity.value, duration: const Duration(milliseconds: 300), child: projectDeck()),
       ),
     );
   }
@@ -435,9 +412,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         ),
         text: Text(
           'Collaborate and innovate.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -646,10 +621,8 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -695,9 +668,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         textConstraint: 300,
         text: Text(
           'All of your socials in one place.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -851,10 +822,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -897,9 +866,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         textConstraint: 250,
         text: Text(
           'Manage your money.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -999,10 +966,8 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -1045,9 +1010,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
       textConstraint: 150,
       text: Text(
         'Stay up to date.',
-        style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-            fontWeight: FontWeight.w600),
+        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
       ),
     ));
   }

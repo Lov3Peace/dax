@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../../main.dart';
 import '../../../util/tactile_button.dart';
 import '../../mobile/mobile_news_page.dart';
@@ -20,22 +21,10 @@ class NewsDeck extends StatefulWidget {
   State<NewsDeck> createState() => _NewsDeckState();
 }
 
-class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
-  @override
-  late AnimationController controller;
-  late Animation<double> scale;
-  late Animation<double> opacity;
+class _NewsDeckState extends State<NewsDeck> {
   @override
   void initState() {
     // TODO: implement initState
-
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
 
     super.initState();
   }
@@ -44,41 +33,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        setState(() {
-          controller.play();
-          Future.delayed(const Duration(milliseconds: 100)).then((_) {
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  if (screenWidth < 550) {
-                    return MobNewsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else if (screenWidth < 1100) {
-                    return TabNewsPage(
-                      transitionAnimation: animation,
-                    );
-                  } else {
-                    return const DeskHeroNewsPage(
-                        //transitionAnimation: animation,
-                        );
-                  }
-                },
-                transitionDuration: const Duration(milliseconds: 700),
-              ),
-            );
-          });
-          Future.delayed(const Duration(milliseconds: 500)).then((_) {
-            controller.reset();
-          });
-        });
+        Navigator.pushNamed(context, '/news');
       },
       child: newsDeck(),
     );
@@ -86,10 +41,15 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
 
   Widget newsDeck({VoidCallback? onTap, Color? color}) {
     // values set in desk_decks.dart
-    deckHeight = deckHeight;
-    deckWidth = deckWidth;
-    halfDeckWidth = halfDeckWidth;
-    labelTextSize = labelTextSize;
+    double deckHeight = 22.sp(context);
+    double deckWidth = 35.25.w(context);
+    double halfDeckWidth = 17.325.w(context);
+    double headerTextSize = 6.5.sp(context);
+    subTextSize = 2.5.sp(context);
+    profBubTextSize = 20;
+    double labelTextSize = 3.sp(context);
+    textConstraint = 500;
+    subTextConstraint = 500;
     return GestureDetector(
       child: Deck(
         deckHeight: deckHeight,

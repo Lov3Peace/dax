@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -64,31 +65,22 @@ class TitleBubble extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
-                    boxShadow: [
-                      BoxShadow(
-                          color: neonGlow,
-                          blurRadius: 20,
-                          blurStyle: BlurStyle.solid)
-                    ],
+                    boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
                     deckName,
-                    style: GoogleFonts.montserrat(
-                        fontSize: textSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 1,
-                          ),
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 2,
-                          ),
-                        ]),
+                    style: GoogleFonts.montserrat(fontSize: textSize, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                      Shadow(
+                        color: shadowColor,
+                        blurRadius: 1,
+                      ),
+                      Shadow(
+                        color: shadowColor,
+                        blurRadius: 2,
+                      ),
+                    ]),
                   ),
                 ),
               ),

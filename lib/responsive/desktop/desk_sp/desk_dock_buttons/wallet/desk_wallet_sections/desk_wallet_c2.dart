@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_application_1/util/imports.dart';
 
 class WalletC2 extends StatelessWidget {
   WalletC2({Key? key}) : super(key: key);
@@ -14,16 +14,16 @@ class WalletC2 extends StatelessWidget {
     bool isSwitch2 = false;
 
     return Padding(
-      padding: EdgeInsets.only(top: 1.5.h),
+      padding: EdgeInsets.only(top: 1.5.h(context)),
       child: Container(
-        height: 36.h,
-        width: 33.w,
+        height: 36.h(context),
+        width: 33.w(context),
         decoration: const BoxDecoration(
           color: Color(0xFF272626),
           borderRadius: BorderRadius.all(Radius.circular(40)),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+          padding: EdgeInsets.symmetric(horizontal: 2.w(context), vertical: 0.5.h(context)),
           child: StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
               return Column(

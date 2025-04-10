@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:intl/intl.dart';
-import 'package:sizer/sizer.dart';
 
 class WalletC1 extends StatelessWidget {
   const WalletC1({Key? key}) : super(key: key);
@@ -8,16 +8,16 @@ class WalletC1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 0.5.h),
+      padding: EdgeInsets.only(top: 0.5.h(context)),
       child: Container(
-        height: 36.h,
-        width: 33.w,
+        height: 36.h(context),
+        width: 33.w(context),
         decoration: const BoxDecoration(
           color: Color(0xFF272626),
           borderRadius: BorderRadius.all(Radius.circular(40)),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 2.w),
+          padding: EdgeInsets.symmetric(horizontal: 2.w(context)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -25,9 +25,9 @@ class WalletC1 extends StatelessWidget {
               _buildSectionTitle('Wallet Address'),
               _buildWalletAddressRow(),
               _buildDivider(),
-              _buildProjectContributionSection(),
+              _buildProjectContributionSection(context),
               _buildDivider(),
-              _buildDepositsSection(),
+              _buildDepositsSection(context),
             ],
           ),
         ),
@@ -82,14 +82,14 @@ class WalletC1 extends StatelessWidget {
 // when called.
 // note: these contributions were manually inputed but they will be generated when automatically
 // any time new contributions are done.
-  Widget _buildProjectContributionSection() {
+  Widget _buildProjectContributionSection(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _buildSectionTitle('Project Contributions'),
-        _buildContributionRow('Lagom Mini', 374),
-        _buildContributionRow('Niche Zero', 550),
+        _buildContributionRow('Lagom Mini', 374, context),
+        _buildContributionRow('Niche Zero', 550, context),
       ],
     );
   }
@@ -97,9 +97,9 @@ class WalletC1 extends StatelessWidget {
 // This builds the contribution row itself and everything that goes in the row
 // which will be the project name that you are contributing to and the amount
 // that was contributed.
-  Widget _buildContributionRow(String projectName, double amount) {
+  Widget _buildContributionRow(String projectName, double amount, context) {
     return Padding(
-      padding: EdgeInsets.only(top: 2.5.h),
+      padding: EdgeInsets.only(top: 2.5.h(context)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -125,22 +125,22 @@ class WalletC1 extends StatelessWidget {
 
 // this builds the deposit scetion as a whole.
 // note: all things within this section will be updated as money is put into and withdrawed from the wallet
-  Widget _buildDepositsSection() {
+  Widget _buildDepositsSection(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _buildSectionTitle('Deposits'),
-        _buildDepositRow('Wallet', 10000),
+        _buildDepositRow('Wallet', 10000, context),
       ],
     );
   }
 
 // This builds the deposits row itself and everything that goes in the row
 // which will be the source (wallet) that you are depositing the money into
-  Widget _buildDepositRow(String source, double amount) {
+  Widget _buildDepositRow(String source, double amount, context) {
     return Padding(
-      padding: EdgeInsets.only(top: 2.5.h, bottom: 1.h),
+      padding: EdgeInsets.only(top: 2.5.h(context), bottom: 1.h(context)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

@@ -1,22 +1,23 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/news_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projects_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/messages.dart';
-import 'package:provider/provider.dart';
-import 'package:simple_animations/simple_animations.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:sizer/sizer.dart';
-import '../../../util/button_state.dart';
-import '../../../util/desk_dash_lists.dart';
+import 'package:flutter_application_1/responsive/desktop/stagger_load.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../desk_sp/desk_side_panel.dart';
+import 'package:rive/rive.dart' as r;
 
-import 'communities_deck.dart';
-import 'projects_deck.dart';
+import '../messages.dart';
 import 'title_bubble.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
@@ -28,7 +29,7 @@ class DesktopDashboard extends StatefulWidget {
   State<DesktopDashboard> createState() => _DesktopDashboardState();
 }
 
-class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin {
+class _DesktopDashboardState extends State<DesktopDashboard> {
   //globals
   @override
   void initState() {
@@ -41,157 +42,136 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ButtonState>(
-      builder: (context, value, child) => Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        body: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
-          child: Container(
-            height: 100.h,
-            // width: 100.w,
-            constraints: 100.w > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
-            child: Stack(
-              children: [
-                // Background(),
-                const ArtBoardScreen(),
+    double deckHeight = 22.sp(context);
+    double deckWidth = 35.25.w(context);
+    double halfDeckWidth = 17.325.w(context);
+    double headerTextSize = 6.5.sp(context);
+    subTextSize = 2.5.sp(context);
+    profBubTextSize = 20;
+    double labelTextSize = 3.sp(context);
+    textConstraint = 500;
+    subTextConstraint = 500;
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Container(
+          height: 100.h(context),
+          width: 100.w(context),
+          constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+          child: Stack(
+            children: [
+              // Background(),
+              ArtBoardScreen(),
 
-                Row(
-                  children: [
-                    DesktopSidePanel(),
-                    Container(
-                      height: 90.h,
-                      constraints: 100.w > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
-                      child: Row(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            // crossAxisAlignment: CrossAxisAlignment.center,
+              Row(
+                children: [
+                  DesktopSidePanel(),
+                  Container(
+                    height: 90.h(context),
+                    // width: 87.5.w(context),
+                    constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                    //
+                    // Row for Decks + Messages
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 0.25.w(context)),
+                          child: Column(
                             children: [
-                              // This padding adds a little bit more to the left for the side panel
-                              // and the right for messages
-                              Padding(
-                                padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
-                                child: Container(
-                                  constraints: 100.w > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
-                                  height: 45.h,
-                                  width: 71.5.w,
-                                  // color: red,
-                                  child: AnimationLimiter(
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: 3,
-                                      itemBuilder: (BuildContext context, int index) {
-                                        return AnimationConfiguration.staggeredList(
-                                          delay: const Duration(milliseconds: 200),
-                                          position: index,
-                                          duration: const Duration(milliseconds: 700),
-                                          child: ScaleAnimation(
-                                            scale: 0.7,
-                                            curve: Curves.easeOutBack,
-                                            child: FadeInAnimation(
-                                              child: Padding(
-                                                padding: EdgeInsets.all(0.25.w),
-                                                child: deskDashboardDecks1(
-                                                  deck1: Column(
-                                                    children: [
-                                                      Padding(
-                                                        padding: EdgeInsets.only(bottom: 1.5.sp),
-                                                        child: TitleBubble(
-                                                          deckHeight: 3.sp,
-                                                          deckName: 'Dashboard',
-                                                          deckWidth: halfDeckWidth,
-                                                          textSize: 4.sp,
-                                                          leftPad: 4.sp,
-                                                        ),
-                                                      ),
-                                                      Expanded(child: ProfileCard()),
-                                                    ],
-                                                  ),
-                                                  deck2: Hero(
-                                                      tag: ButtonState().projectsHeroTag,
-                                                      flightShuttleBuilder: flightShuttleBuilder,
-                                                      child: ProjectsDeck()),
-                                                  deck3: Hero(
-                                                      tag: ButtonState().communityHeroTag,
-                                                      flightShuttleBuilder: flightShuttleBuilder,
-                                                      child: CommunitiesDeck()),
-                                                )[index],
+                              //
+                              // Row for Title, Profile, Projects, and Communities Decks
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    //
+                                    // Stagger Load Animation
+                                    StaggerLoad(
+                                        layer: 1,
+                                        scale: 1.03,
+                                        scrollDirection: Axis.horizontal,
+                                        duration: 200,
+                                        delay: 75,
+                                        padding: EdgeInsets.all(0.25.w(context)),
+                                        widgets: [
+                                          //
+                                          //Column of Title Bubble and Profile Card
+                                          Column(
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(bottom: 0.25.w(context)),
+                                                child: TitleBubble(
+                                                  deckHeight: 3.sp(context),
+                                                  deckName: 'Dashboard',
+                                                  deckWidth: halfDeckWidth,
+                                                  textSize: 4.sp(context),
+                                                  leftPad: 4.sp(context),
+                                                ),
                                               ),
-                                            ),
+                                              Expanded(
+                                                child: Hero(
+                                                  tag: 'profileHeroTag',
+                                                  flightShuttleBuilder: flightShuttleBuilder,
+                                                  child: ProfileCard(),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        );
-                                      },
-                                    ),
-                                  ),
+                                          ProjectsDeck(),
+                                          CommunitiesDeck(),
+                                        ]),
+                                  ],
                                 ),
                               ),
-                              // This padding adds a little bit more to the left for the side panel
-                              // and the right for messages
-                              Padding(
-                                padding: EdgeInsets.only(left: 0.25.w, right: 0.25.w),
-                                child: Container(
-                                  constraints: 100.w > 1920 ? BoxConstraints(minHeight: 720) : BoxConstraints(minHeight: 450),
-                                  height: 45.h,
-                                  width: 71.5.w,
-                                  child: AnimationLimiter(
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: 2,
-                                      itemBuilder: (BuildContext context, int index) {
-                                        return AnimationConfiguration.staggeredList(
-                                          delay: const Duration(milliseconds: 200),
-                                          position: index,
-                                          duration: const Duration(milliseconds: 700),
-                                          child: ScaleAnimation(
-                                            scale: 0.7,
-                                            curve: Curves.easeOutBack,
-                                            child: FadeInAnimation(
-                                              child: Padding(
-                                                padding: EdgeInsets.all(0.25.w),
-                                                child: deskDashboardDecks2(
-                                                  deck4: Hero(
-                                                    flightShuttleBuilder: flightShuttleBuilder,
-                                                    tag: ButtonState().socialsHeroTag,
-                                                    child: SocialsDeck(),
-                                                  ),
-                                                  deck5: Hero(
-                                                    flightShuttleBuilder: flightShuttleBuilder,
-                                                    tag: ButtonState().newsHeroTag,
-                                                    child: NewsDeck(),
-                                                  ),
-                                                )[index],
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
+                              //
+                              // Row for Socials and News Decks
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    StaggerLoad(
+                                        layer: 2,
+                                        scale: 1.03,
+                                        scrollDirection: Axis.horizontal,
+                                        duration: 200,
+                                        delay: 75,
+                                        padding: EdgeInsets.all(0.25.w(context)),
+                                        widgets: [
+                                          SocialsDeck(),
+                                          NewsDeck(),
+                                        ]),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
-                          // ignore: prefer_const_constructors
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 0.25.w),
-                            child: Messages(),
+                        ),
+                        // // ignore: prefer_const_constructors
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 0.25.w(context)),
+                          child: StaggerLoad(
+                            widgets: [Messages()],
+                            duration: 200,
+                            delay: 75,
+                            layer: 3,
+                            scale: 1.03,
+                            scrollDirection: Axis.horizontal,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                  ),
 
-                    // ignore: prefer_const_constructors
-                  ],
-                ),
+                  // ignore: prefer_const_constructors
+                ],
+              ),
 
-                // Positioned.fill(
-                //   child: BackdropFilter(
-                //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                //       child:  SizedBox()),
-                // ),
-              ],
-            ),
+              // Positioned.fill(
+              //   child: BackdropFilter(
+              //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+              //       child:  SizedBox()),
+              // ),
+            ],
           ),
         ),
       ),
@@ -200,7 +180,6 @@ class _DesktopDashboardState extends State<DesktopDashboard> with AnimationMixin
 
   @override
   void dispose() {
-    // controller.dispose();
     super.dispose();
   }
 }

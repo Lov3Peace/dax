@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../../main.dart';
 import '../../../../../util/gradient_container.dart';
@@ -84,8 +84,8 @@ class _Pc3Section3State extends State<Pc3Section3> {
 
   Widget buildNotifications() {
     return Container(
-      height: 21.5.h,
-      width: 20.w,
+      height: 21.5.h(context),
+      width: 20.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 34, 38, 42),
         borderRadius: BorderRadius.circular(30),
@@ -101,14 +101,14 @@ class _Pc3Section3State extends State<Pc3Section3> {
             children: [
               Text(
                 'Notifications',
-                style: TextStyle(fontSize: 4.sp, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 4.sp(context), fontWeight: FontWeight.bold),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Messages',
-                    style: TextStyle(fontSize: 3.sp),
+                    style: TextStyle(fontSize: 3.sp(context)),
                   ),
                   ValueListenableBuilder<bool>(
                     valueListenable: messagesEnabled,
@@ -132,7 +132,7 @@ class _Pc3Section3State extends State<Pc3Section3> {
                 children: [
                   Text(
                     'Friend Requests',
-                    style: TextStyle(fontSize: 3.sp),
+                    style: TextStyle(fontSize: 3.sp(context)),
                   ),
                   ValueListenableBuilder<bool>(
                     valueListenable: friendRequestsEnabled,
@@ -156,7 +156,7 @@ class _Pc3Section3State extends State<Pc3Section3> {
                 children: [
                   Text(
                     'Transactions',
-                    style: TextStyle(fontSize: 3.sp),
+                    style: TextStyle(fontSize: 3.sp(context)),
                   ),
                   ValueListenableBuilder<bool>(
                     valueListenable: transactionsEnabled,
@@ -184,8 +184,8 @@ class _Pc3Section3State extends State<Pc3Section3> {
 
   Widget buildBilling() {
     return Container(
-      height: 21.5.h,
-      width: 20.w,
+      height: 21.5.h(context),
+      width: 20.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 34, 38, 42),
         borderRadius: BorderRadius.circular(30),
@@ -200,7 +200,7 @@ class _Pc3Section3State extends State<Pc3Section3> {
             children: [
               Text(
                 'Billing',
-                style: TextStyle(fontSize: 4.sp, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 4.sp(context), fontWeight: FontWeight.bold),
               ),
 
               // First Row: Card Number and Edit Button
@@ -212,7 +212,7 @@ class _Pc3Section3State extends State<Pc3Section3> {
                 children: [
                   Text(
                     'PayPal',
-                    style: TextStyle(fontSize: 3.sp),
+                    style: TextStyle(fontSize: 3.sp(context)),
                   ),
                   ValueListenableBuilder<bool>(
                     valueListenable: paypalEnabled,
@@ -266,7 +266,7 @@ class _Pc3Section3State extends State<Pc3Section3> {
             width: 15,
             neonGlow: red,
             text: 'Update',
-            textSize: 2.sp,
+            textSize: 2.sp(context),
             borderColor: Colors.transparent,
             borderRadius: 500,
           ),

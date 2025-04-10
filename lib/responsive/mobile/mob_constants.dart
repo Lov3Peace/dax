@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sizer/sizer.dart';
 import 'package:supercharged/supercharged.dart';
 import 'mobile_finance_page.dart';
 import 'mobile_news_page.dart';
@@ -93,14 +93,8 @@ class Deck extends StatelessWidget {
               top: 20,
               child: Column(
                 children: [
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: text),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: subText)
+                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: text),
+                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: subText)
                 ],
               ),
             ),
@@ -109,10 +103,7 @@ class Deck extends StatelessWidget {
               bottom: 0,
               child: Column(
                 children: [
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: image),
+                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: image),
                 ],
               ),
             ),
@@ -127,32 +118,22 @@ class Deck extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [gradient1, gradient2]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: neonGlow,
-                            blurRadius: 7,
-                            blurStyle: BlurStyle.solid)
-                      ],
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20))),
+                      boxShadow: [BoxShadow(color: neonGlow, blurRadius: 7, blurStyle: BlurStyle.solid)],
+                      borderRadius: const BorderRadius.all(Radius.circular(20))),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Text(
                       deckName,
-                      style: GoogleFonts.montserrat(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(
-                              color: shadowColor,
-                              blurRadius: 1,
-                            ),
-                            Shadow(
-                              color: shadowColor,
-                              blurRadius: 2,
-                            ),
-                          ]),
+                      style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                        Shadow(
+                          color: shadowColor,
+                          blurRadius: 1,
+                        ),
+                        Shadow(
+                          color: shadowColor,
+                          blurRadius: 2,
+                        ),
+                      ]),
                     ),
                   ),
                 ),
@@ -269,12 +250,7 @@ class ProfileBubble extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
-                    boxShadow: [
-                      BoxShadow(
-                          color: neonGlow,
-                          blurRadius: 20,
-                          blurStyle: BlurStyle.solid)
-                    ],
+                    boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -284,20 +260,16 @@ class ProfileBubble extends StatelessWidget {
                       Image.asset('images/crest5.png', width: 35),
                       Text(
                         deckName,
-                        style: GoogleFonts.montserrat(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: shadowColor,
-                                blurRadius: 1,
-                              ),
-                              Shadow(
-                                color: shadowColor,
-                                blurRadius: 2,
-                              ),
-                            ]),
+                        style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 1,
+                          ),
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 2,
+                          ),
+                        ]),
                       ),
                     ],
                   ),
@@ -375,31 +347,22 @@ class TitleBubble extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
-                    boxShadow: [
-                      BoxShadow(
-                          color: neonGlow,
-                          blurRadius: 20,
-                          blurStyle: BlurStyle.solid)
-                    ],
+                    boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
                     deckName,
-                    style: GoogleFonts.montserrat(
-                        fontSize: textSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 1,
-                          ),
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 2,
-                          ),
-                        ]),
+                    style: GoogleFonts.montserrat(fontSize: textSize, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                      Shadow(
+                        color: shadowColor,
+                        blurRadius: 1,
+                      ),
+                      Shadow(
+                        color: shadowColor,
+                        blurRadius: 2,
+                      ),
+                    ]),
                   ),
                 ),
               ),
@@ -472,8 +435,7 @@ class _DockButtonState extends State<DockButton> {
     // toggle between control instructions
     setState(() {
       control = Control.play;
-      currentColor =
-          (currentColor == activeColor) ? inactiveColor : activeColor;
+      currentColor = (currentColor == activeColor) ? inactiveColor : activeColor;
     });
   }
 
@@ -522,10 +484,8 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -547,10 +507,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
       },
       child: ScaleTransition(
         scale: scale,
-        child: AnimatedOpacity(
-            opacity: opacity.value,
-            duration: const Duration(milliseconds: 300),
-            child: projectDeck()),
+        child: AnimatedOpacity(opacity: opacity.value, duration: const Duration(milliseconds: 300), child: projectDeck()),
       ),
     );
   }
@@ -572,13 +529,11 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         textConstraint: 200,
         image: Image.asset(
           'images/proj placeholder.webp',
-          height: 20.h,
+          height: 20.h(context),
         ),
         text: Text(
           'Collaborate and innovate.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -800,10 +755,8 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -849,9 +802,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         textConstraint: 300,
         text: Text(
           'All of your socials in one place.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -1005,10 +956,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -1051,9 +1000,7 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         textConstraint: 150,
         text: Text(
           'Manage your money.',
-          style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-              fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -1207,10 +1154,8 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) {
-                  animation =
-                      CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -1253,9 +1198,7 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
       textConstraint: 150,
       text: Text(
         'Stay up to date.',
-        style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
-            fontWeight: FontWeight.w600),
+        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
       ),
     ));
   }
@@ -1381,15 +1324,12 @@ class LogOutButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 55),
       decoration: BoxDecoration(
           gradient: const LinearGradient(colors: [purp, red]),
-          boxShadow: const [
-            BoxShadow(color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
-          ],
+          boxShadow: const [BoxShadow(color: red, blurRadius: 20, blurStyle: BlurStyle.solid)],
           borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
       child: const Center(
         child: Text(
           'Log Out',
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
     );
@@ -1434,14 +1374,8 @@ class Stacks extends Deck {
               top: 20,
               child: Column(
                 children: [
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: text),
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: subText)
+                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: text),
+                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: subText)
                 ],
               ),
             ),
@@ -1450,10 +1384,7 @@ class Stacks extends Deck {
               bottom: 0,
               child: Column(
                 children: [
-                  Container(
-                      margin: const EdgeInsets.only(bottom: 5),
-                      width: textConstraint,
-                      child: image),
+                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: image),
                 ],
               ),
             ),
@@ -1468,32 +1399,22 @@ class Stacks extends Deck {
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [gradient1, gradient2]),
-                      boxShadow: [
-                        BoxShadow(
-                            color: neonGlow,
-                            blurRadius: 7,
-                            blurStyle: BlurStyle.solid)
-                      ],
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(20))),
+                      boxShadow: [BoxShadow(color: neonGlow, blurRadius: 7, blurStyle: BlurStyle.solid)],
+                      borderRadius: const BorderRadius.all(Radius.circular(20))),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Text(
                       deckName,
-                      style: GoogleFonts.montserrat(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          shadows: [
-                            Shadow(
-                              color: shadowColor,
-                              blurRadius: 1,
-                            ),
-                            Shadow(
-                              color: shadowColor,
-                              blurRadius: 2,
-                            ),
-                          ]),
+                      style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
+                        Shadow(
+                          color: shadowColor,
+                          blurRadius: 1,
+                        ),
+                        Shadow(
+                          color: shadowColor,
+                          blurRadius: 2,
+                        ),
+                      ]),
                     ),
                   ),
                 ),

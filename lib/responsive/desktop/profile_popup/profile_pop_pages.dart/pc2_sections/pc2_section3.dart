@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../../main.dart';
 import '../../../../../util/gradient_container.dart';
@@ -111,7 +111,7 @@ class _Pc2Section3State extends State<Pc2Section3> {
                     width: 20,
                     neonGlow: purp,
                     text: 'Delete Goals',
-                    textSize: 2.5.sp,
+                    textSize: 2.5.sp(context),
                     borderColor: const Color.fromARGB(0, 255, 255, 255),
                     borderRadius: 500,
                   ),
@@ -125,7 +125,7 @@ class _Pc2Section3State extends State<Pc2Section3> {
                     width: 20,
                     neonGlow: purp,
                     text: 'Close',
-                    textSize: 2.5.sp,
+                    textSize: 2.5.sp(context),
                     borderColor: const Color.fromARGB(0, 255, 255, 255),
                     borderRadius: 500,
                   ),
@@ -145,20 +145,24 @@ class _Pc2Section3State extends State<Pc2Section3> {
   @override
   Widget build(BuildContext context) {
     return CarouselContentsTemp(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          buildProjects(),
-          buildGoals(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            buildProjects(),
+            SizedBox(
+              height: 1.h(context),
+            ),
+            buildGoals(),
+          ],
+        ),
       ),
     );
   }
 
   buildProjects() {
     return Container(
-      height: 21.5.h,
-      width: 20.w,
+      height: 21.5.h(context),
+      width: 20.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 34, 38, 42),
         borderRadius: BorderRadius.circular(30),
@@ -167,13 +171,13 @@ class _Pc2Section3State extends State<Pc2Section3> {
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.all(1.5.h),
+          padding: EdgeInsets.all(1.5.h(context)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Projects',
-                style: TextStyle(fontSize: 5.sp, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -184,8 +188,8 @@ class _Pc2Section3State extends State<Pc2Section3> {
 
   buildGoals() {
     return Container(
-      height: 21.5.h,
-      width: 20.w,
+      height: 21.5.h(context),
+      width: 20.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 34, 38, 42),
         borderRadius: BorderRadius.circular(30),
@@ -194,13 +198,13 @@ class _Pc2Section3State extends State<Pc2Section3> {
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.all(1.5.h),
+          padding: EdgeInsets.all(1.5.h(context)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Goals',
-                style: TextStyle(fontSize: 5.sp, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
               ),
               TextField(
                 controller: shortTermController,
@@ -249,7 +253,7 @@ class _Pc2Section3State extends State<Pc2Section3> {
                         width: 20,
                         neonGlow: purp,
                         text: 'View Goals',
-                        textSize: 2.5.sp,
+                        textSize: 2.5.sp(context),
                         borderColor: Colors.transparent,
                         borderRadius: 500,
                       ),

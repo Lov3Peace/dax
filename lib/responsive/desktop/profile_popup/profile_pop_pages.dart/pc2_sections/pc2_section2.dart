@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_application_1/util/imports.dart';
 
 import '../../../../../main.dart';
 import '../../../../../util/gradient_container.dart';
@@ -19,7 +19,7 @@ class Pc2Section2 extends StatefulWidget {
 class _Pc2Section2State extends State<Pc2Section2> {
   List<File> uploadedFiles = [];
 
-  Future<void> _pickFiles() async {
+  Future<void> pickFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
     if (result != null) {
       setState(() {
@@ -28,7 +28,7 @@ class _Pc2Section2State extends State<Pc2Section2> {
     }
   }
 
-  void _removeFile(File file) {
+  void removeFile(File file) {
     setState(() {
       uploadedFiles.remove(file);
     });
@@ -46,19 +46,19 @@ class _Pc2Section2State extends State<Pc2Section2> {
         child: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
           child: Padding(
-            padding: EdgeInsets.all(2.h),
+            padding: EdgeInsets.all(2.h(context)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Showcase',
-                  style: TextStyle(fontSize: 5.sp, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 1.h),
+                SizedBox(height: 1.h(context)),
                 uploadedFiles.isEmpty
                     ? Text(
                         'Upload attachments like personal achievements, resume, transcript, or even photos...',
-                        style: TextStyle(fontSize: 2.5.sp),
+                        style: TextStyle(fontSize: 2.5.sp(context)),
                       )
                     : SizedBox(
                         height: 200,
@@ -69,16 +69,16 @@ class _Pc2Section2State extends State<Pc2Section2> {
                                 title: Text(file.path.split('/').last),
                                 trailing: IconButton(
                                   icon: const Icon(Icons.delete),
-                                  onPressed: () => _removeFile(file),
+                                  onPressed: () => removeFile(file),
                                 ),
                               );
                             }).toList(),
                           ),
                         ),
                       ),
-                SizedBox(height: 2.h),
+                SizedBox(height: 2.h(context)),
                 TactileButton(
-                  onTap: _pickFiles,
+                  onTap: pickFiles,
                   child: GradientContainer(
                     gradient1: red,
                     gradient2: purp,
@@ -86,7 +86,7 @@ class _Pc2Section2State extends State<Pc2Section2> {
                     width: 20,
                     neonGlow: purp,
                     text: 'Upload Files',
-                    textSize: 2.5.sp,
+                    textSize: 2.5.sp(context),
                     borderColor: const Color.fromARGB(0, 255, 255, 255),
                     borderRadius: 500,
                   ),

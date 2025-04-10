@@ -1,5 +1,6 @@
-import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_communies_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_faqs_button.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_news_button.dart';
@@ -59,11 +60,10 @@ class ButtonState extends ChangeNotifier {
   //Info Side Panel
   String _activeInfoButtonId = '';
   int _currentIndex = 0;
-  final CarouselController _carouselController = CarouselController();
+  final CarouselSliderController _CarouselSliderController = CarouselSliderController();
 
   String get activeInfoButtonId => _activeInfoButtonId;
   int get currentIndex => _currentIndex;
-  CarouselController get carouselController => _carouselController;
 
   void setActiveInfoButton(String infoButtonId) {
     _activeInfoButtonId = infoButtonId;
@@ -77,7 +77,7 @@ class ButtonState extends ChangeNotifier {
   }
 
   void goToSlide(int index) {
-    _carouselController.animateToPage(index);
+    _CarouselSliderController.animateToPage(index);
     setSlide(index);
   }
 

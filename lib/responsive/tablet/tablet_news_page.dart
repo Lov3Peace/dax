@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_constants.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -9,8 +10,7 @@ import '../../util/background.dart';
 import 'tablet_dock.dart';
 
 class TabNewsPage extends StatefulWidget {
-  const TabNewsPage(
-      {super.key, required Animation<double> transitionAnimation});
+  const TabNewsPage({super.key, required Animation<double> transitionAnimation});
 
   @override
   State<TabNewsPage> createState() => _TabNewsPageState();
@@ -36,16 +36,14 @@ class _TabNewsPageState extends State<TabNewsPage> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.userScrollDirection ==
-        ScrollDirection.reverse) {
+    if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
       setState(() {
         // Calculate the new opacity based on the scroll offset
         _showAppBar = 1.0 - (_scrollController.offset / 100.0);
         // Limit the opacity value between 0.0 and 1.0
         _showAppBar = _showAppBar.clamp(0.0, 1.0);
       });
-    } else if (_scrollController.position.userScrollDirection ==
-        ScrollDirection.forward) {
+    } else if (_scrollController.position.userScrollDirection == ScrollDirection.forward) {
       setState(() {
         _showAppBar = 1.0;
       });
@@ -64,8 +62,7 @@ class _TabNewsPageState extends State<TabNewsPage> {
           leadingWidth: screenWidth * 0.9,
           toolbarHeight: lerpDouble(0, 10, 8),
           flexibleSpace: Padding(
-            padding: EdgeInsets.fromLTRB(
-                screenWidth * .05, 30, screenWidth * .05, 0),
+            padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
             child: Opacity(
               opacity: _showAppBar,
               child: Row(
@@ -124,8 +121,7 @@ class _TabNewsPageState extends State<TabNewsPage> {
                           children: [
                             GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context).push(
-                                      MaterialPageRoute(builder: (context) {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                                     return const KeyboardsDeck();
                                   }));
                                 },

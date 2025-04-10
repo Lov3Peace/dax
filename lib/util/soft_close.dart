@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 
 class SoftClose extends Curve {
   final double count;

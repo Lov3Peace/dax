@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../../../util/gradient_container.dart';
 import '../../../../../../util/tactile_button.dart';
@@ -103,7 +103,7 @@ class _Pc3Section1State extends State<Pc3Section1> {
               children: [
                 Text(
                   'General',
-                  style: TextStyle(fontSize: 4.sp, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 4.sp(context), fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
                 buildInputField('Username', usernameController, updateUsername),
@@ -123,14 +123,14 @@ class _Pc3Section1State extends State<Pc3Section1> {
   }
 
   Widget buildSectionLable(String title) {
-    return Text(title, style: TextStyle(fontSize: 3.25.sp, color: Colors.white70));
+    return Text(title, style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white70));
   }
 
   Widget buildInputField(String label, TextEditingController controller, VoidCallback onUpdate) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 3.sp, color: Colors.white70)),
+        Text(label, style: TextStyle(fontSize: 3.sp(context), color: Colors.white70)),
         Row(
           children: [
             Expanded(
@@ -149,7 +149,7 @@ class _Pc3Section1State extends State<Pc3Section1> {
                 width: 15,
                 neonGlow: red,
                 text: 'Change',
-                textSize: 2.sp,
+                textSize: 2.sp(context),
                 borderColor: Colors.transparent,
                 borderRadius: 500,
               ),

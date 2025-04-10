@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_all_messages.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_butto
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../desk_decks.dart';
 
@@ -40,10 +40,10 @@ final friendsBucket = PageStorageBucket();
 //           startSlide.activateSlide(SlideType.friend);
 //         },
 //         label: Padding(
-//           padding: EdgeInsets.only(left: 0.5.w),
+//           padding: EdgeInsets.only(left: 0.5.w(context)),
 //           child: Text(
 //             'Connections',
-//             style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 2.sp), fontWeight: FontWeight.w400, color: Colors.white54),
+//             style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 2.sp(context)), fontWeight: FontWeight.w400, color: Colors.white54),
 //           ),
 //         ),
 //       ),
@@ -78,7 +78,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
     // Add more containers as needed
   ];
 
-  final CarouselController _carouselController = CarouselController();
+  final CarouselSliderController _CarouselSliderController = CarouselSliderController();
 
   bool isSelected = false;
   Color activeColor = tran;
@@ -93,15 +93,15 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.h,
-      width: 71.w,
+      height: 100.h(context),
+      width: 71.w(context),
       alignment: Alignment.center,
       child: Stack(
         alignment: Alignment.center,
         children: [
           SizedBox(
-            height: 77.h,
-            width: 71.w,
+            height: 77.h(context),
+            width: 71.w(context),
             // padding: const EdgeInsets.symmetric(vertical: 32),
             child: Material(
               shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -115,7 +115,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                       child: Container(
-                          // height: 85.h,
+                          // height: 85.h(context),
                           decoration: BoxDecoration(
                         border: Border.all(color: deckBorderColor),
                         borderRadius: BorderRadius.circular(24),
@@ -128,7 +128,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
-                          padding: EdgeInsets.only(left: 1.5.w, top: 1.h),
+                          padding: EdgeInsets.only(left: 1.5.w(context), top: 1.h(context)),
                           child: const Text(
                             "Connections",
                             style: TextStyle(
@@ -140,9 +140,9 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(
-                          1.5.w,
+                          1.5.w(context),
                           10,
-                          1.5.w,
+                          1.5.w(context),
                           10,
                         ),
                         child: TextFormField(
@@ -152,7 +152,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                             fillColor: const Color.fromARGB(70, 32, 32, 40),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(5.w),
+                                Radius.circular(5.w(context)),
                               ),
                               borderSide: BorderSide(color: deckBorderColor),
                             ),
@@ -169,9 +169,9 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
 
                       //Container housing the tab buttons
                       Padding(
-                        padding: EdgeInsets.only(left: 1.5.w, right: 1.5.w, bottom: 10),
+                        padding: EdgeInsets.only(left: 1.5.w(context), right: 1.5.w(context), bottom: 10),
                         child: Container(
-                          height: 6.5.h,
+                          height: 6.5.h(context),
                           width: double.infinity,
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(70, 32, 32, 40),
@@ -196,12 +196,12 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                   });
 
                                   int pageIndex = 0; // Change this to the page index
-                                  _carouselController.animateToPage(pageIndex);
+                                  _CarouselSliderController.animateToPage(pageIndex);
 
                                   // isSelected = false;
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(horizontal: 7.w(context), vertical: 1.h(context)),
                                   decoration: const BoxDecoration(
                                       gradient: LinearGradient(colors: [purp, red]),
                                       boxShadow: [BoxShadow(color: red, blurRadius: 10, blurStyle: BlurStyle.solid)],
@@ -221,12 +221,12 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                   });
 
                                   int pageIndex = 1; // Change this to the page index
-                                  _carouselController.animateToPage(pageIndex);
+                                  _CarouselSliderController.animateToPage(pageIndex);
 
                                   // isSelected = false;
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 4.5.w, vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(horizontal: 4.5.w(context), vertical: 1.h(context)),
                                   decoration: BoxDecoration(
                                       gradient: LinearGradient(colors: [Colors.grey.shade900, Colors.grey.shade800]),
                                       boxShadow: const [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
@@ -246,12 +246,12 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                                   });
 
                                   int pageIndex = 2; // Change this to the page index
-                                  _carouselController.animateToPage(pageIndex);
+                                  _CarouselSliderController.animateToPage(pageIndex);
 
                                   // isSelected = false;
                                 },
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 4.5.w, vertical: 1.h),
+                                  padding: EdgeInsets.symmetric(horizontal: 4.5.w(context), vertical: 1.h(context)),
                                   decoration: BoxDecoration(
                                       gradient: LinearGradient(colors: [Colors.grey.shade900, Colors.grey.shade800]),
                                       boxShadow: const [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
@@ -268,11 +268,10 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                       Expanded(
                         child: Container(
                           width: double.infinity,
-                          padding: EdgeInsets.only(left: 1.5.w, right: 1.5.w, bottom: 3.h),
+                          padding: EdgeInsets.only(left: 1.5.w(context), right: 1.5.w(context), bottom: 3.h(context)),
                           child: PageStorage(
                             bucket: friendsBucket,
                             child: CarouselSlider(
-                              carouselController: _carouselController,
                               options: CarouselOptions(
                                 scrollPhysics: const NeverScrollableScrollPhysics(),
                                 viewportFraction: 1,
@@ -342,8 +341,8 @@ class Indicators extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(
-                height: 2.h,
-                width: 3.w,
+                height: 2.h(context),
+                width: 3.w(context),
               ),
               Container(),
             ],

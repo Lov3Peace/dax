@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/Window%20Route/messages_window_route.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:sizer/sizer.dart';
 
 class MobMessagesWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
@@ -44,12 +44,10 @@ class _MobMessagesWindowPopupCard extends StatefulWidget {
   const _MobMessagesWindowPopupCard({Key? key}) : super(key: key);
 
   @override
-  State<_MobMessagesWindowPopupCard> createState() =>
-      _MobMessagesWindowPopupCardState();
+  State<_MobMessagesWindowPopupCard> createState() => _MobMessagesWindowPopupCardState();
 }
 
-class _MobMessagesWindowPopupCardState
-    extends State<_MobMessagesWindowPopupCard> {
+class _MobMessagesWindowPopupCardState extends State<_MobMessagesWindowPopupCard> {
   //List for People stories
   final List people = [
     "Tiffany",
@@ -66,7 +64,7 @@ class _MobMessagesWindowPopupCardState
     ChatMessages(),
     // Add more containers as needed
   ];
-  final CarouselController _carouselController = CarouselController();
+  final CarouselSliderController _CarouselSliderController = CarouselSliderController();
 
   bool isSelected = false;
   Color activeColor = tran;
@@ -79,13 +77,12 @@ class _MobMessagesWindowPopupCardState
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+            padding: EdgeInsets.only(bottom: 10.h(context), top: 4.h(context)),
             child: Center(
               child: Container(
-                height: 85.h,
-                width: 91.w,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                height: 85.h(context),
+                width: 91.w(context),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding: const EdgeInsets.symmetric(vertical: 32),
                 child: Hero(
                   tag: _heroMessagesWindow,
@@ -102,11 +99,9 @@ class _MobMessagesWindowPopupCardState
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
-                                height: 85.h,
+                                height: 85.h(context),
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color.fromARGB(
-                                          182, 31, 31, 31)),
+                                  border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
                           ),
@@ -117,7 +112,7 @@ class _MobMessagesWindowPopupCardState
                             children: [
                               //Stories
                               Padding(
-                                padding: EdgeInsets.only(right: 42.w, top: 1.h),
+                                padding: EdgeInsets.only(right: 42.w(context), top: 1.h(context)),
                                 child: const Text(
                                   "Messages",
                                   style: TextStyle(
@@ -127,11 +122,10 @@ class _MobMessagesWindowPopupCardState
                                 ),
                               ),
                               SizedBox(
-                                height: 10.5.h,
+                                height: 10.5.h(context),
                                 child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                    physics: const ScrollPhysics(
-                                        parent: BouncingScrollPhysics()),
+                                    physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
                                     itemCount: people.length,
                                     itemBuilder: (context, index) {
                                       return BubbleStories(text: people[index]);
@@ -142,12 +136,10 @@ class _MobMessagesWindowPopupCardState
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: 6.5.h,
+                                  height: 6.5.h(context),
                                   width: double.infinity,
                                   decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromRGBO(42, 41, 41, 0.631)
-                                            .withOpacity(0.98),
+                                    color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(40),
                                     ),
@@ -170,30 +162,18 @@ class _MobMessagesWindowPopupCardState
                                             }
                                           });
 
-                                          int pageIndex =
-                                              0; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
+                                          int pageIndex = 0; // Change this to the page index
+                                          _CarouselSliderController.animateToPage(pageIndex);
 
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 7.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 7.w(context), vertical: 1.h(context)),
                                           decoration: const BoxDecoration(
-                                              gradient: LinearGradient(
-                                                  colors: [purp, red]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: red,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("All",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                              gradient: LinearGradient(colors: [purp, red]),
+                                              boxShadow: [BoxShadow(color: red, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                          child: const Text("All", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
                                       //Group Button
@@ -207,32 +187,18 @@ class _MobMessagesWindowPopupCardState
                                             }
                                           });
 
-                                          int pageIndex =
-                                              1; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
+                                          int pageIndex = 1; // Change this to the page index
+                                          _CarouselSliderController.animateToPage(pageIndex);
 
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 6.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 6.w(context), vertical: 1.h(context)),
                                           decoration: const BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                Colors.black54,
-                                                Colors.black54
-                                              ]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: tran,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("Group",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                              gradient: LinearGradient(colors: [Colors.black54, Colors.black54]),
+                                              boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                          child: const Text("Group", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
                                       //Chat Button
@@ -246,32 +212,18 @@ class _MobMessagesWindowPopupCardState
                                             }
                                           });
 
-                                          int pageIndex =
-                                              2; // Change this to the page index
-                                          _carouselController
-                                              .animateToPage(pageIndex);
+                                          int pageIndex = 2; // Change this to the page index
+                                          _CarouselSliderController.animateToPage(pageIndex);
 
                                           // isSelected = false;
                                         },
                                         child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 6.w, vertical: 1.h),
+                                          padding: EdgeInsets.symmetric(horizontal: 6.w(context), vertical: 1.h(context)),
                                           decoration: const BoxDecoration(
-                                              gradient: LinearGradient(colors: [
-                                                Colors.black54,
-                                                Colors.black54
-                                              ]),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: tran,
-                                                    blurRadius: 3,
-                                                    blurStyle: BlurStyle.solid)
-                                              ],
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20))),
-                                          child: const Text("Chat",
-                                              style: TextStyle(
-                                                  color: Colors.white)),
+                                              gradient: LinearGradient(colors: [Colors.black54, Colors.black54]),
+                                              boxShadow: [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
+                                              borderRadius: BorderRadius.all(Radius.circular(20))),
+                                          child: const Text("Chat", style: TextStyle(color: Colors.white)),
                                         ),
                                       ),
                                     ],
@@ -279,17 +231,16 @@ class _MobMessagesWindowPopupCardState
                                 ),
                               ),
 
-                              SizedBox(height: 1.h),
+                              SizedBox(height: 1.h(context)),
                               //Container Housing Carousel slider
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  height: 50.h,
-                                  width: 100.w,
+                                  height: 50.h(context),
+                                  width: 100.w(context),
                                   decoration: BoxDecoration(
-                                    color: const Color.fromARGB(162, 27, 27, 27)
-                                        .withOpacity(0.85),
+                                    color: const Color.fromARGB(162, 27, 27, 27).withOpacity(0.85),
                                     borderRadius: const BorderRadius.all(
                                       Radius.circular(35),
                                     ),
@@ -298,9 +249,8 @@ class _MobMessagesWindowPopupCardState
                                   child: PageStorage(
                                     bucket: messageBucket,
                                     child: CarouselSlider(
-                                      carouselController: _carouselController,
                                       options: CarouselOptions(
-                                        height: 53.h,
+                                        height: 53.h(context),
                                         viewportFraction: 1,
                                         enlargeCenterPage: true,
                                         initialPage: _currentIndex,
@@ -310,8 +260,7 @@ class _MobMessagesWindowPopupCardState
                                           });
                                         },
                                       ),
-                                      items:
-                                          _carouselContainers.map((container) {
+                                      items: _carouselContainers.map((container) {
                                         return Builder(
                                           builder: (BuildContext context) {
                                             return container;
@@ -369,8 +318,8 @@ class ChatMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 53.h,
-      width: 100.w,
+      height: 53.h(context),
+      width: 100.w(context),
       decoration: BoxDecoration(
         color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
         borderRadius: const BorderRadius.all(
@@ -412,8 +361,8 @@ class GroupMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70.h,
-      width: 100.w,
+      height: 70.h(context),
+      width: 100.w(context),
       decoration: BoxDecoration(
         color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
         borderRadius: const BorderRadius.all(
@@ -455,8 +404,8 @@ class AllMessages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 53.h,
-      width: 100.w,
+      height: 53.h(context),
+      width: 100.w(context),
       decoration: BoxDecoration(
         color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.98),
         borderRadius: const BorderRadius.all(
@@ -531,14 +480,14 @@ class MyContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: .5.h,
-        vertical: .3.h,
+        horizontal: .5.h(context),
+        vertical: .3.h(context),
       ),
       child: GestureDetector(
         onTap: () {},
         child: Container(
-          height: 8.h,
-          width: 100.h,
+          height: 8.h(context),
+          width: 100.h(context),
           decoration: BoxDecoration(
             color: const Color.fromRGBO(42, 41, 41, 0.631).withOpacity(0.1),
             // border: Border.all(
@@ -550,12 +499,12 @@ class MyContainer extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 1.h),
+            padding: EdgeInsets.symmetric(horizontal: 1.h(context)),
             child: Stack(
               children: [
                 Container(
-                  width: 13.w,
-                  height: 13.h,
+                  width: 13.w(context),
+                  height: 13.h(context),
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(colors: [purp, red]),
                     shape: BoxShape.circle,
@@ -563,18 +512,18 @@ class MyContainer extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 12.5.w,
-                  height: 12.5.h,
+                  width: 12.5.w(context),
+                  height: 12.5.h(context),
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.grey,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 4.h, left: 4.5.h),
+                  padding: EdgeInsets.only(top: 4.h(context), left: 4.5.h(context)),
                   child: Container(
-                    width: 4.5.w,
-                    height: 4.5.h,
+                    width: 4.5.w(context),
+                    height: 4.5.h(context),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color.fromARGB(255, 118, 123, 118),

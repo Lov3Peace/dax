@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../../util/button_state.dart';
 
@@ -14,7 +14,7 @@ class SettingsSidePanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: tran,
-      width: 13.w,
+      width: 13.w(context),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +24,7 @@ class SettingsSidePanel extends StatelessWidget {
             'Table of Contents :',
             style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: 1.h(context)),
           const SettingsSidePanelButtons(),
         ],
       ),
@@ -43,23 +43,23 @@ class SettingsSidePanelButtons extends StatelessWidget {
       children: <Widget>[
         _buildButton(context, 'button1', 'General'),
         SizedBox(
-          height: 1.5.h,
+          height: 1.5.h(context),
         ),
         _buildButton(context, 'button2', 'Profile'),
         SizedBox(
-          height: 1.5.h,
+          height: 1.5.h(context),
         ),
         _buildButton(context, 'button3', 'Billing'),
         SizedBox(
-          height: 1.5.h,
+          height: 1.5.h(context),
         ),
         _buildButton(context, 'button4', 'Accessibility'),
         SizedBox(
-          height: 1.5.h,
+          height: 1.5.h(context),
         ),
         _buildButton(context, 'button5', 'Security'),
         SizedBox(
-          height: 1.5.h,
+          height: 1.5.h(context),
         ),
         _buildButton(context, 'button6', 'Privacy'),
       ],
@@ -92,13 +92,13 @@ class SettingsSidePanelButtons extends StatelessWidget {
             color: tran,
             borderRadius: const BorderRadius.all(Radius.circular(60)),
           ),
-          width: isActive ? 13.w : 9.w,
-          height: 4.h,
+          width: isActive ? 13.w(context) : 9.w(context),
+          height: 4.h(context),
           alignment: Alignment.center,
           child: Text(
             setButtonText,
             style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp),
+                textStyle: TextStyle(fontSize: 2.sp(context)),
                 fontWeight: FontWeight.w400,
                 color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54),
           ),

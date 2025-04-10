@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
 import '../mob_artboard_page.dart';
 import 'SignUp/signup_btn.dart';
@@ -13,8 +14,7 @@ class MobileLaunchPage extends StatefulWidget {
   State<MobileLaunchPage> createState() => _MobileLaunchPageState();
 }
 
-class _MobileLaunchPageState extends State<MobileLaunchPage>
-    with AnimationMixin {
+class _MobileLaunchPageState extends State<MobileLaunchPage> with AnimationMixin {
   bool isSignInDialogShown = false;
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();

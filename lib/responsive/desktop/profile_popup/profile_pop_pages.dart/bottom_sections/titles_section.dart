@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sizer/sizer.dart';
+
 import '../../../../../util/tactile_button.dart';
 
 class PCTitles extends StatefulWidget {
@@ -97,11 +98,11 @@ class _PCTitlesState extends State<PCTitles> {
               child: GradientContainer(
                 gradient1: Colors.blue,
                 gradient2: Colors.purple,
-                height: 1.h,
-                width: 1.5.w,
+                height: 1.h(context),
+                width: 1.5.w(context),
                 neonGlow: Colors.purple,
                 text: 'Confirm',
-                textSize: 2.5.sp,
+                textSize: 2.5.sp(context),
                 borderColor: Colors.transparent,
                 borderRadius: 500,
               ),
@@ -115,8 +116,8 @@ class _PCTitlesState extends State<PCTitles> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20.h,
-      width: 18.w,
+      height: 20.h(context),
+      width: 18.w(context),
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(30),
@@ -126,9 +127,9 @@ class _PCTitlesState extends State<PCTitles> {
           children: [
             Text(
               'Titles',
-              style: TextStyle(fontSize: 3.25.sp, color: Colors.white),
+              style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white),
             ),
-            SizedBox(height: 1.h),
+            SizedBox(height: 1.h(context)),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -139,11 +140,11 @@ class _PCTitlesState extends State<PCTitles> {
                           child: GradientContainer(
                             gradient1: Colors.blue,
                             gradient2: Colors.purple,
-                            height: 1.h,
-                            width: 1.5.w,
+                            height: 1.h(context),
+                            width: 1.5.w(context),
                             neonGlow: Colors.purple,
                             text: 'Choose Titles',
-                            textSize: 2.5.sp,
+                            textSize: 2.5.sp(context),
                             borderColor: Colors.transparent,
                             borderRadius: 500,
                           ),
@@ -156,7 +157,7 @@ class _PCTitlesState extends State<PCTitles> {
                           final gradientColors = buttonGradients[buttonId] ?? [Colors.grey, Colors.black];
 
                           return Padding(
-                            padding: EdgeInsets.symmetric(vertical: 0.5.h), // Adds spacing
+                            padding: EdgeInsets.symmetric(vertical: 0.5.h(context)), // Adds spacing
                             child: TactileButton(
                               onTap: showSelectionDialog, // Opens selection modal
                               child: GradientContainer(
@@ -166,7 +167,7 @@ class _PCTitlesState extends State<PCTitles> {
                                 width: 20,
                                 neonGlow: gradientColors[1],
                                 text: button["label"],
-                                textSize: 2.5.sp,
+                                textSize: 2.5.sp(context),
                                 borderColor: Colors.transparent,
                                 borderRadius: 500,
                               ),

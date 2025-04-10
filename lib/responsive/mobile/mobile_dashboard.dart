@@ -1,11 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../util/dashboard_decks.dart';
 import 'mob_artboard_page.dart';
 import 'mobile_dock.dart';
@@ -47,9 +47,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
         children: [
           const ArtBoardScreen(),
           Positioned.fill(
-            child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                child: const SizedBox()),
+            child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30), child: const SizedBox()),
           ),
           GestureDetector(
             onTap: () {
@@ -63,16 +61,12 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
             child: Column(
               children: [
                 SizedBox(
-                  height: 60.h,
+                  height: 60.h(context),
                   // color: red,
                   child: AnimationLimiter(
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
-                      padding: EdgeInsets.fromLTRB(
-                          MediaQuery.of(context).size.width * 0.035,
-                          90,
-                          MediaQuery.of(context).size.width * 0.035,
-                          0),
+                      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.035, 90, MediaQuery.of(context).size.width * 0.035, 0),
                       itemCount: 2,
                       itemBuilder: (BuildContext context, int index) {
                         return AnimationConfiguration.staggeredList(
@@ -95,7 +89,7 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                   ),
                 ),
                 SizedBox(
-                  height: 25.h,
+                  height: 25.h(context),
                   // color: red,
                   child: AnimationLimiter(
                     child: ListView.builder(
@@ -113,19 +107,11 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                             child: FadeInAnimation(
                               child: mobTabDashboardDecks2(
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                      MediaQuery.of(context).size.width * 0.035,
-                                      0,
-                                      0,
-                                      15),
+                                  padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.035, 0, 0, 15),
                                   child: const FinancesDeck(),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                      MediaQuery.of(context).size.width * 0.035,
-                                      0,
-                                      0,
-                                      15),
+                                  padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.035, 0, 0, 15),
                                   child: const NewsDeck(),
                                 ),
                               )[index],

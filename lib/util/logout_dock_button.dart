@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../responsive/responsive_layout.dart';
 import 'auth/onboarding_page.dart';
 import '../responsive/mobile/mob_constants.dart';
@@ -27,12 +27,12 @@ class LogoutWindowButton extends StatelessWidget {
         }));
       },
       child: Hero(
-        tag: _heroLogoutWindow,
+        tag: heroLogoutWindow,
         child: Material(
           color: tran,
           child: Icon(
             Ionicons.log_out_outline,
-            size: 5.sp,
+            size: 5.sp(context),
           ),
         ),
       ),
@@ -40,7 +40,7 @@ class LogoutWindowButton extends StatelessWidget {
   }
 }
 
-const String _heroLogoutWindow = 'Logout-window-hero';
+const String heroLogoutWindow = 'Logout-window-hero';
 
 class LogoutWindowPopupCard extends StatefulWidget {
   const LogoutWindowPopupCard({
@@ -143,15 +143,15 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10.h, top: 4.h),
+            padding: EdgeInsets.only(bottom: 10.h(context), top: 4.h(context)),
             child: Center(
               child: Container(
-                height: 35.h,
-                width: 50.w,
+                height: 35.h(context),
+                width: 50.w(context),
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
-                  tag: _heroLogoutWindow,
+                  tag: heroLogoutWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -165,7 +165,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                           child: BackdropFilter(
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
-                                height: 85.h,
+                                height: 85.h(context),
                                 decoration: BoxDecoration(
                                   border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
@@ -179,7 +179,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 2.h),
+                                  padding: EdgeInsets.only(bottom: 2.h(context)),
                                   child: const Text(
                                     "Logout",
                                     style: TextStyle(
@@ -198,7 +198,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: 2.h),
+                                  padding: EdgeInsets.only(top: 2.h(context)),
                                   child: TextButton(
                                     onPressed: signOut,
                                     child: const LogOutButton(),

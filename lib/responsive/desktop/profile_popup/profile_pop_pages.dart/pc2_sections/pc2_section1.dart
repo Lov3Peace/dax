@@ -1,11 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../../main.dart';
 
@@ -198,20 +196,24 @@ class Pc2Section1State extends State<Pc2Section1> {
   @override
   Widget build(BuildContext context) {
     return CarouselContentsTemp(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          buildBio(),
-          buildSkills(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            buildBio(),
+            SizedBox(
+              height: 1.h(context),
+            ),
+            buildSkills(),
+          ],
+        ),
       ),
     );
   }
 
   buildBio() {
     return Container(
-      height: 21.5.h,
-      width: 20.w,
+      height: 21.5.h(context),
+      width: 20.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 34, 38, 42),
         borderRadius: BorderRadius.circular(30),
@@ -220,17 +222,17 @@ class Pc2Section1State extends State<Pc2Section1> {
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.all(2.h),
+          padding: EdgeInsets.all(2.h(context)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Bio',
-                style: TextStyle(fontSize: 5.sp, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
               ),
               TextField(
                 controller: bioController,
-                style: TextStyle(fontSize: 2.5.sp, color: Colors.white),
+                style: TextStyle(fontSize: 2.5.sp(context), color: Colors.white),
                 decoration: const InputDecoration(
                   hintText: "Tell Us About Yourself!",
                   hintStyle: TextStyle(color: Colors.white54),
@@ -249,24 +251,24 @@ class Pc2Section1State extends State<Pc2Section1> {
 
   buildSkills() {
     return Container(
-      height: 21.5.h,
-      width: 20.w,
+      height: 21.5.h(context),
+      width: 20.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 34, 38, 42),
         borderRadius: BorderRadius.circular(30),
         border: Border.all(color: Colors.white70),
       ),
       child: Padding(
-        padding: EdgeInsets.all(2.h),
+        padding: EdgeInsets.all(2.h(context)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Skills',
-              style: TextStyle(fontSize: 5.sp, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
             ),
             SizedBox(
-              height: 1.h,
+              height: 1.h(context),
             ),
             TactileButton(
               //             onTap: showSkillsDialog,
@@ -277,7 +279,7 @@ class Pc2Section1State extends State<Pc2Section1> {
                 width: 20,
                 neonGlow: purp,
                 text: 'Select Skills',
-                textSize: 2.5.sp,
+                textSize: 2.5.sp(context),
                 borderColor: const Color.fromARGB(0, 255, 255, 255),
                 borderRadius: 500,
               ),

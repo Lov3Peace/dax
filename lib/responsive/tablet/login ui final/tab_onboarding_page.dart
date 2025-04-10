@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
-import 'package:sizer/sizer.dart';
 import '../tablet_artboard_page.dart';
 import 'SignIn/tab_signin_btn.dart';
 import 'SignUp/tab_signup_btn.dart';
@@ -12,8 +12,7 @@ class TabOnboardingScreen extends StatefulWidget {
   State<TabOnboardingScreen> createState() => _TabOnboardingScreenState();
 }
 
-class _TabOnboardingScreenState extends State<TabOnboardingScreen>
-    with AnimationMixin {
+class _TabOnboardingScreenState extends State<TabOnboardingScreen> with AnimationMixin {
   bool isSignInDialogShown = false;
 
   @override
@@ -36,7 +35,7 @@ class _TabOnboardingScreenState extends State<TabOnboardingScreen>
                       flex: 1,
                     ),
                     SizedBox(
-                      width: 90.h,
+                      width: 90.h(context),
                       child: const Column(
                         children: [
                           Padding(
@@ -95,8 +94,7 @@ class _TabOnboardingScreenState extends State<TabOnboardingScreen>
                         Row(
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
                               child: TabSignUpButton(
                                 onTap: signupbtn,
                               ),

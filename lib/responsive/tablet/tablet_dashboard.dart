@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_constants.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -46,9 +47,7 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
         children: [
           const TabArtBoardScreen(),
           Positioned.fill(
-            child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                child: const SizedBox()),
+            child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30), child: const SizedBox()),
           ),
           GestureDetector(
               onTap: () {
@@ -69,11 +68,8 @@ class _TabletDashboardState extends State<TabletDashboard> with AnimationMixin {
                         AnimationLimiter(
                           child: ListView.builder(
                             physics: const BouncingScrollPhysics(),
-                            padding: EdgeInsets.fromLTRB(
-                                MediaQuery.of(context).size.width * 0.035,
-                                90,
-                                MediaQuery.of(context).size.width * 0.035,
-                                15),
+                            padding:
+                                EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.035, 90, MediaQuery.of(context).size.width * 0.035, 15),
                             itemCount: 3,
                             itemBuilder: (BuildContext context, int index) {
                               return AnimationConfiguration.staggeredList(

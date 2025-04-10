@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_application_1/util/imports.dart';
 
 class PcCarouselTemplate extends StatelessWidget {
   final Widget child;
@@ -12,7 +12,7 @@ class PcCarouselTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 90.w,
+      width: 90.w(context),
       decoration: BoxDecoration(
         // border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
         borderRadius: BorderRadius.circular(24),

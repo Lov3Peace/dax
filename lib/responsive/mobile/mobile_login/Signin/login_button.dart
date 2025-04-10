@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../../mob_constants.dart';
 import 'signin_form.dart';
 
@@ -45,18 +45,12 @@ class _SignInButtonState extends State<SignInButton> {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
               gradient: const LinearGradient(colors: [purp, red]),
-              boxShadow: const [
-                BoxShadow(
-                    color: red, blurRadius: 10, blurStyle: BlurStyle.solid)
-              ],
+              boxShadow: const [BoxShadow(color: red, blurRadius: 10, blurStyle: BlurStyle.solid)],
               borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
           child: const Center(
             child: Text(
               'Sign In',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),
         ),
@@ -89,9 +83,8 @@ class _SignInButtonState extends State<SignInButton> {
           },
           pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 60.h,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(32)),
+              height: 60.h(context),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
               child: Material(
                 shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -106,8 +99,7 @@ class _SignInButtonState extends State<SignInButton> {
                         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
                         child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(
-                                color: const Color.fromARGB(182, 31, 31, 31)),
+                            border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                             borderRadius: BorderRadius.circular(24),
                           ),
                         ),

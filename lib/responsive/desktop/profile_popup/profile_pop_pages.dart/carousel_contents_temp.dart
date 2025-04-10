@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_application_1/util/imports.dart';
 
 class CarouselContentsTemp extends StatelessWidget {
   final Widget child;
@@ -9,8 +9,8 @@ class CarouselContentsTemp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 44.h,
-      width: 17.5.w,
+      height: 44.h(context),
+      width: 17.5.w(context),
       child: child,
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../../../../main.dart';
 import '../../../../../../util/gradient_container.dart';
@@ -71,7 +71,7 @@ class _Pc3Section2State extends State<Pc3Section2> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Security', style: TextStyle(fontSize: 4.sp, fontWeight: FontWeight.bold)),
+                Text('Security', style: TextStyle(fontSize: 4.sp(context), fontWeight: FontWeight.bold)),
                 const SizedBox(height: 20),
 
                 // Password Section
@@ -85,8 +85,8 @@ class _Pc3Section2State extends State<Pc3Section2> {
                       child: GradientContainer(
                         gradient1: red,
                         gradient2: purp,
-                        height: .5.h,
-                        width: .5.w,
+                        height: .5.h(context),
+                        width: .5.w(context),
                         neonGlow: purp,
                         text: 'Reset',
                         textSize: 12,
@@ -103,7 +103,7 @@ class _Pc3Section2State extends State<Pc3Section2> {
                   children: [
                     Text(
                       'MFA',
-                      style: TextStyle(fontSize: 3.sp),
+                      style: TextStyle(fontSize: 3.sp(context)),
                     ),
                     ValueListenableBuilder<bool>(
                       valueListenable: mfaEnabled,
@@ -136,7 +136,7 @@ class _Pc3Section2State extends State<Pc3Section2> {
                   children: [
                     Text(
                       'Private Account',
-                      style: TextStyle(fontSize: 3.sp),
+                      style: TextStyle(fontSize: 3.sp(context)),
                     ),
                     ValueListenableBuilder<bool>(
                       valueListenable: privateAccountEnabled,
@@ -164,7 +164,7 @@ class _Pc3Section2State extends State<Pc3Section2> {
   }
 
   Widget buildSectionTitle(String title) {
-    return Text(title, style: TextStyle(fontSize: 3.25.sp, color: Colors.white70));
+    return Text(title, style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white70));
   }
 
   Widget buildPasswordReset() {
@@ -184,7 +184,7 @@ class _Pc3Section2State extends State<Pc3Section2> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 3.sp, color: Colors.white70)),
+        Text(label, style: TextStyle(fontSize: 3.sp(context), color: Colors.white70)),
         Row(
           children: [
             Expanded(
@@ -203,7 +203,7 @@ class _Pc3Section2State extends State<Pc3Section2> {
                 width: 15,
                 neonGlow: red,
                 text: 'Update',
-                textSize: 2.sp,
+                textSize: 2.sp(context),
                 borderColor: Colors.transparent,
                 borderRadius: 500,
               ),
@@ -222,7 +222,7 @@ class _Pc3Section2State extends State<Pc3Section2> {
       width: 15,
       neonGlow: red,
       text: 'Update',
-      textSize: 2.sp,
+      textSize: 2.sp(context),
       borderColor: Colors.transparent,
       borderRadius: 500,
     );

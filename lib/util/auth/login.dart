@@ -1,12 +1,12 @@
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:flutter_application_1/util/auth/signup.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:sizer/sizer.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
 import 'forget_password_form.dart';
@@ -68,7 +68,7 @@ class _InitLoginButtonState extends State<InitLoginButton> {
           },
           pageBuilder: (context, _, __) => Center(
             child: Container(
-              height: 60.h,
+              height: 60.h(context),
               constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 500),
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
               padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
@@ -84,7 +84,7 @@ class _InitLoginButtonState extends State<InitLoginButton> {
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                         child: Container(
-                            height: 85.h,
+                            height: 85.h(context),
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: const Color.fromARGB(182, 59, 59, 59),
@@ -336,7 +336,7 @@ class _LoginFormState extends State<LoginForm> {
                             },
                             pageBuilder: (context, _, __) => Center(
                               child: Container(
-                                height: 60.h,
+                                height: 60.h(context),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
                                 padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                                 child: Material(
@@ -351,7 +351,7 @@ class _LoginFormState extends State<LoginForm> {
                                         child: BackdropFilter(
                                           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                                           child: Container(
-                                              height: 85.h,
+                                              height: 85.h(context),
                                               decoration: BoxDecoration(
                                                 border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                                 borderRadius: BorderRadius.circular(24),

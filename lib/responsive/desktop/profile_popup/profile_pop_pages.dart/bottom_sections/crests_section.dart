@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_application_1/util/imports.dart';
 
 class PCCrests extends StatefulWidget {
   PCCrests({super.key});
@@ -17,8 +17,8 @@ class PCCrestsState extends State<PCCrests> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20.h,
-      width: 18.w,
+      height: 20.h(context),
+      width: 18.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(0, 34, 38, 42),
         borderRadius: BorderRadius.circular(30),
@@ -29,29 +29,32 @@ class PCCrestsState extends State<PCCrests> {
           children: [
             Text(
               'Crests',
-              style: TextStyle(fontSize: 3.25.sp, color: Colors.white),
+              style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white),
             ),
             SizedBox(
-              height: 3.h,
+              height: 3.h(context),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: crestData.map((crest) {
-                return Column(
-                  children: [
-                    Image.asset(
-                      crest["image"]!,
-                      height: 9.h,
-                      width: 5.5.w,
-                      fit: BoxFit.contain,
-                    ),
-                    Text(
-                      crest["label"]!,
-                      style: TextStyle(fontSize: 2.5.sp, color: Colors.white),
-                    ),
-                  ],
-                );
-              }).toList(),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: crestData.map((crest) {
+                  return Column(
+                    children: [
+                      Image.asset(
+                        crest["image"]!,
+                        height: 9.h(context),
+                        width: 5.5.w(context),
+                        fit: BoxFit.contain,
+                      ),
+                      Text(
+                        crest["label"]!,
+                        style: TextStyle(fontSize: 2.5.sp(context), color: Colors.white),
+                      ),
+                    ],
+                  );
+                }).toList(),
+              ),
             ),
           ],
         ),

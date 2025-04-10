@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'package:flutter_application_1/util/imports.dart';
 
 class PCProjects extends StatefulWidget {
   PCProjects({super.key});
 
   @override
-  State<PCProjects> createState() => _PCProjectsState();
+  State<PCProjects> createState() => PCProjectsState();
 }
 
-class _PCProjectsState extends State<PCProjects> {
+class PCProjectsState extends State<PCProjects> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20.h,
-      width: 18.w,
+      height: 20.h(context),
+      width: 18.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(0, 34, 38, 42),
         borderRadius: BorderRadius.circular(30),
@@ -24,7 +24,7 @@ class _PCProjectsState extends State<PCProjects> {
         children: [
           Text(
             'Projects',
-            style: TextStyle(fontSize: 3.25.sp, color: Colors.white),
+            style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white),
           ),
         ],
       ),
@@ -36,15 +36,15 @@ class PCTeams extends StatefulWidget {
   PCTeams({super.key});
 
   @override
-  State<PCTeams> createState() => _PCTeamsState();
+  State<PCTeams> createState() => PCTeamsState();
 }
 
-class _PCTeamsState extends State<PCTeams> {
+class PCTeamsState extends State<PCTeams> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20.h,
-      width: 18.w,
+      height: 20.h(context),
+      width: 18.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(0, 34, 38, 42),
         borderRadius: BorderRadius.circular(30),
@@ -55,7 +55,7 @@ class _PCTeamsState extends State<PCTeams> {
         children: [
           Text(
             'Teams',
-            style: TextStyle(fontSize: 3.25.sp, color: Colors.white),
+            style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white),
           ),
         ],
       ),

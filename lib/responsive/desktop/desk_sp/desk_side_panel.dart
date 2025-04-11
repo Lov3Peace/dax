@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
+
 import 'package:flutter_application_1/responsive/desktop/desk_sp/sp_button_template.dart';
 import 'package:flutter_application_1/util/gradient_container.dart';
 import 'package:flutter_application_1/util/logout_dock_button.dart';
@@ -16,6 +16,7 @@ import 'desk_dock_buttons/desk_home_button.dart';
 import 'desk_dock_buttons/help/desk_help_popup.dart';
 import 'desk_dock_buttons/info/desk_info_popup.dart';
 import 'desk_dock_buttons/settings/desk_settings_popup.dart.dart';
+import 'desk_dock_buttons/wallet/desk_wallet_popup.dart';
 
 class DesktopSidePanel extends StatefulWidget {
   DesktopSidePanel({

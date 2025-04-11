@@ -5,7 +5,6 @@ import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart'
 
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/desk_wallet_popup/desk_wallet_popup.dart.dart';
 import 'package:flutter_application_1/util/soft_close.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 

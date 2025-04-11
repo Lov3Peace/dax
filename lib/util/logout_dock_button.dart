@@ -27,7 +27,7 @@ class LogoutWindowButton extends StatelessWidget {
         }));
       },
       child: Hero(
-        tag: _heroLogoutWindow,
+        tag: heroLogoutWindow,
         child: Material(
           color: tran,
           child: Icon(
@@ -40,7 +40,7 @@ class LogoutWindowButton extends StatelessWidget {
   }
 }
 
-const String _heroLogoutWindow = 'Logout-window-hero';
+const String heroLogoutWindow = 'Logout-window-hero';
 
 class LogoutWindowPopupCard extends StatefulWidget {
   const LogoutWindowPopupCard({
@@ -151,7 +151,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
                 padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
-                  tag: _heroLogoutWindow,
+                  tag: heroLogoutWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),

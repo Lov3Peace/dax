@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
-import '../../../main.dart';
 import '../../../util/auth/login.dart';
-import '../../../util/button_state.dart';
 import '../../../util/tactile_button.dart';
-import '../desk_constants.dart';
 import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 
@@ -22,12 +17,14 @@ class ProfileCard extends StatelessWidget {
             PageRouteBuilder(
               opaque: false,
               barrierDismissible: true,
+              barrierLabel: 'Dimiss',
+              transitionDuration: Duration(milliseconds: 300),
               barrierColor: Colors.black54, // Dims the background
               pageBuilder: (_, __, ___) => Scaffold(
                 backgroundColor: Colors.transparent,
                 body: Center(
                   child: Hero(
-                    tag: ButtonState().profileHeroTag,
+                    tag: 'profileHeroTag',
                     flightShuttleBuilder: flightShuttleBuilder,
                     child: ProfilePopup(),
                   ),

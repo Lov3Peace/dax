@@ -14,18 +14,20 @@ class PC1 extends StatelessWidget {
         border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
         borderRadius: BorderRadius.circular(24),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Image.asset(
-            "images/creator.png",
-            height: 38.h(context),
-          ),
-          Text(
-            "Creator",
-            style: TextStyle(color: white, fontSize: 5.sp(context), fontWeight: FontWeight.bold),
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset(
+              "images/creator.png",
+              height: 38.h(context),
+            ),
+            Text(
+              "Creator",
+              style: TextStyle(color: white, fontSize: 5.sp(context), fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
     );
   }

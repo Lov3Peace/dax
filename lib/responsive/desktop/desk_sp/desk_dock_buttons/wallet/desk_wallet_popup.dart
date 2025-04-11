@@ -1,11 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/button_state.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-//import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../../../util/gradient_container.dart';
 import '../../../../../util/tactile_button.dart';

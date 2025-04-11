@@ -109,7 +109,13 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                                   leftPad: 4.sp(context),
                                                 ),
                                               ),
-                                              Expanded(child: ProfileCard()),
+                                              Expanded(
+                                                child: Hero(
+                                                  tag: 'profileHeroTag',
+                                                  flightShuttleBuilder: flightShuttleBuilder,
+                                                  child: ProfileCard(),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                           ProjectsDeck(),

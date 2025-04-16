@@ -1,3 +1,5 @@
+// THIS WIDGET MUST ALWAYS BE WRAPPED IN AN EXPANDED WIDGET
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/util/imports.dart';
@@ -37,8 +39,7 @@ class LargeStaggerLoad extends StatelessWidget {
           // column, and ((this listview's index * 2) + 1) for the second column (i think
           // this might scale with the amount of columns; like for 3 columns it would be
           // (this listview's index * 3) but im not sure yet; will test)
-          widgets:
-              (index * 2) + 1 >= widgets.length ? [widgets[index * 2]] : [widgets[index * 2], widgets[(index * 2) + 1]],
+          widgets: (index * 2) + 1 >= widgets.length ? [widgets[index * 2]] : [widgets[index * 2], widgets[(index * 2) + 1]],
           scrollDirection: Axis.horizontal,
           delay: index <= 1 ? ((index + 1).abs() * 100) : 200, // experimenting with this
           scale: 1.02,

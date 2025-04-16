@@ -12,11 +12,11 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 import 'package:simple_animations/simple_animations.dart';
-import '../../../pages/keyboards_deck.dart';
-import '../../../util/button_state.dart';
+import '../../../../pages/keyboards_deck.dart';
+import '../../../../util/button_state.dart';
 
-import '../dashboard/title_bubble.dart';
-import '../desk_decks.dart';
+import '../../dashboard/title_bubble.dart';
+import '../../desk_decks.dart';
 
 class DeskHeroProjectsPage extends StatefulWidget {
   const DeskHeroProjectsPage({Key? key}) : super(key: key);

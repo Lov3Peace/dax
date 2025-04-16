@@ -112,6 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                           right: 0.75.w(context),
                         ),
                         child: TextField(
+                          style: TextStyle(fontSize: 3.sp(context)),
                           controller: _usernameController,
                           decoration: InputDecoration(
                             enabledBorder: UnderlineInputBorder(
@@ -144,6 +145,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                           right: 0.75.w(context),
                         ),
                         child: TextField(
+                          style: TextStyle(fontSize: 3.sp(context)),
                           controller: _passwordController,
                           onSubmitted: (value) => login(),
                           obscureText: true,

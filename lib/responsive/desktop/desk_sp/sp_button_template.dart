@@ -5,7 +5,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/desk_hero_project_page.dart';
+import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/projects/desk_hero_project_page.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

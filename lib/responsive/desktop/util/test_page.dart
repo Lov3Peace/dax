@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/util/responsive_shortcuts.dart';
+import 'package:flutter_application_1/responsive/desktop/util/responsive_shorthand.dart';
 
 // import 'package:size_setter/size_setter.dart';
 //

@@ -7,7 +7,7 @@ import '../../../util/tactile_button.dart';
 import '../desk_decks.dart';
 import 'package:rive/rive.dart' as r;
 
-import '../hero_deck_pages/desk_hero_project_page.dart';
+import '../hero_deck_pages/projects/desk_hero_project_page.dart';
 
 class ProjectsDeck extends StatefulWidget {
   const ProjectsDeck({Key? key}) : super(key: key);

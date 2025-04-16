@@ -1,9 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/error_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
+import 'package:flutter_application_1/util/test_container.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +14,7 @@ import 'package:simple_animations/simple_animations.dart';
 import '../../../main.dart';
 import '../../../pages/keyboards_deck.dart';
 import '../../../util/button_state.dart';
+import '../../../util/test_list.dart';
 import '../../mobile/mob_artboard_page.dart';
 
 import '../dashboard/title_bubble.dart';
@@ -21,7 +25,9 @@ import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
 import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
 
 import '../desk_sp/desk_side_panel.dart';
+import '../large_stagger_load.dart';
 import '../messages.dart';
+import '../util/web_ui_template.dart';
 
 class DeskHeroCommunitiesPage extends StatefulWidget {
   const DeskHeroCommunitiesPage({Key? key}) : super(key: key);
@@ -47,85 +53,65 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
   Widget build(BuildContext context) {
     return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        body: SingleChildScrollView(
-          child: Container(
-            height: 100.h(context),
-            width: 100.w(context),
-            constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
-            child: Stack(
-              children: [
-                const ArtBoardScreen(),
-                GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    children: [
-                      DesktopSidePanel(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 12.5.w(context),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  //
-                                  // Title of Screen
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 23.6.w(context)),
-                                    child: TitleBubble(
-                                      deckHeight: 5.5.h(context),
-                                      deckName: 'Community',
-                                      deckWidth: 17.25.w(context),
-                                      textSize: 3.sp(context),
-                                      leftPad: 30,
-                                    ),
-                                  ),
-                                  //
-                                  //Houses Decks Buttons
-                                  Container(
-                                    color: tran,
-                                    child: const Column(
-                                      children: [
-                                        CommunityButtonHolder(),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                color: tran,
-                                child: Column(
-                                  children: [
-                                    Hero(
-                                      tag: ButtonState().communityHeroTag,
-                                      flightShuttleBuilder: flightShuttleBuilder,
-                                      child: const DeskCommunityCont(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+          extendBodyBehindAppBar: true,
+          extendBody: true,
+          body: WebUiTemplate(
+            //Column for Title, Dock Buttons, and Content
+            child: Container(
+              height: 90.h(context),
+              width: 71.w(context),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 1.sp(context)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        //
+                        // Title of Screen
+                        TitleBubble(
+                          deckHeight: 6.5.h(context),
+                          deckName: 'Projects',
+                          deckWidth: 17.25.w(context),
+                          textSize: 3.sp(context),
+                          leftPad: 30,
+                        ),
 
-                          // ignore: prefer_const_constructors
-                          Messages(),
-                        ],
-                      ),
-                    ],
+                        //
+                        //Houses Deck Buttons
+                        Container(
+                          color: tran,
+                          child: const Column(
+                            children: [ProjectsBubbleDock()],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection("Community Posts").orderBy("Timestamp", descending: false).snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Expanded(
+                              child: LargeStaggerLoad(widgets: snapshot.data!.docs, childWidth: 40.w(context), childHeight: 40.h(context)));
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text('${snapshot.error}'));
+                        }
+                        return Container();
+                      },
+                    ),
+                  ),
+                  // Expanded(
+                  //   child: StaggerLoad(duration: 200, widgets: test_big_list, scrollDirection: Axis.vertical, delay: 20, scale: 1.03, layer: 1),
+                  // ),
+                ],
+              ),
             ),
-          ),
-        ),
-      ),
+          )),
     );
   }
 

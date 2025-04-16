@@ -244,6 +244,7 @@ class _LoginFormState extends State<LoginForm> {
                 right: 10,
               ),
               child: TextField(
+                style: TextStyle(fontSize: 3.sp(context)),
                 controller: _usernameController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -274,6 +275,7 @@ class _LoginFormState extends State<LoginForm> {
                 right: 15,
               ),
               child: TextField(
+                style: TextStyle(fontSize: 3.sp(context)),
                 controller: _passwordController,
                 onSubmitted: (value) => login(),
                 obscureText: false,

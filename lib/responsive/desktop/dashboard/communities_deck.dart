@@ -10,7 +10,7 @@ import '../../tablet/tablet_finance_page.dart';
 import '../desk_constants.dart';
 import '../desk_decks.dart';
 import '../hero_deck_pages/desk_hero_communities_page.dart';
-import '../hero_deck_pages/desk_hero_project_page.dart';
+import '../hero_deck_pages/projects/desk_hero_project_page.dart';
 
 class CommunitiesDeck extends StatefulWidget {
   const CommunitiesDeck({

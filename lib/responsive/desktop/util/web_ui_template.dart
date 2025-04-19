@@ -48,8 +48,7 @@ class WebUiTemplate extends StatelessWidget {
                   Container(
                     height: 90.h(context),
                     // width: 71.5.w(context),
-                    constraints:
-                        100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                    constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                     //
                     // *** Content goes here ***
                     child: Padding(
@@ -61,8 +60,7 @@ class WebUiTemplate extends StatelessWidget {
                   Container(
                     height: 90.h(context),
                     // width: 71.5.w(context),
-                    constraints:
-                        100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                    constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                     child: Padding(
                       padding: EdgeInsets.all(0.5.w(context)),
                       child: Messages(),

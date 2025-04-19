@@ -1,34 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/communities_post.dart';
-import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-
-import 'package:simple_animations/simple_animations.dart';
-
+import '../../../../main.dart';
 import '../../dashboard/title_bubble.dart';
 import '../../desk_decks.dart';
+import '../../util/web_ui_template.dart';
+import 'communities_post.dart';
 
-class DeskHeroProjectsPage extends StatefulWidget {
-  const DeskHeroProjectsPage({Key? key}) : super(key: key);
+class DeskHeroCommunitiesPage extends StatefulWidget {
+  const DeskHeroCommunitiesPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskHeroProjectsPage> createState() => _DeskHeroProjectsPageState();
+  State<DeskHeroCommunitiesPage> createState() => _DeskHeroCommunitiesPageState();
 }
 
-class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with AnimationMixin {
+class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
   //globals
-
-  //final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,36 +27,39 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
             height: 90.h(context),
             width: 71.w(context),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 1.sp(context)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          //
-                          // Title of Screen
-                          TitleBubble(
-                            deckHeight: 6.5.h(context),
-                            deckName: 'Projects',
-                            deckWidth: 17.25.w(context),
-                            textSize: 3.sp(context),
-                            leftPad: 30,
-                          ),
-
-                          //
-                          //Houses Deck Buttons
-                          Container(
-                            color: tran,
-                            child: const Column(
-                              children: [ProjectsBubbleDock()],
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 1.sp(context)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            //
+                            // Title of Screen
+                            TitleBubble(
+                              deckHeight: 6.5.h(context),
+                              deckName: 'Communities',
+                              deckWidth: 17.25.w(context),
+                              textSize: 4.sp(context),
+                              leftPad: 20,
                             ),
-                          ),
-                        ],
+
+                            //
+                            //Houses Deck Buttons
+                            //
+                            Container(
+                              color: tran,
+                              child: const Column(
+                                children: [ProjectsBubbleDock()],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -103,24 +93,23 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
         ));
   }
 
-  @override
-  void dispose() {
-    // controller.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // controller.dispose();
+  //   super.dispose();
+  // }
 }
 
-class ProjectsBubbleDock extends StatelessWidget {
-  const ProjectsBubbleDock({super.key});
+class CommunityButtonHolder extends StatelessWidget {
+  const CommunityButtonHolder({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 6.5.h(context),
       width: 30.w(context),
-      constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 110) : BoxConstraints(minHeight: 55),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5.w(context)),
+        borderRadius: BorderRadius.circular(1.5.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),
         border: Border.all(color: deckBorderColor),
       ),
@@ -128,8 +117,8 @@ class ProjectsBubbleDock extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SocialsButton(),
+          ProjectsButton(),
           NewsButton(),
-          CommunityButton(),
         ],
       ),
     );

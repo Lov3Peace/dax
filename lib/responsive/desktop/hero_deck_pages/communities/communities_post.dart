@@ -13,7 +13,6 @@ class CommunitiesPost extends StatefulWidget {
     required this.content,
     required this.timestamp,
     this.height,
-    this.width,
     required this.gradient1,
     required this.gradient2,
     required this.neonGlow,
@@ -27,7 +26,6 @@ class CommunitiesPost extends StatefulWidget {
   final String content;
   final String timestamp;
   final double? height;
-  final double? width;
   final Image? image;
   final double? textConstraint;
   final Color gradient1;
@@ -52,15 +50,15 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
           Color.fromARGB(240, 19, 19, 19),
           Color.fromARGB(194, 33, 33, 33),
         ], transform: GradientRotation(180)),
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(1.w(context)),
         border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
       ),
       constraints: const BoxConstraints(),
       // height: 2 * textBoxHeight,
-      width: 40.w(context),
       child: Padding(
         padding: EdgeInsets.all(1.5.w(context)),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,7 +131,7 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
                       onPressed: liked,
                       icon: Icon(
                         Ionicons.heart,
-                        color: isLiked ? red : white,
+                        color: isLiked ? orange : white,
                       ),
                     ),
                     const IconButton(

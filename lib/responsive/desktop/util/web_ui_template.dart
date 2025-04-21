@@ -46,7 +46,7 @@ class WebUiTemplate extends StatelessWidget {
                 children: [
                   DesktopSidePanel(),
                   Container(
-                    height: 90.h(context),
+                    height: 100.h(context),
                     // width: 71.5.w(context),
                     constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                     //

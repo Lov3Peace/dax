@@ -73,7 +73,6 @@ class ProjectCategory extends StatelessWidget {
                 )
               ],
             ),
-            TextField(),
             //
             // Category Label
             //

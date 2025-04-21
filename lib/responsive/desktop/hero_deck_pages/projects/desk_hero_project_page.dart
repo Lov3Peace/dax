@@ -2,14 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/communities_post.dart';
+import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/communities_post_list.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
 
 import 'package:simple_animations/simple_animations.dart';
 
+import '../../../../util/test_list.dart';
 import '../../dashboard/title_bubble.dart';
 import '../../desk_decks.dart';
+import '../../large_stagger_load.dart';
 
 class DeskHeroProjectsPage extends StatefulWidget {
   const DeskHeroProjectsPage({Key? key}) : super(key: key);
@@ -74,29 +77,29 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                     ),
                   ],
                 ),
-                // Expanded(
-                //   child: LargeStaggerLoad(
-                //     widgets: test_big_list,
-                //     childHeight: 50.h(context),
-                //     childWidth: 35.w(context),
-                //     padding: EdgeInsets.all(0.5.w(context)),
-                //     physics: const NeverScrollableScrollPhysics(),
-                //   ),
-                // ),
-                CommunitiesPost(
-                  postTitle: Text(
-                    '[Post Title]',
-                    style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.w700),
+                Expanded(
+                  child: LargeStaggerLoad(
+                    widgets: test_big_list,
+                    childHeight: 50.h(context),
+                    childWidth: 35.w(context),
+                    padding: EdgeInsets.all(0.5.w(context)),
+                    physics: const NeverScrollableScrollPhysics(),
                   ),
-                  content: '[Content]',
-                  user: '[User]',
-                  timestamp: 'timestamp',
-                  category: '[Category]',
-                  gradient1: red,
-                  gradient2: pink,
-                  neonGlow: tran,
-                  shadowColor: white,
                 ),
+                // CommunitiesPost(
+                //   postTitle: Text(
+                //     '[Post Title]',
+                //     style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.w700),
+                //   ),
+                //   content: '[Content]',
+                //   user: '[User]',
+                //   timestamp: 'timestamp',
+                //   category: '[Category]',
+                //   gradient1: red,
+                //   gradient2: pink,
+                //   neonGlow: tran,
+                //   shadowColor: white,
+                // ),
               ],
             ),
           ),

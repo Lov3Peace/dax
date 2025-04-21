@@ -11,20 +11,21 @@ class LargeStaggerLoad extends StatelessWidget {
   const LargeStaggerLoad({
     super.key,
     required this.widgets,
-    required this.childWidth,
-    required this.childHeight,
+    this.childWidth,
+    this.childHeight,
     this.padding,
     this.physics,
   });
 
   final List widgets;
-  final double childWidth;
-  final double childHeight;
+  final double? childWidth;
+  final double? childHeight;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
 
   @override
   Widget build(BuildContext context) {
+    // print(Scrollable.of(context).position.pixels);
     return ListView.builder(
       itemCount: ((widgets.length / 2)).ceil(),
       itemBuilder: (context, index) => Container(
@@ -41,7 +42,9 @@ class LargeStaggerLoad extends StatelessWidget {
           // (this listview's index * 3) but im not sure yet; will test)
           widgets: (index * 2) + 1 >= widgets.length ? [widgets[index * 2]] : [widgets[index * 2], widgets[(index * 2) + 1]],
           scrollDirection: Axis.horizontal,
-          delay: index <= 1 ? ((index + 1).abs() * 100) : 200, // experimenting with this
+          delay: Scrollable.of(context).position.pixels <= 10
+              ? index * 50
+              : (Scrollable.of(context).position.pixels.abs().ceil() - (index * 5)), // experimenting with this
           scale: 1.02,
           layer: 1,
           padding: padding,

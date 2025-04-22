@@ -2,21 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../../../main.dart';
-import '../../../pages/keyboards_deck.dart';
 import '../../../util/button_state.dart';
 import '../../../util/soft_close.dart';
-import '../../mobile/mob_artboard_page.dart';
-
-import '../dashboard/communities_deck.dart';
+import '../../../util/test_list.dart';
 import '../dashboard/title_bubble.dart';
 import '../desk_decks.dart';
-import '../messages.dart';
+import '../large_stagger_load.dart';
+import '../util/web_ui_template.dart';
 
 class DeskCommunityPage extends StatefulWidget {
   const DeskCommunityPage({Key? key}) : super(key: key);
@@ -46,92 +40,57 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
   Widget build(BuildContext context) {
     return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        body: SingleChildScrollView(
-          child: Container(
-            height: 100.h(context),
-            width: 100.w(context),
-            constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
-            child: Stack(
-              children: [
-                const ArtBoardScreen(),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      controller.play();
-                    });
-                    Future.delayed(const Duration(milliseconds: 300)).then((_) {
-                      controller.playReverse();
-                    });
-                  },
-                  child: Row(
+          extendBodyBehindAppBar: true,
+          extendBody: true,
+          body: WebUiTemplate(
+            //Column for Title, Dock Buttons, and Content
+            child: Container(
+              height: 80.h(context),
+              width: 71.w(context),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      DesktopSidePanel(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 12.5.w(context),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  //
-                                  // Title of Screen
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 23.6.w(context)),
-                                    child: TitleBubble(
-                                      deckHeight: 5.5.h(context),
-                                      deckName: 'Community',
-                                      deckWidth: 17.25.w(context),
-                                      textSize: 3.sp(context),
-                                      leftPad: 30,
-                                    ),
-                                  ),
-                                  //
-                                  //Houses Decks Buttons
-                                  Container(
-                                    color: tran,
-                                    child: const Column(
-                                      children: [
-                                        CommunityButtonHolder(),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                color: tran,
-                                child: Column(
-                                  children: [
-                                    Hero(
-                                      tag: ButtonState().communityHeroTag,
-                                      flightShuttleBuilder: flightShuttleBuilder,
-                                      child: const DeskCommunityCont(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                      //
+                      // Title of Screen
+                      TitleBubble(
+                        deckHeight: 6.5.h(context),
+                        deckName: 'Communities',
+                        deckWidth: 17.25.w(context),
+                        textSize: 3.sp(context),
+                        leftPad: 30,
+                      ),
 
-                          // ignore: prefer_const_constructors
-                          Messages(),
-                        ],
+                      //
+                      //Houses Deck Buttons
+                      Container(
+                        color: tran,
+                        child: const Column(
+                          children: [CommunityBubbleDock()],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: 1.h(context),
+                  ),
+                  Expanded(
+                    child: LargeStaggerLoad(
+                      widgets: test_big_list,
+                      childHeight: 50.h(context),
+                      childWidth: 35.w(context),
+                      padding: EdgeInsets.all(0.5.w(context)),
+                      physics: const NeverScrollableScrollPhysics(),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ),
-      ),
+          )),
     );
   }
 
@@ -142,59 +101,8 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
   }
 }
 
-class DeskCommunityCont extends StatefulWidget {
-  const DeskCommunityCont({super.key});
-
-  @override
-  State<DeskCommunityCont> createState() => _DeskCommunityContState();
-}
-
-class _DeskCommunityContState extends State<DeskCommunityCont> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 80.h(context),
-      width: 71.w(context),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.5.w(context)),
-        color: const Color.fromARGB(185, 21, 19, 22),
-        border: Border.all(color: deckBorderColor),
-      ),
-      child: ListView.builder(
-        itemExtent: 420,
-        physics: const BouncingScrollPhysics(),
-        itemCount: 3,
-        itemBuilder: (BuildContext context, int index) {
-          return AnimationConfiguration.staggeredList(
-            delay: const Duration(milliseconds: 500),
-            position: index,
-            duration: const Duration(milliseconds: 700),
-            child: SlideAnimation(
-              horizontalOffset: 100,
-              curve: Curves.easeOutBack,
-              child: FadeInAnimation(
-                child: Column(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                            return const KeyboardsDeck();
-                          }));
-                        },
-                        child: CommunitiesDeck()),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class CommunityButtonHolder extends StatelessWidget {
-  const CommunityButtonHolder({super.key});
+class CommunityBubbleDock extends StatelessWidget {
+  const CommunityBubbleDock({super.key});
 
   @override
   Widget build(BuildContext context) {

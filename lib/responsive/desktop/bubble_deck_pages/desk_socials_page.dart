@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/pages/keyboards_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-
-import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_side_panel.dart';
-import 'package:flutter_application_1/responsive/desktop/messages.dart';
 import 'package:flutter_application_1/util/button_state.dart';
-import 'package:indexed/indexed.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../../util/soft_close.dart';
-import '../../mobile/mob_artboard_page.dart';
-import '../dashboard/socials_deck.dart';
+import '../../../util/test_list.dart';
 import '../dashboard/title_bubble.dart';
 import '../desk_decks.dart';
-import '../desk_sp/desk_dock_buttons/connections/desk_connections_popup.dart';
-import '../desk_sp/desk_dock_buttons/help/desk_help_popup.dart';
-import '../desk_sp/desk_dock_buttons/info/desk_info_popup.dart';
-import '../desk_sp/desk_dock_buttons/settings/desk_settings_popup.dart.dart';
+import '../util/web_ui_template.dart';
 
 class DeskSocialsPage extends StatefulWidget {
   const DeskSocialsPage({Key? key}) : super(key: key);
@@ -55,80 +43,52 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
       builder: (context, value, child) => Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
-        body: SingleChildScrollView(
+        body: WebUiTemplate(
+          //Column for Title, Dock Buttons, and Content
           child: Container(
-            height: 100.h(context),
-            width: 100.w(context),
-            constraints: const BoxConstraints(minWidth: 1200, minHeight: 500),
-            child: Stack(
+            height: 80.h(context),
+            width: 71.w(context),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const ArtBoardScreen(),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      controller.play();
-                    });
-                    Future.delayed(const Duration(milliseconds: 300)).then((_) {
-                      controller.playReverse();
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      DesktopSidePanel(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  //
-                                  // Title of Screen
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 23.6.w(context)),
-                                    child: TitleBubble(
-                                      deckHeight: 5.5.h(context),
-                                      deckName: 'Socials',
-                                      deckWidth: 17.25.w(context),
-                                      textSize: 3.sp(context),
-                                      leftPad: 30,
-                                    ),
-                                  ),
-                                  //
-                                  //Houses Decks Buttons
-                                  Container(
-                                    color: tran,
-                                    child: const Column(
-                                      children: [
-                                        SocialsButtonHolder(),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                color: tran,
-                                child: Column(
-                                  children: [
-                                    Hero(
-                                      tag: ButtonState().socialsHeroTag,
-                                      flightShuttleBuilder: flightShuttleBuilder,
-                                      child: const DeskSocialsCont(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    //
+                    // Title of Screen
+                    TitleBubble(
+                      deckHeight: 6.5.h(context),
+                      deckName: 'Socials',
+                      deckWidth: 17.25.w(context),
+                      textSize: 3.sp(context),
+                      leftPad: 30,
+                    ),
 
-                          // ignore: prefer_const_constructors
-                          Messages(),
-                        ],
+                    //
+                    //Houses Deck Buttons
+                    Container(
+                      color: tran,
+                      child: const Column(
+                        children: [SocialsBubbleDock()],
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 1.h(context),
+                ),
+                Expanded(
+                  child: StaggerLoad(
+                    widgets: test_big_list,
+                    padding: EdgeInsets.all(0.5.w(context)),
+                    physics: const BouncingScrollPhysics(),
+                    duration: 300,
+                    scrollDirection: Axis.vertical,
+                    delay: 5,
+                    scale: 1.02,
+                    layer: 1,
                   ),
                 ),
               ],
@@ -146,61 +106,8 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
   }
 }
 
-class DeskSocialsCont extends StatefulWidget {
-  const DeskSocialsCont({
-    super.key,
-  });
-
-  @override
-  State<DeskSocialsCont> createState() => _DeskSocialsContState();
-}
-
-class _DeskSocialsContState extends State<DeskSocialsCont> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 80.h(context),
-      width: 71.w(context),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(1.5.w(context)),
-        color: const Color.fromARGB(185, 21, 19, 22),
-        border: Border.all(color: deckBorderColor),
-      ),
-      child: ListView.builder(
-        itemExtent: 420,
-        physics: const BouncingScrollPhysics(),
-        itemCount: 3,
-        itemBuilder: (BuildContext context, int index) {
-          return AnimationConfiguration.staggeredList(
-            delay: const Duration(milliseconds: 500),
-            position: index,
-            duration: const Duration(milliseconds: 700),
-            child: SlideAnimation(
-              horizontalOffset: 100,
-              curve: Curves.easeOutBack,
-              child: FadeInAnimation(
-                child: Column(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                            return const KeyboardsDeck();
-                          }));
-                        },
-                        child: SocialsDeck()),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
-
-class SocialsButtonHolder extends StatelessWidget {
-  const SocialsButtonHolder({super.key});
+class SocialsBubbleDock extends StatelessWidget {
+  const SocialsBubbleDock({super.key});
 
   @override
   Widget build(BuildContext context) {

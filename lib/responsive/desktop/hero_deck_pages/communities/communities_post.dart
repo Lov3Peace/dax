@@ -66,7 +66,7 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
                 Container(width: widget.textConstraint, child: widget.postTitle),
                 Container(
                   child: Row(
-                    spacing: 0.5.w(context),
+                    // spacing: 0.5.w(context),
                     children: [
                       Placeholder(
                         child: Text('Badge'),
@@ -109,16 +109,20 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Text(
                       widget.category,
-                      style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
-                        Shadow(
-                          color: widget.shadowColor,
-                          blurRadius: 1,
-                        ),
-                        Shadow(
-                          color: widget.shadowColor,
-                          blurRadius: 2,
-                        ),
-                      ]),
+                      style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              color: widget.shadowColor,
+                              blurRadius: 1,
+                            ),
+                            Shadow(
+                              color: widget.shadowColor,
+                              blurRadius: 2,
+                            ),
+                          ]),
                     ),
                   ),
                 ),

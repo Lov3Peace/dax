@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/communities_post_list.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
+import 'package:flutter_application_1/util/test_list.dart';
 import '../../../../main.dart';
 import '../../dashboard/title_bubble.dart';
 import '../../desk_decks.dart';
@@ -67,25 +68,11 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
                   child: LargeStaggerLoad(
                     widgets: comm_post_list,
                     childHeight: 40.sp(context),
-                    // childWidth: 35.w(context),
+                    childWidth: 35.w(context),
                     padding: EdgeInsets.all(0.5.w(context)),
-                    physics: const NeverScrollableScrollPhysics(),
+                    // physics: const NeverScrollableScrollPhysics(),
                   ),
                 ),
-                // CommunitiesPost(
-                //   postTitle: Text(
-                //     '[Post Title]',
-                //     style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.w700),
-                //   ),
-                //   content: '[Content]',
-                //   user: '[User]',
-                //   timestamp: 'timestamp',
-                //   category: '[Category]',
-                //   gradient1: red,
-                //   gradient2: pink,
-                //   neonGlow: tran,
-                //   shadowColor: white,
-                // ),
               ],
             ),
           ),

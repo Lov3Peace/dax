@@ -1,5 +1,3 @@
-// THIS WIDGET MUST ALWAYS BE WRAPPED IN AN EXPANDED WIDGET
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_application_1/util/imports.dart';
@@ -7,30 +5,44 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/util/test_container.dart';
 
-class LargeStaggerLoad extends StatelessWidget {
+class LargeStaggerLoad extends StatefulWidget {
   const LargeStaggerLoad({
     super.key,
     required this.widgets,
-    this.childWidth,
-    this.childHeight,
+    required this.childWidth,
+    required this.childHeight,
     this.padding,
     this.physics,
   });
 
   final List widgets;
-  final double? childWidth;
-  final double? childHeight;
+  final double childWidth;
+  final double childHeight;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
 
   @override
+  State<LargeStaggerLoad> createState() => _LargeStaggerLoadState();
+}
+
+class _LargeStaggerLoadState extends State<LargeStaggerLoad> {
+  final ScrollController scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+      print(scrollController.offset);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // print(Scrollable.of(context).position.pixels);
     return ListView.builder(
-      itemCount: ((widgets.length / 2)).ceil(),
+      itemCount: ((widget.widgets.length / 2)).ceil(),
+      controller: scrollController,
       itemBuilder: (context, index) => Container(
-        width: childWidth,
-        height: childHeight,
+        width: widget.childWidth,
+        height: widget.childHeight,
         child: StaggerLoad(
           duration: 300,
           // had to use math and conditions for this. If the length of the
@@ -40,15 +52,16 @@ class LargeStaggerLoad extends StatelessWidget {
           // column, and ((this listview's index * 2) + 1) for the second column (i think
           // this might scale with the amount of columns; like for 3 columns it would be
           // (this listview's index * 3) but im not sure yet; will test)
-          widgets: (index * 2) + 1 >= widgets.length ? [widgets[index * 2]] : [widgets[index * 2], widgets[(index * 2) + 1]],
+          widgets: (index * 2) + 1 >= widget.widgets.length
+              ? [widget.widgets[index * 2]]
+              : [widget.widgets[index * 2], widget.widgets[(index * 2) + 1]],
           scrollDirection: Axis.horizontal,
-          delay: Scrollable.of(context).position.pixels <= 10
-              ? index * 50
-              : (Scrollable.of(context).position.pixels.abs().ceil() - (index * 5)), // experimenting with this
+          // delay: index % 2 == 0 ? 400 : 600,
+          delay: scrollController.offset <= index * 2 ? index * 100 : 300,
           scale: 1.02,
           layer: 1,
-          padding: padding,
-          physics: physics,
+          padding: widget.padding,
+          physics: widget.physics,
         ),
       ),
     );

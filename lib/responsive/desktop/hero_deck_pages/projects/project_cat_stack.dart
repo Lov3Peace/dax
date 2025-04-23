@@ -60,7 +60,7 @@ class ProjectCategory extends StatelessWidget {
                 Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: postTitle),
                 Container(
                   child: Row(
-                    spacing: 0.5.w(context),
+                    // spacing: 0.5.w(context),
                     children: [
                       Placeholder(
                         child: Text('Badge'),
@@ -87,16 +87,20 @@ class ProjectCategory extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Text(
                       category,
-                      style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
-                        Shadow(
-                          color: shadowColor,
-                          blurRadius: 1,
-                        ),
-                        Shadow(
-                          color: shadowColor,
-                          blurRadius: 2,
-                        ),
-                      ]),
+                      style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 1,
+                            ),
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 2,
+                            ),
+                          ]),
                     ),
                   ),
                 ),

@@ -1,12 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/field_dropdown.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../../../util/gradient_container.dart';
 import '../../../../../util/tactile_button.dart';
+
+import '../../../desk_decks.dart';
 import 'desk_wallet_sections/desk_wallet_c1.dart';
 import 'desk_wallet_sections/desk_wallet_c2.dart';
+import 'test_tactilebutton.dart';
 
 Control slideWallet = Control.stop;
 
@@ -14,53 +18,73 @@ class WalletPopUp extends StatefulWidget {
   const WalletPopUp({super.key});
 
   @override
-  State<WalletPopUp> createState() => _WalletPopUpState();
+  State<WalletPopUp> createState() => WalletPopUpState();
 }
 
-final walletIDController = TextEditingController();
-final reasonController = TextEditingController();
+final amountController = TextEditingController();
 
-class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
+final TextEditingController cardController = TextEditingController();
+final TextEditingController locationController = TextEditingController();
+// consists of all linked cards to the account
+final List<String> linkedCards = [
+  'Visa **** 1234',
+  'Chase Debit **** 5678',
+  'Cash App Card',
+];
+// can will be auto populaed depending on the destinatuons and contacts within the account
+final List<String> locations = [
+  'Visa **** 1234',
+  'Chase Debit **** 5678',
+  'Cash App Card',
+];
+// the frequency of transaction
+final List<String> frequency = [
+  'Once',
+  'Weekly',
+  'BiWeekly',
+  'Monthly',
+];
+
+class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 10.h(context), top: 4.h(context)),
-        child: Container(
-          height: 85.h(context),
-          width: 70.w(context),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
-          padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-          child: Material(
-            shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-            color: const Color.fromARGB(42, 55, 52, 52),
-            elevation: 0,
-            borderRadius: BorderRadius.circular(32),
-            child: Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(24),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: Container(
-                      height: 85.h(context),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
-                        borderRadius: BorderRadius.circular(24),
+    return Container(
+      height: 100.h(context),
+      width: 71.w(context),
+      alignment: Alignment.center,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          SizedBox(
+              height: 77.h(context),
+              width: 65.w(context),
+              // padding: const EdgeInsets.symmetric(vertical: 32),
+              child: Material(
+                  shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
+                  color: const Color.fromARGB(140, 20, 20, 30),
+                  elevation: 2,
+                  borderRadius: BorderRadius.circular(32),
+                  child: Stack(children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(24),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                        child: Container(
+                            // height: 85.h(context),
+                            decoration: BoxDecoration(
+                          border: Border.all(color: deckBorderColor),
+                          borderRadius: BorderRadius.circular(24),
+                        )),
                       ),
                     ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
                     Padding(
-                      padding: EdgeInsets.only(top: .7.h(context), bottom: .7.h(context)),
-                      child: Wrap(
+                      padding: EdgeInsets.only(
+                        right: 2.h(context),
+                        left: 2.h(context),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // The reverse slide button allows for the slide and button to be reset at anytime
-                          // note: may need to work on spacing and padding to get the exact look we are
-                          // looking for.
                           Wrap(
                             spacing: 1.w(context),
                             children: [
@@ -71,186 +95,145 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                   // meaning how you are able to pay other people on projects that you want to particpate in
                                   // or send money to friends as donations as well.
                                   Padding(
-                                    padding: EdgeInsets.only(top: 20.h(context)),
+                                    padding: EdgeInsets.only(top: 19.h(context)),
                                     child: Container(
                                       height: 55.h(context),
                                       width: 29.w(context),
                                       decoration: const BoxDecoration(
-                                        color: Color.fromARGB(255, 39, 38, 38),
+                                        color: Color.fromARGB(70, 32, 32, 40),
                                         borderRadius: BorderRadius.all(Radius.circular(40)),
                                       ),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(bottom: 1.h(context), left: 2.5.w(context), top: 5.h(context)),
-                                            child: const Text(
-                                              'Pay to',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(
+                                          1.w(context),
+                                        ),
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(top: 4.h(context)),
+                                                child: const SelectableTactile(),
                                               ),
-                                            ),
-                                          ),
-                                          Center(
-                                            child: Container(
-                                              height: 6.h(context),
-                                              margin: EdgeInsets.only(bottom: 1.h(context)),
-                                              width: 23.w(context),
-                                              decoration: BoxDecoration(
-                                                color: const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
-                                                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                                border: const Border.fromBorderSide(
-                                                  BorderSide(color: Color.fromARGB(72, 255, 255, 255)),
-                                                ),
+                                              SizedBox(
+                                                height: 2.h(context),
                                               ),
-                                              child: SingleChildScrollView(
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                child: TextField(
-                                                  controller: walletIDController,
-                                                  decoration: const InputDecoration(border: InputBorder.none),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(bottom: 1.h(context)),
-                                            child: const Center(
-                                              child: Text(
-                                                'Please enter the Wallet ID or destination email',
+                                              Text(
+                                                'From',
                                                 style: TextStyle(
-                                                  color: Color.fromARGB(113, 158, 158, 158),
-                                                  fontSize: 10,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 3.sp(context),
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          Center(
-                                            child: Wrap(
-                                              alignment: WrapAlignment.center,
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                              SizedBox(
+                                                height: 1.h(context),
+                                              ),
+                                              LinkedCardDropdownField(
+                                                cards: linkedCards,
+                                                controller: cardController,
+                                                label: 'Choose a Card',
+                                              ),
+                                              SizedBox(
+                                                height: 2.h(context),
+                                              ),
+                                              Text(
+                                                'Destination',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 3.sp(context),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 1.h(context),
+                                              ),
+                                              LinkedCardDropdownField(
+                                                cards: locations,
+                                                controller: locationController,
+                                                label: 'Choose a Destination',
+                                              ),
+                                              SizedBox(
+                                                height: 2.h(context),
+                                              ),
+                                              Center(
+                                                child: Wrap(
+                                                  spacing: 1.w(context),
+                                                  alignment: WrapAlignment.center,
                                                   children: [
-                                                    Padding(
-                                                      padding: EdgeInsets.only(bottom: 1.h(context)),
-                                                      child: const Text(
-                                                        'Amount',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight: FontWeight.bold,
+                                                    // this column holds the amount given
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsets.only(bottom: 1.h(context)),
+                                                          child: Text(
+                                                            'Amount',
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 3.sp(context),
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
+                                                        CustomSizedTextField(
+                                                          controller: amountController,
+                                                          width: 12.w(context),
+                                                        )
+                                                      ],
                                                     ),
-                                                    Container(
-                                                      height: 6.h(context),
-                                                      margin: EdgeInsets.only(bottom: 1.h(context)),
-                                                      width: 11.w(context),
-                                                      decoration: BoxDecoration(
-                                                        color: const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
-                                                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                                        border: const Border.fromBorderSide(
-                                                          BorderSide(color: Color.fromARGB(72, 255, 255, 255)),
+                                                    // this column will holds the reason for sending
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsets.only(bottom: 1.h(context)),
+                                                          child: Text(
+                                                            'Frequency',
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 3.sp(context),
+                                                            ),
+                                                          ),
                                                         ),
-                                                      ),
+                                                        LinkedCardDropdownField(
+                                                          cards: frequency,
+                                                          controller: locationController,
+                                                          width: 12.w(context),
+                                                          label: 'Select',
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(left: 1.w(context)),
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Padding(
-                                                        padding: EdgeInsets.only(bottom: 1.h(context)),
-                                                        child: const Text(
-                                                          'Reason',
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight: FontWeight.bold,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        height: 6.h(context),
-                                                        margin: EdgeInsets.only(bottom: 1.h(context)),
-                                                        width: 11.w(context),
-                                                        decoration: BoxDecoration(
-                                                          color: const Color.fromARGB(159, 28, 28, 28).withOpacity(0.98),
-                                                          borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                                          border: const Border.fromBorderSide(
-                                                            BorderSide(color: Color.fromARGB(72, 255, 255, 255)),
-                                                          ),
-                                                        ),
-                                                        child: SingleChildScrollView(
-                                                          physics: const NeverScrollableScrollPhysics(),
-                                                          child: TextField(
-                                                            controller: reasonController,
-                                                            decoration: const InputDecoration(border: InputBorder.none),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
+                                              ),
+                                              SizedBox(
+                                                height: 3.h(context),
+                                              ),
+                                              //
+                                              // Tactile button below will be the means of the user depositing money and seeing money in there account.
+                                              // This button will have a on tap function that will allow them to pull from there card or bank account
+                                              // referenced in there wallet.
+                                              Center(
+                                                child: TactileButton(
+                                                  onTap: () {},
+                                                  child: GradientContainer(
+                                                    gradient1: blue,
+                                                    gradient2: const Color.fromARGB(255, 85, 221, 89),
+                                                    height: 2.h(context),
+                                                    width: 15.h(context),
+                                                    neonGlow: greenGlow,
+                                                    text: 'Submit',
+                                                    textSize: 3.sp(context),
+                                                    borderColor: Colors.white38,
+                                                    borderRadius: 500,
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(top: 2.h(context)),
-                                            child: Center(
-                                              child: Wrap(
-                                                // This wrap holds the commission the company will receive after every transaction
-                                                // done or particpated in the user
-                                                alignment: WrapAlignment.spaceBetween,
-                                                children: [
-                                                  Padding(
-                                                    padding: EdgeInsets.only(right: 2.w(context)),
-                                                    child: const Column(
-                                                      children: [
-                                                        Text('Commission:'),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  const VerticalDivider(
-                                                    width: 100,
-                                                    color: Colors.white,
-                                                    thickness: 2,
-                                                    indent: 50,
-                                                  ),
-                                                  Padding(
-                                                    padding: EdgeInsets.only(right: 2.w(context)),
-                                                    child: const Column(
-                                                      children: [
-                                                        Text('Total:'),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
                                               ),
-                                            ),
+                                            ],
                                           ),
-                                          //
-                                          // Tactile button below will be the means of the user depositing money and seeing money in there account.
-                                          // This button will have a on tap function that will allow them to pull from there card or bank account
-                                          // referenced in there wallet.
-                                          Center(
-                                            child: TactileButton(
-                                              onTap: () {},
-                                              child: GradientContainer(
-                                                gradient1: blue,
-                                                gradient2: const Color.fromARGB(255, 85, 221, 89),
-                                                height: 15,
-                                                width: 150,
-                                                neonGlow: greenGlow,
-                                                text: 'Send',
-                                                textSize: 12,
-                                                borderColor: Colors.white38,
-                                                borderRadius: 500,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -286,12 +269,12 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                     alignment: WrapAlignment.spaceBetween,
                                                     crossAxisAlignment: WrapCrossAlignment.center,
                                                     children: [
-                                                      const Text(
+                                                      Text(
                                                         'Balance',
                                                         style: TextStyle(
-                                                          color: Color.fromARGB(255, 255, 255, 255),
+                                                          color: const Color.fromARGB(255, 255, 255, 255),
                                                           fontWeight: FontWeight.bold,
-                                                          fontSize: 20,
+                                                          fontSize: 5.sp(context),
                                                         ),
                                                       ),
                                                       Container(
@@ -301,13 +284,13 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                         ),
                                                         child: Padding(
                                                           padding: EdgeInsets.all(1.h(context)),
-                                                          child: const Text(
+                                                          child: Text(
                                                             "katarina",
                                                             textAlign: TextAlign.center,
                                                             style: TextStyle(
                                                               color: Colors.white,
                                                               fontWeight: FontWeight.bold,
-                                                              fontSize: 18,
+                                                              fontSize: 3.sp(context),
                                                             ),
                                                           ),
                                                         ),
@@ -321,8 +304,8 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                 padding: EdgeInsets.only(bottom: 2.h(context), left: 2.w(context), top: 5.h(context)),
                                                 child: Text(
                                                   NumberFormat.simpleCurrency(locale: 'en-US', decimalDigits: 2).format(7837),
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
+                                                  style: TextStyle(
+                                                    fontSize: 3.sp(context),
                                                     fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
@@ -344,21 +327,18 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                               Padding(
                                 padding: EdgeInsets.only(top: 1.h(context)),
                                 child: Container(
-                                  height: 73.5.h(context),
+                                  height: 74.h(context),
                                   width: 32.w(context),
                                   decoration: const BoxDecoration(
                                     color: Color.fromARGB(0, 194, 36, 36),
                                     borderRadius: BorderRadius.all(Radius.circular(40)),
                                   ),
-                                  child: SingleChildScrollView(
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        WalletC1(),
-                                        WalletC2(),
-                                      ],
-                                    ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      WalletC1(),
+                                      WalletC2(),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -367,12 +347,8 @@ class _WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                         ],
                       ),
                     ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
+                  ])))
+        ],
       ),
     );
   }

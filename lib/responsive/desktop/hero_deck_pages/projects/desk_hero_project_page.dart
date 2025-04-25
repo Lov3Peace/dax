@@ -132,7 +132,7 @@ class ProjectsBubbleDock extends StatelessWidget {
         children: [
           SocialsButton(),
           NewsButton(),
-          CommunityButton(),
+          CommunitiesButton(),
         ],
       ),
     );

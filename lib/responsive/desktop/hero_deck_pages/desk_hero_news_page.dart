@@ -215,7 +215,7 @@ class NewsButtonHolder extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           SocialsButton(),
-          CommunityButton(),
+          CommunitiesButton(),
           ProjectsButton(),
         ],
       ),

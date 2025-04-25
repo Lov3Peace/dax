@@ -399,11 +399,3 @@ List comm_post_list = [
     shadowColor: white,
   ),
 ];
-
-internals(List widgetList) {
-  List widgets = [];
-  for (int i = 0; i < (widgetList.length / 2); i++) {
-    widgets.addAll([widgetList[2 * i], widgetList[(2 * i) + 1]]);
-  }
-  return widgets;
-}

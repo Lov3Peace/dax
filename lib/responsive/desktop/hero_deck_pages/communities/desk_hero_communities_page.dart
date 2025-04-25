@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/communities_post_list.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
@@ -35,31 +36,33 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
               children: [
                 Row(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: 1.sp(context)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          //
-                          // Title of Screen
-                          TitleBubble(
-                            deckHeight: 6.5.h(context),
-                            deckName: 'Communities',
-                            deckWidth: 17.25.w(context),
-                            textSize: 3.sp(context),
-                            leftPad: 30,
-                          ),
-
-                          //
-                          //Houses Deck Buttons
-                          Container(
-                            color: tran,
-                            child: const Column(
-                              children: [CommunitiesBubbleDock()],
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 1.sp(context)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            //
+                            // Title of Screen
+                            TitleBubble(
+                              deckHeight: 6.5.h(context),
+                              deckName: 'Communities',
+                              deckWidth: 17.25.w(context),
+                              textSize: 3.sp(context),
+                              leftPad: 30,
                             ),
-                          ),
-                        ],
+
+                            //
+                            //Houses Deck Buttons
+                            Container(
+                              color: tran,
+                              child: const Column(
+                                children: [CommunitiesBubbleDock()],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -67,7 +70,7 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
                 Expanded(
                   child: LargeStaggerLoad(
                     widgets: comm_post_list,
-                    childHeight: 40.sp(context),
+                    childHeight: 250,
                     childWidth: 35.w(context),
                     padding: EdgeInsets.all(0.5.w(context)),
                     // physics: const NeverScrollableScrollPhysics(),
@@ -105,7 +108,7 @@ class CommunitiesBubbleDock extends StatelessWidget {
         children: [
           SocialsButton(),
           NewsButton(),
-          CommunityButton(),
+          CommunitiesButton(),
         ],
       ),
     );

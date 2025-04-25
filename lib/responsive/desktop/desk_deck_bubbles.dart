@@ -32,7 +32,7 @@ class ProjectsButton extends StatelessWidget {
         tag: value.projectsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
         child: TactileButton(
-          scale: 0.9,
+          scale: 1.03,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
               final heroOff = context.read<ButtonState>();
@@ -97,7 +97,7 @@ class NewsButton extends StatelessWidget {
         tag: value.newsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
         child: TactileButton(
-          scale: 0.9,
+          scale: 1.03,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
               final heroOff = context.read<ButtonState>();
@@ -152,8 +152,8 @@ class NewsButton extends StatelessWidget {
 
 //
 //Finances Button
-class CommunityButton extends StatelessWidget {
-  const CommunityButton({super.key});
+class CommunitiesButton extends StatelessWidget {
+  const CommunitiesButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +162,7 @@ class CommunityButton extends StatelessWidget {
         tag: value.communityHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
         child: TactileButton(
-          scale: 0.9,
+          scale: 1.03,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
               final heroOff = context.read<ButtonState>();
@@ -226,7 +226,7 @@ class SocialsButton extends StatelessWidget {
         tag: value.socialsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
         child: TactileButton(
-          scale: 0.9,
+          scale: 1.03,
           onTap: () {
             Future.delayed(const Duration(milliseconds: 100)).then((_) {
               final heroOff = context.read<ButtonState>();

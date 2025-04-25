@@ -272,7 +272,7 @@ class ProjectsBubbleDock extends StatelessWidget {
                   duration: const Duration(milliseconds: 400),
                   curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const CommunityButton()
+          const CommunitiesButton()
               .animate()
               .slideX(
                   begin: 0.25,

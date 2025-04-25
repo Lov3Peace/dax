@@ -53,7 +53,8 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
         borderRadius: BorderRadius.circular(1.w(context)),
         border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
       ),
-      constraints: const BoxConstraints(),
+      // constraints: const BoxConstraints(),
+      // width: 34.w(context),
       // height: 2 * textBoxHeight,
       child: Padding(
         padding: EdgeInsets.all(1.5.w(context)),

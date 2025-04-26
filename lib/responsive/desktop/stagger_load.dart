@@ -55,8 +55,7 @@ class StaggerLoad extends StatelessWidget {
               .scale(
                 duration: Duration(milliseconds: duration),
                 begin: Offset(scale, scale),
-                end: Offset(1.0 / scale,
-                    1.0 / scale), // eg. 1.0/1.05 to get original scale value (resetting it to normal val of 1.0)
+                end: Offset(1.0 / scale, 1.0 / scale), // eg. 1.0/1.05 to get original scale value (resetting it to normal val of 1.0)
               );
         });
   }

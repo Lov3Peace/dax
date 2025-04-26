@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_application_1/util/imports.dart';
 
 import 'package:flutter_animate/flutter_animate.dart';
@@ -52,9 +51,8 @@ class _LargeStaggerLoadState extends State<LargeStaggerLoad> {
           // column, and ((this listview's index * 2) + 1) for the second column (i think
           // this might scale with the amount of columns; like for 3 columns it would be
           // (this listview's index * 3) but im not sure yet; will test)
-          widgets: (index * 2) + 1 >= widget.widgets.length
-              ? [widget.widgets[index * 2]]
-              : [widget.widgets[index * 2], widget.widgets[(index * 2) + 1]],
+          widgets:
+              (index * 2) + 1 >= widget.widgets.length ? [widget.widgets[index * 2]] : [widget.widgets[index * 2], widget.widgets[(index * 2) + 1]],
           scrollDirection: Axis.horizontal,
           // delay: index % 2 == 0 ? 400 : 600,
           delay: (index * widget.childHeight) < 100.h(context) ? (index * 100) : 300,

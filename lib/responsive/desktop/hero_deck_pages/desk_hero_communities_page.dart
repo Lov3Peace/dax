@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/button_state.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_animations/simple_animations.dart';
+import '../../../util/button_state.dart';
 import '../../../util/test_list.dart';
-import '../bubble_deck_pages/desk_socials_page.dart';
+import '../bubble_deck_pages/desk_community_page.dart';
 import '../dashboard/title_bubble.dart';
+import '../large_stagger_load.dart';
 import '../util/web_ui_template.dart';
 
-class DeskHeroSocialsPage extends StatefulWidget {
-  const DeskHeroSocialsPage({Key? key}) : super(key: key);
+class DeskHeroCommunitiesPage extends StatefulWidget {
+  const DeskHeroCommunitiesPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskHeroSocialsPage> createState() => _DeskHeroSocialsPageState();
+  State<DeskHeroCommunitiesPage> createState() => _DeskHeroCommunitiesPageState();
 }
 
-class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with AnimationMixin {
+class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -23,14 +23,8 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
   late AnimationController heightController;
   late AnimationController colorController;
 
-  //final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
-
   @override
   void initState() {
-    scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
-    opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
-    controller.stop();
-
     super.initState();
   }
 
@@ -57,7 +51,7 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                       // Title of Screen
                       TitleBubble(
                         deckHeight: 6.5.h(context),
-                        deckName: 'Socials',
+                        deckName: 'Communities',
                         deckWidth: 17.25.w(context),
                         textSize: 3.sp(context),
                         leftPad: 30,
@@ -68,7 +62,7 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                       Container(
                         color: tran,
                         child: const Column(
-                          children: [SocialsBubbleDock()],
+                          children: [CommunityBubbleDock()],
                         ),
                       ),
                     ],
@@ -77,15 +71,12 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                     height: 1.h(context),
                   ),
                   Expanded(
-                    child: StaggerLoad(
+                    child: LargeStaggerLoad(
                       widgets: test_big_list,
+                      childHeight: 50.h(context),
+                      childWidth: 35.w(context),
                       padding: EdgeInsets.all(0.5.w(context)),
-                      physics: const BouncingScrollPhysics(),
-                      duration: 300,
-                      scrollDirection: Axis.vertical,
-                      delay: 5,
-                      scale: 1.02,
-                      layer: 1,
+                      physics: const NeverScrollableScrollPhysics(),
                     ),
                   ),
                 ],

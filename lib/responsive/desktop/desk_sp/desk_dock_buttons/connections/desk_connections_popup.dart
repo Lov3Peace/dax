@@ -1,90 +1,38 @@
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_favorite_messages.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_partner_messages.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_all_messages.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_chat_messages.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/connections/desk_group_messages.dart';
-import 'package:flutter_application_1/util/button_state.dart';
-import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-
 import '../../../desk_decks.dart';
-
-//const String _heroFriendsWindow = 'Friends-window-hero';
-final friendsBucket = PageStorageBucket();
-
-// class DeskFriendsWindowPopupCard extends StatefulWidget {
-//   /// {@macro add_todo_popup_card}
-//   const DeskFriendsWindowPopupCard({Key? key}) : super(key: key);
-
-//   @override
-//   State<DeskFriendsWindowPopupCard> createState() => _DeskFriendsWindowPopupCardState();
-// }
-
-// class _DeskFriendsWindowPopupCardState extends State<DeskFriendsWindowPopupCard> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Material(
-//       color: tran,
-//       child: TextButton.icon(
-//         icon: const Icon(
-//           Ionicons.people_outline,
-//           size: 30,
-//           color: Colors.white54,
-//         ),
-//         onPressed: () {
-//           final startSlide = context.read<ButtonState>();
-//           startSlide.activateSlide(SlideType.friend);
-//         },
-//         label: Padding(
-//           padding: EdgeInsets.only(left: 0.5.w(context)),
-//           child: Text(
-//             'Connections',
-//             style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 2.sp(context)), fontWeight: FontWeight.w400, color: Colors.white54),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+import 'desk_all_messages.dart';
+import 'desk_connection_tactile.dart';
 
 class FriendsPopUp extends StatefulWidget {
   const FriendsPopUp({super.key});
 
   @override
-  State<FriendsPopUp> createState() => _FriendsPopUpState();
+  State<FriendsPopUp> createState() => FriendsPopUpState();
 }
 
-class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
-  //control = Control.play;
-  final TextEditingController _searchController = TextEditingController();
-  final List people = [
-    "Tiffany",
-    "Mitch",
-    "Cassandra",
-    "Bluecheese",
-    "Johnny",
-  ];
+class FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
+  final TextEditingController searchController = TextEditingController();
+  final CarouselSliderController carouselController = CarouselSliderController();
+  int currentIndex = 0;
 
-  int _currentIndex = 0;
-
-  final List<Widget> _carouselContainers = [
+  final List<Widget> carouselItems = [
     AllMessages(),
-    GroupMessages(),
-    ChatMessages(),
-    // Add more containers as needed
+    FavoriteMessages(),
+    PartnerMessages(),
   ];
 
-  final CarouselSliderController _CarouselSliderController = CarouselSliderController();
+  void handleButtonTap(int index) {
+    setState(() => currentIndex = index);
 
-  bool isSelected = false;
-  Color activeColor = tran;
-  Color inactiveColor = tran;
-  Color currentColor = tran;
-  int selectedIndex = 0;
+    carouselController.animateToPage(index);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -101,8 +49,7 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
         children: [
           SizedBox(
             height: 77.h(context),
-            width: 71.w(context),
-            // padding: const EdgeInsets.symmetric(vertical: 32),
+            width: 65.w(context),
             child: Material(
               shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
               color: const Color.fromARGB(140, 20, 20, 30),
@@ -122,179 +69,90 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
                       )),
                     ),
                   ),
-                  Column(
-                    children: [
-                      //Stories
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 1.5.w(context), top: 1.h(context)),
-                          child: const Text(
-                            "Connections",
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(
-                          1.5.w(context),
-                          10,
-                          1.5.w(context),
-                          10,
-                        ),
-                        child: TextFormField(
-                          controller: _searchController,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: const Color.fromARGB(70, 32, 32, 40),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5.w(context)),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 1.h(context)),
+                    child: Column(
+                      children: [
+                        //Stories
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 1.5.w(context)),
+                            child: Text(
+                              "Connections",
+                              style: TextStyle(
+                                fontSize: 7.sp(context),
+                                fontWeight: FontWeight.w800,
                               ),
-                              borderSide: BorderSide(color: deckBorderColor),
                             ),
-                            hintText: 'Search...',
-                            contentPadding: const EdgeInsets.only(left: 20),
-                            suffixIcon: const Icon(Icons.search),
                           ),
-                          onChanged: (value) {
-                            // Implement your search logic here
-                            // You can use the 'value' variable to perform search operations
-                          },
                         ),
-                      ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(
+                            1.5.w(context),
+                            10,
+                            1.5.w(context),
+                            10,
+                          ),
+                          child: TextFormField(
+                            controller: searchController,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: const Color.fromARGB(70, 32, 32, 40),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5.w(context)),
+                                ),
+                                borderSide: BorderSide(color: deckBorderColor),
+                              ),
+                              hintText: 'Search...',
+                              contentPadding: const EdgeInsets.only(left: 20),
+                              suffixIcon: const Icon(Icons.search),
+                            ),
+                            onChanged: (value) {
+                              // Implement your search logic here
+                              // You can use the 'value' variable to perform search operations
+                            },
+                          ),
+                        ),
 
-                      //Container housing the tab buttons
-                      Padding(
-                        padding: EdgeInsets.only(left: 1.5.w(context), right: 1.5.w(context), bottom: 10),
-                        child: Container(
-                          height: 6.5.h(context),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
+                        //Container housing the tab buttons
+                        Padding(
+                          padding: EdgeInsets.only(left: 1.5.w(context), right: 1.5.w(context), bottom: 10),
+                          child: Container(
+                            height: 6.h(context),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
                               color: const Color.fromARGB(70, 32, 32, 40),
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(40),
                               ),
-                              border: Border.all(color: deckBorderColor)),
-                          child: Wrap(
-                            alignment: WrapAlignment.spaceEvenly,
-                            runAlignment: WrapAlignment.center,
-                            children: [
-                              //
-                              //All Button
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    if (selectedIndex != 1) {
-                                      selectedIndex = 1;
-                                      isSelected = true;
-                                      currentColor = activeColor;
-                                    }
-                                  });
-
-                                  int pageIndex = 0; // Change this to the page index
-                                  _CarouselSliderController.animateToPage(pageIndex);
-
-                                  // isSelected = false;
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 7.w(context), vertical: 1.h(context)),
-                                  decoration: const BoxDecoration(
-                                      gradient: LinearGradient(colors: [purp, red]),
-                                      boxShadow: [BoxShadow(color: red, blurRadius: 10, blurStyle: BlurStyle.solid)],
-                                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                                  child: const Text("All", style: TextStyle(color: Colors.white)),
-                                ),
-                              ),
-                              //Favorites Button
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    if (selectedIndex != 1) {
-                                      selectedIndex = 1;
-                                      isSelected = true;
-                                      currentColor = activeColor;
-                                    }
-                                  });
-
-                                  int pageIndex = 1; // Change this to the page index
-                                  _CarouselSliderController.animateToPage(pageIndex);
-
-                                  // isSelected = false;
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 4.5.w(context), vertical: 1.h(context)),
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(colors: [Colors.grey.shade900, Colors.grey.shade800]),
-                                      boxShadow: const [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
-                                      borderRadius: const BorderRadius.all(Radius.circular(20))),
-                                  child: const Text("Favorites", style: TextStyle(color: Colors.white)),
-                                ),
-                              ),
-                              //Partners Button
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    if (selectedIndex != 1) {
-                                      selectedIndex = 1;
-                                      isSelected = true;
-                                      currentColor = activeColor;
-                                    }
-                                  });
-
-                                  int pageIndex = 2; // Change this to the page index
-                                  _CarouselSliderController.animateToPage(pageIndex);
-
-                                  // isSelected = false;
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 4.5.w(context), vertical: 1.h(context)),
-                                  decoration: BoxDecoration(
-                                      gradient: LinearGradient(colors: [Colors.grey.shade900, Colors.grey.shade800]),
-                                      boxShadow: const [BoxShadow(color: tran, blurRadius: 3, blurStyle: BlurStyle.solid)],
-                                      borderRadius: const BorderRadius.all(Radius.circular(20))),
-                                  child: const Text("Partners", style: TextStyle(color: Colors.white)),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      //Container Housing Carousel slider
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.only(left: 1.5.w(context), right: 1.5.w(context), bottom: 3.h(context)),
-                          child: PageStorage(
-                            bucket: friendsBucket,
-                            child: CarouselSlider(
-                              options: CarouselOptions(
-                                scrollPhysics: const NeverScrollableScrollPhysics(),
-                                viewportFraction: 1,
-                                enlargeCenterPage: true,
-                                initialPage: _currentIndex,
-                                onPageChanged: (index, _) {
-                                  setState(() {
-                                    _currentIndex = index;
-                                  });
-                                },
-                              ),
-                              items: _carouselContainers.map((container) {
-                                return Builder(
-                                  builder: (BuildContext context) {
-                                    return container;
-                                  },
-                                );
-                              }).toList(),
+                              border: Border.all(color: deckBorderColor),
                             ),
+                            child: ConnectionTactile(onButtonTap: handleButtonTap),
                           ),
                         ),
-                      ),
-                    ],
+
+                        // Container Housing Carousel slider
+                        Expanded(
+                          child: CarouselSlider(
+                            carouselController: carouselController,
+                            options: CarouselOptions(
+                              height: double.infinity,
+                              viewportFraction: .95,
+                              enableInfiniteScroll: false,
+                              enlargeCenterPage: true,
+                              onPageChanged: (index, _) {
+                                setState(() {
+                                  currentIndex = index;
+                                });
+                              },
+                            ),
+                            items: carouselItems,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -305,50 +163,9 @@ class _FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
     );
   }
 
-  void allbtn() {}
-
-  void groupbtn() {}
-
-  void chatbtn() {}
-
-  void buttonPressed() {
-    // toggle between control instructions
-    setState(() {
-      isSelected = true;
-      currentColor = (isSelected == false) ? inactiveColor : activeColor;
-    });
-  }
-
   @override
   void dispose() {
-    _searchController.dispose();
+    searchController.dispose();
     super.dispose();
-  }
-}
-
-class Indicators extends StatelessWidget {
-  const Indicators({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.start,
-      children: [
-        const Text('Bri'),
-        const Text('Tom'),
-        const Text('Skylar'),
-        Container(
-          child: Row(
-            children: [
-              SizedBox(
-                height: 2.h(context),
-                width: 3.w(context),
-              ),
-              Container(),
-            ],
-          ),
-        ),
-      ],
-    );
   }
 }

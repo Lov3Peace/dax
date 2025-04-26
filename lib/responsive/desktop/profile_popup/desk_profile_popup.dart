@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/bottom_sections/crests_section.dart';
@@ -13,7 +12,6 @@ import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_p
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/pc_carousel_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import 'profile_pop_pages.dart/pc3_sections/pc3_section1.dart';
 import 'profile_pop_pages.dart/pc3_sections/pc3_section2.dart';
 import 'profile_pop_pages.dart/pc3_sections/pc3_section3.dart';
@@ -114,7 +112,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
                           CarouselSlider(
                             options: CarouselOptions(
                               height: 46.h(context),
-                              viewportFraction: .95,
+                              viewportFraction: .97,
                               enableInfiniteScroll: false,
                               enlargeCenterPage: true,
                               onPageChanged: (index, reason) {
@@ -131,19 +129,19 @@ class _ProfilePopupState extends State<ProfilePopup> {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       CarouselContentsTemp(
                                         child: Pc2Section1(),
                                       ),
                                       SizedBox(
-                                        width: 0.5.h(context),
+                                        width: 0.75.w(context),
                                       ),
                                       CarouselContentsTemp(
                                         child: Pc2Section2(),
                                       ),
                                       SizedBox(
-                                        width: 0.5.h(context),
+                                        width: 0.75.w(context),
                                       ),
                                       CarouselContentsTemp(
                                         child: Pc2Section3(),
@@ -155,7 +153,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
                               PcCarouselTemplate(
                                 child: SingleChildScrollView(
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       CarouselContentsTemp(
                                         child: Pc3Section1(),

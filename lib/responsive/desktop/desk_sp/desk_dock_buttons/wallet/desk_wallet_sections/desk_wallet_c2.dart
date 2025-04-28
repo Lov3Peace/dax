@@ -1,181 +1,241 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import '../../../../../../util/gradient_container.dart';
+import '../../../../../../util/tactile_button.dart';
 
-class WalletC2 extends StatelessWidget {
+class WalletC2 extends StatefulWidget {
   WalletC2({Key? key}) : super(key: key);
 
+  @override
+  State<WalletC2> createState() => _WalletC2State();
+}
+
+class _WalletC2State extends State<WalletC2> {
   final TextEditingController _controller = TextEditingController();
+  bool isEditable = false;
+  bool isHidden = true;
+  bool isSwitch = false;
+  bool isSwitch2 = false;
 
   @override
   Widget build(BuildContext context) {
-    bool isEditable = false;
-    bool isHidden = true;
-    bool isSwitch = false;
-    bool isSwitch2 = false;
-
     return Padding(
       padding: EdgeInsets.only(top: 1.5.h(context)),
       child: Container(
-        height: 36.h(context),
+        height: 35.h(context),
         width: 33.w(context),
         decoration: const BoxDecoration(
-          color: Color(0xFF272626),
+          color: const Color.fromARGB(70, 32, 32, 40),
           borderRadius: BorderRadius.all(Radius.circular(40)),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 2.w(context), vertical: 0.5.h(context)),
-          child: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildWalletAddressSection(setState, isEditable, isHidden),
-                  const Divider(color: Colors.grey),
-                  _buildSecurityPrivacySection(setState, isSwitch, isSwitch2),
-                  const Divider(color: Colors.grey),
-                  _buildStatementsSection(),
-                ],
-              );
-            },
+        child: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 2.w(context), vertical: 3.h(context)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //This row contains textfiled for the linked card, visibility icon, and save/edit tactile button
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _controller,
+                        enabled: isEditable,
+                        obscureText: isHidden,
+                        style: const TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          hintText: 'Linked Card',
+                          hintStyle: const TextStyle(color: Colors.white70),
+                          filled: false,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                          // enabledBorder: const OutlineInputBorder(
+                          //   borderRadius: BorderRadius.all(Radius.circular(20)),
+                          //   borderSide: BorderSide(color: Colors.grey),
+                          // ),
+                          // focusedBorder: const OutlineInputBorder(
+                          //   borderRadius: BorderRadius.all(Radius.circular(20)),
+                          //   borderSide: BorderSide(color: Colors.white),
+                          // ),
+                          border: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          suffixIcon: IconButton(
+                            onPressed: () => setState(() => isHidden = !isHidden),
+                            icon: Icon(
+                              isHidden ? Icons.visibility_off : Icons.visibility,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    TactileButton(
+                      onTap: () {
+                        if (isEditable) {
+                          debugPrint('Saved: ${_controller.text}');
+                        }
+                        setState(() => isEditable = !isEditable);
+                      },
+                      child: GradientContainer(
+                        gradient1: isEditable ? blue : Colors.transparent,
+                        gradient2: isEditable ? const Color.fromARGB(255, 85, 221, 89) : Colors.transparent,
+                        height: 1.h(context),
+                        width: 2.h(context),
+                        neonGlow: isEditable ? greenGlow : Colors.transparent,
+                        text: isEditable ? 'Save' : 'Edit',
+                        textSize: 2.sp(context),
+                        borderColor: Colors.white38,
+                        borderRadius: 500,
+                        // Use default color if not editable
+                      ),
+                    ),
+                  ],
+                ),
+                const Divider(color: Colors.grey),
+                SizedBox(
+                  height: 1.h(context),
+                ),
+                //this colummn holds the multifactor Authentication and the Blur info on load swicthes
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Security & Privacy',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 3.sp(context),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 1.h(context),
+                    ),
+                    buildSwitchRow(
+                      context,
+                      'Multifactor Authentication',
+                      isSwitch,
+                      (bool value) => setState(() => isSwitch = value),
+                    ),
+                    SizedBox(
+                      height: 1.h(context),
+                    ),
+                    buildSwitchRow(
+                      context,
+                      'Blur Info On Load',
+                      isSwitch2,
+                      (bool value) => setState(() => isSwitch2 = value),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 1.h(context),
+                ),
+                const Divider(color: Colors.grey),
+                SizedBox(
+                  height: 1.h(context),
+                ),
+                //this column holds financial statements for the duration of account access
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Statements',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 3.sp(context),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          getCurrentMonth(),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 2.sp(context),
+                          ),
+                        ),
+                        TactileButton(
+                          onTap: () {},
+                          child: GradientContainer(
+                            gradient1: blue,
+                            gradient2: const Color.fromARGB(255, 85, 221, 89),
+                            height: 1.h(context),
+                            width: 2.h(context),
+                            neonGlow: greenGlow,
+                            text: 'View',
+                            textSize: 2.sp(context),
+                            borderColor: Colors.white38,
+                            borderRadius: 500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildWalletAddressSection(StateSetter setState, bool isEditable, bool isHidden) {
-    return Row(
-      children: [
-        Expanded(
-          child: Card(
-            elevation: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _controller,
-                enabled: isEditable,
-                obscureText: isHidden,
-                decoration: const InputDecoration(
-                  labelText: 'Linked Card',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 6),
-        Column(
-          children: [
-            ElevatedButton(
-              onPressed: () => setState(() => isEditable = !isEditable),
-              child: Text(isEditable ? 'Save' : 'Edit'),
-            ),
-            const SizedBox(height: 6),
-            ElevatedButton(
-              onPressed: () => setState(() => isHidden = !isHidden),
-              child: Text(isHidden ? 'Show' : 'Hide'),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSecurityPrivacySection(StateSetter setState, bool isSwitch, bool isSwitch2) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Security & Privacy',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        ),
-        _buildSwitchRow(
-          'Multifactor Authentication',
-          isSwitch,
-          (bool newBool) => setState(() => isSwitch = newBool),
-        ),
-        _buildSwitchRow(
-          'Blur Info On Load',
-          isSwitch2,
-          (bool newBool) => setState(() => isSwitch2 = newBool),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSwitchRow(String label, bool switchValue, ValueChanged<bool> onChanged) {
+  Widget buildSwitchRow(BuildContext context, String label, bool value, ValueChanged<bool> onChanged) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           label,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-          ),
-        ),
-        Switch(
-          value: switchValue,
-          activeColor: Colors.white,
-          activeTrackColor: const Color(0xFFDD53F5),
-          onChanged: onChanged,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildStatementsSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Statements',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 16,
+            fontSize: 2.sp(context),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const CurrentMonthText(),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('View'),
+        GestureDetector(
+          onTap: () => onChanged(!value),
+          child: Container(
+            width: 50,
+            height: 28,
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: value
+                  ? const LinearGradient(
+                      colors: [blue, Color.fromARGB(255, 85, 221, 89)],
+                    )
+                  : const LinearGradient(
+                      colors: [Colors.grey, Colors.grey],
+                    ),
             ),
-          ],
+            child: AnimatedAlign(
+              duration: const Duration(milliseconds: 200),
+              alignment: value ? Alignment.centerRight : Alignment.centerLeft,
+              child: Container(
+                width: 22,
+                height: 22,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );
   }
-}
 
-class CurrentMonthText extends StatelessWidget {
-  const CurrentMonthText({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    List<String> months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    String currentMonth = months[now.month - 1];
-    int currentYear = now.year;
-
-    return Text(
-      '$currentMonth $currentYear',
-      style: const TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-        fontSize: 12,
-      ),
-    );
+  String getCurrentMonth() {
+    final now = DateTime.now();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    return '${months[now.month - 1]} ${now.year}';
   }
 }

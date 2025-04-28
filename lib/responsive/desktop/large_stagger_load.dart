@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_application_1/util/imports.dart';
 
 import 'package:flutter_animate/flutter_animate.dart';
@@ -9,14 +8,14 @@ class LargeStaggerLoad extends StatefulWidget {
   const LargeStaggerLoad({
     super.key,
     required this.widgets,
-    required this.childWidth,
+    this.childWidth,
     required this.childHeight,
     this.padding,
     this.physics,
   });
 
   final List widgets;
-  final double childWidth;
+  final double? childWidth;
   final double childHeight;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
@@ -41,7 +40,7 @@ class _LargeStaggerLoadState extends State<LargeStaggerLoad> {
       itemCount: ((widget.widgets.length / 2)).ceil(),
       controller: scrollController,
       itemBuilder: (context, index) => Container(
-        width: widget.childWidth,
+        // width: widget.childWidth,
         height: widget.childHeight,
         child: StaggerLoad(
           duration: 300,

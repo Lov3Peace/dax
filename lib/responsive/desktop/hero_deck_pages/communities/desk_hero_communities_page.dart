@@ -23,63 +23,54 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
         body: WebUiTemplate(
-          //Column for Title, Dock Buttons, and Content
-          child: Container(
-            height: 90.h(context),
-            width: 71.w(context),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: 1.sp(context)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            //
-                            // Title of Screen
-                            TitleBubble(
-                              deckHeight: 6.5.h(context),
-                              deckName: 'Communities',
-                              deckWidth: 17.25.w(context),
-                              textSize: 3.sp(context),
-                              leftPad: 30,
-                            ),
-
-                            //
-                            //Houses Deck Buttons
-                            Container(
-                              color: tran,
-                              child: const Column(
-                                children: [CommunitiesBubbleDock()],
-                              ),
-                            ),
-                          ],
-                        ),
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0.5.w(context), 0, 0.5.w(context), 0.5.w(context)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      //
+                      // Title of Screen
+                      TitleBubble(
+                        deckHeight: 3.sp(context),
+                        deckName: 'Communities',
+                        deckWidth: 17.25.w(context),
+                        textSize: 3.sp(context),
+                        leftPad: 30,
                       ),
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: LargeStaggerLoad(
-                    widgets: comm_post_list,
-                    childHeight: 250,
-                    childWidth: 35.w(context),
-                    padding: EdgeInsets.all(0.5.w(context)),
-                    // physics: const NeverScrollableScrollPhysics(),
+
+                      //
+                      //Houses Deck Buttons
+                      Container(
+                        color: tran,
+                        child: CommunitiesBubbleDock(),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
+            ],
+          ),
+          Expanded(
+            child: LargeStaggerLoad(
+              widgets: comm_post_list,
+              childHeight: 250,
+              padding: EdgeInsets.all(0.5.w(context)),
+              // physics: const NeverScrollableScrollPhysics(),
             ),
           ),
-        ));
+        ],
+      ),
+    ));
   }
 
   @override
@@ -95,7 +86,7 @@ class CommunitiesBubbleDock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 6.5.h(context),
+      height: 3.sp(context),
       width: 30.w(context),
       constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 110) : BoxConstraints(minHeight: 55),
       decoration: BoxDecoration(

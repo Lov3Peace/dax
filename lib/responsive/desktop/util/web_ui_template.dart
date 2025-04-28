@@ -34,42 +34,40 @@ class WebUiTemplate extends StatelessWidget {
         physics: const AlwaysScrollableScrollPhysics(),
         child: Container(
           height: 100.h(context),
-          // width: 100.w(context),
+          width: 100.w(context),
           constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
           child: Stack(
             children: [
               // Background(),
               ArtBoardScreen(),
 
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  DesktopSidePanel(),
-                  Container(
-                    height: 100.h(context),
-                    // width: 71.5.w(context),
-                    constraints:
-                        100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
-                    //
-                    // *** Content goes here ***
-                    child: Padding(
-                        padding: EdgeInsets.all(0.25.w(context)),
+              Padding(
+                padding: EdgeInsets.only(right: 0.75.w(context)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    DesktopSidePanel(),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5.h(context)),
+                      child: Container(
+                        height: 100.h(context),
+                        width: 71.5.w(context),
+                        constraints:
+                            100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                         //
-                        // Row for Decks, Stacks, Cards, etc.
-                        child: child),
-                  ),
-                  Container(
-                    height: 90.h(context),
-                    // width: 71.5.w(context),
-                    constraints:
-                        100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
-                    child: Padding(
-                      padding: EdgeInsets.all(0.5.w(context)),
+                        // *** Content goes here ***
+                        child: child,
+                      ),
+                    ),
+                    Container(
+                      height: 90.h(context),
+                      constraints:
+                          100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                       child: Messages(),
                     ),
-                  ),
-                  // ignore: prefer_const_constructors
-                ],
+                    // ignore: prefer_const_constructors
+                  ],
+                ),
               ),
 
               // Positioned.fill(

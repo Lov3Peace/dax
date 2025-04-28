@@ -3,8 +3,8 @@ import 'package:flutter_application_1/util/imports.dart';
 import '../../../desk_decks.dart';
 import 'actions_buttons.dart';
 
-class AllMessages extends StatelessWidget {
-  AllMessages({
+class FavoriteMessages extends StatelessWidget {
+  FavoriteMessages({
     super.key,
   });
 

@@ -10,7 +10,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../responsive/mobile/mob_artboard_page.dart';
-import '../gradient_container.dart';
+import '../gradient_label.dart';
 import '../tactile_button.dart';
 import 'auth_check.dart';
 import 'forget_password_form.dart';

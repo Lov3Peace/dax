@@ -7,7 +7,7 @@ import 'package:simple_animations/simple_animations.dart';
 import '../../main.dart';
 import 'auth_check.dart';
 
-import '../gradient_container.dart';
+import '../gradient_label.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -111,7 +111,8 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
                       ],
                     ),
                   ),
-                ).animate().slideX(begin: -1, end: 0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOutBack)));
+                ).animate().slideX(
+                        begin: -1, end: 0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOutBack)));
       },
     );
     // setState(() {

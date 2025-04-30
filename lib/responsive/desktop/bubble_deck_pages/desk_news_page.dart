@@ -64,7 +64,7 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
                       deckName: 'News',
                       deckWidth: 17.25.w(context),
                       textSize: 3.sp(context),
-                      leftPad: 30,
+                      rightPad: 30,
                     ),
 
                     //

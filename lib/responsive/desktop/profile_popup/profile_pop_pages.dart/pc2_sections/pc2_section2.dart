@@ -6,7 +6,7 @@ import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_p
 import 'package:flutter_application_1/util/imports.dart';
 
 import '../../../../../main.dart';
-import '../../../../../util/gradient_container.dart';
+import '../../../../../util/gradient_label.dart';
 import '../../../../../util/tactile_button.dart';
 
 class Pc2Section2 extends StatefulWidget {

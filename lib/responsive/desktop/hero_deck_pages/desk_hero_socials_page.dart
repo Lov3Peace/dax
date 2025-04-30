@@ -60,7 +60,7 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
                         deckName: 'Socials',
                         deckWidth: 17.25.w(context),
                         textSize: 3.sp(context),
-                        leftPad: 30,
+                        rightPad: 30,
                       ),
 
                       //

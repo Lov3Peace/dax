@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../util/gradient_container.dart';
+import '../../../../../util/gradient_label.dart';
 
 import '../../../../../util/imports.dart';
 import '../../../../../util/tactile_button.dart';

@@ -79,7 +79,7 @@ class _MobNewsPageState extends State<MobNewsPage> {
                       gradient1: tran,
                       gradient2: tran,
                       neonGlow: const Color.fromARGB(78, 4, 4, 4),
-                      leftPad: 0,
+                      rightPad: 0,
                     ),
                   ),
                   Hero(

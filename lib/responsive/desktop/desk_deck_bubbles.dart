@@ -3,7 +3,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_finance_page.dart';
 import 'package:flutter_application_1/util/button_state.dart';
-import 'package:flutter_application_1/util/gradient_container.dart';
+import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:provider/provider.dart';
 
@@ -71,11 +71,11 @@ class ProjectsButton extends StatelessWidget {
           child: GradientContainer(
             gradient1: red,
             gradient2: purp,
-            height: 10,
-            width: 30,
+            height: 1.5.sp(context),
+            width: 5.sp(context),
             neonGlow: red,
             text: 'Projects',
-            textSize: 12,
+            textSize: 2.sp(context),
             borderColor: const Color.fromARGB(0, 255, 255, 255),
             borderRadius: 500,
           ),
@@ -136,8 +136,8 @@ class NewsButton extends StatelessWidget {
           child: GradientContainer(
             gradient1: blue,
             gradient2: purp,
-            height: 10,
-            width: 30,
+            height: 1.5.sp(context),
+            width: 5.sp(context),
             neonGlow: blue,
             text: 'News',
             textSize: 12,
@@ -187,7 +187,7 @@ class CommunitiesButton extends StatelessWidget {
                       );
                     } else {
                       // ignore: prefer_const_constructors
-                      return DeskCommunityPage(
+                      return DeskCommunitiesPage(
                           //transitionAnimation: animation,
                           );
                     }
@@ -200,10 +200,10 @@ class CommunitiesButton extends StatelessWidget {
           child: GradientContainer(
             gradient1: green,
             gradient2: blue,
-            height: 10,
-            width: 30,
+            height: 1.5.sp(context),
+            width: 5.sp(context),
             neonGlow: greenGlow,
-            text: 'Community',
+            text: 'Communities',
             textSize: 12,
             borderColor: const Color.fromARGB(0, 255, 255, 255),
             borderRadius: 500,
@@ -265,8 +265,8 @@ class SocialsButton extends StatelessWidget {
           child: GradientContainer(
             gradient1: orange,
             gradient2: purp,
-            height: 10,
-            width: 30,
+            height: 1.5.sp(context),
+            width: 5.sp(context),
             neonGlow: orangeGlow,
             text: 'Socials',
             textSize: 12,

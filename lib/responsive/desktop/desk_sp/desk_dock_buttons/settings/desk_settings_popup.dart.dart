@@ -1,13 +1,14 @@
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/username_change.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/general_settings.dart';
-import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:supercharged/supercharged.dart';
 import '../../../desk_decks.dart';
 import 'settings_side_panel.dart';
+import 'settings_side_panel_info/general_settings.dart';
 
 class SettingsPopUp extends StatefulWidget {
   const SettingsPopUp({super.key});
@@ -22,19 +23,14 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.loadUsername(FirebaseAuth.instance.currentUser);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    double deckHeight = 22.sp(context);
-    double deckWidth = 35.25.w(context);
-    double halfDeckWidth = 17.325.w(context);
-    double headerTextSize = 6.5.sp(context);
-    subTextSize = 2.5.sp(context);
-    profBubTextSize = 20;
-    double labelTextSize = 3.sp(context);
-    textConstraint = 500;
-    subTextConstraint = 500;
     return Container(
       height: 100.h(context),
       width: 71.w(context),
@@ -44,7 +40,7 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
         children: [
           SizedBox(
             height: 77.h(context),
-            width: 71.w(context),
+            width: 65.w(context),
             // padding: const EdgeInsets.symmetric(vertical: 32),
             child: Material(
               shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -77,42 +73,43 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                           children: [
                             // This column houses both the title of the widget and also the settings side panel
                             // settings side panel is in its own file in the settings folder
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 1.w(context),
-                                    bottom: 2.h(context),
-                                  ),
-                                  child: const Text(
-                                    'Settings',
-                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
-                                  ),
-                                ),
-                                //
-                                //
-                                //This container houses the settings panel buttons
-                                Container(
-                                  height: 66.h(context),
-                                  width: 14.w(context),
-                                  constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
-                                  decoration: const BoxDecoration(
-                                    color: Color.fromRGBO(17, 17, 17, 1),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 1.w(context)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 1.w(context),
+                                      bottom: 2.h(context),
+                                    ),
+                                    child: Text(
+                                      'Settings',
+                                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 6.sp(context)),
                                     ),
                                   ),
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 2.h(context)),
-                                    child: const Column(
-                                      children: [
-                                        SettingsSidePanel(),
-                                      ],
+
+                                  //
+                                  //This container houses the settings panel buttons
+                                  Container(
+                                    height: 68.h(context),
+                                    width: 14.w(context),
+                                    constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
+                                    decoration: const BoxDecoration(
+                                      color: Color.fromARGB(70, 32, 32, 40),
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(top: 2.h(context)),
+                                      child: const Column(
+                                        children: [
+                                          SettingsSidePanel(),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             // This container houses the profile attributes and settings containers
                             Container(
@@ -130,46 +127,54 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                                   // This container for profile attributes showing how long you have been a member
                                   // profile name, and online status
                                   Container(
-                                    height: 15.h(context),
+                                    height: 12.h(context),
                                     width: 47.w(context),
                                     decoration: const BoxDecoration(
-                                      color: Color.fromRGBO(17, 17, 17, 1),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
+                                      color: Color.fromARGB(70, 32, 32, 40),
+                                      borderRadius: BorderRadius.all(Radius.circular(20)),
                                     ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 1.h(context), right: 1.5.w(context), bottom: 1.h(context)),
-                                      child: Wrap(
-                                        alignment: WrapAlignment.spaceEvenly,
-                                        children: [
-                                          //Container housing profile picture and basic information
-                                          Container(
-                                            height: 13.h(context),
-                                            width: 20.w(context),
-                                            decoration: const BoxDecoration(
-                                              color: Color.fromARGB(0, 184, 40, 40),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(20),
-                                              ),
-                                            ),
+                                    child: Row(
+                                      // alignment: WrapAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        //Container housing profile picture and basic information
+
+                                        Image.asset(
+                                          "images/creator.png",
+                                          height: 10.h(context),
+                                        ),
+                                        Container(
+                                          height: 10.h(context),
+                                          width: 20.w(context),
+                                          decoration: const BoxDecoration(
+                                            color: Color.fromARGB(0, 32, 32, 40),
+                                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(1.h(context)),
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
                                               children: [
                                                 // This Text shows the profile ID
                                                 Text(
-                                                  auth.currentUser!.email.toString().allBefore('@'),
+                                                  context.watch<UserProvider>().username,
                                                   style: GoogleFonts.montserrat(
-                                                      textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+                                                      textStyle: TextStyle(fontSize: 5.sp(context)), fontWeight: FontWeight.w600),
                                                 ),
-                                                const Text('Member since 07.17.2023'),
+
+                                                Text(
+                                                  'Member since 07.17.2023',
+                                                  style: TextStyle(fontSize: 3.sp(context)),
+                                                ),
+
                                                 // This is the row containing online status
                                                 // there will be 3 statuses all together being online, away, and offline.
                                                 Row(
                                                   children: [
                                                     Container(
-                                                      height: 2.h(context),
+                                                      height: 1.5.h(context),
                                                       width: 1.w(context),
                                                       decoration: const BoxDecoration(
                                                         color: Color.fromARGB(255, 9, 223, 41),
@@ -180,42 +185,48 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
                                                     ),
                                                     Padding(
                                                       padding: EdgeInsets.only(left: 0.5.w(context)),
-                                                      child: const Text('Online'),
+                                                      child: Text(
+                                                        'Online',
+                                                        style: TextStyle(
+                                                          fontSize: 3.sp(context),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
                                               ],
                                             ),
                                           ),
-                                          //Container housing badges achieved on profile so far
-                                          Container(
-                                            height: 13.h(context),
-                                            width: 16.w(context),
-                                            decoration: const BoxDecoration(
-                                              color: Color.fromRGBO(25, 25, 29, 1),
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(20),
-                                              ),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(top: 1.h(context), left: 1.w(context)),
-                                                  child: const Text(
-                                                    'Badges Earned:',
-                                                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
+                                        ),
+                                        //Container housing badges achieved on profile so far
+                                        Container(
+                                          height: 10.h(context),
+                                          width: 16.w(context),
+                                          decoration: const BoxDecoration(
+                                            color: Color.fromARGB(70, 32, 32, 40),
+                                            borderRadius: BorderRadius.all(Radius.circular(20)),
                                           ),
-                                        ],
-                                      ),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.only(top: 1.h(context), left: 1.w(context)),
+                                                child: Text(
+                                                  'Badges Earned:',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 4.sp(context),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  //
-                                  //
+
                                   // This is the container that will be housing all general notes and information
                                   // for each given button in the settings side panel.
                                   // note: we are still designing the Ui for th ebuttons so the code for this will come much later.
@@ -237,5 +248,3 @@ class _SettingsPopUpState extends State<SettingsPopUp> with AnimationMixin {
     );
   }
 }
-
-//

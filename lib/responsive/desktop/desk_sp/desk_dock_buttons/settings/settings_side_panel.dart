@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -18,11 +17,11 @@ class SettingsSidePanel extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
+          Text(
             'Table of Contents :',
-            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline, fontSize: 3.sp(context)),
           ),
           SizedBox(height: 1.h(context)),
           const SettingsSidePanelButtons(),
@@ -41,27 +40,27 @@ class SettingsSidePanelButtons extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        _buildButton(context, 'button1', 'General'),
+        buildButton(context, 'button1', 'General'),
         SizedBox(
           height: 1.5.h(context),
         ),
-        _buildButton(context, 'button2', 'Profile'),
+        buildButton(context, 'button2', 'Profile'),
         SizedBox(
           height: 1.5.h(context),
         ),
-        _buildButton(context, 'button3', 'Billing'),
+        buildButton(context, 'button3', 'Billing'),
         SizedBox(
           height: 1.5.h(context),
         ),
-        _buildButton(context, 'button4', 'Accessibility'),
+        buildButton(context, 'button4', 'Accessibility'),
         SizedBox(
           height: 1.5.h(context),
         ),
-        _buildButton(context, 'button5', 'Security'),
+        buildButton(context, 'button5', 'Security'),
         SizedBox(
           height: 1.5.h(context),
         ),
-        _buildButton(context, 'button6', 'Privacy'),
+        buildButton(context, 'button6', 'Privacy'),
       ],
     );
   }
@@ -69,7 +68,7 @@ class SettingsSidePanelButtons extends StatelessWidget {
   // This build creates a button and gives that button perimeters such as context
   // button Id and button text, allowing for every button to be unique while having
   // the same animations.
-  Widget _buildButton(BuildContext context, String setButtonId, String setButtonText) {
+  Widget buildButton(BuildContext context, String setButtonId, String setButtonText) {
     var buttonState = Provider.of<ButtonState>(context);
     bool isActive = buttonState.activeSetButtonId == setButtonId;
 

@@ -1,16 +1,32 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/username_change.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:supercharged/supercharged.dart';
-import '../../../util/auth/login.dart';
+import 'package:provider/provider.dart';
 import '../../../util/tactile_button.dart';
 import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 
-class ProfileCard extends StatelessWidget {
+class ProfileCard extends StatefulWidget {
   const ProfileCard({super.key});
 
   @override
+  State<ProfileCard> createState() => _ProfileCardState();
+}
+
+class _ProfileCardState extends State<ProfileCard> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      userProvider.loadUsername(FirebaseAuth.instance.currentUser);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final username = context.watch<UserProvider>().username;
     return TactileButton(
         onTap: () {
           Navigator.of(context).push(
@@ -33,10 +49,10 @@ class ProfileCard extends StatelessWidget {
             ),
           );
         },
-        child: profileCard(context: context));
+        child: profileCard(context: context, username: username));
   }
 
-  Widget profileCard({VoidCallback? onTap, Color? color, context}) {
+  Widget profileCard({required String username, VoidCallback? onTap, Color? color, context}) {
     // values set in desk_decks.dart
     double deckHeight = 22.sp(context);
     double deckWidth = 35.25.w(context);
@@ -56,7 +72,7 @@ class ProfileCard extends StatelessWidget {
       neonGlow: tran,
       labelTextSize: labelTextSize,
       textConstraint: halfDeckWidth * 0.8,
-      headingText: auth.currentUser!.email.toString().allBefore('@'),
+      headingText: username,
       subText: '',
     );
   }

@@ -1,28 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/username_change.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/profile_popup/desk_profile_popup.dart';
-import 'package:flutter_application_1/responsive/tablet/tablet_finance_page.dart';
-import 'package:flutter_application_1/responsive/tablet/tablet_news_page.dart';
-import 'package:flutter_application_1/responsive/tablet/tablet_projects_page.dart';
-import 'package:flutter_application_1/responsive/tablet/tablet_socials_page.dart';
-import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rive/rive.dart' as r;
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
-import '../../util/button_state.dart';
 import '../../util/auth/login.dart';
 import '../mobile/mobile_finance_page.dart';
-import '../mobile/mobile_news_page.dart';
-import '../mobile/mobile_projects_page.dart';
-import '../mobile/mobile_socials_page.dart';
-import 'hero_deck_pages/desk_hero_communities_page.dart';
-import 'hero_deck_pages/desk_hero_news_page.dart';
-import 'hero_deck_pages/desk_hero_project_page.dart';
-import 'hero_deck_pages/desk_hero_socials_page.dart';
+import '../tablet/tablet_finance_page.dart';
 import 'desk_decks.dart';
 
 // Screen dimension variables to use instead of MediaQuery (context)
@@ -294,7 +280,7 @@ class _MTProfileCardState extends State<MTProfileCard> with AnimationMixin {
       neonGlow: tran,
       labelTextSize: labelTextSize,
       textConstraint: halfDeckWidth * 0.8,
-      headingText: auth.currentUser!.email.toString().allBefore('@'),
+      headingText: getCurrentUsername(),
       subText: '',
     );
   }

@@ -40,34 +40,33 @@ class WebUiTemplate extends StatelessWidget {
             children: [
               // Background(),
               ArtBoardScreen(),
-
-              Padding(
-                padding: EdgeInsets.only(right: 0.75.w(context)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    DesktopSidePanel(),
-                    Padding(
-                      padding: EdgeInsets.only(top: 5.h(context)),
-                      child: Container(
-                        height: 100.h(context),
-                        width: 71.5.w(context),
-                        constraints:
-                            100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
-                        //
-                        // *** Content goes here ***
-                        child: child,
-                      ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  DesktopSidePanel(),
+                  Padding(
+                    padding: EdgeInsets.only(top: 5.h(context)),
+                    child: Container(
+                      height: 100.h(context),
+                      width: 71.5.w(context),
+                      constraints:
+                          100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                      //
+                      // *** Content goes here ***
+                      child: child,
                     ),
-                    Container(
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 5.h(context)),
+                    child: Container(
                       height: 90.h(context),
                       constraints:
                           100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                       child: Messages(),
                     ),
-                    // ignore: prefer_const_constructors
-                  ],
-                ),
+                  ),
+                ],
               ),
 
               // Positioned.fill(

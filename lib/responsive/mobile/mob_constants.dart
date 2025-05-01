@@ -124,16 +124,20 @@ class Deck extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Text(
                       deckName,
-                      style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
-                        Shadow(
-                          color: shadowColor,
-                          blurRadius: 1,
-                        ),
-                        Shadow(
-                          color: shadowColor,
-                          blurRadius: 2,
-                        ),
-                      ]),
+                      style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 1,
+                            ),
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 2,
+                            ),
+                          ]),
                     ),
                   ),
                 ),
@@ -169,7 +173,7 @@ AppBar mobAppBar() {
               gradient1: tran,
               gradient2: tran,
               neonGlow: const Color.fromARGB(78, 4, 4, 4),
-              leftPad: 0,
+              rightPad: 0,
             ),
           ),
           Hero(
@@ -260,16 +264,20 @@ class ProfileBubble extends StatelessWidget {
                       Image.asset('images/crest5.png', width: 35),
                       Text(
                         deckName,
-                        style: GoogleFonts.montserrat(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 1,
-                          ),
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 2,
-                          ),
-                        ]),
+                        style: GoogleFonts.montserrat(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                color: shadowColor,
+                                blurRadius: 1,
+                              ),
+                              Shadow(
+                                color: shadowColor,
+                                blurRadius: 2,
+                              ),
+                            ]),
                       ),
                     ],
                   ),
@@ -292,7 +300,7 @@ class TitleBubble extends StatelessWidget {
     required this.gradient1,
     required this.gradient2,
     required this.neonGlow,
-    required this.leftPad,
+    required this.rightPad,
     this.textSize,
     this.onTap,
     super.key,
@@ -305,7 +313,7 @@ class TitleBubble extends StatelessWidget {
   Color gradient2;
   Color neonGlow;
   double? textSize;
-  double leftPad;
+  double rightPad;
   VoidCallback? onTap;
   Color shadowColor = Colors.white;
   Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
@@ -343,7 +351,7 @@ class TitleBubble extends StatelessWidget {
           alignment: Alignment.centerLeft,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(leftPad, 0, 0, 0),
+              padding: EdgeInsets.fromLTRB(rightPad, 0, 0, 0),
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
@@ -353,16 +361,20 @@ class TitleBubble extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
                     deckName,
-                    style: GoogleFonts.montserrat(fontSize: textSize, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
-                      Shadow(
-                        color: shadowColor,
-                        blurRadius: 1,
-                      ),
-                      Shadow(
-                        color: shadowColor,
-                        blurRadius: 2,
-                      ),
-                    ]),
+                    style: GoogleFonts.montserrat(
+                        fontSize: textSize,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 1,
+                          ),
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 2,
+                          ),
+                        ]),
                   ),
                 ),
               ),
@@ -507,7 +519,8 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
       },
       child: ScaleTransition(
         scale: scale,
-        child: AnimatedOpacity(opacity: opacity.value, duration: const Duration(milliseconds: 300), child: projectDeck()),
+        child:
+            AnimatedOpacity(opacity: opacity.value, duration: const Duration(milliseconds: 300), child: projectDeck()),
       ),
     );
   }
@@ -533,7 +546,8 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         ),
         text: Text(
           'Collaborate and innovate.',
-          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -802,7 +816,8 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         textConstraint: 300,
         text: Text(
           'All of your socials in one place.',
-          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -1000,7 +1015,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         textConstraint: 150,
         text: Text(
           'Manage your money.',
-          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -1198,7 +1214,8 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
       textConstraint: 150,
       text: Text(
         'Stay up to date.',
-        style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+        style: GoogleFonts.montserrat(
+            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
       ),
     ));
   }
@@ -1405,16 +1422,20 @@ class Stacks extends Deck {
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Text(
                       deckName,
-                      style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
-                        Shadow(
-                          color: shadowColor,
-                          blurRadius: 1,
-                        ),
-                        Shadow(
-                          color: shadowColor,
-                          blurRadius: 2,
-                        ),
-                      ]),
+                      style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 1,
+                            ),
+                            Shadow(
+                              color: shadowColor,
+                              blurRadius: 2,
+                            ),
+                          ]),
                     ),
                   ),
                 ),

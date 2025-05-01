@@ -5,7 +5,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 
 import 'package:flutter_application_1/responsive/desktop/desk_sp/sp_button_template.dart';
-import 'package:flutter_application_1/util/gradient_container.dart';
+import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/logout_dock_button.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -46,13 +46,16 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
         child: Container(
           constraints: BoxConstraints(minHeight: 750),
           clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(color: const Color.fromARGB(185, 21, 19, 22), border: Border.all(color: deckBorderColor), boxShadow: [
-            // BoxShadow(
-            //   blurRadius: 10,
-            //   color: Color.fromARGB(255, 37, 37, 37),
-            //   offset: Offset(0, 0),
-            // )
-          ]),
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(185, 21, 19, 22),
+              border: Border.all(color: deckBorderColor),
+              boxShadow: [
+                // BoxShadow(
+                //   blurRadius: 10,
+                //   color: Color.fromARGB(255, 37, 37, 37),
+                //   offset: Offset(0, 0),
+                // )
+              ]),
           width: 12.5.w(context),
           child: Padding(
             padding: EdgeInsets.only(left: 1.w(context)),

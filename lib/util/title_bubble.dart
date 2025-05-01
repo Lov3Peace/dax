@@ -11,7 +11,7 @@ class TitleBubble extends StatelessWidget {
     required this.gradient1,
     required this.gradient2,
     required this.neonGlow,
-    required this.leftPad,
+    required this.rightPad,
     this.textSize,
     this.onTap,
     super.key,
@@ -24,7 +24,7 @@ class TitleBubble extends StatelessWidget {
   Color gradient2;
   Color neonGlow;
   double? textSize;
-  double leftPad;
+  double rightPad;
   VoidCallback? onTap;
   Color shadowColor = Colors.white;
   Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
@@ -61,7 +61,7 @@ class TitleBubble extends StatelessWidget {
           alignment: Alignment.centerLeft,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(leftPad, 0, 0, 0),
+              padding: EdgeInsets.fromLTRB(rightPad, 0, 0, 0),
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
@@ -71,16 +71,20 @@ class TitleBubble extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
                     deckName,
-                    style: GoogleFonts.montserrat(fontSize: textSize, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
-                      Shadow(
-                        color: shadowColor,
-                        blurRadius: 1,
-                      ),
-                      Shadow(
-                        color: shadowColor,
-                        blurRadius: 2,
-                      ),
-                    ]),
+                    style: GoogleFonts.montserrat(
+                        fontSize: textSize,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 1,
+                          ),
+                          Shadow(
+                            color: shadowColor,
+                            blurRadius: 2,
+                          ),
+                        ]),
                   ),
                 ),
               ),

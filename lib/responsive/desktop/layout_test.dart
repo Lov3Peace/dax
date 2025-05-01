@@ -57,7 +57,7 @@ class _LayoutTestState extends State<LayoutTest> with AnimationMixin {
         //           //     gradient2: tran,
         //           //     neonGlow: tran,
         //           //     textSize: titleTextSize,
-        //           //     leftPad: 30,
+        //           //     rightPad: 30,
         //           //   ),
         //           // ),
         //         ],

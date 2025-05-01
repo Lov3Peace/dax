@@ -61,7 +61,7 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                             deckName: 'Projects',
                             deckWidth: 17.25.w(context),
                             textSize: 3.sp(context),
-                            leftPad: 30,
+                            rightPad: 30,
                           ),
 
                           //

@@ -10,7 +10,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../responsive/mobile/mob_artboard_page.dart';
-import '../gradient_container.dart';
+import '../gradient_label.dart';
 import '../tactile_button.dart';
 import 'auth_check.dart';
 import 'forget_password_form.dart';
@@ -48,7 +48,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
               height: 100.h(context),
               width: 100.w(context),
               child: Image.asset(
-                "images/colorful-ripple-red-yellow.jpg",
+                "images/aperture-vintage-GlsKHybjdS0-unsplash.jpg",
                 fit: BoxFit.fill,
               ),
             ),
@@ -112,6 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                           right: 0.75.w(context),
                         ),
                         child: TextField(
+                          autofocus: true,
                           style: TextStyle(fontSize: 3.sp(context)),
                           controller: _usernameController,
                           decoration: InputDecoration(
@@ -237,7 +238,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                                                     child: Container(
                                                         height: 85.h(context),
                                                         decoration: BoxDecoration(
-                                                          border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
+                                                          border:
+                                                              Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
                                                           borderRadius: BorderRadius.circular(24),
                                                         )),
                                                   ),
@@ -334,7 +336,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
 
   Future login() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: '${_usernameController.text}@omni.com', password: _passwordController.text);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: '${_usernameController.text}@omni.com', password: _passwordController.text);
       if (mounted) {
         Navigator.pushNamed(
           context,

@@ -31,53 +31,56 @@ class ProjectsButton extends StatelessWidget {
       builder: (context, value, child) => Hero(
         tag: value.projectsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
-        child: TactileButton(
-          scale: 1.03,
-          onTap: () {
-            Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<ButtonState>();
-              heroOff.heroOff();
-              print(value.socialsHeroTag);
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    if (screenWidth < 550) {
-                      return MobProjectsPage(
-                        transitionAnimation: animation,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+          child: TactileButton(
+            scale: 1.03,
+            onTap: () {
+              Future.delayed(const Duration(milliseconds: 100)).then((_) {
+                final heroOff = context.read<ButtonState>();
+                heroOff.heroOff();
+                print(value.socialsHeroTag);
+                Navigator.of(context).push(
+                  PageRouteBuilder(
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
                       );
-                    } else if (screenWidth < 1100) {
-                      return TabProjectsPage(
-                        transitionAnimation: animation,
-                      );
-                    } else {
-                      // ignore: prefer_const_constructors
-                      return DeskProjectsPage(
-                          //transitionAnimation: animation,
-                          );
-                    }
-                  },
-                  transitionDuration: const Duration(milliseconds: 200),
-                ),
-              );
-            });
-          },
-          child: GradientContainer(
-            gradient1: red,
-            gradient2: purp,
-            height: 1.5.sp(context),
-            width: 5.sp(context),
-            neonGlow: red,
-            text: 'Projects',
-            textSize: 2.sp(context),
-            borderColor: const Color.fromARGB(0, 255, 255, 255),
-            borderRadius: 500,
+                    },
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      if (screenWidth < 550) {
+                        return MobProjectsPage(
+                          transitionAnimation: animation,
+                        );
+                      } else if (screenWidth < 1100) {
+                        return TabProjectsPage(
+                          transitionAnimation: animation,
+                        );
+                      } else {
+                        // ignore: prefer_const_constructors
+                        return DeskProjectsPage(
+                            //transitionAnimation: animation,
+                            );
+                      }
+                    },
+                    transitionDuration: const Duration(milliseconds: 200),
+                  ),
+                );
+              });
+            },
+            child: GradientContainer(
+              gradient1: red,
+              gradient2: purp,
+              height: 1.5.sp(context),
+              width: 5.sp(context),
+              neonGlow: red,
+              text: 'Projects',
+              textSize: 2.sp(context),
+              borderColor: const Color.fromARGB(0, 255, 255, 255),
+              borderRadius: 500,
+            ),
           ),
         ),
       ),
@@ -96,53 +99,56 @@ class NewsButton extends StatelessWidget {
       builder: (context, value, child) => Hero(
         tag: value.newsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
-        child: TactileButton(
-          scale: 1.03,
-          onTap: () {
-            Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<ButtonState>();
-              heroOff.heroOff();
-              print(value.socialsHeroTag);
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    if (screenWidth < 550) {
-                      return MobNewsPage(
-                        transitionAnimation: animation,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+          child: TactileButton(
+            scale: 1.03,
+            onTap: () {
+              Future.delayed(const Duration(milliseconds: 100)).then((_) {
+                final heroOff = context.read<ButtonState>();
+                heroOff.heroOff();
+                print(value.socialsHeroTag);
+                Navigator.of(context).push(
+                  PageRouteBuilder(
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
                       );
-                    } else if (screenWidth < 1100) {
-                      return TabNewsPage(
-                        transitionAnimation: animation,
-                      );
-                    } else {
-                      // ignore: prefer_const_constructors
-                      return DeskNewsPage(
-                          //transitionAnimation: animation,
-                          );
-                    }
-                  },
-                  transitionDuration: const Duration(milliseconds: 200),
-                ),
-              );
-            });
-          },
-          child: GradientContainer(
-            gradient1: blue,
-            gradient2: purp,
-            height: 1.5.sp(context),
-            width: 5.sp(context),
-            neonGlow: blue,
-            text: 'News',
-            textSize: 12,
-            borderColor: const Color.fromARGB(0, 255, 255, 255),
-            borderRadius: 500,
+                    },
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      if (screenWidth < 550) {
+                        return MobNewsPage(
+                          transitionAnimation: animation,
+                        );
+                      } else if (screenWidth < 1100) {
+                        return TabNewsPage(
+                          transitionAnimation: animation,
+                        );
+                      } else {
+                        // ignore: prefer_const_constructors
+                        return DeskNewsPage(
+                            //transitionAnimation: animation,
+                            );
+                      }
+                    },
+                    transitionDuration: const Duration(milliseconds: 200),
+                  ),
+                );
+              });
+            },
+            child: GradientContainer(
+              gradient1: blue,
+              gradient2: purp,
+              height: 1.5.sp(context),
+              width: 5.sp(context),
+              neonGlow: blue,
+              text: 'News',
+              textSize: 12,
+              borderColor: const Color.fromARGB(0, 255, 255, 255),
+              borderRadius: 500,
+            ),
           ),
         ),
       ),
@@ -161,52 +167,55 @@ class CommunitiesButton extends StatelessWidget {
       builder: (context, value, child) => Hero(
         tag: value.communityHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
-        child: TactileButton(
-          scale: 1.03,
-          onTap: () {
-            Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<ButtonState>();
-              heroOff.heroOff();
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    if (screenWidth < 550) {
-                      return MobFinancePage(
-                        transitionAnimation: animation,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+          child: TactileButton(
+            scale: 1.03,
+            onTap: () {
+              Future.delayed(const Duration(milliseconds: 100)).then((_) {
+                final heroOff = context.read<ButtonState>();
+                heroOff.heroOff();
+                Navigator.of(context).push(
+                  PageRouteBuilder(
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
                       );
-                    } else if (screenWidth < 1100) {
-                      return TabFinancePage(
-                        transitionAnimation: animation,
-                      );
-                    } else {
-                      // ignore: prefer_const_constructors
-                      return DeskCommunitiesPage(
-                          //transitionAnimation: animation,
-                          );
-                    }
-                  },
-                  transitionDuration: const Duration(milliseconds: 200),
-                ),
-              );
-            });
-          },
-          child: GradientContainer(
-            gradient1: green,
-            gradient2: blue,
-            height: 1.5.sp(context),
-            width: 5.sp(context),
-            neonGlow: greenGlow,
-            text: 'Communities',
-            textSize: 12,
-            borderColor: const Color.fromARGB(0, 255, 255, 255),
-            borderRadius: 500,
+                    },
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      if (screenWidth < 550) {
+                        return MobFinancePage(
+                          transitionAnimation: animation,
+                        );
+                      } else if (screenWidth < 1100) {
+                        return TabFinancePage(
+                          transitionAnimation: animation,
+                        );
+                      } else {
+                        // ignore: prefer_const_constructors
+                        return DeskCommunitiesPage(
+                            //transitionAnimation: animation,
+                            );
+                      }
+                    },
+                    transitionDuration: const Duration(milliseconds: 200),
+                  ),
+                );
+              });
+            },
+            child: GradientContainer(
+              gradient1: green,
+              gradient2: blue,
+              height: 1.5.sp(context),
+              width: 5.sp(context),
+              neonGlow: greenGlow,
+              text: 'Communities',
+              textSize: 12,
+              borderColor: const Color.fromARGB(0, 255, 255, 255),
+              borderRadius: 500,
+            ),
           ),
         ),
       ),
@@ -225,53 +234,56 @@ class SocialsButton extends StatelessWidget {
       builder: (context, value, child) => Hero(
         tag: value.socialsHeroTag,
         flightShuttleBuilder: flightShuttleBuilder,
-        child: TactileButton(
-          scale: 1.03,
-          onTap: () {
-            Future.delayed(const Duration(milliseconds: 100)).then((_) {
-              final heroOff = context.read<ButtonState>();
-              heroOff.heroOff();
-              print(value.socialsHeroTag);
-              Navigator.of(context).push(
-                PageRouteBuilder(
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    animation = CurvedAnimation(parent: animation, curve: Curves.linear);
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    if (screenWidth < 550) {
-                      return MobSocialsPage(
-                        transitionAnimation: animation,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+          child: TactileButton(
+            scale: 1.03,
+            onTap: () {
+              Future.delayed(const Duration(milliseconds: 100)).then((_) {
+                final heroOff = context.read<ButtonState>();
+                heroOff.heroOff();
+                print(value.socialsHeroTag);
+                Navigator.of(context).push(
+                  PageRouteBuilder(
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                      animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
                       );
-                    } else if (screenWidth < 1100) {
-                      return TabSocialsPage(
-                        transitionAnimation: animation,
-                      );
-                    } else {
-                      // ignore: prefer_const_constructors
-                      return DeskSocialsPage(
-                          //transitionAnimation: animation,
-                          );
-                    }
-                  },
-                  transitionDuration: const Duration(milliseconds: 200),
-                ),
-              );
-            });
-          },
-          child: GradientContainer(
-            gradient1: orange,
-            gradient2: purp,
-            height: 1.5.sp(context),
-            width: 5.sp(context),
-            neonGlow: orangeGlow,
-            text: 'Socials',
-            textSize: 12,
-            borderColor: const Color.fromARGB(0, 255, 255, 255),
-            borderRadius: 500,
+                    },
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      if (screenWidth < 550) {
+                        return MobSocialsPage(
+                          transitionAnimation: animation,
+                        );
+                      } else if (screenWidth < 1100) {
+                        return TabSocialsPage(
+                          transitionAnimation: animation,
+                        );
+                      } else {
+                        // ignore: prefer_const_constructors
+                        return DeskSocialsPage(
+                            //transitionAnimation: animation,
+                            );
+                      }
+                    },
+                    transitionDuration: const Duration(milliseconds: 200),
+                  ),
+                );
+              });
+            },
+            child: GradientContainer(
+              gradient1: orange,
+              gradient2: purp,
+              height: 1.sp(context),
+              width: 5.sp(context),
+              neonGlow: orangeGlow,
+              text: 'Socials',
+              textSize: 12,
+              borderColor: const Color.fromARGB(0, 255, 255, 255),
+              borderRadius: 500,
+            ),
           ),
         ),
       ),

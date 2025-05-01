@@ -29,13 +29,15 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         // crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
               Expanded(
+                // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
+                // the padding on the LargeStagger list items)
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(0.5.w(context), 0, 0.5.w(context), 0.5.w(context)),
+                  padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +45,7 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
                       //
                       // Title of Screen
                       TitleBubble(
-                        deckHeight: 3.sp(context),
+                        deckHeight: 5.h(context),
                         deckName: 'Communities',
                         deckWidth: 17.25.w(context),
                         textSize: 3.5.sp(context),
@@ -85,8 +87,9 @@ class CommunitiesBubbleDock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 8.sp(context),
-      // width: 30.w(context),
+      padding: EdgeInsets.all(0.75.w(context)),
+      height: 5.h(context),
+      constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 110) : BoxConstraints(minHeight: 55),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),

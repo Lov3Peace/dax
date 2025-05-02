@@ -19,19 +19,19 @@ class FAQsInformation extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildHeader('Questions', context),
+            buildHeader('Questions', context),
             const Divider(color: Colors.grey, indent: 20, endIndent: 30),
-            _buildSection(
+            buildSection(
                 'Q: How can I go hawda?',
                 'The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it is seen around the web; on templates, websites, and stock designs. Use our generator to get your own, or read on for the authoritative history of lorem ipsum.',
                 context),
             const Divider(color: Colors.grey, indent: 20, endIndent: 30),
-            _buildSection(
+            buildSection(
                 'Q: Is going hawda mandatory?',
                 'The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it is seen around the web; on templates, websites, and stock designs. Use our generator to get your own, or read on for the authoritative history of lorem ipsum.',
                 context),
             const Divider(color: Colors.grey, indent: 20, endIndent: 30),
-            _buildSection(
+            buildSection(
                 'Q: Will Lex ever go hawda?',
                 'The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it is seen around the web; on templates, websites, and stock designs. Use our generator to get your own, or read on for the authoritative history of lorem ipsum.',
                 context),
@@ -42,22 +42,22 @@ class FAQsInformation extends StatelessWidget {
   }
 
 // This build gives the header of the section selected
-  Widget _buildHeader(String title, context) {
+  Widget buildHeader(String title, context) {
     return Padding(
       padding: EdgeInsets.only(top: 2.h(context), left: 3.w(context)),
       child: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
-          fontSize: 36,
+          fontSize: 6.sp(context),
         ),
       ),
     );
   }
 
 // This build the sections for the specified faqs button
-  Widget _buildSection(String title, String content, context) {
+  Widget buildSection(String title, String content, context) {
     return Container(
       height: 24.h(context),
       width: 45.w(context),

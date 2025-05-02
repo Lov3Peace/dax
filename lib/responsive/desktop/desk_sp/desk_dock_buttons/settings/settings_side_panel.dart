@@ -1,108 +1,100 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../../util/button_state.dart';
-
-// This class creates the complete side panle all together.
 class SettingsSidePanel extends StatelessWidget {
-  const SettingsSidePanel({super.key});
+  final int currentIndex;
+  final Function(int) onTap;
+
+  const SettingsSidePanel({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: tran,
       width: 13.w(context),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            'Table of Contents :',
-            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline, fontSize: 3.sp(context)),
-          ),
-          SizedBox(height: 1.h(context)),
-          const SettingsSidePanelButtons(),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Table of Contents :',
+              style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline, fontSize: 4.sp(context)),
+            ),
+            SizedBox(height: 1.h(context)),
+            SettingsSidePanelButtons(
+              currentIndex: currentIndex,
+              onTap: onTap,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-// This class houses all the settings side panel buttons
 class SettingsSidePanelButtons extends StatelessWidget {
-  const SettingsSidePanelButtons({super.key});
+  final int currentIndex;
+  final Function(int) onTap;
+
+  SettingsSidePanelButtons({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  final List<String> labels = [
+    'General',
+    'Profile',
+    'Billing',
+    'Accessibility',
+    'Security',
+    'Privacy',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        buildButton(context, 'button1', 'General'),
-        SizedBox(
-          height: 1.5.h(context),
-        ),
-        buildButton(context, 'button2', 'Profile'),
-        SizedBox(
-          height: 1.5.h(context),
-        ),
-        buildButton(context, 'button3', 'Billing'),
-        SizedBox(
-          height: 1.5.h(context),
-        ),
-        buildButton(context, 'button4', 'Accessibility'),
-        SizedBox(
-          height: 1.5.h(context),
-        ),
-        buildButton(context, 'button5', 'Security'),
-        SizedBox(
-          height: 1.5.h(context),
-        ),
-        buildButton(context, 'button6', 'Privacy'),
-      ],
-    );
-  }
+      children: List.generate(labels.length, (index) {
+        final isActive = currentIndex == index;
 
-  // This build creates a button and gives that button perimeters such as context
-  // button Id and button text, allowing for every button to be unique while having
-  // the same animations.
-  Widget buildButton(BuildContext context, String setButtonId, String setButtonText) {
-    var buttonState = Provider.of<ButtonState>(context);
-    bool isActive = buttonState.activeSetButtonId == setButtonId;
-
-    return GestureDetector(
-      onTap: () {
-        buttonState.setActiveSetButton(setButtonId); // Set the pressed button as active
-        buttonState.callSetClassForButton(setButtonId);
-        // buttonState.deactivateOtherButtons(
-        //     buttonId); // Call the specific class for the button
-      },
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 100),
-          decoration: BoxDecoration(
-            border: Border.all(color: isActive ? Colors.black87 : tran),
-            boxShadow: [
-              BoxShadow(color: isActive ? Colors.white : Colors.grey.shade700),
-            ],
-            color: tran,
-            borderRadius: const BorderRadius.all(Radius.circular(60)),
+        return Padding(
+          padding: EdgeInsets.only(bottom: 1.h(context)),
+          child: GestureDetector(
+            onTap: () => onTap(index),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 100),
+                decoration: BoxDecoration(
+                  border: Border.all(color: isActive ? Colors.white70 : tran),
+                  boxShadow: [BoxShadow(color: isActive ? Colors.white : Colors.grey.shade700)],
+                  color: tran,
+                  borderRadius: BorderRadius.circular(60),
+                ),
+                width: isActive ? 13.w(context) : 9.w(context),
+                height: 4.h(context),
+                alignment: Alignment.center,
+                child: Text(
+                  labels[index],
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(fontSize: 2.sp(context)),
+                    fontWeight: FontWeight.w400,
+                    color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54,
+                  ),
+                ),
+              ),
+            ),
           ),
-          width: isActive ? 13.w(context) : 9.w(context),
-          height: 4.h(context),
-          alignment: Alignment.center,
-          child: Text(
-            setButtonText,
-            style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp(context)),
-                fontWeight: FontWeight.w400,
-                color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54),
-          ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

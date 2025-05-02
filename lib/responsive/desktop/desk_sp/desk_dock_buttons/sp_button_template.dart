@@ -1,13 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/button_state.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class SpButtonTemplate extends StatefulWidget {
   final IconData icon;

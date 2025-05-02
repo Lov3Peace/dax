@@ -50,14 +50,6 @@ class _WalletC2State extends State<WalletC2> {
                           hintStyle: const TextStyle(color: Colors.white70),
                           filled: false,
                           contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                          // enabledBorder: const OutlineInputBorder(
-                          //   borderRadius: BorderRadius.all(Radius.circular(20)),
-                          //   borderSide: BorderSide(color: Colors.grey),
-                          // ),
-                          // focusedBorder: const OutlineInputBorder(
-                          //   borderRadius: BorderRadius.all(Radius.circular(20)),
-                          //   borderSide: BorderSide(color: Colors.white),
-                          // ),
                           border: InputBorder.none,
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,

@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import '../../../../../main.dart';
-import '../../../../../util/button_state.dart';
 
 class FAQsSidePanel extends StatelessWidget {
-  const FAQsSidePanel({super.key});
+  final int currentIndex;
+  final Function(int) onTap;
+
+  const FAQsSidePanel({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +22,15 @@ class FAQsSidePanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
+          Text(
             'Table of Contents :',
-            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline, fontSize: 3.sp(context)),
           ),
           SizedBox(height: 1.h(context)),
-          const FAQsSidePanelButtons(),
+          FAQsSidePanelButtons(
+            currentIndex: currentIndex,
+            onTap: onTap,
+          ),
         ],
       ),
     );
@@ -31,77 +38,62 @@ class FAQsSidePanel extends StatelessWidget {
 }
 
 class FAQsSidePanelButtons extends StatelessWidget {
-  const FAQsSidePanelButtons({super.key});
+  final int currentIndex;
+  final Function(int) onTap;
+
+  FAQsSidePanelButtons({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  final List<String> labels = [
+    'Questions',
+    'Projects',
+    'Communities',
+    'Socials',
+    'News',
+    'Wallet',
+    'Tips & Tricks',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        _buildButton(context, 'button1', 'Questions'),
-        SizedBox(
-          height: 1.h(context),
-        ),
-        _buildButton(context, 'button2', 'Projects'),
-        SizedBox(
-          height: 1.h(context),
-        ),
-        _buildButton(context, 'button3', 'Communities'),
-        SizedBox(
-          height: 1.h(context),
-        ),
-        _buildButton(context, 'button4', 'Socials'),
-        SizedBox(
-          height: 1.h(context),
-        ),
-        _buildButton(context, 'button5', 'News'),
-        SizedBox(
-          height: 1.h(context),
-        ),
-        _buildButton(context, 'button6', 'Wallet'),
-        SizedBox(
-          height: 1.h(context),
-        ),
-        _buildButton(context, 'button7', 'Tips & Tricks'),
-      ],
-    );
-  }
+      children: List.generate(labels.length, (index) {
+        final isActive = currentIndex == index;
 
-  Widget _buildButton(BuildContext context, String faqsButtonId, String faqsButtonText) {
-    var buttonState = Provider.of<ButtonState>(context);
-    bool isActive = buttonState.activeFAQsButtonId == faqsButtonId;
-
-    return GestureDetector(
-      onTap: () {
-        buttonState.setActiveFAQsButton(faqsButtonId); // Set the pressed button as active
-        buttonState.callFAQsClassForButton(faqsButtonId);
-        // buttonState.deactivateOtherButtons(
-        //     buttonId); // Call the specific class for the button
-      },
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 100),
-          decoration: BoxDecoration(
-            border: Border.all(color: isActive ? Colors.black87 : tran),
-            boxShadow: [
-              BoxShadow(color: isActive ? Colors.white : Colors.grey.shade700),
-            ],
-            color: tran,
-            borderRadius: const BorderRadius.all(Radius.circular(60)),
+        return Padding(
+          padding: EdgeInsets.only(bottom: 1.h(context)),
+          child: GestureDetector(
+            onTap: () => onTap(index),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 100),
+                decoration: BoxDecoration(
+                  border: Border.all(color: isActive ? Colors.white70 : tran),
+                  boxShadow: [BoxShadow(color: isActive ? Colors.white : Colors.grey.shade700)],
+                  color: tran,
+                  borderRadius: BorderRadius.circular(60),
+                ),
+                width: isActive ? 13.w(context) : 9.w(context),
+                height: 4.h(context),
+                alignment: Alignment.center,
+                child: Text(
+                  labels[index],
+                  style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(fontSize: 2.sp(context)),
+                    fontWeight: FontWeight.w400,
+                    color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54,
+                  ),
+                ),
+              ),
+            ),
           ),
-          width: isActive ? 13.w(context) : 9.w(context),
-          height: 4.h(context),
-          alignment: Alignment.center,
-          child: Text(
-            faqsButtonText,
-            style: GoogleFonts.montserrat(
-                textStyle: TextStyle(fontSize: 2.sp(context)),
-                fontWeight: FontWeight.w400,
-                color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54),
-          ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

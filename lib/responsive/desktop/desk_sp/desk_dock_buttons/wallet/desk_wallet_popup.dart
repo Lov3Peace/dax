@@ -1,12 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/field_dropdown.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/username_change.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../../../util/gradient_label.dart';
 import '../../../../../util/tactile_button.dart';
-
 import '../../../desk_decks.dart';
 import 'desk_wallet_sections/desk_wallet_c1.dart';
 import 'desk_wallet_sections/desk_wallet_c2.dart';
@@ -286,13 +288,9 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                                         child: Padding(
                                                           padding: EdgeInsets.all(1.h(context)),
                                                           child: Text(
-                                                            "katarina",
-                                                            textAlign: TextAlign.center,
-                                                            style: TextStyle(
-                                                              color: Colors.white,
-                                                              fontWeight: FontWeight.bold,
-                                                              fontSize: 3.sp(context),
-                                                            ),
+                                                            context.watch<UserProvider>().username,
+                                                            style: GoogleFonts.montserrat(
+                                                                textStyle: TextStyle(fontSize: 3.sp(context)), fontWeight: FontWeight.w600),
                                                           ),
                                                         ),
                                                       ),

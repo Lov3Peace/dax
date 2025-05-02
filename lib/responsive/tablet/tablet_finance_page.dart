@@ -78,7 +78,7 @@ class _TabFinancePageState extends State<TabFinancePage> {
                     gradient1: tran,
                     gradient2: tran,
                     neonGlow: tran,
-                    leftPad: 0,
+                    rightPad: 0,
                   ),
                 ),
                 Hero(

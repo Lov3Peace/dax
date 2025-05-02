@@ -4,7 +4,7 @@ import 'package:flutter_application_1/responsive/desktop/firebase_tools/username
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../../../../../util/gradient_container.dart';
+import '../../../../../../util/gradient_label.dart';
 import '../../../../../../util/tactile_button.dart';
 
 // The class the holds the information in the genral settings button

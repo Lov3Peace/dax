@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:intl/intl.dart';
-import '../../../../../../util/gradient_container.dart';
+import '../../../../../../util/gradient_label.dart';
 import '../../../../../../util/tactile_button.dart';
 
 class WalletC1 extends StatelessWidget {

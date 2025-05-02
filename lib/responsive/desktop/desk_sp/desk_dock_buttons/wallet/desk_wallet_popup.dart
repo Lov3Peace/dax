@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../../../../../util/gradient_container.dart';
+import '../../../../../util/gradient_label.dart';
 import '../../../../../util/tactile_button.dart';
 import '../../../desk_decks.dart';
 import 'desk_wallet_sections/desk_wallet_c1.dart';
@@ -245,7 +245,8 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                       height: 20.h(context),
                                       width: 20.w(context),
                                       decoration: BoxDecoration(
-                                        gradient: const LinearGradient(colors: [blue, Color.fromARGB(255, 85, 221, 89)]),
+                                        gradient:
+                                            const LinearGradient(colors: [blue, Color.fromARGB(255, 85, 221, 89)]),
                                         boxShadow: const [
                                           BoxShadow(
                                             color: blue,
@@ -299,9 +300,11 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                               ),
                                               const SizedBox(),
                                               Padding(
-                                                padding: EdgeInsets.only(bottom: 2.h(context), left: 2.w(context), top: 5.h(context)),
+                                                padding: EdgeInsets.only(
+                                                    bottom: 2.h(context), left: 2.w(context), top: 5.h(context)),
                                                 child: Text(
-                                                  NumberFormat.simpleCurrency(locale: 'en-US', decimalDigits: 2).format(7837),
+                                                  NumberFormat.simpleCurrency(locale: 'en-US', decimalDigits: 2)
+                                                      .format(7837),
                                                   style: TextStyle(
                                                     fontSize: 3.sp(context),
                                                     fontWeight: FontWeight.bold,

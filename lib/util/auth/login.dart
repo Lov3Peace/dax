@@ -5,7 +5,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:flutter_application_1/util/auth/signup.dart';
-import 'package:flutter_application_1/util/gradient_container.dart';
+import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
@@ -161,7 +161,8 @@ class _LoginFormState extends State<LoginForm> {
 
   Future login() async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: '${_usernameController.text}@omni.com', password: _passwordController.text);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: '${_usernameController.text}@omni.com', password: _passwordController.text);
 
       Navigator.of(context).push(
         PageRouteBuilder(
@@ -244,6 +245,7 @@ class _LoginFormState extends State<LoginForm> {
                 right: 10,
               ),
               child: TextField(
+                style: TextStyle(fontSize: 3.sp(context)),
                 controller: _usernameController,
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -274,6 +276,7 @@ class _LoginFormState extends State<LoginForm> {
                 right: 15,
               ),
               child: TextField(
+                style: TextStyle(fontSize: 3.sp(context)),
                 controller: _passwordController,
                 onSubmitted: (value) => login(),
                 obscureText: false,

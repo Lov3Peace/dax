@@ -11,6 +11,7 @@ class StaggerLoad extends StatelessWidget {
     required this.delay,
     required this.scale,
     required this.layer,
+    this.controller,
     this.padding,
     this.physics,
   });
@@ -22,6 +23,7 @@ class StaggerLoad extends StatelessWidget {
   final Axis scrollDirection;
   final EdgeInsets? padding;
   final ScrollPhysics? physics;
+  final ScrollController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class StaggerLoad extends StatelessWidget {
         itemCount: widgets.length, // the length of the listview is the length of the list passed into it
         scrollDirection: scrollDirection,
         physics: physics,
+        controller: controller,
         itemBuilder: (context, index) {
           return Container(
             padding: padding,

@@ -4,7 +4,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 
 import '../../../../../main.dart';
-import '../../../../../util/gradient_container.dart';
+import '../../../../../util/gradient_label.dart';
 
 class Pc2Section3 extends StatefulWidget {
   Pc2Section3({super.key});

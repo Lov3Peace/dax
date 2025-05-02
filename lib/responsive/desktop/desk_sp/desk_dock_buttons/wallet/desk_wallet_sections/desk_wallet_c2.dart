@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import '../../../../../../util/gradient_container.dart';
+import '../../../../../../util/gradient_label.dart';
 import '../../../../../../util/tactile_button.dart';
 
 class WalletC2 extends StatefulWidget {
@@ -227,7 +227,20 @@ class _WalletC2State extends State<WalletC2> {
 
   String getCurrentMonth() {
     final now = DateTime.now();
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
     return '${months[now.month - 1]} ${now.year}';
   }
 }

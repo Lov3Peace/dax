@@ -10,14 +10,14 @@ class TitleBubble extends StatefulWidget {
   final double deckWidth;
   final String deckName;
   final double textSize;
-  final double leftPad;
+  final double rightPad;
   final VoidCallback? onTap;
 
   const TitleBubble({
     required this.deckHeight,
     required this.deckWidth,
     required this.deckName,
-    required this.leftPad,
+    required this.rightPad,
     required this.textSize,
     this.onTap,
     Key? key,
@@ -45,31 +45,18 @@ class _TitleBubbleState extends State<TitleBubble> {
         constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 110) : BoxConstraints(minHeight: 55),
         height: widget.deckHeight,
         width: widget.deckWidth,
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(widget.leftPad, 0, 0, 0),
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [Colors.transparent, Colors.transparent]),
-                  boxShadow: [BoxShadow(color: Colors.transparent, blurRadius: 20, blurStyle: BlurStyle.solid)],
-                  borderRadius: BorderRadius.all(Radius.circular(20.sp(context))),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: Text(
-                    widget.deckName,
-                    style: GoogleFonts.montserrat(
-                      fontSize: widget.textSize,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(0, 0, widget.rightPad, 0),
+          child: Center(
+            child: Text(
+              widget.deckName,
+              style: GoogleFonts.montserrat(
+                fontSize: widget.textSize,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

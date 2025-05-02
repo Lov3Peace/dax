@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../main.dart';
 import '../../responsive/mobile/mob_constants.dart';
-import '../gradient_container.dart';
+import '../gradient_label.dart';
 import '../tactile_button.dart';
 
 class ForgotPasswordForm extends StatefulWidget {

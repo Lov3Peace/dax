@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -63,7 +63,7 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                       deckName: 'Socials',
                       deckWidth: 17.25.w(context),
                       textSize: 3.sp(context),
-                      leftPad: 30,
+                      rightPad: 30,
                     ),
 
                     //
@@ -131,7 +131,7 @@ class SocialsBubbleDock extends StatelessWidget {
                   duration: const Duration(milliseconds: 400),
                   curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const CommunityButton()
+          const CommunitiesButton()
               .animate()
               .slideX(
                   begin: 0.25,

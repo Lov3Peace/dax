@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../util/button_state.dart';
@@ -12,14 +12,14 @@ import '../desk_decks.dart';
 import '../large_stagger_load.dart';
 import '../util/web_ui_template.dart';
 
-class DeskCommunityPage extends StatefulWidget {
-  const DeskCommunityPage({Key? key}) : super(key: key);
+class DeskCommunitiesPage extends StatefulWidget {
+  const DeskCommunitiesPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskCommunityPage> createState() => _DeskCommunityPageState();
+  State<DeskCommunitiesPage> createState() => _DeskCommunitiesPageState();
 }
 
-class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMixin {
+class _DeskCommunitiesPageState extends State<DeskCommunitiesPage> with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -62,7 +62,7 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
                         deckName: 'Communities',
                         deckWidth: 17.25.w(context),
                         textSize: 3.sp(context),
-                        leftPad: 30,
+                        rightPad: 30,
                       ),
 
                       //
@@ -70,7 +70,7 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
                       Container(
                         color: tran,
                         child: const Column(
-                          children: [CommunityBubbleDock()],
+                          children: [CommunitiesBubbleDock()],
                         ),
                       ),
                     ],
@@ -101,8 +101,8 @@ class _DeskCommunityPageState extends State<DeskCommunityPage> with AnimationMix
   }
 }
 
-class CommunityBubbleDock extends StatelessWidget {
-  const CommunityBubbleDock({super.key});
+class CommunitiesBubbleDock extends StatelessWidget {
+  const CommunitiesBubbleDock({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +126,7 @@ class CommunityBubbleDock extends StatelessWidget {
                   duration: const Duration(milliseconds: 400),
                   curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const ProjectsButton()
+          const CommunitiesButton()
               .animate()
               .slideX(
                   begin: 0.25,
@@ -135,7 +135,7 @@ class CommunityBubbleDock extends StatelessWidget {
                   duration: const Duration(milliseconds: 400),
                   curve: const SoftClose())
               .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const NewsButton()
+          const ProjectsButton()
               .animate()
               .slideX(
                   begin: 0.25,

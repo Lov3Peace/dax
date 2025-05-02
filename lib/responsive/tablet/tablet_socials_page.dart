@@ -81,7 +81,7 @@ class _TabSocialsPageState extends State<TabSocialsPage> {
                       gradient1: tran,
                       gradient2: tran,
                       neonGlow: tran,
-                      leftPad: 0,
+                      rightPad: 0,
                     ),
                   ),
                   Hero(

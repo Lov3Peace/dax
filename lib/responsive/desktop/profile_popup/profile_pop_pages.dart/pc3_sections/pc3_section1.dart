@@ -5,7 +5,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../../../util/gradient_container.dart';
+import '../../../../../util/gradient_label.dart';
 import '../../../../../../util/tactile_button.dart';
 
 class Pc3Section1 extends StatefulWidget {

@@ -6,7 +6,6 @@ import 'package:flutter_application_1/util/test_list.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../util/button_state.dart';
-import '../bubble_deck_pages/desk_project_page.dart';
 import '../dashboard/title_bubble.dart';
 
 class DeskHeroProjectsPage extends StatefulWidget {
@@ -53,7 +52,7 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                         deckName: 'Projects',
                         deckWidth: 17.25.w(context),
                         textSize: 3.sp(context),
-                        leftPad: 30,
+                        rightPad: 30,
                       ),
 
                       //

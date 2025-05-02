@@ -80,100 +80,102 @@ class HelpPopUpState extends State<HelpPopUp> {
                       ),
                       Padding(
                         padding: EdgeInsets.all(1.h(context)),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                // This column houses the title of the popup along with the container
-                                // that houses the class infosidepanel
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(bottom: .5.h(context)),
-                                      child: Text(
-                                        'FAQs',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 6.sp(context),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  // This column houses the title of the popup along with the container
+                                  // that houses the class infosidepanel
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: .5.h(context)),
+                                        child: Text(
+                                          'FAQs',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 6.sp(context),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Container(
-                                      height: 68.h(context),
-                                      width: 14.w(context),
-                                      constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(70, 32, 32, 40),
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(20),
+                                      Container(
+                                        height: 70.h(context),
+                                        width: 14.w(context),
+                                        constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
+                                        decoration: BoxDecoration(
+                                          color: const Color.fromARGB(70, 32, 32, 40),
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(20),
+                                          ),
+                                          border: Border.all(
+                                            color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                                            width: 1.5, // ← adjust thickness
+                                          ),
                                         ),
-                                        border: Border.all(
-                                          color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
-                                          width: 1.5, // ← adjust thickness
+                                        child: Padding(
+                                          padding: EdgeInsets.only(top: 2.h(context)),
+                                          child: Column(
+                                            children: [
+                                              FAQsSidePanel(
+                                                currentIndex: currentSlide,
+                                                onTap: handleButtonTap,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                      child: Padding(
-                                        padding: EdgeInsets.only(top: 2.h(context)),
-                                        child: Column(
-                                          children: [
-                                            FAQsSidePanel(
-                                              currentIndex: currentSlide,
-                                              onTap: handleButtonTap,
-                                            ),
-                                          ],
-                                        ),
+                                    ],
+                                  ),
+                                  // This container houses the container that holds the information for the specified button selected
+                                  // in the faqs side panel.
+                                  Container(
+                                    height: 75.h(context),
+                                    width: 47.w(context),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(70, 32, 32, 40),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                      border: Border.all(
+                                        color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                                        width: 1.5, // ← adjust thickness
                                       ),
                                     ),
-                                  ],
-                                ),
-                                // This container houses the container that holds the information for the specified button selected
-                                // in the faqs side panel.
-                                Container(
-                                  height: 75.h(context),
-                                  width: 47.w(context),
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromARGB(70, 32, 32, 40),
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(20),
-                                    ),
-                                    border: Border.all(
-                                      color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
-                                      width: 1.5, // ← adjust thickness
+                                    child: Center(
+                                      // The container that holds the information
+                                      child: Container(
+                                        height: 71.h(context),
+                                        width: 45.w(context),
+                                        decoration: const BoxDecoration(
+                                          color: Color.fromRGBO(15, 15, 17, 1),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(20),
+                                          ),
+                                        ),
+                                        child: CarouselSlider(
+                                          carouselController: controller,
+                                          options: CarouselOptions(
+                                            height: 69.h(context),
+                                            viewportFraction: .97,
+                                            enlargeCenterPage: true,
+                                            scrollPhysics: const NeverScrollableScrollPhysics(),
+                                            onPageChanged: (index, _) {
+                                              setState(() => currentSlide = index);
+                                            },
+                                          ),
+                                          items: slides,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                  child: Center(
-                                    // The container that holds the information
-                                    child: Container(
-                                      height: 71.h(context),
-                                      width: 45.w(context),
-                                      decoration: const BoxDecoration(
-                                        color: Color.fromRGBO(15, 15, 17, 1),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(20),
-                                        ),
-                                      ),
-                                      child: CarouselSlider(
-                                        carouselController: controller,
-                                        options: CarouselOptions(
-                                          height: 69.h(context),
-                                          viewportFraction: .97,
-                                          enlargeCenterPage: true,
-                                          scrollPhysics: const NeverScrollableScrollPhysics(),
-                                          onPageChanged: (index, _) {
-                                            setState(() => currentSlide = index);
-                                          },
-                                        ),
-                                        items: slides,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

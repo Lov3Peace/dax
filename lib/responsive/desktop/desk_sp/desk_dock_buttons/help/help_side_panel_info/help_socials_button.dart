@@ -67,15 +67,20 @@ class SocialsInformation extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.only(left: 3.w(context), top: 1.h(context)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title),
-            Padding(
-              padding: EdgeInsets.only(top: 2.5.h(context), right: 1.5.w(context)),
-              child: Text(content),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(title),
+              Padding(
+                padding: EdgeInsets.only(top: 2.5.h(context), right: 1.5.w(context)),
+                child: Text(
+                  content,
+                  style: TextStyle(fontSize: 3.sp(context)),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

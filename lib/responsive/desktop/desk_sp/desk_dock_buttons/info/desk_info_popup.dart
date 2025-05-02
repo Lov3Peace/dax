@@ -2,23 +2,42 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_about_us.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_contact_us.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_goals.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/info/info_side_panel_info/info_terms_conditions.dart';
-import 'package:provider/provider.dart';
-import 'package:simple_animations/simple_animations.dart';
-import '../../../../../util/button_state.dart';
-import '../../../desk_constants.dart';
+
 import '../../../desk_decks.dart';
 import 'info_side_panel.dart';
+import 'info_side_panel_info/info_about_us.dart';
+import 'info_side_panel_info/info_contact_us.dart';
+import 'info_side_panel_info/info_goals.dart';
+import 'info_side_panel_info/info_terms_conditions.dart';
 
-class InfoPopUp extends StatelessWidget {
+class InfoPopUp extends StatefulWidget {
   const InfoPopUp({super.key});
 
   @override
+  State<InfoPopUp> createState() => _InfoPopUpState();
+}
+
+class _InfoPopUpState extends State<InfoPopUp> {
+  final CarouselSliderController controller = CarouselSliderController();
+
+  int currentSlide = 0;
+
+  final List<Widget> slides = [
+    AboutUsInformation(),
+    ContactUsInformation(),
+    GoalsInformation(),
+    TermsConditionsInformation(),
+  ];
+
+  void handleButtonTap(int index) {
+    setState(() {
+      currentSlide = index;
+    });
+    controller.jumpToPage(index);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final buttonState = Provider.of<ButtonState>(context);
     return Container(
       // height: 100.h(context),
       width: 71.w(context),
@@ -26,7 +45,7 @@ class InfoPopUp extends StatelessWidget {
       child: Stack(alignment: Alignment.center, children: [
         SizedBox(
           height: 77.h(context),
-          width: 71.w(context),
+          width: 65.w(context),
           // padding: const EdgeInsets.symmetric(vertical: 32),
           child: Material(
             shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -47,83 +66,105 @@ class InfoPopUp extends StatelessWidget {
                     )),
                   ),
                 ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: .7.h(context), bottom: .7.h(context)),
-                      child: Wrap(
-                        spacing: 1.w(context),
-                        children: [
-                          // This column houses the title of the popup along with the container
-                          // that houses the class infosidepanel
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(bottom: .5.h(context)),
-                                child: const Text(
-                                  'Info',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 36,
+                Padding(
+                  padding: EdgeInsets.all(1.h(context)),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            // This column houses the title of the popup along with the container
+                            // that houses the class infosidepanel
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: .5.h(context)),
+                                  child: Text(
+                                    'Info',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 6.sp(context),
+                                    ),
                                   ),
+                                ),
+                                Container(
+                                  height: 70.h(context),
+                                  width: 14.w(context),
+                                  constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromARGB(70, 32, 32, 40),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                    border: Border.all(
+                                      color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                                      width: 1.5, // ← adjust thickness
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 2.h(context)),
+                                    child: Column(
+                                      children: [
+                                        InfoSidePanel(
+                                          currentIndex: currentSlide,
+                                          onTap: handleButtonTap,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // This container houses the container that holds the information for the specified button selected
+                            // in the info side panel.
+                            Container(
+                              height: 75.h(context),
+                              width: 47.w(context),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(70, 32, 32, 40),
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                                border: Border.all(
+                                  color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                                  width: 1.5, // ← adjust thickness
                                 ),
                               ),
-                              Container(
-                                height: 68.h(context),
-                                width: 14.w(context),
-                                constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
-                                decoration: const BoxDecoration(
-                                  color: Color.fromRGBO(17, 17, 17, 1),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
+                              child: Center(
+                                // The container that holds the information
+                                child: Container(
+                                  height: 71.h(context),
+                                  width: 45.w(context),
+                                  decoration: const BoxDecoration(
+                                    color: Color.fromRGBO(15, 15, 17, 1),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: CarouselSlider(
+                                    carouselController: controller,
+                                    options: CarouselOptions(
+                                      height: 69.h(context),
+                                      viewportFraction: .97,
+                                      enlargeCenterPage: true,
+                                      scrollPhysics: const NeverScrollableScrollPhysics(),
+                                      onPageChanged: (index, _) {
+                                        setState(() => currentSlide = index);
+                                      },
+                                    ),
+                                    items: slides,
                                   ),
                                 ),
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 2.h(context)),
-                                  child: const Column(
-                                    children: [
-                                      InfoSidePanel(),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          // This container houses the container that holds the information for the specified button selected
-                          // in the info side panel.
-                          Container(
-                            height: 75.h(context),
-                            width: 50.w(context),
-                            decoration: const BoxDecoration(
-                              color: Color.fromRGBO(17, 17, 17, 1),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
                               ),
                             ),
-                            child: Center(
-                              // The container that holds the information
-                              child: CarouselSlider(
-                                items: [
-                                  AboutUsInformation(),
-                                  ContactUsInformation(),
-                                  GoalsInformation(),
-                                  TermsConditionsInformation(),
-                                ],
-                                options: CarouselOptions(
-                                  height: 100.h(context),
-                                  viewportFraction: 0.9,
-                                  enlargeCenterPage: true,
-                                  onPageChanged: (index, reason) {},
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ],
             ),

@@ -42,16 +42,15 @@ class WebUiTemplate extends StatelessWidget {
               ArtBoardScreen(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   DesktopSidePanel(),
                   Padding(
-                    padding: EdgeInsets.only(top: 5.h(context)),
+                    padding: EdgeInsets.fromLTRB(0.25.w(context), 5.h(context), 0.25.w(context), 0),
                     child: Container(
                       height: 100.h(context),
                       width: 71.5.w(context),
-                      constraints:
-                          100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                      constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                       //
                       // *** Content goes here ***
                       child: child,
@@ -61,8 +60,7 @@ class WebUiTemplate extends StatelessWidget {
                     padding: EdgeInsets.only(top: 5.h(context)),
                     child: Container(
                       height: 90.h(context),
-                      constraints:
-                          100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                      constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
                       child: Messages(),
                     ),
                   ),

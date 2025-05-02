@@ -37,7 +37,7 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
                 // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
                 // the padding on the LargeStagger list items)
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+                  padding: EdgeInsets.fromLTRB(0.5.w(context), 0, 0.5.w(context), 2.sp(context)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -89,7 +89,7 @@ class CommunitiesBubbleDock extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(0.75.w(context)),
       height: 5.h(context),
-      constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 110) : BoxConstraints(minHeight: 55),
+      constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 125) : BoxConstraints(minHeight: 65),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),

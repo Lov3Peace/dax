@@ -5,7 +5,7 @@ import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communi
 import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/communities_post_list.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 
 import 'package:simple_animations/simple_animations.dart';
 

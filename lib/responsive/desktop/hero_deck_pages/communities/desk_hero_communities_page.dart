@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/communities_post_list.dart';
+import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_deck_bubbles.dart';
-import 'package:flutter_application_1/util/test_list.dart';
-import '../../../../main.dart';
-import '../../../../util/soft_close.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import '../../dashboard/title_bubble.dart';
-import '../../desk_decks.dart';
 import '../../large_stagger_load.dart';
 import '../../util/web_ui_template.dart';
-import 'communities_post.dart';
 
 class DeskHeroCommunitiesPage extends StatefulWidget {
   const DeskHeroCommunitiesPage({Key? key}) : super(key: key);
@@ -54,7 +49,7 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
 
                       //
                       //Houses Deck Buttons
-                      CommunitiesBubbleDock(),
+                      BubbleDock(child1: ProjectsButton(), child2: SocialsButton(), child3: NewsButton()),
                     ],
                   ),
                 ),
@@ -78,56 +73,5 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
   void dispose() {
     // controller.dispose();
     super.dispose();
-  }
-}
-
-class CommunitiesBubbleDock extends StatelessWidget {
-  const CommunitiesBubbleDock({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(0.75.w(context)),
-      height: 5.h(context),
-      constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 125) : BoxConstraints(minHeight: 65),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(3.w(context)),
-        color: const Color.fromARGB(185, 21, 19, 22),
-        border: Border.all(color: deckBorderColor),
-      ),
-      // padding: EdgeInsets.fromLTRB(1.w(context), 1.sp(context), 1.w(context), 1.sp(context)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const SocialsButton()
-              .animate()
-              .slideX(
-                  begin: 0.25,
-                  end: 0,
-                  delay: const Duration(milliseconds: 200),
-                  duration: const Duration(milliseconds: 400),
-                  curve: const SoftClose())
-              .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const CommunitiesButton()
-              .animate()
-              .slideX(
-                  begin: 0.25,
-                  end: 0,
-                  delay: const Duration(milliseconds: 400),
-                  duration: const Duration(milliseconds: 400),
-                  curve: const SoftClose())
-              .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-          const ProjectsButton()
-              .animate()
-              .slideX(
-                  begin: 0.25,
-                  end: 0,
-                  delay: const Duration(milliseconds: 600),
-                  duration: const Duration(milliseconds: 400),
-                  curve: const SoftClose())
-              .fadeIn(begin: 0, duration: const Duration(milliseconds: 500)),
-        ],
-      ),
-    );
   }
 }

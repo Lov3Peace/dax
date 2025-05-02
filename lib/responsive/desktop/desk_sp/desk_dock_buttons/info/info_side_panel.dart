@@ -39,31 +39,28 @@ class InfoSidePanelButtons extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        _buildButton(context, 'button1', 'About Us'),
+        _buildButton(context, 'About Us'),
         SizedBox(
           height: 1.5.h(context),
         ),
-        _buildButton(context, 'button2', 'Contact Us'),
+        _buildButton(context, 'Contact Us'),
         SizedBox(
           height: 1.5.h(context),
         ),
-        _buildButton(context, 'button3', 'Goals'),
+        _buildButton(context, 'Goals'),
         SizedBox(
           height: 1.5.h(context),
         ),
-        _buildButton(context, 'button4', 'Terms & Conditions'),
+        _buildButton(context, 'Terms & Conditions'),
       ],
     );
   }
 
-  Widget _buildButton(BuildContext context, String infoButtonId, String infoButtonText) {
-    var buttonState = Provider.of<ButtonState>(context);
-    bool isActive = buttonState.activeInfoButtonId == infoButtonId;
+  Widget _buildButton(BuildContext context, String infoButtonText) {
+    bool isActive = false;
 
     return GestureDetector(
-      onTap: () {
-        buttonState.setActiveInfoButton(infoButtonId);
-      },
+      onTap: () {},
       child: Align(
         alignment: Alignment.centerLeft,
         child: AnimatedContainer(

@@ -1,17 +1,48 @@
 import 'dart:ui';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_communies_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_news_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_projects_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_tips_tricks_button.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel_info/help_wallet_button.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/help/help_side_panel.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_animations/simple_animations.dart';
-import '../../../desk_constants.dart';
 import '../../../desk_decks.dart';
 import 'help_side_panel_info/help_faqs_button.dart';
+import 'help_side_panel_info/help_socials_button.dart';
 
 // Popup to the FAQs button of the dashboard side panel
-class HelpPopUp extends StatelessWidget {
+class HelpPopUp extends StatefulWidget {
   const HelpPopUp({super.key});
+
+  @override
+  State<HelpPopUp> createState() => HelpPopUpState();
+}
+
+class HelpPopUpState extends State<HelpPopUp> {
+  final CarouselSliderController controller = CarouselSliderController();
+
+  int currentSlide = 0;
+
+  final List<Widget> slides = [
+    const FAQsInformation(),
+    const ProjectsInformation(),
+    const CommunitiesInformation(),
+    const SocialsInformation(),
+    const NewsInformation(),
+    const WalletInformation(),
+    const TTsInformation(),
+  ];
+
+  void handleButtonTap(int index) {
+    setState(() {
+      currentSlide = index;
+    });
+    controller.jumpToPage(index);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +57,7 @@ class HelpPopUp extends StatelessWidget {
             children: [
               SizedBox(
                 height: 77.h(context),
-                width: 71.w(context),
+                width: 65.w(context),
                 // padding: const EdgeInsets.symmetric(vertical: 32),
                 child: Material(
                   shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
@@ -47,12 +78,12 @@ class HelpPopUp extends StatelessWidget {
                           )),
                         ),
                       ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: .7.h(context), bottom: .7.h(context)),
-                            child: Wrap(
-                              spacing: 1.w(context),
+                      Padding(
+                        padding: EdgeInsets.all(1.h(context)),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 // This column houses the title of the popup along with the container
                                 // that houses the class infosidepanel
@@ -61,12 +92,12 @@ class HelpPopUp extends StatelessWidget {
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.only(bottom: .5.h(context)),
-                                      child: const Text(
+                                      child: Text(
                                         'FAQs',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 36,
+                                          fontSize: 6.sp(context),
                                         ),
                                       ),
                                     ),
@@ -74,17 +105,24 @@ class HelpPopUp extends StatelessWidget {
                                       height: 68.h(context),
                                       width: 14.w(context),
                                       constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
-                                      decoration: const BoxDecoration(
-                                        color: Color.fromRGBO(17, 17, 17, 1),
-                                        borderRadius: BorderRadius.all(
+                                      decoration: BoxDecoration(
+                                        color: const Color.fromARGB(70, 32, 32, 40),
+                                        borderRadius: const BorderRadius.all(
                                           Radius.circular(20),
+                                        ),
+                                        border: Border.all(
+                                          color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                                          width: 1.5, // ← adjust thickness
                                         ),
                                       ),
                                       child: Padding(
                                         padding: EdgeInsets.only(top: 2.h(context)),
-                                        child: const Column(
+                                        child: Column(
                                           children: [
-                                            FAQsSidePanel(),
+                                            FAQsSidePanel(
+                                              currentIndex: currentSlide,
+                                              onTap: handleButtonTap,
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -95,32 +133,48 @@ class HelpPopUp extends StatelessWidget {
                                 // in the faqs side panel.
                                 Container(
                                   height: 75.h(context),
-                                  width: 50.w(context),
-                                  decoration: const BoxDecoration(
-                                    color: Color.fromRGBO(17, 17, 17, 1),
-                                    borderRadius: BorderRadius.all(
+                                  width: 47.w(context),
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromARGB(70, 32, 32, 40),
+                                    borderRadius: const BorderRadius.all(
                                       Radius.circular(20),
+                                    ),
+                                    border: Border.all(
+                                      color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                                      width: 1.5, // ← adjust thickness
                                     ),
                                   ),
                                   child: Center(
                                     // The container that holds the information
                                     child: Container(
                                       height: 71.h(context),
-                                      width: 48.w(context),
+                                      width: 45.w(context),
                                       decoration: const BoxDecoration(
                                         color: Color.fromRGBO(15, 15, 17, 1),
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(20),
                                         ),
                                       ),
-                                      child: const FAQsInformation(),
+                                      child: CarouselSlider(
+                                        carouselController: controller,
+                                        options: CarouselOptions(
+                                          height: 69.h(context),
+                                          viewportFraction: .97,
+                                          enlargeCenterPage: true,
+                                          scrollPhysics: const NeverScrollableScrollPhysics(),
+                                          onPageChanged: (index, _) {
+                                            setState(() => currentSlide = index);
+                                          },
+                                        ),
+                                        items: slides,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

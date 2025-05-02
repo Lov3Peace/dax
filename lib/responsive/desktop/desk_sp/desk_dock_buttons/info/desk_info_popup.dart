@@ -115,9 +115,7 @@ class InfoPopUp extends StatelessWidget {
                                   height: 100.h(context),
                                   viewportFraction: 0.9,
                                   enlargeCenterPage: true,
-                                  onPageChanged: (index, reason) {
-                                    buttonState.setSlide(index);
-                                  },
+                                  onPageChanged: (index, reason) {},
                                 ),
                               ),
                             ),

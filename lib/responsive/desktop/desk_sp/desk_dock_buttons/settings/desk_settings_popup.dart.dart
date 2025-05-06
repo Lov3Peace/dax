@@ -109,7 +109,8 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                                       ),
                                       child: Text(
                                         'Settings',
-                                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 6.sp(context)),
+                                        style: TextStyle(
+                                            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 6.sp(context)),
                                       ),
                                     ),
 
@@ -189,7 +190,8 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                                                     Text(
                                                       context.watch<UserProvider>().username,
                                                       style: GoogleFonts.montserrat(
-                                                          textStyle: TextStyle(fontSize: 5.sp(context)), fontWeight: FontWeight.w600),
+                                                          textStyle: TextStyle(fontSize: 5.sp(context)),
+                                                          fontWeight: FontWeight.w600),
                                                     ),
 
                                                     Text(

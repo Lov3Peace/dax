@@ -1,6 +1,7 @@
 import 'dart:js';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/node_test.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/util/error_page.dart';
 import 'package:flutter_application_1/responsive/desktop/util/test_page.dart';
@@ -14,4 +15,5 @@ var routes = {
   '/communities': DeskHeroCommunitiesPage(),
   '/socials': DeskHeroSocialsPage(),
   '/news': DeskHeroNewsPage(),
+  '/nodetest': NodeTest(),
 };

@@ -1,4 +1,14 @@
+import mongoose from 'mongoose';
 import app from './app.js';
-const port = 7777
+import dotenv from "dotenv";
 
-app.listen(port, () => console.log(`Dax Server listening on port ${port}!`));
+// used for env variables
+dotenv.config()
+
+const port = process.env.PORT || 7777;
+
+app.listen(port, console.log(`Dax Server listening on port ${port}!`));
+
+mongoose.connect(process.env.DB_CONN)
+    .then(() => console.log(`Database Connection Established`))
+    .catch((error) => console.log(error));

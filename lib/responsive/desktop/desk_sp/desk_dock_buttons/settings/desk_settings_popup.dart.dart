@@ -119,9 +119,13 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                                       height: 68.h(context),
                                       width: 14.w(context),
                                       constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
-                                      decoration: const BoxDecoration(
-                                        color: Color.fromARGB(70, 32, 32, 40),
-                                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      decoration: BoxDecoration(
+                                        color: const Color.fromARGB(70, 32, 32, 40),
+                                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                        border: Border.all(
+                                          color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                                          width: 1.5, // ← adjust thickness
+                                        ),
                                       ),
                                       child: Padding(
                                         padding: EdgeInsets.only(top: 2.h(context)),
@@ -156,9 +160,13 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                                     Container(
                                       height: 12.h(context),
                                       width: 47.w(context),
-                                      decoration: const BoxDecoration(
-                                        color: Color.fromARGB(70, 32, 32, 40),
-                                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                                      decoration: BoxDecoration(
+                                        color: const Color.fromARGB(70, 32, 32, 40),
+                                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                        border: Border.all(
+                                          color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                                          width: 1.5, // ← adjust thickness
+                                        ),
                                       ),
                                       child: Row(
                                         // alignment: WrapAlignment.spaceEvenly,
@@ -262,24 +270,40 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                                     Container(
                                       height: 59.h(context),
                                       width: 47.w(context),
-                                      decoration: const BoxDecoration(
-                                        color: Color.fromRGBO(15, 15, 17, 1),
-                                        borderRadius: BorderRadius.all(
+                                      decoration: BoxDecoration(
+                                        color: const Color.fromARGB(70, 32, 32, 40),
+                                        borderRadius: const BorderRadius.all(
                                           Radius.circular(20),
                                         ),
-                                      ),
-                                      child: CarouselSlider(
-                                        carouselController: controller,
-                                        options: CarouselOptions(
-                                          height: 57.h(context),
-                                          viewportFraction: .97,
-                                          enlargeCenterPage: true,
-                                          scrollPhysics: const NeverScrollableScrollPhysics(),
-                                          onPageChanged: (index, _) {
-                                            setState(() => currentSlide = index);
-                                          },
+                                        border: Border.all(
+                                          color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                                          width: 1.5, // ← adjust thickness
                                         ),
-                                        items: slides,
+                                      ),
+                                      child: Center(
+                                        child: Container(
+                                          height: 57.h(context),
+                                          width: 45.w(context),
+                                          decoration: const BoxDecoration(
+                                            color: Color.fromRGBO(15, 15, 17, 1),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(20),
+                                            ),
+                                          ),
+                                          child: CarouselSlider(
+                                            carouselController: controller,
+                                            options: CarouselOptions(
+                                              height: 55.h(context),
+                                              viewportFraction: .97,
+                                              enlargeCenterPage: true,
+                                              scrollPhysics: const NeverScrollableScrollPhysics(),
+                                              onPageChanged: (index, _) {
+                                                setState(() => currentSlide = index);
+                                              },
+                                            ),
+                                            items: slides,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],

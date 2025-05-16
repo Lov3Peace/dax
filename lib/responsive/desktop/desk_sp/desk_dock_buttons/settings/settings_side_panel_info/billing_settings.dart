@@ -16,7 +16,7 @@ class BillingSettingsInfoState extends State<BillingSettingsInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 59.h(context),
+      height: 55.h(context),
       width: 47.w(context),
       decoration: const BoxDecoration(
         color: Color.fromARGB(70, 32, 32, 40),

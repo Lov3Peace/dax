@@ -2,7 +2,7 @@ import express from 'express';
 const app = express();
 import mongoose from 'mongoose';
 import cors from 'cors';
-import authRouter from './routes/authRouter.js';
+import authRouter from './routers/authRouter.js';
 
 app.get('/node', (req, res) => {
     console.log(`Connected: ${req.ip}`);

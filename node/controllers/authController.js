@@ -1,7 +1,7 @@
 import user from "../models/user.js";
 
 const createUser = async (req, res) => {
-    const newUser = new user({
+    const newUserObj = new createUserModel({
         username: req.body.username,
         password: req.body.password,
     });
@@ -14,4 +14,18 @@ const createUser = async (req, res) => {
     }
 }
 
-export default createUser;
+const deleteUser = async (req, res) => {
+    const deletedUserObj = new deleteUserModel({
+        username: req.body.username,
+        password: req.body.password
+    });
+    try {
+        const deletedUser = await deletedUserObj.deleteOne();
+        res.status(200).json(deletedUser);
+    } catch (error) {
+        res.status(500).json(error);
+
+    }
+}
+
+export default [createUser, deleteUser];

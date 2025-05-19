@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 // used for env variables
 dotenv.config()
 
-const port = process.env.PORT || 7777;
+const port = process.env.PORT;
 
 app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 

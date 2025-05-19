@@ -58,11 +58,7 @@ class _DeskCommunitiesPageState extends State<DeskCommunitiesPage> with Animatio
                       //
                       // Title of Screen
                       TitleBubble(
-                        deckHeight: 6.5.h(context),
                         deckName: 'Communities',
-                        deckWidth: 17.25.w(context),
-                        textSize: 3.sp(context),
-                        rightPad: 30,
                       ),
 
                       //

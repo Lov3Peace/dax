@@ -59,11 +59,7 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                     //
                     // Title of Screen
                     TitleBubble(
-                      deckHeight: 6.5.h(context),
                       deckName: 'Socials',
-                      deckWidth: 17.25.w(context),
-                      textSize: 3.sp(context),
-                      rightPad: 30,
                     ),
 
                     //

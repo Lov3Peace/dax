@@ -32,13 +32,16 @@ class _GradientContainerState extends State<GradientContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints(minHeight: 30),
+      height: widget.height,
+      width: widget.width,
+      // padding: EdgeInsets.fromLTRB(widget.width, widget.height, widget.width, widget.height),
       decoration: BoxDecoration(
           gradient: LinearGradient(colors: [widget.gradient1, widget.gradient2]),
           boxShadow: [BoxShadow(color: widget.neonGlow, blurRadius: 10, blurStyle: BlurStyle.solid)],
           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
           border: Border.all(color: widget.borderColor)),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(widget.width, widget.height, widget.width, widget.height),
+      child: Center(
         child: Text(
           widget.text,
           style: GoogleFonts.montserrat(

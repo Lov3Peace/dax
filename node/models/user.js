@@ -4,8 +4,8 @@ const userSchema = new mongoose.Schema(
     {
         username: { type: String, required: true, unique: true },
         password: { type: String, required: true, unique: false },
-        isAdmin: { type: Boolean, default: false },
-        skills: { type: Array }
+        isAdmin: { type: Boolean, required: true, default: false },
+        skills: { type: Array, }
         // profile: {type: String, required: true, default: ''}
     }
 );

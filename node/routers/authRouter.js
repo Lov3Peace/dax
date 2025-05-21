@@ -5,7 +5,7 @@ const authRouter = Router();
 
 authRouter.post('/register', createUser)
 
-authRouter.delete('delete_user', deleteUser);
+authRouter.delete('/deleteUser', deleteUser);
 
 // authRouter.get('/login', loginUser);
 

@@ -103,11 +103,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                               Padding(
                                                 padding: EdgeInsets.only(bottom: 0.25.w(context)),
                                                 child: TitleBubble(
-                                                  deckHeight: 3.sp(context),
                                                   deckName: 'Dashboard',
-                                                  deckWidth: halfDeckWidth,
-                                                  textSize: 4.sp(context),
-                                                  rightPad: 4.sp(context),
                                                 ),
                                               ),
                                               Expanded(

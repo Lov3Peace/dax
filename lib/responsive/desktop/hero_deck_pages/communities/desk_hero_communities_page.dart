@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/communities_post_list.dart';
+import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/test_communities_post_list.dart';
 import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
@@ -33,18 +33,14 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
                 // the padding on the LargeStagger list items)
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(0.5.w(context), 0, 0.5.w(context), 2.sp(context)),
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       //
                       // Title of Screen
                       TitleBubble(
-                        deckHeight: 5.h(context),
                         deckName: 'Communities',
-                        deckWidth: 17.25.w(context),
-                        textSize: 3.5.sp(context),
-                        rightPad: 0.w(context),
                       ),
 
                       //

@@ -74,114 +74,112 @@ class _GeneralSettingsInfoState extends State<GeneralSettingsInfo> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 4.h(context), vertical: 2.h(context)),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Username:',
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 5.sp(context),
-                                  fontWeight: FontWeight.w500,
-                                ),
+                    child: Column(
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'Username:',
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 5.sp(context),
+                                fontWeight: FontWeight.w500,
                               ),
-                              SizedBox(
-                                width: 1.w(context),
-                              ),
-                              Expanded(
-                                child: isEditable
-                                    ? TextField(
-                                        controller: controller,
-                                        enabled: isEditable,
-                                        style: const TextStyle(color: Colors.white),
-                                        decoration: InputDecoration(
-                                          hintText: 'Username',
-                                          hintStyle: const TextStyle(color: Colors.white70),
-                                          filled: false,
-                                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                                          border: InputBorder.none,
-                                          enabledBorder: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          suffixIcon: IconButton(
-                                            onPressed: () => setState(() => isHidden = !isHidden),
-                                            icon: Icon(
-                                              isHidden ? Icons.visibility_off : Icons.visibility,
-                                              color: Colors.white70,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    : Text(
-                                        getCurrentUsername(),
-                                        style: GoogleFonts.montserrat(
-                                          textStyle: TextStyle(
-                                            fontSize: 5.sp(context),
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
+                            ),
+                            SizedBox(
+                              width: 1.w(context),
+                            ),
+                            Expanded(
+                              child: isEditable
+                                  ? TextField(
+                                      controller: controller,
+                                      enabled: isEditable,
+                                      style: const TextStyle(color: Colors.white),
+                                      decoration: InputDecoration(
+                                        hintText: 'Username',
+                                        hintStyle: const TextStyle(color: Colors.white70),
+                                        filled: false,
+                                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                        border: InputBorder.none,
+                                        enabledBorder: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        suffixIcon: IconButton(
+                                          onPressed: () => setState(() => isHidden = !isHidden),
+                                          icon: Icon(
+                                            isHidden ? Icons.visibility_off : Icons.visibility,
+                                            color: Colors.white70,
                                           ),
                                         ),
                                       ),
-                              ),
-                              SizedBox(width: 1.h(context)),
-                              TactileButton(
-                                onTap: () async {
-                                  if (isEditable) {
-                                    // Save the edited username
-                                    final newUsername = controller.text.trim();
-                                    if (newUsername.isNotEmpty) {
-                                      try {
-                                        await auth.currentUser!.updateDisplayName(newUsername);
-                                        await auth.currentUser!.reload(); // refresh user session
-                                        userProvider.updateUsername(newUsername);
-                                        debugPrint('Username updated to: $username');
-                                      } catch (e) {
-                                        debugPrint('Failed to update username: $e');
-                                      }
+                                    )
+                                  : Text(
+                                      getCurrentUsername(),
+                                      style: GoogleFonts.montserrat(
+                                        textStyle: TextStyle(
+                                          fontSize: 5.sp(context),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                            ),
+                            SizedBox(width: 1.h(context)),
+                            TactileButton(
+                              onTap: () async {
+                                if (isEditable) {
+                                  // Save the edited username
+                                  final newUsername = controller.text.trim();
+                                  if (newUsername.isNotEmpty) {
+                                    try {
+                                      await auth.currentUser!.updateDisplayName(newUsername);
+                                      await auth.currentUser!.reload(); // refresh user session
+                                      userProvider.updateUsername(newUsername);
+                                      debugPrint('Username updated to: $username');
+                                    } catch (e) {
+                                      debugPrint('Failed to update username: $e');
                                     }
-                                  } else {
-                                    controller.text = username;
                                   }
-                                  setState(() => isEditable = !isEditable);
-                                },
-                                child: GradientContainer(
-                                  gradient1: isEditable ? blue : Colors.transparent,
-                                  gradient2: isEditable ? const Color.fromARGB(255, 85, 221, 89) : Colors.transparent,
-                                  height: 1.h(context),
-                                  width: 2.h(context),
-                                  neonGlow: isEditable ? greenGlow : Colors.transparent,
-                                  text: isEditable ? 'Save' : 'Edit',
-                                  textSize: 2.sp(context),
-                                  borderColor: Colors.white38,
-                                  borderRadius: 500,
-                                ),
+                                } else {
+                                  controller.text = username;
+                                }
+                                setState(() => isEditable = !isEditable);
+                              },
+                              child: GradientContainer(
+                                gradient1: isEditable ? blue : Colors.transparent,
+                                gradient2: isEditable ? const Color.fromARGB(255, 85, 221, 89) : Colors.transparent,
+                                height: 1.h(context),
+                                width: 2.h(context),
+                                neonGlow: isEditable ? greenGlow : Colors.transparent,
+                                text: isEditable ? 'Save' : 'Edit',
+                                textSize: 2.sp(context),
+                                borderColor: Colors.white38,
+                                borderRadius: 500,
                               ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 1.h(context),
-                          ),
-                          const Divider(
-                            color: Colors.grey,
-                            // indent: 20,
-                            // endIndent: 20,
-                            thickness: 2,
-                          ),
-                          SizedBox(
-                            height: 1.h(context),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 2.w(context),
                             ),
-                            child: const Text(
-                              'Placeholder',
-                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 1.h(context),
+                        ),
+                        const Divider(
+                          color: Colors.grey,
+                          // indent: 20,
+                          // endIndent: 20,
+                          thickness: 2,
+                        ),
+                        SizedBox(
+                          height: 1.h(context),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 2.w(context),
                           ),
-                        ],
-                      ),
+                          child: const Text(
+                            'Placeholder',
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

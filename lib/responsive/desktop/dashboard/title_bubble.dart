@@ -6,19 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 import '../desk_decks.dart';
 
 class TitleBubble extends StatefulWidget {
-  final double deckHeight;
-  final double deckWidth;
   final String deckName;
-  final double textSize;
-  final double rightPad;
   final VoidCallback? onTap;
 
   const TitleBubble({
-    required this.deckHeight,
-    required this.deckWidth,
     required this.deckName,
-    required this.rightPad,
-    required this.textSize,
     this.onTap,
     Key? key,
   }) : super(key: key);
@@ -42,19 +34,16 @@ class _TitleBubbleState extends State<TitleBubble> {
           color: deckColor,
           border: Border.all(color: deckBorderColor),
         ),
-        constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 110) : BoxConstraints(minHeight: 55),
-        height: widget.deckHeight,
-        width: widget.deckWidth,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, widget.rightPad, 0),
-          child: Center(
-            child: Text(
-              widget.deckName,
-              style: GoogleFonts.montserrat(
-                fontSize: widget.textSize,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
+        constraints: BoxConstraints(minHeight: 50),
+        height: 7.h(context),
+        width: 17.25.w(context),
+        child: Center(
+          child: Text(
+            widget.deckName,
+            style: GoogleFonts.montserrat(
+              fontSize: 4.sp(context),
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
             ),
           ),
         ),

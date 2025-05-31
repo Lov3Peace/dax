@@ -1,4 +1,5 @@
 export '../main.dart';
+export 'package:flutter/material.dart';
 export '../responsive/desktop/dashboard/desk_dashboard.dart';
 export '../responsive/desktop/stagger_load.dart';
 export '../util/auth/auth_check.dart';

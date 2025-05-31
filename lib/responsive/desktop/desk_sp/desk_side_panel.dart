@@ -13,7 +13,7 @@ import 'desk_dock_buttons/desk_home_button.dart';
 import 'desk_dock_buttons/help/desk_help_popup.dart';
 import 'desk_dock_buttons/info/desk_info_popup.dart';
 import 'desk_dock_buttons/settings/desk_settings_popup.dart.dart';
-import 'desk_dock_buttons/sp_button_template.dart';
+import 'desk_dock_buttons/desk_dock_button_templates/sp_button_template.dart';
 import 'desk_dock_buttons/wallet/desk_wallet_popup.dart';
 
 class DesktopSidePanel extends StatefulWidget {
@@ -44,16 +44,13 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
         child: Container(
           constraints: BoxConstraints(minHeight: 750),
           clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(185, 21, 19, 22),
-              border: Border.all(color: deckBorderColor),
-              boxShadow: [
-                // BoxShadow(
-                //   blurRadius: 10,
-                //   color: Color.fromARGB(255, 37, 37, 37),
-                //   offset: Offset(0, 0),
-                // )
-              ]),
+          decoration: BoxDecoration(color: const Color.fromARGB(185, 21, 19, 22), border: Border.all(color: deckBorderColor), boxShadow: [
+            // BoxShadow(
+            //   blurRadius: 10,
+            //   color: Color.fromARGB(255, 37, 37, 37),
+            //   offset: Offset(0, 0),
+            // )
+          ]),
           width: 12.5.w(context),
           child: Padding(
             padding: EdgeInsets.only(left: 1.w(context)),

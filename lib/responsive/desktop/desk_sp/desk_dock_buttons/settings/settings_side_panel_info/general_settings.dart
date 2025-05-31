@@ -41,7 +41,7 @@ class _GeneralSettingsInfoState extends State<GeneralSettingsInfo> {
     final username = userProvider.username;
 
     return Container(
-      height: 59.h(context),
+      height: 55.h(context),
       width: 47.w(context),
       decoration: const BoxDecoration(
         color: Color.fromARGB(70, 32, 32, 40),

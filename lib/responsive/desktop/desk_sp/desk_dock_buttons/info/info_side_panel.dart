@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_dock_button_templates/toc_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/button_state.dart';
-import 'package:provider/provider.dart';
-import '../../../../../main.dart';
 
-// This class creates the info side panel and all its contents
 class InfoSidePanel extends StatelessWidget {
-  const InfoSidePanel({super.key});
+  final int currentIndex;
+  final Function(int) onTap;
+
+  const InfoSidePanel({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,73 +22,22 @@ class InfoSidePanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
+          Text(
             'Table of Contents :',
-            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline, fontSize: 3.sp(context)),
           ),
           SizedBox(height: 1.h(context)),
-          const InfoSidePanelButtons()
+          TableofContentsTemplate(
+            currentIndex: currentIndex,
+            onTap: onTap,
+            labels: const ['About Us', 'Contact Us', 'Goals', 'Terms & Conditions'],
+            spacing: 1.h(context),
+            activeWidth: 13.w(context),
+            inactiveWidth: 9.w(context),
+            height: 4.h(context),
+            fontSize: 2.sp(context),
+          )
         ],
-      ),
-    );
-  }
-}
-
-// This class houses all side panel buttons in the info popup
-class InfoSidePanelButtons extends StatelessWidget {
-  const InfoSidePanelButtons({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        _buildButton(context, 'About Us'),
-        SizedBox(
-          height: 1.5.h(context),
-        ),
-        _buildButton(context, 'Contact Us'),
-        SizedBox(
-          height: 1.5.h(context),
-        ),
-        _buildButton(context, 'Goals'),
-        SizedBox(
-          height: 1.5.h(context),
-        ),
-        _buildButton(context, 'Terms & Conditions'),
-      ],
-    );
-  }
-
-  Widget _buildButton(BuildContext context, String infoButtonText) {
-    bool isActive = false;
-
-    return GestureDetector(
-      onTap: () {},
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 100),
-          decoration: BoxDecoration(
-            border: Border.all(color: isActive ? Colors.black87 : Colors.transparent),
-            boxShadow: [
-              BoxShadow(color: isActive ? Colors.white : Colors.grey.shade700),
-            ],
-            color: Colors.transparent,
-            borderRadius: const BorderRadius.all(Radius.circular(60)),
-          ),
-          width: isActive ? 13.w(context) : 9.w(context),
-          height: 4.h(context),
-          alignment: Alignment.center,
-          child: Text(
-            infoButtonText,
-            style: TextStyle(
-              fontSize: 2.sp(context),
-              fontWeight: FontWeight.w400,
-              color: isActive ? const Color.fromARGB(221, 28, 24, 24) : Colors.white54,
-            ),
-          ),
-        ),
       ),
     );
   }

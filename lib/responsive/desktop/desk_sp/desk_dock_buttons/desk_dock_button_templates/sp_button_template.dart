@@ -3,6 +3,11 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/*
+ this side panel button template:
+ 
+
+*/
 class SpButtonTemplate extends StatefulWidget {
   final IconData icon;
   final String deskButtonText;
@@ -15,10 +20,10 @@ class SpButtonTemplate extends StatefulWidget {
     Key? key,
   }) : super(key: key);
   @override
-  State<SpButtonTemplate> createState() => _SpButtonTemplateState();
+  State<SpButtonTemplate> createState() => SpButtonTemplateState();
 }
 
-class _SpButtonTemplateState extends State<SpButtonTemplate> {
+class SpButtonTemplateState extends State<SpButtonTemplate> {
   bool isHover = false;
   @override
   Widget build(BuildContext context) {

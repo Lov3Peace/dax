@@ -2,7 +2,7 @@ import User from "../models/user.js";
 import CryptoJS from "crypto-js";
 import { errorLog, infoLog } from "../log.js";
 // Logger for info, debug, errors, etc.
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
     // Creates a 'newUser' object and sets it equal to a 
     // new instance of the 'User' model that we imported above 
     // (the 'new' keyword is creating the new instance of the model
@@ -24,17 +24,16 @@ const createUser = async (req, res) => {
         res.status(500).json(error);
         errorLog.error('error', error);
     }
-}
+};
 
-const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
     try {
-        User.deleteOne({ username: req.body.username })
+        const deletedUser = User.deleteOne({ username: req.body.username });
+        console.log(req.body.username);
         res.status(200).json(deletedUser);
     } catch (error) {
-
+        errorLog.error(error);
         res.status(500).json(error);
 
     }
-}
-
-export default [createUser, deleteUser];
+};

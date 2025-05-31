@@ -32,8 +32,8 @@ class ConnectionTactileState extends State<ConnectionTactile> {
           child: GradientContainer(
             gradient1: isSelected ? red : Colors.transparent,
             gradient2: isSelected ? purp : Colors.transparent,
-            height: 1.h(context),
-            width: 4.h(context),
+            height: 3.h(context),
+            width: 7.w(context),
             neonGlow: tran,
             text: buttonLabels[index],
             textSize: 2.5.sp(context),

@@ -9,7 +9,7 @@ app.get('/node', (req, res) => {
     res.send({ success: true });
 });
 
-app.use(express.json())
+app.use(express.json());
 
 app.use('/api/', authRouter)
 

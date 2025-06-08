@@ -32,7 +32,9 @@ class SelectableTactileState extends State<SelectableTactile> {
           },
           child: GradientContainer(
             gradient1: isSelected ? Colors.blue : Colors.transparent,
-            gradient2: isSelected ? const Color.fromARGB(255, 85, 221, 89) : Colors.transparent,
+            gradient2: isSelected
+                ? const Color.fromARGB(255, 85, 221, 89)
+                : Colors.transparent,
             height: 1.h(context),
             width: 1.h(context),
             neonGlow: tran,

@@ -31,7 +31,8 @@ bool isSwitch = false;
 final _usernameController = TextEditingController();
 final _passwordController = TextEditingController();
 
-class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin {
+class _OnboardingScreenState extends State<OnboardingScreen>
+    with AnimationMixin {
   // bool isLoginDialogShown = false;
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
               width: 40.w(context),
               height: 100.h(context),
               constraints: BoxConstraints(minHeight: 900, minWidth: 500),
-              padding: EdgeInsets.only(left: 5.w(context), right: 10.w(context)),
+              padding:
+                  EdgeInsets.only(left: 5.w(context), right: 10.w(context)),
               decoration: BoxDecoration(
                   border: Border.all(
                 color: const Color.fromARGB(184, 59, 54, 61),
@@ -88,7 +90,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                           ),
                           Text(
                             'Omni',
-                            style: TextStyle(fontSize: 12.sp(context), fontWeight: FontWeight.w400),
+                            style: TextStyle(
+                                fontSize: 12.sp(context),
+                                fontWeight: FontWeight.w400),
                           ),
                         ],
                       ),
@@ -101,7 +105,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                         child: Text(
                           textAlign: TextAlign.start,
                           "Username",
-                          style: TextStyle(color: Colors.white, fontSize: 4.sp(context)),
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 4.sp(context)),
                         ),
                       ),
                       Padding(
@@ -131,10 +136,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
 
                       //Password
                       Padding(
-                        padding: EdgeInsets.only(left: 0.75.w(context), top: 3.sp(context)),
+                        padding: EdgeInsets.only(
+                            left: 0.75.w(context), top: 3.sp(context)),
                         child: Text(
                           "Password",
-                          style: TextStyle(color: Colors.white, fontSize: 4.sp(context)),
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 4.sp(context)),
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -153,7 +160,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                           decoration: InputDecoration(
                             prefixIconColor: Colors.black,
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromARGB(151, 255, 255, 255), width: 0.05.w(context)),
+                              borderSide: BorderSide(
+                                  color: Color.fromARGB(151, 255, 255, 255),
+                                  width: 0.05.w(context)),
                             ),
                           ),
                         ),
@@ -180,7 +189,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                                 child: FittedBox(
                                   fit: BoxFit.fill,
                                   child: Switch(
-                                    thumbIcon: MaterialStatePropertyAll(Icon(Icons.lock_outline)),
+                                    thumbIcon: MaterialStatePropertyAll(
+                                        Icon(Icons.lock_outline)),
                                     value: isSwitch,
                                     activeColor: Colors.white,
                                     activeTrackColor: pink,
@@ -208,13 +218,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                                       barrierDismissible: true,
                                       barrierLabel: "Login",
                                       context: context,
-                                      transitionDuration: const Duration(milliseconds: 400),
-                                      transitionBuilder: (_, animation, __, child) {
+                                      transitionDuration:
+                                          const Duration(milliseconds: 400),
+                                      transitionBuilder:
+                                          (_, animation, __, child) {
                                         Tween<Offset> tween;
-                                        tween = Tween(begin: const Offset(0, -1), end: Offset.zero);
+                                        tween = Tween(
+                                            begin: const Offset(0, -1),
+                                            end: Offset.zero);
                                         return SlideTransition(
                                           position: tween.animate(
-                                            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+                                            CurvedAnimation(
+                                                parent: animation,
+                                                curve: Curves.easeInOut),
                                           ),
                                           child: child,
                                         );
@@ -222,25 +238,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                                       pageBuilder: (context, _, __) => Center(
                                         child: Container(
                                           height: 60.sp(context),
-                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                                          padding: EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(32)),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 32, horizontal: 24),
                                           child: Material(
-                                            shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                                            color: const Color.fromARGB(42, 55, 52, 52),
+                                            shadowColor: const Color.fromRGBO(
+                                                42, 41, 41, 0.631),
+                                            color: const Color.fromARGB(
+                                                42, 55, 52, 52),
                                             elevation: 2,
-                                            borderRadius: BorderRadius.circular(32),
+                                            borderRadius:
+                                                BorderRadius.circular(32),
                                             child: Stack(
                                               children: [
                                                 ClipRRect(
-                                                  borderRadius: BorderRadius.circular(24),
+                                                  borderRadius:
+                                                      BorderRadius.circular(24),
                                                   child: BackdropFilter(
-                                                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                                    filter: ImageFilter.blur(
+                                                        sigmaX: 10, sigmaY: 10),
                                                     child: Container(
                                                         height: 85.h(context),
-                                                        decoration: BoxDecoration(
-                                                          border:
-                                                              Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
-                                                          borderRadius: BorderRadius.circular(24),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color: const Color
+                                                                  .fromARGB(182,
+                                                                  31, 31, 31)),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(24),
                                                         )),
                                                   ),
                                                 ),
@@ -249,26 +278,35 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                                                   child: Column(
                                                     children: [
                                                       Padding(
-                                                        padding: EdgeInsets.only(top: 10),
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                top: 10),
                                                         child: Text(
                                                           "Forgot Password",
                                                           style: TextStyle(
                                                             fontSize: 34,
-                                                            fontFamily: "Gontserrat",
+                                                            fontFamily:
+                                                                "Gontserrat",
                                                             color: Colors.white,
-                                                            fontWeight: FontWeight.bold,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                           ),
                                                         ),
                                                       ),
                                                       Padding(
-                                                        padding: EdgeInsets.symmetric(vertical: 2.sp(context)),
+                                                        padding: EdgeInsets
+                                                            .symmetric(
+                                                                vertical: 2.sp(
+                                                                    context)),
                                                         child: Text(
                                                           "Please enter your email linked to the account!",
-                                                          textAlign: TextAlign.center,
+                                                          textAlign:
+                                                              TextAlign.center,
                                                           style: TextStyle(
                                                             fontSize: 14,
                                                             color: Colors.white,
-                                                            fontWeight: FontWeight.bold,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                           ),
                                                         ),
                                                       ),
@@ -287,7 +325,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                               },
                               child: Text(
                                 "Forgot Password?",
-                                style: TextStyle(color: Colors.white, fontSize: 3.sp(context)),
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 3.sp(context)),
                               ),
                             ),
                           ),
@@ -307,11 +347,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
                               child: GradientContainer(
                                 gradient1: red,
                                 gradient2: pink,
-                                height: 2.sp(context),
-                                width: 3.w(context),
-                                neonGlow: red,
+                                height: 4.h(context),
+                                width: 7.w(context),
+                                neonGlow: pink,
                                 text: 'Launch',
-                                textSize: 3.sp(context),
+                                textSize: 2.sp(context),
                                 borderColor: tran,
                                 borderRadius: 5.sp(context),
                               ),
@@ -337,7 +377,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> with AnimationMixin
   Future login() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: '${_usernameController.text}@omni.com', password: _passwordController.text);
+          email: '${_usernameController.text}@omni.com',
+          password: _passwordController.text);
       if (mounted) {
         Navigator.pushNamed(
           context,

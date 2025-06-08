@@ -41,27 +41,24 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
 
   Widget socialsDeck({VoidCallback? onTap, Color? color}) {
     // values set in desk_decks.dart
-    double deckHeight = 22.sp(context);
-    double deckWidth = 35.25.w(context);
-    double halfDeckWidth = 17.325.w(context);
-    double headerTextSize = 6.5.sp(context);
     subTextSize = 2.5.sp(context);
     profBubTextSize = 20;
-    double labelTextSize = 3.sp(context);
+    double labelTextSize = 2.5.sp(context);
     textConstraint = 500;
     subTextConstraint = 500;
     return Deck(
-      deckHeight: deckHeight,
-      deckWidth: deckWidth,
+      deckHeight: 22.sp(context),
+      deckWidth: 35.25.w(context),
       deckName: 'Socials',
       gradient1: orange,
       gradient2: purp,
       neonGlow: orange,
       labelTextSize: labelTextSize,
-      textConstraint: deckWidth * 0.9,
+      textConstraint: 30.w(context),
       headingText: 'All of your socials in one place.',
-      subText: 'Just link your social media accounts and access them all in one place.',
-      subTextConstraint: deckWidth * 0.6,
+      subText:
+          'Just link your social media accounts and access them all in one place.',
+      subTextConstraint: 25.w(context),
       riveAnim: const r.RiveAnimation.asset(
         "rive/twitter_rv.riv",
         fit: BoxFit.fitWidth,

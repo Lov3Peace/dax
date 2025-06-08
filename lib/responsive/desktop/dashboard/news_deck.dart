@@ -47,23 +47,22 @@ class _NewsDeckState extends State<NewsDeck> {
     double headerTextSize = 6.5.sp(context);
     subTextSize = 2.5.sp(context);
     profBubTextSize = 20;
-    double labelTextSize = 3.sp(context);
+    double labelTextSize = 2.5.sp(context);
     textConstraint = 500;
     subTextConstraint = 500;
-    return GestureDetector(
-      child: Deck(
-        deckHeight: deckHeight,
-        deckWidth: deckWidth,
-        deckName: 'News',
-        gradient1: blue,
-        gradient2: purp,
-        neonGlow: blue,
-        labelTextSize: labelTextSize,
-        textConstraint: deckWidth * 0.7,
-        subTextConstraint: deckWidth * 0.7,
-        headingText: 'Stay up to date.',
-        subText: 'Add your preferred news source to get news updates to your feed.',
-      ),
+    return Deck(
+      deckHeight: deckHeight,
+      deckWidth: deckWidth,
+      deckName: 'News',
+      gradient1: blue,
+      gradient2: purp,
+      neonGlow: blue,
+      labelTextSize: labelTextSize,
+      textConstraint: 30.w(context),
+      subTextConstraint: 25.w(context),
+      headingText: 'Stay up to date.',
+      subText:
+          'Add your preferred news source to get news updates to your feed.',
     );
   }
 }

@@ -42,7 +42,8 @@ class _Pc3Section1State extends State<Pc3Section1> {
   }
 
   void showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   void updateUsername() {
@@ -103,7 +104,8 @@ class _Pc3Section1State extends State<Pc3Section1> {
               children: [
                 Text(
                   'General',
-                  style: TextStyle(fontSize: 4.sp(context), fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 4.sp(context), fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
                 buildInputField('Username', usernameController, updateUsername),
@@ -111,7 +113,8 @@ class _Pc3Section1State extends State<Pc3Section1> {
                 buildInputField('Email', emailController, updateEmail),
                 const Divider(),
                 buildSectionLable('Location'),
-                Text(location, style: const TextStyle(fontSize: 14, color: Colors.white)),
+                Text(location,
+                    style: const TextStyle(fontSize: 14, color: Colors.white)),
                 const Divider(),
                 buildSectionLable('Member Since'),
               ],
@@ -123,20 +126,24 @@ class _Pc3Section1State extends State<Pc3Section1> {
   }
 
   Widget buildSectionLable(String title) {
-    return Text(title, style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white70));
+    return Text(title,
+        style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white70));
   }
 
-  Widget buildInputField(String label, TextEditingController controller, VoidCallback onUpdate) {
+  Widget buildInputField(
+      String label, TextEditingController controller, VoidCallback onUpdate) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 3.sp(context), color: Colors.white70)),
+        Text(label,
+            style: TextStyle(fontSize: 3.sp(context), color: Colors.white70)),
         Row(
           children: [
             Expanded(
               child: TextField(
                 controller: controller,
-                decoration: InputDecoration(hintText: 'Enter $label', border: InputBorder.none),
+                decoration: InputDecoration(
+                    hintText: 'Enter $label', border: InputBorder.none),
               ),
             ),
             const SizedBox(width: 10),

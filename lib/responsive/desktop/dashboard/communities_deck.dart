@@ -37,24 +37,21 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
     double halfDeckWidth = 17.325.w(context);
     double headerTextSize = 6.5.sp(context);
     subTextSize = 2.5.sp(context);
-    profBubTextSize = 20;
-    double labelTextSize = 3.sp(context);
+    double labelTextSize = 2.5.sp(context);
     textConstraint = 500;
     subTextConstraint = 500;
-    return GestureDetector(
-      child: Deck(
-        deckHeight: deckHeight,
-        deckWidth: halfDeckWidth,
-        deckName: 'Communities',
-        gradient1: red,
-        gradient2: orange,
-        neonGlow: red,
-        labelTextSize: labelTextSize,
-        textConstraint: halfDeckWidth,
-        subTextConstraint: halfDeckWidth * 0.6,
-        headingText: 'Find your community.',
-        subText: "Connect with others and say what's on your mind.",
-      ),
+    return Deck(
+      deckHeight: deckHeight,
+      deckWidth: halfDeckWidth,
+      deckName: 'Communities',
+      gradient1: red,
+      gradient2: orange,
+      neonGlow: orangeGlow,
+      labelTextSize: labelTextSize,
+      textConstraint: halfDeckWidth,
+      subTextConstraint: halfDeckWidth * 0.7,
+      headingText: 'Find your community.',
+      subText: "Connect with others and say what's on your mind.",
     );
   }
 }

@@ -65,21 +65,24 @@ class _Pc2Section3State extends State<Pc2Section3> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (shortTermGoals.isNotEmpty) ...[
-                    const Text('Short-Term Goals:', style: TextStyle(fontWeight: FontWeight.bold)),
+                    const Text('Short-Term Goals:',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                     ...shortTermGoals.asMap().entries.map((entry) => ListTile(
                           leading: Text("${entry.key + 1}"),
                           title: Text(entry.value),
                           trailing: IconButton(
                             icon: const Icon(Icons.check, color: Colors.green),
                             onPressed: () {
-                              setState(() => shortTermGoals.removeAt(entry.key));
+                              setState(
+                                  () => shortTermGoals.removeAt(entry.key));
                               this.setState(() {});
                             },
                           ),
                         )),
                   ],
                   if (longTermGoals.isNotEmpty) ...[
-                    const Text('Long-Term Goals:', style: TextStyle(fontWeight: FontWeight.bold)),
+                    const Text('Long-Term Goals:',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                     ...longTermGoals.asMap().entries.map((entry) => ListTile(
                           leading: Text("${entry.key + 1}"),
                           title: Text(entry.value),
@@ -177,7 +180,8 @@ class _Pc2Section3State extends State<Pc2Section3> {
             children: [
               Text(
                 'Projects',
-                style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 5.sp(context), fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -204,7 +208,8 @@ class _Pc2Section3State extends State<Pc2Section3> {
             children: [
               Text(
                 'Goals',
-                style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 5.sp(context), fontWeight: FontWeight.bold),
               ),
               TextField(
                 controller: shortTermController,

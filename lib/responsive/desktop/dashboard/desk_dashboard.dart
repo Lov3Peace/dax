@@ -59,7 +59,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
         child: Container(
           height: 100.h(context),
           width: 100.w(context),
-          constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+          constraints: BoxConstraints(minHeight: 900),
           child: Stack(
             children: [
               // Background(),
@@ -71,14 +71,16 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                   Container(
                     height: 90.h(context),
                     // width: 87.5.w(context),
-                    constraints:
-                        100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                    constraints: 100.w(context) > 1920
+                        ? BoxConstraints(minHeight: 1440)
+                        : BoxConstraints(minHeight: 900),
                     //
                     // Row for Decks + Messages
                     child: Row(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 0.25.w(context)),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 0.25.w(context)),
                           child: Column(
                             children: [
                               //
@@ -94,14 +96,16 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                         scrollDirection: Axis.horizontal,
                                         duration: 200,
                                         delay: 75,
-                                        padding: EdgeInsets.all(0.25.w(context)),
+                                        padding:
+                                            EdgeInsets.all(0.25.w(context)),
                                         widgets: [
                                           //
                                           //Column of Title Bubble and Profile Card
                                           Column(
                                             children: [
                                               Padding(
-                                                padding: EdgeInsets.only(bottom: 0.25.w(context)),
+                                                padding: EdgeInsets.only(
+                                                    bottom: 0.25.w(context)),
                                                 child: TitleBubble(
                                                   deckName: 'Dashboard',
                                                 ),
@@ -109,7 +113,8 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                               Expanded(
                                                 child: Hero(
                                                   tag: 'profileHeroTag',
-                                                  flightShuttleBuilder: flightShuttleBuilder,
+                                                  flightShuttleBuilder:
+                                                      flightShuttleBuilder,
                                                   child: ProfileCard(),
                                                 ),
                                               ),
@@ -132,7 +137,8 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                         scrollDirection: Axis.horizontal,
                                         duration: 200,
                                         delay: 75,
-                                        padding: EdgeInsets.all(0.25.w(context)),
+                                        padding:
+                                            EdgeInsets.all(0.25.w(context)),
                                         widgets: [
                                           SocialsDeck(),
                                           NewsDeck(),
@@ -145,7 +151,8 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                         ),
                         // // ignore: prefer_const_constructors
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 0.25.w(context)),
+                          padding:
+                              EdgeInsets.symmetric(vertical: 0.25.w(context)),
                           child: StaggerLoad(
                             widgets: [Messages()],
                             duration: 200,

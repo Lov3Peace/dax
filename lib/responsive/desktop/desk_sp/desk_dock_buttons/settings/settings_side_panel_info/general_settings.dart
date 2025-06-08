@@ -55,7 +55,10 @@ class _GeneralSettingsInfoState extends State<GeneralSettingsInfo> {
               padding: EdgeInsets.all(1.h(context)),
               child: Text(
                 'General Settings',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 7.sp(context)),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 7.sp(context)),
               ),
             ),
 
@@ -73,7 +76,8 @@ class _GeneralSettingsInfoState extends State<GeneralSettingsInfo> {
                     ),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.h(context), vertical: 2.h(context)),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 4.h(context), vertical: 2.h(context)),
                     child: Column(
                       // crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -95,19 +99,26 @@ class _GeneralSettingsInfoState extends State<GeneralSettingsInfo> {
                                   ? TextField(
                                       controller: controller,
                                       enabled: isEditable,
-                                      style: const TextStyle(color: Colors.white),
+                                      style:
+                                          const TextStyle(color: Colors.white),
                                       decoration: InputDecoration(
                                         hintText: 'Username',
-                                        hintStyle: const TextStyle(color: Colors.white70),
+                                        hintStyle: const TextStyle(
+                                            color: Colors.white70),
                                         filled: false,
-                                        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 12, vertical: 16),
                                         border: InputBorder.none,
                                         enabledBorder: InputBorder.none,
                                         focusedBorder: InputBorder.none,
                                         suffixIcon: IconButton(
-                                          onPressed: () => setState(() => isHidden = !isHidden),
+                                          onPressed: () => setState(
+                                              () => isHidden = !isHidden),
                                           icon: Icon(
-                                            isHidden ? Icons.visibility_off : Icons.visibility,
+                                            isHidden
+                                                ? Icons.visibility_off
+                                                : Icons.visibility,
                                             color: Colors.white70,
                                           ),
                                         ),
@@ -132,12 +143,16 @@ class _GeneralSettingsInfoState extends State<GeneralSettingsInfo> {
                                   final newUsername = controller.text.trim();
                                   if (newUsername.isNotEmpty) {
                                     try {
-                                      await auth.currentUser!.updateDisplayName(newUsername);
-                                      await auth.currentUser!.reload(); // refresh user session
+                                      await auth.currentUser!
+                                          .updateDisplayName(newUsername);
+                                      await auth.currentUser!
+                                          .reload(); // refresh user session
                                       userProvider.updateUsername(newUsername);
-                                      debugPrint('Username updated to: $username');
+                                      debugPrint(
+                                          'Username updated to: $username');
                                     } catch (e) {
-                                      debugPrint('Failed to update username: $e');
+                                      debugPrint(
+                                          'Failed to update username: $e');
                                     }
                                   }
                                 } else {
@@ -146,11 +161,15 @@ class _GeneralSettingsInfoState extends State<GeneralSettingsInfo> {
                                 setState(() => isEditable = !isEditable);
                               },
                               child: GradientContainer(
-                                gradient1: isEditable ? blue : Colors.transparent,
-                                gradient2: isEditable ? const Color.fromARGB(255, 85, 221, 89) : Colors.transparent,
+                                gradient1:
+                                    isEditable ? blue : Colors.transparent,
+                                gradient2: isEditable
+                                    ? const Color.fromARGB(255, 85, 221, 89)
+                                    : Colors.transparent,
                                 height: 1.h(context),
                                 width: 2.h(context),
-                                neonGlow: isEditable ? greenGlow : Colors.transparent,
+                                neonGlow:
+                                    isEditable ? greenGlow : Colors.transparent,
                                 text: isEditable ? 'Save' : 'Edit',
                                 textSize: 2.sp(context),
                                 borderColor: Colors.white38,

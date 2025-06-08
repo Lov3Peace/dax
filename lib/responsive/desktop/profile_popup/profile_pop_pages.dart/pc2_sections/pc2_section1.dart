@@ -228,11 +228,13 @@ class Pc2Section1State extends State<Pc2Section1> {
             children: [
               Text(
                 'Bio',
-                style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 5.sp(context), fontWeight: FontWeight.bold),
               ),
               TextField(
                 controller: bioController,
-                style: TextStyle(fontSize: 2.5.sp(context), color: Colors.white),
+                style:
+                    TextStyle(fontSize: 2.5.sp(context), color: Colors.white),
                 decoration: const InputDecoration(
                   hintText: "Tell Us About Yourself!",
                   hintStyle: TextStyle(color: Colors.white54),
@@ -265,7 +267,8 @@ class Pc2Section1State extends State<Pc2Section1> {
           children: [
             Text(
               'Skills',
-              style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 5.sp(context), fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 1.h(context),

@@ -45,7 +45,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
         child: Container(
           width: 12.5.w(context),
           height: 100.h(context),
-          constraints: BoxConstraints(minHeight: 750),
+          constraints: BoxConstraints(minHeight: 950),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               color: const Color.fromARGB(185, 21, 19, 22),
@@ -58,39 +58,36 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
                 // )
               ]),
           child: SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: 99.h(context)),
-              child: IntrinsicHeight(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 1.w(context)),
-                  child: Column(
-                    spacing: 20,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    // mainAxisSize: MainAxisSize.min,
-                    children: [
-                      //Logo
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(1.5.w(context))),
-                            clipBehavior: Clip.hardEdge,
-                            child: Image.asset("images/omni-temp-logo.png",
-                                height: 15.sp(context))),
-                      ),
-                      SidePanelButtons(),
-                      Spacer(),
-                      //Logout
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 20),
-                        child: TactileButton(
-                          child: LogoutWindowButton(),
-                        ),
-                      ),
-                    ],
+            child: Padding(
+              padding: EdgeInsets.only(left: 1.w(context)),
+              child: Column(
+                spacing: 20,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisSize: MainAxisSize.min,
+                children: [
+                  //Logo
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
+                    child: ClipRRect(
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(1.5.w(context))),
+                        clipBehavior: Clip.hardEdge,
+                        child: Image.asset("images/omni-temp-logo.png",
+                            height: 15.sp(context))),
                   ),
-                ),
+                  SidePanelButtons(),
+                  SizedBox(
+                    height: 28.h(context),
+                  ),
+                  //Logout
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: TactileButton(
+                      child: LogoutWindowButton(),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

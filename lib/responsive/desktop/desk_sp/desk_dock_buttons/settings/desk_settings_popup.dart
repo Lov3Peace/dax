@@ -84,7 +84,10 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                           ),
                           child: Text(
                             'Settings',
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 6.sp(context)),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 6.sp(context)),
                           ),
                         ),
 
@@ -93,12 +96,15 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                         Container(
                           height: 68.h(context),
                           width: 14.w(context),
-                          constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
+                          constraints: const BoxConstraints(
+                              maxWidth: 500, minHeight: 250),
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(70, 32, 32, 40),
-                            borderRadius: const BorderRadius.all(Radius.circular(20)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
                             border: Border.all(
-                              color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                              color: const Color.fromARGB(18, 255, 255,
+                                  255), // ← change this to any color you want
                               width: 1.5, // ← adjust thickness
                             ),
                           ),
@@ -137,9 +143,11 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                           width: 47.w(context),
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(70, 32, 32, 40),
-                            borderRadius: const BorderRadius.all(Radius.circular(20)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20)),
                             border: Border.all(
-                              color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                              color: const Color.fromARGB(18, 255, 255,
+                                  255), // ← change this to any color you want
                               width: 1.5, // ← adjust thickness
                             ),
                           ),
@@ -158,25 +166,33 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                                 width: 20.w(context),
                                 decoration: const BoxDecoration(
                                   color: Color.fromARGB(0, 32, 32, 40),
-                                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
                                 ),
                                 child: Padding(
                                   padding: EdgeInsets.all(1.h(context)),
                                   child: SingleChildScrollView(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                                       children: [
                                         // This Text shows the profile ID
                                         Text(
-                                          context.watch<UserProvider>().username,
-                                          style: GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 5.sp(context)), fontWeight: FontWeight.w600),
+                                          context
+                                              .watch<UserProvider>()
+                                              .username,
+                                          style: GoogleFonts.montserrat(
+                                              textStyle: TextStyle(
+                                                  fontSize: 5.sp(context)),
+                                              fontWeight: FontWeight.w600),
                                         ),
 
                                         Text(
                                           'Member since 07.17.2023',
-                                          style: TextStyle(fontSize: 3.sp(context)),
+                                          style: TextStyle(
+                                              fontSize: 3.sp(context)),
                                         ),
 
                                         // This is the row containing online status
@@ -187,14 +203,16 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                                               height: 1.5.h(context),
                                               width: 1.w(context),
                                               decoration: const BoxDecoration(
-                                                color: Color.fromARGB(255, 9, 223, 41),
+                                                color: Color.fromARGB(
+                                                    255, 9, 223, 41),
                                                 borderRadius: BorderRadius.all(
                                                   Radius.circular(20),
                                                 ),
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(left: 0.5.w(context)),
+                                              padding: EdgeInsets.only(
+                                                  left: 0.5.w(context)),
                                               child: Text(
                                                 'Online',
                                                 style: TextStyle(
@@ -215,204 +233,28 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                                 width: 16.w(context),
                                 decoration: const BoxDecoration(
                                   color: Color.fromARGB(70, 32, 32, 40),
-                                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
                                 ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(top: 1.h(context), left: 1.w(context)),
+                                      padding: EdgeInsets.only(
+                                          top: 1.h(context),
+                                          left: 1.w(context)),
                                       child: Text(
-<<<<<<< HEAD
-                                        'Settings',
-                                        style: TextStyle(
-                                            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 6.sp(context)),
-                                      ),
-                                    ),
-
-                                    //
-                                    //This container houses the settings panel buttons
-                                    Container(
-                                      height: 68.h(context),
-                                      width: 14.w(context),
-                                      constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
-                                      decoration: const BoxDecoration(
-                                        color: Color.fromARGB(70, 32, 32, 40),
-                                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsets.only(top: 2.h(context)),
-                                        child: Column(
-                                          children: [
-                                            SettingsSidePanel(
-                                              currentIndex: currentSlide,
-                                              onTap: handleButtonTap,
-                                            ),
-                                          ],
-=======
                                         'Badges Earned:',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 4.sp(context),
->>>>>>> 09709b7414955f8a1e9a04a26fb388375e793ca4
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-<<<<<<< HEAD
-                              // This container houses the profile attributes and settings containers
-                              Container(
-                                height: 74.5.h(context),
-                                width: 47.w(context),
-                                decoration: const BoxDecoration(
-                                  color: Color.fromARGB(0, 207, 33, 33),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    // This container for profile attributes showing how long you have been a member
-                                    // profile name, and online status
-                                    Container(
-                                      height: 12.h(context),
-                                      width: 47.w(context),
-                                      decoration: const BoxDecoration(
-                                        color: Color.fromARGB(70, 32, 32, 40),
-                                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                                      ),
-                                      child: Row(
-                                        // alignment: WrapAlignment.spaceEvenly,
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          //Container housing profile picture and basic information
-
-                                          Image.asset(
-                                            "images/creator.png",
-                                            height: 10.h(context),
-                                          ),
-                                          Container(
-                                            height: 10.h(context),
-                                            width: 20.w(context),
-                                            decoration: const BoxDecoration(
-                                              color: Color.fromARGB(0, 32, 32, 40),
-                                              borderRadius: BorderRadius.all(Radius.circular(20)),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsets.all(1.h(context)),
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                                                  children: [
-                                                    // This Text shows the profile ID
-                                                    Text(
-                                                      context.watch<UserProvider>().username,
-                                                      style: GoogleFonts.montserrat(
-                                                          textStyle: TextStyle(fontSize: 5.sp(context)),
-                                                          fontWeight: FontWeight.w600),
-                                                    ),
-
-                                                    Text(
-                                                      'Member since 07.17.2023',
-                                                      style: TextStyle(fontSize: 3.sp(context)),
-                                                    ),
-
-                                                    // This is the row containing online status
-                                                    // there will be 3 statuses all together being online, away, and offline.
-                                                    Row(
-                                                      children: [
-                                                        Container(
-                                                          height: 1.5.h(context),
-                                                          width: 1.w(context),
-                                                          decoration: const BoxDecoration(
-                                                            color: Color.fromARGB(255, 9, 223, 41),
-                                                            borderRadius: BorderRadius.all(
-                                                              Radius.circular(20),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding: EdgeInsets.only(left: 0.5.w(context)),
-                                                          child: Text(
-                                                            'Online',
-                                                            style: TextStyle(
-                                                              fontSize: 3.sp(context),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          //Container housing badges achieved on profile so far
-                                          Container(
-                                            height: 10.h(context),
-                                            width: 16.w(context),
-                                            decoration: const BoxDecoration(
-                                              color: Color.fromARGB(70, 32, 32, 40),
-                                              borderRadius: BorderRadius.all(Radius.circular(20)),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(top: 1.h(context), left: 1.w(context)),
-                                                  child: Text(
-                                                    'Badges Earned:',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 4.sp(context),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-
-                                    // This is the container that will be housing all general notes and information
-                                    // for each given button in the settings side panel.
-                                    // note: we are still designing the Ui for th ebuttons so the code for this will come much later.
-                                    Container(
-                                      height: 59.h(context),
-                                      width: 47.w(context),
-                                      decoration: const BoxDecoration(
-                                        color: Color.fromRGBO(15, 15, 17, 1),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(20),
-                                        ),
-                                      ),
-                                      child: CarouselSlider(
-                                        carouselController: controller,
-                                        options: CarouselOptions(
-                                          height: 57.h(context),
-                                          viewportFraction: .97,
-                                          enlargeCenterPage: true,
-                                          scrollPhysics: const NeverScrollableScrollPhysics(),
-                                          onPageChanged: (index, _) {
-                                            setState(() => currentSlide = index);
-                                          },
-                                        ),
-                                        items: slides,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-=======
->>>>>>> 09709b7414955f8a1e9a04a26fb388375e793ca4
                             ],
                           ),
                         ),
@@ -429,7 +271,8 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                               Radius.circular(20),
                             ),
                             border: Border.all(
-                              color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                              color: const Color.fromARGB(18, 255, 255,
+                                  255), // ← change this to any color you want
                               width: 1.5, // ← adjust thickness
                             ),
                           ),
@@ -449,7 +292,8 @@ class _SettingsPopUpState extends State<SettingsPopUp> {
                                   height: 55.h(context),
                                   viewportFraction: .97,
                                   enlargeCenterPage: true,
-                                  scrollPhysics: const NeverScrollableScrollPhysics(),
+                                  scrollPhysics:
+                                      const NeverScrollableScrollPhysics(),
                                   onPageChanged: (index, _) {
                                     setState(() => currentSlide = index);
                                   },

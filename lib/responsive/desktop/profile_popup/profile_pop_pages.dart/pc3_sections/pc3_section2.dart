@@ -28,7 +28,8 @@ class _Pc3Section2State extends State<Pc3Section2> {
   Future<void> loadPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     mfaEnabled.value = prefs.getBool('mfaEnabled') ?? false;
-    privateAccountEnabled.value = prefs.getBool('privateAccountEnabled') ?? false;
+    privateAccountEnabled.value =
+        prefs.getBool('privateAccountEnabled') ?? false;
     phoneController.text = prefs.getString('recoveryPhone') ?? '';
   }
 
@@ -52,7 +53,8 @@ class _Pc3Section2State extends State<Pc3Section2> {
   }
 
   void showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -71,7 +73,9 @@ class _Pc3Section2State extends State<Pc3Section2> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Security', style: TextStyle(fontSize: 4.sp(context), fontWeight: FontWeight.bold)),
+                Text('Security',
+                    style: TextStyle(
+                        fontSize: 4.sp(context), fontWeight: FontWeight.bold)),
                 const SizedBox(height: 20),
 
                 // Password Section
@@ -126,7 +130,8 @@ class _Pc3Section2State extends State<Pc3Section2> {
                 const SizedBox(height: 10),
                 // Recovery Phone Section
 
-                buildRecoveryPhoneInput('Recovery Phone #', phoneController, updatePhone),
+                buildRecoveryPhoneInput(
+                    'Recovery Phone #', phoneController, updatePhone),
                 const Divider(),
                 const SizedBox(height: 10),
                 buildSectionTitle('Privacy'),
@@ -164,7 +169,8 @@ class _Pc3Section2State extends State<Pc3Section2> {
   }
 
   Widget buildSectionTitle(String title) {
-    return Text(title, style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white70));
+    return Text(title,
+        style: TextStyle(fontSize: 3.25.sp(context), color: Colors.white70));
   }
 
   Widget buildPasswordReset() {
@@ -173,24 +179,28 @@ class _Pc3Section2State extends State<Pc3Section2> {
       children: [
         const Text('********'),
         TactileButton(
-          onTap: () => showSnackBar('Password reset! New password: NewPassword123'),
+          onTap: () =>
+              showSnackBar('Password reset! New password: NewPassword123'),
           child: buildGradientButton('Reset'),
         ),
       ],
     );
   }
 
-  Widget buildRecoveryPhoneInput(String label, TextEditingController controller, VoidCallback onUpdate) {
+  Widget buildRecoveryPhoneInput(
+      String label, TextEditingController controller, VoidCallback onUpdate) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 3.sp(context), color: Colors.white70)),
+        Text(label,
+            style: TextStyle(fontSize: 3.sp(context), color: Colors.white70)),
         Row(
           children: [
             Expanded(
               child: TextField(
                 controller: controller,
-                decoration: InputDecoration(hintText: 'Enter $label', border: InputBorder.none),
+                decoration: InputDecoration(
+                    hintText: 'Enter $label', border: InputBorder.none),
               ),
             ),
             const SizedBox(width: 10),

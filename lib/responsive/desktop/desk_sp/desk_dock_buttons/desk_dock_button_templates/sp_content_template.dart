@@ -73,12 +73,16 @@ class SpContentPanel extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: TextStyle(color: Colors.white, fontSize: 3.5.sp(context))),
+              Text(title,
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 3.5.sp(context))),
               Padding(
-                padding: EdgeInsets.only(top: 2.5.h(context), right: 1.5.w(context)),
+                padding:
+                    EdgeInsets.only(top: 2.5.h(context), right: 1.5.w(context)),
                 child: Text(
                   content,
-                  style: TextStyle(fontSize: 3.sp(context), color: Colors.white70),
+                  style:
+                      TextStyle(fontSize: 3.sp(context), color: Colors.white70),
                 ),
               ),
             ],

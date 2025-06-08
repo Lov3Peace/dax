@@ -153,13 +153,17 @@ class _PCTitlesState extends State<PCTitles> {
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: selectedButtons.map((buttonId) {
-                          final button = availableButtons.firstWhere((b) => b["id"] == buttonId);
-                          final gradientColors = buttonGradients[buttonId] ?? [Colors.grey, Colors.black];
+                          final button = availableButtons
+                              .firstWhere((b) => b["id"] == buttonId);
+                          final gradientColors = buttonGradients[buttonId] ??
+                              [Colors.grey, Colors.black];
 
                           return Padding(
-                            padding: EdgeInsets.symmetric(vertical: 0.5.h(context)), // Adds spacing
+                            padding: EdgeInsets.symmetric(
+                                vertical: 0.5.h(context)), // Adds spacing
                             child: TactileButton(
-                              onTap: showSelectionDialog, // Opens selection modal
+                              onTap:
+                                  showSelectionDialog, // Opens selection modal
                               child: GradientContainer(
                                 gradient1: gradientColors[0],
                                 gradient2: gradientColors[1],

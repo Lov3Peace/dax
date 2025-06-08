@@ -63,9 +63,12 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
             pageBuilder: (context, _, __) => Center(
                     child: Container(
                   height: 75.h(context),
-                  constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 550),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                  padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                  constraints:
+                      const BoxConstraints(maxWidth: 1000, maxHeight: 550),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
                     color: const Color.fromARGB(42, 55, 52, 52),
@@ -81,7 +84,8 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
                                 height: 85.h(context),
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: const Color.fromARGB(182, 59, 59, 59),
+                                    color:
+                                        const Color.fromARGB(182, 59, 59, 59),
                                   ),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
@@ -112,7 +116,10 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
                     ),
                   ),
                 ).animate().slideX(
-                        begin: -1, end: 0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOutBack)));
+                        begin: -1,
+                        end: 0,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOutBack)));
       },
     );
     // setState(() {
@@ -157,7 +164,8 @@ class _SignUpFormState extends State<SignUpForm> {
       Navigator.of(context).push(
         PageRouteBuilder(
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+            animation =
+                CurvedAnimation(parent: animation, curve: Curves.linear);
             return FadeTransition(
               opacity: animation,
               child: child,
@@ -176,7 +184,8 @@ class _SignUpFormState extends State<SignUpForm> {
       } else if (e.code == 'wrong-password') {
         print('wrong password');
       } else if (e.code == 'weak-password') {
-        print('Weak Password. Please try 6 or more characters with special characters.');
+        print(
+            'Weak Password. Please try 6 or more characters with special characters.');
       }
     }
   }

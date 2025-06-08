@@ -31,7 +31,8 @@ class _WalletC2State extends State<WalletC2> {
         child: SingleChildScrollView(
           physics: NeverScrollableScrollPhysics(),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 2.w(context), vertical: 3.h(context)),
+            padding: EdgeInsets.symmetric(
+                horizontal: 2.w(context), vertical: 3.h(context)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,14 +50,18 @@ class _WalletC2State extends State<WalletC2> {
                           hintText: 'Linked Card',
                           hintStyle: const TextStyle(color: Colors.white70),
                           filled: false,
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 16),
                           border: InputBorder.none,
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           suffixIcon: IconButton(
-                            onPressed: () => setState(() => isHidden = !isHidden),
+                            onPressed: () =>
+                                setState(() => isHidden = !isHidden),
                             icon: Icon(
-                              isHidden ? Icons.visibility_off : Icons.visibility,
+                              isHidden
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                               color: Colors.white70,
                             ),
                           ),
@@ -73,7 +78,9 @@ class _WalletC2State extends State<WalletC2> {
                       },
                       child: GradientContainer(
                         gradient1: isEditable ? blue : Colors.transparent,
-                        gradient2: isEditable ? const Color.fromARGB(255, 85, 221, 89) : Colors.transparent,
+                        gradient2: isEditable
+                            ? const Color.fromARGB(255, 85, 221, 89)
+                            : Colors.transparent,
                         height: 1.h(context),
                         width: 2.h(context),
                         neonGlow: isEditable ? greenGlow : Colors.transparent,
@@ -179,7 +186,8 @@ class _WalletC2State extends State<WalletC2> {
     );
   }
 
-  Widget buildSwitchRow(BuildContext context, String label, bool value, ValueChanged<bool> onChanged) {
+  Widget buildSwitchRow(BuildContext context, String label, bool value,
+      ValueChanged<bool> onChanged) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

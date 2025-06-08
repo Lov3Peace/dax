@@ -13,7 +13,8 @@ class ConnectionTactile extends StatefulWidget {
 }
 
 class ConnectionTactileState extends State<ConnectionTactile> {
-  int selectedIndex = 0; // <-- this makes the first button look selected on load
+  int selectedIndex =
+      0; // <-- this makes the first button look selected on load
 
   @override
   Widget build(BuildContext context) {

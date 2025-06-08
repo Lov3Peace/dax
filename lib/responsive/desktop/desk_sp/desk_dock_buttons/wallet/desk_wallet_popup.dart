@@ -141,10 +141,12 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                     children: [
                                       // this column holds the amount given
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.only(bottom: 1.h(context)),
+                                            padding: EdgeInsets.only(
+                                                bottom: 1.h(context)),
                                             child: Text(
                                               'Amount',
                                               style: TextStyle(
@@ -162,10 +164,12 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                       ),
                                       // this column will holds the reason for sending
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.only(bottom: 1.h(context)),
+                                            padding: EdgeInsets.only(
+                                                bottom: 1.h(context)),
                                             child: Text(
                                               'Frequency',
                                               style: TextStyle(
@@ -198,7 +202,8 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                     onTap: () {},
                                     child: GradientContainer(
                                       gradient1: blue,
-                                      gradient2: const Color.fromARGB(255, 85, 221, 89),
+                                      gradient2: const Color.fromARGB(
+                                          255, 85, 221, 89),
                                       height: 2.h(context),
                                       width: 15.h(context),
                                       neonGlow: greenGlow,
@@ -221,7 +226,8 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                         height: 20.h(context),
                         width: 20.w(context),
                         decoration: BoxDecoration(
-                          gradient: const LinearGradient(colors: [blue, Color.fromARGB(255, 85, 221, 89)]),
+                          gradient: const LinearGradient(
+                              colors: [blue, Color.fromARGB(255, 85, 221, 89)]),
                           boxShadow: const [
                             BoxShadow(
                               color: blue,
@@ -240,32 +246,43 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 0.5.w(context)),
                                   child: SizedBox(
                                     width: double.infinity,
                                     child: Wrap(
                                       alignment: WrapAlignment.spaceBetween,
-                                      crossAxisAlignment: WrapCrossAlignment.center,
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
                                       children: [
                                         Text(
                                           'Balance',
                                           style: TextStyle(
-                                            color: const Color.fromARGB(255, 255, 255, 255),
+                                            color: const Color.fromARGB(
+                                                255, 255, 255, 255),
                                             fontWeight: FontWeight.bold,
                                             fontSize: 5.sp(context),
                                           ),
                                         ),
                                         Container(
                                           decoration: BoxDecoration(
-                                            color: const Color.fromARGB(0, 86, 81, 81).withOpacity(0.6),
-                                            borderRadius: BorderRadius.circular(24),
+                                            color: const Color.fromARGB(
+                                                    0, 86, 81, 81)
+                                                .withOpacity(0.6),
+                                            borderRadius:
+                                                BorderRadius.circular(24),
                                           ),
                                           child: Padding(
-                                            padding: EdgeInsets.all(1.h(context)),
+                                            padding:
+                                                EdgeInsets.all(1.h(context)),
                                             child: Text(
-                                              context.watch<UserProvider>().username,
-                                              style:
-                                                  GoogleFonts.montserrat(textStyle: TextStyle(fontSize: 3.sp(context)), fontWeight: FontWeight.w600),
+                                              context
+                                                  .watch<UserProvider>()
+                                                  .username,
+                                              style: GoogleFonts.montserrat(
+                                                  textStyle: TextStyle(
+                                                      fontSize: 3.sp(context)),
+                                                  fontWeight: FontWeight.w600),
                                             ),
                                           ),
                                         ),
@@ -275,9 +292,14 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
                                 ),
                                 const SizedBox(),
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 2.h(context), left: 2.w(context), top: 5.h(context)),
+                                  padding: EdgeInsets.only(
+                                      bottom: 2.h(context),
+                                      left: 2.w(context),
+                                      top: 5.h(context)),
                                   child: Text(
-                                    NumberFormat.simpleCurrency(locale: 'en-US', decimalDigits: 2).format(7837),
+                                    NumberFormat.simpleCurrency(
+                                            locale: 'en-US', decimalDigits: 2)
+                                        .format(7837),
                                     style: TextStyle(
                                       fontSize: 3.sp(context),
                                       fontWeight: FontWeight.bold,

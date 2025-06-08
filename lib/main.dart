@@ -58,7 +58,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       onGenerateRoute: (settings) => PageRouteBuilder(
         settings: settings,
-        pageBuilder: (context, animation, secondaryAnimation) => routes[settings.name]!,
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            routes[settings.name]!,
         fullscreenDialog: true,
       ),
       onUnknownRoute: (settings) => PageRouteBuilder(
@@ -69,7 +70,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: GoogleFonts.montserrat().fontFamily,
-          colorScheme: const ColorScheme.dark(secondary: red, onSurface: Colors.white),
+          colorScheme:
+              const ColorScheme.dark(secondary: red, onSurface: Colors.white),
           scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
     );
   }

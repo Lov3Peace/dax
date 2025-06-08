@@ -34,7 +34,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
     double headerTextSize = 6.5.sp(context);
     subTextSize = 2.5.sp(context);
     profBubTextSize = 20;
-    double labelTextSize = 3.sp(context);
+    double labelTextSize = 2.5.sp(context);
     textConstraint = 500;
     subTextConstraint = 500;
     return Deck(
@@ -43,13 +43,14 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
       deckName: 'Projects',
       gradient1: red,
       gradient2: pink,
-      neonGlow: red,
+      neonGlow: pink,
       labelTextSize: labelTextSize,
-      textConstraint: deckWidth * 0.7,
-      subTextConstraint: deckWidth * 0.6,
+      textConstraint: 30.w(context),
+      subTextConstraint: 20.w(context),
       headingText: 'Collaborate and innovate.',
-      subText: 'Post, join, or support independent projects anywhere in the world.',
-      riveAnim: const r.RiveAnimation.asset('rive/building_apartments.riv'),
+      subText:
+          'Post, join, or support independent projects anywhere in the world.',
+      riveAnim: r.RiveAnimation.asset('rive/building_apartments.riv'),
     );
   }
 }

@@ -35,7 +35,8 @@ class _Pc3Section3State extends State<Pc3Section3> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       messagesEnabled.value = prefs.getBool('messagesEnabled') ?? false;
-      friendRequestsEnabled.value = prefs.getBool('friendRequestsEnabled') ?? false;
+      friendRequestsEnabled.value =
+          prefs.getBool('friendRequestsEnabled') ?? false;
       transactionsEnabled.value = prefs.getBool('transactionsEnabled') ?? false;
       paypalEnabled.value = prefs.getBool('paypalEnabled') ?? false;
     });
@@ -66,7 +67,8 @@ class _Pc3Section3State extends State<Pc3Section3> {
   }
 
   void showSnackBar(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -101,7 +103,8 @@ class _Pc3Section3State extends State<Pc3Section3> {
             children: [
               Text(
                 'Notifications',
-                style: TextStyle(fontSize: 4.sp(context), fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 4.sp(context), fontWeight: FontWeight.bold),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,7 +203,8 @@ class _Pc3Section3State extends State<Pc3Section3> {
             children: [
               Text(
                 'Billing',
-                style: TextStyle(fontSize: 4.sp(context), fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 4.sp(context), fontWeight: FontWeight.bold),
               ),
 
               // First Row: Card Number and Edit Button
@@ -232,7 +236,8 @@ class _Pc3Section3State extends State<Pc3Section3> {
                 ],
               ),
               // Third Row: Paypal Account and Edit Button
-              buildBillingContent('Paypal Account', paypalController, updatePaypal)
+              buildBillingContent(
+                  'Paypal Account', paypalController, updatePaypal)
             ],
           ),
         ),

@@ -37,8 +37,14 @@ class _GradientContainerState extends State<GradientContainer> {
       width: widget.width,
       // padding: EdgeInsets.fromLTRB(widget.width, widget.height, widget.width, widget.height),
       decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [widget.gradient1, widget.gradient2]),
-          boxShadow: [BoxShadow(color: widget.neonGlow, blurRadius: 10, blurStyle: BlurStyle.solid)],
+          gradient:
+              LinearGradient(colors: [widget.gradient1, widget.gradient2]),
+          boxShadow: [
+            BoxShadow(
+                color: widget.neonGlow,
+                blurRadius: 10,
+                blurStyle: BlurStyle.solid)
+          ],
           borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
           border: Border.all(color: widget.borderColor)),
       child: Center(

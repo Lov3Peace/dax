@@ -42,8 +42,10 @@ class ProjectsButton extends StatelessWidget {
                 print(value.socialsHeroTag);
                 Navigator.of(context).push(
                   PageRouteBuilder(
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      animation = CurvedAnimation(
+                          parent: animation, curve: Curves.linear);
                       return FadeTransition(
                         opacity: animation,
                         child: child,
@@ -110,8 +112,10 @@ class NewsButton extends StatelessWidget {
                 print(value.socialsHeroTag);
                 Navigator.of(context).push(
                   PageRouteBuilder(
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      animation = CurvedAnimation(
+                          parent: animation, curve: Curves.linear);
                       return FadeTransition(
                         opacity: animation,
                         child: child,
@@ -177,8 +181,10 @@ class CommunitiesButton extends StatelessWidget {
                 heroOff.heroOff();
                 Navigator.of(context).push(
                   PageRouteBuilder(
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      animation = CurvedAnimation(
+                          parent: animation, curve: Curves.linear);
                       return FadeTransition(
                         opacity: animation,
                         child: child,
@@ -245,8 +251,10 @@ class SocialsButton extends StatelessWidget {
                 print(value.socialsHeroTag);
                 Navigator.of(context).push(
                   PageRouteBuilder(
-                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                      animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      animation = CurvedAnimation(
+                          parent: animation, curve: Curves.linear);
                       return FadeTransition(
                         opacity: animation,
                         child: child,

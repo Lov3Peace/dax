@@ -145,7 +145,8 @@ class WalletC1 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      NumberFormat.simpleCurrency(locale: 'en-US').format(10000),
+                      NumberFormat.simpleCurrency(locale: 'en-US')
+                          .format(10000),
                       style: TextStyle(
                         fontSize: 2.sp(context),
                         fontWeight: FontWeight.bold,
@@ -167,7 +168,8 @@ class WalletC1 extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      NumberFormat.simpleCurrency(locale: 'en-US').format(100000),
+                      NumberFormat.simpleCurrency(locale: 'en-US')
+                          .format(100000),
                       style: TextStyle(
                         fontSize: 2.sp(context),
                         fontWeight: FontWeight.bold,

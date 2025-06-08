@@ -30,7 +30,10 @@ class AccessSettingsInfoState extends State<AccessSettingsInfo> {
               padding: EdgeInsets.all(1.h(context)),
               child: Text(
                 'Accessibility Settings',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 7.sp(context)),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 7.sp(context)),
               ),
             ),
 

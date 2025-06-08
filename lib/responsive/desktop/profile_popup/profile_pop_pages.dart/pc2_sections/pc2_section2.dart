@@ -20,10 +20,12 @@ class _Pc2Section2State extends State<Pc2Section2> {
   List<File> uploadedFiles = [];
 
   Future<void> pickFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
     if (result != null) {
       setState(() {
-        uploadedFiles.addAll(result.paths.whereType<String>().map((path) => File(path)));
+        uploadedFiles
+            .addAll(result.paths.whereType<String>().map((path) => File(path)));
       });
     }
   }
@@ -52,7 +54,8 @@ class _Pc2Section2State extends State<Pc2Section2> {
               children: [
                 Text(
                   'Showcase',
-                  style: TextStyle(fontSize: 5.sp(context), fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 5.sp(context), fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 1.h(context)),
                 uploadedFiles.isEmpty

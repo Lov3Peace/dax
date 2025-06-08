@@ -46,6 +46,7 @@ class SpButtonTemplateState extends State<SpButtonTemplate> {
           slideIn();
         },
         child: AnimatedContainer(
+          constraints: BoxConstraints(maxHeight: 30.h(context)),
           duration: const Duration(milliseconds: 200),
           padding: EdgeInsets.only(left: isHover ? 10 : 0),
           decoration: BoxDecoration(
@@ -101,7 +102,11 @@ class SpButtonTemplateState extends State<SpButtonTemplate> {
             context: context,
             // transitionDuration: const Duration(milliseconds: 200),
             pageBuilder: (context, _, __) => Center(
-                child: widget.child.animate().slideX(begin: -1, end: 0, curve: Curves.easeOutBack, duration: const Duration(milliseconds: 500))));
+                child: widget.child.animate().slideX(
+                    begin: -1,
+                    end: 0,
+                    curve: Curves.easeOutBack,
+                    duration: const Duration(milliseconds: 500))));
       },
     );
   }

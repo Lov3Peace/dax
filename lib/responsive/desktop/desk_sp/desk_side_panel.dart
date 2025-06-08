@@ -12,7 +12,7 @@ import 'desk_dock_buttons/connections/desk_connections_popup.dart';
 import 'desk_dock_buttons/desk_home_button.dart';
 import 'desk_dock_buttons/help/desk_help_popup.dart';
 import 'desk_dock_buttons/info/desk_info_popup.dart';
-import 'desk_dock_buttons/settings/desk_settings_popup.dart.dart';
+import 'desk_dock_buttons/settings/desk_settings_popup.dart';
 import 'desk_dock_buttons/desk_dock_button_templates/sp_button_template.dart';
 import 'desk_dock_buttons/wallet/desk_wallet_popup.dart';
 
@@ -25,7 +25,8 @@ class DesktopSidePanel extends StatefulWidget {
   State<DesktopSidePanel> createState() => _DesktopSidePanelState();
 }
 
-class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin {
+class _DesktopSidePanelState extends State<DesktopSidePanel>
+    with AnimationMixin {
   late Animation<double> scale;
   late Animation<double> opacity;
 
@@ -42,48 +43,55 @@ class _DesktopSidePanelState extends State<DesktopSidePanel> with AnimationMixin
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
         child: Container(
+          width: 12.5.w(context),
+          height: 100.h(context),
           constraints: BoxConstraints(minHeight: 750),
           clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(color: const Color.fromARGB(185, 21, 19, 22), border: Border.all(color: deckBorderColor), boxShadow: [
-            // BoxShadow(
-            //   blurRadius: 10,
-            //   color: Color.fromARGB(255, 37, 37, 37),
-            //   offset: Offset(0, 0),
-            // )
-          ]),
-          width: 12.5.w(context),
-          child: Padding(
-            padding: EdgeInsets.only(left: 1.w(context)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // mainAxisSize: MainAxisSize.min,
-              children: [
-                //Logo
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(1.5.w(context))),
-                      clipBehavior: Clip.hardEdge,
-                      child: Image.asset("images/omni-temp-logo.png", height: 5.w(context))),
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(185, 21, 19, 22),
+              border: Border.all(color: deckBorderColor),
+              boxShadow: [
+                // BoxShadow(
+                //   blurRadius: 10,
+                //   color: Color.fromARGB(255, 37, 37, 37),
+                //   offset: Offset(0, 0),
+                // )
+              ]),
+          child: SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: 99.h(context)),
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 1.w(context)),
+                  child: Column(
+                    spacing: 20,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisSize: MainAxisSize.min,
+                    children: [
+                      //Logo
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(1.5.w(context))),
+                            clipBehavior: Clip.hardEdge,
+                            child: Image.asset("images/omni-temp-logo.png",
+                                height: 15.sp(context))),
+                      ),
+                      SidePanelButtons(),
+                      Spacer(),
+                      //Logout
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 20),
+                        child: TactileButton(
+                          child: LogoutWindowButton(),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                // Divider(
-                //   color: Colors.grey,
-                //   thickness: 0.5,
-                //   indent: 1.w(context),
-                //   endIndent: 2.w(context),
-                // ),
-                SizedBox(
-                  height: 5.sp(context),
-                ),
-                SidePanelButtons(),
-                Spacer(),
-                //Logout
-                Padding(
-                  padding: EdgeInsets.only(bottom: 2.sp(context)),
-                  child: TactileButton(child: LogoutWindowButton()),
-                ),
-              ],
+              ),
             ),
           ),
         ),
@@ -102,33 +110,29 @@ class SidePanelButtons extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 20,
       children: [
         DeskHomeButton(),
-        SizedBox(height: 20),
         SpButtonTemplate(
           icon: Icons.wallet,
           deskButtonText: 'Wallet',
           child: WalletPopUp(),
         ),
-        SizedBox(height: 20), // Adjusted the height to 20
         SpButtonTemplate(
           icon: Icons.person,
           deskButtonText: 'Connections',
           child: FriendsPopUp(),
         ),
-        SizedBox(height: 20), // Adjusted the height to 20
         SpButtonTemplate(
           icon: Icons.settings,
           deskButtonText: 'Settings',
           child: SettingsPopUp(),
         ),
-        SizedBox(height: 20), // Adjusted the height to 20
         SpButtonTemplate(
           icon: Icons.help,
           deskButtonText: 'Help',
           child: HelpPopUp(),
         ),
-        SizedBox(height: 20), // Adjusted the height to 20
         SpButtonTemplate(
           icon: Icons.info,
           deskButtonText: 'Info',

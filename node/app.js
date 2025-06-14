@@ -11,7 +11,7 @@ app.get('/node', (req, res) => {
 
 app.use(express.json());
 
-app.use('/api/', authRouter)
+app.use('/api/', authRouter);
 
 app.use(cors());
 

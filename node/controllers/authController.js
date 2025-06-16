@@ -1,7 +1,8 @@
 import User from "../models/user.js";
 import { errorLog, infoLog } from "../log.js";
 import bcrypt from "bcrypt";
-import jsonwebtoken from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+import { generateKeyPairSync } from "crypto";
 // Logger for info, debug, errors, etc.
 export const createUser = async (req, res) => {
     // Creates a 'newUser' object and sets it equal to a
@@ -33,18 +34,39 @@ export const createUser = async (req, res) => {
 export const loginUser = async (req, res) => {
     try {
         // debugger;
-        // const { username, password } = req.body;
-        const user = await User.findOne({ username: req.body.username });
+        const { username, password } = req.body;
+        // Fetch Username from DB
+        const user = await User.findOne({ username: username });
         if (!user) {
-            infoLog.info(`User ${user.username} not found`);
-            return res.status(404).json(user);
+            infoLog.info(`User ${username} not found`);
+            return res.status(404).json(`User ${username} not found`);
         }
+        // Retrieve the hashed pw in the DB
         const hashedDbPw = user.password;
-        const matched = await bcrypt.compare(req.body.password, hashedDbPw);
+        // Compare the hashed pw to the request pw
+        const matched = await bcrypt.compare(password, hashedDbPw);
+        // If matched returns true, generate and verify JWTs
         if (matched) {
+            // JWT Generation and Verification
+            const { privateKey, publicKey } = generateKeyPairSync("rsa", {
+                modulusLength: 4096,
+                privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+                publicKeyEncoding: { type: 'spki', format: 'pem' },
+            });
+            const token = jwt.sign({
+                id: user._id,
+                role: user.roles,
+                isAdmin: user.isAdmin
+            },
+                privateKey,
+                { algorithm: 'RS256', expiresIn: '30m' }
+            );
+            const decoded = jwt.verify(token, publicKey, { algorithms: "RS256" });
+
             infoLog.info(`${user.username} logged in successfully`);
             console.log(`${user.username} logged in Successfully`);
-            return res.status(200).json(`${user.username} logged in successfully`);
+
+            return res.status(200).json({ user: user.username, token });
         } else {
             return res.status(401).json(`Authentication for ${user.username} failed`);
         }
@@ -71,6 +93,21 @@ export const deleteUser = async (req, res) => {
         const hashedDbPw = user.password;
         const matched = await bcrypt.compare(password, hashedDbPw);
         if (matched) {
+            // JWT Generation and Verification
+            const { privateKey, publicKey } = generateKeyPairSync("rsa", {
+                modulusLength: 4096,
+                privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+                publicKeyEncoding: { type: 'spki', format: 'pem' },
+            });
+            const token = jwt.sign({
+                id: user._id,
+                role: user.roles,
+                isAdmin: user.isAdmin
+            },
+                privateKey,
+                { algorithm: 'RS256', expiresIn: '30m' }
+            );
+            const decoded = jwt.verify(token, publicKey, { algorithms: "RS256" })
             const deletedUser = await User.deleteOne({ username: user.username });
             infoLog.info(`User '${user.username}' deleted successfully`);
             return res.status(200).json(`User '${user.username}' deleted successfully`);

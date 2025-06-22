@@ -37,7 +37,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
       },
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/');
+          Navigator.pushNamed(context, '/home');
         },
         child: Stack(
           children: [

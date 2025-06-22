@@ -3,7 +3,7 @@ import app from './app.js';
 import dotenv from "dotenv";
 
 // used for env variables
-dotenv.config()
+dotenv.config();
 
 const port = process.env.PORT;
 

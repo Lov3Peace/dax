@@ -4,7 +4,7 @@ import '../../util/imports.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-var node_endpoint = Uri.parse('http://127.0.0.1:7777/node');
+var node_endpoint = Uri.parse('http://127.0.0.1:7777/api/register');
 
 class NodeTest extends StatelessWidget {
   NodeTest({super.key});

@@ -22,5 +22,8 @@ class UserProvider with ChangeNotifier {
 }
 
 String getCurrentUsername() {
-  return auth.currentUser?.displayName ?? auth.currentUser?.email?.allBefore('@') ?? '';
+  return 'User';
+  // return auth.currentUser?.displayName ??
+  //     auth.currentUser?.email?.allBefore('@') ??
+  '';
 }

@@ -11,9 +11,9 @@ authRouter.post("/register", createUser);
 
 authRouter.delete("/deleteUser", deleteUser);
 
-authRouter.get("/login", loginUser);
+authRouter.post("/login", loginUser);
 
-authRouter.put('/updateUser', updateUser);
+authRouter.patch('/updateUser', updateUser);
 
 export default authRouter;
 

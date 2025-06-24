@@ -93,8 +93,14 @@ class Deck extends StatelessWidget {
               top: 20,
               child: Column(
                 children: [
-                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: text),
-                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: subText)
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: text),
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: subText)
                 ],
               ),
             ),
@@ -103,7 +109,10 @@ class Deck extends StatelessWidget {
               bottom: 0,
               child: Column(
                 children: [
-                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: image),
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: image),
                 ],
               ),
             ),
@@ -118,8 +127,14 @@ class Deck extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [gradient1, gradient2]),
-                      boxShadow: [BoxShadow(color: neonGlow, blurRadius: 7, blurStyle: BlurStyle.solid)],
-                      borderRadius: const BorderRadius.all(Radius.circular(20))),
+                      boxShadow: [
+                        BoxShadow(
+                            color: neonGlow,
+                            blurRadius: 7,
+                            blurStyle: BlurStyle.solid)
+                      ],
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20))),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Text(
@@ -182,7 +197,7 @@ AppBar mobAppBar() {
             child: ProfileBubble(
               deckHeight: screenHeight * 0.05,
               deckWidth: screenWidth * 0.3,
-              deckName: auth.currentUser!.email.toString().allBefore('@'),
+              deckName: 'User',
               gradient1: tran,
               gradient2: tran,
               neonGlow: const Color.fromARGB(78, 4, 4, 4),
@@ -254,7 +269,12 @@ class ProfileBubble extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
-                    boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
+                    boxShadow: [
+                      BoxShadow(
+                          color: neonGlow,
+                          blurRadius: 20,
+                          blurStyle: BlurStyle.solid)
+                    ],
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -355,7 +375,12 @@ class TitleBubble extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
-                    boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
+                    boxShadow: [
+                      BoxShadow(
+                          color: neonGlow,
+                          blurRadius: 20,
+                          blurStyle: BlurStyle.solid)
+                    ],
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -447,7 +472,8 @@ class _DockButtonState extends State<DockButton> {
     // toggle between control instructions
     setState(() {
       control = Control.play;
-      currentColor = (currentColor == activeColor) ? inactiveColor : activeColor;
+      currentColor =
+          (currentColor == activeColor) ? inactiveColor : activeColor;
     });
   }
 
@@ -496,8 +522,10 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  animation =
+                      CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -519,8 +547,10 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
       },
       child: ScaleTransition(
         scale: scale,
-        child:
-            AnimatedOpacity(opacity: opacity.value, duration: const Duration(milliseconds: 300), child: projectDeck()),
+        child: AnimatedOpacity(
+            opacity: opacity.value,
+            duration: const Duration(milliseconds: 300),
+            child: projectDeck()),
       ),
     );
   }
@@ -547,7 +577,8 @@ class _ProjectsDeckState extends State<ProjectsDeck> with AnimationMixin {
         text: Text(
           'Collaborate and innovate.',
           style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+              fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -769,8 +800,10 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  animation =
+                      CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -817,7 +850,8 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         text: Text(
           'All of your socials in one place.',
           style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+              fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -971,8 +1005,10 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  animation =
+                      CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -1016,7 +1052,8 @@ class _FinancesDeckState extends State<FinancesDeck> with AnimationMixin {
         text: Text(
           'Manage your money.',
           style: GoogleFonts.montserrat(
-              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+              textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+              fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -1170,8 +1207,10 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  animation =
+                      CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,
@@ -1215,7 +1254,8 @@ class _NewsDeckState extends State<NewsDeck> with AnimationMixin {
       text: Text(
         'Stay up to date.',
         style: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0), fontWeight: FontWeight.w600),
+            textStyle: TextStyle(fontSize: headerTextSize, height: 1.0),
+            fontWeight: FontWeight.w600),
       ),
     ));
   }
@@ -1341,12 +1381,15 @@ class LogOutButton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 55),
       decoration: BoxDecoration(
           gradient: const LinearGradient(colors: [purp, red]),
-          boxShadow: const [BoxShadow(color: red, blurRadius: 20, blurStyle: BlurStyle.solid)],
+          boxShadow: const [
+            BoxShadow(color: red, blurRadius: 20, blurStyle: BlurStyle.solid)
+          ],
           borderRadius: BorderRadius.all(Radius.circular(screenWidth / 4))),
       child: const Center(
         child: Text(
           'Log Out',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
         ),
       ),
     );
@@ -1391,8 +1434,14 @@ class Stacks extends Deck {
               top: 20,
               child: Column(
                 children: [
-                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: text),
-                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: subText)
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: text),
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: subText)
                 ],
               ),
             ),
@@ -1401,7 +1450,10 @@ class Stacks extends Deck {
               bottom: 0,
               child: Column(
                 children: [
-                  Container(margin: const EdgeInsets.only(bottom: 5), width: textConstraint, child: image),
+                  Container(
+                      margin: const EdgeInsets.only(bottom: 5),
+                      width: textConstraint,
+                      child: image),
                 ],
               ),
             ),
@@ -1416,8 +1468,14 @@ class Stacks extends Deck {
                 child: Container(
                   decoration: BoxDecoration(
                       gradient: LinearGradient(colors: [gradient1, gradient2]),
-                      boxShadow: [BoxShadow(color: neonGlow, blurRadius: 7, blurStyle: BlurStyle.solid)],
-                      borderRadius: const BorderRadius.all(Radius.circular(20))),
+                      boxShadow: [
+                        BoxShadow(
+                            color: neonGlow,
+                            blurRadius: 7,
+                            blurStyle: BlurStyle.solid)
+                      ],
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20))),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Text(

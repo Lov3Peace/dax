@@ -1,20 +1,26 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
+import 'package:supercharged/supercharged.dart';
 import '../../responsive/mobile/mob_artboard_page.dart';
 import '../gradient_label.dart';
 import '../tactile_button.dart';
 import 'auth_check.dart';
 import 'forget_password_form.dart';
 import 'signup.dart';
+import 'package:http/http.dart' as http;
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -28,8 +34,8 @@ Control control = Control.stop;
 //Controls the switch
 bool isSwitch = false;
 
-final _usernameController = TextEditingController();
-final _passwordController = TextEditingController();
+final TextEditingController _usernameController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
 
 class _OnboardingScreenState extends State<OnboardingScreen>
     with AnimationMixin {
@@ -375,38 +381,68 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   Future login() async {
+    var loginEndpoint = Uri.parse('http://127.0.0.1:7777/api/login');
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: '${_usernameController.text}@omni.com',
-          password: _passwordController.text);
-      if (mounted) {
-        Navigator.pushNamed(
-          context,
-          '/',
-        );
+      // Hitting the Login endpoint
+      print('Fetching...');
+      print('${_usernameController.text}');
+      var res = await http
+          .post(
+            loginEndpoint,
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode({
+              "username": _usernameController.text,
+              "password": _passwordController.text
+            }),
+          )
+          .timeout(Duration(seconds: 5));
+      final body = json.decode(res.body);
+      print('Fetched...');
+      print(res.body);
+      if (body is Map && body.containsKey('token')) {
+        if (mounted) {
+          Navigator.pushNamed(context, '/home');
+        } else {
+          print(
+            'No context found!',
+          );
+        }
+      } else {
+        showErrorMessage('Login Failed: $body');
       }
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print("User doesn't exist.");
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password.');
-        showErrorMessage(e.code);
-      }
+    } catch (e) {
+      print('Login Failed: $e');
     }
   }
 
-  // error message to user
   void showErrorMessage(String message) {
     showDialog(
         context: (context),
         builder: (context) {
-          return AlertDialog(
-            backgroundColor: const Color.fromARGB(182, 75, 75, 75),
-            title: Center(
-                child: Text(
-              message,
-              style: const TextStyle(color: Colors.white),
-            )),
+          return Center(
+            child: Stack(children: [
+              BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                blendMode: BlendMode.darken,
+                child: SizedBox(),
+              ),
+              AlertDialog(
+                backgroundColor: tran,
+                content: Container(
+                  padding: EdgeInsetsGeometry.all(1.w(context)),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1.5.w(context)),
+                    color: deckColor,
+                    border: Border.all(color: deckBorderColor),
+                  ),
+                  child: Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 3.sp(context), color: white),
+                  ),
+                ),
+              )
+            ]),
           );
         });
   }

@@ -43,14 +43,16 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
   }
 
   void _onScroll() {
-    if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+    if (_scrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
       setState(() {
         // Calculate the new opacity based on the scroll offset
         _showAppBar = 1.0 - (_scrollController.offset / 100.0);
         // Limit the opacity value between 0.0 and 1.0
         _showAppBar = _showAppBar.clamp(0.0, 1.0);
       });
-    } else if (_scrollController.position.userScrollDirection == ScrollDirection.forward) {
+    } else if (_scrollController.position.userScrollDirection ==
+        ScrollDirection.forward) {
       setState(() {
         _showAppBar = 1.0;
       });
@@ -69,7 +71,8 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
             leadingWidth: screenWidth * 0.9,
             toolbarHeight: lerpDouble(0, 10, 8),
             flexibleSpace: Padding(
-              padding: EdgeInsets.fromLTRB(screenWidth * .05, 30, screenWidth * .05, 0),
+              padding: EdgeInsets.fromLTRB(
+                  screenWidth * .05, 30, screenWidth * .05, 0),
               child: Opacity(
                 opacity: _showAppBar,
                 child: Row(
@@ -94,7 +97,7 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
                       child: ProfileBubble(
                         deckHeight: screenHeight * 0.05,
                         deckWidth: screenWidth * 0.3,
-                        deckName: auth.currentUser!.email.toString().allBefore('@'),
+                        deckName: 'User',
                         gradient1: tran,
                         gradient2: tran,
                         neonGlow: const Color.fromARGB(78, 4, 4, 4),
@@ -128,11 +131,13 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
                             children: [
                               GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context) {
                                       return const KeyboardsDeck();
                                     }));
                                   },
-                                  child: ProjectStacks().mobProjectStacks[index]),
+                                  child:
+                                      ProjectStacks().mobProjectStacks[index]),
                             ],
                           ),
                         ),

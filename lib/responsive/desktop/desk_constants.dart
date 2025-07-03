@@ -12,7 +12,8 @@ import '../tablet/tablet_finance_page.dart';
 import 'desk_decks.dart';
 
 // Screen dimension variables to use instead of MediaQuery (context)
-final double screenHeight = window.physicalSize.height / window.devicePixelRatio;
+final double screenHeight =
+    window.physicalSize.height / window.devicePixelRatio;
 final double screenWidth = window.physicalSize.width / window.devicePixelRatio;
 
 // Responsive variables
@@ -82,8 +83,14 @@ class _ProfileBubbleState extends State<ProfileBubble> {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [widget.gradient1, widget.gradient2]),
-                  boxShadow: [BoxShadow(color: widget.neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
+                  gradient: LinearGradient(
+                      colors: [widget.gradient1, widget.gradient2]),
+                  boxShadow: [
+                    BoxShadow(
+                        color: widget.neonGlow,
+                        blurRadius: 20,
+                        blurStyle: BlurStyle.solid)
+                  ],
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Padding(
@@ -167,7 +174,8 @@ class _DockButtonState extends State<DockButton> {
   void toggleShrink() {
     setState(() {
       control = Control.play;
-      currentColor = (currentColor == activeColor) ? inactiveColor : activeColor;
+      currentColor =
+          (currentColor == activeColor) ? inactiveColor : activeColor;
     });
   }
 
@@ -223,8 +231,10 @@ class _MTProfileCardState extends State<MTProfileCard> with AnimationMixin {
           Future.delayed(const Duration(milliseconds: 100)).then((_) {
             Navigator.of(context).push(
               PageRouteBuilder(
-                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                  animation = CurvedAnimation(parent: animation, curve: Curves.linear);
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  animation =
+                      CurvedAnimation(parent: animation, curve: Curves.linear);
                   return FadeTransition(
                     opacity: animation,
                     child: child,

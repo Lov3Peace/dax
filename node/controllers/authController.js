@@ -3,7 +3,15 @@ import { errorLog, infoLog } from "../log.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { generateKeyPairSync } from "crypto";
+import cookieParser from "cookie-parser";
+import { log } from "console";
 // Logger for info, debug, errors, etc.
+
+const { privateKey, publicKey } = generateKeyPairSync("rsa", {
+    modulusLength: 2048,
+    privateKeyEncoding: { type: "pkcs8", format: "pem" },
+    publicKeyEncoding: { type: "spki", format: "pem" },
+});
 
 const userCheck = async (req, res) => {
     const { username, password } = req.body;
@@ -18,13 +26,16 @@ const userCheck = async (req, res) => {
     }
     return user;
 };
-export const createUser = async (req, res) => {
-    // Creates a 'newUser' object and sets it equal to a
-    // new instance of the 'User' model that we imported above
-    // (the 'new' keyword is creating the new instance of the model
-    // which gives us more control over what we do with the model)
 
+export const createUser = async (req, res) => {
     try {
+        const { username, password } = req.body;
+        const user = await User.findOne({ username });
+        if (user) {
+            return res
+                .status(400)
+                .json(`User already exists. Please enter a unique username.`);
+        }
         const hashedPw = await bcrypt.hash(req.body.password, 10);
         const newUser = new User({
             username: req.body.username,
@@ -47,8 +58,7 @@ export const createUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
     try {
-        console.log('Endpoint Hit!');
-        console.log(req.body);
+        console.log("Login Endpoint Hit!");
         // debugger;
         const { username, password } = req.body;
         const user = await userCheck(req, res);
@@ -59,11 +69,6 @@ export const loginUser = async (req, res) => {
         // If matched returns true, generate and verify JWTs
         if (matched) {
             // JWT Generation and Verification
-            const { privateKey, publicKey } = generateKeyPairSync("rsa", {
-                modulusLength: 4096,
-                privateKeyEncoding: { type: "pkcs8", format: "pem" },
-                publicKeyEncoding: { type: "spki", format: "pem" },
-            });
             const token = jwt.sign(
                 {
                     id: user._id,
@@ -71,21 +76,59 @@ export const loginUser = async (req, res) => {
                     isAdmin: user.isAdmin,
                 },
                 privateKey,
-                { algorithm: "RS256", expiresIn: "30m" },
+                { algorithm: "RS256", expiresIn: "5m" },
             );
-            const decoded = jwt.verify(token, publicKey, { algorithms: "RS256" });
-
+            // const decoded = jwt.verify(token, publicKey, { algorithms: "RS256" });
+            // debugger;
+            res.cookie("token", token, {
+                httpOnly: true,
+                sameSite: "None",
+                secure: true,
+            });
+            res.cookie("username", username);
             infoLog.info(`${user.username} logged in successfully`);
             console.log(`${user.username} logged in Successfully`);
 
-            return res.status(200).json({ user: user.username, token });
+            return res.status(200).json({ user: user.username });
         } else {
             return res.status(401).json(`Authentication for ${user.username} failed`);
         }
     } catch (error) {
         errorLog.error("error", error);
-        return res.status(500).json('Error');
+        return res.status(500).json("Error");
     }
+};
+
+export const loginCheck = async (req, res) => {
+    // const isLoggedIn = false;
+    try {
+        console.log("LoginCheck Hit");
+        // debugger;
+        const cookie = req.cookies;
+        if (cookie.token) {
+            // If the token is invalid or expired, it throws an error. So, just catch it, log it, and log out the user
+            const decoded = jwt.verify(cookie.token, publicKey, {
+                algorithms: ["RS256"],
+            });
+            console.log("User currently logged in.");
+            return res.status(200).json("User currently logged in.");
+        } else {
+            res.clearCookie("token");
+            infoLog.info(`No token found`);
+            return res.status(401).json(`No token found`);
+        }
+    } catch (mes) {
+        res.clearCookie("token");
+        infoLog.info(mes);
+        res.status(401).json(`Token expired or invalid`);
+    }
+};
+
+export const logout = async (req, res) => {
+    const username = req.cookies("username");
+    const token = req.cookies("token");
+    res.clearCookie("token");
+    return res.status(200).json(`User ${username} has been logged out.`);
 };
 
 export const deleteUser = async (req, res) => {
@@ -99,11 +142,6 @@ export const deleteUser = async (req, res) => {
         const matched = await bcrypt.compare(password, hashedDbPw);
         if (matched) {
             // JWT Generation and Verification
-            const { privateKey, publicKey } = generateKeyPairSync("rsa", {
-                modulusLength: 4096,
-                privateKeyEncoding: { type: "pkcs8", format: "pem" },
-                publicKeyEncoding: { type: "spki", format: "pem" },
-            });
             const token = jwt.sign(
                 {
                     id: user._id,
@@ -130,7 +168,7 @@ export const deleteUser = async (req, res) => {
     }
 };
 
-export const updateUser = async (req, res) => {
+export const changeUsername = async (req, res) => {
     // debugger;
     const { username, password, newUsername } = req.body;
     try {

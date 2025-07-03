@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
@@ -13,12 +15,13 @@ import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/stagger_load.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import '../../../util/auth/loginCheck.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../desk_sp/desk_side_panel.dart';
 import 'package:rive/rive.dart' as r;
-
 import '../messages.dart';
 import 'title_bubble.dart';
+import 'package:http/browser_client.dart' as httpClient;
 
 //import 'package:responsive_framework/responsive_framework.dart';
 

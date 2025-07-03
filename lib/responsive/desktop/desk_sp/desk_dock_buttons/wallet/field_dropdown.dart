@@ -17,7 +17,8 @@ class LinkedCardDropdownField extends StatefulWidget {
   });
 
   @override
-  State<LinkedCardDropdownField> createState() => LinkedCardDropdownFieldState();
+  State<LinkedCardDropdownField> createState() =>
+      LinkedCardDropdownFieldState();
 }
 
 class LinkedCardDropdownFieldState extends State<LinkedCardDropdownField> {
@@ -90,7 +91,8 @@ class LinkedCardDropdownFieldState extends State<LinkedCardDropdownField> {
           readOnly: true,
           onTap: toggleDropdown,
           decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             labelText: widget.label,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(30),
@@ -139,7 +141,8 @@ class CustomSizedTextField extends StatelessWidget {
         controller: controller,
         obscureText: obscureText,
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           labelText: label,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),

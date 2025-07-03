@@ -3,8 +3,8 @@ import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import '../../../util/imports.dart';
 
 var routes = {
-  '/': OnboardingScreen(),
-  '/home': DesktopDashboard(),
+  '/': DesktopDashboard(),
+  '/launch': OnboardingScreen(),
   '/projects': DeskHeroProjectsPage(),
   '/communities': DeskHeroCommunitiesPage(),
   '/socials': DeskHeroSocialsPage(),

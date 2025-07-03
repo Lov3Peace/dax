@@ -1,3 +1,8 @@
+import 'dart:async';
+import 'package:flutter_application_1/util/auth/loginCheck.dart';
+import 'package:flutter_application_1/util/auth/onboarding_page.dart';
+import 'package:flutter_application_1/util/imports.dart';
+import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -48,18 +53,55 @@ const Color hoverGreen = Color.fromARGB(255, 170, 255, 147);
 const Color tran = Color.fromARGB(0, 0, 0, 0);
 const Color white = Colors.white;
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool loggedIn = false;
+  @override
+  void initState() {
+    super.initState();
+    checkRes();
+    if (checkRes != 200) {
+      setState(() {
+        loggedIn = false;
+      });
+      navigatorKey?.currentState?.pushReplacementNamed('/launch');
+      print("User has been automatically logged out.");
+    } else {
+      loggedIn = true;
+    }
+    print("User logged in: ${loggedIn}");
+    Timer.periodic(Duration(seconds: 30), (timer) {
+      loginCheck(); // call the function, don't await or call it prematurely
+    });
+  }
+
+  checkRes() async {
+    var resStatus = await loginCheck();
+    return resStatus;
+  }
+
+  final GlobalKey<NavigatorState>? navigatorKey = GlobalKey();
+
+  @override
   Widget build(BuildContext context) {
+    // if (!loggedIn) {
+    //   navigatorKey?.currentState?.pushReplacementNamed('/launch');
+    //   print("User has been automatically logged out.");
+    // }
     timeDilation = 1;
     return MaterialApp(
-      initialRoute: '/',
+      navigatorKey: navigatorKey,
+      initialRoute: loggedIn ? '/' : '/launch',
       onGenerateRoute: (settings) => PageRouteBuilder(
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) =>
-            routes[settings.name]!,
+            loggedIn ? routes[settings.name]! : routes['/launch']!,
         fullscreenDialog: true,
       ),
       onUnknownRoute: (settings) => PageRouteBuilder(

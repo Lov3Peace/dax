@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/auth/loginCheck.dart';
-import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/foundation.dart';
@@ -12,7 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart';
-import 'responsive/desktop/firebase_tools/username_change.dart';
+import 'responsive/desktop/firebase_tools/userProvider.dart';
 import 'responsive/desktop/util/error_page.dart';
 
 Future main() async {
@@ -34,6 +34,7 @@ Future main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => ButtonState()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => AuthNotifier()),
         // Add more providers as needed
       ],
       child: MyApp(),
@@ -61,49 +62,43 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool loggedIn = false;
   @override
   void initState() {
     super.initState();
-    checkRes();
-    if (checkRes != 200) {
-      setState(() {
-        loggedIn = false;
-      });
-      navigatorKey?.currentState?.pushReplacementNamed('/launch');
-      print("User has been automatically logged out.");
-    } else {
-      loggedIn = true;
-    }
-    print("User logged in: ${loggedIn}");
-    Timer.periodic(Duration(seconds: 30), (timer) {
-      loginCheck(); // call the function, don't await or call it prematurely
-    });
-  }
-
-  checkRes() async {
-    var resStatus = await loginCheck();
-    return resStatus;
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   loginCheck(context);
+    // });
+    // var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    // if (authNotifier.isLoggedIn) {
+    //   Timer.periodic(Duration(seconds: 30), (timer) async {
+    //     var res = await loginCheck(context);
+    //   });
+    // }
   }
 
   final GlobalKey<NavigatorState>? navigatorKey = GlobalKey();
+// Have to create an async function here to call loginCheck since we have to await the result of loginCheck, but initState has to stay synchronous (cant await in a synchronous func)
 
   @override
   Widget build(BuildContext context) {
-    // if (!loggedIn) {
-    //   navigatorKey?.currentState?.pushReplacementNamed('/launch');
-    //   print("User has been automatically logged out.");
-    // }
+    var authNotifier = Provider.of<AuthNotifier>(context);
     timeDilation = 1;
     return MaterialApp(
       navigatorKey: navigatorKey,
-      initialRoute: loggedIn ? '/' : '/launch',
+      initialRoute: authNotifier.isLoggedIn ? "/" : "/launch",
+      // Using PageRouteBuilder for smoother routing animation
       onGenerateRoute: (settings) => PageRouteBuilder(
         settings: settings,
+        // Checks if user is logged in. If not, go to /launch page. If so, go to route
+        // ! for null checking
         pageBuilder: (context, animation, secondaryAnimation) =>
-            loggedIn ? routes[settings.name]! : routes['/launch']!,
+            authNotifier.isLoggedIn
+                ? routes[settings.name]!
+                : routes["/launch"]!,
+        // Used for clean routing animation
         fullscreenDialog: true,
       ),
+      // this is not working right now
       onUnknownRoute: (settings) => PageRouteBuilder(
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) => ErrorPage(),
@@ -119,6 +114,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+// Used to fix Hero animation bug
 Widget flightShuttleBuilder(
   BuildContext flightContext,
   Animation<double> animation,

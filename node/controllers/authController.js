@@ -1,11 +1,9 @@
 import User from "../models/user.js";
+// Logger for info, debug, errors, etc.
 import { errorLog, infoLog } from "../log.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { generateKeyPairSync } from "crypto";
-import cookieParser from "cookie-parser";
-import { log } from "console";
-// Logger for info, debug, errors, etc.
 
 const { privateKey, publicKey } = generateKeyPairSync("rsa", {
     modulusLength: 2048,
@@ -18,16 +16,18 @@ const userCheck = async (req, res) => {
     const user = await User.findOne({ username });
     if (!username || !password) {
         infoLog.info(`Username/password cannot be null`);
-        return res.status(400).json(`Must input username and password!`);
+        res.status(400).json(`Must input username and password!`);
+        return user;
     }
     if (!user) {
         infoLog.info(`User '${username}' not found`);
-        return res.status(404).json(`User '${username}' not found`);
+        res.status(404).json(`User '${username}' not found`);
+        return user;
     }
     return user;
 };
 
-export const createUser = async (req, res) => {
+export const register = async (req, res) => {
     try {
         const { username, password } = req.body;
         const user = await User.findOne({ username });
@@ -56,42 +56,52 @@ export const createUser = async (req, res) => {
     }
 };
 
-export const loginUser = async (req, res) => {
+export const login = async (req, res) => {
     try {
         console.log("Login Endpoint Hit!");
         // debugger;
         const { username, password } = req.body;
         const user = await userCheck(req, res);
-        // Retrieve the hashed pw in the DB
-        const hashedDbPw = await user.password;
-        // Compare the hashed pw to the request pw
-        const matched = await bcrypt.compare(password, hashedDbPw);
-        // If matched returns true, generate and verify JWTs
-        if (matched) {
-            // JWT Generation and Verification
-            const token = jwt.sign(
-                {
-                    id: user._id,
-                    role: user.roles,
-                    isAdmin: user.isAdmin,
-                },
-                privateKey,
-                { algorithm: "RS256", expiresIn: "5m" },
-            );
-            // const decoded = jwt.verify(token, publicKey, { algorithms: "RS256" });
-            // debugger;
-            res.cookie("token", token, {
-                httpOnly: true,
-                sameSite: "None",
-                secure: true,
-            });
-            res.cookie("username", username);
-            infoLog.info(`${user.username} logged in successfully`);
-            console.log(`${user.username} logged in Successfully`);
+        if (user) {
+            // Retrieve the hashed pw in the DB
+            const hashedDbPw = await user.password;
+            // Compare the hashed pw to the request pw
+            const matched = await bcrypt.compare(password, hashedDbPw);
+            // If matched returns true, generate and verify JWTs
+            if (matched) {
+                // JWT Generation and Verification
+                const token = jwt.sign(
+                    {
+                        id: user._id,
+                        role: user.roles,
+                        isAdmin: user.isAdmin,
+                    },
+                    privateKey,
+                    { algorithm: "RS256", expiresIn: "1m" },
+                );
+                // const decoded = jwt.verify(token, publicKey, { algorithms: "RS256" });
+                // debugger;
+                res.cookie("token", token, {
+                    httpOnly: true,
+                    sameSite: "None",
+                    secure: true,
+                    maxAge: "60000",
+                });
+                res.cookie("username", username, {
+                    httpOnly: true,
+                    sameSite: "None",
+                    secure: true,
+                    maxAge: "60000",
+                });
+                infoLog.info(`${user.username} logged in successfully`);
+                console.log(`${user.username} logged in Successfully`);
 
-            return res.status(200).json({ user: user.username });
-        } else {
-            return res.status(401).json(`Authentication for ${user.username} failed`);
+                return res.status(200).json({ user: user.username });
+            } else {
+                infoLog.info(`Invalid username/password - try again.`);
+                console.log(`Invalid username/password - try again.`);
+                return res.status(401).json(`Invalid username/password - try again.`);
+            }
         }
     } catch (error) {
         errorLog.error("error", error);
@@ -104,31 +114,41 @@ export const loginCheck = async (req, res) => {
     try {
         console.log("LoginCheck Hit");
         // debugger;
-        const cookie = req.cookies;
-        if (cookie.token) {
+        const cookies = req.cookies;
+        if (cookies.token) {
             // If the token is invalid or expired, it throws an error. So, just catch it, log it, and log out the user
-            const decoded = jwt.verify(cookie.token, publicKey, {
+            const decoded = jwt.verify(cookies.token, publicKey, {
                 algorithms: ["RS256"],
             });
             console.log("User currently logged in.");
             return res.status(200).json("User currently logged in.");
         } else {
             res.clearCookie("token");
+            res.clearCookie("username");
             infoLog.info(`No token found`);
             return res.status(401).json(`No token found`);
         }
     } catch (mes) {
         res.clearCookie("token");
+        res.clearCookie("username");
         infoLog.info(mes);
         res.status(401).json(`Token expired or invalid`);
     }
 };
 
 export const logout = async (req, res) => {
-    const username = req.cookies("username");
-    const token = req.cookies("token");
-    res.clearCookie("token");
-    return res.status(200).json(`User ${username} has been logged out.`);
+    try {
+        console.log("trying to log out");
+        const cookies = req.cookies;
+        const username = cookies.username;
+        res.clearCookie("token");
+        console.log(username);
+        return res.status(200).json(`User ${username} has been logged out.`);
+    } catch (error) {
+        errorLog.error(`Unable to log out: ${error}`);
+        console.log(`Unable to log out: ${error}`);
+        return res.status(500).json(`Unable to log out - try again later.`);
+    }
 };
 
 export const deleteUser = async (req, res) => {

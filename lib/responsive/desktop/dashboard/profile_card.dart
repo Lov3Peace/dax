@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/firebase_tools/username_change.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:provider/provider.dart';
 import '../../../util/tactile_button.dart';
@@ -52,7 +52,8 @@ class _ProfileCardState extends State<ProfileCard> {
         child: profileCard(context: context, username: username));
   }
 
-  Widget profileCard({required String username, VoidCallback? onTap, Color? color, context}) {
+  Widget profileCard(
+      {required String username, VoidCallback? onTap, Color? color, context}) {
     // values set in desk_decks.dart
     double deckHeight = 22.sp(context);
     double deckWidth = 35.25.w(context);

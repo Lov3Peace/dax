@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/firebase_tools/username_change.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

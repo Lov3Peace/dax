@@ -89,7 +89,8 @@ class DesktopLogoutWindowButton extends StatelessWidget {
           ],
         ),
         Text(
-          auth.currentUser!.email.toString().allBefore('@'),
+          // auth.currentUser!.email.toString().allBefore('@'),
+          '',
           style: GoogleFonts.montserrat(
             textStyle: TextStyle(fontSize: 4.sp(context)),
             fontWeight: FontWeight.w400,

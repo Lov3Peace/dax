@@ -4,11 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/util/auth/authNotifier.dart';
+import 'package:flutter_application_1/util/auth/register.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
-import 'package:flutter_application_1/util/auth/signup.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
@@ -28,7 +30,6 @@ class InitSignUpButton extends StatefulWidget {
 class _InitSignUpButtonState extends State<InitSignUpButton> {
   // bool isSignUpDialogShown = false;
   //controls button
-  Control control = Control.stop;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,6 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
   void loadPopUp() {
     // toggle between control instructions
 
-    control = Control.play;
     //slide animation
     showGeneralDialog(
         barrierDismissible: true,
@@ -138,68 +138,6 @@ class _SignUpFormState extends State<SignUpForm> {
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  var registerEndpoint = Uri.parse('https://localhost:7777/api/register');
-
-  Future register(username, password, email, context, mounted) async {
-    try {
-      // Hitting the Login endpoint
-      print('Fetching...');
-      final client = httpClient.BrowserClient()..withCredentials = true;
-      var res = await client
-          .post(
-            registerEndpoint,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(
-                {"username": username, "password": password, "email": email}),
-          )
-          .timeout(const Duration(seconds: 5));
-      final body = json.decode(res.body);
-      // cookie.sameSite
-      // cookie.maxAge = 30;
-      print('Fetched...');
-      print(res.body);
-      if (body is Map && body.keys.contains('password') && mounted) {
-        Navigator.pushNamed(context, '/');
-      } else {
-        showErrorMessage('Signup Failed: $body', context);
-      }
-    } catch (e) {
-      showErrorMessage('Signup Failed: $e', context);
-      print('Signup Failed: $e');
-    }
-  }
-
-  void showErrorMessage(String message, context) {
-    showDialog(
-        context: (context),
-        builder: (context) {
-          return Center(
-            child: Stack(children: [
-              BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                blendMode: BlendMode.darken,
-                child: SizedBox(),
-              ),
-              AlertDialog(
-                backgroundColor: tran,
-                content: Container(
-                  padding: EdgeInsetsGeometry.all(1.w(context)),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(1.5.w(context)),
-                    color: deckColor,
-                    border: Border.all(color: deckBorderColor),
-                  ),
-                  child: Text(
-                    message,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 3.sp(context), color: white),
-                  ),
-                ),
-              )
-            ]),
-          );
-        });
-  }
 
   @override
   void dispose() {
@@ -336,25 +274,28 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
 
             //SignUp
-            // Signs us into the
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: TactileButton(
+                  scale: 1.05,
                   onTap: () async {
-                    register(_usernameController.text, _passwordController.text,
-                        _emailController.text, context, mounted);
+                    await register(registerEndpoint, _usernameController.text,
+                        _passwordController.text, context, mounted);
                   },
-                  child: GradientContainer(
-                    gradient1: purp,
-                    gradient2: red,
-                    height: 10,
-                    width: 30,
-                    neonGlow: red,
-                    text: 'Sign Up',
-                    textSize: 14,
-                    borderColor: tran,
-                    borderRadius: 500,
+                  child: Container(
+                    constraints: BoxConstraints(maxWidth: 150, maxHeight: 50),
+                    child: GradientContainer(
+                      gradient1: red,
+                      gradient2: pink,
+                      height: 4.h(context),
+                      width: 7.w(context),
+                      neonGlow: pink,
+                      text: 'Launch',
+                      textSize: 16,
+                      borderColor: tran,
+                      borderRadius: 5.sp(context),
+                    ),
                   ),
                 ),
               ),

@@ -6,7 +6,8 @@ import cookieParser from "cookie-parser";
 
 app.use(express.json());
 
-app.use(cors({ credentials: true, origin: "http://localhost:7778" }));
+// app.use(cors({ credentials: true, origin: "http://10.7.77.8:7778" })); // for web build
+app.use(cors({ credentials: true, origin: "http://localhost:7778" })); // for dev
 
 app.use(cookieParser());
 

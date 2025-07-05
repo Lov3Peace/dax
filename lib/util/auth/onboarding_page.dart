@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
+import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
@@ -20,7 +21,6 @@ import '../gradient_label.dart';
 import '../tactile_button.dart';
 import 'auth_check.dart';
 import 'forget_password_form.dart';
-import 'signup.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/browser_client.dart' as httpClient;
 
@@ -165,6 +165,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         child: TextField(
                           style: TextStyle(fontSize: 3.sp(context)),
                           controller: _passwordController,
+                          // handles pressing 'Enter'
                           onSubmitted: (value) => login(
                               loginEndpoint,
                               _usernameController.text,

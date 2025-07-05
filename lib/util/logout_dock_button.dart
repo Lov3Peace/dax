@@ -1,22 +1,18 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
+import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
-import 'package:flutter_application_1/util/auth/loginCheck.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../responsive/responsive_layout.dart';
-import 'auth/onboarding_page.dart';
 import '../responsive/mobile/mob_constants.dart';
 import 'Window Route/logout_window_route.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/browser_client.dart' as httpClient;
 
 class LogoutWindowButton extends StatelessWidget {
@@ -129,14 +125,15 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
   //     ),
   //   );
   // }
+  var logoutEndpoint = Uri.parse("https://localhost:7777/api/logout");
   Future logout() async {
-    var logoutEndpoint = Uri.parse("https://localhost:7777/logout");
     try {
       // Hitting the Login endpoint
       print('Fetching...');
       final client = httpClient.BrowserClient()..withCredentials = true;
-      var username = Cookie.fromSetCookieValue('username');
-      print('Username: $username');
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      final username = userProvider.username;
+      print("Got Username: $username");
       var res = await client
           .post(
             logoutEndpoint,
@@ -149,14 +146,16 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
       // cookie.maxAge = 30;
       print('Fetched...');
       print(res.body);
-      if (body is Map && res.statusCode == 200 && mounted) {
-        Navigator.pushReplacementNamed(context, '/');
+      if (res.statusCode == 200 && mounted) {
+        var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+        authNotifier.loggedOut();
+        Navigator.pushReplacementNamed(context, '/launch');
       } else {
-        showErrorMessage('Signup Failed: $body', context);
+        showErrorMessage('Could not log out - try again later. $body', context);
       }
     } catch (e) {
-      showErrorMessage('Signup Failed: $e', context);
-      print('Signup Failed: $e');
+      showErrorMessage('Could not log out - try again later. $e', context);
+      print('Could not log out - try again later. $e');
     }
   }
 

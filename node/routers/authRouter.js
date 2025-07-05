@@ -1,19 +1,19 @@
 import Router from "express";
 import {
     changeUsername,
-    createUser,
     deleteUser,
     loginCheck,
-    loginUser,
+    login,
     logout,
+    register,
 } from "../controllers/authController.js";
 const authRouter = Router();
 
-authRouter.post("/register", createUser);
+authRouter.post("/register", register);
 
 authRouter.delete("/deleteUser", deleteUser);
 
-authRouter.post("/login", loginUser);
+authRouter.post("/login", login);
 
 authRouter.get("/loginCheck", loginCheck);
 

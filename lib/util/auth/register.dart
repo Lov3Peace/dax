@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
 import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
@@ -16,7 +17,7 @@ import 'forget_password_form.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/browser_client.dart' as httpClient;
 
-final registerEndpoint = Uri.parse("https://localhost:7778/register");
+final registerEndpoint = Uri.parse("https://localhost:7777/api/register");
 
 Future register(username, password, email, context, mounted) async {
   try {
@@ -40,6 +41,9 @@ Future register(username, password, email, context, mounted) async {
       print("Success");
       // access AuthNotifier Provider but set listen to false
       var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
+      authNotifier.loggedIn();
+      userProvider.saveUsername(body["username"]);
       authNotifier.loggedIn();
       // Navigate to Dashboard
       Navigator.pushNamed(context, "/");

@@ -19,7 +19,7 @@ import 'package:http/browser_client.dart' as httpClient;
 
 final registerEndpoint = Uri.parse("https://localhost:7777/api/register");
 
-Future register(username, password, email, context, mounted) async {
+Future register(username, password, email, rememberMe, context, mounted) async {
   try {
     // Hitting the Login endpoint
     print('Fetching...');
@@ -27,7 +27,10 @@ Future register(username, password, email, context, mounted) async {
     var res = await client
         .post(
           registerEndpoint,
-          headers: {"Content-Type": "application/json"},
+          headers: {
+            "Content-Type": "application/json",
+            "rememberMe": rememberMe
+          },
           body: jsonEncode(
               {"username": username, "password": password, "email": email}),
         )

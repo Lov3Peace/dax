@@ -11,16 +11,23 @@ import 'package:provider/provider.dart';
 import 'package:http/browser_client.dart' as httpClient;
 
 late Timer _timer;
-Future login(endpoint, username, password, context, mounted) async {
+Future login(endpoint, username, password, rememberMe, context, mounted) async {
   try {
     // Hitting the Login endpoint
     print('Fetching...');
     final client = httpClient.BrowserClient()..withCredentials = true;
+    print("(login) RememberMe: $rememberMe");
     var res = await client
         .post(
           endpoint,
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode({"username": username, "password": password}),
+          headers: {
+            "Content-Type": "application/json",
+            "rememberMe": rememberMe.toString()
+          },
+          body: jsonEncode({
+            "username": username,
+            "password": password,
+          }),
         )
         .timeout(const Duration(seconds: 5));
     final body = json.decode(res.body);
@@ -34,26 +41,17 @@ Future login(endpoint, username, password, context, mounted) async {
       var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       authNotifier.loggedIn();
-      userProvider.saveUsername(body["user"]);
+      userProvider.saveUsername(body["username"]);
       print(userProvider.username);
       // Navigate to Dashboard
       Navigator.pushNamed(context, "/");
-      _timer = Timer.periodic(Duration(seconds: 30), (timer) {
-        // Run async logic separately
-        loginCheck(context).then((statusCode) {
-          if (statusCode != 200 || authNotifier.isLoggedIn == false) {
-            cancelTimer();
-            print("Timer cancelled");
-          }
-        });
-      });
       var loggedIn = authNotifier.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {
       showErrorMessage('Login Failed: $body', context);
     }
   } catch (e) {
-    showErrorMessage('Login Failed: $e', context);
+    showErrorMessage('Error - Login Failed: $e', context);
     print('Login Failed: $e');
   }
 }

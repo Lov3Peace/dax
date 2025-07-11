@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/auth/loginCheck.dart';
+import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/foundation.dart';
@@ -18,17 +19,17 @@ import 'responsive/desktop/util/error_page.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-        options: const FirebaseOptions(
-            apiKey: "AIzaSyC6cmRlApktLp8pr73JJ9ulx9TOxeYI4_o",
-            appId: "1:28990487504:web:1c7d24fea847542a88d7d5",
-            messagingSenderId: "28990487504",
-            projectId: "omni-fb089"));
-  } else {
-    await Firebase.initializeApp();
-  }
-
+  // if (kIsWeb) {
+  //   await Firebase.initializeApp(
+  //       options: const FirebaseOptions(
+  //           apiKey: "AIzaSyC6cmRlApktLp8pr73JJ9ulx9TOxeYI4_o",
+  //           appId: "1:28990487504:web:1c7d24fea847542a88d7d5",
+  //           messagingSenderId: "28990487504",
+  //           projectId: "omni-fb089"));
+  // } else {
+  //   await Firebase.initializeApp();
+  // }
+  //
   runApp(
     MultiProvider(
       providers: [
@@ -37,7 +38,7 @@ Future main() async {
         ChangeNotifierProvider(create: (_) => AuthNotifier()),
         // Add more providers as needed
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -62,18 +63,33 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late Future _initLoginCheck;
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   loginCheck(context);
-    // });
-    // var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    // if (authNotifier.isLoggedIn) {
-    //   Timer.periodic(Duration(seconds: 30), (timer) async {
-    //     var res = await loginCheck(context);
-    //   });
-    // }
+    _initLoginCheck = initLoginCheck(context);
+  }
+
+  bool isLaunch = true;
+  var initEndpoint = Uri.parse('https://localhost:7777/api/');
+  Future initLoginCheck(context) async {
+    var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    final client = httpClient.BrowserClient()..withCredentials = true;
+    try {
+      var res = await client.get(
+        initEndpoint,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ).timeout(const Duration(seconds: 5));
+      final status = res.statusCode;
+      status == 200 ? authNotifier.loggedIn() : authNotifier.loggedOut();
+      print("Init Status Code: $status");
+      print("isLaunch: $isLaunch");
+      return status;
+    } catch (e) {
+      print("initLoginCheck failed!");
+    }
   }
 
   final GlobalKey<NavigatorState>? navigatorKey = GlobalKey();
@@ -81,36 +97,46 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var authNotifier = Provider.of<AuthNotifier>(context);
-    timeDilation = 1;
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      initialRoute: authNotifier.isLoggedIn ? "/" : "/launch",
-      // Using PageRouteBuilder for smoother routing animation
-      onGenerateRoute: (settings) => PageRouteBuilder(
-        settings: settings,
-        // Checks if user is logged in. If not, go to /launch page. If so, go to route
-        // ! for null checking
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            authNotifier.isLoggedIn
-                ? routes[settings.name]!
-                : routes["/launch"]!,
-        // Used for clean routing animation
-        fullscreenDialog: true,
-      ),
-      // this is not working right now
-      onUnknownRoute: (settings) => PageRouteBuilder(
-        settings: settings,
-        pageBuilder: (context, animation, secondaryAnimation) => ErrorPage(),
-        fullscreenDialog: true,
-      ),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          fontFamily: GoogleFonts.montserrat().fontFamily,
-          colorScheme:
-              const ColorScheme.dark(secondary: red, onSurface: Colors.white),
-          scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
-    );
+    var authNotifier = Provider.of<AuthNotifier>(context, listen: true);
+    return FutureBuilder(
+        future: _initLoginCheck,
+        builder: (context, snapshot) {
+          var isLoggedIn = authNotifier.isLoggedIn;
+          if (!snapshot.hasData) {
+            return CircularProgressIndicator.adaptive();
+          }
+          print("(authNotifier) isLoggedIn: $isLoggedIn");
+          timeDilation = 1;
+          return MaterialApp(
+            navigatorKey: navigatorKey,
+            initialRoute: authNotifier.isLoggedIn ? "/" : "/launch",
+            // Using PageRouteBuilder for smoother routing animation
+            onGenerateRoute: (settings) => PageRouteBuilder(
+              settings: settings,
+              // Checks if user is logged in. If not, go to /launch page. If so, go to route
+              // ! for null checking
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  authNotifier.isLoggedIn
+                      ? routes[settings.name]!
+                      : routes["/launch"]!,
+              // Used for clean routing animation
+              fullscreenDialog: true,
+            ),
+            // this is not working right now
+            onUnknownRoute: (settings) => PageRouteBuilder(
+              settings: settings,
+              pageBuilder: (context, animation, secondaryAnimation) =>
+                  ErrorPage(),
+              fullscreenDialog: true,
+            ),
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+                fontFamily: GoogleFonts.montserrat().fontFamily,
+                colorScheme: const ColorScheme.dark(
+                    secondary: red, onSurface: Colors.white),
+                scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),
+          );
+        });
   }
 }
 

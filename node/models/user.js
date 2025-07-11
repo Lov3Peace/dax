@@ -5,10 +5,10 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true, unique: false },
     email: { type: String, required: true, unique: true },
     isAdmin: { type: Boolean, required: true, default: false },
+    rememberMe: { type: Boolean, required: true, default: false },
     roles: { type: Array, required: true, default: [] },
     skills: { type: Array },
     // profile: {type: String, required: true, default: ''}
 });
 
 export default mongoose.model("user", userSchema);
-

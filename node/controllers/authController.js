@@ -4,12 +4,7 @@ import { errorLog, infoLog } from "../log.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { generateKeyPairSync } from "crypto";
-
-const { privateKey, publicKey } = generateKeyPairSync("rsa", {
-    modulusLength: 2048,
-    privateKeyEncoding: { type: "pkcs8", format: "pem" },
-    publicKeyEncoding: { type: "spki", format: "pem" },
-});
+import { privKey, pubKey } from "../auth/keygen.js";
 
 const userCheck = async (req, res) => {
     const { username, password } = req.body;
@@ -42,6 +37,7 @@ export const register = async (req, res) => {
             password: hashedPw,
             email: req.body.email,
             isAdmin: req.body.isAdmin,
+            rememberMe: req.body.rememberme,
         });
         // Tries to save a newUser to the db and returns the
         // response in JSON format with the 201 status code.
@@ -60,8 +56,25 @@ export const login = async (req, res) => {
     try {
         console.log("Login Endpoint Hit!");
         // debugger;
-        const { username, password } = req.body;
+        const { username, password, rememberMe } = req.body;
+
         const user = await userCheck(req, res);
+        const refreshToken = jwt.sign(
+            {
+                id: user._id,
+                role: user.roles,
+                isAdmin: user.isAdmin,
+                rememberMe: user.rememberMe,
+            },
+            privKey,
+            { algorithm: "RS256", expiresIn: "1m" },
+        );
+        res.cookie("token", refreshToken, {
+            httpOnly: true,
+            sameSite: "None",
+            secure: true,
+            maxAge: "60000",
+        });
         if (user) {
             // Retrieve the hashed pw in the DB
             const hashedDbPw = await user.password;
@@ -75,11 +88,12 @@ export const login = async (req, res) => {
                         id: user._id,
                         role: user.roles,
                         isAdmin: user.isAdmin,
+                        rememberMe: user.rememberMe,
                     },
-                    privateKey,
+                    privKey,
                     { algorithm: "RS256", expiresIn: "1m" },
                 );
-                // const decoded = jwt.verify(token, publicKey, { algorithms: "RS256" });
+                // const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
                 // debugger;
                 res.cookie("token", token, {
                     httpOnly: true,
@@ -96,7 +110,7 @@ export const login = async (req, res) => {
                 infoLog.info(`${user.username} logged in successfully`);
                 console.log(`${user.username} logged in Successfully`);
 
-                return res.status(200).json({ user: user.username });
+                return res.status(200).json({ username: user.username });
             } else {
                 infoLog.info(`Invalid username/password - try again.`);
                 console.log(`Invalid username/password - try again.`);
@@ -106,33 +120,6 @@ export const login = async (req, res) => {
     } catch (error) {
         errorLog.error("error", error);
         return res.status(500).json("Error");
-    }
-};
-
-export const loginCheck = async (req, res) => {
-    // const isLoggedIn = false;
-    try {
-        console.log("LoginCheck Hit");
-        // debugger;
-        const cookies = req.cookies;
-        if (cookies.token) {
-            // If the token is invalid or expired, it throws an error. So, just catch it, log it, and log out the user
-            const decoded = jwt.verify(cookies.token, publicKey, {
-                algorithms: ["RS256"],
-            });
-            console.log("User currently logged in.");
-            return res.status(200).json("User currently logged in.");
-        } else {
-            res.clearCookie("token");
-            res.clearCookie("username");
-            infoLog.info(`No token found`);
-            return res.status(401).json(`No token found`);
-        }
-    } catch (mes) {
-        res.clearCookie("token");
-        res.clearCookie("username");
-        infoLog.info(mes);
-        res.status(401).json(`Token expired or invalid`);
     }
 };
 
@@ -168,10 +155,10 @@ export const deleteUser = async (req, res) => {
                     role: user.roles,
                     isAdmin: user.isAdmin,
                 },
-                privateKey,
+                privKey,
                 { algorithm: "RS256", expiresIn: "30m" },
             );
-            const decoded = jwt.verify(token, publicKey, { algorithms: "RS256" });
+            const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
             const deletedUser = await User.deleteOne({ username: user.username });
             infoLog.info(`User '${user.username}' deleted successfully`);
             return res

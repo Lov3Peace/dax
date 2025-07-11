@@ -132,8 +132,8 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   //Controls the Remember Me switch
-  bool rememberMe = false;
   bool showLogin = true;
+  bool _rememberMe = false;
   //Controller for text fields
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
@@ -231,6 +231,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     _usernameController.text,
                     _passwordController.text,
                     _emailController.text,
+                    _rememberMe,
                     context,
                     mounted),
                 decoration: InputDecoration(
@@ -259,12 +260,12 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                 ),
                 Switch(
-                    value: rememberMe,
+                    value: _rememberMe,
                     activeColor: Colors.white,
                     activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
-                    onChanged: (bool newBool) {
+                    onChanged: (value) {
                       setState(() {
-                        rememberMe = newBool;
+                        _rememberMe = !_rememberMe;
                       });
                     }),
               ],
@@ -280,8 +281,13 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: TactileButton(
                   scale: 1.05,
                   onTap: () async {
-                    await register(registerEndpoint, _usernameController.text,
-                        _passwordController.text, context, mounted);
+                    await register(
+                        _usernameController.text,
+                        _passwordController.text,
+                        _emailController.text,
+                        _rememberMe,
+                        context,
+                        mounted);
                   },
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 150, maxHeight: 50),

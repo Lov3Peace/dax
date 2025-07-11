@@ -34,7 +34,7 @@ class OnboardingScreen extends StatefulWidget {
 //controlls button
 Control control = Control.stop;
 //Controls the switch
-bool isSwitch = false;
+bool _rememberMe = false;
 
 var loginEndpoint = Uri.parse('https://localhost:7777/api/login');
 var registerEndpoint = Uri.parse('https://localhost:7777/api/register');
@@ -170,6 +170,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                               loginEndpoint,
                               _usernameController.text,
                               _passwordController.text,
+                              _rememberMe,
                               context,
                               mounted),
                           obscureText: true,
@@ -205,14 +206,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                 child: FittedBox(
                                   fit: BoxFit.fill,
                                   child: Switch(
-                                    thumbIcon: MaterialStatePropertyAll(
+                                    thumbIcon: const WidgetStatePropertyAll(
                                         Icon(Icons.lock_outline)),
-                                    value: isSwitch,
+                                    value: _rememberMe,
                                     activeColor: Colors.white,
                                     activeTrackColor: pink,
-                                    onChanged: (bool newBool) {
+                                    onChanged: (value) {
                                       setState(() {
-                                        isSwitch = newBool;
+                                        _rememberMe = !_rememberMe;
                                       });
                                     },
                                   ),
@@ -364,6 +365,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                     loginEndpoint,
                                     _usernameController.text,
                                     _passwordController.text,
+                                    _rememberMe,
                                     context,
                                     mounted);
                               },

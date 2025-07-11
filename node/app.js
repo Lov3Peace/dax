@@ -3,6 +3,7 @@ const app = express();
 import cors from "cors";
 import authRouter from "./routers/authRouter.js";
 import cookieParser from "cookie-parser";
+import { authCheck } from "./auth/authCheck.js";
 
 app.use(express.json());
 

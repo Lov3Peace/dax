@@ -7,14 +7,10 @@ import { generateKeyPairSync } from "crypto";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { privKey, pubKey } from "./keygen.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const privateKey = fs.readFileSync(path.join(__dirname, "privateKey.pem"));
-const publicKey = fs.readFileSync(path.join(__dirname, "publicKey.pem"));
 export const authCheck = async (req, res, next) => {
-    debugger;
+    // debugger;
     const rememberMe = req.headers.rememberme;
     const username = req.body.username;
     try {
@@ -37,7 +33,21 @@ export const authCheck = async (req, res, next) => {
         }
     } catch (error) {
         if (error.message.includes("expired") && rememberMe == "true") {
-            next();
+            const user = User.findOne({ username });
+            if (user) {
+                const refreshToken = jwt.sign(
+                    {
+                        _id: user._id,
+                        username: user.username,
+                        role: user.roles,
+                        isAdmin: user.isAdmin,
+                        rememberMe: user.rememberMe,
+                    },
+                    privKey,
+                    { algorithm: "RS256", expiresIn: "1m" },
+                );
+                next();
+            }
         } else {
             res.clearCookie("token");
             res.clearCookie("username");

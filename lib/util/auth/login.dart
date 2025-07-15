@@ -10,8 +10,8 @@ import 'package:flutter_application_1/main.dart';
 import 'package:provider/provider.dart';
 import 'package:http/browser_client.dart' as httpClient;
 
-late Timer _timer;
-Future login(endpoint, username, password, rememberMe, context, mounted) async {
+final loginEndpoint = Uri.parse("https://localhost:7777/api/login");
+Future login(username, password, rememberMe, context, mounted) async {
   try {
     // Hitting the Login endpoint
     print('Fetching...');
@@ -19,7 +19,7 @@ Future login(endpoint, username, password, rememberMe, context, mounted) async {
     print("(login) RememberMe: $rememberMe");
     var res = await client
         .post(
-          endpoint,
+          loginEndpoint,
           headers: {
             "Content-Type": "application/json",
             "rememberMe": rememberMe.toString()
@@ -88,9 +88,7 @@ void showErrorMessage(String message, context) {
       });
 }
 
-void cancelTimer() {
-  _timer.cancel();
-}
+void cancelTimer() {}
 // @override
 // void dispose() {
 //   _timer.cancel();

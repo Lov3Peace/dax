@@ -23,6 +23,8 @@ import 'auth_check.dart';
 import 'forget_password_form.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/browser_client.dart' as httpClient;
+import 'package:flutter_application_1/util/auth/authNotifier.dart';
+import 'package:provider/provider.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -33,17 +35,57 @@ class OnboardingScreen extends StatefulWidget {
 
 //controlls button
 Control control = Control.stop;
-//Controls the switch
-bool _rememberMe = false;
 
 var loginEndpoint = Uri.parse('https://localhost:7777/api/login');
 var registerEndpoint = Uri.parse('https://localhost:7777/api/register');
 final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
+bool isLaunch = true;
+bool _rememberMe = false;
+var initEndpoint = Uri.parse('https://localhost:7777/api/');
+Future initLoginCheck(context) async {
+  var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+//Controls the switch
+  final client = httpClient.BrowserClient()..withCredentials = true;
+  try {
+    var res = await client.get(
+      initEndpoint,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    ).timeout(const Duration(seconds: 5));
+    final body = json.decode(res.body);
+    final status = res.statusCode;
+    _rememberMe = bool.parse(body["rememberMe"]);
+    status == 200 ? authNotifier.loggedIn() : authNotifier.loggedOut();
+    print(res.body);
+    print("Init Status Code: $status");
+    print("isLaunch: $isLaunch");
+    return status;
+  } catch (e) {
+    print("initLoginCheck failed!");
+    print("Error: $e");
+  }
+}
 
-class _OnboardingScreenState extends State<OnboardingScreen>
-    with AnimationMixin {
+loginCheckRoute(context, mounted) {
+  final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+  initLoginCheck(context).then((res) {
+    if (res == 200) {
+      login(_usernameController.text, _passwordController.text, _rememberMe,
+          context, mounted);
+    }
+  });
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
   // bool isLoginDialogShown = false;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loginCheckRoute(context, mounted);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,13 +208,20 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           style: TextStyle(fontSize: 3.sp(context)),
                           controller: _passwordController,
                           // handles pressing 'Enter'
-                          onSubmitted: (value) => login(
-                              loginEndpoint,
-                              _usernameController.text,
-                              _passwordController.text,
-                              _rememberMe,
-                              context,
-                              mounted),
+                          onSubmitted: (value) {
+                            var authnotifier = Provider.of<AuthNotifier>(
+                                context,
+                                listen: false);
+                            login(
+                                _usernameController.text,
+                                _passwordController.text,
+                                authnotifier.rememberMe,
+                                context,
+                                mounted);
+                            if (authnotifier.rememberMe == true) {
+                              authnotifier.enableRememberMe();
+                            }
+                          },
                           obscureText: true,
                           decoration: InputDecoration(
                             prefixIconColor: Colors.black,
@@ -362,7 +411,6 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                               scale: 1.05,
                               onTap: () async {
                                 await login(
-                                    loginEndpoint,
                                     _usernameController.text,
                                     _passwordController.text,
                                     _rememberMe,

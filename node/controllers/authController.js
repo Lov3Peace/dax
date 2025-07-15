@@ -56,28 +56,13 @@ export const login = async (req, res) => {
     try {
         console.log("Login Endpoint Hit!");
         // debugger;
-        const { username, password, rememberMe } = req.body;
+        const { username, password } = req.body;
+        const rememberMe = req.headers.rememberme;
 
         const user = await userCheck(req, res);
-        const refreshToken = jwt.sign(
-            {
-                id: user._id,
-                role: user.roles,
-                isAdmin: user.isAdmin,
-                rememberMe: user.rememberMe,
-            },
-            privKey,
-            { algorithm: "RS256", expiresIn: "1m" },
-        );
-        res.cookie("token", refreshToken, {
-            httpOnly: true,
-            sameSite: "None",
-            secure: true,
-            maxAge: "60000",
-        });
         if (user) {
             // Retrieve the hashed pw in the DB
-            const hashedDbPw = await user.password;
+            const hashedDbPw = user.password;
             // Compare the hashed pw to the request pw
             const matched = await bcrypt.compare(password, hashedDbPw);
             // If matched returns true, generate and verify JWTs
@@ -85,7 +70,8 @@ export const login = async (req, res) => {
                 // JWT Generation and Verification
                 const token = jwt.sign(
                     {
-                        id: user._id,
+                        _id: user._id,
+                        username: user.username,
                         role: user.roles,
                         isAdmin: user.isAdmin,
                         rememberMe: user.rememberMe,
@@ -94,7 +80,9 @@ export const login = async (req, res) => {
                     { algorithm: "RS256", expiresIn: "1m" },
                 );
                 // const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
-                // debugger;
+                debugger;
+                const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+
                 res.cookie("token", token, {
                     httpOnly: true,
                     sameSite: "None",
@@ -107,19 +95,25 @@ export const login = async (req, res) => {
                     secure: true,
                     maxAge: "60000",
                 });
+                res.cookie("rememberMe", rememberMe, {
+                    httpOnly: true,
+                    sameSite: "None",
+                    secure: true,
+                    maxAge: `${thirtyDays}`,
+                });
                 infoLog.info(`${user.username} logged in successfully`);
                 console.log(`${user.username} logged in Successfully`);
 
                 return res.status(200).json({ username: user.username });
             } else {
-                infoLog.info(`Invalid username/password - try again.`);
-                console.log(`Invalid username/password - try again.`);
-                return res.status(401).json(`Invalid username/password - try again.`);
+                infoLog.info(`Invalid username / password - try again.`);
+                console.log(`Invalid username / password - try again.`);
+                return res.status(401).json(`Invalid username / password - try again.`);
             }
         }
     } catch (error) {
         errorLog.error("error", error);
-        return res.status(500).json("Error");
+        return res.status(500).json(`Error: ${error} `);
     }
 };
 
@@ -129,11 +123,12 @@ export const logout = async (req, res) => {
         const cookies = req.cookies;
         const username = cookies.username;
         res.clearCookie("token");
+        res.clearCookie("rememberMe");
         console.log(username);
         return res.status(200).json(`User ${username} has been logged out.`);
     } catch (error) {
-        errorLog.error(`Unable to log out: ${error}`);
-        console.log(`Unable to log out: ${error}`);
+        errorLog.error(`Unable to log out: ${error} `);
+        console.log(`Unable to log out: ${error} `);
         return res.status(500).json(`Unable to log out - try again later.`);
     }
 };

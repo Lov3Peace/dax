@@ -119,11 +119,20 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
+        debugger;
         console.log("trying to log out");
         const cookies = req.cookies;
         const username = cookies.username;
-        res.clearCookie("token");
-        res.clearCookie("rememberMe");
+        res.clearCookie("token", {
+            httpOnly: true,
+            sameSite: "None",
+            secure: true,
+        });
+        res.clearCookie("rememberMe", {
+            httpOnly: true, // match httpOnly
+            secure: true, // match secure
+            sameSite: "Strict", // match sameSite
+        });
         console.log(username);
         return res.status(200).json(`User ${username} has been logged out.`);
     } catch (error) {

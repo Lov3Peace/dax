@@ -19,7 +19,7 @@ export const authCheck = async (req, res, next) => {
         const cookies = req.cookies;
         if (cookies.token) {
             // If the token is invalid or expired, it throws an error. So, just catch it, log it, and log out the user
-            const decoded = jwt.verify(cookies.token, publicKey, {
+            const decoded = jwt.verify(cookies.token, pubKey, {
                 algorithms: ["RS256"],
             });
             console.log("User currently logged in.");

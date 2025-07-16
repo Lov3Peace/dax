@@ -40,7 +40,6 @@ var loginEndpoint = Uri.parse('https://localhost:7777/api/login');
 var registerEndpoint = Uri.parse('https://localhost:7777/api/register');
 final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
-bool isLaunch = true;
 bool _rememberMe = false;
 var initEndpoint = Uri.parse('https://localhost:7777/api/');
 Future initLoginCheck(context) async {
@@ -56,11 +55,11 @@ Future initLoginCheck(context) async {
     ).timeout(const Duration(seconds: 5));
     final body = json.decode(res.body);
     final status = res.statusCode;
+    print(body);
     _rememberMe = bool.parse(body["rememberMe"]);
+    print(_rememberMe);
     status == 200 ? authNotifier.loggedIn() : authNotifier.loggedOut();
-    print(res.body);
     print("Init Status Code: $status");
-    print("isLaunch: $isLaunch");
     return status;
   } catch (e) {
     print("initLoginCheck failed!");
@@ -72,8 +71,7 @@ loginCheckRoute(context, mounted) {
   final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
   initLoginCheck(context).then((res) {
     if (res == 200) {
-      login(_usernameController.text, _passwordController.text, _rememberMe,
-          context, mounted);
+      Navigator.pushReplacementNamed(context, "/");
     }
   });
 }

@@ -9,3 +9,4 @@ export '../responsive/desktop/hero_deck_pages/communities/desk_hero_communities_
 export '../responsive/desktop/hero_deck_pages/desk_hero_socials_page.dart';
 export '../responsive/desktop/hero_deck_pages/desk_hero_news_page.dart';
 export '../responsive/desktop/util/responsive_shorthand.dart';
+export './auth/loginCheck.dart';

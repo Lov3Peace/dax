@@ -1,16 +1,19 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:ui';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
+import 'package:flutter_application_1/util/auth/authNotifier.dart';
+import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
+import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../responsive/responsive_layout.dart';
-import 'auth/onboarding_page.dart';
 import '../responsive/mobile/mob_constants.dart';
 import 'Window Route/logout_window_route.dart';
+import 'package:http/browser_client.dart' as httpClient;
 
 class LogoutWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
@@ -18,7 +21,7 @@ class LogoutWindowButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return TactileButton(
       onTap: () {
         Navigator.of(context).push(LogoutWindowRoute(builder: (context) {
           return LogoutWindowPopupCard(
@@ -53,7 +56,8 @@ class LogoutWindowPopupCard extends StatefulWidget {
 }
 
 /// {@macro add_todo_popup_card}
-class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with AnimationMixin {
+class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
+    with AnimationMixin {
   // @override
   // Widget build(BuildContext context) {
   //   return Center(
@@ -121,19 +125,38 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
   //     ),
   //   );
   // }
-  Future signOut() async {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          // ignore: prefer_const_constructors
-          builder: (context) => ResponsiveLayout(
-            mobileVersion: MobileLaunchPage(),
-            tabletVersion: OnboardingScreen(),
-            desktopVersion: OnboardingScreen(),
-          ),
-        ));
-
-    FirebaseAuth.instance.signOut();
+  var logoutEndpoint = Uri.parse("https://localhost:7777/api/logout");
+  Future logout() async {
+    try {
+      // Hitting the Login endpoint
+      print('Fetching...');
+      final client = httpClient.BrowserClient()..withCredentials = true;
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      final username = userProvider.username;
+      print("Got Username: $username");
+      var res = await client
+          .post(
+            logoutEndpoint,
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode({"username": username}),
+          )
+          .timeout(const Duration(seconds: 5));
+      final body = json.decode(res.body);
+      // cookie.sameSite
+      // cookie.maxAge = 30;
+      print('Fetched...');
+      print(res.body);
+      if (res.statusCode == 200 && mounted) {
+        var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+        authNotifier.loggedOut();
+        Navigator.pushReplacementNamed(context, '/launch');
+      } else {
+        showErrorMessage('Could not log out - try again later. $body', context);
+      }
+    } catch (e) {
+      showErrorMessage('Could not log out - try again later. $e', context);
+      print('Could not log out - try again later. $e');
+    }
   }
 
   @override
@@ -148,8 +171,10 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
               child: Container(
                 height: 35.h(context),
                 width: 50.w(context),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
                   tag: heroLogoutWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
@@ -167,7 +192,9 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                             child: Container(
                                 height: 85.h(context),
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
+                                  border: Border.all(
+                                      color: const Color.fromARGB(
+                                          182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
                           ),
@@ -179,7 +206,8 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.only(bottom: 2.h(context)),
+                                  padding:
+                                      EdgeInsets.only(bottom: 2.h(context)),
                                   child: const Text(
                                     "Logout",
                                     style: TextStyle(
@@ -200,7 +228,9 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                                 Padding(
                                   padding: EdgeInsets.only(top: 2.h(context)),
                                   child: TextButton(
-                                    onPressed: signOut,
+                                    onPressed: () async {
+                                      logout();
+                                    },
                                     child: const LogOutButton(),
                                   ),
                                 )

@@ -1,16 +1,22 @@
 import 'dart:ui';
-
+import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/util/auth/authNotifier.dart';
+import 'package:flutter_application_1/util/auth/register.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:flutter_application_1/util/gradient_label.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../../main.dart';
-import 'auth_check.dart';
-
-import '../gradient_label.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'forget_password_form.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/browser_client.dart' as httpClient;
 
 //Actual BUTTON DAVON or PHIL Whatever the hell you want to be called these days.
 //if you ask me, you just formerly go by: Primate
@@ -24,7 +30,6 @@ class InitSignUpButton extends StatefulWidget {
 class _InitSignUpButtonState extends State<InitSignUpButton> {
   // bool isSignUpDialogShown = false;
   //controls button
-  Control control = Control.stop;
 
   @override
   Widget build(BuildContext context) {
@@ -40,88 +45,69 @@ class _InitSignUpButtonState extends State<InitSignUpButton> {
   void loadPopUp() {
     // toggle between control instructions
 
-    control = Control.play;
-    Future.delayed(
-      const Duration(milliseconds: 200),
-      () {
-        //slide animation
-        showGeneralDialog(
-            barrierDismissible: true,
-            barrierLabel: "Sign Up",
-            context: context,
-            transitionDuration: const Duration(milliseconds: 500),
-            // transitionBuilder: (_, animation, __, child) {
-            //   Tween<Offset> tween;
-            //   tween = Tween(begin: const Offset(-1, 0), end: Offset.zero);
-            //   return SlideTransition(
-            //     position: tween.animate(
-            //       CurvedAnimation(parent: animation, curve: Curves.easeInOutBack),
-            //     ),
-            //     child: child,
-            //   );
-            // },
-            pageBuilder: (context, _, __) => Center(
-                    child: Container(
-                  height: 75.h(context),
-                  constraints:
-                      const BoxConstraints(maxWidth: 1000, maxHeight: 550),
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-                  child: Material(
-                    shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                    color: const Color.fromARGB(42, 55, 52, 52),
-                    elevation: 2,
-                    borderRadius: BorderRadius.circular(32),
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(24),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                                height: 85.h(context),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        const Color.fromARGB(182, 59, 59, 59),
-                                  ),
-                                  borderRadius: BorderRadius.circular(24),
-                                )),
-                          ),
-                        ),
-                        const SingleChildScrollView(
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(top: 10),
-                                child: Text(
-                                  "Sign Up",
-                                  style: TextStyle(
-                                    fontSize: 34,
-                                    fontFamily: "Gontserrat",
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
+    //slide animation
+    showGeneralDialog(
+        barrierDismissible: true,
+        barrierLabel: "Sign Up",
+        context: context,
+        transitionDuration: const Duration(milliseconds: 500),
+        pageBuilder: (context, _, __) => Center(
+                child: Container(
+              height: 75.h(context),
+              constraints: const BoxConstraints(maxWidth: 1000, maxHeight: 550),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(32)),
+              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+              child: Material(
+                shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
+                color: const Color.fromARGB(42, 55, 52, 52),
+                elevation: 2,
+                borderRadius: BorderRadius.circular(32),
+                child: Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(24),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: Container(
+                            height: 85.h(context),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: const Color.fromARGB(182, 59, 59, 59),
                               ),
-                              SignUpForm()
-                            ],
-                          ),
-                        ),
-                      ],
+                              borderRadius: BorderRadius.circular(24),
+                            )),
+                      ),
                     ),
-                  ),
-                ).animate().slideX(
-                        begin: -1,
-                        end: 0,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOutBack)));
-      },
-    );
+                    const SingleChildScrollView(
+                      child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                fontSize: 34,
+                                fontFamily: "Gontserrat",
+                                color: Colors.white,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ),
+                          SignUpForm()
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ).animate().slideX(
+                    begin: -1,
+                    end: 0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeInOutBack)));
     // setState(() {
     //   isSignUpDialogShown = true;
     // });
@@ -146,49 +132,12 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   //Controls the Remember Me switch
-  bool rememberMe = false;
   bool showLogin = true;
+  bool _rememberMe = false;
   //Controller for text fields
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  Future signUp() async {
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        //email: '${_usernameController.text}@omni.com',
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-
-      Navigator.of(context).push(
-        PageRouteBuilder(
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            animation =
-                CurvedAnimation(parent: animation, curve: Curves.linear);
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          pageBuilder: (context, animation, secondaryAnimation) {
-            // ignore: prefer_const_constructors
-            return AuthCheck();
-          },
-          transitionDuration: const Duration(milliseconds: 0),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-exists') {
-        print("email already exists");
-      } else if (e.code == 'wrong-password') {
-        print('wrong password');
-      } else if (e.code == 'weak-password') {
-        print(
-            'Weak Password. Please try 6 or more characters with special characters.');
-      }
-    }
-  }
 
   @override
   void dispose() {
@@ -278,7 +227,13 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               child: TextField(
                 controller: _passwordController,
-                onSubmitted: (value) => signUp(),
+                onSubmitted: (value) => register(
+                    _usernameController.text,
+                    _passwordController.text,
+                    _emailController.text,
+                    _rememberMe,
+                    context,
+                    mounted),
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
@@ -305,12 +260,12 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                 ),
                 Switch(
-                    value: rememberMe,
+                    value: _rememberMe,
                     activeColor: Colors.white,
                     activeTrackColor: const Color.fromARGB(255, 221, 83, 245),
-                    onChanged: (bool newBool) {
+                    onChanged: (value) {
                       setState(() {
-                        rememberMe = newBool;
+                        _rememberMe = !_rememberMe;
                       });
                     }),
               ],
@@ -320,22 +275,33 @@ class _SignUpFormState extends State<SignUpForm> {
             ),
 
             //SignUp
-            // Signs us into the
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: TactileButton(
-                  onTap: signUp,
-                  child: GradientContainer(
-                    gradient1: purp,
-                    gradient2: red,
-                    height: 10,
-                    width: 30,
-                    neonGlow: red,
-                    text: 'Sign Up',
-                    textSize: 14,
-                    borderColor: tran,
-                    borderRadius: 500,
+                  scale: 1.05,
+                  onTap: () async {
+                    await register(
+                        _usernameController.text,
+                        _passwordController.text,
+                        _emailController.text,
+                        _rememberMe,
+                        context,
+                        mounted);
+                  },
+                  child: Container(
+                    constraints: BoxConstraints(maxWidth: 150, maxHeight: 50),
+                    child: GradientContainer(
+                      gradient1: red,
+                      gradient2: pink,
+                      height: 4.h(context),
+                      width: 7.w(context),
+                      neonGlow: pink,
+                      text: 'Launch',
+                      textSize: 16,
+                      borderColor: tran,
+                      borderRadius: 5.sp(context),
+                    ),
                   ),
                 ),
               ),

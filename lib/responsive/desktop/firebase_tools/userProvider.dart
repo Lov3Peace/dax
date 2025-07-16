@@ -15,6 +15,11 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+  void saveUsername(username) {
+    _username = username;
+    notifyListeners();
+  }
+
   void updateUsername(String newName) {
     _username = newName;
     notifyListeners();

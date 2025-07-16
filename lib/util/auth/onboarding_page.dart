@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/util/auth/login.dart';
+import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
@@ -19,8 +21,10 @@ import '../gradient_label.dart';
 import '../tactile_button.dart';
 import 'auth_check.dart';
 import 'forget_password_form.dart';
-import 'signup.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/browser_client.dart' as httpClient;
+import 'package:flutter_application_1/util/auth/authNotifier.dart';
+import 'package:provider/provider.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -31,15 +35,55 @@ class OnboardingScreen extends StatefulWidget {
 
 //controlls button
 Control control = Control.stop;
-//Controls the switch
-bool isSwitch = false;
 
+var loginEndpoint = Uri.parse('https://localhost:7777/api/login');
+var registerEndpoint = Uri.parse('https://localhost:7777/api/register');
 final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
+bool _rememberMe = false;
+var initEndpoint = Uri.parse('https://localhost:7777/api/');
+Future initLoginCheck(context) async {
+  var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+//Controls the switch
+  final client = httpClient.BrowserClient()..withCredentials = true;
+  try {
+    var res = await client.get(
+      initEndpoint,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    ).timeout(const Duration(seconds: 5));
+    final body = json.decode(res.body);
+    final status = res.statusCode;
+    print(body);
+    _rememberMe = bool.parse(body["rememberMe"]);
+    print(_rememberMe);
+    status == 200 ? authNotifier.loggedIn() : authNotifier.loggedOut();
+    print("Init Status Code: $status");
+    return status;
+  } catch (e) {
+    print("initLoginCheck failed!");
+    print("Error: $e");
+  }
+}
 
-class _OnboardingScreenState extends State<OnboardingScreen>
-    with AnimationMixin {
+loginCheckRoute(context, mounted) {
+  final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+  initLoginCheck(context).then((res) {
+    if (res == 200) {
+      Navigator.pushReplacementNamed(context, "/");
+    }
+  });
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
   // bool isLoginDialogShown = false;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    loginCheckRoute(context, mounted);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,7 +205,21 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                         child: TextField(
                           style: TextStyle(fontSize: 3.sp(context)),
                           controller: _passwordController,
-                          onSubmitted: (value) => login(),
+                          // handles pressing 'Enter'
+                          onSubmitted: (value) {
+                            var authnotifier = Provider.of<AuthNotifier>(
+                                context,
+                                listen: false);
+                            login(
+                                _usernameController.text,
+                                _passwordController.text,
+                                authnotifier.rememberMe,
+                                context,
+                                mounted);
+                            if (authnotifier.rememberMe == true) {
+                              authnotifier.enableRememberMe();
+                            }
+                          },
                           obscureText: true,
                           decoration: InputDecoration(
                             prefixIconColor: Colors.black,
@@ -195,14 +253,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                 child: FittedBox(
                                   fit: BoxFit.fill,
                                   child: Switch(
-                                    thumbIcon: MaterialStatePropertyAll(
+                                    thumbIcon: const WidgetStatePropertyAll(
                                         Icon(Icons.lock_outline)),
-                                    value: isSwitch,
+                                    value: _rememberMe,
                                     activeColor: Colors.white,
                                     activeTrackColor: pink,
-                                    onChanged: (bool newBool) {
+                                    onChanged: (value) {
                                       setState(() {
-                                        isSwitch = newBool;
+                                        _rememberMe = !_rememberMe;
                                       });
                                     },
                                   ),
@@ -287,7 +345,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                                         padding:
                                                             EdgeInsets.only(
                                                                 top: 10),
-                                                        child: Text(
+                                                        child: const Text(
                                                           "Forgot Password",
                                                           style: TextStyle(
                                                             fontSize: 34,
@@ -304,7 +362,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                                                             .symmetric(
                                                                 vertical: 2.sp(
                                                                     context)),
-                                                        child: Text(
+                                                        child: const Text(
                                                           "Please enter your email linked to the account!",
                                                           textAlign:
                                                               TextAlign.center,
@@ -349,7 +407,14 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                           children: [
                             TactileButton(
                               scale: 1.05,
-                              onTap: login,
+                              onTap: () async {
+                                await login(
+                                    _usernameController.text,
+                                    _passwordController.text,
+                                    _rememberMe,
+                                    context,
+                                    mounted);
+                              },
                               child: GradientContainer(
                                 gradient1: red,
                                 gradient2: pink,
@@ -378,72 +443,5 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         ),
       ),
     );
-  }
-
-  Future login() async {
-    var loginEndpoint = Uri.parse('http://127.0.0.1:7777/api/login');
-    try {
-      // Hitting the Login endpoint
-      print('Fetching...');
-      print('${_usernameController.text}');
-      var res = await http
-          .post(
-            loginEndpoint,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode({
-              "username": _usernameController.text,
-              "password": _passwordController.text
-            }),
-          )
-          .timeout(Duration(seconds: 5));
-      final body = json.decode(res.body);
-      print('Fetched...');
-      print(res.body);
-      if (body is Map && body.containsKey('token')) {
-        if (mounted) {
-          Navigator.pushNamed(context, '/home');
-        } else {
-          print(
-            'No context found!',
-          );
-        }
-      } else {
-        showErrorMessage('Login Failed: $body');
-      }
-    } catch (e) {
-      print('Login Failed: $e');
-    }
-  }
-
-  void showErrorMessage(String message) {
-    showDialog(
-        context: (context),
-        builder: (context) {
-          return Center(
-            child: Stack(children: [
-              BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                blendMode: BlendMode.darken,
-                child: SizedBox(),
-              ),
-              AlertDialog(
-                backgroundColor: tran,
-                content: Container(
-                  padding: EdgeInsetsGeometry.all(1.w(context)),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(1.5.w(context)),
-                    color: deckColor,
-                    border: Border.all(color: deckBorderColor),
-                  ),
-                  child: Text(
-                    message,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 3.sp(context), color: white),
-                  ),
-                ),
-              )
-            ]),
-          );
-        });
   }
 }

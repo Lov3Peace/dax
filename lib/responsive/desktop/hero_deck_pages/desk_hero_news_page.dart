@@ -15,7 +15,8 @@ class DeskHeroNewsPage extends StatefulWidget {
   State<DeskHeroNewsPage> createState() => _DeskHeroNewsPageState();
 }
 
-class _DeskHeroNewsPageState extends State<DeskHeroNewsPage> with AnimationMixin {
+class _DeskHeroNewsPageState extends State<DeskHeroNewsPage>
+    with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/browser_client.dart' as httpClient;
 
 class DeskHomeButton extends StatefulWidget {
   const DeskHomeButton({super.key});
@@ -37,7 +40,8 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
       },
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/home');
+          // loginCheck();
+          Navigator.pushNamed(context, '/');
         },
         child: Stack(
           children: [
@@ -94,4 +98,13 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
       ),
     );
   }
+
+  // Future loginCheck() async {
+  //   final client = httpClient.BrowserClient()..withCredentials = true;
+  //   final loginCheckEndpoint =
+  //       Uri.parse('http://127.0.0.1:7777/api/loginCheck');
+  //   var res = await client
+  //       .get(loginCheckEndpoint, headers: {"Content-Type": "application/json"});
+  //   return res;
+  // }
 }

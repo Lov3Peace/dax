@@ -1,58 +1,63 @@
-import 'dart:async';
 import 'dart:ui';
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
 import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/util/auth/auth_check.dart';
+import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_animations/simple_animations.dart';
+import '../tactile_button.dart';
+import '../../responsive/mobile/mob_constants.dart';
+import 'forget_password_form.dart';
+import 'package:http/http.dart' as http;
 import 'package:http/browser_client.dart' as httpClient;
 
-final loginEndpoint = Uri.parse("https://localhost:7777/api/login");
-Future login(username, password, rememberMe, context, mounted) async {
+final registerEndpoint = Uri.parse("https://localhost:7777/api/register");
+
+Future register(username, password, email, rememberMe, context, mounted) async {
   try {
     // Hitting the Login endpoint
     print('Fetching...');
     final client = httpClient.BrowserClient()..withCredentials = true;
-    print("(login) RememberMe: $rememberMe");
     var res = await client
         .post(
-          loginEndpoint,
+          registerEndpoint,
           headers: {
             "Content-Type": "application/json",
-            "rememberMe": rememberMe.toString()
+            "rememberMe": rememberMe
           },
-          body: jsonEncode({
-            "username": username,
-            "password": password,
-          }),
+          body: jsonEncode(
+              {"username": username, "password": password, "email": email}),
         )
         .timeout(const Duration(seconds: 5));
     final body = json.decode(res.body);
     // cookie.sameSite
     // cookie.maxAge = 30;
-    print('Fetched!');
+    print('Fetched...');
     print(res.body);
-    if (body is Map && res.statusCode == 200 && mounted) {
+    if (body is Map && res.statusCode == 201 && mounted) {
       print("Success");
       // access AuthNotifier Provider but set listen to false
       var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       authNotifier.loggedIn();
       userProvider.saveUsername(body["username"]);
-      print(userProvider.username);
+      authNotifier.loggedIn();
       // Navigate to Dashboard
       Navigator.pushNamed(context, "/");
       var loggedIn = authNotifier.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {
-      showErrorMessage('Login Failed: $body', context);
+      showErrorMessage('Registration Failed: $body', context);
     }
   } catch (e) {
-    showErrorMessage('Error - Login Failed: $e', context);
-    print('Login Failed: $e');
+    showErrorMessage('Registration Failed: $e', context);
+    print('Registration Failed: $e');
   }
 }
 
@@ -87,9 +92,3 @@ void showErrorMessage(String message, context) {
         );
       });
 }
-
-void cancelTimer() {}
-// @override
-// void dispose() {
-//   _timer.cancel();
-// }

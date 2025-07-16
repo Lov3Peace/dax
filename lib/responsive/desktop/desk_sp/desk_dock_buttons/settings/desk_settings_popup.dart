@@ -8,7 +8,7 @@ import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_butto
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/privacy_settings.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/profile_settings.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/settings/settings_side_panel_info/security_settings.dart';
-import 'package:flutter_application_1/responsive/desktop/firebase_tools/username_change.dart';
+import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

@@ -3,10 +3,11 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class TactileButton extends StatefulWidget {
-  TactileButton({super.key, required this.child, this.onTap, this.scale = 1.015});
-  VoidCallback? onTap;
-  double scale;
-  Widget child;
+  const TactileButton(
+      {super.key, required this.child, this.onTap, this.scale = 1.015});
+  final VoidCallback? onTap;
+  final double scale;
+  final Widget child;
   @override
   State<TactileButton> createState() => _TactileButtonState();
 }

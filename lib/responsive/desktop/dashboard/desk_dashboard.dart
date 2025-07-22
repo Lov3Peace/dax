@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,24 +35,41 @@ class DesktopDashboard extends StatefulWidget {
 
 class _DesktopDashboardState extends State<DesktopDashboard> {
   //globals
+  final getUserDataEndpoint =
+      Uri.parse('https://localhost:7777/api/getUserDashboardData');
+  var userData;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+  }
 
-    // final heroReset = context.read<ButtonState>();
-    // heroReset.heroReset();
+  Future getUserDataFetch() async {
+    final client = httpClient.BrowserClient()..withCredentials = true;
+    try {
+      var res = await client.get(
+        getUserDataEndpoint,
+        headers: {"Content-Type": "application/json"},
+      );
+      final body = json.decode(res.body);
+      return body;
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    getUserDataFetch().then((res) {
+      userData = res;
+      print(res);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    double deckHeight = 22.sp(context);
-    double deckWidth = 35.25.w(context);
-    double halfDeckWidth = 17.325.w(context);
-    double headerTextSize = 6.5.sp(context);
     subTextSize = 2.5.sp(context);
     profBubTextSize = 20;
-    double labelTextSize = 3.sp(context);
     textConstraint = 500;
     subTextConstraint = 500;
     return Scaffold(
@@ -110,7 +128,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                                 padding: EdgeInsets.only(
                                                     bottom: 0.25.w(context)),
                                                 child: TitleBubble(
-                                                  deckName: 'Dashboard',
+                                                  deckName: "Dashboard",
                                                 ),
                                               ),
                                               Expanded(

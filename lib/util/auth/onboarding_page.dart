@@ -1,27 +1,13 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
 import 'dart:ui';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
-import 'package:supercharged/supercharged.dart';
-import '../../responsive/mobile/mob_artboard_page.dart';
 import '../gradient_label.dart';
 import '../tactile_button.dart';
-import 'auth_check.dart';
 import 'forget_password_form.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:provider/provider.dart';
@@ -32,9 +18,6 @@ class OnboardingScreen extends StatefulWidget {
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
-
-//controlls button
-Control control = Control.stop;
 
 var loginEndpoint = Uri.parse('https://localhost:7777/api/login');
 var registerEndpoint = Uri.parse('https://localhost:7777/api/register');
@@ -47,12 +30,9 @@ Future initLoginCheck(context) async {
 //Controls the switch
   final client = httpClient.BrowserClient()..withCredentials = true;
   try {
-    var res = await client.get(
-      initEndpoint,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    ).timeout(const Duration(seconds: 5));
+    var res = await client.get(initEndpoint, headers: {
+      "Content-Type": "application/json",
+    }).timeout(const Duration(seconds: 5));
     final body = json.decode(res.body);
     final status = res.statusCode;
     print(body);

@@ -1,7 +1,8 @@
-import user from "../models/user";
 import { Router } from "express";
 import { getUserDashboardData } from "../controllers/userController.js";
 
-const userRouter = Router();
+const userDataRouter = Router();
 
-userRouter.get("/getUserDashboardData", getUserDashboardData);
+userDataRouter.get("/getUserDashboardData", getUserDashboardData);
+
+export default userDataRouter;

@@ -129,7 +129,8 @@ class _ProfilePopupState extends State<ProfilePopup> {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       CarouselContentsTemp(
                                         child: Pc2Section1(),
@@ -153,7 +154,8 @@ class _ProfilePopupState extends State<ProfilePopup> {
                               PcCarouselTemplate(
                                 child: SingleChildScrollView(
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       CarouselContentsTemp(
                                         child: Pc3Section1(),

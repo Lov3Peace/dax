@@ -8,10 +8,11 @@ import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 
 class ProfileCard extends StatefulWidget {
-  const ProfileCard({super.key});
+  const ProfileCard({super.key, required this.username});
 
   @override
   State<ProfileCard> createState() => _ProfileCardState();
+  final String username;
 }
 
 class _ProfileCardState extends State<ProfileCard> {
@@ -22,7 +23,6 @@ class _ProfileCardState extends State<ProfileCard> {
 
   @override
   Widget build(BuildContext context) {
-    final username = context.watch<UserProvider>().username;
     return TactileButton(
         onTap: () {
           Navigator.of(context).push(
@@ -45,7 +45,7 @@ class _ProfileCardState extends State<ProfileCard> {
             ),
           );
         },
-        child: profileCard(context: context, username: username));
+        child: profileCard(context: context, username: widget.username));
   }
 
   Widget profileCard(

@@ -34,7 +34,7 @@ Future login(username, password, rememberMe, context, mounted) async {
     // cookie.sameSite
     // cookie.maxAge = 30;
     print('Fetched!');
-    print(res.body);
+    print("Login Endpoint resBody: " + res.body);
     if (body is Map && res.statusCode == 200 && mounted) {
       print("Success");
       // access AuthNotifier Provider but set listen to false
@@ -42,7 +42,7 @@ Future login(username, password, rememberMe, context, mounted) async {
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       authNotifier.loggedIn();
       userProvider.saveUsername(body["username"]);
-      print(userProvider.username);
+      // print(userProvider.username);
       // Navigate to Dashboard
       Navigator.pushNamed(context, "/");
       var loggedIn = authNotifier.isLoggedIn;

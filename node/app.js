@@ -3,7 +3,8 @@ const app = express();
 import cors from "cors";
 import authRouter from "./routers/authRouter.js";
 import cookieParser from "cookie-parser";
-import { authCheck } from "./auth/authCheck.js";
+import authCheck from "./auth/authCheck.js";
+import userDataRouter from "./routers/userDataRouter.js";
 
 app.use(express.json());
 
@@ -13,6 +14,8 @@ app.use(cors({ credentials: true, origin: "http://localhost:7778" })); // for de
 app.use(cookieParser());
 
 app.use("/api/", authRouter);
+
+app.use("/api/", userDataRouter);
 
 // app.get('/node', (req, res) => {
 //     console.log(`Connected: ${req.ip}`);a

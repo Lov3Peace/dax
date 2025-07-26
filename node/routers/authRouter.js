@@ -7,7 +7,7 @@ import {
     register,
 } from "../controllers/authController.js";
 import { initLoginCheck } from "../auth/init.js";
-import { authCheck } from "../auth/authCheck.js";
+import authCheck from "../auth/authCheck.js";
 const authRouter = Router();
 
 authRouter.get("/", initLoginCheck);

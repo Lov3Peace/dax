@@ -1,5 +1,5 @@
-import { authCheck } from "../auth/authCheck";
-import User from "../models/user";
+import authCheck from "../auth/authCheck.js";
+import User from "../models/user.js";
 
 export const getUserDashboardData = async (req, res) => {
     console.log("trying to fetch user data...");

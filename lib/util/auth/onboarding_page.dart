@@ -24,7 +24,9 @@ var registerEndpoint = Uri.parse('https://localhost:7777/api/register');
 final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 bool _rememberMe = false;
+
 var initEndpoint = Uri.parse('https://localhost:7777/api/');
+
 Future initLoginCheck(context) async {
   var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
 //Controls the switch
@@ -48,7 +50,7 @@ Future initLoginCheck(context) async {
 }
 
 loginCheckRoute(context, mounted) {
-  final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+  // final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
   initLoginCheck(context).then((res) {
     if (res == 200) {
       Navigator.pushReplacementNamed(context, "/");
@@ -57,12 +59,22 @@ loginCheckRoute(context, mounted) {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  // bool isLoginDialogShown = false;
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
+    var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    print("AuthNotifier().isLoggedIn = " + authNotifier.toString());
     loginCheckRoute(context, mounted);
   }
+
+  // bool isLoginDialogShown = false;
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   if (AuthNotifier().isLoggedIn == true) {
+  //     loginCheckRoute(context, mounted);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

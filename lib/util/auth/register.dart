@@ -29,7 +29,8 @@ Future register(username, password, email, rememberMe, context, mounted) async {
           registerEndpoint,
           headers: {
             "Content-Type": "application/json",
-            "rememberMe": rememberMe
+            "rememberMe": rememberMe.toString(),
+            "username": username
           },
           body: jsonEncode(
               {"username": username, "password": password, "email": email}),
@@ -53,6 +54,7 @@ Future register(username, password, email, rememberMe, context, mounted) async {
       var loggedIn = authNotifier.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {
+      print(res.statusCode);
       showErrorMessage('Registration Failed: $body', context);
     }
   } catch (e) {

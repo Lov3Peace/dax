@@ -32,14 +32,11 @@ class _ProfileCardState extends State<ProfileCard> {
               barrierLabel: 'Dimiss',
               transitionDuration: Duration(milliseconds: 300),
               barrierColor: Colors.black54, // Dims the background
-              pageBuilder: (_, __, ___) => Scaffold(
-                backgroundColor: Colors.transparent,
-                body: Center(
-                  child: Hero(
-                    tag: 'profileHeroTag',
-                    flightShuttleBuilder: flightShuttleBuilder,
-                    child: ProfilePopup(),
-                  ),
+              pageBuilder: (_, __, ___) => Center(
+                child: Hero(
+                  tag: 'profileHeroTag',
+                  flightShuttleBuilder: flightShuttleBuilder,
+                  child: ProfilePopup(),
                 ),
               ),
             ),
@@ -51,17 +48,14 @@ class _ProfileCardState extends State<ProfileCard> {
   Widget profileCard(
       {required String username, VoidCallback? onTap, Color? color, context}) {
     // values set in desk_decks.dart
-    double deckHeight = 22.sp(context);
-    double deckWidth = 35.25.w(context);
     double halfDeckWidth = 17.325.w(context);
-    double headerTextSize = 6.5.sp(context);
     subTextSize = 2.5.sp(context);
     profBubTextSize = 20;
     double labelTextSize = 3.sp(context);
     textConstraint = 500;
     subTextConstraint = 500;
     return Deck(
-      deckHeight: deckHeight,
+      deckHeight: 22.sp(context),
       deckWidth: halfDeckWidth,
       deckName: '',
       gradient1: tran,

@@ -16,6 +16,7 @@ import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/stagger_load.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:rive/rive.dart';
 import '../../../util/auth/loginCheck.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../desk_sp/desk_side_panel.dart';
@@ -37,44 +38,39 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
   //globals
   final getUserDataEndpoint =
       Uri.parse('https://localhost:7777/api/getUserDashboardData');
+  var _getData;
   var userData;
   bool isLoading = false;
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration(seconds: 2), () => CircularProgressIndicator());
-  }
 
   Future getUserDataFetch() async {
     final client = httpClient.BrowserClient()..withCredentials = true;
     try {
+      await Future.delayed(Duration(seconds: 3));
       var res = await client.get(getUserDataEndpoint, headers: {
         "Content-Type": "application/json",
       }).timeout(const Duration(seconds: 5));
       final body = json.decode(res.body);
       final resStatus = res.statusCode;
       print("Get Status: $resStatus");
-      return body;
+      userData = body;
+      return userData;
     } catch (e) {
       print("Error: $e");
     }
   }
 
-  getUserDataCall() {
-    getUserDataFetch().then((res) {
-      setState(() {
-        userData = res;
-        isLoading = true;
-      });
-      return userData;
-    });
-  }
-
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    getUserDataCall();
+  void initState() {
+    super.initState();
+    // set it to a private variable to call it in the FutureBuilder
+    // so it only returns the value once in the FutureBuilder instead
+    // of calling the function DIRECTLY infinite times inside of the Build
+    _getData = getUserDataFetch();
   }
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -86,11 +82,24 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       body: FutureBuilder(
-        future: getUserDataFetch(),
+        future: _getData,
         builder: (context, snapshot) {
-          // if (!snapshot.hasData) {
-          //   return CircularProgressIndicator();
-          // }
+          if (!snapshot.hasData) {
+            return Stack(
+              children: [
+                ArtBoardScreen(),
+                Center(
+                  child: Container(
+                      height: 350,
+                      child:
+                          RiveAnimation.asset("rive/futuristic-loading.riv")),
+                  // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                  // RiveAnimation.asset("rive/loadingsquare.riv")),
+                ),
+              ],
+            );
+          }
+          // userData = snapshot.data;
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             child: Container(

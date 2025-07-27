@@ -40,7 +40,6 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
       Uri.parse('https://localhost:7777/api/getUserDashboardData');
   var _getData;
   var userData;
-  bool isLoading = false;
 
   Future getUserDataFetch() async {
     final client = httpClient.BrowserClient()..withCredentials = true;

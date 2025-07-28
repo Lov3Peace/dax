@@ -8,10 +8,11 @@ import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 
 class ProfileCard extends StatefulWidget {
-  const ProfileCard({super.key});
+  const ProfileCard({super.key, required this.username});
 
   @override
   State<ProfileCard> createState() => _ProfileCardState();
+  final String username;
 }
 
 class _ProfileCardState extends State<ProfileCard> {
@@ -22,7 +23,6 @@ class _ProfileCardState extends State<ProfileCard> {
 
   @override
   Widget build(BuildContext context) {
-    final username = context.watch<UserProvider>().username;
     return TactileButton(
         onTap: () {
           Navigator.of(context).push(
@@ -32,36 +32,30 @@ class _ProfileCardState extends State<ProfileCard> {
               barrierLabel: 'Dimiss',
               transitionDuration: Duration(milliseconds: 300),
               barrierColor: Colors.black54, // Dims the background
-              pageBuilder: (_, __, ___) => Scaffold(
-                backgroundColor: Colors.transparent,
-                body: Center(
-                  child: Hero(
-                    tag: 'profileHeroTag',
-                    flightShuttleBuilder: flightShuttleBuilder,
-                    child: ProfilePopup(),
-                  ),
+              pageBuilder: (_, __, ___) => Center(
+                child: Hero(
+                  tag: 'profileHeroTag',
+                  flightShuttleBuilder: flightShuttleBuilder,
+                  child: ProfilePopup(),
                 ),
               ),
             ),
           );
         },
-        child: profileCard(context: context, username: username));
+        child: profileCard(context: context, username: widget.username));
   }
 
   Widget profileCard(
       {required String username, VoidCallback? onTap, Color? color, context}) {
     // values set in desk_decks.dart
-    double deckHeight = 22.sp(context);
-    double deckWidth = 35.25.w(context);
     double halfDeckWidth = 17.325.w(context);
-    double headerTextSize = 6.5.sp(context);
     subTextSize = 2.5.sp(context);
     profBubTextSize = 20;
     double labelTextSize = 3.sp(context);
     textConstraint = 500;
     subTextConstraint = 500;
     return Deck(
-      deckHeight: deckHeight,
+      deckHeight: 22.sp(context),
       deckWidth: halfDeckWidth,
       deckName: '',
       gradient1: tran,

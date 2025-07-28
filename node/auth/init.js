@@ -8,6 +8,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { privKey, pubKey } from "./keygen.js";
 import User from "../models/user.js";
+
 export const initLoginCheck = async (req, res, next) => {
     console.log("Init Hit");
     // debugger;

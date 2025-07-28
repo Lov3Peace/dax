@@ -22,6 +22,8 @@ const userCheck = async (req, res) => {
     return user;
 };
 
+const thirtyDays = 30 * 24 * 60 * 60 * 1000;
+
 export const register = async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -38,6 +40,35 @@ export const register = async (req, res) => {
             email: req.body.email,
             isAdmin: req.body.isAdmin,
             rememberMe: req.body.rememberme,
+        });
+        const token = jwt.sign(
+            {
+                _id: newUser._id,
+                username: newUser.username,
+                role: newUser.roles,
+                isAdmin: newUser.isAdmin,
+                rememberMe: newUser.rememberMe,
+            },
+            privKey,
+            { algorithm: "RS256", expiresIn: "1m" },
+        );
+        res.cookie("token", token, {
+            httpOnly: true,
+            sameSite: "None",
+            secure: true,
+            maxAge: "60000",
+        });
+        res.cookie("username", username, {
+            httpOnly: true,
+            sameSite: "None",
+            secure: true,
+            maxAge: "60000",
+        });
+        res.cookie("rememberMe", req.body.rememberMe, {
+            httpOnly: true,
+            sameSite: "None",
+            secure: true,
+            maxAge: `${thirtyDays}`,
         });
         // Tries to save a newUser to the db and returns the
         // response in JSON format with the 201 status code.
@@ -81,7 +112,6 @@ export const login = async (req, res) => {
                 );
                 // const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
                 debugger;
-                const thirtyDays = 30 * 24 * 60 * 60 * 1000;
 
                 res.cookie("token", token, {
                     httpOnly: true,

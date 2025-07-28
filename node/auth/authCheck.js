@@ -9,7 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { privKey, pubKey } from "./keygen.js";
 
-export const authCheck = async (req, res, next) => {
+const authCheck = async (req, res, next) => {
     // debugger;
     const rememberMe = req.headers.rememberme;
     const username = req.body.username;
@@ -56,3 +56,5 @@ export const authCheck = async (req, res, next) => {
         }
     }
 };
+
+export default authCheck;

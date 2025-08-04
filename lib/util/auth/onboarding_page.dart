@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../gradient_label.dart';
 import '../tactile_button.dart';
@@ -49,11 +51,30 @@ Future initLoginCheck(context) async {
   }
 }
 
-loginCheckRoute(context, mounted) {
+loginCheckRoute(context, mounted) async {
   // final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
   initLoginCheck(context).then((res) {
     if (res == 200) {
-      Navigator.pushReplacementNamed(context, "/");
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Stack(
+              children: [
+                // ArtBoardScreen(),
+                Center(
+                  child: Container(
+                      height: 350,
+                      child:
+                          RiveAnimation.asset("rive/futuristic-loading.riv")),
+                  // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                  // RiveAnimation.asset("rive/loadingsquare.riv")),
+                ),
+              ],
+            );
+          });
+
+      Future.delayed(Duration(seconds: 2),
+          () => Navigator.pushReplacementNamed(context, "/"));
     }
   });
 }

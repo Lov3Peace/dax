@@ -9,6 +9,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:provider/provider.dart';
 import 'package:http/browser_client.dart' as httpClient;
+import 'package:rive/rive.dart';
 
 final loginEndpoint = Uri.parse("https://localhost:7777/api/login");
 Future login(username, password, rememberMe, context, mounted) async {
@@ -44,7 +45,26 @@ Future login(username, password, rememberMe, context, mounted) async {
       userProvider.saveUsername(body["username"]);
       // print(userProvider.username);
       // Navigate to Dashboard
-      Navigator.pushNamed(context, "/");
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Stack(
+              children: [
+                // ArtBoardScreen(),
+                Center(
+                  child: Container(
+                      height: 350,
+                      child:
+                          RiveAnimation.asset("rive/futuristic-loading.riv")),
+                  // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                  // RiveAnimation.asset("rive/loadingsquare.riv")),
+                ),
+              ],
+            );
+          });
+      Future.delayed(
+          Duration(seconds: 2), () => Navigator.pushNamed(context, "/"));
+
       var loggedIn = authNotifier.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {

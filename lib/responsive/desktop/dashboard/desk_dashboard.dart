@@ -44,7 +44,6 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
   Future getUserDataFetch() async {
     final client = httpClient.BrowserClient()..withCredentials = true;
     try {
-      await Future.delayed(Duration(seconds: 3));
       var res = await client.get(getUserDataEndpoint, headers: {
         "Content-Type": "application/json",
       }).timeout(const Duration(seconds: 5));
@@ -66,10 +65,6 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
     // of calling the function DIRECTLY infinite times inside of the Build
     _getData = getUserDataFetch();
   }
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -86,12 +81,12 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
           if (!snapshot.hasData) {
             return Stack(
               children: [
-                ArtBoardScreen(),
+                // ArtBoardScreen(),
                 Center(
                   child: Container(
-                      height: 350,
-                      child:
-                          RiveAnimation.asset("rive/futuristic-loading.riv")),
+                    height: 350,
+                    child: RiveAnimation.asset("rive/futuristic-loading.riv"),
+                  ),
                   // RiveAnimation.asset("rive/progress_bar_concept.riv")),
                   // RiveAnimation.asset("rive/loadingsquare.riv")),
                 ),

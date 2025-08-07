@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
+import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:google_fonts/google_fonts.dart';

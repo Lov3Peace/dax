@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
@@ -30,8 +31,8 @@ bool _rememberMe = false;
 var initEndpoint = Uri.parse('https://localhost:7777/api/');
 
 Future initLoginCheck(context) async {
-  var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-//Controls the switch
+  final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+  final userProvider = Provider.of<UserProvider>(context, listen: false);
   final client = httpClient.BrowserClient()..withCredentials = true;
   try {
     var res = await client.get(initEndpoint, headers: {
@@ -43,6 +44,7 @@ Future initLoginCheck(context) async {
     _rememberMe = bool.parse(body["rememberMe"]);
     print(_rememberMe);
     status == 200 ? authNotifier.loggedIn() : authNotifier.loggedOut();
+    status == 200 ? userProvider.saveUserData(body) : {};
     print("Init Status Code: $status");
     return status;
   } catch (e) {

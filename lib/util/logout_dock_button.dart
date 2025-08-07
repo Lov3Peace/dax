@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
+import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
 import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/imports.dart';

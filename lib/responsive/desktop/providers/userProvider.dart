@@ -8,11 +8,19 @@ class UserProvider with ChangeNotifier {
 
   String get username => _username;
 
+  Map _userdata = {};
+  Map get userData => _userdata;
+
   void loadUsername(User? user) {
     if (user != null) {
       _username = user.displayName ?? user.email?.split('@')[0] ?? '';
       notifyListeners();
     }
+  }
+
+  void saveUserData(userData) {
+    _userdata = userData;
+    notifyListeners();
   }
 
   void saveUsername(username) {

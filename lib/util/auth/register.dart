@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/firebase_tools/userProvider.dart';
+import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
 import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
@@ -47,10 +47,10 @@ Future register(username, password, email, rememberMe, context, mounted) async {
       var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       authNotifier.loggedIn();
-      userProvider.saveUsername(body["username"]);
+      userProvider.saveUserData(body);
       authNotifier.loggedIn();
       // Navigate to Dashboard
-      Navigator.pushNamed(context, "/");
+      Navigator.pushReplacementNamed(context, "/");
       var loggedIn = authNotifier.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {

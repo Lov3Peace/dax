@@ -13,23 +13,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart';
-import 'responsive/desktop/firebase_tools/userProvider.dart';
+import 'responsive/desktop/providers/userProvider.dart';
 import 'responsive/desktop/util/error_page.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // if (kIsWeb) {
-  //   await Firebase.initializeApp(
-  //       options: const FirebaseOptions(
-  //           apiKey: "AIzaSyC6cmRlApktLp8pr73JJ9ulx9TOxeYI4_o",
-  //           appId: "1:28990487504:web:1c7d24fea847542a88d7d5",
-  //           messagingSenderId: "28990487504",
-  //           projectId: "omni-fb089"));
-  // } else {
-  //   await Firebase.initializeApp();
-  // }
-  //
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+        options: const FirebaseOptions(
+            apiKey: "AIzaSyC6cmRlApktLp8pr73JJ9ulx9TOxeYI4_o",
+            appId: "1:28990487504:web:1c7d24fea847542a88d7d5",
+            messagingSenderId: "28990487504",
+            projectId: "omni-fb089"));
+  } else {
+    await Firebase.initializeApp();
+  }
+
   runApp(
     MultiProvider(
       providers: [

@@ -43,8 +43,13 @@ Future initLoginCheck(context) async {
     print(body);
     _rememberMe = bool.parse(body["rememberMe"]);
     print(_rememberMe);
-    status == 200 ? authNotifier.loggedIn() : authNotifier.loggedOut();
-    status == 200 ? userProvider.saveUserData(body) : {};
+    if (status == 200) {
+      authNotifier.loggedIn();
+      userProvider.saveUserData(body);
+      final headers = res.headers;
+      final token = headers["authorization"];
+      authNotifier.setToken(token);
+    }
     print("Init Status Code: $status");
     return status;
   } catch (e) {

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
+import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
@@ -26,9 +27,13 @@ class _ProfileCardState extends State<ProfileCard> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
     userData = userProvider.userData;
-    var token = JwtDecoder.decode(userData["token"]);
-    final bool isAdmin = token["isAdmin"];
+    var token = authNotifier.token;
+    print("AuthNotifier Token: $token");
+    var decodedToken = JwtDecoder.decode(token);
+    print("AuthNotifier decodedToken: $decodedToken");
+    final bool isAdmin = decodedToken["isAdmin"];
     adminOrUser = isAdmin == true ? "Admin" : "User";
     print("Profile Card Rebuilt");
     return TactileButton(

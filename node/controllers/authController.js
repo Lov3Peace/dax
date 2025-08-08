@@ -134,7 +134,9 @@ export const login = async (req, res) => {
         infoLog.info(`${user.username} logged in successfully`);
         console.log(`${user.username} logged in Successfully`);
 
-        return res.status(200).json({ username: user.username, token: token });
+        res.setHeader("Authorization", token);
+
+        return res.status(200).json({ username: user.username });
       } else {
         infoLog.info(`Invalid username / password - try again.`);
         console.log(`Invalid username / password - try again.`);

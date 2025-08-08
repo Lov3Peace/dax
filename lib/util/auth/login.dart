@@ -32,9 +32,12 @@ Future login(username, password, rememberMe, context, mounted) async {
         )
         .timeout(const Duration(seconds: 5));
     final body = json.decode(res.body);
+    final headers = res.headers;
+    final token = headers["authorization"];
     // cookie.sameSite
     // cookie.maxAge = 30;
     print('Fetched!');
+    print('Headers: $headers');
     print("Login Endpoint resBody: " + res.body);
     if (body is Map && res.statusCode == 200 && mounted) {
       print("Success");
@@ -42,6 +45,7 @@ Future login(username, password, rememberMe, context, mounted) async {
       var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       authNotifier.loggedIn();
+      authNotifier.setToken(token);
       userProvider.saveUsername(body["username"]);
       userProvider.saveUserData(body);
       // print(userProvider.username);

@@ -10,6 +10,7 @@ import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:provider/provider.dart';
+import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
@@ -50,7 +51,26 @@ Future register(username, password, email, rememberMe, context, mounted) async {
       userProvider.saveUserData(body);
       authNotifier.loggedIn();
       // Navigate to Dashboard
-      Navigator.pushReplacementNamed(context, "/");
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Stack(
+              children: [
+                // ArtBoardScreen(),
+                Center(
+                  child: Container(
+                      height: 350,
+                      child:
+                          RiveAnimation.asset("rive/futuristic-loading.riv")),
+                  // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                  // RiveAnimation.asset("rive/loadingsquare.riv")),
+                ),
+              ],
+            );
+          });
+      Future.delayed(
+          Duration(seconds: 2), () => Navigator.pushNamed(context, "/"));
+
       var loggedIn = authNotifier.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {

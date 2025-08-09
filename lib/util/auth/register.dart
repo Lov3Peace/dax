@@ -3,14 +3,15 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
-import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:provider/provider.dart';
+import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
+import '../providers/userAuthProvider.dart';
+import '../providers/userProvider.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
 import 'forget_password_form.dart';
@@ -43,15 +44,35 @@ Future register(username, password, email, rememberMe, context, mounted) async {
     print(res.body);
     if (body is Map && res.statusCode == 201 && mounted) {
       print("Success");
-      // access AuthNotifier Provider but set listen to false
-      var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+      // access UserAuthProvider but set listen to false
+      var userAuthProvider =
+          Provider.of<UserAuthProvider>(context, listen: false);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
-      authNotifier.loggedIn();
+      userAuthProvider.loggedIn();
       userProvider.saveUserData(body);
-      authNotifier.loggedIn();
+      userAuthProvider.loggedIn();
       // Navigate to Dashboard
-      Navigator.pushReplacementNamed(context, "/");
-      var loggedIn = authNotifier.isLoggedIn;
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Stack(
+              children: [
+                // ArtBoardScreen(),
+                Center(
+                  child: Container(
+                      height: 350,
+                      child:
+                          RiveAnimation.asset("rive/futuristic-loading.riv")),
+                  // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                  // RiveAnimation.asset("rive/loadingsquare.riv")),
+                ),
+              ],
+            );
+          });
+      Future.delayed(Duration(seconds: 2),
+          () => Navigator.pushReplacementNamed(context, "/"));
+
+      var loggedIn = userAuthProvider.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {
       print(res.statusCode);

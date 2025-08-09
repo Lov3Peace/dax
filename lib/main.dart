@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/auth/loginCheck.dart';
 import 'package:flutter_application_1/util/auth/onboarding_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
@@ -13,8 +12,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart';
-import 'responsive/desktop/providers/userProvider.dart';
 import 'responsive/desktop/util/error_page.dart';
+import 'util/providers/userAuthProvider.dart';
+import 'util/providers/userProvider.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ Future main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => ButtonState()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
-        ChangeNotifierProvider(create: (_) => AuthNotifier()),
+        ChangeNotifierProvider(create: (_) => UserAuthProvider()),
         // Add more providers as needed
       ],
       child: const MyApp(),
@@ -63,35 +63,37 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  late Future _initLoginCheck;
   @override
   void initState() {
     super.initState();
   }
 
-  final GlobalKey<NavigatorState>? navigatorKey = GlobalKey();
-// Have to create an async function here to call loginCheck since we have to await the result of loginCheck, but initState has to stay synchronous (cant await in a synchronous func)
-
+  // final GlobalKey<NavigatorState>? navigatorKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    var authNotifier = Provider.of<AuthNotifier>(context, listen: true);
+    var userAuthProvider =
+        Provider.of<UserAuthProvider>(context, listen: false);
     timeDilation = 1;
     return MaterialApp(
-      navigatorKey: navigatorKey,
-      initialRoute: "/launch",
-      // Using PageRouteBuilder for smoother routing animation
-      onGenerateRoute: (settings) => PageRouteBuilder(
-        settings: settings,
-        // Checks if user is logged in. If not, go to /launch page. If so, go to route
-        // ! for null checking
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            authNotifier.isLoggedIn
-                ? routes[settings.name]!
-                : routes["/launch"]!,
-        // Used for clean routing animation
-        fullscreenDialog: true,
-      ),
-      // this is not working right now
+      // navigatorKey: navigatorKey,
+      // this generates the routes based on if the user is logged in
+      // and if the route exists
+      onGenerateRoute: (settings) {
+        if (!userAuthProvider.isLoggedIn) {
+          // Using PageRouteBuilder for smoother routing animation
+          return PageRouteBuilder(
+            settings: settings,
+            pageBuilder: (_, __, ___) => routes["/launch"]!,
+          );
+        }
+        if (userAuthProvider.isLoggedIn && routes[settings.name] != null) {
+          return PageRouteBuilder(
+            settings: settings,
+            pageBuilder: (_, __, ___) => routes[settings.name]!,
+          );
+        }
+        return null;
+      },
       onUnknownRoute: (settings) => PageRouteBuilder(
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) => ErrorPage(),

@@ -2,8 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
-import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
@@ -14,6 +12,9 @@ import 'package:simple_animations/simple_animations.dart';
 import '../responsive/mobile/mob_constants.dart';
 import 'Window Route/logout_window_route.dart';
 import 'package:http/browser_client.dart' as httpClient;
+
+import 'providers/userAuthProvider.dart';
+import 'providers/userProvider.dart';
 
 class LogoutWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
@@ -147,8 +148,9 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
       print('Fetched...');
       print(res.body);
       if (res.statusCode == 200 && mounted) {
-        var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-        authNotifier.loggedOut();
+        var userAuthProvider =
+            Provider.of<UserAuthProvider>(context, listen: false);
+        userAuthProvider.loggedOut();
         Navigator.pushReplacementNamed(context, '/launch');
       } else {
         showErrorMessage('Could not log out - try again later. $body', context);

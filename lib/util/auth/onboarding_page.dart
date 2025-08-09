@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
@@ -9,10 +8,11 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../gradient_label.dart';
+import '../providers/userAuthProvider.dart';
+import '../providers/userProvider.dart';
 import '../tactile_button.dart';
 import 'forget_password_form.dart';
 import 'package:http/browser_client.dart' as httpClient;
-import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:provider/provider.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -31,7 +31,8 @@ bool _rememberMe = false;
 var initEndpoint = Uri.parse('https://localhost:7777/api/');
 
 Future initLoginCheck(context) async {
-  final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+  final userAuthProvider =
+      Provider.of<UserAuthProvider>(context, listen: false);
   final userProvider = Provider.of<UserProvider>(context, listen: false);
   final client = httpClient.BrowserClient()..withCredentials = true;
   try {
@@ -44,11 +45,11 @@ Future initLoginCheck(context) async {
     _rememberMe = bool.parse(body["rememberMe"]);
     print(_rememberMe);
     if (status == 200) {
-      authNotifier.loggedIn();
+      userAuthProvider.loggedIn();
       userProvider.saveUserData(body);
       final headers = res.headers;
       final token = headers["authorization"];
-      authNotifier.setToken(token);
+      userAuthProvider.setToken(token);
     }
     print("Init Status Code: $status");
     return status;
@@ -59,7 +60,7 @@ Future initLoginCheck(context) async {
 }
 
 loginCheckRoute(context, mounted) async {
-  // final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+  // final userAuthProvider = Provider.of<AuthNotifier>(context, listen: false);
   initLoginCheck(context).then((res) {
     if (res == 200) {
       showDialog(
@@ -90,19 +91,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-    var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
-    print("AuthNotifier().isLoggedIn = " + authNotifier.toString());
+    var userAuthProvider =
+        Provider.of<UserAuthProvider>(context, listen: false);
+    print("(OnboardingScreen) AuthNotifier().isLoggedIn = " +
+        userAuthProvider.isLoggedIn.toString());
     loginCheckRoute(context, mounted);
   }
-
-  // bool isLoginDialogShown = false;
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   if (AuthNotifier().isLoggedIn == true) {
-  //     loginCheckRoute(context, mounted);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +221,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           controller: _passwordController,
                           // handles pressing 'Enter'
                           onSubmitted: (value) {
-                            var authnotifier = Provider.of<AuthNotifier>(
+                            var authnotifier = Provider.of<UserAuthProvider>(
                                 context,
                                 listen: false);
                             login(

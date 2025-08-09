@@ -1,6 +1,6 @@
 import 'package:flutter_application_1/util/imports.dart';
 
-class AuthNotifier extends ChangeNotifier {
+class UserAuthProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
   bool _rememberMe = false;
   String _token = '';

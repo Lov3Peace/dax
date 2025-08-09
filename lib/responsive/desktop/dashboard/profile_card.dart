@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
-import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
+import '../../../util/providers/userAuthProvider.dart';
+import '../../../util/providers/userProvider.dart';
 import '../../../util/tactile_button.dart';
 import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
@@ -27,9 +27,10 @@ class _ProfileCardState extends State<ProfileCard> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+    final userAuthProvider =
+        Provider.of<UserAuthProvider>(context, listen: false);
     userData = userProvider.userData;
-    var token = authNotifier.token;
+    var token = userAuthProvider.token;
     print("AuthNotifier Token: $token");
     var decodedToken = JwtDecoder.decode(token);
     print("AuthNotifier decodedToken: $decodedToken");

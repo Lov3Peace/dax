@@ -5,7 +5,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
@@ -20,6 +19,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 import '../../../util/auth/loginCheck.dart';
+import '../../../util/providers/userProvider.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../desk_sp/desk_side_panel.dart';
 import 'package:rive/rive.dart' as r;

@@ -1,15 +1,17 @@
 import 'dart:async';
 import 'dart:ui';
 import 'dart:convert';
+import 'dart:ui' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
-import 'package:flutter_application_1/util/auth/authNotifier.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:provider/provider.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:rive/rive.dart';
+
+import '../providers/userAuthProvider.dart';
+import '../providers/userProvider.dart';
 
 final loginEndpoint = Uri.parse("https://localhost:7777/api/login");
 Future login(username, password, rememberMe, context, mounted) async {
@@ -42,11 +44,11 @@ Future login(username, password, rememberMe, context, mounted) async {
     if (body is Map && res.statusCode == 200 && mounted) {
       print("Success");
       // access AuthNotifier Provider but set listen to false
-      var authNotifier = Provider.of<AuthNotifier>(context, listen: false);
+      var userAuthProvider =
+          Provider.of<UserAuthProvider>(context, listen: false);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
-      authNotifier.loggedIn();
-      authNotifier.setToken(token);
-      userProvider.saveUsername(body["username"]);
+      userAuthProvider.loggedIn();
+      userAuthProvider.setToken(token);
       userProvider.saveUserData(body);
       // print(userProvider.username);
       // Navigate to Dashboard
@@ -67,10 +69,10 @@ Future login(username, password, rememberMe, context, mounted) async {
               ],
             );
           });
-      Future.delayed(
-          Duration(seconds: 2), () => Navigator.pushNamed(context, "/"));
+      Future.delayed(Duration(seconds: 2),
+          () => Navigator.pushReplacementNamed(context, "/"));
 
-      var loggedIn = authNotifier.isLoggedIn;
+      var loggedIn = userAuthProvider.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {
       showErrorMessage('Login Failed: $body', context);

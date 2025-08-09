@@ -1,12 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/providers/userProvider.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
 import '../../util/auth/login.dart';
+import '../../util/providers/userProvider.dart';
 import '../mobile/mobile_finance_page.dart';
 import '../tablet/tablet_finance_page.dart';
 import 'desk_decks.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/test_communities_post_list.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/communities/test_communities_post_list.dart';
 import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
@@ -12,7 +12,8 @@ class DeskHeroCommunitiesPage extends StatefulWidget {
   const DeskHeroCommunitiesPage({Key? key}) : super(key: key);
 
   @override
-  State<DeskHeroCommunitiesPage> createState() => _DeskHeroCommunitiesPageState();
+  State<DeskHeroCommunitiesPage> createState() =>
+      _DeskHeroCommunitiesPageState();
 }
 
 class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
@@ -32,7 +33,8 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
                 // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
                 // the padding on the LargeStagger list items)
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(0.5.w(context), 0, 0.5.w(context), 2.sp(context)),
+                  padding: EdgeInsets.fromLTRB(
+                      0.5.w(context), 0, 0.5.w(context), 2.sp(context)),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -45,7 +47,10 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
 
                       //
                       //Houses Deck Buttons
-                      BubbleDock(child1: ProjectsButton(), child2: SocialsButton(), child3: NewsButton()),
+                      BubbleDock(
+                          child1: ProjectsButton(),
+                          child2: SocialsButton(),
+                          child3: NewsButton()),
                     ],
                   ),
                 ),

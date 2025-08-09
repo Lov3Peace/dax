@@ -8,7 +8,7 @@ import '../../mobile/mobile_socials_page.dart';
 import '../../tablet/tablet_socials_page.dart';
 import '../desk_constants.dart';
 import '../desk_decks.dart';
-import '../hero_deck_pages/desk_hero_socials_page.dart';
+import '../decks_content/desk_hero_socials_page.dart';
 import 'package:rive/rive.dart' as r;
 
 import 'desk_dashboard.dart';

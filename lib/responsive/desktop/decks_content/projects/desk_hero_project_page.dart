@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/communities_post.dart';
-import 'package:flutter_application_1/responsive/desktop/hero_deck_pages/communities/test_communities_post_list.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/communities/communities_post.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/communities/test_communities_post_list.dart';
 import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
@@ -22,7 +22,8 @@ class DeskHeroProjectsPage extends StatefulWidget {
   State<DeskHeroProjectsPage> createState() => _DeskHeroProjectsPageState();
 }
 
-class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with AnimationMixin {
+class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage>
+    with AnimationMixin {
   //globals
 
   //final dashboardDecksList = dashboardDecks(0, 1, 2, 4);
@@ -48,7 +49,8 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
                   // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
                   // the padding on the LargeStagger list items)
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(0.5.w(context), 0, 0.5.w(context), 2.sp(context)),
+                    padding: EdgeInsets.fromLTRB(
+                        0.5.w(context), 0, 0.5.w(context), 2.sp(context)),
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,7 +63,10 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage> with Animat
 
                         //
                         //Houses Deck Buttons
-                        BubbleDock(child1: ProjectsButton(), child2: SocialsButton(), child3: NewsButton()),
+                        BubbleDock(
+                            child1: ProjectsButton(),
+                            child2: SocialsButton(),
+                            child3: NewsButton()),
                       ],
                     ),
                   ),

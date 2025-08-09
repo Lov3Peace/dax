@@ -9,7 +9,7 @@ import '../../mobile/mobile_news_page.dart';
 import '../../tablet/tablet_news_page.dart';
 import '../desk_decks.dart';
 import '../desk_constants.dart';
-import '../hero_deck_pages/desk_hero_news_page.dart';
+import '../decks_content/desk_hero_news_page.dart';
 import './desk_dashboard.dart';
 
 class NewsDeck extends StatefulWidget {

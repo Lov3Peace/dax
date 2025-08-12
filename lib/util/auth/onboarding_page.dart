@@ -220,11 +220,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           style: TextStyle(fontSize: 3.sp(context)),
                           controller: _passwordController,
                           // handles pressing 'Enter'
-                          onSubmitted: (value) {
+                          onSubmitted: (value) async {
                             var authnotifier = Provider.of<UserAuthProvider>(
                                 context,
                                 listen: false);
-                            login(
+                            await login(
                                 _usernameController.text,
                                 _passwordController.text,
                                 authnotifier.rememberMe,

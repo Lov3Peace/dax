@@ -1,4 +1,6 @@
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectCategoryCard.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
+import 'package:flutter_application_1/responsive/desktop/large_stagger_load.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import '../../util/imports.dart';
 import 'dashboard/title_bubble.dart';
@@ -46,15 +48,9 @@ class Devpage extends StatelessWidget {
               ),
             ],
           ),
-          ProjectCategory(
-              category: "[Category]",
-              description: "[Description]",
-              width: 35.w(context),
-              content: Text("Content"),
-              gradient1: red,
-              gradient2: pink,
-              neonGlow: pink,
-              shadowColor: white),
+          Expanded(
+              child: LargeStaggerLoad(
+                  widgets: projects, childHeight: 50.h(context)))
         ]));
   }
 }

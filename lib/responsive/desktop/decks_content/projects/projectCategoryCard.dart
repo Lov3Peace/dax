@@ -36,7 +36,7 @@ class ProjectCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     print(textConstraint);
     return Container(
-      // margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 20),
       decoration: BoxDecoration(
         gradient: const LinearGradient(colors: [
           Color.fromARGB(240, 19, 19, 19),
@@ -45,18 +45,19 @@ class ProjectCategory extends StatelessWidget {
         borderRadius: BorderRadius.circular(1.w(context)),
         border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
       ),
-      constraints: const BoxConstraints(),
-      // height: 2 * textBoxHeight,
+      constraints: const BoxConstraints(minHeight: 300),
+      // height: 50.h(context),
       width: width,
       child: Padding(
-        padding: EdgeInsets.all(1.5.w(context)),
+        padding: EdgeInsets.all(1.w(context)),
         child: Column(
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(1.w(context)),
               child: Image.asset(
-                  // height: 30.h(context),
-                  width: 35.w(context),
+                  // height: 40.h(context),
+                  width: 34.w(context),
+                  fit: BoxFit.contain,
                   "../../../../../images/construction-project.jpg"),
             ),
             Row(
@@ -64,13 +65,10 @@ class ProjectCategory extends StatelessWidget {
                 Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: Text(
-                        "Construction",
-                        style: TextStyle(
-                            fontSize: 5.sp(context),
-                            fontWeight: FontWeight.w700),
-                      ),
+                    Text(
+                      "Construction",
+                      style: TextStyle(
+                          fontSize: 5.sp(context), fontWeight: FontWeight.w700),
                     ),
                     Text(description,
                         style: TextStyle(

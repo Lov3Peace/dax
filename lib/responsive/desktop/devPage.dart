@@ -47,8 +47,9 @@ class Devpage extends StatelessWidget {
             ],
           ),
           ProjectCategory(
-              category: "[Category]",
-              description: "[Description]",
+              category: "Construction",
+              description:
+                  "Find projects for planning, design, and building of structures or infrastructure, from residential homes to large-scale commercial developments.",
               width: 35.w(context),
               content: Text("Content"),
               gradient1: red,

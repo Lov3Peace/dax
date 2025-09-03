@@ -8,13 +8,17 @@ class LargeStaggerLoad extends StatefulWidget {
   const LargeStaggerLoad({
     super.key,
     required this.widgets,
-    this.childWidth,
     required this.childHeight,
+    required this.scale,
+    required this.constraints,
+    this.childWidth,
     this.padding,
     this.physics,
   });
 
   final List widgets;
+  final double scale;
+  final BoxConstraints constraints;
   final double? childWidth;
   final double childHeight;
   final EdgeInsets? padding;
@@ -41,6 +45,7 @@ class _LargeStaggerLoadState extends State<LargeStaggerLoad> {
       controller: scrollController,
       itemBuilder: (context, index) => Container(
         // width: widget.childWidth,
+        constraints: widget.constraints,
         height: widget.childHeight,
         child: StaggerLoad(
           duration: 300,
@@ -51,12 +56,15 @@ class _LargeStaggerLoadState extends State<LargeStaggerLoad> {
           // column, and ((this listview's index * 2) + 1) for the second column (i think
           // this might scale with the amount of columns; like for 3 columns it would be
           // (this listview's index * 3) but im not sure yet; will test)
-          widgets:
-              (index * 2) + 1 >= widget.widgets.length ? [widget.widgets[index * 2]] : [widget.widgets[index * 2], widget.widgets[(index * 2) + 1]],
+          widgets: (index * 2) + 1 >= widget.widgets.length
+              ? [widget.widgets[index * 2]]
+              : [widget.widgets[index * 2], widget.widgets[(index * 2) + 1]],
           scrollDirection: Axis.horizontal,
           // delay: index % 2 == 0 ? 400 : 600,
-          delay: (index * widget.childHeight) < 100.h(context) ? (index * 100) : 300,
-          scale: 1.03,
+          delay: (index * widget.childHeight) < 100.h(context)
+              ? (index * 100)
+              : 300,
+          scale: widget.scale,
           layer: 1,
           padding: widget.padding,
           physics: widget.physics,

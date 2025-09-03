@@ -10,25 +10,22 @@ class ProjectCategory extends StatelessWidget {
     super.key,
     required this.category,
     required this.description,
-    this.content,
+    required this.imageDir,
     this.height,
     this.width,
-    this.image,
     this.textConstraint,
   });
   final String category;
   final String description;
-  final Text? content;
   final double? height;
   final double? width;
-  final Image? image;
+  final String imageDir;
   final double? textConstraint;
 
   @override
   Widget build(BuildContext context) {
     return TactileButton(
       child: Container(
-        // margin: const EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
           gradient: const LinearGradient(colors: [
             Color.fromARGB(240, 19, 19, 19),
@@ -37,41 +34,44 @@ class ProjectCategory extends StatelessWidget {
           borderRadius: BorderRadius.circular(1.25.w(context)),
           border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
         ),
-        constraints: const BoxConstraints(minHeight: 425, minWidth: 500),
+        constraints: const BoxConstraints(minHeight: 460, minWidth: 450),
         height: 50.h(context),
-        width: width,
+        width: 35.5.w(context),
+        // width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Stack(
-                children: [
-                  // Container(
-                  //   decoration: BoxDecoration(boxShadow: [
-                  //     BoxShadow(
-                  //       color: Colors.red,
-                  //       offset: Offset(1, 1),
-                  //       spreadRadius: -3,
-                  //     )
-                  //   ], borderRadius: BorderRadius.circular(1.5.w(context))),
-                  // ),
-                  Container(
-                    constraints: BoxConstraints(minHeight: 350),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(1.5.w(context)),
-                      child: Image.asset(
-                          fit: BoxFit.cover,
-                          width: 35.w(context),
-                          "../../../../../images/construction-project.jpg"),
+              Expanded(
+                child: Stack(
+                  children: [
+                    // Container(
+                    //   decoration: BoxDecoration(boxShadow: [
+                    //     BoxShadow(
+                    //       color: Colors.red,
+                    //       offset: Offset(1, 1),
+                    //       spreadRadius: -3,
+                    //     )
+                    //   ], borderRadius: BorderRadius.circular(1.5.w(context))),
+                    // ),
+                    Container(
+                      constraints:
+                          const BoxConstraints(minHeight: 350, minWidth: 350),
+                      // height: 35.5.h(context),
+                      width: 35.5.w(context),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(1.25.w(context)),
+                        child: Image.asset(fit: BoxFit.cover, imageDir),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Row(
                 children: [
                   Flexible(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 5),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -84,7 +84,8 @@ class ProjectCategory extends StatelessWidget {
                           Text(
                             description,
                             style: TextStyle(
-                                fontSize: 2.sp(context),
+                                fontSize:
+                                    100.w(context) >= 1920 ? 2.sp(context) : 12,
                                 fontWeight: FontWeight.w500),
                             softWrap: true,
                           ),
@@ -95,7 +96,7 @@ class ProjectCategory extends StatelessWidget {
                   const Padding(
                     padding: EdgeInsets.only(left: 30),
                     child: TactileButton(
-                        scale: 1.08,
+                        scale: 1.05,
                         child: Icon(
                           Icons.add_circle,
                           size: 40,

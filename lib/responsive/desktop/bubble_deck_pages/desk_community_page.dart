@@ -19,7 +19,8 @@ class DeskCommunitiesPage extends StatefulWidget {
   State<DeskCommunitiesPage> createState() => _DeskCommunitiesPageState();
 }
 
-class _DeskCommunitiesPageState extends State<DeskCommunitiesPage> with AnimationMixin {
+class _DeskCommunitiesPageState extends State<DeskCommunitiesPage>
+    with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -77,6 +78,8 @@ class _DeskCommunitiesPageState extends State<DeskCommunitiesPage> with Animatio
                   Expanded(
                     child: LargeStaggerLoad(
                       widgets: test_big_list,
+                      scale: 1.02,
+                      constraints: BoxConstraints(minHeight: 350),
                       childHeight: 50.h(context),
                       childWidth: 35.w(context),
                       padding: EdgeInsets.all(0.5.w(context)),

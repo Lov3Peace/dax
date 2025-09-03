@@ -1,4 +1,6 @@
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectCategoryCard.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
+import 'package:flutter_application_1/responsive/desktop/large_stagger_load.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import '../../util/imports.dart';
 import 'dashboard/title_bubble.dart';
@@ -46,13 +48,16 @@ class Devpage extends StatelessWidget {
               ),
             ],
           ),
-          ProjectCategory(
-            category: "Construction",
-            description:
-                "Find projects for planning, design, and building of structures or infrastructure, from residential homes to large-scale commercial developments.",
-            width: 35.w(context),
-            content: Text("Content"),
-          ),
+          Expanded(
+            child: LargeStaggerLoad(
+              widgets: projects,
+              scale: 1.02,
+              constraints: const BoxConstraints(minHeight: 450),
+              padding: EdgeInsets.all(0.25.w(context)),
+              childHeight: 54.h(context),
+              physics: NeverScrollableScrollPhysics(),
+            ),
+          )
         ]));
   }
 }

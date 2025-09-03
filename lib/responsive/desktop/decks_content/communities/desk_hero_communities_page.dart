@@ -60,6 +60,8 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
           Expanded(
             child: LargeStaggerLoad(
               widgets: comm_post_list,
+              scale: 1.02,
+              constraints: BoxConstraints(minHeight: 350),
               childHeight: 250,
               padding: EdgeInsets.all(0.5.w(context)),
               // physics: const NeverScrollableScrollPhysics(),

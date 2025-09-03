@@ -35,7 +35,9 @@ class WebUiTemplate extends StatelessWidget {
         child: Container(
           height: 100.h(context),
           width: 100.w(context),
-          constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+          constraints: 100.w(context) > 1920
+              ? BoxConstraints(minHeight: 1440)
+              : BoxConstraints(minHeight: 900),
           child: Stack(
             children: [
               // Background(),
@@ -44,24 +46,37 @@ class WebUiTemplate extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  //
+                  // Side Panel
                   DesktopSidePanel(),
+                  //
+                  // Content
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0.25.w(context), 5.h(context), 0.25.w(context), 0),
+                    padding: EdgeInsets.only(top: 5.h(context)),
                     child: Container(
                       height: 100.h(context),
-                      width: 71.5.w(context),
-                      constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
+                      width: 72.5.w(context),
+                      constraints: 100.w(context) > 1920
+                          ? BoxConstraints(minHeight: 1440)
+                          : BoxConstraints(minHeight: 900),
                       //
                       // *** Content goes here ***
                       child: child,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 5.h(context)),
-                    child: Container(
-                      height: 90.h(context),
-                      constraints: 100.w(context) > 1920 ? BoxConstraints(minHeight: 1440) : BoxConstraints(minHeight: 900),
-                      child: Messages(),
+                  //
+                  // Messages
+                  Align(
+                    // alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 5.h(context)),
+                      child: Container(
+                        height: 90.h(context),
+                        constraints: 100.w(context) > 1920
+                            ? BoxConstraints(minHeight: 1440)
+                            : BoxConstraints(minHeight: 900),
+                        child: Messages(),
+                      ),
                     ),
                   ),
                 ],

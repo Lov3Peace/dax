@@ -113,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               height: 100.h(context),
               width: 100.w(context),
               child: Image.asset(
-                "images/aperture-vintage-GlsKHybjdS0-unsplash.jpg",
+                "images/alex-pavor-T6kZsf30NW0-unsplash.jpg",
                 fit: BoxFit.fill,
               ),
             ),

@@ -76,6 +76,8 @@ class _DeskHeroProjectsPageState extends State<DeskHeroProjectsPage>
             Expanded(
               child: LargeStaggerLoad(
                 widgets: test_big_list,
+                scale: 1.02,
+                constraints: BoxConstraints(minHeight: 350),
                 childHeight: 50.h(context),
                 childWidth: 35.w(context),
                 padding: EdgeInsets.all(0.5.w(context)),

@@ -31,7 +31,7 @@ class Devpage extends StatelessWidget {
                       //
                       // Title of Screen
                       TitleBubble(
-                        deckName: 'Communities',
+                        deckName: 'Projects',
                       ),
 
                       //
@@ -47,15 +47,12 @@ class Devpage extends StatelessWidget {
             ],
           ),
           ProjectCategory(
-              category: "Construction",
-              description:
-                  "Find projects for planning, design, and building of structures or infrastructure, from residential homes to large-scale commercial developments.",
-              width: 35.w(context),
-              content: Text("Content"),
-              gradient1: red,
-              gradient2: pink,
-              neonGlow: pink,
-              shadowColor: white),
+            category: "Construction",
+            description:
+                "Find projects for planning, design, and building of structures or infrastructure, from residential homes to large-scale commercial developments.",
+            width: 35.w(context),
+            content: Text("Content"),
+          ),
         ]));
   }
 }

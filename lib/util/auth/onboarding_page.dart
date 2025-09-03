@@ -153,7 +153,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                           ),
                           Text(
-                            'Omni',
+                            'carbon',
                             style: TextStyle(
                                 fontSize: 12.sp(context),
                                 fontWeight: FontWeight.w400),

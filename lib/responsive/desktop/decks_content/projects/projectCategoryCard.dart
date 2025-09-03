@@ -10,27 +10,19 @@ class ProjectCategory extends StatelessWidget {
     super.key,
     required this.category,
     required this.description,
-    required this.content,
+    this.content,
     this.height,
     this.width,
-    required this.gradient1,
-    required this.gradient2,
-    required this.neonGlow,
-    required this.shadowColor,
     this.image,
     this.textConstraint,
   });
   final String category;
   final String description;
-  final Text content;
+  final Text? content;
   final double? height;
   final double? width;
   final Image? image;
   final double? textConstraint;
-  final Color gradient1;
-  final Color gradient2;
-  final Color neonGlow;
-  final Color shadowColor;
 
   @override
   Widget build(BuildContext context) {
@@ -42,73 +34,78 @@ class ProjectCategory extends StatelessWidget {
             Color.fromARGB(240, 19, 19, 19),
             Color.fromARGB(194, 33, 33, 33),
           ], transform: GradientRotation(180)),
-          borderRadius: BorderRadius.circular(1.w(context)),
+          borderRadius: BorderRadius.circular(1.25.w(context)),
           border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
         ),
-        constraints: const BoxConstraints(),
-        // height: 2 * textBoxHeight,
+        constraints: const BoxConstraints(minHeight: 400),
+        height: 50.h(context),
         width: width,
-        child: Padding(
-          padding: EdgeInsets.all(1.5.w(context)),
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(boxShadow: [
-                      BoxShadow(
-                        color: Colors.red,
-                        offset: Offset(1, 1),
-                        spreadRadius: -3,
-                      )
-                    ], borderRadius: BorderRadius.circular(1.5.w(context))),
-                  ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(1.5.w(context)),
-                    child: Image.asset(
-                        // height: 30.h(context),
-                        width: 35.w(context),
-                        "../../../../../images/construction-project.jpg"),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          category,
-                          style: TextStyle(
-                              fontSize: 5.sp(context),
-                              fontWeight: FontWeight.w700),
-                        ),
-                        Text(
-                          description,
-                          style: TextStyle(
-                              fontSize: 2.5.sp(context),
-                              fontWeight: FontWeight.w500),
-                          softWrap: true,
-                        ),
-                      ],
+        child: Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    // Container(
+                    //   decoration: BoxDecoration(boxShadow: [
+                    //     BoxShadow(
+                    //       color: Colors.red,
+                    //       offset: Offset(1, 1),
+                    //       spreadRadius: -3,
+                    //     )
+                    //   ], borderRadius: BorderRadius.circular(1.5.w(context))),
+                    // ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(1.5.w(context)),
+                      child: Image.asset(
+                          fit: BoxFit.cover,
+                          height: 35.h(context),
+                          width: 35.w(context),
+                          "../../../../../images/construction-project.jpg"),
                     ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 30, left: 30),
-                    child: TactileButton(
-                        scale: 1.08,
-                        child: Icon(
-                          Icons.add_circle,
-                          size: 40,
-                        )),
-                  ),
-                ],
-              ),
-              //
-              // Category Label
-              //
-            ],
+                  ],
+                ),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              maxLines: 2,
+                              category,
+                              style: const TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w700),
+                            ),
+                            Text(
+                              description,
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.w500),
+                              softWrap: true,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 30),
+                      child: TactileButton(
+                          scale: 1.08,
+                          child: Icon(
+                            Icons.add_circle,
+                            size: 40,
+                          )),
+                    ),
+                  ],
+                ),
+                //
+                // Category Label
+                //
+              ],
+            ),
           ),
         ),
       ),

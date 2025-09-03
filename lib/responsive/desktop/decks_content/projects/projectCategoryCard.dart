@@ -37,75 +37,76 @@ class ProjectCategory extends StatelessWidget {
           borderRadius: BorderRadius.circular(1.25.w(context)),
           border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
         ),
-        constraints: const BoxConstraints(minHeight: 400),
+        constraints: const BoxConstraints(minHeight: 425, minWidth: 500),
         height: 50.h(context),
         width: width,
-        child: Expanded(
-          child: Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    // Container(
-                    //   decoration: BoxDecoration(boxShadow: [
-                    //     BoxShadow(
-                    //       color: Colors.red,
-                    //       offset: Offset(1, 1),
-                    //       spreadRadius: -3,
-                    //     )
-                    //   ], borderRadius: BorderRadius.circular(1.5.w(context))),
-                    // ),
-                    ClipRRect(
+        child: Padding(
+          padding: EdgeInsets.all(30),
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  // Container(
+                  //   decoration: BoxDecoration(boxShadow: [
+                  //     BoxShadow(
+                  //       color: Colors.red,
+                  //       offset: Offset(1, 1),
+                  //       spreadRadius: -3,
+                  //     )
+                  //   ], borderRadius: BorderRadius.circular(1.5.w(context))),
+                  // ),
+                  Container(
+                    constraints: BoxConstraints(minHeight: 350),
+                    child: ClipRRect(
                       borderRadius: BorderRadius.circular(1.5.w(context)),
                       child: Image.asset(
                           fit: BoxFit.cover,
-                          height: 35.h(context),
                           width: 35.w(context),
                           "../../../../../images/construction-project.jpg"),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              maxLines: 2,
-                              category,
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w700),
-                            ),
-                            Text(
-                              description,
-                              style: const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500),
-                              softWrap: true,
-                            ),
-                          ],
-                        ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            category,
+                            style: TextStyle(
+                                fontSize: 5.sp(context),
+                                fontWeight: FontWeight.w700),
+                          ),
+                          Text(
+                            description,
+                            style: TextStyle(
+                                fontSize: 2.sp(context),
+                                fontWeight: FontWeight.w500),
+                            softWrap: true,
+                          ),
+                        ],
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(left: 30),
-                      child: TactileButton(
-                          scale: 1.08,
-                          child: Icon(
-                            Icons.add_circle,
-                            size: 40,
-                          )),
-                    ),
-                  ],
-                ),
-                //
-                // Category Label
-                //
-              ],
-            ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 30),
+                    child: TactileButton(
+                        scale: 1.08,
+                        child: Icon(
+                          Icons.add_circle,
+                          size: 40,
+                        )),
+                  ),
+                ],
+              ),
+              //
+              // Category Label
+              //
+            ],
           ),
         ),
       ),

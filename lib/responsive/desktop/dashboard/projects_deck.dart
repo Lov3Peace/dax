@@ -7,7 +7,7 @@ import '../../../util/tactile_button.dart';
 import '../desk_decks.dart';
 import 'package:rive/rive.dart' as r;
 
-import '../decks_content/projects/desk_hero_project_page.dart';
+import '../decks_content/projects/desktop_projects_page.dart';
 
 class ProjectsDeck extends StatefulWidget {
   const ProjectsDeck({Key? key}) : super(key: key);
@@ -30,8 +30,6 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
     // values set in desk_decks.dart
     double deckHeight = 22.sp(context);
     double deckWidth = 35.25.w(context);
-    double halfDeckWidth = 17.325.w(context);
-    double headerTextSize = 6.5.sp(context);
     subTextSize = 2.5.sp(context);
     profBubTextSize = 20;
     double labelTextSize = 2.5.sp(context);

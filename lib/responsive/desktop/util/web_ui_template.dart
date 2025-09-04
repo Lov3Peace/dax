@@ -15,7 +15,7 @@ import 'package:flutter_application_1/responsive/desktop/stagger_load.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../dashboard/title_bubble.dart';
-import '../desk_sp/desk_side_panel.dart';
+import '../side_panel/side_panel.dart';
 import 'package:rive/rive.dart' as r;
 
 import '../messages.dart';
@@ -30,67 +30,71 @@ class WebUiTemplate extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      body: SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Container(
-          height: 100.h(context),
-          width: 100.w(context),
-          constraints: 100.w(context) > 1920
-              ? BoxConstraints(minHeight: 1440)
-              : BoxConstraints(minHeight: 900),
-          child: Stack(
-            children: [
-              // Background(),
-              ArtBoardScreen(),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  //
-                  // Side Panel
-                  DesktopSidePanel(),
-                  //
-                  // Content
-                  Padding(
-                    padding: EdgeInsets.only(top: 5.h(context)),
-                    child: Container(
-                      height: 100.h(context),
-                      width: 72.5.w(context),
-                      constraints: 100.w(context) > 1920
-                          ? BoxConstraints(minHeight: 1440)
-                          : BoxConstraints(minHeight: 900),
-                      //
-                      // *** Content goes here ***
-                      child: child,
+      body: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(
+              child: Container(
+                height: 100.h(context),
+                width: 100.w(context),
+                constraints: 100.w(context) > 1920
+                    ? BoxConstraints(minHeight: 1440)
+                    : BoxConstraints(minHeight: 900),
+                child: Stack(
+                  children: [
+                    // Background(),
+                    ArtBoardScreen(),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //
+                        // Side Panel
+                        DesktopSidePanel(),
+                        //
+                        // Content
+                        Padding(
+                          padding: EdgeInsets.only(top: 1.w(context)),
+                          child: Container(
+                            height: 100.h(context),
+                            width: 72.5.w(context),
+                            constraints: 100.w(context) > 1920
+                                ? BoxConstraints(minHeight: 1440)
+                                : BoxConstraints(minHeight: 900),
+                            //
+                            // *** Content goes here ***
+                            child: child,
+                          ),
+                        ),
+                        //
+                        // Messages
+                        Align(
+                          // alignment: Alignment.topRight,
+                          child: Padding(
+                            padding:
+                                EdgeInsets.symmetric(vertical: 1.w(context)),
+                            child: Container(
+                              // height: 90.h(context),
+                              constraints: 100.w(context) > 1920
+                                  ? BoxConstraints(minHeight: 1440)
+                                  : BoxConstraints(minHeight: 900),
+                              child: Messages(),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  //
-                  // Messages
-                  Align(
-                    // alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 5.h(context)),
-                      child: Container(
-                        height: 90.h(context),
-                        constraints: 100.w(context) > 1920
-                            ? BoxConstraints(minHeight: 1440)
-                            : BoxConstraints(minHeight: 900),
-                        child: Messages(),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
 
-              // Positioned.fill(
-              //   child: BackdropFilter(
-              //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-              //       child:  SizedBox()),
-              // ),
-            ],
-          ),
-        ),
-      ),
+                    // Positioned.fill(
+                    //   child: BackdropFilter(
+                    //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+                    //       child:  SizedBox()),
+                    // ),
+                  ],
+                ),
+              ),
+            ),
+          ]),
     );
   }
 }

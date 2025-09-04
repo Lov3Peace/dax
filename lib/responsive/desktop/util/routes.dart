@@ -7,7 +7,7 @@ var routes = {
   '/': DesktopDashboard(),
   '/launch': OnboardingScreen(),
   '/dev': Devpage(),
-  '/projects': DeskHeroProjectsPage(),
+  '/projects': DesktopProjectsPage(),
   '/communities': DeskHeroCommunitiesPage(),
   '/socials': DeskHeroSocialsPage(),
   '/news': DeskHeroNewsPage(),

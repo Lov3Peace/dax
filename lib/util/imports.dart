@@ -5,7 +5,7 @@ export '../responsive/desktop/dashboard/desk_dashboard.dart';
 export '../responsive/desktop/stagger_load.dart';
 export '../util/auth/auth_check.dart';
 export '../responsive/responsive_layout.dart';
-export '../responsive/desktop/decks_content/projects/desk_hero_project_page.dart';
+export '../responsive/desktop/decks_content/projects/desktop_projects_page.dart';
 export '../responsive/desktop/decks_content/communities/desk_hero_communities_page.dart';
 export '../responsive/desktop/decks_content/desk_hero_socials_page.dart';
 export '../responsive/desktop/decks_content/desk_hero_news_page.dart';

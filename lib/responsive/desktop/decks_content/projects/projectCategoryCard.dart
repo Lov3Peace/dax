@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/decks.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
@@ -27,33 +28,21 @@ class ProjectCategory extends StatelessWidget {
     return TactileButton(
       child: Container(
         decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [
-            Color.fromARGB(240, 19, 19, 19),
-            Color.fromARGB(194, 33, 33, 33),
-          ], transform: GradientRotation(180)),
+          color: const Color.fromRGBO(17, 17, 17, 0.55),
           borderRadius: BorderRadius.circular(1.25.w(context)),
-          border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
+          border: Border.all(color: deckBorderColor),
         ),
         constraints: const BoxConstraints(minHeight: 460, minWidth: 450),
         height: 50.h(context),
         width: 35.5.w(context),
         // width: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(1.w(context)),
           child: Column(
             children: [
               Expanded(
                 child: Stack(
                   children: [
-                    // Container(
-                    //   decoration: BoxDecoration(boxShadow: [
-                    //     BoxShadow(
-                    //       color: Colors.red,
-                    //       offset: Offset(1, 1),
-                    //       spreadRadius: -3,
-                    //     )
-                    //   ], borderRadius: BorderRadius.circular(1.5.w(context))),
-                    // ),
                     Container(
                       constraints:
                           const BoxConstraints(minHeight: 350, minWidth: 350),
@@ -93,13 +82,13 @@ class ProjectCategory extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 30),
                     child: TactileButton(
                         scale: 1.05,
                         child: Icon(
                           Icons.add_circle,
-                          size: 40,
+                          size: 2.w(context),
                         )),
                   ),
                 ],

@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_dock_button_templates/sp_card_template.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../desk_decks.dart';
@@ -9,16 +9,18 @@ import '../desk_dock_button_templates/messages_template.dart';
 import 'actions_buttons.dart';
 import 'desk_connection_tactile.dart';
 
-class FriendsPopUp extends StatefulWidget {
-  const FriendsPopUp({super.key});
+class ConnectionsPopUp extends StatefulWidget {
+  const ConnectionsPopUp({super.key});
 
   @override
-  State<FriendsPopUp> createState() => FriendsPopUpState();
+  State<ConnectionsPopUp> createState() => ConnectionsPopUpState();
 }
 
-class FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
+class ConnectionsPopUpState extends State<ConnectionsPopUp>
+    with AnimationMixin {
   final TextEditingController searchController = TextEditingController();
-  final CarouselSliderController carouselController = CarouselSliderController();
+  final CarouselSliderController carouselController =
+      CarouselSliderController();
   int currentIndex = 0;
 
   void handleButtonTap(int index) {
@@ -43,7 +45,8 @@ class FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
         rows: [
           [
             Text('[Username]', style: TextStyle(fontSize: 2.5.sp(context))),
-            Text('[Online/Offline]', style: TextStyle(fontSize: 2.5.sp(context))),
+            Text('[Online/Offline]',
+                style: TextStyle(fontSize: 2.5.sp(context))),
             Text('[Time]', style: TextStyle(fontSize: 2.5.sp(context))),
             const ActionsButtons(),
           ],
@@ -67,7 +70,8 @@ class FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
         rows: [
           [
             Text('[Username]', style: TextStyle(fontSize: 2.5.sp(context))),
-            Text('[Online/Offline]', style: TextStyle(fontSize: 2.5.sp(context))),
+            Text('[Online/Offline]',
+                style: TextStyle(fontSize: 2.5.sp(context))),
             Text('[Time]', style: TextStyle(fontSize: 2.5.sp(context))),
             const ActionsButtons(),
           ],
@@ -91,7 +95,8 @@ class FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
         rows: [
           [
             Text('[Username]', style: TextStyle(fontSize: 2.5.sp(context))),
-            Text('[Online/Offline]', style: TextStyle(fontSize: 2.5.sp(context))),
+            Text('[Online/Offline]',
+                style: TextStyle(fontSize: 2.5.sp(context))),
             Text('[Time]', style: TextStyle(fontSize: 2.5.sp(context))),
             const ActionsButtons(),
           ],
@@ -161,7 +166,8 @@ class FriendsPopUpState extends State<FriendsPopUp> with AnimationMixin {
 
             //Container housing the tab buttons
             Padding(
-              padding: EdgeInsets.only(left: 1.5.w(context), right: 1.5.w(context), bottom: 10),
+              padding: EdgeInsets.only(
+                  left: 1.5.w(context), right: 1.5.w(context), bottom: 10),
               child: Container(
                 height: 6.h(context),
                 width: double.infinity,

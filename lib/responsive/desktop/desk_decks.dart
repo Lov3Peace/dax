@@ -117,7 +117,7 @@ class _DeckState extends State<Deck> {
                         style: GoogleFonts.montserrat(
                             height: 1.1,
                             textStyle: TextStyle(
-                                fontSize: 100.w(context) >= 1080
+                                fontSize: 100.w(context) >= 1920
                                     ? 6.25.sp(context)
                                     : 36),
                             fontWeight: FontWeight.w600),

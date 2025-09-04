@@ -109,12 +109,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             //   'rive/anime_girl.riv',
             //   fit: BoxFit.fill,
             // ),
-            SizedBox(
+            Container(
+              constraints: 100.w(context) >= 1439
+                  ? BoxConstraints(minHeight: 1100)
+                  : BoxConstraints(minHeight: 900, minWidth: 500),
               height: 100.h(context),
               width: 100.w(context),
               child: Image.asset(
                 "images/alex-pavor-T6kZsf30NW0-unsplash.jpg",
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
             // Main Container w/ Blur
@@ -122,7 +125,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               clipBehavior: Clip.hardEdge,
               width: 40.w(context),
               height: 100.h(context),
-              constraints: BoxConstraints(minHeight: 900, minWidth: 500),
+              constraints: 100.w(context) >= 3800
+                  ? BoxConstraints(minHeight: 1100)
+                  : BoxConstraints(minHeight: 900, minWidth: 500),
               padding:
                   EdgeInsets.only(left: 5.w(context), right: 10.w(context)),
               decoration: BoxDecoration(
@@ -160,7 +165,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      Container(
+                        constraints: BoxConstraints(minHeight: 20),
                         height: 10.sp(context),
                       ),
                       //Username
@@ -194,7 +200,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      Container(
+                        constraints: BoxConstraints(minHeight: 20),
                         height: 3.sp(context),
                       ),
 
@@ -245,7 +252,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5.sp(context)),
+                      Container(
+                        constraints: BoxConstraints(minHeight: 20),
+                        height: 5.sp(context),
+                      ),
 
                       //Row that contains rememeber me and Forgot Password button
                       Row(
@@ -315,7 +325,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       },
                                       pageBuilder: (context, _, __) => Center(
                                         child: Container(
-                                          height: 60.sp(context),
+                                          height: 60.h(context),
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(32)),
@@ -358,7 +368,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                       Padding(
                                                         padding:
                                                             EdgeInsets.only(
-                                                                top: 10),
+                                                                top: 1.h(
+                                                                    context)),
                                                         child: const Text(
                                                           "Forgot Password",
                                                           style: TextStyle(
@@ -374,7 +385,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                                       Padding(
                                                         padding: EdgeInsets
                                                             .symmetric(
-                                                                vertical: 2.sp(
+                                                                vertical: 2.h(
                                                                     context)),
                                                         child: const Text(
                                                           "Please enter your email linked to the account!",
@@ -411,7 +422,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      Container(
+                        constraints: BoxConstraints(minHeight: 20),
                         height: 12.sp(context),
                       ),
                       Padding(
@@ -438,7 +450,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 text: 'Launch',
                                 textSize: 2.sp(context),
                                 borderColor: tran,
-                                borderRadius: 5.sp(context),
+                                borderRadius: 5.w(context),
                               ),
                             ),
                             TactileButton(

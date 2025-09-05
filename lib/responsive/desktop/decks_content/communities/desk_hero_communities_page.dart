@@ -21,55 +21,21 @@ class _DeskHeroCommunitiesPageState extends State<DeskHeroCommunitiesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: WebUiTemplate(
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
-                // the padding on the LargeStagger list items)
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      0.5.w(context), 0, 0.5.w(context), 2.sp(context)),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      //
-                      // Title of Screen
-                      TitleBubble(
-                        deckName: 'Communities',
-                      ),
-
-                      //
-                      //Houses Deck Buttons
-                      BubbleDock(
-                          child1: ProjectsButton(),
-                          child2: SocialsButton(),
-                          child3: NewsButton()),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: LargeStaggerLoad(
-              widgets: comm_post_list,
-              scale: 1.02,
-              constraints: BoxConstraints(minHeight: 350),
-              childHeight: 250,
-              padding: EdgeInsets.all(0.5.w(context)),
-              // physics: const NeverScrollableScrollPhysics(),
-            ),
-          ),
-        ],
+      body: WebUiTemplate(
+        title: "Communities",
+        button1: ProjectsButton(),
+        button2: SocialsButton(),
+        button3: NewsButton(),
+        child: LargeStaggerLoad(
+          widgets: comm_post_list,
+          scale: 1.02,
+          constraints: BoxConstraints(minHeight: 350),
+          childHeight: 250,
+          childPadding: EdgeInsets.all(0.5.w(context)),
+          // physics: const NeverScrollableScrollPhysics(),
+        ),
       ),
-    ));
+    );
   }
 
   @override

@@ -32,7 +32,9 @@ class _GradientContainerState extends State<GradientContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(minHeight: 30),
+      constraints: 100.w(context) >= 2560
+          ? BoxConstraints(minHeight: 100)
+          : BoxConstraints(minHeight: 30),
       height: widget.height,
       width: widget.width,
       // padding: EdgeInsets.fromLTRB(widget.width, widget.height, widget.width, widget.height),

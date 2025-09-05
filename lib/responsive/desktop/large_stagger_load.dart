@@ -12,7 +12,8 @@ class LargeStaggerLoad extends StatefulWidget {
     required this.scale,
     required this.constraints,
     this.childWidth,
-    this.padding,
+    this.listPadding,
+    this.childPadding,
     this.physics,
   });
 
@@ -21,7 +22,8 @@ class LargeStaggerLoad extends StatefulWidget {
   final BoxConstraints constraints;
   final double? childWidth;
   final double childHeight;
-  final EdgeInsets? padding;
+  final EdgeInsets? listPadding;
+  final EdgeInsets? childPadding;
   final ScrollPhysics? physics;
 
   @override
@@ -43,6 +45,7 @@ class _LargeStaggerLoadState extends State<LargeStaggerLoad> {
     return ListView.builder(
       itemCount: ((widget.widgets.length / 2)).ceil(),
       controller: scrollController,
+      padding: widget.listPadding,
       itemBuilder: (context, index) => Container(
         // width: widget.childWidth,
         constraints: widget.constraints,
@@ -66,7 +69,7 @@ class _LargeStaggerLoadState extends State<LargeStaggerLoad> {
               : 300,
           scale: widget.scale,
           layer: 1,
-          padding: widget.padding,
+          padding: widget.childPadding,
           physics: widget.physics,
         ),
       ),

@@ -44,6 +44,10 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
         extendBodyBehindAppBar: true,
         extendBody: true,
         body: WebUiTemplate(
+          title: "Socials",
+          button1: ProjectsButton(),
+          button2: CommunitiesButton(),
+          button3: NewsButton(),
           //Column for Title, Dock Buttons, and Content
           child: Container(
             height: 80.h(context),

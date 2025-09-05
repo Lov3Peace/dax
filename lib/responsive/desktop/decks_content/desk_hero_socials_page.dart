@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +16,8 @@ class DeskHeroSocialsPage extends StatefulWidget {
   State<DeskHeroSocialsPage> createState() => _DeskHeroSocialsPageState();
 }
 
-class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with AnimationMixin {
+class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage>
+    with AnimationMixin {
   //globals
   late Animation<double> scale;
   late Animation<double> opacity;
@@ -38,56 +40,28 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage> with Animatio
   Widget build(BuildContext context) {
     return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
-          extendBodyBehindAppBar: true,
-          extendBody: true,
-          body: WebUiTemplate(
-            //Column for Title, Dock Buttons, and Content
-            child: Container(
-              height: 80.h(context),
-              width: 71.w(context),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      //
-                      // Title of Screen
-                      TitleBubble(
-                        deckName: 'Socials',
-                      ),
-
-                      //
-                      //Houses Deck Buttons
-                      Container(
-                        color: tran,
-                        child: const Column(
-                          children: [SocialsBubbleDock()],
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 1.h(context),
-                  ),
-                  Expanded(
-                    child: StaggerLoad(
-                      widgets: test_big_list,
-                      padding: EdgeInsets.all(0.5.w(context)),
-                      physics: const BouncingScrollPhysics(),
-                      duration: 300,
-                      scrollDirection: Axis.vertical,
-                      delay: 5,
-                      scale: 1.02,
-                      layer: 1,
-                    ),
-                  ),
-                ],
-              ),
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: WebUiTemplate(
+          title: "Socials",
+          button1: ProjectsButton(),
+          button2: CommunitiesButton(),
+          button3: NewsButton(),
+          //Column for Title, Dock Buttons, and Content
+          child: Expanded(
+            child: StaggerLoad(
+              widgets: test_big_list,
+              padding: EdgeInsets.all(0.5.w(context)),
+              physics: const BouncingScrollPhysics(),
+              duration: 300,
+              scrollDirection: Axis.vertical,
+              delay: 5,
+              scale: 1.02,
+              layer: 1,
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 

@@ -41,55 +41,27 @@ class _DeskCommunitiesPageState extends State<DeskCommunitiesPage>
   Widget build(BuildContext context) {
     return Consumer<ButtonState>(
       builder: (context, value, child) => Scaffold(
-          extendBodyBehindAppBar: true,
-          extendBody: true,
-          body: WebUiTemplate(
-            //Column for Title, Dock Buttons, and Content
-            child: Container(
-              height: 80.h(context),
-              width: 71.w(context),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      //
-                      // Title of Screen
-                      TitleBubble(
-                        deckName: 'Communities',
-                      ),
-
-                      //
-                      //Houses Deck Buttons
-                      Container(
-                        color: tran,
-                        child: const Column(
-                          children: [CommunitiesBubbleDock()],
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 1.h(context),
-                  ),
-                  Expanded(
-                    child: LargeStaggerLoad(
-                      widgets: test_big_list,
-                      scale: 1.02,
-                      constraints: BoxConstraints(minHeight: 350),
-                      childHeight: 50.h(context),
-                      childWidth: 35.w(context),
-                      padding: EdgeInsets.all(0.5.w(context)),
-                      physics: const NeverScrollableScrollPhysics(),
-                    ),
-                  ),
-                ],
-              ),
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        body: WebUiTemplate(
+          title: "Communities",
+          button1: ProjectsButton(),
+          button2: SocialsButton(),
+          button3: NewsButton(),
+          //Column for Title, Dock Buttons, and Content
+          child: Expanded(
+            child: LargeStaggerLoad(
+              widgets: test_big_list,
+              scale: 1.02,
+              constraints: BoxConstraints(minHeight: 350),
+              childHeight: 50.h(context),
+              childWidth: 35.w(context),
+              childPadding: EdgeInsets.all(0.5.w(context)),
+              physics: const NeverScrollableScrollPhysics(),
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 

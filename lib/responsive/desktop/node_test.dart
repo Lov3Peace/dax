@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:supercharged/supercharged.dart';
 import '../../util/imports.dart';
@@ -21,6 +22,10 @@ class NodeTest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WebUiTemplate(
+      title: "NodeTest",
+      button1: ProjectsButton(),
+      button2: CommunitiesButton(),
+      button3: SocialsButton(),
       child: Column(
         children: [
           Container(

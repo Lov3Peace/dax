@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
@@ -11,6 +12,10 @@ class ErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: WebUiTemplate(
+        title: "Error",
+        button1: ProjectsButton(),
+        button2: CommunitiesButton(),
+        button3: SocialsButton(),
         child: Center(
           child: Text(
             'Error: Page Not Found',

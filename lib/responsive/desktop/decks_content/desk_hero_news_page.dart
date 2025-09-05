@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -43,50 +44,21 @@ class _DeskHeroNewsPageState extends State<DeskHeroNewsPage>
         extendBodyBehindAppBar: true,
         extendBody: true,
         body: WebUiTemplate(
+          title: "News",
+          button1: ProjectsButton(),
+          button2: CommunitiesButton(),
+          button3: SocialsButton(),
           //Column for Title, Dock Buttons, and Content
-          child: Container(
-            height: 80.h(context),
-            width: 71.w(context),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //
-                    // Title of Screen
-                    TitleBubble(
-                      deckName: 'News',
-                    ),
-
-                    //
-                    //Houses Deck Buttons
-                    Container(
-                      color: tran,
-                      child: const Column(
-                        children: [NewsBubbleDock()],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h(context),
-                ),
-                Expanded(
-                  child: StaggerLoad(
-                    widgets: test_big_list,
-                    padding: EdgeInsets.all(0.5.w(context)),
-                    physics: const BouncingScrollPhysics(),
-                    duration: 300,
-                    scrollDirection: Axis.vertical,
-                    delay: 5,
-                    scale: 1.02,
-                    layer: 1,
-                  ),
-                ),
-              ],
+          child: Expanded(
+            child: StaggerLoad(
+              widgets: test_big_list,
+              padding: EdgeInsets.all(0.5.w(context)),
+              physics: const BouncingScrollPhysics(),
+              duration: 300,
+              scrollDirection: Axis.vertical,
+              delay: 5,
+              scale: 1.02,
+              layer: 1,
             ),
           ),
         ),

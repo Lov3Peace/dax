@@ -15,62 +15,18 @@ class DesktopProjectsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WebUiTemplate(
-        child: Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            // mainAxisSize: MainAxisSize.min,
-            children: [
-          Row(
-            children: [
-              Expanded(
-                // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
-                // the padding on the LargeStagger list items)
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      0.5.w(context), 0, 0.5.w(context), 0.5.w(context)),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      //
-                      // Title of Screen
-                      TitleBubble(
-                        deckName: 'Projects',
-                      ),
-
-                      //
-                      //Houses Deck Buttons
-                      BubbleDock(
-                          child1: ProjectsButton(),
-                          child2: SocialsButton(),
-                          child3: NewsButton()),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-              //
-              // Subtle fade out effect at the top of the page when scrolling
-              child: ShaderMask(
-            shaderCallback: (Rect rect) {
-              return const LinearGradient(
-                  // transform: GradientRotation(pi / 180),
-                  colors: [tran, white],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  stops: [0, 0.015]).createShader(rect);
-            },
-            child: LargeStaggerLoad(
-              widgets: projects,
-              scale: 1.02,
-              constraints: const BoxConstraints(minHeight: 450),
-              padding: EdgeInsets.all(0.25.w(context)),
-              childHeight: 52.h(context),
-              physics: NeverScrollableScrollPhysics(),
-            ),
-          ))
-        ]));
+      title: "Projects",
+      button1: CommunitiesButton(),
+      button2: SocialsButton(),
+      button3: NewsButton(),
+      child: LargeStaggerLoad(
+        widgets: projects,
+        scale: 1.02,
+        constraints: const BoxConstraints(minHeight: 450),
+        childPadding: EdgeInsets.all(0.25.w(context)),
+        childHeight: 52.h(context),
+        physics: NeverScrollableScrollPhysics(),
+      ),
+    );
   }
 }

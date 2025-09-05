@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
@@ -23,8 +24,19 @@ import '../messages.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class WebUiTemplate extends StatelessWidget {
-  const WebUiTemplate({Key? key, required this.child}) : super(key: key);
+  const WebUiTemplate(
+      {Key? key,
+      required this.child,
+      required this.title,
+      required this.button1,
+      required this.button2,
+      required this.button3})
+      : super(key: key);
   final Widget child;
+  final String title;
+  final Widget button1;
+  final Widget button2;
+  final Widget button3;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +75,61 @@ class WebUiTemplate extends StatelessWidget {
                                 : BoxConstraints(minHeight: 900),
                             //
                             // *** Content goes here ***
-                            child: child,
+                            child: Column(
+                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                // crossAxisAlignment: CrossAxisAlignment.center,
+                                // mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
+                                        // the padding on the LargeStagger list items)
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              0.5.w(context),
+                                              0,
+                                              0.5.w(context),
+                                              0.5.w(context)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              //
+                                              // Title of Screen
+                                              TitleBubble(
+                                                deckName: title,
+                                              ),
+
+                                              //
+                                              //Houses Deck Buttons
+                                              BubbleDock(
+                                                  child1: button1,
+                                                  child2: button2,
+                                                  child3: button3),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Expanded(
+                                      //
+                                      // Subtle fade out effect at the top of the page when scrolling
+                                      child: ShaderMask(
+                                    shaderCallback: (Rect rect) {
+                                      return const LinearGradient(
+                                          // transform: GradientRotation(pi / 180),
+                                          colors: [tran, white],
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          stops: [0, 0.015]).createShader(rect);
+                                    },
+                                    child: child,
+                                  ))
+                                ]),
                           ),
                         ),
                         //

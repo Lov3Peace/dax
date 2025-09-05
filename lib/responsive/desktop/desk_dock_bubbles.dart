@@ -27,63 +27,23 @@ class ProjectsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ButtonState>(
-      builder: (context, value, child) => Hero(
-        tag: value.projectsHeroTag,
-        flightShuttleBuilder: flightShuttleBuilder,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
-          child: TactileButton(
-            scale: 1.05,
-            onTap: () {
-              Future.delayed(const Duration(milliseconds: 100)).then((_) {
-                final heroOff = context.read<ButtonState>();
-                heroOff.heroOff();
-                print(value.socialsHeroTag);
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      animation = CurvedAnimation(
-                          parent: animation, curve: Curves.linear);
-                      return FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      );
-                    },
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      if (screenWidth < 550) {
-                        return MobProjectsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else if (screenWidth < 1100) {
-                        return TabProjectsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else {
-                        // ignore: prefer_const_constructors
-                        return DeskProjectsPage(
-                            //transitionAnimation: animation,
-                            );
-                      }
-                    },
-                    transitionDuration: const Duration(milliseconds: 200),
-                  ),
-                );
-              });
-            },
-            child: GradientContainer(
-              gradient1: red,
-              gradient2: purp,
-              height: 3.5.h(context),
-              width: 7.w(context),
-              neonGlow: red,
-              text: 'Projects',
-              textSize: 2.sp(context),
-              borderColor: const Color.fromARGB(0, 255, 255, 255),
-              borderRadius: 500,
-            ),
-          ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+      child: TactileButton(
+        scale: 1.05,
+        onTap: () {
+          Navigator.pushNamed(context, "/projects");
+        },
+        child: GradientContainer(
+          gradient1: red,
+          gradient2: purp,
+          height: 3.5.h(context),
+          width: 7.w(context),
+          neonGlow: red,
+          text: 'Projects',
+          textSize: 2.sp(context),
+          borderColor: const Color.fromARGB(0, 255, 255, 255),
+          borderRadius: 500,
         ),
       ),
     );
@@ -97,63 +57,23 @@ class NewsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ButtonState>(
-      builder: (context, value, child) => Hero(
-        tag: value.newsHeroTag,
-        flightShuttleBuilder: flightShuttleBuilder,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
-          child: TactileButton(
-            scale: 1.05,
-            onTap: () {
-              Future.delayed(const Duration(milliseconds: 100)).then((_) {
-                final heroOff = context.read<ButtonState>();
-                heroOff.heroOff();
-                print(value.socialsHeroTag);
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      animation = CurvedAnimation(
-                          parent: animation, curve: Curves.linear);
-                      return FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      );
-                    },
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      if (screenWidth < 550) {
-                        return MobNewsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else if (screenWidth < 1100) {
-                        return TabNewsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else {
-                        // ignore: prefer_const_constructors
-                        return DeskNewsPage(
-                            //transitionAnimation: animation,
-                            );
-                      }
-                    },
-                    transitionDuration: const Duration(milliseconds: 200),
-                  ),
-                );
-              });
-            },
-            child: GradientContainer(
-              gradient1: blue,
-              gradient2: purp,
-              height: 3.5.h(context),
-              width: 7.w(context),
-              neonGlow: blue,
-              text: 'News',
-              textSize: 2.sp(context),
-              borderColor: const Color.fromARGB(0, 255, 255, 255),
-              borderRadius: 500,
-            ),
-          ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+      child: TactileButton(
+        scale: 1.05,
+        onTap: () {
+          Navigator.pushNamed(context, "/news");
+        },
+        child: GradientContainer(
+          gradient1: blue,
+          gradient2: purp,
+          height: 3.5.h(context),
+          width: 7.w(context),
+          neonGlow: blue,
+          text: 'News',
+          textSize: 2.sp(context),
+          borderColor: const Color.fromARGB(0, 255, 255, 255),
+          borderRadius: 500,
         ),
       ),
     );
@@ -167,62 +87,23 @@ class CommunitiesButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ButtonState>(
-      builder: (context, value, child) => Hero(
-        tag: value.communityHeroTag,
-        flightShuttleBuilder: flightShuttleBuilder,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
-          child: TactileButton(
-            scale: 1.05,
-            onTap: () {
-              Future.delayed(const Duration(milliseconds: 100)).then((_) {
-                final heroOff = context.read<ButtonState>();
-                heroOff.heroOff();
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      animation = CurvedAnimation(
-                          parent: animation, curve: Curves.linear);
-                      return FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      );
-                    },
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      if (screenWidth < 550) {
-                        return MobFinancePage(
-                          transitionAnimation: animation,
-                        );
-                      } else if (screenWidth < 1100) {
-                        return TabFinancePage(
-                          transitionAnimation: animation,
-                        );
-                      } else {
-                        // ignore: prefer_const_constructors
-                        return DeskCommunitiesPage(
-                            //transitionAnimation: animation,
-                            );
-                      }
-                    },
-                    transitionDuration: const Duration(milliseconds: 200),
-                  ),
-                );
-              });
-            },
-            child: GradientContainer(
-              gradient1: red,
-              gradient2: orange,
-              height: 3.5.h(context),
-              width: 7.w(context),
-              neonGlow: orangeGlow,
-              text: 'Communities',
-              textSize: 2.sp(context),
-              borderColor: const Color.fromARGB(0, 255, 255, 255),
-              borderRadius: 500,
-            ),
-          ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+      child: TactileButton(
+        scale: 1.05,
+        onTap: () {
+          Navigator.pushNamed(context, "/communities");
+        },
+        child: GradientContainer(
+          gradient1: red,
+          gradient2: orange,
+          height: 3.5.h(context),
+          width: 7.w(context),
+          neonGlow: orangeGlow,
+          text: 'Communities',
+          textSize: 2.sp(context),
+          borderColor: const Color.fromARGB(0, 255, 255, 255),
+          borderRadius: 500,
         ),
       ),
     );
@@ -236,63 +117,23 @@ class SocialsButton extends StatelessWidget {
   get socsTag => ButtonState().socialsHeroTag;
   @override
   Widget build(BuildContext context) {
-    return Consumer<ButtonState>(
-      builder: (context, value, child) => Hero(
-        tag: value.socialsHeroTag,
-        flightShuttleBuilder: flightShuttleBuilder,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
-          child: TactileButton(
-            scale: 1.05,
-            onTap: () {
-              Future.delayed(const Duration(milliseconds: 100)).then((_) {
-                final heroOff = context.read<ButtonState>();
-                heroOff.heroOff();
-                print(value.socialsHeroTag);
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                      animation = CurvedAnimation(
-                          parent: animation, curve: Curves.linear);
-                      return FadeTransition(
-                        opacity: animation,
-                        child: child,
-                      );
-                    },
-                    pageBuilder: (context, animation, secondaryAnimation) {
-                      if (screenWidth < 550) {
-                        return MobSocialsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else if (screenWidth < 1100) {
-                        return TabSocialsPage(
-                          transitionAnimation: animation,
-                        );
-                      } else {
-                        // ignore: prefer_const_constructors
-                        return DeskSocialsPage(
-                            //transitionAnimation: animation,
-                            );
-                      }
-                    },
-                    transitionDuration: const Duration(milliseconds: 200),
-                  ),
-                );
-              });
-            },
-            child: GradientContainer(
-              gradient1: orange,
-              gradient2: purp,
-              height: 3.5.h(context),
-              width: 7.w(context),
-              neonGlow: orangeGlow,
-              text: 'Socials',
-              textSize: 2.sp(context),
-              borderColor: const Color.fromARGB(0, 255, 255, 255),
-              borderRadius: 500,
-            ),
-          ),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 0.5.w(context)),
+      child: TactileButton(
+        scale: 1.05,
+        onTap: () {
+          Navigator.pushNamed(context, "/socials");
+        },
+        child: GradientContainer(
+          gradient1: orange,
+          gradient2: purp,
+          height: 3.5.h(context),
+          width: 7.w(context),
+          neonGlow: orangeGlow,
+          text: 'Socials',
+          textSize: 2.sp(context),
+          borderColor: const Color.fromARGB(0, 255, 255, 255),
+          borderRadius: 500,
         ),
       ),
     );

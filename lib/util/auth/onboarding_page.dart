@@ -110,7 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             //   fit: BoxFit.fill,
             // ),
             Container(
-              constraints: 100.w(context) >= 1439
+              constraints: 100.w(context) >= 3800
                   ? BoxConstraints(minHeight: 1100)
                   : BoxConstraints(minHeight: 900, minWidth: 500),
               height: 100.h(context),

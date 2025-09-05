@@ -84,7 +84,9 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
         child: Container(
           height: 100.h(context),
           width: 100.w(context),
-          constraints: BoxConstraints(minHeight: 900),
+          constraints: 100.w(context) > 2560
+              ? BoxConstraints(minHeight: 1440)
+              : BoxConstraints(minHeight: 900),
           child: Stack(
             children: [
               // Background(),
@@ -96,7 +98,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                   Container(
                     height: 90.h(context),
                     // width: 87.5.w(context),
-                    constraints: 100.w(context) > 1920
+                    constraints: 100.w(context) > 2560
                         ? BoxConstraints(minHeight: 1440)
                         : BoxConstraints(minHeight: 900),
                     //

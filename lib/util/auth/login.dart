@@ -70,7 +70,7 @@ Future login(username, password, rememberMe, context, mounted) async {
             );
           });
       Future.delayed(Duration(seconds: 2),
-          () => Navigator.pushReplacementNamed(context, "/dev"));
+          () => Navigator.pushReplacementNamed(context, "/"));
 
       var loggedIn = userAuthProvider.isLoggedIn;
       print("Logged In: $loggedIn");

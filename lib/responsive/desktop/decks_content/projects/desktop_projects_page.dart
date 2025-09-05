@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_application_1/responsive/desktop/dashboard/title_bubble.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectCategoryCard.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
@@ -49,15 +51,26 @@ class DesktopProjectsPage extends StatelessWidget {
             ],
           ),
           Expanded(
+              //
+              // Subtle fade out effect at the top of the page when scrolling
+              child: ShaderMask(
+            shaderCallback: (Rect rect) {
+              return const LinearGradient(
+                  // transform: GradientRotation(pi / 180),
+                  colors: [tran, white],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  stops: [0, 0.015]).createShader(rect);
+            },
             child: LargeStaggerLoad(
               widgets: projects,
               scale: 1.02,
               constraints: const BoxConstraints(minHeight: 450),
               padding: EdgeInsets.all(0.25.w(context)),
-              childHeight: 54.h(context),
+              childHeight: 52.h(context),
               physics: NeverScrollableScrollPhysics(),
             ),
-          )
+          ))
         ]));
   }
 }

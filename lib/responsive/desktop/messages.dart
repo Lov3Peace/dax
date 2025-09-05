@@ -16,8 +16,8 @@ class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: 100.w(context) > 1920
-          ? BoxConstraints(minHeight: 710, minWidth: 100)
+      constraints: 100.w(context) > 2560
+          ? BoxConstraints(minHeight: 900, minWidth: 100)
           : BoxConstraints(minHeight: 450, minWidth: 100),
       // margin: EdgeInsets.all(1.w(context)),
       decoration: BoxDecoration(

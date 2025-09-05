@@ -45,7 +45,9 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
         child: Container(
           width: 12.5.w(context),
           height: 100.h(context),
-          constraints: BoxConstraints(minHeight: 950),
+          constraints: 100.w(context) > 2560
+              ? BoxConstraints(minHeight: 1440)
+              : BoxConstraints(minHeight: 900),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               color: const Color.fromARGB(185, 21, 19, 22),

@@ -38,29 +38,21 @@ class _DeskHeroSocialsPageState extends State<DeskHeroSocialsPage>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ButtonState>(
-      builder: (context, value, child) => Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        body: WebUiTemplate(
-          title: "Socials",
-          button1: ProjectsButton(),
-          button2: CommunitiesButton(),
-          button3: NewsButton(),
-          //Column for Title, Dock Buttons, and Content
-          child: Expanded(
-            child: StaggerLoad(
-              widgets: test_big_list,
-              padding: EdgeInsets.all(0.5.w(context)),
-              physics: const BouncingScrollPhysics(),
-              duration: 300,
-              scrollDirection: Axis.vertical,
-              delay: 5,
-              scale: 1.02,
-              layer: 1,
-            ),
-          ),
-        ),
+    return WebUiTemplate(
+      title: "Socials",
+      button1: ProjectsButton(),
+      button2: CommunitiesButton(),
+      button3: NewsButton(),
+      //Column for Title, Dock Buttons, and Content
+      child: StaggerLoad(
+        widgets: test_big_list,
+        padding: EdgeInsets.all(0.5.w(context)),
+        physics: const BouncingScrollPhysics(),
+        duration: 300,
+        scrollDirection: Axis.vertical,
+        delay: 35,
+        scale: 1.02,
+        layer: 1,
       ),
     );
   }

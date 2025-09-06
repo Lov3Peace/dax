@@ -42,125 +42,112 @@ class WebUiTemplate extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      body: CustomScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          slivers: [
-            SliverToBoxAdapter(
-              child: Container(
-                height: 100.h(context),
-                width: 100.w(context),
-                constraints: 100.w(context) > 1920
-                    ? BoxConstraints(minHeight: 1440)
-                    : BoxConstraints(minHeight: 900),
-                child: Stack(
-                  children: [
-                    // Background(),
-                    ArtBoardScreen(),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+      body: Container(
+        height: 100.h(context),
+        width: 100.w(context),
+        constraints: 100.w(context) > 2560
+            ? BoxConstraints(minHeight: 1440)
+            : BoxConstraints(minHeight: 900),
+        child: Stack(
+          children: [
+            // Background(),
+            ArtBoardScreen(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                //
+                // Side Panel
+                DesktopSidePanel(),
+                //
+                // Content
+                Container(
+                  height: 100.h(context),
+                  width: 72.5.w(context),
+                  constraints: 100.w(context) > 2560
+                      ? BoxConstraints(minHeight: 1440)
+                      : BoxConstraints(minHeight: 900),
+                  child: Stack(
                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      // mainAxisSize: MainAxisSize.min,
                       children: [
-                        //
-                        // Side Panel
-                        DesktopSidePanel(),
-                        //
-                        // Content
-                        Padding(
-                          padding: EdgeInsets.only(top: 1.w(context)),
-                          child: Container(
-                            height: 100.h(context),
-                            width: 72.5.w(context),
-                            constraints: 100.w(context) > 1920
-                                ? BoxConstraints(minHeight: 1440)
-                                : BoxConstraints(minHeight: 900),
-                            //
-                            // *** Content goes here ***
-                            child: Column(
-                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                // crossAxisAlignment: CrossAxisAlignment.center,
-                                // mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
-                                        // the padding on the LargeStagger list items)
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              0.5.w(context),
-                                              0,
-                                              0.5.w(context),
-                                              0.5.w(context)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              //
-                                              // Title of Screen
-                                              TitleBubble(
-                                                deckName: title,
-                                              ),
-
-                                              //
-                                              //Houses Deck Buttons
-                                              BubbleDock(
-                                                  child1: button1,
-                                                  child2: button2,
-                                                  child3: button3),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Expanded(
-                                      //
-                                      // Subtle fade out effect at the top of the page when scrolling
-                                      child: ShaderMask(
-                                    shaderCallback: (Rect rect) {
-                                      return const LinearGradient(
-                                          // transform: GradientRotation(pi / 180),
-                                          colors: [tran, white],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          stops: [0, 0.015]).createShader(rect);
-                                    },
-                                    child: child,
-                                  ))
-                                ]),
-                          ),
+                        ShaderMask(
+                          shaderCallback: (Rect rect) {
+                            return const LinearGradient(
+                              // transform: GradientRotation(pi / 180),
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [tran, white],
+                              stops: [0.09, 0.11],
+                            ).createShader(rect);
+                          },
+                          //
+                          // *** Content goes here ***
+                          child: child,
                         ),
-                        //
-                        // Messages
-                        Align(
-                          // alignment: Alignment.topRight,
-                          child: Padding(
-                            padding:
-                                EdgeInsets.symmetric(vertical: 1.w(context)),
-                            child: Container(
-                              // height: 90.h(context),
-                              constraints: 100.w(context) > 1920
-                                  ? BoxConstraints(minHeight: 1440)
-                                  : BoxConstraints(minHeight: 900),
-                              child: Messages(),
+                        Row(
+                          children: [
+                            Expanded(
+                              // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
+                              // the padding on the LargeStagger list items)
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    0.5.w(context),
+                                    1.w(context),
+                                    0.5.w(context),
+                                    0.5.w(context)),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    //
+                                    // Title of Screen
+                                    TitleBubble(
+                                      deckName: title,
+                                    ),
+
+                                    //
+                                    //Houses Deck Buttons
+                                    BubbleDock(
+                                        child1: button1,
+                                        child2: button2,
+                                        child3: button3),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-
-                    // Positioned.fill(
-                    //   child: BackdropFilter(
-                    //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                    //       child:  SizedBox()),
-                    // ),
-                  ],
+                      ]),
                 ),
-              ),
+                //
+                // Messages
+                Align(
+                  // alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 1.w(context)),
+                    child: Container(
+                      // height: 90.h(context),
+                      constraints: 100.w(context) > 1920
+                          ? BoxConstraints(minHeight: 1440)
+                          : BoxConstraints(minHeight: 900),
+                      child: Messages(),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ]),
+
+            // Positioned.fill(
+            //   child: BackdropFilter(
+            //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+            //       child:  SizedBox()),
+            // ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -23,6 +23,7 @@ class DesktopProjectsPage extends StatelessWidget {
         widgets: projects,
         scale: 1.02,
         constraints: const BoxConstraints(minHeight: 450),
+        listPadding: EdgeInsets.only(top: 10.h(context)),
         childPadding: EdgeInsets.all(0.25.w(context)),
         childHeight: 52.h(context),
         physics: NeverScrollableScrollPhysics(),

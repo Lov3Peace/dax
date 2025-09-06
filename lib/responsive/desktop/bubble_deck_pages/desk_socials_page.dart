@@ -82,7 +82,7 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                 Expanded(
                   child: StaggerLoad(
                     widgets: test_big_list,
-                    padding: EdgeInsets.all(0.5.w(context)),
+                    childPadding: EdgeInsets.all(0.5.w(context)),
                     physics: const BouncingScrollPhysics(),
                     duration: 300,
                     scrollDirection: Axis.vertical,

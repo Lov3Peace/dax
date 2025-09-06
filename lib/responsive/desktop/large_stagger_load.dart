@@ -69,7 +69,7 @@ class _LargeStaggerLoadState extends State<LargeStaggerLoad> {
               : 300,
           scale: widget.scale,
           layer: 1,
-          padding: widget.childPadding,
+          childPadding: widget.childPadding,
           physics: widget.physics,
         ),
       ),

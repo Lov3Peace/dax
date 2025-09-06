@@ -123,7 +123,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                         scrollDirection: Axis.horizontal,
                                         duration: 200,
                                         delay: 75,
-                                        padding:
+                                        childPadding:
                                             EdgeInsets.all(0.25.w(context)),
                                         widgets: [
                                           //
@@ -164,7 +164,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                         scrollDirection: Axis.horizontal,
                                         duration: 200,
                                         delay: 75,
-                                        padding:
+                                        childPadding:
                                             EdgeInsets.all(0.25.w(context)),
                                         widgets: [
                                           SocialsDeck(),

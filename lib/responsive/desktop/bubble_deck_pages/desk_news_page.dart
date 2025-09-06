@@ -53,7 +53,7 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
           child: Expanded(
             child: StaggerLoad(
               widgets: test_big_list,
-              padding: EdgeInsets.all(0.5.w(context)),
+              childPadding: EdgeInsets.all(0.5.w(context)),
               physics: const BouncingScrollPhysics(),
               duration: 300,
               scrollDirection: Axis.vertical,

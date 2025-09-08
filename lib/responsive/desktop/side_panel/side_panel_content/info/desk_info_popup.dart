@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_dock_button_templates/sp_card_template.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../../desk_decks.dart';
 import 'info_side_panel.dart';
@@ -142,14 +142,16 @@ class _InfoPopUpState extends State<InfoPopUp> {
                       Container(
                         height: 70.h(context),
                         width: 14.w(context),
-                        constraints: const BoxConstraints(maxWidth: 500, minHeight: 250),
+                        constraints:
+                            const BoxConstraints(maxWidth: 500, minHeight: 250),
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(70, 32, 32, 40),
                           borderRadius: const BorderRadius.all(
                             Radius.circular(20),
                           ),
                           border: Border.all(
-                            color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                            color: const Color.fromARGB(18, 255, 255,
+                                255), // ← change this to any color you want
                             width: 1.5, // ← adjust thickness
                           ),
                         ),
@@ -178,7 +180,8 @@ class _InfoPopUpState extends State<InfoPopUp> {
                         Radius.circular(20),
                       ),
                       border: Border.all(
-                        color: const Color.fromARGB(18, 255, 255, 255), // ← change this to any color you want
+                        color: const Color.fromARGB(18, 255, 255,
+                            255), // ← change this to any color you want
                         width: 1.5, // ← adjust thickness
                       ),
                     ),

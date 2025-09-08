@@ -79,7 +79,7 @@ class _DeckState extends State<Deck> {
         color: Colors.transparent,
         height: widget.deckHeight,
         width: widget.deckWidth,
-        constraints: const BoxConstraints(minWidth: 250),
+        // constraints: const BoxConstraints(minWidth: 250),
 
         //Blur
         child: Stack(
@@ -95,29 +95,33 @@ class _DeckState extends State<Deck> {
                 color: deckColor,
                 border: Border.all(color: deckBorderColor),
               ),
-              constraints: const BoxConstraints(minHeight: 500, minWidth: 700),
+              // constraints: const BoxConstraints(minHeight: 500, minWidth: 700),
             ),
 
             //Heading and Subheading Text
-            Positioned(
-              left: 0,
-              top: 20,
+            Align(
+              alignment: Alignment.topLeft,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Heading Text
-                  Container(
-                    constraints: BoxConstraints(),
-                    margin: EdgeInsets.fromLTRB(2.w(context),
-                        widget.deckHeight * 0.12, 2.w(context), 0),
-                    width: widget.textConstraint,
-                    child: Text(
-                      widget.headingText,
-                      softWrap: true,
-                      style: GoogleFonts.montserrat(
-                          height: 1.1,
-                          textStyle: TextStyle(fontSize: headerTextSize),
-                          fontWeight: FontWeight.w600),
+                  Flexible(
+                    child: Container(
+                      constraints: BoxConstraints(),
+                      padding: EdgeInsets.fromLTRB(2.w(context),
+                          widget.deckHeight * 0.12, 2.w(context), 0),
+                      width: widget.textConstraint,
+                      child: Text(
+                        widget.headingText,
+                        softWrap: true,
+                        style: GoogleFonts.montserrat(
+                            height: 1.1,
+                            textStyle: TextStyle(
+                                fontSize: 100.w(context) >= 1920
+                                    ? 6.25.sp(context)
+                                    : 36),
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                   // Subheading Text
@@ -130,7 +134,9 @@ class _DeckState extends State<Deck> {
                       widget.subText,
                       softWrap: true,
                       style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(fontSize: subTextSize),
+                          textStyle: TextStyle(
+                              fontSize:
+                                  100.w(context) >= 1920 ? 3.sp(context) : 16),
                           fontWeight: FontWeight.w400),
                     ),
                   )

@@ -23,8 +23,8 @@ import '../messages.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
-class WebUiTemplate extends StatelessWidget {
-  const WebUiTemplate(
+class TestWebUiTemplate extends StatelessWidget {
+  const TestWebUiTemplate(
       {Key? key,
       required this.child,
       required this.title,

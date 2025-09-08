@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_dock_button_templates/sp_card_template.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/wallet/field_dropdown.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/wallet/field_dropdown.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';

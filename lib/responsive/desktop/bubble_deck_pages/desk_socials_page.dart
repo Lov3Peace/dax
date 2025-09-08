@@ -44,6 +44,10 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
         extendBodyBehindAppBar: true,
         extendBody: true,
         body: WebUiTemplate(
+          title: "Socials",
+          button1: ProjectsButton(),
+          button2: CommunitiesButton(),
+          button3: NewsButton(),
           //Column for Title, Dock Buttons, and Content
           child: Container(
             height: 80.h(context),
@@ -78,7 +82,7 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                 Expanded(
                   child: StaggerLoad(
                     widgets: test_big_list,
-                    padding: EdgeInsets.all(0.5.w(context)),
+                    childPadding: EdgeInsets.all(0.5.w(context)),
                     physics: const BouncingScrollPhysics(),
                     duration: 300,
                     scrollDirection: Axis.vertical,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_sp/desk_dock_buttons/desk_dock_button_templates/toc_template.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/toc_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 
 class InfoSidePanel extends StatelessWidget {
@@ -24,13 +24,22 @@ class InfoSidePanel extends StatelessWidget {
         children: [
           Text(
             'Table of Contents :',
-            style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline, fontSize: 3.sp(context)),
+            style: TextStyle(
+                color: Colors.white70,
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                fontSize: 3.sp(context)),
           ),
           SizedBox(height: 1.h(context)),
           TableofContentsTemplate(
             currentIndex: currentIndex,
             onTap: onTap,
-            labels: const ['About Us', 'Contact Us', 'Goals', 'Terms & Conditions'],
+            labels: const [
+              'About Us',
+              'Contact Us',
+              'Goals',
+              'Terms & Conditions'
+            ],
             spacing: 1.h(context),
             activeWidth: 13.w(context),
             inactiveWidth: 9.w(context),

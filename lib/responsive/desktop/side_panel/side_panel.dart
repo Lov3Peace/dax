@@ -8,13 +8,13 @@ import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 import '../desk_decks.dart';
-import 'desk_dock_buttons/connections/desk_connections_popup.dart';
-import 'desk_dock_buttons/desk_home_button.dart';
-import 'desk_dock_buttons/help/desk_help_popup.dart';
-import 'desk_dock_buttons/info/desk_info_popup.dart';
-import 'desk_dock_buttons/settings/desk_settings_popup.dart';
-import 'desk_dock_buttons/desk_dock_button_templates/sp_button_template.dart';
-import 'desk_dock_buttons/wallet/desk_wallet_popup.dart';
+import 'side_panel_content/connections/desk_connections_popup.dart';
+import 'side_panel_content/desk_home_button.dart';
+import 'side_panel_content/help/desk_help_popup.dart';
+import 'side_panel_content/info/desk_info_popup.dart';
+import 'side_panel_content/settings/desk_settings_popup.dart';
+import 'side_panel_content/desk_dock_button_templates/sp_button_template.dart';
+import 'side_panel_content/wallet/desk_wallet_popup.dart';
 
 class DesktopSidePanel extends StatefulWidget {
   DesktopSidePanel({
@@ -45,7 +45,9 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
         child: Container(
           width: 12.5.w(context),
           height: 100.h(context),
-          constraints: BoxConstraints(minHeight: 950),
+          constraints: 100.w(context) > 2560
+              ? BoxConstraints(minHeight: 1440)
+              : BoxConstraints(minHeight: 900),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               color: const Color.fromARGB(185, 21, 19, 22),
@@ -123,7 +125,7 @@ class SidePanelButtons extends StatelessWidget {
         SpButtonTemplate(
           icon: Icons.person,
           deskButtonText: 'Connections',
-          child: FriendsPopUp(),
+          child: ConnectionsPopUp(),
         ),
         SpButtonTemplate(
           icon: Icons.settings,

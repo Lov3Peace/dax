@@ -35,14 +35,7 @@ export const register = async (req, res) => {
         .json(`User already exists. Please enter a unique username.`);
     }
     const hashedPw = await bcrypt.hash(req.body.password, 10);
-    // const newUser = new User({
-    //   username: req.body.username,
-    //   password: hashedPw,
-    //   email: req.body.email,
-    //   isAdmin: req.body.isAdmin,
-    //   rememberMe: req.body.rememberme,
-    // });
-    // await newUser.save();
+
     const newUser = await User.create({
       username: req.body.username,
       password: hashedPw,

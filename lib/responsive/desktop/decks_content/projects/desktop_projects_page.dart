@@ -59,8 +59,8 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
         widgets: projects,
         scale: 1.02,
         constraints: const BoxConstraints(minHeight: 450),
-        listPadding: EdgeInsets.fromLTRB(
-            0.5.w(context), 10.h(context), 0.5.w(context), 0),
+        listPadding:
+            EdgeInsets.fromLTRB(0.5.w(context), 100, 0.5.w(context), 0),
         childPadding: EdgeInsets.all(0.25.w(context)),
         childHeight: 52.h(context),
         physics: const NeverScrollableScrollPhysics(),

@@ -1,17 +1,9 @@
 import mongoose from "mongoose";
 
-const projectCatSchema = new mongoose.Schema({
-    category: { type: String, required: true },
-    subHeading: { type: String, required: false },
-    image: { type: Image, required: false }
+const projectCategoriesSchema = new mongoose.Schema({
+  category: { type: String, required: true },
+  description: { type: String, required: true },
+  image: { type: String, required: true },
 });
 
-const projectPostSchema = new mongoose.Schema({
-    category: { type: String, required: true },
-    description: { type: String, required: true },
-    images: { type: Image, required: false }
-});
-const projectsSchemalList = []
-projectsSchemaList.push(mongoose.model("projectsCatSchema", projectPostSchema));
-
-export default projectsSchemalList;
+export default mongoose.model("projectCategorie", projectCategoriesSchema);

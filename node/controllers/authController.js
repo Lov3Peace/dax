@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import User from "../storage/models/user.js";
 // Logger for info, debug, errors, etc.
 import { errorLog, infoLog } from "../log.js";
 import bcrypt from "bcrypt";
@@ -86,7 +86,6 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     console.log("Login Endpoint Hit!");
-    // debugger;
     const { username, password } = req.body;
     const rememberMe = req.headers.rememberme;
 
@@ -111,7 +110,6 @@ export const login = async (req, res) => {
           { algorithm: "RS256", expiresIn: "1m" },
         );
         // const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
-        debugger;
 
         res.cookie("token", token, {
           httpOnly: true,
@@ -151,7 +149,6 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    debugger;
     console.log("trying to log out");
     const cookies = req.cookies;
     const username = cookies.username;
@@ -176,7 +173,6 @@ export const logout = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    // debugger;
     // const inputUsername = req.body.username;
     // const inputPW = req.body.password;
     const { username, password } = req.body;
@@ -203,7 +199,6 @@ export const deleteUser = async (req, res) => {
 };
 
 export const changeUsername = async (req, res) => {
-  // debugger;
   const { username, password, newUsername } = req.body;
   try {
     const user = await userCheck(req, res);

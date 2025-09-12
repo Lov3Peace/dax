@@ -5,5 +5,7 @@ const projectCategoriesSchema = new mongoose.Schema({
   description: { type: String, required: true },
   image: { type: String, required: true },
 });
-
-export default mongoose.model("projectCategorie", projectCategoriesSchema);
+// doing mongoose.model() creates the collection in the database as soon as
+// the server is restarted (it will make the name all lowercase in the db and
+// add an 's' at the end lol)
+export default mongoose.model("projectCategories", projectCategoriesSchema);

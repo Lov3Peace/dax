@@ -25,6 +25,7 @@ const userCheck = async (req, res) => {
 const thirtyDays = 30 * 24 * 60 * 60 * 1000;
 
 export const register = async (req, res) => {
+  debugger;
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -34,18 +35,27 @@ export const register = async (req, res) => {
         .json(`User already exists. Please enter a unique username.`);
     }
     const hashedPw = await bcrypt.hash(req.body.password, 10);
-    const newUser = new User({
+    // const newUser = new User({
+    //   username: req.body.username,
+    //   password: hashedPw,
+    //   email: req.body.email,
+    //   isAdmin: req.body.isAdmin,
+    //   rememberMe: req.body.rememberme,
+    // });
+    // await newUser.save();
+    const newUser = await User.create({
       username: req.body.username,
       password: hashedPw,
       email: req.body.email,
       isAdmin: req.body.isAdmin,
       rememberMe: req.body.rememberme,
     });
+
     const token = jwt.sign(
       {
         _id: newUser._id,
         username: newUser.username,
-        role: newUser.roles,
+        roles: newUser.roles,
         isAdmin: newUser.isAdmin,
         rememberMe: newUser.rememberMe,
       },
@@ -70,13 +80,14 @@ export const register = async (req, res) => {
       secure: true,
       maxAge: `${thirtyDays}`,
     });
+
+    res.setHeader("Authorization", token);
     // Tries to save a newUser to the db and returns the
     // response in JSON format with the 201 status code.
     // If it fails then return status code of 500 and
     // the error in JSON format
-    const savedUser = await newUser.save();
-    infoLog.info(`User ${savedUser.username} Account Created Successfully`);
-    return res.status(201).json({ username: savedUser.username, token: token });
+    infoLog.info(`User ${newUser.username} Account Created Successfully`);
+    return res.status(201).json({ username: newUser.username, token: token });
   } catch (error) {
     errorLog.error("error", error);
     return res.status(500).json(error);
@@ -102,7 +113,7 @@ export const login = async (req, res) => {
           {
             _id: user._id,
             username: user.username,
-            role: user.roles,
+            roles: user.roles,
             isAdmin: user.isAdmin,
             rememberMe: user.rememberMe,
           },

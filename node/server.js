@@ -4,7 +4,10 @@ import dotenv from "dotenv";
 import https from "https";
 import fs from "fs";
 import { minioClient } from "./clients/minio.js";
-import { getProjectsCategoryAssets } from "./controllers/projectsController.js";
+import {
+  getProjectsCategoryAssets,
+  updateProjectCategoriesCollection,
+} from "./controllers/projectsController.js";
 
 // used for env variables
 dotenv.config();
@@ -23,6 +26,7 @@ https
     console.log(`Dax Server Started with HTTPS on port: ${port}`),
   );
 
+updateProjectCategoriesCollection();
 // app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 
 // mongoose.connect(process.env.DB_CONN)

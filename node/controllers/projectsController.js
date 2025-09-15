@@ -21,6 +21,21 @@ export const updateProjectCategoriesCollection = async function () {
     true,
   );
   bucketStream.on("data", function (obj) {
-    console.log(obj);
+    const fileExtReg = /\.\w+/;
+    let category = obj.name
+      .replace("-", " ")
+      .replace("images/", "")
+      .replace(fileExtReg, "");
+    let capList = [];
+    const catSplit = category.split(" ");
+    catSplit.forEach(function (word) {
+      const w = word.charAt(0).toUpperCase().concat(word.slice(1));
+      capList.push(w);
+    });
+    let capWord;
+    capList.forEach(function (word) {
+      capWord = capList.join(" ");
+    });
+    console.log(capWord);
   });
 };

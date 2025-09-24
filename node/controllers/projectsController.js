@@ -6,8 +6,6 @@ export const getProjectsCategoryAssets = async (req, res) => {
   // debugger;
   // *ModelName*.find({}) returns all objects in the collection
   const categories = await ProjectCategories.find({});
-  console.log(categories);
-
   if (!categories) {
     return res.status(404).json("No categories found");
   }
@@ -15,12 +13,13 @@ export const getProjectsCategoryAssets = async (req, res) => {
 };
 
 export const updateProjectCategoriesCollection = async function () {
+  const categories = await ProjectCategories.find({});
   const bucketStream = minioClient.listObjectsV2(
     "carbon-assets",
     "images",
     true,
   );
-  bucketStream.on("data", function (obj) {
+  bucketStream.on("data", async function (obj) {
     const fileExtReg = /\.\w+/;
     let category = obj.name
       .replace("-", " ")
@@ -33,9 +32,17 @@ export const updateProjectCategoriesCollection = async function () {
       capList.push(w);
     });
     let capWord;
-    capList.forEach(function (word) {
+    capList.forEach(function () {
       capWord = capList.join(" ");
     });
-    console.log(capWord);
+    // console.log(categories);
+    if ((await ProjectCategories.find({ category: capWord })) < 1) {
+      const newCategory = await ProjectCategories.create({
+        category: capWord,
+        description: " ",
+        image: obj.name,
+      });
+      console.log(capWord);
+    }
   });
 };

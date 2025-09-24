@@ -21,7 +21,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
       Uri.parse("https://localhost:7777/api/projectsCategoryAssets");
 
   // final cdnBaseUrl = "https://assets.crbn.cx/carbon-assets/images/";
-  final cdnBaseUrl = "http://10.7.77.10:8010/carbon-assets/images/";
+  final cdnBaseUrl = "http://10.7.77.10:8010/carbon-assets/";
   var projects = [];
 
   @override

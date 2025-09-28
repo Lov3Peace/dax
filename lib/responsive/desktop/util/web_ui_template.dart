@@ -73,7 +73,7 @@ class WebUiTemplate extends StatelessWidget {
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
                                 colors: [tran, Colors.grey, white],
-                                stops: [0.03, 0.07, 0.11],
+                                stops: [0.05, 0.12, 0.15],
                               ).createShader(rect);
                             },
                             //

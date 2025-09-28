@@ -1,24 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_constants.dart';
-import 'package:flutter_application_1/responsive/mobile/mobile_finance_page.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
-import 'package:provider/provider.dart';
 
 import '../../../main.dart';
-import '../mobile/mobile_news_page.dart';
-import '../mobile/mobile_projects_page.dart';
-import '../mobile/mobile_socials_page.dart';
-import '../tablet/tablet_finance_page.dart';
-import '../tablet/tablet_news_page.dart';
-import '../tablet/tablet_projects_page.dart';
-import '../tablet/tablet_socials_page.dart';
-import 'bubble_deck_pages/desk_community_page.dart';
-import 'bubble_deck_pages/desk_news_page.dart';
-import 'bubble_deck_pages/desk_project_page.dart';
-import 'bubble_deck_pages/desk_socials_page.dart';
 
 //
 //Project Button

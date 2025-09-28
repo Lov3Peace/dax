@@ -20,7 +20,9 @@ class BubbleDock extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(0.75.w(context)),
       height: 7.h(context),
-      constraints: BoxConstraints(minHeight: 70),
+      constraints: 100.w(context) >= 2560
+          ? const BoxConstraints(minHeight: 100, maxHeight: 300)
+          : const BoxConstraints(minHeight: 70, maxHeight: 200),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),

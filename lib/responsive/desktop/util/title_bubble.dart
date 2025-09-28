@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../desk_decks.dart';
@@ -34,7 +33,9 @@ class _TitleBubbleState extends State<TitleBubble> {
           color: deckColor,
           border: Border.all(color: deckBorderColor),
         ),
-        constraints: BoxConstraints(minHeight: 70),
+        constraints: 100.w(context) >= 2560
+            ? const BoxConstraints(minHeight: 100, maxHeight: 300)
+            : const BoxConstraints(minHeight: 70, maxHeight: 200),
         height: 7.h(context),
         width: 17.25.w(context),
         child: Center(

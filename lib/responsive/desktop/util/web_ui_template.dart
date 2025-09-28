@@ -6,18 +6,10 @@ import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/news_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/projects_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/stagger_load.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../mobile/mob_artboard_page.dart';
-import '../dashboard/title_bubble.dart';
+import 'title_bubble.dart';
 import '../side_panel/side_panel.dart';
-import 'package:rive/rive.dart' as r;
 
 import '../messages.dart';
 
@@ -80,8 +72,8 @@ class WebUiTemplate extends StatelessWidget {
                                 // transform: GradientRotation(pi / 180),
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
-                                colors: [tran, white],
-                                stops: [0.09, 0.11],
+                                colors: [tran, Colors.grey, white],
+                                stops: [0.03, 0.07, 0.11],
                               ).createShader(rect);
                             },
                             //

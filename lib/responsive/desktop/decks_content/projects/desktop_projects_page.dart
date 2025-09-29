@@ -52,7 +52,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
 
   @override
   Widget build(BuildContext context) {
-  print(100.h(context));
+    print(100.w(context));
     return WebUiTemplate(
       title: "Projects",
       button1: CommunitiesButton(),
@@ -62,9 +62,11 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
         widgets: projects,
         scale: 1.02,
         constraints: const BoxConstraints(minHeight: 450),
-        listPadding: EdgeInsets.fromLTRB(
-            0.5.w(context), 100.h(context) < 875 ? 100 :10.h(context), 0.5.w(context), 0),
-        childPadding: EdgeInsets.all(0.25.w(context)),
+        listPadding: EdgeInsets.fromLTRB(0.5.w(context),
+            100.h(context) < 875 ? 100 : 10.h(context), 0.5.w(context), 0),
+        childPadding: 100.w(context) > 2200
+            ? EdgeInsets.all(10)
+            : EdgeInsets.all(0.25.w(context)),
         childHeight: 52.h(context),
         physics: const NeverScrollableScrollPhysics(),
       ),

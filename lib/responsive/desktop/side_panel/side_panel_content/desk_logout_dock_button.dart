@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/auth/onboarding_page.dart';
+import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
@@ -192,7 +192,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const OnboardingScreen()));
+                                                  const LaunchPage()));
                                     },
                                     child: const Placeholder(),
                                   ),

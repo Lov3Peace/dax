@@ -4,12 +4,13 @@ import 'dart:convert';
 import 'dart:ui' as html;
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:provider/provider.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:rive/rive.dart';
-
+import 'package:go_router/go_router.dart';
 import '../providers/userAuthProvider.dart';
 import '../providers/userProvider.dart';
 
@@ -20,19 +21,18 @@ Future login(username, password, rememberMe, context, mounted) async {
     print('Fetching...');
     final client = httpClient.BrowserClient()..withCredentials = true;
     print("(login) RememberMe: $rememberMe");
-    var res = await client
-        .post(
-          loginEndpoint,
-          headers: {
-            "Content-Type": "application/json",
-            "rememberMe": rememberMe.toString()
-          },
-          body: jsonEncode({
-            "username": username,
-            "password": password,
-          }),
-        )
-        .timeout(const Duration(seconds: 5));
+    var res = await client.post(
+      loginEndpoint,
+      headers: {
+        "Content-Type": "application/json",
+        "rememberMe": rememberMe.toString()
+      },
+      body: jsonEncode({
+        "username": username,
+        "password": password,
+      }),
+    );
+    // .timeout(const Duration(seconds: 5));
     final body = json.decode(res.body);
     final headers = res.headers;
     final token = headers["authorization"];
@@ -50,6 +50,10 @@ Future login(username, password, rememberMe, context, mounted) async {
       userAuthProvider.loggedIn();
       userAuthProvider.setToken(token);
       userProvider.saveUserData(body);
+      userProvider.saveUsername(username);
+      userProvider.username == ''
+          ? print("Username is ''")
+          : print(userProvider.username);
       // print(userProvider.username);
       // Navigate to Dashboard
       showDialog(
@@ -69,8 +73,10 @@ Future login(username, password, rememberMe, context, mounted) async {
               ],
             );
           });
-      Future.delayed(Duration(seconds: 2),
-          () => Navigator.pushReplacementNamed(context, "/"));
+      Future.delayed(Duration(seconds: 2), () {
+        router.pop();
+        router.go("/");
+      });
 
       var loggedIn = userAuthProvider.isLoggedIn;
       print("Logged In: $loggedIn");
@@ -115,7 +121,6 @@ void showErrorMessage(String message, context) {
       });
 }
 
-void cancelTimer() {}
 // @override
 // void dispose() {
 //   _timer.cancel();

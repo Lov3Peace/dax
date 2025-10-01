@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter_application_1/util/auth/loginCheck.dart';
-import 'package:flutter_application_1/util/auth/onboarding_page.dart';
+import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ import 'package:http/http.dart';
 import 'responsive/desktop/util/error_page.dart';
 import 'util/providers/userAuthProvider.dart';
 import 'util/providers/userProvider.dart';
+import 'responsive/desktop/util/go_routes.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -71,34 +73,9 @@ class _MyAppState extends State<MyApp> {
   // final GlobalKey<NavigatorState>? navigatorKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    var userAuthProvider =
-        Provider.of<UserAuthProvider>(context, listen: false);
     timeDilation = 1;
-    return MaterialApp(
-      // navigatorKey: navigatorKey,
-      // this generates the routes based on if the user is logged in
-      // and if the route exists
-      onGenerateRoute: (settings) {
-        if (!userAuthProvider.isLoggedIn) {
-          // Using PageRouteBuilder for smoother routing animation
-          return PageRouteBuilder(
-            settings: settings,
-            pageBuilder: (_, __, ___) => routes["/launch"]!,
-          );
-        }
-        if (userAuthProvider.isLoggedIn && routes[settings.name] != null) {
-          return PageRouteBuilder(
-            settings: settings,
-            pageBuilder: (_, __, ___) => routes[settings.name]!,
-          );
-        }
-        return null;
-      },
-      onUnknownRoute: (settings) => PageRouteBuilder(
-        settings: settings,
-        pageBuilder: (context, animation, secondaryAnimation) => ErrorPage(),
-        fullscreenDialog: true,
-      ),
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: GoogleFonts.montserrat().fontFamily,

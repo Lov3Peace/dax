@@ -6,6 +6,7 @@ import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -151,7 +152,8 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
         var userAuthProvider =
             Provider.of<UserAuthProvider>(context, listen: false);
         userAuthProvider.loggedOut();
-        Navigator.pushReplacementNamed(context, '/launch');
+        context.pop();
+        context.go("/launch");
       } else {
         showErrorMessage('Could not log out - try again later. $body', context);
       }

@@ -23,9 +23,10 @@ Future loginCheck(context) async {
   if (statusCode != 200) {
     userAuthProvider.loggedOut();
     // addPostFrameCallback because navigating in async and outside of build
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      navigatorKey.currentState?.pushReplacementNamed('/launch');
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   navigatorKey.currentState?.pushReplacementNamed('/launch');
+    // });
+    context.go("/");
     print("LoginCheck failed - user has been automatically logged out.");
   } else {
     userAuthProvider.loggedIn();

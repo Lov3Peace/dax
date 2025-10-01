@@ -100,7 +100,6 @@ class CommunitiesButton extends StatelessWidget {
 //Socials Button
 class SocialsButton extends StatelessWidget {
   const SocialsButton({super.key});
-  get socsTag => ButtonState().socialsHeroTag;
   @override
   Widget build(BuildContext context) {
     return Padding(

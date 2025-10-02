@@ -142,7 +142,7 @@ export const login = async (req, res) => {
           httpOnly: true,
           sameSite: "None",
           secure: true,
-          maxAge: `${thirtyDays}`,
+          maxAge: thirtyDays,
         });
         infoLog.info(`${user.username} logged in successfully`);
         console.log(`${user.username} logged in Successfully`);

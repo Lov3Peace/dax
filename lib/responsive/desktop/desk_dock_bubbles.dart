@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/button_state.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
@@ -18,7 +19,7 @@ class ProjectsButton extends StatelessWidget {
       child: TactileButton(
         scale: 1.05,
         onTap: () {
-          Navigator.pushNamed(context, "/projects");
+          router.push("/projects");
         },
         child: GradientContainer(
           gradient1: red,
@@ -48,7 +49,7 @@ class NewsButton extends StatelessWidget {
       child: TactileButton(
         scale: 1.05,
         onTap: () {
-          Navigator.pushNamed(context, "/news");
+          router.push("/news");
         },
         child: GradientContainer(
           gradient1: blue,
@@ -78,7 +79,7 @@ class CommunitiesButton extends StatelessWidget {
       child: TactileButton(
         scale: 1.05,
         onTap: () {
-          Navigator.pushNamed(context, "/communities");
+          router.push("/communities");
         },
         child: GradientContainer(
           gradient1: red,
@@ -107,7 +108,7 @@ class SocialsButton extends StatelessWidget {
       child: TactileButton(
         scale: 1.05,
         onTap: () {
-          Navigator.pushNamed(context, "/socials");
+          router.push("/socials");
         },
         child: GradientContainer(
           gradient1: orange,

@@ -116,7 +116,7 @@ export const login = async (req, res) => {
           privKey,
           { algorithm: "RS256", expiresIn: "1m" },
         );
-        debugger;
+        // debugger;
         const newRefreshToken = uuidv4();
         await User.findOneAndUpdate(
           { username: username },

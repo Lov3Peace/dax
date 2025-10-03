@@ -14,7 +14,6 @@ final GoRouter router = GoRouter(
       // Using PageRouteBuilder for smoother routing animation
       return "/launch";
     }
-    if (userAuthProvider.isLoggedIn) {}
   },
   routes: <RouteBase>[
     GoRoute(
@@ -48,11 +47,101 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: "/projects",
-      builder: (BuildContext context, state) => DesktopProjectsPage(),
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: DesktopProjectsPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
       routes: [
         GoRoute(
           path: 'posts',
-          builder: (BuildContext context, state) => DesktopProjectPostsPage(),
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              child: DesktopProjectPostsPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            );
+          },
+        ),
+      ],
+    ),
+    GoRoute(
+      path: "/socials",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: DesktopSocialsPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
+      routes: [
+        GoRoute(
+          path: 'posts',
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              child: DesktopSocialsPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            );
+          },
+        ),
+      ],
+    ),
+    GoRoute(
+      path: "/communities",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: DesktopCommunitiesPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
+      routes: [
+        GoRoute(
+          path: 'posts',
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              child: DesktopCommunitiesPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            );
+          },
+        ),
+      ],
+    ),
+    GoRoute(
+      path: "/news",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: DesktopNewsPage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
+      routes: [
+        GoRoute(
+          path: 'posts',
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              child: DesktopNewsPage(),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
+                return FadeTransition(opacity: animation, child: child);
+              },
+            );
+          },
         ),
       ],
     ),

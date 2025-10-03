@@ -8,7 +8,7 @@ const thirtyDays = 30 * 24 * 60 * 60 * 1000;
 
 export const initLoginCheck = async (req, res, next) => {
   console.log("Init Hit");
-  debugger;
+  // debugger;
   try {
     const refreshToken = req.cookies.refreshToken;
     const rememberMe = req.cookies.rememberMe;

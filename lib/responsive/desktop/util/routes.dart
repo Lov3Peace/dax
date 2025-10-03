@@ -9,8 +9,8 @@ var routes = {
   '/dev': Devpage(),
   '/projects': DesktopProjectsPage(),
   '/project-posts': DesktopProjectPostsPage(),
-  '/communities': DeskHeroCommunitiesPage(),
-  '/socials': DeskHeroSocialsPage(),
-  '/news': DeskHeroNewsPage(),
+  '/communities': DesktopCommunitiesPage(),
+  '/socials': DesktopSocialsPage(),
+  '/news': DesktopNewsPage(),
   '/nodetest': NodeTest(),
 };

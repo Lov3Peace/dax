@@ -40,6 +40,7 @@ Future login(username, password, rememberMe, context, mounted) async {
     // cookie.maxAge = 30;
     print('Fetched!');
     print('Headers: $headers');
+    print("Login Body: $body");
     print("Login Endpoint resBody: " + res.body);
     if (body is Map && res.statusCode == 200 && mounted) {
       print("Success");

@@ -26,7 +26,6 @@ const userCheck = async (req, res) => {
 const thirtyDays = 30 * 24 * 60 * 60 * 1000;
 
 export const register = async (req, res) => {
-  debugger;
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -70,7 +69,7 @@ export const register = async (req, res) => {
       maxAge: thirtyDays,
     });
 
-    res.cookie("rememberMe", req.body.rememberMe, {
+    res.cookie("rememberMe", req.headers.rememberme, {
       httpOnly: true,
       sameSite: "None",
       secure: true,
@@ -115,12 +114,14 @@ export const login = async (req, res) => {
             isAdmin: user.isAdmin,
           },
           privKey,
-          { algorithm: "RS256", expiresIn: "10s" },
+          { algorithm: "RS256", expiresIn: "1m" },
         );
+        debugger;
         const newRefreshToken = uuidv4();
-        const refreshToken = User.updateOne(
+        await User.findOneAndUpdate(
           { username: username },
           { $set: { refreshToken: newRefreshToken } },
+          { new: true },
         );
         // const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
 
@@ -166,6 +167,11 @@ export const logout = async (req, res) => {
   try {
     const cookies = req.cookies;
     res.clearCookie("accessToken", {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
+    res.clearCookie("refreshToken", {
       httpOnly: true,
       sameSite: "None",
       secure: true,

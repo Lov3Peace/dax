@@ -229,7 +229,7 @@ class _SignUpFormState extends State<SignUpForm> {
               child: TextField(
                 controller: _passwordController,
                 onSubmitted: (value) {
-                  context.pop();
+                  router.pop();
                   register(_usernameController.text, _passwordController.text,
                       _emailController.text, _rememberMe, context, mounted);
                 },
@@ -280,7 +280,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: TactileButton(
                   scale: 1.05,
                   onTap: () {
-                    context.pop();
+                    router.pop();
                     register(_usernameController.text, _passwordController.text,
                         _emailController.text, _rememberMe, context, mounted);
                   },

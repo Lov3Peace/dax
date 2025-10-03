@@ -31,9 +31,9 @@ class _ProfileCardState extends State<ProfileCard> {
         Provider.of<UserAuthProvider>(context, listen: false);
     userData = userProvider.userData;
     var token = userAuthProvider.token;
-    // print("AuthNotifier Token: $token");
+    print("AuthNotifier Token: $token");
     var decodedToken = JwtDecoder.decode(token);
-    // print("AuthNotifier decodedToken: $decodedToken");
+    print("AuthNotifier decodedToken: $decodedToken");
     final bool isAdmin = decodedToken["isAdmin"];
     adminOrUser = isAdmin == true ? "Admin" : "User";
     // print("Profile Card Rebuilt");

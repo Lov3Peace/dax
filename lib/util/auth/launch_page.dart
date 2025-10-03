@@ -37,13 +37,13 @@ Future initLoginCheck(context) async {
   final userProvider = Provider.of<UserProvider>(context, listen: false);
   final client = httpClient.BrowserClient()..withCredentials = true;
   try {
-    var username = userProvider.username;
-    print("GET REQUEST USERNAME: $username");
     var res = await client.get(initEndpoint, headers: {
       "Content-Type": "application/json",
-    }).timeout(const Duration(seconds: 5));
+    });
     final body = json.decode(res.body);
     final status = res.statusCode;
+    final username = body["username"];
+    print("GET REQUEST USERNAME: $username");
     print(body);
     _rememberMe = bool.parse(body["rememberMe"]);
     print(_rememberMe);

@@ -16,13 +16,12 @@ export const initLoginCheck = async (req, res, next) => {
       console.log("Token didn't load or got erased");
       accessToken = "noToken";
     }
-    const user = User.findOne({ refreshToken });
-    // const newRefreshToken = uuidv4();
-    // const user = await User.findOneAndUpdate(
-    //   { refreshToken: refreshToken },
-    //   { $set: { refreshToken: newRefreshToken } },
-    //   { projection: { username: 1, refreshToken: 1 } },
-    // );
+    const newRefreshToken = uuidv4();
+    const user = await User.findOneAndUpdate(
+      { refreshToken: refreshToken },
+      { $set: { refreshToken: newRefreshToken } },
+      { new: true },
+    );
     //decoded.user_id and get the data from db call and put in res
     // const userID = decoded._id;
     if (!user) {
@@ -48,7 +47,7 @@ export const initLoginCheck = async (req, res, next) => {
         secure: true,
         maxAge: 9000,
       });
-      res.cookie("refreshToken", refreshToken, {
+      res.cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
         sameSite: "None",
         secure: true,
@@ -76,7 +75,7 @@ export const initLoginCheck = async (req, res, next) => {
         {
           id: userDbRefreshToken._id,
           username: userDbRefreshToken.username,
-          role: userDbRefreshToken.roles,
+          roles: userDbRefreshToken.roles,
           isAdmin: userDbRefreshToken.isAdmin,
         },
         privKey,

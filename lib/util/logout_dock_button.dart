@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
@@ -152,8 +153,8 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
         var userAuthProvider =
             Provider.of<UserAuthProvider>(context, listen: false);
         userAuthProvider.loggedOut();
-        context.pop();
-        context.go("/launch");
+        router.pop();
+        router.go("/launch");
       } else {
         showErrorMessage('Could not log out - try again later. $body', context);
       }

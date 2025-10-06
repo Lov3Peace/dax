@@ -1,4 +1,8 @@
-import app from "../app";
+import { getProjectsCategoryAssets } from "../controllers/projectsController.js";
 import Router from "express";
 
-app.use('/')
+const projectsRouter = Router();
+
+projectsRouter.get("/projectsCategoryAssets", getProjectsCategoryAssets);
+
+export default projectsRouter;

@@ -34,7 +34,7 @@ class ProjectCategory extends StatelessWidget {
         ),
         constraints: const BoxConstraints(minHeight: 460, minWidth: 450),
         height: 50.h(context),
-        width: 35.5.w(context),
+        width: 35.25.w(context),
         // width: double.infinity,
         child: Padding(
           padding: EdgeInsets.all(1.w(context)),
@@ -50,7 +50,7 @@ class ProjectCategory extends StatelessWidget {
                       width: 35.5.w(context),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(1.25.w(context)),
-                        child: Image.asset(fit: BoxFit.cover, imageDir),
+                        child: Image.network(imageDir, fit: BoxFit.cover),
                       ),
                     ),
                   ],

@@ -7,7 +7,11 @@ import '../desk_dock_bubbles.dart';
 import '../desk_decks.dart';
 
 class BubbleDock extends StatelessWidget {
-  const BubbleDock({super.key, required this.child1, required this.child2, required this.child3});
+  const BubbleDock(
+      {super.key,
+      required this.child1,
+      required this.child2,
+      required this.child3});
   final Widget child1;
   final Widget child2;
   final Widget child3;
@@ -16,7 +20,9 @@ class BubbleDock extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(0.75.w(context)),
       height: 7.h(context),
-      constraints: BoxConstraints(minHeight: 50),
+      constraints: 100.w(context) >= 2560
+          ? const BoxConstraints(minHeight: 100, maxHeight: 300)
+          : const BoxConstraints(minHeight: 70, maxHeight: 200),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3.w(context)),
         color: const Color.fromARGB(185, 21, 19, 22),

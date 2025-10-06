@@ -32,12 +32,13 @@ class LargeStaggerLoad extends StatefulWidget {
 
 class _LargeStaggerLoadState extends State<LargeStaggerLoad> {
   final ScrollController scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
-    scrollController.addListener(() {
-      print(scrollController.offset);
-    });
+    // scrollController.addListener(() {
+    //   print(scrollController.offset);
+    // });
   }
 
   @override

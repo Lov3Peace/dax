@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'dart:ui';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -48,9 +50,10 @@ Future register(username, password, email, rememberMe, context, mounted) async {
       var userAuthProvider =
           Provider.of<UserAuthProvider>(context, listen: false);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
+      final token = res.headers["authorization"];
+      userAuthProvider.setToken(token);
       userAuthProvider.loggedIn();
       userProvider.saveUserData(body);
-      userAuthProvider.loggedIn();
       // Navigate to Dashboard
       showDialog(
           context: context,

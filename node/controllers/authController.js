@@ -1,4 +1,4 @@
-import User from "../models/user.js";
+import User from "../storage/models/user.js";
 // Logger for info, debug, errors, etc.
 import { errorLog, infoLog } from "../log.js";
 import bcrypt from "bcrypt";
@@ -25,6 +25,7 @@ const userCheck = async (req, res) => {
 const thirtyDays = 30 * 24 * 60 * 60 * 1000;
 
 export const register = async (req, res) => {
+  debugger;
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -34,18 +35,20 @@ export const register = async (req, res) => {
         .json(`User already exists. Please enter a unique username.`);
     }
     const hashedPw = await bcrypt.hash(req.body.password, 10);
-    const newUser = new User({
+
+    const newUser = await User.create({
       username: req.body.username,
       password: hashedPw,
       email: req.body.email,
       isAdmin: req.body.isAdmin,
       rememberMe: req.body.rememberme,
     });
+
     const token = jwt.sign(
       {
         _id: newUser._id,
         username: newUser.username,
-        role: newUser.roles,
+        roles: newUser.roles,
         isAdmin: newUser.isAdmin,
         rememberMe: newUser.rememberMe,
       },
@@ -70,13 +73,14 @@ export const register = async (req, res) => {
       secure: true,
       maxAge: `${thirtyDays}`,
     });
+
+    res.setHeader("Authorization", token);
     // Tries to save a newUser to the db and returns the
     // response in JSON format with the 201 status code.
     // If it fails then return status code of 500 and
     // the error in JSON format
-    const savedUser = await newUser.save();
-    infoLog.info(`User ${savedUser.username} Account Created Successfully`);
-    return res.status(201).json({ username: savedUser.username, token: token });
+    infoLog.info(`User ${newUser.username} Account Created Successfully`);
+    return res.status(201).json({ username: newUser.username, token: token });
   } catch (error) {
     errorLog.error("error", error);
     return res.status(500).json(error);
@@ -86,7 +90,6 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     console.log("Login Endpoint Hit!");
-    // debugger;
     const { username, password } = req.body;
     const rememberMe = req.headers.rememberme;
 
@@ -103,7 +106,7 @@ export const login = async (req, res) => {
           {
             _id: user._id,
             username: user.username,
-            role: user.roles,
+            roles: user.roles,
             isAdmin: user.isAdmin,
             rememberMe: user.rememberMe,
           },
@@ -111,7 +114,6 @@ export const login = async (req, res) => {
           { algorithm: "RS256", expiresIn: "1m" },
         );
         // const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
-        debugger;
 
         res.cookie("token", token, {
           httpOnly: true,
@@ -151,7 +153,6 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    debugger;
     console.log("trying to log out");
     const cookies = req.cookies;
     const username = cookies.username;
@@ -176,7 +177,6 @@ export const logout = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    // debugger;
     // const inputUsername = req.body.username;
     // const inputPW = req.body.password;
     const { username, password } = req.body;
@@ -203,7 +203,6 @@ export const deleteUser = async (req, res) => {
 };
 
 export const changeUsername = async (req, res) => {
-  // debugger;
   const { username, password, newUsername } = req.body;
   try {
     const user = await userCheck(req, res);

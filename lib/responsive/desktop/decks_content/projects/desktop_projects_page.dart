@@ -6,12 +6,13 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/projects/
 // import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/large_stagger_load.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import '../../../../util/imports.dart';
 import 'package:http/browser_client.dart' as httpClient;
 
 class DesktopProjectsPage extends StatefulWidget {
-  DesktopProjectsPage({super.key});
+  const DesktopProjectsPage({super.key});
 
   @override
   State<DesktopProjectsPage> createState() => _DesktopProjectsPageState();
@@ -40,9 +41,13 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
     for (final project in body) {
       projects.add(
         ProjectCategory(
-            category: project["category"],
-            description: project["description"],
-            imageDir: cdnBaseUrl + project["image"]),
+          category: project["category"],
+          description: project["description"],
+          imageDir: cdnBaseUrl + project["image"],
+          onTap: () {
+            router.push("/" + project["route"]);
+          },
+        ),
       );
     }
     setState(() {

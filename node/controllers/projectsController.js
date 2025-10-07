@@ -35,12 +35,14 @@ export const updateProjectCategoriesCollection = async function () {
     capList.forEach(function () {
       capWord = capList.join(" ");
     });
+    const route = "/".concat(capWord.join("-"));
     // console.log(categories);
     if ((await ProjectCategories.find({ category: capWord })) < 1) {
       const newCategory = await ProjectCategories.create({
         category: capWord,
         description: " ",
         image: obj.name,
+        route: route,
       });
       console.log(capWord);
     }

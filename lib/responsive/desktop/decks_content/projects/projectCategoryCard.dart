@@ -12,6 +12,7 @@ class ProjectCategory extends StatelessWidget {
     required this.category,
     required this.description,
     required this.imageDir,
+    required this.onTap,
     this.height,
     this.width,
     this.textConstraint,
@@ -22,12 +23,13 @@ class ProjectCategory extends StatelessWidget {
   final double? width;
   final String imageDir;
   final double? textConstraint;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        Navigator.pushNamed(context, "/posts");
+        onTap;
       },
       child: Container(
         decoration: BoxDecoration(

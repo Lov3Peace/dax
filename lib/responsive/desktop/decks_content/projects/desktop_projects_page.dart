@@ -23,8 +23,8 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
   final assetsEndpoint =
       Uri.parse("https://localhost:7777/api/projectsCategoryAssets");
 
-  // final cdnBaseUrl = "https://assets.crbn.cx/carbon-assets/images/";
-  final cdnBaseUrl = "http://10.7.77.10:8010/carbon-assets/";
+  final cdnBaseUrl = "https://assets.crbn.cx/carbon-assets/";
+  // final cdnBaseUrl = "http://10.7.77.10:8010/carbon-assets/";
   var projects = [];
 
   @override
@@ -41,13 +41,10 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
     for (final project in body) {
       projects.add(
         ProjectCategory(
-          category: project["category"],
-          description: project["description"],
-          imageDir: cdnBaseUrl + project["image"],
-          onTap: () {
-            router.push("/" + project["route"]);
-          },
-        ),
+            category: project["category"],
+            description: project["description"],
+            imageDir: cdnBaseUrl + project["image"],
+            route: project["route"]),
       );
     }
     setState(() {

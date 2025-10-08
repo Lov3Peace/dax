@@ -34,7 +34,7 @@ class _NewsDeckState extends State<NewsDeck> {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        router.push("/news");
+        router.go("/news");
       },
       child: newsDeck(),
     );

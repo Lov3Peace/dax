@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/decks.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
@@ -12,7 +13,7 @@ class ProjectCategory extends StatelessWidget {
     required this.category,
     required this.description,
     required this.imageDir,
-    required this.onTap,
+    required this.route,
     this.height,
     this.width,
     this.textConstraint,
@@ -23,13 +24,13 @@ class ProjectCategory extends StatelessWidget {
   final double? width;
   final String imageDir;
   final double? textConstraint;
-  final VoidCallback onTap;
+  final String route;
 
   @override
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        onTap;
+        router.goNamed("category-posts", pathParameters: {"category": route});
       },
       child: Container(
         decoration: BoxDecoration(

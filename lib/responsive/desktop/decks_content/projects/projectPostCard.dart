@@ -41,6 +41,7 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
+      onTap: () {},
       child: Container(
         //
         // Parent Container

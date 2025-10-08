@@ -62,7 +62,7 @@ final GoRouter router = GoRouter(
       routes: [
         GoRoute(
           name: "category-posts",
-          path: ':category',
+          path: '/:category',
           pageBuilder: (context, state) {
             return CustomTransitionPage(
               child: DesktopProjectPostsPage(),

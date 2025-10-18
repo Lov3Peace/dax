@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectCategoryCard.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectPostCard.dart';
 // import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/large_stagger_load.dart';
@@ -10,21 +11,22 @@ import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.da
 import '../../../../util/imports.dart';
 import 'package:http/browser_client.dart' as httpClient;
 
-class DesktopProjectsPage extends StatefulWidget {
-  DesktopProjectsPage({super.key});
+class DesktopProjectPostsPage extends StatefulWidget {
+  DesktopProjectPostsPage({super.key});
 
   @override
-  State<DesktopProjectsPage> createState() => _DesktopProjectsPageState();
+  State<DesktopProjectPostsPage> createState() =>
+      _DesktopProjectPostsPageState();
 }
 
-class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
+class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
   final client = httpClient.BrowserClient()..withCredentials = true;
   final assetsEndpoint =
       Uri.parse("https://localhost:7777/api/projectsCategoryAssets");
 
   // final cdnBaseUrl = "https://assets.crbn.cx/carbon-assets/images/";
   final cdnBaseUrl = "http://10.7.77.10:8010/carbon-assets/";
-  var projects = [];
+  var posts = [];
 
   @override
   void initState() {
@@ -37,16 +39,20 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
     // print(res.body);
     final body = jsonDecode(res.body);
     // print(cdnBaseUrl + body[0]["image"]);
-    for (final project in body) {
-      projects.add(
-        ProjectCategory(
-            category: project["category"],
-            description: project["description"],
-            imageDir: cdnBaseUrl + project["image"]),
-      );
+    for (final post in body) {
+      posts.add(ProjectPostCard(
+          category: "[Category]",
+          postTitle: Text("[postTitle]"),
+          user: "[User]",
+          content: "[Content]",
+          timestamp: "[timestamp]",
+          gradient1: red,
+          gradient2: pink,
+          neonGlow: pink,
+          shadowColor: tran));
     }
     setState(() {
-      projects;
+      posts;
     });
   }
 
@@ -59,7 +65,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
       button2: SocialsButton(),
       button3: NewsButton(),
       child: LargeStaggerLoad(
-        widgets: projects,
+        widgets: posts,
         scale: 1.02,
         constraints: const BoxConstraints(minHeight: 450),
         listPadding: EdgeInsets.fromLTRB(0.5.w(context),

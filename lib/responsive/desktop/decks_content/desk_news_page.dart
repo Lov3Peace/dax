@@ -4,16 +4,16 @@ import 'package:flutter_application_1/util/imports.dart';
 import '../../../util/test_list.dart';
 import '../util/web_ui_template.dart';
 
-class DeskHeroSocialsPage extends StatelessWidget {
-  const DeskHeroSocialsPage({Key? key}) : super(key: key);
+class DesktopNewsPage extends StatelessWidget {
+  const DesktopNewsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return WebUiTemplate(
-      title: "Socials",
+      title: "News",
       button1: ProjectsButton(),
       button2: CommunitiesButton(),
-      button3: NewsButton(),
+      button3: SocialsButton(),
       child: StaggerLoad(
         widgets: test_big_list,
         listPadding: EdgeInsets.only(top: 10.h(context)),

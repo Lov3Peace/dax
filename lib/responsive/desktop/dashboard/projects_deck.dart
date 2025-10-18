@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -21,7 +22,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
   Widget build(BuildContext context) {
     return TactileButton(
         onTap: () {
-          Navigator.pushNamed(context, '/projects');
+          router.push("/projects");
         },
         child: projectDeck());
   }

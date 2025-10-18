@@ -26,6 +26,9 @@ class ProjectCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
+      onTap: () {
+        Navigator.pushNamed(context, "/posts");
+      },
       child: Container(
         decoration: BoxDecoration(
           color: const Color.fromRGBO(17, 17, 17, 0.55),

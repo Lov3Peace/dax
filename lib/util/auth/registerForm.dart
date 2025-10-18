@@ -4,11 +4,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/auth/register.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../tactile_button.dart';
@@ -226,13 +228,11 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               child: TextField(
                 controller: _passwordController,
-                onSubmitted: (value) => register(
-                    _usernameController.text,
-                    _passwordController.text,
-                    _emailController.text,
-                    _rememberMe,
-                    context,
-                    mounted),
+                onSubmitted: (value) {
+                  router.pop();
+                  register(_usernameController.text, _passwordController.text,
+                      _emailController.text, _rememberMe, context, mounted);
+                },
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
@@ -279,14 +279,10 @@ class _SignUpFormState extends State<SignUpForm> {
                 padding: const EdgeInsets.only(left: 15),
                 child: TactileButton(
                   scale: 1.05,
-                  onTap: () async {
-                    await register(
-                        _usernameController.text,
-                        _passwordController.text,
-                        _emailController.text,
-                        _rememberMe,
-                        context,
-                        mounted);
+                  onTap: () {
+                    router.pop();
+                    register(_usernameController.text, _passwordController.text,
+                        _emailController.text, _rememberMe, context, mounted);
                   },
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 150, maxHeight: 50),

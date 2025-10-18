@@ -6,8 +6,8 @@ import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart'
 import '../../large_stagger_load.dart';
 import '../../util/web_ui_template.dart';
 
-class DeskHeroCommunitiesPage extends StatelessWidget {
-  const DeskHeroCommunitiesPage({Key? key}) : super(key: key);
+class DesktopCommunitiesPage extends StatelessWidget {
+  const DesktopCommunitiesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

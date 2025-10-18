@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
-
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
@@ -15,11 +16,11 @@ import 'forget_password_form.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:provider/provider.dart';
 
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+class LaunchPage extends StatefulWidget {
+  const LaunchPage({super.key});
 
   @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
+  State<LaunchPage> createState() => _LaunchPageState();
 }
 
 var loginEndpoint = Uri.parse('https://localhost:7777/api/login');
@@ -38,20 +39,23 @@ Future initLoginCheck(context) async {
   try {
     var res = await client.get(initEndpoint, headers: {
       "Content-Type": "application/json",
-    }).timeout(const Duration(seconds: 5));
+    });
     final body = json.decode(res.body);
     final status = res.statusCode;
+    final username = body["username"];
+    print("GET REQUEST USERNAME: $username");
     print(body);
     _rememberMe = bool.parse(body["rememberMe"]);
     print(_rememberMe);
     if (status == 200) {
       userAuthProvider.loggedIn();
       userProvider.saveUserData(body);
+      userProvider.saveUsername(username);
       final headers = res.headers;
       final token = headers["authorization"];
       userAuthProvider.setToken(token);
     }
-    print("Init Status Code: $status");
+    print("Init Status Code from API: $status");
     return status;
   } catch (e) {
     print("initLoginCheck failed!");
@@ -81,19 +85,21 @@ loginCheckRoute(context, mounted) async {
             );
           });
 
-      Future.delayed(Duration(seconds: 2),
-          () => Navigator.pushReplacementNamed(context, "/"));
+      Future.delayed(Duration(seconds: 2), () {
+        router.pop();
+        router.go("/");
+      });
     }
   });
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
+class _LaunchPageState extends State<LaunchPage> {
   @override
   void initState() {
     super.initState();
     var userAuthProvider =
         Provider.of<UserAuthProvider>(context, listen: false);
-    print("(OnboardingScreen) AuthNotifier().isLoggedIn = " +
+    print("(LaunchPage) AuthNotifier().isLoggedIn = " +
         userAuthProvider.isLoggedIn.toString());
     loginCheckRoute(context, mounted);
   }

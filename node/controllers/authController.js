@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { generateKeyPairSync } from "crypto";
 import { privKey, pubKey } from "../auth/keygen.js";
+import { v4 as uuidv4 } from "uuid";
 
 const userCheck = async (req, res) => {
   const { username, password } = req.body;
@@ -25,7 +26,6 @@ const userCheck = async (req, res) => {
 const thirtyDays = 30 * 24 * 60 * 60 * 1000;
 
 export const register = async (req, res) => {
-  debugger;
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -35,52 +35,56 @@ export const register = async (req, res) => {
         .json(`User already exists. Please enter a unique username.`);
     }
     const hashedPw = await bcrypt.hash(req.body.password, 10);
+    const refreshToken = uuidv4();
 
     const newUser = await User.create({
       username: req.body.username,
       password: hashedPw,
       email: req.body.email,
       isAdmin: req.body.isAdmin,
-      rememberMe: req.body.rememberme,
+      refreshToken: refreshToken,
     });
 
-    const token = jwt.sign(
+    const accessToken = jwt.sign(
       {
         _id: newUser._id,
         username: newUser.username,
         roles: newUser.roles,
         isAdmin: newUser.isAdmin,
-        rememberMe: newUser.rememberMe,
       },
       privKey,
-      { algorithm: "RS256", expiresIn: "1m" },
+      { algorithm: "RS256", expiresIn: "10s" },
     );
-    res.cookie("token", token, {
+    res.cookie("accessToken", accessToken, {
       httpOnly: true,
       sameSite: "None",
       secure: true,
-      maxAge: "60000",
-    });
-    res.cookie("username", username, {
-      httpOnly: true,
-      sameSite: "None",
-      secure: true,
-      maxAge: "60000",
-    });
-    res.cookie("rememberMe", req.body.rememberMe, {
-      httpOnly: true,
-      sameSite: "None",
-      secure: true,
-      maxAge: `${thirtyDays}`,
+      maxAge: 60,
     });
 
-    res.setHeader("Authorization", token);
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      maxAge: thirtyDays,
+    });
+
+    res.cookie("rememberMe", req.headers.rememberme, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      maxAge: thirtyDays,
+    });
+
+    res.setHeader("Authorization", accessToken);
     // Tries to save a newUser to the db and returns the
     // response in JSON format with the 201 status code.
     // If it fails then return status code of 500 and
     // the error in JSON format
     infoLog.info(`User ${newUser.username} Account Created Successfully`);
-    return res.status(201).json({ username: newUser.username, token: token });
+    return res
+      .status(201)
+      .json({ username: newUser.username, accessToken: accessToken });
   } catch (error) {
     errorLog.error("error", error);
     return res.status(500).json(error);
@@ -102,41 +106,49 @@ export const login = async (req, res) => {
       // If matched returns true, generate and verify JWTs
       if (matched) {
         // JWT Generation and Verification
-        const token = jwt.sign(
+        const accessToken = jwt.sign(
           {
             _id: user._id,
             username: user.username,
             roles: user.roles,
             isAdmin: user.isAdmin,
-            rememberMe: user.rememberMe,
           },
           privKey,
           { algorithm: "RS256", expiresIn: "1m" },
         );
+        // debugger;
+        const newRefreshToken = uuidv4();
+        await User.findOneAndUpdate(
+          { username: username },
+          { $set: { refreshToken: newRefreshToken } },
+          { new: true },
+        );
         // const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
 
-        res.cookie("token", token, {
+        res.cookie("accessToken", accessToken, {
           httpOnly: true,
           sameSite: "None",
           secure: true,
-          maxAge: "60000",
+          maxAge: 9000,
         });
-        res.cookie("username", username, {
+
+        res.cookie("refreshToken", newRefreshToken, {
           httpOnly: true,
           sameSite: "None",
           secure: true,
-          maxAge: "60000",
+          maxAge: thirtyDays,
         });
+
         res.cookie("rememberMe", rememberMe, {
           httpOnly: true,
           sameSite: "None",
           secure: true,
-          maxAge: `${thirtyDays}`,
+          maxAge: thirtyDays,
         });
         infoLog.info(`${user.username} logged in successfully`);
         console.log(`${user.username} logged in Successfully`);
 
-        res.setHeader("Authorization", token);
+        res.setHeader("Authorization", accessToken);
 
         return res.status(200).json({ username: user.username });
       } else {
@@ -153,10 +165,13 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
   try {
-    console.log("trying to log out");
     const cookies = req.cookies;
-    const username = cookies.username;
-    res.clearCookie("token", {
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
+    res.clearCookie("refreshToken", {
       httpOnly: true,
       sameSite: "None",
       secure: true,
@@ -166,8 +181,7 @@ export const logout = async (req, res) => {
       secure: true, // match secure
       sameSite: "Strict", // match sameSite
     });
-    console.log(username);
-    return res.status(200).json(`User ${username} has been logged out.`);
+    return res.status(200).json(`User has been logged out.`);
   } catch (error) {
     errorLog.error(`Unable to log out: ${error} `);
     console.log(`Unable to log out: ${error} `);
@@ -185,7 +199,7 @@ export const deleteUser = async (req, res) => {
     const matched = await bcrypt.compare(password, hashedDbPw);
     if (matched) {
       // JWT Generation and Verification
-      const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
+      const decoded = jwt.verify(accessToken, pubKey, { algorithms: "RS256" });
       const deletedUser = await User.deleteOne({ username: user.username });
       infoLog.info(`User '${user.username}' deleted successfully`);
       return res

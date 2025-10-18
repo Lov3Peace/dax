@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -8,7 +9,7 @@ import '../../mobile/mobile_socials_page.dart';
 import '../../tablet/tablet_socials_page.dart';
 import '../desk_constants.dart';
 import '../desk_decks.dart';
-import '../decks_content/desk_hero_socials_page.dart';
+import '../decks_content/desk_socials_page.dart';
 import 'package:rive/rive.dart' as r;
 
 import 'desk_dashboard.dart';
@@ -33,7 +34,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        Navigator.pushNamed(context, '/socials');
+        router.push("/socials");
       },
       child: socialsDeck(),
     );

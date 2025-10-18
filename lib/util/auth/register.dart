@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/auth/auth_check.dart';
@@ -27,18 +28,16 @@ Future register(username, password, email, rememberMe, context, mounted) async {
     // Hitting the Login endpoint
     print('Fetching...');
     final client = httpClient.BrowserClient()..withCredentials = true;
-    var res = await client
-        .post(
-          registerEndpoint,
-          headers: {
-            "Content-Type": "application/json",
-            "rememberMe": rememberMe.toString(),
-            "username": username
-          },
-          body: jsonEncode(
-              {"username": username, "password": password, "email": email}),
-        )
-        .timeout(const Duration(seconds: 5));
+    var res = await client.post(
+      registerEndpoint,
+      headers: {
+        "Content-Type": "application/json",
+        "rememberMe": rememberMe.toString(),
+        "username": username
+      },
+      body: jsonEncode(
+          {"username": username, "password": password, "email": email}),
+    );
     final body = json.decode(res.body);
     // cookie.sameSite
     // cookie.maxAge = 30;
@@ -72,9 +71,9 @@ Future register(username, password, email, rememberMe, context, mounted) async {
               ],
             );
           });
-      Future.delayed(Duration(seconds: 2),
-          () => Navigator.pushReplacementNamed(context, "/"));
-
+      Future.delayed(Duration(seconds: 1), () {
+        router.pop();
+      }).then((done) => router.go("/"));
       var loggedIn = userAuthProvider.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {

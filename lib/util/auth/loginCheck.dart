@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +24,10 @@ Future loginCheck(context) async {
   if (statusCode != 200) {
     userAuthProvider.loggedOut();
     // addPostFrameCallback because navigating in async and outside of build
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      navigatorKey.currentState?.pushReplacementNamed('/launch');
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   navigatorKey.currentState?.pushReplacementNamed('/launch');
+    // });
+    router.go("/");
     print("LoginCheck failed - user has been automatically logged out.");
   } else {
     userAuthProvider.loggedIn();

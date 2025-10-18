@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
-import 'package:flutter_application_1/util/auth/onboarding_page.dart';
+import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../responsive/mobile/mobile_login/mobile_launch_page.dart';
@@ -55,7 +55,8 @@ class LogoutWindowPopupCard extends StatefulWidget {
 }
 
 /// {@macro add_todo_popup_card}
-class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with AnimationMixin {
+class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
+    with AnimationMixin {
   // @override
   // Widget build(BuildContext context) {
   //   return Center(
@@ -136,14 +137,17 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
               child: Container(
                 height: 35.h(context),
                 width: 85.w(context),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
                   tag: _heroLogoutWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Material(
                     shadowColor: const Color.fromRGBO(42, 41, 41, 0.631),
-                    color: const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
+                    color:
+                        const Color.fromARGB(42, 55, 52, 52).withOpacity(0.7),
                     elevation: 2,
                     borderRadius: BorderRadius.circular(32),
                     child: Stack(
@@ -155,7 +159,9 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                             child: Container(
                               height: 85.h(context),
                               decoration: BoxDecoration(
-                                border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
+                                border: Border.all(
+                                    color:
+                                        const Color.fromARGB(182, 31, 31, 31)),
                                 borderRadius: BorderRadius.circular(24),
                               ),
                             ),
@@ -171,7 +177,10 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: 'Logout',
-                                    hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                                    hintStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
                                     border: InputBorder.none,
                                   ),
                                   cursorColor: Colors.white,
@@ -180,7 +189,10 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: 'Would you like to log out?',
-                                    hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                                    hintStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
                                     border: InputBorder.none,
                                   ),
                                   cursorColor: Colors.white,
@@ -190,10 +202,11 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard> with Anim
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const ResponsiveLayout(
+                                        builder: (context) =>
+                                            const ResponsiveLayout(
                                           mobileVersion: MobileLaunchPage(),
                                           tabletVersion: MobileLaunchPage(),
-                                          desktopVersion: OnboardingScreen(),
+                                          desktopVersion: LaunchPage(),
                                         ),
                                       ),
                                     );

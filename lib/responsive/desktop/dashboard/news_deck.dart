@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +10,7 @@ import '../../mobile/mobile_news_page.dart';
 import '../../tablet/tablet_news_page.dart';
 import '../desk_decks.dart';
 import '../desk_constants.dart';
-import '../decks_content/desk_hero_news_page.dart';
+import '../decks_content/desk_news_page.dart';
 import './desk_dashboard.dart';
 
 class NewsDeck extends StatefulWidget {
@@ -33,7 +34,7 @@ class _NewsDeckState extends State<NewsDeck> {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        Navigator.pushNamed(context, '/news');
+        router.push("/news");
       },
       child: newsDeck(),
     );

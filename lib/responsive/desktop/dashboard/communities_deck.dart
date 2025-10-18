@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../../util/tactile_button.dart';
 import '../desk_decks.dart';
@@ -24,7 +25,7 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        Navigator.pushNamed(context, '/communities');
+        router.push("/communities");
       },
       child: communityDeck(),
     );

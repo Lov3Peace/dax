@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/desk_dashboard.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
-import 'package:flutter_application_1/util/auth/onboarding_page.dart';
+import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/responsive/responsive_layout.dart';
 import 'package:flutter_application_1/responsive/tablet/tablet_dashboard.dart';
 import '../../responsive/mobile/mobile_dashboard.dart';
@@ -37,8 +37,8 @@ class _AuthCheckState extends State<AuthCheck> {
           } else {
             // ignore: prefer_const_constructors
             return ResponsiveLayout(
-              desktopVersion: OnboardingScreen(),
-              tabletVersion: OnboardingScreen(),
+              desktopVersion: LaunchPage(),
+              tabletVersion: LaunchPage(),
               mobileVersion: MobileLaunchPage(),
             );
           }

@@ -7,7 +7,7 @@ import 'package:simple_animations/simple_animations.dart';
 import '../../../util/button_state.dart';
 import '../../../util/soft_close.dart';
 import '../../../util/test_list.dart';
-import '../dashboard/title_bubble.dart';
+import '../util/title_bubble.dart';
 import '../desk_decks.dart';
 import '../util/web_ui_template.dart';
 

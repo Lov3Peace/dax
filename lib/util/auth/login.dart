@@ -13,8 +13,14 @@ import 'package:rive/rive.dart';
 import 'package:go_router/go_router.dart';
 import '../providers/userAuthProvider.dart';
 import '../providers/userProvider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-final loginEndpoint = Uri.parse("https://localhost:7777/api/login");
+const hostname = String.fromEnvironment("HOSTNAME", defaultValue: "localhost");
+final loginEndpoint = Uri(
+    scheme: "https",
+    host: hostname,
+    port: hostname.contains("localhost") ? 7777 : null,
+    path: "/api/login");
 Future login(username, password, rememberMe, context, mounted) async {
   try {
     // Hitting the Login endpoint

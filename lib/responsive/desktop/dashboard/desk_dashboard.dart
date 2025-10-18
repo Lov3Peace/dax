@@ -31,7 +31,7 @@ class DesktopDashboard extends StatefulWidget {
 class _DesktopDashboardState extends State<DesktopDashboard> {
   //globals
   final getUserDataEndpoint =
-      Uri.parse('https://localhost:7777/api/getUserDashboardData');
+      Uri.parse('https://$hostname/api/getUserDashboardData');
   var _getData;
   var userData;
 

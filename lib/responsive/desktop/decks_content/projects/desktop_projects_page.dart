@@ -10,6 +10,7 @@ import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import '../../../../util/imports.dart';
 import 'package:http/browser_client.dart' as httpClient;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DesktopProjectsPage extends StatefulWidget {
   const DesktopProjectsPage({super.key});
@@ -21,7 +22,7 @@ class DesktopProjectsPage extends StatefulWidget {
 class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
   final client = httpClient.BrowserClient()..withCredentials = true;
   final assetsEndpoint =
-      Uri.parse("https://localhost:7777/api/projectsCategoryAssets");
+      Uri.parse("https://$hostname/api/projectsCategoryAssets");
 
   final cdnBaseUrl = "https://assets.crbn.cx/carbon-assets/";
   // final cdnBaseUrl = "http://10.7.77.10:8010/carbon-assets/";

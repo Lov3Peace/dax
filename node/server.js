@@ -13,26 +13,27 @@ import {
 dotenv.config();
 
 const port = process.env.PORT;
-https
-  .createServer(
-    {
-      key: fs.readFileSync("./ssl/key.pem"),
-      cert: fs.readFileSync("./ssl/cert.pem"),
-      minVersion: "TLSv1.2",
-    },
-    app,
-  )
-  .listen(port, () =>
-    console.log(`Dax Server Started with HTTPS on port: ${port}`),
-  );
+// https
+//   .createServer(
+//     {
+//       key: fs.readFileSync("./ssl/key.pem"),
+//       cert: fs.readFileSync("./ssl/cert.pem"),
+//       minVersion: "TLSv1.2",
+//     },
+//     app,
+//   )
+//   .listen(port, () =>
+//     console.log(`Dax Server Started with HTTPS on port: ${port}`),
+//   );
 
 updateProjectCategoriesCollection();
-// app.listen(port, console.log(`Dax Server listening on port ${port}!`));
+app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 
-// mongoose.connect(process.env.DB_CONN)
-//     .then(() => console.log(`Database Connection Established`))
-//     .catch((error) => console.log(error));
 mongoose
-  .connect(process.env.LOCAL_DB_CONN)
+  .connect(process.env.DB_CONN)
   .then(() => console.log(`Database Connection Established`))
   .catch((error) => console.log(error));
+// mongoose
+//   .connect(process.env.LOCAL_DB_CONN)
+//   .then(() => console.log(`Database Connection Established`))
+//   .catch((error) => console.log(error));

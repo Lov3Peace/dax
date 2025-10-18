@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
 import 'package:flutter_application_1/util/auth/login.dart';
@@ -23,13 +24,17 @@ class LaunchPage extends StatefulWidget {
   State<LaunchPage> createState() => _LaunchPageState();
 }
 
-var loginEndpoint = Uri.parse('https://localhost:7777/api/login');
-var registerEndpoint = Uri.parse('https://localhost:7777/api/register');
+const hostname = String.fromEnvironment("HOSTNAME", defaultValue: "localhost");
+final loginEndpoint = Uri(
+    scheme: "https",
+    host: hostname,
+    port: hostname.contains("localhost") ? 7777 : null,
+    path: "/api/login");
+final registerEndpoint = Uri.parse('https://$hostname/api/register');
+final initEndpoint = Uri.parse('https://$hostname/api/');
 final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 bool _rememberMe = false;
-
-var initEndpoint = Uri.parse('https://localhost:7777/api/');
 
 Future initLoginCheck(context) async {
   final userAuthProvider =

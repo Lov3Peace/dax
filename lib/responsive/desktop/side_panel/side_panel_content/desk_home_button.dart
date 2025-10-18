@@ -103,7 +103,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
   // Future loginCheck() async {
   //   final client = httpClient.BrowserClient()..withCredentials = true;
   //   final loginCheckEndpoint =
-  //       Uri.parse('http://127.0.0.1:7777/api/loginCheck');
+  //       Uri.parse('http://127.0.0.1/api/loginCheck');
   //   var res = await client
   //       .get(loginCheckEndpoint, headers: {"Content-Type": "application/json"});
   //   return res;

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter_application_1/util/auth/loginCheck.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/foundation.dart';
@@ -20,7 +21,6 @@ import 'responsive/desktop/util/go_routes.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   if (kIsWeb) {
     await Firebase.initializeApp(
         options: const FirebaseOptions(

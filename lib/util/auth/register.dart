@@ -21,7 +21,7 @@ import 'forget_password_form.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/browser_client.dart' as httpClient;
 
-final registerEndpoint = Uri.parse("https://localhost:7777/api/register");
+final registerEndpoint = Uri.parse("https://$hostname/api/register");
 
 Future register(username, password, email, rememberMe, context, mounted) async {
   try {

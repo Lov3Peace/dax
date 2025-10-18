@@ -22,7 +22,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
   Widget build(BuildContext context) {
     return TactileButton(
         onTap: () {
-          router.push("/projects");
+          router.go("/projects");
         },
         child: projectDeck());
   }

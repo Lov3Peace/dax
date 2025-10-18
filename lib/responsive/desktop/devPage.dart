@@ -15,7 +15,7 @@ class Devpage extends StatelessWidget {
       button2: SocialsButton(),
       button3: NewsButton(),
       child: LargeStaggerLoad(
-        widgets: projects,
+        widgets: [],
         scale: 1.02,
         constraints: const BoxConstraints(minHeight: 450),
         listPadding: EdgeInsets.only(top: 10.h(context)),

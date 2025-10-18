@@ -1,6 +1,6 @@
 import { minioClient } from "../clients/minio.js";
 import { errorLog, infoLog } from "../log.js";
-import ProjectCategories from "../storage/models/project-cat.js";
+import ProjectCategories from "../storage/models/projectCategory.js";
 
 export const getProjectsCategoryAssets = async (req, res) => {
   // debugger;
@@ -35,12 +35,14 @@ export const updateProjectCategoriesCollection = async function () {
     capList.forEach(function () {
       capWord = capList.join(" ");
     });
+    const route = capWord.replace(" ", "-");
     // console.log(categories);
     if ((await ProjectCategories.find({ category: capWord })) < 1) {
       const newCategory = await ProjectCategories.create({
         category: capWord,
         description: " ",
         image: obj.name,
+        route: route,
       });
       console.log(capWord);
     }

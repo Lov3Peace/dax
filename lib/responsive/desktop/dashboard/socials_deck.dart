@@ -34,7 +34,7 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        router.push("/socials");
+        router.go("/socials");
       },
       child: socialsDeck(),
     );

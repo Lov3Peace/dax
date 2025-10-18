@@ -25,7 +25,7 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        router.push("/communities");
+        router.go("/communities");
       },
       child: communityDeck(),
     );

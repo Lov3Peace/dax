@@ -22,7 +22,7 @@ class DesktopProjectPostsPage extends StatefulWidget {
 class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
   final client = httpClient.BrowserClient()..withCredentials = true;
   final assetsEndpoint =
-      Uri.parse("https://localhost:7777/api/projectsCategoryAssets");
+      Uri.parse("https://$hostname/api/projectsCategoryAssets");
 
   // final cdnBaseUrl = "https://assets.crbn.cx/carbon-assets/images/";
   final cdnBaseUrl = "http://10.7.77.10:8010/carbon-assets/";

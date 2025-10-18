@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,9 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
 Future loginCheck(context) async {
   final client = httpClient.BrowserClient()..withCredentials = true;
-  final loginCheckEndpoint = Uri.parse('https://localhost:7777/api/loginCheck');
+  const hostname =
+      String.fromEnvironment("HOSTNAME", defaultValue: "localhost:7777");
+  final loginCheckEndpoint = Uri.parse('https://$hostname/api/loginCheck');
   final res = await client
       .get(loginCheckEndpoint, headers: {"Content-Type": "application/json"});
   final userAuthProvider =

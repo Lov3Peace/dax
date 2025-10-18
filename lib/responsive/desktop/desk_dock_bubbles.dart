@@ -19,7 +19,7 @@ class ProjectsButton extends StatelessWidget {
       child: TactileButton(
         scale: 1.05,
         onTap: () {
-          router.push("/projects");
+          router.go("/projects");
         },
         child: GradientContainer(
           gradient1: red,
@@ -49,7 +49,7 @@ class NewsButton extends StatelessWidget {
       child: TactileButton(
         scale: 1.05,
         onTap: () {
-          router.push("/news");
+          router.go("/news");
         },
         child: GradientContainer(
           gradient1: blue,
@@ -79,7 +79,7 @@ class CommunitiesButton extends StatelessWidget {
       child: TactileButton(
         scale: 1.05,
         onTap: () {
-          router.push("/communities");
+          router.go("/communities");
         },
         child: GradientContainer(
           gradient1: red,
@@ -108,7 +108,7 @@ class SocialsButton extends StatelessWidget {
       child: TactileButton(
         scale: 1.05,
         onTap: () {
-          router.push("/socials");
+          router.go("/socials");
         },
         child: GradientContainer(
           gradient1: orange,

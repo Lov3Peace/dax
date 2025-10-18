@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
@@ -41,7 +42,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
       child: GestureDetector(
         onTap: () {
           // loginCheck();
-          Navigator.pushNamed(context, '/');
+          router.go("/");
         },
         child: Stack(
           children: [
@@ -102,7 +103,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
   // Future loginCheck() async {
   //   final client = httpClient.BrowserClient()..withCredentials = true;
   //   final loginCheckEndpoint =
-  //       Uri.parse('http://127.0.0.1:7777/api/loginCheck');
+  //       Uri.parse('http://127.0.0.1/api/loginCheck');
   //   var res = await client
   //       .get(loginCheckEndpoint, headers: {"Content-Type": "application/json"});
   //   return res;

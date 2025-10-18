@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:7778",
+    origin: process.env.ORIGIN_URL || "http://localhost:7778",
     exposedHeaders: ["Authorization"],
   }),
 ); // for dev

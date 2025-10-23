@@ -1,3 +1,4 @@
+import "package:flutter_application_1/responsive/desktop/desk_decks.dart";
 import "package:flutter_application_1/util/imports.dart";
 import "package:flutter_application_1/util/tactile_button.dart";
 import "package:google_fonts/google_fonts.dart";
@@ -36,7 +37,6 @@ class ProjectPostCard extends StatefulWidget {
 }
 
 class _ProjectPostCardState extends State<ProjectPostCard> {
-  @override
   bool isLiked = false;
   @override
   Widget build(BuildContext context) {
@@ -47,12 +47,9 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
         // Parent Container
         //
         decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [
-            Color.fromARGB(240, 19, 19, 19),
-            Color.fromARGB(194, 33, 33, 33),
-          ], transform: GradientRotation(180)),
-          borderRadius: BorderRadius.circular(1.w(context)),
-          border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
+          color: const Color.fromRGBO(17, 17, 17, 0.55),
+          borderRadius: BorderRadius.circular(1.25.w(context)),
+          border: Border.all(color: deckBorderColor),
         ),
         // constraints: const BoxConstraints(),
         width: 34.75.w(context),

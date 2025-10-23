@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter_application_1/util/auth/loginCheck.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/browser_client.dart' as httpClient;
@@ -35,6 +36,7 @@ Future main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => AppStateProvider()),
         ChangeNotifierProvider(create: (context) => ButtonState()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => UserAuthProvider()),
@@ -45,17 +47,9 @@ Future main() async {
   );
 }
 
-const Color red = Color.fromARGB(255, 255, 85, 85);
-const Color purp = Color.fromARGB(255, 182, 47, 255);
-const Color pink = Color.fromARGB(255, 255, 148, 253);
-const Color blue = Color.fromARGB(255, 59, 193, 255);
-const Color orange = Colors.orange;
-const Color orangeGlow = Colors.deepOrange;
-const Color green = Color.fromARGB(255, 90, 255, 45);
-const Color greenGlow = Color.fromARGB(169, 34, 255, 0);
-const Color hoverGreen = Color.fromARGB(255, 170, 255, 147);
-const Color tran = Color.fromARGB(0, 0, 0, 0);
-const Color white = Colors.white;
+// Hostname determined by environment
+const hostname =
+    String.fromEnvironment("HOSTNAME", defaultValue: "http://localhost:7777");
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -70,7 +64,6 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  // final GlobalKey<NavigatorState>? navigatorKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     timeDilation = 1;
@@ -86,6 +79,17 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+const Color red = Color.fromARGB(255, 255, 85, 85);
+const Color purp = Color.fromARGB(255, 182, 47, 255);
+const Color pink = Color.fromARGB(255, 255, 148, 253);
+const Color blue = Color.fromARGB(255, 59, 193, 255);
+const Color orange = Colors.orange;
+const Color orangeGlow = Colors.deepOrange;
+const Color green = Color.fromARGB(255, 90, 255, 45);
+const Color greenGlow = Color.fromARGB(169, 34, 255, 0);
+const Color hoverGreen = Color.fromARGB(255, 170, 255, 147);
+const Color tran = Color.fromARGB(0, 0, 0, 0);
+const Color white = Colors.white;
 // Used to fix Hero animation bug
 Widget flightShuttleBuilder(
   BuildContext flightContext,

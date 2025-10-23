@@ -21,8 +21,7 @@ class DesktopProjectsPage extends StatefulWidget {
 
 class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
   final client = httpClient.BrowserClient()..withCredentials = true;
-  final assetsEndpoint =
-      Uri.parse("https://$hostname/api/projectsCategoryAssets");
+  final assetsEndpoint = Uri.parse("$hostname/api/projectsCategoryAssets");
 
   final cdnBaseUrl = "https://assets.crbn.cx/carbon-assets/";
   // final cdnBaseUrl = "http://10.7.77.10:8010/carbon-assets/";
@@ -35,6 +34,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
   }
 
   Future getAssets() async {
+  try {
     final res = await client.get(assetsEndpoint);
     // print(res.body);
     final body = jsonDecode(res.body);
@@ -51,6 +51,9 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
     setState(() {
       projects;
     });
+  } catch( e) {
+  print("Error retrieving JSON data: $e" );
+  }
   }
 
   @override

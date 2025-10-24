@@ -2,16 +2,6 @@ import { minioClient } from "../clients/minio.js";
 import { errorLog, infoLog } from "../log.js";
 import ProjectCategories from "../storage/models/projectCategory.js";
 
-export const getProjectsCategoryAssets = async (req, res) => {
-  // debugger;
-  // *ModelName*.find({}) returns all objects in the collection
-  const categories = await ProjectCategories.find({});
-  if (!categories) {
-    return res.status(404).json("No categories found");
-  }
-  return res.status(200).json(categories);
-};
-
 export const updateProjectCategoriesCollection = async function () {
   const categories = await ProjectCategories.find({});
   const bucketStream = minioClient.listObjectsV2(
@@ -47,4 +37,23 @@ export const updateProjectCategoriesCollection = async function () {
       console.log(capWord);
     }
   });
+};
+
+export const getProjectsCategoryAssets = async (req, res) => {
+  // debugger;
+  // *ModelName*.find({}) returns all objects in the collection
+  const categories = await ProjectCategories.find({});
+  if (!categories) {
+    return res.status(404).json("No categories found");
+  }
+  return res.status(200).json(categories);
+};
+
+export const getProjectPosts = async function (req, res) {
+  const projectCategory = req.headers.category;
+  if (!projectCategory) {
+    return res.status(404).json("No category sent in header");
+  }
+
+  const projectCollection = Project;
 };

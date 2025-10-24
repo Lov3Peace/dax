@@ -33,7 +33,3 @@ mongoose
   .connect(process.env.DB_CONN)
   .then(() => console.log(`Database Connection Established`))
   .catch((error) => console.log(error));
-// mongoose
-//   .connect(process.env.LOCAL_DB_CONN)
-//   .then(() => console.log(`Database Connection Established`))
-//   .catch((error) => console.log(error));

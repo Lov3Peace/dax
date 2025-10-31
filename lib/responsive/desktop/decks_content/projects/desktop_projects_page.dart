@@ -34,26 +34,26 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
   }
 
   Future getAssets() async {
-  try {
-    final res = await client.get(assetsEndpoint);
-    // print(res.body);
-    final body = jsonDecode(res.body);
-    // print(cdnBaseUrl + body[0]["image"]);
-    for (final project in body) {
-      projects.add(
-        ProjectCategory(
-            category: project["category"],
-            description: project["description"],
-            imageDir: cdnBaseUrl + project["image"],
-            route: project["route"]),
-      );
+    try {
+      final res = await client.get(assetsEndpoint);
+      // print(res.body);
+      final body = jsonDecode(res.body);
+      // print(cdnBaseUrl + body[0]["image"]);
+      for (final project in body) {
+        setState(() {
+          projects.add(
+            ProjectCategory(
+                category: project["category"],
+                description: project["description"],
+                imageDir: cdnBaseUrl + project["image"],
+                route: project["route"]),
+          );
+          Future.delayed(Duration(milliseconds: 50));
+        });
+      }
+    } catch (e) {
+      print("Error retrieving JSON data: $e");
     }
-    setState(() {
-      projects;
-    });
-  } catch( e) {
-  print("Error retrieving JSON data: $e" );
-  }
   }
 
   @override
@@ -73,7 +73,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
         childPadding: 100.w(context) > 2200
             ? EdgeInsets.all(10)
             : EdgeInsets.all(0.25.w(context)),
-        childHeight: 52.h(context),
+        childHeight: 30.w(context),
         physics: const NeverScrollableScrollPhysics(),
       ),
     );

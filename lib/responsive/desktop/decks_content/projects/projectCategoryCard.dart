@@ -28,6 +28,10 @@ class ProjectCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double descriptionTextSize = 3.sp(context);
+    if (100.w(context) < 1000) {
+      descriptionTextSize = 12;
+    }
     return TactileButton(
       onTap: () {
         router.goNamed("category-posts", pathParameters: {"category": route});
@@ -39,7 +43,7 @@ class ProjectCategory extends StatelessWidget {
           border: Border.all(color: deckBorderColor),
         ),
         constraints: const BoxConstraints(minHeight: 460, minWidth: 450),
-        height: 50.h(context),
+        height: 35.25.w(context),
         width: 35.25.w(context),
         // width: double.infinity,
         child: Padding(
@@ -52,7 +56,7 @@ class ProjectCategory extends StatelessWidget {
                     Container(
                       constraints:
                           const BoxConstraints(minHeight: 350, minWidth: 350),
-                      // height: 35.5.h(context),
+                      height: 35.5.w(context),
                       width: 35.5.w(context),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(1.25.w(context)),
@@ -63,7 +67,9 @@ class ProjectCategory extends StatelessWidget {
                 ),
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // Category Text
                   Flexible(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10),
@@ -71,6 +77,8 @@ class ProjectCategory extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             category,
                             style: TextStyle(
                                 fontSize: 5.sp(context),
@@ -79,8 +87,7 @@ class ProjectCategory extends StatelessWidget {
                           Text(
                             description,
                             style: TextStyle(
-                                fontSize:
-                                    100.w(context) >= 1920 ? 2.sp(context) : 12,
+                                fontSize: descriptionTextSize,
                                 fontWeight: FontWeight.w500),
                             softWrap: true,
                           ),
@@ -89,7 +96,7 @@ class ProjectCategory extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 30),
+                    padding: const EdgeInsets.only(left: 30),
                     child: TactileButton(
                         scale: 1.05,
                         child: Icon(

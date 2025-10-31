@@ -98,6 +98,25 @@ Widget flightShuttleBuilder(
   BuildContext fromHeroContext,
   BuildContext toHeroContext,
 ) {
+  // Determine which child to show based on push or pop
+  final Widget shuttleChild = (flightDirection == HeroFlightDirection.push)
+      ? (toHeroContext.widget as Hero).child
+      : (fromHeroContext.widget as Hero).child;
+
+  return Material(
+    type: MaterialType.transparency, // no background, respects child size
+    textStyle: DefaultTextStyle.of(toHeroContext).style,
+    child: shuttleChild,
+  );
+}
+
+Widget textFlightShuttleBuilder(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection flightDirection,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
   return DefaultTextStyle(
     style: DefaultTextStyle.of(toHeroContext).style,
     child: toHeroContext.widget,

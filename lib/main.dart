@@ -105,8 +105,35 @@ Widget flightShuttleBuilder(
 
   return Material(
     type: MaterialType.transparency, // no background, respects child size
-    textStyle: DefaultTextStyle.of(toHeroContext).style,
+    textStyle: DefaultTextStyle.of(fromHeroContext).style,
     child: shuttleChild,
+  );
+}
+
+Widget flightShuttleBuilder2(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection direction,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
+  final Widget toHero = toHeroContext.widget;
+  final Widget fromHero = fromHeroContext.widget;
+
+  // Wrap in an AnimatedBuilder to fade the contents
+  return AnimatedBuilder(
+    animation: animation,
+    builder: (context, _) {
+      final fadeValue = direction == HeroFlightDirection.push
+          ? animation.value.clamp(0.0, 1.0)
+          : 1.0 - animation.value.clamp(0.0, 1.0);
+
+      // Only fade the text, not the whole hero shape
+      return Opacity(
+        opacity: fadeValue,
+        child: direction == HeroFlightDirection.push ? toHero : fromHero,
+      );
+    },
   );
 }
 
@@ -117,8 +144,9 @@ Widget textFlightShuttleBuilder(
   BuildContext fromHeroContext,
   BuildContext toHeroContext,
 ) {
-  return DefaultTextStyle(
-    style: DefaultTextStyle.of(toHeroContext).style,
+  return Material(
+    type: MaterialType.transparency, // no background, respects child size
+    textStyle: DefaultTextStyle.of(fromHeroContext).style,
     child: toHeroContext.widget,
   );
 }

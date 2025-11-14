@@ -10,7 +10,6 @@ import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import '../../../../util/imports.dart';
 import 'package:http/browser_client.dart' as httpClient;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DesktopProjectsPage extends StatefulWidget {
   const DesktopProjectsPage({super.key});
@@ -18,6 +17,8 @@ class DesktopProjectsPage extends StatefulWidget {
   @override
   State<DesktopProjectsPage> createState() => _DesktopProjectsPageState();
 }
+
+List<DropdownMenuEntry> projectCategoryDropdownEntries = [];
 
 class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
   final client = httpClient.BrowserClient()..withCredentials = true;
@@ -39,6 +40,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
       // print(res.body);
       final body = jsonDecode(res.body);
       // print(cdnBaseUrl + body[0]["image"]);
+      projectCategoryDropdownEntries.clear();
       for (final project in body) {
         setState(() {
           projects.add(
@@ -50,6 +52,8 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
           );
           Future.delayed(Duration(milliseconds: 50));
         });
+        projectCategoryDropdownEntries.add(DropdownMenuEntry(
+            value: project["category"], label: project["category"]));
       }
     } catch (e) {
       print("Error retrieving JSON data: $e");

@@ -43,22 +43,23 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
         .get(getPostsEndpoint, headers: {"projectCategory": widget.parameter});
     // print(res.body);
     final body = jsonDecode(res.body);
+
     // print(cdnBaseUrl + body[0]["image"]);
     for (final post in body) {
-      posts.add(ProjectPostCard(
-          category: widget.parameter,
-          postTitle: Text("[postTitle]"),
-          user: "[User]",
-          content: "[Content]",
-          timestamp: "[timestamp]",
-          gradient1: red,
-          gradient2: pink,
-          neonGlow: pink,
-          shadowColor: tran));
+      setState(() {
+        posts.add(ProjectPostCard(
+            category: widget.parameter,
+            postTitle: Text("[postTitle]"),
+            user: "[User]",
+            content: "[Content]",
+            timestamp: "[timestamp]",
+            gradient1: red,
+            gradient2: pink,
+            neonGlow: pink,
+            shadowColor: tran));
+        Future.delayed(Duration(milliseconds: 50));
+      });
     }
-    setState(() {
-      posts;
-    });
   }
 
   @override
@@ -102,6 +103,7 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
                 alignment: Alignment.bottomRight,
                 child: Hero(
                   tag: "newProjectForm",
+                  // transitionOnUserGestures: true,
                   child: Container(
                     padding: EdgeInsets.all(buttonContainerPadding),
                     height: buttonContainerHeight,
@@ -119,13 +121,21 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
                             PageRouteBuilder(
                                 opaque: false,
                                 barrierDismissible: true,
+                                transitionDuration: Duration(milliseconds: 200),
+                                // reverseTransitionDuration:
+                                //     Duration(milliseconds: 300),
                                 pageBuilder: (context, _, __) {
                                   return Center(
                                     child: Hero(
-                                        tag: "newProjectForm",
-                                        flightShuttleBuilder:
-                                            textFlightShuttleBuilder,
-                                        child: NewProjectForm()),
+                                      transitionOnUserGestures: true,
+                                      tag: "newProjectForm",
+                                      flightShuttleBuilder:
+                                          flightShuttleBuilder,
+                                      child: Material(
+                                        type: MaterialType.transparency,
+                                        child: NewProjectForm(),
+                                      ),
+                                    ),
                                   );
                                 }));
                       },

@@ -121,7 +121,8 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
                             PageRouteBuilder(
                                 opaque: false,
                                 barrierDismissible: true,
-                                transitionDuration: Duration(milliseconds: 200),
+                                // maintainState: true,
+                                transitionDuration: Duration(milliseconds: 500),
                                 // reverseTransitionDuration:
                                 //     Duration(milliseconds: 300),
                                 pageBuilder: (context, _, __) {
@@ -130,7 +131,7 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
                                       transitionOnUserGestures: true,
                                       tag: "newProjectForm",
                                       flightShuttleBuilder:
-                                          flightShuttleBuilder,
+                                          textFlightShuttleBuilder2,
                                       child: Material(
                                         type: MaterialType.transparency,
                                         child: NewProjectForm(),

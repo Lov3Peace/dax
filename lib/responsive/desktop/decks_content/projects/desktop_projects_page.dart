@@ -53,7 +53,9 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
           Future.delayed(Duration(milliseconds: 50));
         });
         projectCategoryDropdownEntries.add(DropdownMenuEntry(
-            value: project["category"], label: project["category"]));
+          label: project["category"],
+          value: project["category"],
+        ));
       }
     } catch (e) {
       print("Error retrieving JSON data: $e");

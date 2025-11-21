@@ -124,9 +124,9 @@ Widget flightShuttleBuilder2(
   return AnimatedBuilder(
     animation: animation,
     builder: (context, _) {
-      final fadeValue = direction == HeroFlightDirection.push
-          ? animation.value.clamp(0.0, 1.0)
-          : 1.0 - animation.value.clamp(0.0, 1.0);
+      final fadeValue = direction == HeroFlightDirection.pop
+          ? 1.0 - animation.value.clamp(0.0, 1.0)
+          : animation.value.clamp(0.0, 1.0);
 
       // Only fade the text, not the whole hero shape
       return Opacity(
@@ -138,6 +138,38 @@ Widget flightShuttleBuilder2(
 }
 
 Widget textFlightShuttleBuilder(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection flightDirection,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
+  return Material(
+    type: MaterialType.transparency, // no background, respects child size
+    textStyle: DefaultTextStyle.of(fromHeroContext).style,
+    child: toHeroContext.widget,
+  );
+}
+
+Widget textFlightShuttleBuilder2(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection flightDirection,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
+  // Determine which child to show based on push or pop
+  final Widget shuttleChild = (flightDirection == HeroFlightDirection.push)
+      ? (toHeroContext.widget as Hero).child
+      : (fromHeroContext.widget as Hero).child;
+
+  return Material(
+    type: MaterialType.transparency, // no background, respects child size
+    // textStyle: TextStyle(color: tran),
+    child: shuttleChild,
+  );
+}
+Widget staticFlightShuttleBuilder(
   BuildContext flightContext,
   Animation<double> animation,
   HeroFlightDirection flightDirection,

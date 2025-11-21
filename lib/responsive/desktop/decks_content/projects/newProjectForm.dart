@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/util/blurryContainer.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -27,15 +28,9 @@ class _NewProjectFormState extends State<NewProjectForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(maxHeight: 1000),
+    return BlurryContainer(
       height: 40.w(context),
       width: 60.w(context),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(2.w(context)),
-        color: const Color.fromARGB(185, 21, 19, 22),
-        border: Border.all(color: deckBorderColor),
-      ),
       child: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.all(35),

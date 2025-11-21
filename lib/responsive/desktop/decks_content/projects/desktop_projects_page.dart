@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/newProjectButton.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectCategoryCard.dart';
 // import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
@@ -70,17 +71,22 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
       button1: CommunitiesButton(),
       button2: SocialsButton(),
       button3: NewsButton(),
-      child: LargeStaggerLoad(
-        widgets: projects,
-        scale: 1.02,
-        constraints: const BoxConstraints(minHeight: 450),
-        listPadding: EdgeInsets.fromLTRB(0.5.w(context),
-            100.h(context) < 875 ? 100 : 10.h(context), 0.5.w(context), 0),
-        childPadding: 100.w(context) > 2200
-            ? EdgeInsets.all(10)
-            : EdgeInsets.all(0.25.w(context)),
-        childHeight: 30.w(context),
-        physics: const NeverScrollableScrollPhysics(),
+      child: Stack(
+        children: [
+          LargeStaggerLoad(
+            widgets: projects,
+            scale: 1.02,
+            constraints: const BoxConstraints(minHeight: 450),
+            listPadding: EdgeInsets.fromLTRB(0.5.w(context),
+                100.h(context) < 875 ? 100 : 10.h(context), 0.5.w(context), 0),
+            childPadding: 100.w(context) > 2200
+                ? EdgeInsets.all(10)
+                : EdgeInsets.all(0.25.w(context)),
+            childHeight: 30.w(context),
+            physics: const NeverScrollableScrollPhysics(),
+          ),
+          NewProjectButton()
+        ],
       ),
     );
   }

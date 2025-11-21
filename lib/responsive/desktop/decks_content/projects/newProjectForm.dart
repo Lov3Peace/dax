@@ -1,6 +1,10 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/estimatedTimeToCompletionLists.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectRolesList.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectUserList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/blurryContainer.dart';
 import 'package:flutter_application_1/util/imports.dart';
@@ -22,9 +26,18 @@ class _NewProjectFormState extends State<NewProjectForm> {
   final TextEditingController _acceptanceCriteriaController =
       TextEditingController();
 
-  var isGroupProject = false;
-
-  var isSoloProject = false;
+  bool isGroupProject = true;
+  bool isSoloProject = false;
+  bool isParticipantsVisible = true;
+  bool isPublic = true;
+  bool isPrivate = false;
+  bool isRolesNeededVisible = true;
+  var projectCategoryValue;
+  var projectUserListValue;
+  var etcUnitsValue;
+  var etcValuesValue;
+  var rolesNeededValue;
+  var projectRolesValue;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +55,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     Text(
                       "New Project",
                       style: TextStyle(
-                          fontSize: 5.sp(context), fontWeight: FontWeight.w600),
+                          fontSize: 7.sp(context), fontWeight: FontWeight.w700),
                     ),
                     const Divider(
                       color: Color.fromARGB(151, 255, 255, 255),
@@ -54,7 +67,9 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       textAlign: TextAlign.start,
                       "Title",
                       style: TextStyle(
-                          color: Colors.white, fontSize: 4.sp(context)),
+                          color: Colors.white,
+                          fontSize: 4.sp(context),
+                          fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 10),
                     TextField(
@@ -84,19 +99,28 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       textAlign: TextAlign.start,
                       "Category",
                       style: TextStyle(
-                          color: Colors.white, fontSize: 4.sp(context)),
+                          color: Colors.white,
+                          fontSize: 4.sp(context),
+                          fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 10),
-                    DropdownMenu(
-                      dropdownMenuEntries: projectCategoryDropdownEntries,
-                      inputDecorationTheme: InputDecorationTheme(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(25.w(context))),
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(151, 255, 255, 255)),
-                        ),
-                      ),
+                    DropdownButton2(
+                      items: projectCategoryDropdownItems,
+                      value: projectCategoryValue,
+                      onChanged: (selectedValue) {
+                        setState(() {
+                          projectCategoryValue = selectedValue;
+                        });
+                      },
+                      dropdownStyleData: DropdownStyleData(
+                          maxHeight: 15.w(context),
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(1.w(context))),
+                            border: Border.all(
+                              color: deckBorderColor,
+                            ),
+                          )),
                     ),
                     const SizedBox(height: 20),
                     //
@@ -105,7 +129,9 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       textAlign: TextAlign.start,
                       "Project Description",
                       style: TextStyle(
-                          color: Colors.white, fontSize: 4.sp(context)),
+                          color: Colors.white,
+                          fontSize: 4.sp(context),
+                          fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 10),
                     TextField(
@@ -138,7 +164,9 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       textAlign: TextAlign.start,
                       "Acceptance Criteria",
                       style: TextStyle(
-                          color: Colors.white, fontSize: 4.sp(context)),
+                          color: Colors.white,
+                          fontSize: 4.sp(context),
+                          fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 10),
                     TextField(
@@ -167,36 +195,227 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     const SizedBox(height: 20),
                     //
                     // Group or Solo
+                    Text(
+                      textAlign: TextAlign.start,
+                      "Participation",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 4.sp(context),
+                          fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 1),
+                      child: Row(
+                        children: [
+                          const Text("Group"),
+                          Radio(
+                            activeColor: red,
+                            hoverColor: tran,
+                            value: true,
+                            groupValue: isGroupProject,
+                            onChanged: (value) {
+                              setState(() {
+                                isGroupProject = value!;
+                                isSoloProject = false;
+                                isParticipantsVisible = true;
+                                isRolesNeededVisible = true;
+                              });
+                            },
+                          ),
+                          SizedBox(width: 3.w(context)),
+                          const Text("Solo"),
+                          Radio(
+                            activeColor: pink,
+                            hoverColor: tran,
+                            value: true,
+                            groupValue: isSoloProject,
+                            onChanged: (value) {
+                              setState(() {
+                                isSoloProject = value!;
+                                isGroupProject = false;
+                                isParticipantsVisible = false;
+                                isRolesNeededVisible = false;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    //
+                    // Teammates
+                    Visibility(
+                      visible: isParticipantsVisible,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 20),
+                          Text(
+                            textAlign: TextAlign.start,
+                            "Teammates",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 4.sp(context),
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 10),
+                          DropdownButton2(
+                            items: projectUserList,
+                            value: projectUserListValue,
+                            onChanged: (selectedValue) {
+                              setState(() {
+                                projectUserListValue = selectedValue;
+                              });
+                            },
+                            dropdownStyleData: DropdownStyleData(
+                                maxHeight: 15.w(context),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(1.w(context))),
+                                  border: Border.all(
+                                    color: deckBorderColor,
+                                  ),
+                                )),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+                    //
+                    // Estimated Time to Completion
+                    Text(
+                      textAlign: TextAlign.start,
+                      "Estimated Time to Completion",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 4.sp(context),
+                          fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(height: 10),
                     Row(
                       children: [
-                        const Text("Group"),
-                        Radio(
-                          activeColor: pink,
-                          hoverColor: tran,
-                          value: true,
-                          groupValue: isGroupProject,
-                          onChanged: (value) {
+                        DropdownButton2(
+                          items: etcValues,
+                          value: etcValuesValue,
+                          onChanged: (selectedValue) {
                             setState(() {
-                              isGroupProject = value!;
-                              isSoloProject = false;
+                              etcValuesValue = selectedValue;
                             });
                           },
+                          dropdownStyleData: DropdownStyleData(
+                              maxHeight: 15.w(context),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(1.w(context))),
+                                border: Border.all(
+                                  color: deckBorderColor,
+                                ),
+                              )),
                         ),
-                        SizedBox(width: 3.w(context)),
-                        const Text("Solo"),
-                        Radio(
-                          activeColor: red,
-                          hoverColor: tran,
-                          value: true,
-                          groupValue: isSoloProject,
-                          onChanged: (value) {
+                        SizedBox(width: 10),
+                        DropdownButton2(
+                          items: etcUnits,
+                          value: etcUnitsValue,
+                          onChanged: (selectedValue) {
                             setState(() {
-                              isSoloProject = value!;
-                              isGroupProject = false;
+                              etcUnitsValue = selectedValue;
                             });
                           },
+                          dropdownStyleData: DropdownStyleData(
+                              maxHeight: 15.w(context),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(1.w(context))),
+                                border: Border.all(
+                                  color: deckBorderColor,
+                                ),
+                              )),
                         ),
                       ],
+                    ),
+
+                    SizedBox(height: 20),
+                    //
+                    // Privacy
+                    Text(
+                      textAlign: TextAlign.start,
+                      "Privacy",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 4.sp(context),
+                          fontWeight: FontWeight.w600),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 1),
+                      child: Row(
+                        children: [
+                          const Text("Public"),
+                          Radio(
+                            activeColor: red,
+                            hoverColor: tran,
+                            value: true,
+                            groupValue: isPublic,
+                            onChanged: (value) {
+                              setState(() {
+                                isPublic = value!;
+                                isPrivate = false;
+                              });
+                            },
+                          ),
+                          SizedBox(width: 3.w(context)),
+                          const Text("Private"),
+                          Radio(
+                            activeColor: pink,
+                            hoverColor: tran,
+                            value: true,
+                            groupValue: isPrivate,
+                            onChanged: (value) {
+                              setState(() {
+                                isPrivate = value!;
+                                isPublic = false;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 20),
+
+                    Visibility(
+                      visible: isRolesNeededVisible,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            textAlign: TextAlign.start,
+                            "Roles Needed",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 4.sp(context),
+                                fontWeight: FontWeight.w600),
+                          ),
+                          SizedBox(height: 10),
+                          DropdownButton2(
+                            items: projectRoles,
+                            value: projectRolesValue,
+                            onChanged: (selectedValue) {
+                              setState(() {
+                                projectRolesValue = selectedValue;
+                              });
+                            },
+                            dropdownStyleData: DropdownStyleData(
+                                maxHeight: 15.w(context),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(1.w(context))),
+                                  border: Border.all(
+                                    color: deckBorderColor,
+                                  ),
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

@@ -19,7 +19,7 @@ class DesktopProjectsPage extends StatefulWidget {
   State<DesktopProjectsPage> createState() => _DesktopProjectsPageState();
 }
 
-List<DropdownMenuEntry> projectCategoryDropdownEntries = [];
+List<DropdownMenuItem> projectCategoryDropdownItems = [];
 
 class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
   final client = httpClient.BrowserClient()..withCredentials = true;
@@ -41,7 +41,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
       // print(res.body);
       final body = jsonDecode(res.body);
       // print(cdnBaseUrl + body[0]["image"]);
-      projectCategoryDropdownEntries.clear();
+      projectCategoryDropdownItems.clear();
       for (final project in body) {
         setState(() {
           projects.add(
@@ -53,8 +53,8 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
           );
           Future.delayed(Duration(milliseconds: 50));
         });
-        projectCategoryDropdownEntries.add(DropdownMenuEntry(
-          label: project["category"],
+        projectCategoryDropdownItems.add(DropdownMenuItem(
+          child: Text(project["category"]),
           value: project["category"],
         ));
       }

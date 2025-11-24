@@ -7,7 +7,10 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/projects/
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectUserList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/blurryContainer.dart';
+import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:group_button/group_button.dart';
 import 'package:ionicons/ionicons.dart';
 
 class NewProjectForm extends StatefulWidget {
@@ -28,9 +31,9 @@ class _NewProjectFormState extends State<NewProjectForm> {
 
   bool isGroupProject = true;
   bool isSoloProject = false;
-  bool isParticipantsVisible = true;
   bool isPublic = true;
   bool isPrivate = false;
+  bool isTeammatesVisible = true;
   bool isRolesNeededVisible = true;
   var projectCategoryValue;
   var projectUserListValue;
@@ -38,6 +41,23 @@ class _NewProjectFormState extends State<NewProjectForm> {
   var etcValuesValue;
   var rolesNeededValue;
   var projectRolesValue;
+// Group vs Solo
+  Color grpButtonColor1 = pink;
+  Color grpButtonColor2 = red;
+  Color grpButtonBorderColor = tran;
+  Color soloButtonColor1 = tran;
+  Color soloButtonColor2 = tran;
+  Color soloButtonGlow = tran;
+  Color soloButtonBorderColor = deckBorderColor;
+
+// Public vs Private
+  Color pubButtonColor1 = pink;
+  Color pubButtonColor2 = red;
+  Color pubButtonBorderColor = deckBorderColor;
+  Color privateButtonColor1 = tran;
+  Color privateButtonColor2 = tran;
+  Color privateButtonGlow = tran;
+  Color privateButtonBorderColor = deckBorderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +80,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     const Divider(
                       color: Color.fromARGB(151, 255, 255, 255),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 25),
                     //
                     // Title
                     Text(
@@ -71,7 +91,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           fontSize: 4.sp(context),
                           fontWeight: FontWeight.w600),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     TextField(
                       autofocus: true,
                       cursorColor: red,
@@ -92,7 +112,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 25),
                     //
                     // Category Dropdown
                     Text(
@@ -103,7 +123,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           fontSize: 4.sp(context),
                           fontWeight: FontWeight.w600),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     DropdownButton2(
                       items: projectCategoryDropdownItems,
                       value: projectCategoryValue,
@@ -122,7 +142,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             ),
                           )),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 25),
                     //
                     // Description
                     Text(
@@ -133,7 +153,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           fontSize: 4.sp(context),
                           fontWeight: FontWeight.w600),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     TextField(
                       cursorColor: red,
                       style: TextStyle(fontSize: 3.sp(context)),
@@ -157,7 +177,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             ),
                           )),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 25),
                     //
                     // Acceptance Criteria
                     Text(
@@ -168,7 +188,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           fontSize: 4.sp(context),
                           fontWeight: FontWeight.w600),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     TextField(
                       cursorColor: red,
                       style: TextStyle(fontSize: 3.sp(context)),
@@ -192,7 +212,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             ),
                           )),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 25),
                     //
                     // Group or Solo
                     Text(
@@ -203,53 +223,78 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           fontSize: 4.sp(context),
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 1),
-                      child: Row(
-                        children: [
-                          const Text("Group"),
-                          Radio(
-                            activeColor: red,
-                            hoverColor: tran,
-                            value: true,
-                            groupValue: isGroupProject,
-                            onChanged: (value) {
-                              setState(() {
-                                isGroupProject = value!;
-                                isSoloProject = false;
-                                isParticipantsVisible = true;
-                                isRolesNeededVisible = true;
-                              });
-                            },
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        TactileButton(
+                          onTap: () {
+                            setState(() {
+                              grpButtonColor1 = pink;
+                              grpButtonColor2 = red;
+                              grpButtonBorderColor = tran;
+                              isGroupProject = true;
+                              isTeammatesVisible = true;
+                              isRolesNeededVisible = true;
+
+                              soloButtonColor1 = tran;
+                              soloButtonColor2 = tran;
+                              soloButtonGlow = tran;
+                              soloButtonBorderColor = deckBorderColor;
+                              isSoloProject = false;
+                            });
+                          },
+                          child: GradientContainer(
+                            height: 1.5.w(context),
+                            width: 6.w(context),
+                            text: "Group",
+                            textSize: 2.sp(context),
+                            gradient1: grpButtonColor1,
+                            gradient2: grpButtonColor2,
+                            neonGlow: tran,
+                            borderColor: grpButtonBorderColor,
+                            borderRadius: 10.w(context),
                           ),
-                          SizedBox(width: 3.w(context)),
-                          const Text("Solo"),
-                          Radio(
-                            activeColor: pink,
-                            hoverColor: tran,
-                            value: true,
-                            groupValue: isSoloProject,
-                            onChanged: (value) {
-                              setState(() {
-                                isSoloProject = value!;
-                                isGroupProject = false;
-                                isParticipantsVisible = false;
-                                isRolesNeededVisible = false;
-                              });
-                            },
+                        ),
+                        SizedBox(width: 25),
+                        TactileButton(
+                          onTap: () {
+                            setState(() {
+                              soloButtonColor1 = pink;
+                              soloButtonColor2 = red;
+                              soloButtonGlow = tran;
+                              soloButtonBorderColor = tran;
+                              isSoloProject = true;
+                              isTeammatesVisible = false;
+                              isRolesNeededVisible = false;
+
+                              grpButtonColor1 = tran;
+                              grpButtonColor2 = tran;
+                              grpButtonBorderColor = deckBorderColor;
+                              isGroupProject = false;
+                            });
+                          },
+                          child: GradientContainer(
+                            height: 2.w(context),
+                            width: 6.w(context),
+                            text: "Solo",
+                            textSize: 2.sp(context),
+                            gradient1: soloButtonColor1,
+                            gradient2: soloButtonColor2,
+                            neonGlow: soloButtonGlow,
+                            borderColor: soloButtonBorderColor,
+                            borderRadius: 10.w(context),
                           ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                     //
                     // Teammates
                     Visibility(
-                      visible: isParticipantsVisible,
+                      visible: isTeammatesVisible,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 25),
                           Text(
                             textAlign: TextAlign.start,
                             "Teammates",
@@ -258,7 +303,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 fontSize: 4.sp(context),
                                 fontWeight: FontWeight.w600),
                           ),
-                          const SizedBox(height: 10),
+                          const SizedBox(height: 20),
                           DropdownButton2(
                             items: projectUserList,
                             value: projectUserListValue,
@@ -267,6 +312,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 projectUserListValue = selectedValue;
                               });
                             },
+                            style: TextStyle(
+                                fontSize: 2.sp(context), color: white),
                             dropdownStyleData: DropdownStyleData(
                                 maxHeight: 15.w(context),
                                 decoration: BoxDecoration(
@@ -281,7 +328,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       ),
                     ),
 
-                    SizedBox(height: 20),
+                    SizedBox(height: 25),
                     //
                     // Estimated Time to Completion
                     Text(
@@ -292,12 +339,14 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           fontSize: 4.sp(context),
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     Row(
                       children: [
                         DropdownButton2(
                           items: etcValues,
                           value: etcValuesValue,
+                          style:
+                              TextStyle(fontSize: 2.sp(context), color: white),
                           onChanged: (selectedValue) {
                             setState(() {
                               etcValuesValue = selectedValue;
@@ -313,10 +362,12 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 ),
                               )),
                         ),
-                        SizedBox(width: 10),
+                        SizedBox(width: 20),
                         DropdownButton2(
                           items: etcUnits,
                           value: etcUnitsValue,
+                          style:
+                              TextStyle(fontSize: 2.sp(context), color: white),
                           onChanged: (selectedValue) {
                             setState(() {
                               etcUnitsValue = selectedValue;
@@ -335,7 +386,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       ],
                     ),
 
-                    SizedBox(height: 20),
+                    SizedBox(height: 25),
                     //
                     // Privacy
                     Text(
@@ -346,41 +397,65 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           fontSize: 4.sp(context),
                           fontWeight: FontWeight.w600),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 1),
-                      child: Row(
-                        children: [
-                          const Text("Public"),
-                          Radio(
-                            activeColor: red,
-                            hoverColor: tran,
-                            value: true,
-                            groupValue: isPublic,
-                            onChanged: (value) {
-                              setState(() {
-                                isPublic = value!;
-                                isPrivate = false;
-                              });
-                            },
-                          ),
-                          SizedBox(width: 3.w(context)),
-                          const Text("Private"),
-                          Radio(
-                            activeColor: pink,
-                            hoverColor: tran,
-                            value: true,
-                            groupValue: isPrivate,
-                            onChanged: (value) {
-                              setState(() {
-                                isPrivate = value!;
-                                isPublic = false;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
                     SizedBox(height: 20),
+                    Row(
+                      children: [
+                        TactileButton(
+                          onTap: () {
+                            setState(() {
+                              pubButtonColor1 = pink;
+                              pubButtonColor2 = red;
+                              pubButtonBorderColor = tran;
+                              isPublic = true;
+
+                              privateButtonColor1 = tran;
+                              privateButtonColor2 = tran;
+                              privateButtonGlow = tran;
+                              privateButtonBorderColor = deckBorderColor;
+                              isPrivate = false;
+                            });
+                          },
+                          child: GradientContainer(
+                            height: 1.5.w(context),
+                            width: 6.w(context),
+                            text: "Public",
+                            textSize: 2.sp(context),
+                            gradient1: pubButtonColor1,
+                            gradient2: pubButtonColor2,
+                            neonGlow: tran,
+                            borderColor: pubButtonBorderColor,
+                            borderRadius: 10.w(context),
+                          ),
+                        ),
+                        SizedBox(width: 25),
+                        TactileButton(
+                          onTap: () {
+                            setState(() {
+                              privateButtonColor1 = pink;
+                              privateButtonColor2 = red;
+                              privateButtonBorderColor = tran;
+                              isPrivate = true;
+
+                              pubButtonColor1 = tran;
+                              pubButtonColor2 = tran;
+                              isPublic = false;
+                            });
+                          },
+                          child: GradientContainer(
+                            height: 2.w(context),
+                            width: 6.w(context),
+                            text: "Private",
+                            textSize: 2.sp(context),
+                            gradient1: privateButtonColor1,
+                            gradient2: privateButtonColor2,
+                            neonGlow: tran,
+                            borderColor: privateButtonBorderColor,
+                            borderRadius: 10.w(context),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 25),
 
                     Visibility(
                       visible: isRolesNeededVisible,
@@ -395,7 +470,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 fontSize: 4.sp(context),
                                 fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 20),
                           DropdownButton2(
                             items: projectRoles,
                             value: projectRolesValue,
@@ -404,6 +479,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 projectRolesValue = selectedValue;
                               });
                             },
+                            style: TextStyle(
+                                fontSize: 2.sp(context), color: white),
                             dropdownStyleData: DropdownStyleData(
                                 maxHeight: 15.w(context),
                                 decoration: BoxDecoration(

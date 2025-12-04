@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/estimatedTimeToCompletionLists.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectRolesList.dart';
@@ -10,8 +14,8 @@ import 'package:flutter_application_1/util/blurryContainer.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
-import 'package:group_button/group_button.dart';
-import 'package:ionicons/ionicons.dart';
+import 'package:multiple_search_selection/multiple_search_selection.dart';
+import 'package:multiselect_dropdown_flutter/multiselect_dropdown_flutter.dart';
 
 class NewProjectForm extends StatefulWidget {
   NewProjectForm({super.key});
@@ -41,6 +45,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   var etcValuesValue;
   var rolesNeededValue;
   var projectRolesValue;
+
 // Group vs Solo
   Color grpButtonColor1 = pink;
   Color grpButtonColor2 = red;
@@ -59,6 +64,14 @@ class _NewProjectFormState extends State<NewProjectForm> {
   Color privateButtonGlow = tran;
   Color privateButtonBorderColor = deckBorderColor;
 
+  // Teammates Search Dropdown
+  final MultipleSearchController _teammatesSearchController =
+      MultipleSearchController();
+  var searchItemsList = [];
+  Color highlightedColor = Colors.black87;
+  ScrollController _teammatesScrollController = ScrollController();
+  int highlightIndex = -1;
+  List _teammatesSelected = [];
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
@@ -132,6 +145,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           projectCategoryValue = selectedValue;
                         });
                       },
+                      style: TextStyle(fontSize: 3.sp(context), color: white),
                       dropdownStyleData: DropdownStyleData(
                           maxHeight: 15.w(context),
                           decoration: BoxDecoration(
@@ -303,27 +317,150 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 fontSize: 4.sp(context),
                                 fontWeight: FontWeight.w600),
                           ),
-                          const SizedBox(height: 20),
-                          DropdownButton2(
-                            items: projectUserList,
-                            value: projectUserListValue,
-                            onChanged: (selectedValue) {
-                              setState(() {
-                                projectUserListValue = selectedValue;
-                              });
+                          Focus(
+                            onKeyEvent: (node, event) {
+                              if (event is KeyDownEvent &&
+                                  event.logicalKey ==
+                                      LogicalKeyboardKey.arrowDown &&
+                                  highlightIndex < searchItemsList.length - 1) {
+                                print("DOWN ARROW PRESSED");
+                                if (highlightIndex != -1) {
+                                  _teammatesScrollController.jumpTo(
+                                      (_teammatesScrollController.offset + 50)
+                                          .clamp(
+                                              0.0,
+                                              _teammatesScrollController
+                                                  .position.maxScrollExtent));
+                                }
+                                setState(() {
+                                  highlightIndex++;
+                                  print("highlightIndex: " +
+                                      highlightIndex.toString());
+                                  print("Search Items List Length: " +
+                                      (searchItemsList.length - 1).toString());
+                                  _teammatesScrollController;
+                                });
+                                return KeyEventResult.handled;
+                              }
+                              if (event is KeyDownEvent &&
+                                  event.logicalKey ==
+                                      LogicalKeyboardKey.arrowUp &&
+                                  highlightIndex > 0) {
+                                setState(() {
+                                  highlightIndex--;
+                                  _teammatesScrollController.jumpTo(
+                                      (_teammatesScrollController.offset - 50)
+                                          .clamp(
+                                              0.0,
+                                              _teammatesScrollController
+                                                  .position.maxScrollExtent));
+                                  print("Search Items List Length: " +
+                                      (searchItemsList.length - 1).toString());
+                                  print("highlightIndex: " +
+                                      highlightIndex.toString());
+                                });
+                              }
+                              if (event is KeyDownEvent &&
+                                  event.logicalKey ==
+                                      LogicalKeyboardKey.arrowUp &&
+                                  highlightIndex == 0) {
+                                setState(() {
+                                  highlightIndex = 0;
+                                  print("Search Items List Length: " +
+                                      (searchItemsList.length - 1).toString());
+                                  print("highlightIndex: " +
+                                      highlightIndex.toString());
+                                });
+                              }
+                              if (event is KeyDownEvent &&
+                                  event.logicalKey ==
+                                      LogicalKeyboardKey.arrowDown &&
+                                  highlightIndex >=
+                                      searchItemsList.length - 1) {
+                                setState(() {
+                                  highlightIndex = searchItemsList.length - 1;
+                                  print("Search Items List Length: " +
+                                      (searchItemsList.length - 1).toString());
+                                  print("highlightIndex: " +
+                                      highlightIndex.toString());
+                                });
+                              }
+                              if (event is KeyDownEvent &&
+                                  (event.logicalKey ==
+                                          LogicalKeyboardKey.arrowDown ||
+                                      event.logicalKey ==
+                                          LogicalKeyboardKey.arrowUp)) {
+                                return KeyEventResult.handled;
+                              }
+
+                              if (event is KeyDownEvent &&
+                                  event.logicalKey ==
+                                      LogicalKeyboardKey.enter) {}
+
+                              return KeyEventResult.ignored;
                             },
-                            style: TextStyle(
-                                fontSize: 2.sp(context), color: white),
-                            dropdownStyleData: DropdownStyleData(
-                                maxHeight: 15.w(context),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(1.w(context))),
-                                  border: Border.all(
-                                    color: deckBorderColor,
+                            child: MultipleSearchSelection(
+                              controller: _teammatesSearchController,
+                              showedItemsScrollController:
+                                  _teammatesScrollController,
+                              searchField: TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Search Users',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(6),
                                   ),
-                                )),
+                                ),
+                              ),
+                              onSearchChanged: (text) {
+                                setState(() {
+                                  searchItemsList = _teammatesSearchController
+                                      .searchItemsCallback!(text);
+                                  print(searchItemsList);
+                                });
+                              },
+                              clearSearchFieldOnSelect: true,
+                              showSelectAllButton: false,
+                              items: projectUserList,
+                              itemsVisibility: ShowedItemsVisibility.onType,
+                              pickedItemBuilder: (user) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black54,
+                                    border:
+                                        Border.all(color: Colors.grey[400]!),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Text(user),
+                                  ),
+                                );
+                              },
+                              fieldToCheck: (user) => user,
+                              itemBuilder: (user, index, isPicked) {
+                                isPicked =
+                                    index == highlightIndex ? true : false;
+                                highlightedColor =
+                                    isPicked ? red : Colors.black87;
+                                return Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(6),
+                                      color: highlightedColor,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 20.0,
+                                        horizontal: 12,
+                                      ),
+                                      child: Text(user),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
+                          const SizedBox(height: 20),
                         ],
                       ),
                     ),
@@ -346,7 +483,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           items: etcValues,
                           value: etcValuesValue,
                           style:
-                              TextStyle(fontSize: 2.sp(context), color: white),
+                              TextStyle(fontSize: 3.sp(context), color: white),
                           onChanged: (selectedValue) {
                             setState(() {
                               etcValuesValue = selectedValue;
@@ -367,7 +504,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           items: etcUnits,
                           value: etcUnitsValue,
                           style:
-                              TextStyle(fontSize: 2.sp(context), color: white),
+                              TextStyle(fontSize: 3.sp(context), color: white),
                           onChanged: (selectedValue) {
                             setState(() {
                               etcUnitsValue = selectedValue;
@@ -480,7 +617,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                               });
                             },
                             style: TextStyle(
-                                fontSize: 2.sp(context), color: white),
+                                fontSize: 3.sp(context), color: white),
                             dropdownStyleData: DropdownStyleData(
                                 maxHeight: 15.w(context),
                                 decoration: BoxDecoration(

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/newProjectButton.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectCategoryCard.dart';
 // import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
@@ -66,6 +67,21 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
   @override
   Widget build(BuildContext context) {
     print(100.w(context));
+
+    while (projects.isEmpty) {
+      return WebUiTemplate(
+        title: "Projects",
+        button1: CommunitiesButton(),
+        button2: SocialsButton(),
+        button3: NewsButton(),
+        child: Center(
+          child: CircularProgressIndicator(
+            color: red,
+            backgroundColor: Colors.black87,
+          ).animate().fadeIn(delay: Duration(milliseconds: 100)),
+        ),
+      );
+    }
     return WebUiTemplate(
       title: "Projects",
       button1: CommunitiesButton(),

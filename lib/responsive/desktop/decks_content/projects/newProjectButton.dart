@@ -41,7 +41,7 @@ class NewProjectButton extends StatelessWidget {
                           context,
                           PageRouteBuilder(
                               opaque: false,
-                              barrierDismissible: true,
+                              barrierDismissible: false,
                               // maintainState: true,
                               transitionDuration: Duration(milliseconds: 500),
                               // reverseTransitionDuration:

@@ -16,6 +16,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:multiple_search_selection/multiple_search_selection.dart';
 import 'package:multiselect_dropdown_flutter/multiselect_dropdown_flutter.dart';
+import 'package:supercharged/supercharged.dart';
 
 class NewProjectForm extends StatefulWidget {
   NewProjectForm({super.key});
@@ -33,6 +34,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   final TextEditingController _acceptanceCriteriaController =
       TextEditingController();
 
+  Color formFieldOutlineColor = const Color.fromARGB(151, 255, 255, 255);
   bool isGroupProject = true;
   bool isSoloProject = false;
   bool isPublic = true;
@@ -45,6 +47,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   var etcValuesValue;
   var rolesNeededValue;
   var projectRolesValue;
+  ScrollController formScrollContrller = ScrollController();
 
 // Group vs Solo
   Color grpButtonColor1 = pink;
@@ -58,7 +61,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
 // Public vs Private
   Color pubButtonColor1 = pink;
   Color pubButtonColor2 = red;
-  Color pubButtonBorderColor = deckBorderColor;
+  Color pubButtonBorderColor = tran;
   Color privateButtonColor1 = tran;
   Color privateButtonColor2 = tran;
   Color privateButtonGlow = tran;
@@ -74,12 +77,14 @@ class _NewProjectFormState extends State<NewProjectForm> {
   var _teammatesSelected = [];
   bool isHighlighted = false;
   FocusNode _teammatesTextFieldFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
       height: 40.w(context),
       width: 60.w(context),
       child: SingleChildScrollView(
+        controller: formScrollContrller,
         child: Padding(
             padding: const EdgeInsets.all(35),
             child: Stack(
@@ -92,8 +97,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       style: TextStyle(
                           fontSize: 7.sp(context), fontWeight: FontWeight.w700),
                     ),
-                    const Divider(
-                      color: Color.fromARGB(151, 255, 255, 255),
+                    Divider(
+                      color: formFieldOutlineColor,
                     ),
                     const SizedBox(height: 25),
                     //
@@ -114,16 +119,15 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       controller: _projectTitleController,
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.w(context))),
+                          borderRadius: BorderRadius.circular(1.5.w(context)),
                           borderSide: BorderSide(
-                            color: const Color.fromARGB(151, 255, 255, 255),
+                            color: formFieldOutlineColor,
                             width: 0.05.w(context),
                           ),
                         ),
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(
-                              color: Color.fromARGB(151, 255, 255, 255)),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(1.w(context)),
+                          borderSide: BorderSide(color: white),
                         ),
                       ),
                     ),
@@ -177,21 +181,16 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       minLines: 5,
                       maxLines: 10,
                       decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(1.w(context)),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(1.w(context))),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(151, 255, 255, 255),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(1.w(context))),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(151, 255, 255, 255),
-                            ),
-                          )),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(1.5.w(context)),
+                          borderSide: BorderSide(
+                              color: formFieldOutlineColor, width: 1),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(1.w(context)),
+                          borderSide: BorderSide(color: white, width: 1),
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 25),
                     //
@@ -212,21 +211,16 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       minLines: 5,
                       maxLines: 10,
                       decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(1.w(context)),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(1.w(context))),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(151, 255, 255, 255),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(1.w(context))),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(151, 255, 255, 255),
-                            ),
-                          )),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(1.5.w(context)),
+                          borderSide: BorderSide(
+                              color: formFieldOutlineColor, width: 1),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(1.w(context)),
+                          borderSide: BorderSide(color: white, width: 1),
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 25),
                     //
@@ -243,6 +237,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     Row(
                       children: [
                         TactileButton(
+                          scale: 1.05,
                           onTap: () {
                             setState(() {
                               grpButtonColor1 = pink;
@@ -250,6 +245,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                               grpButtonBorderColor = tran;
                               isGroupProject = true;
                               isTeammatesVisible = true;
+                              _teammatesTextFieldFocusNode = FocusNode();
                               isRolesNeededVisible = true;
 
                               soloButtonColor1 = tran;
@@ -260,7 +256,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             });
                           },
                           child: GradientContainer(
-                            height: 1.5.w(context),
+                            height: 2.w(context),
                             width: 6.w(context),
                             text: "Group",
                             textSize: 2.sp(context),
@@ -273,6 +269,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         ),
                         SizedBox(width: 25),
                         TactileButton(
+                          scale: 1.05,
                           onTap: () {
                             setState(() {
                               soloButtonColor1 = pink;
@@ -320,11 +317,21 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 fontWeight: FontWeight.w600),
                           ),
                           Focus(
+                            onFocusChange: (changed) {
+                              if (changed) {
+                                formScrollContrller.jumpTo(
+                                    formScrollContrller.position.extentInside +
+                                        100);
+                              }
+                              if (!changed) {
+                                _teammatesSearchController.clearSearchField();
+                              }
+                            },
                             onKeyEvent: (node, event) {
                               if (event is KeyDownEvent &&
                                   event.logicalKey ==
                                       LogicalKeyboardKey.arrowDown &&
-                                  highlightIndex < searchItemsList.length - 1) {
+                                  highlightIndex < searchItemsList.lastIndex!) {
                                 print("DOWN ARROW PRESSED");
                                 if (highlightIndex != -1) {
                                   _teammatesScrollController.jumpTo(
@@ -339,7 +346,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                   print("highlightIndex: " +
                                       highlightIndex.toString());
                                   print("Search Items List Length: " +
-                                      (searchItemsList.length - 1).toString());
+                                      (searchItemsList.lastIndex!).toString());
                                   _teammatesScrollController;
                                 });
                                 return KeyEventResult.handled;
@@ -357,7 +364,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                               _teammatesScrollController
                                                   .position.maxScrollExtent));
                                   print("Search Items List Length: " +
-                                      (searchItemsList.length - 1).toString());
+                                      (searchItemsList.lastIndex!).toString());
                                   print("highlightIndex: " +
                                       highlightIndex.toString());
                                 });
@@ -369,7 +376,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 setState(() {
                                   highlightIndex = 0;
                                   print("Search Items List Length: " +
-                                      (searchItemsList.length - 1).toString());
+                                      (searchItemsList.lastIndex!).toString());
                                   print("highlightIndex: " +
                                       highlightIndex.toString());
                                 });
@@ -378,11 +385,11 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                   event.logicalKey ==
                                       LogicalKeyboardKey.arrowDown &&
                                   highlightIndex >=
-                                      searchItemsList.length - 1) {
+                                      searchItemsList.lastIndex!) {
                                 setState(() {
-                                  highlightIndex = searchItemsList.length - 1;
+                                  highlightIndex = searchItemsList.lastIndex!;
                                   print("Search Items List Length: " +
-                                      (searchItemsList.length - 1).toString());
+                                      (searchItemsList.lastIndex!).toString());
                                   print("highlightIndex: " +
                                       highlightIndex.toString());
                                 });
@@ -395,22 +402,24 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 return KeyEventResult.handled;
                               }
 
+                              // Once Enter is pressed, add the item to the picked items list via the callback function,
+                              // remove the item from the all items list via the callback function, set the highlightIndex
+                              // back to 0 to reset it for the next search, clear the search field to avoid confusion, and
+                              // request focus back to the TextField.
+
                               if (event is KeyDownEvent &&
                                   event.logicalKey ==
                                       LogicalKeyboardKey.enter) {
-                                var selected;
                                 setState(() {
-                                  // _teammatesSearchController
-                                  //     .getPickedItemsCallback!()
-                                  //     .add(searchItemsList[highlightIndex]);
                                   _teammatesSearchController
-                                      .getPickedItems()
+                                      .getPickedItemsCallback!()
                                       .add(searchItemsList[highlightIndex]);
                                   _teammatesSearchController
-                                      .searchItems(
-                                          searchItemsList[highlightIndex])
+                                      .getAllItemsCallback!()
                                       .remove(searchItemsList[highlightIndex]);
-                                  // _teammatesSearchController.clearSearchField();
+                                  highlightIndex = 0;
+
+                                  _teammatesSearchController.clearSearchField();
                                 });
                                 print(_teammatesSearchController
                                     .getPickedItems());
@@ -421,66 +430,103 @@ class _NewProjectFormState extends State<NewProjectForm> {
 
                               return KeyEventResult.ignored;
                             },
-                            child: MultipleSearchSelection(
-                              controller: _teammatesSearchController,
-                              showedItemsScrollController:
-                                  _teammatesScrollController,
-                              searchField: TextField(
-                                focusNode: _teammatesTextFieldFocusNode,
-                                decoration: InputDecoration(
-                                  hintText: 'Search Users',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6),
+                            child: Container(
+                              width: 30.w(context),
+                              child: MultipleSearchSelection(
+                                items: projectUserList,
+                                searchField: TextField(
+                                  cursorColor: red,
+                                  decoration: InputDecoration(
+                                    labelText: 'Search Users...',
+                                    labelStyle: TextStyle(color: Colors.grey),
+                                    floatingLabelStyle: TextStyle(color: white),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(1.5.w(context)),
+                                      borderSide: BorderSide(
+                                          color: formFieldOutlineColor,
+                                          width: 1),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(1.w(context)),
+                                      borderSide:
+                                          BorderSide(color: white, width: 1),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              onSearchChanged: (text) {
-                                setState(() {
-                                  searchItemsList = _teammatesSearchController
-                                      .searchItemsCallback!(text);
-                                  print(searchItemsList);
-                                });
-                              },
-                              clearSearchFieldOnSelect: true,
-                              showSelectAllButton: false,
-                              items: projectUserList,
-                              itemsVisibility: ShowedItemsVisibility.onType,
-                              pickedItemBuilder: (user) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black54,
-                                    border:
-                                        Border.all(color: Colors.grey[400]!),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    child: Text(user),
-                                  ),
-                                );
-                              },
-                              fieldToCheck: (user) => user,
-                              itemBuilder: (user, index, isPicked) {
-                                isHighlighted =
-                                    index == highlightIndex ? true : false;
-                                highlightedColor =
-                                    isHighlighted ? red : Colors.black87;
-                                return Padding(
-                                  padding: const EdgeInsets.all(6.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(6),
-                                      color: highlightedColor,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 20.0,
-                                        horizontal: 12,
+                                itemsVisibility: ShowedItemsVisibility.onType,
+                                controller: _teammatesSearchController,
+                                showedItemsScrollController:
+                                    _teammatesScrollController,
+                                onItemAdded: (item) {
+                                  _teammatesTextFieldFocusNode.requestFocus();
+                                },
+                                onSearchChanged: (text) {
+                                  _teammatesSearchController
+                                      .getAllItemsCallback;
+                                  setState(() {
+                                    searchItemsList = _teammatesSearchController
+                                        .searchItems(text);
+                                  });
+                                },
+                                sortShowedItems: true,
+                                fieldToCheck: (user) => user,
+                                maximumShowItemsHeight: 20.w(context),
+                                clearSearchFieldOnSelect: false,
+                                showSelectAllButton: false,
+                                itemBuilder: (user, index, isPicked) {
+                                  isHighlighted =
+                                      index == highlightIndex ? true : false;
+                                  highlightedColor = isHighlighted
+                                      ? Colors.grey.shade700
+                                      : tran;
+                                  return Padding(
+                                    padding: EdgeInsets.all(0.25.w(context)),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                            10.w(context)),
+                                        color: highlightedColor,
                                       ),
-                                      child: Text(user),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 20.0,
+                                          horizontal: 12,
+                                        ),
+                                        child: Text(user),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                                showedItemsBoxDecoration: BoxDecoration(
+                                  color: Colors.black87,
+                                  border: BoxBorder.all(
+                                      style: BorderStyle.solid,
+                                      color: deckBorderColor),
+                                  borderRadius:
+                                      BorderRadius.circular(1.5.w(context)),
+                                ),
+                                pickedItemBuilder: (user) {
+                                  return TactileButton(
+                                    child: GradientContainer(
+                                        height: 2.w(context),
+                                        width: 7.w(context),
+                                        text: user,
+                                        textSize: 2.sp(context),
+                                        gradient1: Colors.white12,
+                                        gradient2: Colors.white12,
+                                        neonGlow: tran,
+                                        borderColor: tran,
+                                        borderRadius: 10.w(context)),
+                                  );
+                                },
+                                pickedItemsBoxDecoration: BoxDecoration(
+                                    border: BoxBorder.all(
+                                        color: formFieldOutlineColor),
+                                    borderRadius:
+                                        BorderRadius.circular(1.5.w(context))),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -561,6 +607,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     Row(
                       children: [
                         TactileButton(
+                          scale: 1.05,
                           onTap: () {
                             setState(() {
                               pubButtonColor1 = pink;
@@ -576,7 +623,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             });
                           },
                           child: GradientContainer(
-                            height: 1.5.w(context),
+                            height: 2.w(context),
                             width: 6.w(context),
                             text: "Public",
                             textSize: 2.sp(context),
@@ -589,6 +636,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         ),
                         SizedBox(width: 25),
                         TactileButton(
+                          scale: 1.05,
                           onTap: () {
                             setState(() {
                               privateButtonColor1 = pink;
@@ -598,6 +646,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
 
                               pubButtonColor1 = tran;
                               pubButtonColor2 = tran;
+                              pubButtonBorderColor = deckBorderColor;
                               isPublic = false;
                             });
                           },

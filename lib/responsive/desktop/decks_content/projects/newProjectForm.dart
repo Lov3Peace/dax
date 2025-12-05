@@ -69,9 +69,11 @@ class _NewProjectFormState extends State<NewProjectForm> {
       MultipleSearchController();
   var searchItemsList = [];
   Color highlightedColor = Colors.black87;
-  ScrollController _teammatesScrollController = ScrollController();
+  final ScrollController _teammatesScrollController = ScrollController();
   int highlightIndex = -1;
-  List _teammatesSelected = [];
+  var _teammatesSelected = [];
+  bool isHighlighted = false;
+  FocusNode _teammatesTextFieldFocusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
@@ -395,7 +397,27 @@ class _NewProjectFormState extends State<NewProjectForm> {
 
                               if (event is KeyDownEvent &&
                                   event.logicalKey ==
-                                      LogicalKeyboardKey.enter) {}
+                                      LogicalKeyboardKey.enter) {
+                                var selected;
+                                setState(() {
+                                  // _teammatesSearchController
+                                  //     .getPickedItemsCallback!()
+                                  //     .add(searchItemsList[highlightIndex]);
+                                  _teammatesSearchController
+                                      .getPickedItems()
+                                      .add(searchItemsList[highlightIndex]);
+                                  _teammatesSearchController
+                                      .searchItems(
+                                          searchItemsList[highlightIndex])
+                                      .remove(searchItemsList[highlightIndex]);
+                                  // _teammatesSearchController.clearSearchField();
+                                });
+                                print(_teammatesSearchController
+                                    .getPickedItems());
+
+                                _teammatesTextFieldFocusNode.requestFocus();
+                                return KeyEventResult.handled;
+                              }
 
                               return KeyEventResult.ignored;
                             },
@@ -404,6 +426,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                               showedItemsScrollController:
                                   _teammatesScrollController,
                               searchField: TextField(
+                                focusNode: _teammatesTextFieldFocusNode,
                                 decoration: InputDecoration(
                                   hintText: 'Search Users',
                                   border: OutlineInputBorder(
@@ -437,10 +460,10 @@ class _NewProjectFormState extends State<NewProjectForm> {
                               },
                               fieldToCheck: (user) => user,
                               itemBuilder: (user, index, isPicked) {
-                                isPicked =
+                                isHighlighted =
                                     index == highlightIndex ? true : false;
                                 highlightedColor =
-                                    isPicked ? red : Colors.black87;
+                                    isHighlighted ? red : Colors.black87;
                                 return Padding(
                                   padding: const EdgeInsets.all(6.0),
                                   child: Container(

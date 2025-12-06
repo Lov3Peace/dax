@@ -323,9 +323,9 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                     formScrollContrller.position.extentInside +
                                         100);
                               }
-                              if (!changed) {
-                                _teammatesSearchController.clearSearchField();
-                              }
+                              // if (!changed && searchItemsList.isEmpty) {
+                              //   _teammatesSearchController.clearSearchField();
+                              // }
                             },
                             onKeyEvent: (node, event) {
                               if (event is KeyDownEvent &&
@@ -473,28 +473,35 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 sortShowedItems: true,
                                 fieldToCheck: (user) => user,
                                 maximumShowItemsHeight: 20.w(context),
-                                clearSearchFieldOnSelect: false,
+                                clearSearchFieldOnSelect: true,
                                 showSelectAllButton: false,
                                 itemBuilder: (user, index, isPicked) {
+                                  print(user);
                                   isHighlighted =
                                       index == highlightIndex ? true : false;
                                   highlightedColor = isHighlighted
                                       ? Colors.grey.shade700
                                       : tran;
-                                  return Padding(
-                                    padding: EdgeInsets.all(0.25.w(context)),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            10.w(context)),
-                                        color: highlightedColor,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 20.0,
-                                          horizontal: 12,
+
+                                  return MouseRegion(
+                                    onEnter: (_) {
+                                      print("HOVERED");
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(0.25.w(context)),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              10.w(context)),
+                                          color: highlightedColor,
                                         ),
-                                        child: Text(user),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 20.0,
+                                            horizontal: 12,
+                                          ),
+                                          child: Text(user),
+                                        ),
                                       ),
                                     ),
                                   );
@@ -511,7 +518,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                   return TactileButton(
                                     child: GradientContainer(
                                         height: 2.w(context),
-                                        width: 7.w(context),
+                                        width: 6.w(context),
                                         text: user,
                                         textSize: 2.sp(context),
                                         gradient1: Colors.white12,

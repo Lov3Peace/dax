@@ -1,7 +1,7 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,9 +14,8 @@ import 'package:flutter_application_1/util/blurryContainer.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
-import 'package:multiple_search_selection/multiple_search_selection.dart';
-import 'package:multiselect_dropdown_flutter/multiselect_dropdown_flutter.dart';
-import 'package:supercharged/supercharged.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:optimized_search_field/optimized_search_field.dart';
 
 class NewProjectForm extends StatefulWidget {
   NewProjectForm({super.key});
@@ -68,8 +67,10 @@ class _NewProjectFormState extends State<NewProjectForm> {
   Color privateButtonBorderColor = deckBorderColor;
 
   // Teammates Search Dropdown
-  final MultipleSearchController _teammatesSearchController =
-      MultipleSearchController();
+  // final MultipleSearchController _teammatesSearchController =MultipleSearchController();
+  late FocusNode teammatesNode;
+  final TextEditingController _teammatesSearchController =
+      TextEditingController();
   var searchItemsList = [];
   Color highlightedColor = Colors.black87;
   final ScrollController _teammatesScrollController = ScrollController();
@@ -77,6 +78,15 @@ class _NewProjectFormState extends State<NewProjectForm> {
   var _teammatesSelected = [];
   bool isHighlighted = false;
   FocusNode _teammatesTextFieldFocusNode = FocusNode();
+  List<String> selectedTeammates = [];
+  bool isSearchEmpty = true;
+  bool isTeammateSelected = false;
+  final textFieldKey = GlobalKey();
+  var searchResultsListKey = GlobalKey();
+  var teammateOptionsList;
+  //     items: projectUserList,
+  //     displayProperty: (user) => user,
+  //     filterProperty: (user) => user);
 
   @override
   Widget build(BuildContext context) {
@@ -316,226 +326,236 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 fontSize: 4.sp(context),
                                 fontWeight: FontWeight.w600),
                           ),
-                          Focus(
-                            onFocusChange: (changed) {
-                              if (changed) {
-                                formScrollContrller.jumpTo(
-                                    formScrollContrller.position.extentInside +
-                                        100);
-                              }
-                              // if (!changed && searchItemsList.isEmpty) {
-                              //   _teammatesSearchController.clearSearchField();
-                              // }
-                            },
-                            onKeyEvent: (node, event) {
-                              if (event is KeyDownEvent &&
-                                  event.logicalKey ==
-                                      LogicalKeyboardKey.arrowDown &&
-                                  highlightIndex < searchItemsList.lastIndex!) {
-                                print("DOWN ARROW PRESSED");
-                                if (highlightIndex != -1) {
-                                  _teammatesScrollController.jumpTo(
-                                      (_teammatesScrollController.offset + 50)
-                                          .clamp(
-                                              0.0,
-                                              _teammatesScrollController
-                                                  .position.maxScrollExtent));
+                          BaseMultiSearchField<String>(
+                              textFieldKey: textFieldKey,
+                              labelText: "Seach for Users...",
+                              controller: _teammatesSearchController,
+                              dropDownList: projectUserList,
+                              getItemText: (text) {
+                                print("TEXT: " + text);
+                                if (projectUserList.contains(text)) {
+                                  return text;
                                 }
-                                setState(() {
-                                  highlightIndex++;
-                                  print("highlightIndex: " +
-                                      highlightIndex.toString());
-                                  print("Search Items List Length: " +
-                                      (searchItemsList.lastIndex!).toString());
-                                  _teammatesScrollController;
-                                });
-                                return KeyEventResult.handled;
-                              }
-                              if (event is KeyDownEvent &&
-                                  event.logicalKey ==
-                                      LogicalKeyboardKey.arrowUp &&
-                                  highlightIndex > 0) {
-                                setState(() {
-                                  highlightIndex--;
-                                  _teammatesScrollController.jumpTo(
-                                      (_teammatesScrollController.offset - 50)
-                                          .clamp(
-                                              0.0,
-                                              _teammatesScrollController
-                                                  .position.maxScrollExtent));
-                                  print("Search Items List Length: " +
-                                      (searchItemsList.lastIndex!).toString());
-                                  print("highlightIndex: " +
-                                      highlightIndex.toString());
-                                });
-                              }
-                              if (event is KeyDownEvent &&
-                                  event.logicalKey ==
-                                      LogicalKeyboardKey.arrowUp &&
-                                  highlightIndex == 0) {
-                                setState(() {
-                                  highlightIndex = 0;
-                                  print("Search Items List Length: " +
-                                      (searchItemsList.lastIndex!).toString());
-                                  print("highlightIndex: " +
-                                      highlightIndex.toString());
-                                });
-                              }
-                              if (event is KeyDownEvent &&
-                                  event.logicalKey ==
-                                      LogicalKeyboardKey.arrowDown &&
-                                  highlightIndex >=
-                                      searchItemsList.lastIndex!) {
-                                setState(() {
-                                  highlightIndex = searchItemsList.lastIndex!;
-                                  print("Search Items List Length: " +
-                                      (searchItemsList.lastIndex!).toString());
-                                  print("highlightIndex: " +
-                                      highlightIndex.toString());
-                                });
-                              }
-                              if (event is KeyDownEvent &&
-                                  (event.logicalKey ==
-                                          LogicalKeyboardKey.arrowDown ||
-                                      event.logicalKey ==
-                                          LogicalKeyboardKey.arrowUp)) {
-                                return KeyEventResult.handled;
-                              }
+                                return "";
+                              },
+                              menuDecoration: BoxDecoration(
+                                  color: Colors.black87,
+                                  borderRadius:
+                                      BorderRadius.circular(1.w(context))),
+                              menuMargin: EdgeInsets.fromLTRB(0, 10, 300, 0),
+                              focusNode: _teammatesTextFieldFocusNode,
+                              listController: _teammatesScrollController,
 
-                              // Once Enter is pressed, add the item to the picked items list via the callback function,
-                              // remove the item from the all items list via the callback function, set the highlightIndex
-                              // back to 0 to reset it for the next search, clear the search field to avoid confusion, and
-                              // request focus back to the TextField.
-
-                              if (event is KeyDownEvent &&
-                                  event.logicalKey ==
-                                      LogicalKeyboardKey.enter) {
-                                setState(() {
-                                  _teammatesSearchController
-                                      .getPickedItemsCallback!()
-                                      .add(searchItemsList[highlightIndex]);
-                                  _teammatesSearchController
-                                      .getAllItemsCallback!()
-                                      .remove(searchItemsList[highlightIndex]);
-                                  highlightIndex = 0;
-
-                                  _teammatesSearchController.clearSearchField();
-                                });
-                                print(_teammatesSearchController
-                                    .getPickedItems());
-
-                                _teammatesTextFieldFocusNode.requestFocus();
-                                return KeyEventResult.handled;
-                              }
-
-                              return KeyEventResult.ignored;
-                            },
-                            child: Container(
-                              width: 30.w(context),
-                              child: MultipleSearchSelection(
-                                items: projectUserList,
-                                searchField: TextField(
-                                  cursorColor: red,
-                                  decoration: InputDecoration(
-                                    labelText: 'Search Users...',
-                                    labelStyle: TextStyle(color: Colors.grey),
-                                    floatingLabelStyle: TextStyle(color: white),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(1.5.w(context)),
-                                      borderSide: BorderSide(
-                                          color: formFieldOutlineColor,
-                                          width: 1),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(1.w(context)),
-                                      borderSide:
-                                          BorderSide(color: white, width: 1),
+                              // listPadding: EdgeInsets.only(left: 0),
+                              menuMaxHeight: 200,
+                              selectedWidget: (user) => TactileButton(
+                                    scale: 1.10,
+                                    onTap: () => setState(() {
+                                      selectedTeammates.remove(user);
+                                    }),
+                                    child: GradientContainer(
+                                      height: 2.w(context),
+                                      width: 6.w(context),
+                                      text: user,
+                                      textSize: 2.sp(context),
+                                      gradient1: Colors.white12,
+                                      gradient2: Colors.white12,
+                                      neonGlow: tran,
+                                      borderColor: tran,
+                                      borderRadius: 10.w(context),
                                     ),
                                   ),
-                                ),
-                                itemsVisibility: ShowedItemsVisibility.onType,
-                                controller: _teammatesSearchController,
-                                showedItemsScrollController:
-                                    _teammatesScrollController,
-                                onItemAdded: (item) {
-                                  _teammatesTextFieldFocusNode.requestFocus();
-                                },
-                                onSearchChanged: (text) {
-                                  _teammatesSearchController
-                                      .getAllItemsCallback;
-                                  setState(() {
-                                    searchItemsList = _teammatesSearchController
-                                        .searchItems(text);
-                                  });
-                                },
-                                sortShowedItems: true,
-                                fieldToCheck: (user) => user,
-                                maximumShowItemsHeight: 20.w(context),
-                                clearSearchFieldOnSelect: true,
-                                showSelectAllButton: false,
-                                itemBuilder: (user, index, isPicked) {
-                                  print(user);
-                                  isHighlighted =
-                                      index == highlightIndex ? true : false;
-                                  highlightedColor = isHighlighted
-                                      ? Colors.grey.shade700
-                                      : tran;
+                              optionsBuilder:
+                                  (TextEditingValue textEditingValue) {
+                                if (textEditingValue.text.isEmpty) {
+                                  return [];
+                                }
+                                setState(() {
+                                  teammateOptionsList = projectUserList
+                                      .where((value) =>
+                                          value.contains(
+                                              textEditingValue.text) &&
+                                          !selectedTeammates.contains(value))
+                                      .toList();
+                                });
+                                return projectUserList.where((value) =>
+                                    value.contains(textEditingValue.text) &&
+                                    !selectedTeammates.contains(value));
+                              },
+                              listClipBehavior: Clip.none,
+                              listButtonItem: (
+                                  {required index,
+                                  required isEnabled,
+                                  key,
+                                  required onPressed,
+                                  required value}) {
+                                isHighlighted =
+                                    index == highlightIndex ? true : false;
+                                highlightedColor = isHighlighted ? red : tran;
 
-                                  return MouseRegion(
-                                    onEnter: (_) {
-                                      print("HOVERED");
-                                    },
-                                    child: Padding(
-                                      padding: EdgeInsets.all(0.25.w(context)),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                              10.w(context)),
-                                          color: highlightedColor,
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 20.0,
-                                            horizontal: 12,
-                                          ),
-                                          child: Text(user),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                showedItemsBoxDecoration: BoxDecoration(
-                                  color: Colors.black87,
-                                  border: BoxBorder.all(
-                                      style: BorderStyle.solid,
-                                      color: deckBorderColor),
-                                  borderRadius:
-                                      BorderRadius.circular(1.5.w(context)),
-                                ),
-                                pickedItemBuilder: (user) {
-                                  return TactileButton(
+                                teammatesNode =
+                                    Focus.of(textFieldKey.currentContext!);
+                                teammatesNode.requestFocus();
+                                if (teammatesNode.hasFocus) {
+                                  print("TEAMMATES NODE HAS FOCUS");
+                                }
+
+                                teammatesNode.onKeyEvent = (node, event) {
+                                  if (value.isNotEmpty) {
+                                    // DOWN ARROW
+                                    if (event is KeyDownEvent &&
+                                        event.logicalKey ==
+                                            LogicalKeyboardKey.arrowDown &&
+                                        highlightIndex <
+                                            teammateOptionsList.length - 1) {
+                                      print("DOWN ARROW PRESSED");
+                                      print("TEAMMATES OPTIONS LIST: " +
+                                          teammateOptionsList.toString());
+                                      if (highlightIndex != -1) {
+                                        _teammatesScrollController.jumpTo(
+                                            (_teammatesScrollController.offset +
+                                                    50)
+                                                .clamp(
+                                                    0.0,
+                                                    _teammatesScrollController
+                                                        .position
+                                                        .maxScrollExtent));
+                                      }
+                                      setState(() {
+                                        highlightIndex++;
+                                        print("highlightIndex: " +
+                                            highlightIndex.toString());
+                                        print("Teammate Options List Length: " +
+                                            (teammateOptionsList.length - 1)
+                                                .toString());
+                                        _teammatesScrollController;
+                                      });
+                                      return KeyEventResult.handled;
+                                    }
+                                    // DOWN ARROW UPPER LIMIT
+                                    if (event is KeyDownEvent &&
+                                        event.logicalKey ==
+                                            LogicalKeyboardKey.arrowDown &&
+                                        highlightIndex >=
+                                            teammateOptionsList.length - 1) {
+                                      setState(() {
+                                        highlightIndex =
+                                            teammateOptionsList.length - 1;
+                                        print("Teammate Options List Length: " +
+                                            (teammateOptionsList.length - 1)
+                                                .toString());
+                                        print("highlightIndex: " +
+                                            highlightIndex.toString());
+                                      });
+                                      return KeyEventResult.handled;
+                                    }
+                                    // UP ARROW
+                                    if (event is KeyDownEvent &&
+                                        event.logicalKey ==
+                                            LogicalKeyboardKey.arrowUp &&
+                                        highlightIndex > 0) {
+                                      setState(() {
+                                        highlightIndex--;
+                                        _teammatesScrollController.jumpTo(
+                                            (_teammatesScrollController.offset -
+                                                    50)
+                                                .clamp(
+                                                    0.0,
+                                                    _teammatesScrollController
+                                                        .position
+                                                        .maxScrollExtent));
+                                        print("Teammate Options List Length: " +
+                                            (teammateOptionsList.length - 1)
+                                                .toString());
+                                        print("highlightIndex: " +
+                                            highlightIndex.toString());
+                                      });
+                                      return KeyEventResult.handled;
+                                    }
+                                    // UP ARROW LOWER LIMIT
+                                    if (event is KeyDownEvent &&
+                                        event.logicalKey ==
+                                            LogicalKeyboardKey.arrowUp &&
+                                        highlightIndex == 0) {
+                                      setState(() {
+                                        highlightIndex = 0;
+                                        print("Teammate Options List Length: " +
+                                            (teammateOptionsList.length - 1)
+                                                .toString());
+                                        print("highlightIndex: " +
+                                            highlightIndex.toString());
+                                      });
+                                      return KeyEventResult.handled;
+                                    }
+                                    return KeyEventResult.ignored;
+                                  }
+                                  return KeyEventResult.ignored;
+                                };
+                                // WidgetsBinding.instance
+                                //     .addPostFrameCallback((_) {
+                                //   final textFieldContext =
+                                //       textFieldKey.currentContext;
+                                //   if (textFieldContext != null) {
+                                //     final focusNode =
+                                //         Focus.of(textFieldContext);
+                                //     focusNode.onKeyEvent = (node, event) {
+                                //       if (event is KeyDownEvent &&
+                                //           event.logicalKey ==
+                                //               LogicalKeyboardKey.arrowDown) {
+                                //         setState(() => highlightIndex++);
+                                //         return KeyEventResult.handled;
+                                //       }
+                                //       return KeyEventResult.ignored;
+                                //     };
+                                //   }
+                                // });
+                                return TactileButton(
+                                    scale: 1.10,
+                                    onTap: onPressed,
                                     child: GradientContainer(
-                                        height: 2.w(context),
+                                        height: 3.w(context),
                                         width: 6.w(context),
-                                        text: user,
-                                        textSize: 2.sp(context),
-                                        gradient1: Colors.white12,
-                                        gradient2: Colors.white12,
+                                        text: value,
+                                        textSize: 3.sp(context),
+                                        gradient1: highlightedColor,
+                                        gradient2: highlightedColor,
                                         neonGlow: tran,
                                         borderColor: tran,
-                                        borderRadius: 10.w(context)),
-                                  );
-                                },
-                                pickedItemsBoxDecoration: BoxDecoration(
-                                    border: BoxBorder.all(
-                                        color: formFieldOutlineColor),
-                                    borderRadius:
-                                        BorderRadius.circular(1.5.w(context))),
-                              ),
-                            ),
-                          ),
+                                        borderRadius: 10.w(context)));
+                                ;
+                              },
+                              item: (user) => Text(user),
+                              removeEvent: (removedItem) => setState(() {
+                                    selectedTeammates.remove(removedItem);
+                                  }),
+                              values: selectedTeammates,
+                              onSelected: (selectedItem) => setState(() {
+                                    var optionHighlighted =
+                                        teammateOptionsList[highlightIndex];
+                                    if (projectUserList
+                                        .contains(selectedItem)) {
+                                      selectedTeammates.add(selectedItem);
+                                    }
+                                    if (projectUserList
+                                            .contains(optionHighlighted) &&
+                                        !projectUserList
+                                            .contains(selectedItem)) {
+                                      selectedTeammates.add(optionHighlighted);
+                                    }
+                                    highlightIndex = 0;
+                                  }),
+                              fieldSuffixIcon: ({
+                                required menuOpened,
+                                required onCloseIconTap,
+                                required onlyCloseMenu,
+                              }) {
+                                return menuOpened
+                                    ? IconButton(
+                                        icon: const Icon(Icons.close),
+                                        onPressed: onCloseIconTap,
+                                      )
+                                    : const Icon(Icons.arrow_drop_down);
+                              }),
                           const SizedBox(height: 20),
                         ],
                       ),
@@ -716,5 +736,42 @@ class _NewProjectFormState extends State<NewProjectForm> {
             )),
       ),
     );
+  }
+
+  var list = [
+    Contact(1, "Joel McHale"),
+    Contact(2, "Danny Pudi"),
+    Contact(3, "Donald Glover"),
+    Contact(4, "Gillian Jacobs"),
+    Contact(5, "Alison Brie"),
+    Contact(6, "Chevy Chase"),
+    Contact(7, "Jim Rush"),
+    Contact(8, "Yvette Nicole Brown"),
+    Contact(9, "Jeff Winger"),
+    Contact(10, "Abed Nadir"),
+    Contact(11, "Troy Barnes"),
+    Contact(12, "Britta Perry"),
+    Contact(13, "Annie Edison"),
+  ];
+}
+
+class Contact {
+  final int id;
+  final String name;
+
+  Contact(
+    this.id,
+    this.name,
+  );
+
+  Contact.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        name = json['name'];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+    };
   }
 }

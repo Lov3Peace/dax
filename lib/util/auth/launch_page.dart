@@ -242,6 +242,7 @@ class _LaunchPageState extends State<LaunchPage> {
                             if (authnotifier.rememberMe == true) {
                               authnotifier.enableRememberMe();
                             }
+                            _passwordController.clear();
                           },
                           obscureText: true,
                           decoration: InputDecoration(
@@ -442,6 +443,7 @@ class _LaunchPageState extends State<LaunchPage> {
                                     _rememberMe,
                                     context,
                                     mounted);
+                                _passwordController.clear();
                               },
                               child: GradientContainer(
                                 gradient1: red,

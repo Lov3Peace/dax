@@ -1,16 +1,35 @@
 import 'package:flutter_application_1/util/imports.dart';
 
-List projectUserList = [
-  "TO_IMPLEMENT: userList",
+List<String> projectUserList = [
   "l3x",
-  "port",
   "al3x",
   "phil",
+  "port",
+  "peter",
+  "bill",
+  "mike",
+  "armando",
+  "steve",
+  "aaron",
+  "emily",
+  "grace",
 ];
 
-List users = [
-  {'id': 'l3x', 'label': 'l3x'},
-  {'id': 'al3x', 'label': 'al3x'},
-  {'id': 'phil', 'label': 'phil'},
-  {'id': 'port', 'label': 'port'},
-];
+// List<DropdownMenuItem> projectUserList = [
+//   DropdownMenuItem(
+//     value: "l3x",
+//     child: Text("l3x"),
+//   ),
+//   DropdownMenuItem(
+//     value: "al3x",
+//     child: Text("al3x"),
+//   ),
+//   DropdownMenuItem(
+//     value: "phil",
+//     child: Text("phil"),
+//   ),
+//   DropdownMenuItem(
+//     value: "port",
+//     child: Text("port"),
+//   ),
+// ];

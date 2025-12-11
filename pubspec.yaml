@@ -96,10 +96,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   flutter_dotenv: ^6.0.0
   dropdown_button2: ^2.3.9
-  textfield_search: ^0.11.1
-  multiple_search_selection: ^2.7.2
-  dropdown_plus: ^0.0.9
-  multiselect_dropdown_flutter: ^0.0.7
+  optimized_search_field: ^2.0.2
 
 dev_dependencies:
   flutter_test:

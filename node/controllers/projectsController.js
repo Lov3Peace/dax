@@ -1,6 +1,7 @@
 import { minioClient } from "../clients/minio.js";
 import { errorLog, infoLog } from "../log.js";
 import ProjectCategories from "../storage/models/projectCategory.js";
+import projectPost from "../storage/models/projectPost.js";
 
 export const updateProjectCategoriesCollection = async function () {
   const categories = await ProjectCategories.find({});
@@ -56,4 +57,28 @@ export const getProjectPosts = async function (req, res) {
   }
 
   const projectCollection = Project;
+};
+
+export const createNewProject = async (req, res) => {
+  console.log(req.body);
+  console.log(req.body.pid);
+
+  if (!req.body.pid) {
+    return res.status(400).json("Invalid project");
+  }
+  const newProject = await projectPost.create({
+    pid: req.body.pid,
+    title: req.body.title,
+    category: req.body.category,
+    description: req.body.description,
+    acceptanceCriteria: req.body.acceptanceCriteria,
+    public: req.body.public,
+    group: req.body.group,
+    teammates: req.body.teammates,
+    etc: req.body.etc,
+    rolesNeeded: req.body.rolesNeeded,
+    timestamp: req.body.timestamp,
+    images: "",
+  });
+  return res.status(200).json("Project Posted Successfully");
 };

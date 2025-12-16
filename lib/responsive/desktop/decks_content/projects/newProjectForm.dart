@@ -16,6 +16,8 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:optimized_search_field/optimized_search_field.dart';
+import 'package:http/browser_client.dart' as httpClient;
+import 'package:uuid/v4.dart';
 
 class NewProjectForm extends StatefulWidget {
   NewProjectForm({super.key});
@@ -25,6 +27,7 @@ class NewProjectForm extends StatefulWidget {
 }
 
 class _NewProjectFormState extends State<NewProjectForm> {
+  Map projectData = {};
   final TextEditingController _projectTitleController = TextEditingController();
 
   final TextEditingController _projectDescriptionController =
@@ -40,12 +43,11 @@ class _NewProjectFormState extends State<NewProjectForm> {
   bool isPrivate = false;
   bool isTeammatesVisible = true;
   bool isRolesNeededVisible = true;
-  var projectCategoryValue;
+  var _projectCategoryValue;
   var projectUserListValue;
   var etcUnitsValue;
   var etcValuesValue;
   var rolesNeededValue;
-  var projectRolesValue;
   ScrollController formScrollContrller = ScrollController();
 
 // Group vs Solo
@@ -74,11 +76,11 @@ class _NewProjectFormState extends State<NewProjectForm> {
   var searchItemsList = [];
   Color highlightedColor = Colors.black87;
   final ScrollController _teammatesScrollController = ScrollController();
-  int highlightIndex = -1;
+  int highlightIndex = 0;
   var _teammatesSelected = [];
   bool isHighlighted = false;
   FocusNode _teammatesTextFieldFocusNode = FocusNode();
-  List<String> selectedTeammates = [];
+  List<String> _selectedTeammates = [];
   bool isSearchEmpty = true;
   bool isTeammateSelected = false;
   final textFieldKey = GlobalKey();
@@ -87,6 +89,42 @@ class _NewProjectFormState extends State<NewProjectForm> {
   //     items: projectUserList,
   //     displayProperty: (user) => user,
   //     filterProperty: (user) => user);
+  Future createProjectPost() async {
+    try {
+      final createProjectEndpoint = Uri.parse("$hostname/api/createNewProject");
+      final client = httpClient.BrowserClient()..withCredentials = true;
+      final pid = const UuidV4().generate();
+      final title = _projectTitleController.text;
+      final description = _projectDescriptionController.text;
+      final category = _projectCategoryValue.toString();
+      final acceptanceCriteria = _acceptanceCriteriaController.text;
+      final etc = etcValuesValue.toString() + " " + etcUnitsValue.toString();
+      final timestamp = DateTime.now().toString();
+
+      projectData.addAll({
+        "pid": pid,
+        "title": title,
+        "category": category,
+        "description": description,
+        "acceptanceCriteria": acceptanceCriteria,
+        "public": isPublic,
+        "group": isGroupProject,
+        "teammates": _selectedTeammates,
+        "etc": etc,
+        "rolesNeeded": rolesNeededValue,
+        "timestamp": timestamp,
+      });
+      final res = await client.post(createProjectEndpoint,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: jsonEncode(projectData));
+      final resBody = res.body;
+      print("Project Post Response: $resBody");
+    } catch (e) {
+      print("Couldn't eeen do it: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,10 +193,10 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     const SizedBox(height: 20),
                     DropdownButton2(
                       items: projectCategoryDropdownItems,
-                      value: projectCategoryValue,
+                      value: _projectCategoryValue,
                       onChanged: (selectedValue) {
                         setState(() {
-                          projectCategoryValue = selectedValue;
+                          _projectCategoryValue = selectedValue;
                         });
                       },
                       style: TextStyle(fontSize: 3.sp(context), color: white),
@@ -250,6 +288,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           scale: 1.05,
                           onTap: () {
                             setState(() {
+                              _selectedTeammates.clear();
                               grpButtonColor1 = pink;
                               grpButtonColor2 = red;
                               grpButtonBorderColor = tran;
@@ -326,16 +365,17 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 fontSize: 4.sp(context),
                                 fontWeight: FontWeight.w600),
                           ),
+                          const SizedBox(height: 15),
                           BaseMultiSearchField<String>(
                             dropDownList: projectUserList,
-                            values: selectedTeammates,
+                            values: _selectedTeammates,
                             item: (user) => Text(user),
                             textFieldKey: textFieldKey,
 
                             labelText: "Seach for Users...",
                             labelTextStyle:
                                 TextStyle(fontSize: 2.5.sp(context)),
-                            fieldDecoration: InputDecoration(),
+
                             showErrorText: true,
                             controller: _teammatesSearchController,
                             optionsBuilder:
@@ -346,16 +386,14 @@ class _NewProjectFormState extends State<NewProjectForm> {
                               setState(() {
                                 // Return list where the input is within a value in the
                                 // projectUserList and isn't in the already
-                                // selectedTeammates list
+                                //_selectedTeammates list
                                 teammateOptionsList = projectUserList
                                     .where((value) =>
                                         value.contains(textEditingValue.text) &&
-                                        !selectedTeammates.contains(value))
+                                        !_selectedTeammates.contains(value))
                                     .toList();
                               });
-                              return projectUserList.where((value) =>
-                                  value.contains(textEditingValue.text) &&
-                                  !selectedTeammates.contains(value));
+                              return teammateOptionsList;
                             },
                             getItemText: (text) {
                               if (projectUserList.contains(text)) {
@@ -370,7 +408,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                               scale: 1.10,
                               // Remove the selected teammate on tap
                               onTap: () => setState(() {
-                                selectedTeammates.remove(user);
+                                _selectedTeammates.remove(user);
                               }),
                               child: GradientContainer(
                                 height: 2.w(context),
@@ -425,6 +463,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                     }
                                     setState(() {
                                       highlightIndex++;
+                                      print(
+                                          "DOWN ARROW teammateOptionsList: $teammateOptionsList");
                                       _teammatesScrollController;
                                     });
                                     return KeyEventResult.handled;
@@ -510,24 +550,36 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             },
 
                             removeEvent: (removedItem) => setState(() {
-                              selectedTeammates.remove(removedItem);
+                              _selectedTeammates.remove(removedItem);
                             }),
                             onSelected: (selectedItem) => setState(() {
-                              print("highlightIndex: $highlightIndex");
-                              // Will throw error if highlightIndex = -1
-                              var optionHighlighted =
-                                  teammateOptionsList[highlightIndex];
-                              print("optionHighlighted: $optionHighlighted");
-                              print("selectedItem: $selectedItem");
-                              // if (projectUserList.contains(selectedItem)) {
-                              //   selectedTeammates.add(selectedItem);
-                              // }
+                              // This takes whatever you click on (selectedItem) and changes teammateOptionsList
+                              // to that (so like teammateOptionsList = [l3x]). Then it appends
+                              // teammateOptionsList to _selectedTeammates. Not sure why it works this way but
+                              // it does. So, we use one variable (optionSelected) and adjust it to be the
+                              // option that is highlighted when user presses Enter (teammateOptionsList[highlightIndex])
+                              //or the option that is clicked (teammateOptionsList[0])
+                              var tol = teammateOptionsList.length;
+                              var optionSelected = teammateOptionsList[
+                                  0]; // default val is the first index
+                              if (tol != 1) {
+                                // only change to the highlightIndex if tol != 1 (tol only == 1
+                                // if you click on the option...not sure why)
+                                optionSelected =
+                                    teammateOptionsList[highlightIndex];
+                              }
+                              if (projectUserList.contains(selectedItem)) {
+                                _selectedTeammates.add(optionSelected);
+                                print("ADDED SELECTED ITEM");
+                              }
+
                               if ((projectUserList.contains(selectedItem) ||
                                       projectUserList
-                                          .contains(optionHighlighted)) &&
-                                  !selectedTeammates.contains(selectedItem) &&
+                                          .contains(optionSelected)) &&
+                                  !_selectedTeammates.contains(selectedItem) &&
                                   teammatesNode.hasFocus) {
-                                selectedTeammates.add(optionHighlighted);
+                                print("ADDED HIGHLIGHTED ITEM");
+                                _selectedTeammates.add(optionSelected);
                               }
                               highlightIndex = 0;
                             }),
@@ -550,8 +602,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 onSubmitted: onSubmitted,
                                 decoration: InputDecoration(
                                   labelText: "Search for Users...",
-                                  labelStyle:
-                                      TextStyle(fontSize: 2.sp(context)),
+                                  labelStyle: TextStyle(
+                                      fontSize: 2.5.sp(context), color: white),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.circular(1.5.w(context)),
@@ -746,10 +798,10 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           SizedBox(height: 20),
                           DropdownButton2(
                             items: projectRoles,
-                            value: projectRolesValue,
+                            value: rolesNeededValue,
                             onChanged: (selectedValue) {
                               setState(() {
-                                projectRolesValue = selectedValue;
+                                rolesNeededValue = selectedValue;
                               });
                             },
                             style: TextStyle(
@@ -764,6 +816,26 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                   ),
                                 )),
                           ),
+                          Row(
+                            children: [
+                              Expanded(child: SizedBox()),
+                              TactileButton(
+                                onTap: createProjectPost,
+                                scale: 1.08,
+                                child: GradientContainer(
+                                  height: 3.w(context),
+                                  width: 7.w(context),
+                                  text: "Submit",
+                                  textSize: 2.5.sp(context),
+                                  gradient1: pink,
+                                  gradient2: red,
+                                  neonGlow: pink,
+                                  borderColor: tran,
+                                  borderRadius: 10.w(context),
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),

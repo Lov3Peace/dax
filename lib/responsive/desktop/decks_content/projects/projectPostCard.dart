@@ -10,7 +10,7 @@ class ProjectPostCard extends StatefulWidget {
     required this.category,
     required this.postTitle,
     required this.user,
-    required this.content,
+    required this.description,
     required this.rolesNeeded,
     required this.timestamp,
     this.height,
@@ -24,7 +24,7 @@ class ProjectPostCard extends StatefulWidget {
   final String category;
   final String postTitle;
   final String user;
-  final String content;
+  final String description;
   final String rolesNeeded;
   final String timestamp;
   final double? height;
@@ -123,15 +123,28 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                           ),
                         ),
                         SizedBox(height: 5),
-                        Text(
-                          "Description: " + widget.content,
-                          style: TextStyle(fontSize: 3.sp(context)),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
+                        Text.rich(
+                          TextSpan(children: [
+                            TextSpan(
+                              text: "Description: ",
+                              style: TextStyle(
+                                  fontSize: 3.sp(context),
+                                  fontWeight: FontWeight.w800),
+                            ),
+                            TextSpan(text: widget.description)
+                          ]),
                         ),
-                        Text(
-                          "Roles Needed: " + widget.rolesNeeded,
-                          style: TextStyle(fontSize: 3.sp(context)),
+                        SizedBox(height: 10),
+                        Text.rich(
+                          TextSpan(children: [
+                            TextSpan(
+                              text: "Roles Needed: ",
+                              style: TextStyle(
+                                  fontSize: 3.sp(context),
+                                  fontWeight: FontWeight.w800),
+                            ),
+                            TextSpan(text: widget.rolesNeeded)
+                          ]),
                         ),
                       ],
                     ),

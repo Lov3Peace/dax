@@ -60,7 +60,7 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
               category: widget.parameter,
               postTitle: post["title"],
               user: post["user"],
-              content: post["description"],
+              description: post["description"],
               rolesNeeded: post["rolesNeeded"] ?? "None",
               timestamp: post["timestamp"],
               gradient1: red,

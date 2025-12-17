@@ -10,6 +10,7 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/projects/
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectRolesList.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectUserList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/blurryContainer.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
@@ -100,7 +101,56 @@ class _NewProjectFormState extends State<NewProjectForm> {
       final acceptanceCriteria = _acceptanceCriteriaController.text;
       final etc = etcValuesValue.toString() + " " + etcUnitsValue.toString();
       final timestamp = DateTime.now().toString();
+      var errorText = "";
 
+      if (title.isEmpty) {
+        errorText = errorText + "- Title Cannot Be Empty\n";
+      }
+      if (description.isEmpty) {
+        errorText = errorText + "- Description Cannot Be Empty\n";
+      }
+      if (category.contains("null")) {
+        errorText = errorText + "- Category Cannot Be Empty\n";
+      }
+      if (acceptanceCriteria.isEmpty) {
+        errorText = errorText + "- Acceptance Criteria Cannot Be Empty\n";
+      }
+      if (etc.contains("null")) {
+        errorText = errorText +
+            "- Estimated Time of Completion Fields Cannot Be Empty\n";
+      }
+      if (errorText.startsWith("-")) {
+        return showDialog(
+            context: context,
+            builder: (context) {
+              return Center(
+                child: BlurryContainer(
+                    width: 30.w(context),
+                    height: 20.w(context),
+                    child: Padding(
+                      padding: EdgeInsets.all(2.w(context)),
+                      child: SingleChildScrollView(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Errors Found",
+                            style: TextStyle(
+                                color: red,
+                                fontSize: 5.sp(context),
+                                fontWeight: FontWeight.w800),
+                          ),
+                          Divider(),
+                          Text(
+                            errorText,
+                            style: TextStyle(fontSize: 3.sp(context)),
+                          ),
+                        ],
+                      )),
+                    )),
+              );
+            });
+      }
       projectData.addAll({
         "pid": pid,
         "title": title,
@@ -121,6 +171,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
           body: jsonEncode(projectData));
       final resBody = res.body;
       print("Project Post Response: $resBody");
+      return 1;
     } catch (e) {
       print("Couldn't eeen do it: $e");
     }
@@ -151,13 +202,25 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     const SizedBox(height: 25),
                     //
                     // Title
-                    Text(
-                      textAlign: TextAlign.start,
-                      "Title",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 4.sp(context),
-                          fontWeight: FontWeight.w600),
+                    Row(
+                      children: [
+                        Text(
+                          textAlign: TextAlign.start,
+                          "Title",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          textAlign: TextAlign.start,
+                          " *",
+                          style: TextStyle(
+                              color: red,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 20),
                     TextField(
@@ -182,13 +245,25 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     const SizedBox(height: 25),
                     //
                     // Category Dropdown
-                    Text(
-                      textAlign: TextAlign.start,
-                      "Category",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 4.sp(context),
-                          fontWeight: FontWeight.w600),
+                    Row(
+                      children: [
+                        Text(
+                          textAlign: TextAlign.start,
+                          "Category",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          textAlign: TextAlign.start,
+                          " *",
+                          style: TextStyle(
+                              color: red,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 20),
                     DropdownButton2(
@@ -213,13 +288,25 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     const SizedBox(height: 25),
                     //
                     // Description
-                    Text(
-                      textAlign: TextAlign.start,
-                      "Project Description",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 4.sp(context),
-                          fontWeight: FontWeight.w600),
+                    Row(
+                      children: [
+                        Text(
+                          textAlign: TextAlign.start,
+                          "Project Description",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          textAlign: TextAlign.start,
+                          " *",
+                          style: TextStyle(
+                              color: red,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 20),
                     TextField(
@@ -243,13 +330,25 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     const SizedBox(height: 25),
                     //
                     // Acceptance Criteria
-                    Text(
-                      textAlign: TextAlign.start,
-                      "Acceptance Criteria",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 4.sp(context),
-                          fontWeight: FontWeight.w600),
+                    Row(
+                      children: [
+                        Text(
+                          textAlign: TextAlign.start,
+                          "Acceptance Criteria",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          textAlign: TextAlign.start,
+                          " *",
+                          style: TextStyle(
+                              color: red,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 20),
                     TextField(
@@ -653,13 +752,25 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     SizedBox(height: 25),
                     //
                     // Estimated Time to Completion
-                    Text(
-                      textAlign: TextAlign.start,
-                      "Estimated Time to Completion",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 4.sp(context),
-                          fontWeight: FontWeight.w600),
+                    Row(
+                      children: [
+                        Text(
+                          textAlign: TextAlign.start,
+                          "Estimated Time to Completion",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          textAlign: TextAlign.start,
+                          " *",
+                          style: TextStyle(
+                              color: red,
+                              fontSize: 4.sp(context),
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 20),
                     Row(
@@ -816,29 +927,53 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                   ),
                                 )),
                           ),
-                          Row(
-                            children: [
-                              Expanded(child: SizedBox()),
-                              TactileButton(
-                                onTap: createProjectPost,
-                                scale: 1.08,
-                                child: GradientContainer(
-                                  height: 3.w(context),
-                                  width: 7.w(context),
-                                  text: "Submit",
-                                  textSize: 2.5.sp(context),
-                                  gradient1: pink,
-                                  gradient2: red,
-                                  neonGlow: pink,
-                                  borderColor: tran,
-                                  borderRadius: 10.w(context),
-                                ),
-                              ),
-                            ],
-                          )
                         ],
                       ),
                     ),
+                    Row(
+                      children: [
+                        Expanded(child: SizedBox()),
+                        TactileButton(
+                          onTap: () async {
+                            final res = await createProjectPost();
+                            print("Res: $res");
+                            if (res == 1) {
+                              router.pop();
+                              if (!mounted) {
+                                return;
+                              }
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Center(
+                                      child: BlurryContainer(
+                                          width: 30.w(context),
+                                          height: 10.w(context),
+                                          child: Center(
+                                            child: Text(
+                                                "Project Posted Successfully"),
+                                          )),
+                                    );
+                                  });
+                              Future.delayed(Duration(seconds: 2))
+                                  .then((onValue) => router.pop());
+                            }
+                          },
+                          scale: 1.08,
+                          child: GradientContainer(
+                            height: 3.w(context),
+                            width: 7.w(context),
+                            text: "Submit",
+                            textSize: 2.5.sp(context),
+                            gradient1: pink,
+                            gradient2: red,
+                            neonGlow: pink,
+                            borderColor: tran,
+                            borderRadius: 10.w(context),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ],

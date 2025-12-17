@@ -1,7 +1,7 @@
+import mongoose from "mongoose";
 import { minioClient } from "../clients/minio.js";
 import { errorLog, infoLog } from "../log.js";
 import ProjectCategories from "../storage/models/projectCategory.js";
-import projectPost from "../storage/models/projectPost.js";
 
 export const updateProjectCategoriesCollection = async function () {
   const categories = await ProjectCategories.find({});
@@ -60,13 +60,60 @@ export const getProjectPosts = async function (req, res) {
 };
 
 export const createNewProject = async (req, res) => {
-  console.log(req.body);
-  console.log(req.body.pid);
-
   if (!req.body.pid) {
     return res.status(400).json("Invalid project");
   }
-  const newProject = await projectPost.create({
+  const projectCategoryExists = [];
+  let collectionName = req.body.category;
+  try {
+    collectionName = collectionName.toLowerCase().replace(" ", "_");
+    collectionName = collectionName + "_projects";
+  } catch (e) {
+    console.log(`Couldn't adjust category name: ${e}`);
+  }
+  let projectCollection;
+
+  try {
+    console.log(collectionName);
+    // Find the collection in the DB that matches the category field in the body
+    const projectCategoryExists = mongoose.connection.db.collection({
+      name: collectionName,
+    }).collectionName;
+    console.log(projectCategoryExists);
+  } catch (e) {
+    console.log(`Couldn't find collection in DB: ${e}`);
+  }
+  // If the collection doesn't exist, create one with the given schema
+  if (!projectCategoryExists) {
+    console.log("Project Category Doesn't Exist. Creating...");
+    const projectPostSchema = new mongoose.Schema({
+      pid: { type: String, required: true },
+      title: { type: String, required: true },
+      category: { type: String, required: true },
+      description: { type: String, required: true },
+      acceptanceCriteria: { type: String, required: true },
+      public: { type: Boolean, required: true },
+      group: { type: Boolean, required: true },
+      teammates: { type: Array, required: false },
+      etc: { type: String, required: true },
+      rolesNeeded: { type: String, required: false },
+      timestamp: { type: String, required: true },
+      images: { type: String, required: false },
+    });
+    try {
+      projectCollection = mongoose.model(collectionName, projectPostSchema);
+    } catch (e) {
+      console.log(`Unable to instantiate model: ${e}`);
+    }
+  } else {
+    console.log(`Project Category: ${collectionName} exists!`);
+    try {
+      projectCollection = mongoose.connection.db.collection(collectionName);
+    } catch (e) {
+      console.log(`Unable to find collection: ${e}`);
+    }
+  }
+  const newProject = await projectCollection.insertOne({
     pid: req.body.pid,
     title: req.body.title,
     category: req.body.category,
@@ -80,5 +127,5 @@ export const createNewProject = async (req, res) => {
     timestamp: req.body.timestamp,
     images: "",
   });
-  return res.status(200).json("Project Posted Successfully");
+  return res.status(200).json(`Project ${req.body.title} Posted Successfully`);
 };

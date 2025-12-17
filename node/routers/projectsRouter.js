@@ -8,7 +8,7 @@ import Router from "express";
 const projectsRouter = Router();
 
 projectsRouter.get("/projectsCategoryAssets", getProjectsCategoryAssets);
-projectsRouter.get("/projectPosts", getProjectPosts);
+projectsRouter.get("/projectPosts/:category", getProjectPosts);
 projectsRouter.post("/createNewProject", createNewProject);
 
 export default projectsRouter;

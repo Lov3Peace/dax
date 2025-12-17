@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/util/responsive_shorthand.dart';
 
 class BlurryContainer extends StatelessWidget {
-  const BlurryContainer(
+  BlurryContainer(
       {super.key,
       this.height,
       this.width,
+      this.borderRadius = 100,
       this.color = const Color.fromARGB(220, 22, 19, 22),
       required this.child});
   final double? height;
   final double? width;
   final Color color;
   final Widget child;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class BlurryContainer extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(1.5.w(context)),
+              borderRadius: BorderRadius.circular(borderRadius),
               color: color,
               border: Border.all(color: const Color.fromARGB(182, 75, 75, 75)),
             ),

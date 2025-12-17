@@ -14,10 +14,12 @@ import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/blurryContainer.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:optimized_search_field/optimized_search_field.dart';
 import 'package:http/browser_client.dart' as httpClient;
+import 'package:provider/provider.dart';
 import 'package:uuid/v4.dart';
 
 class NewProjectForm extends StatefulWidget {
@@ -127,6 +129,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                 child: BlurryContainer(
                     width: 30.w(context),
                     height: 20.w(context),
+                    borderRadius: 1.5.w(context),
                     child: Padding(
                       padding: EdgeInsets.all(2.w(context)),
                       child: SingleChildScrollView(
@@ -151,8 +154,11 @@ class _NewProjectFormState extends State<NewProjectForm> {
               );
             });
       }
+
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
       projectData.addAll({
         "pid": pid,
+        "user": userProvider.username,
         "title": title,
         "category": category,
         "description": description,
@@ -182,6 +188,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
     return BlurryContainer(
       height: 40.w(context),
       width: 60.w(context),
+      borderRadius: 1.5.w(context),
       child: SingleChildScrollView(
         controller: formScrollContrller,
         child: Padding(
@@ -930,6 +937,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         ],
                       ),
                     ),
+                    //
+                    // Submit
                     Row(
                       children: [
                         Expanded(child: SizedBox()),
@@ -943,20 +952,38 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 return;
                               }
                               showDialog(
+                                  barrierDismissible: true,
                                   context: context,
                                   builder: (context) {
                                     return Center(
                                       child: BlurryContainer(
                                           width: 30.w(context),
-                                          height: 10.w(context),
+                                          height: 7.w(context),
                                           child: Center(
-                                            child: Text(
-                                                "Project Posted Successfully"),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                const Icon(
+                                                  Ionicons.checkmark_circle,
+                                                  color: green,
+                                                ),
+                                                SizedBox(width: 1.w(context)),
+                                                Text(
+                                                  "Project Posted Successfully",
+                                                  style: TextStyle(
+                                                      fontSize: 5.sp(context),
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      color: white),
+                                                ),
+                                              ],
+                                            ),
                                           )),
                                     );
                                   });
                               Future.delayed(Duration(seconds: 2))
-                                  .then((onValue) => router.pop());
+                                  .then((_) => router.pop());
                             }
                           },
                           scale: 1.08,

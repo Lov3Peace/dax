@@ -51,43 +51,52 @@ export const getProjectsCategoryAssets = async (req, res) => {
 };
 
 export const getProjectPosts = async function (req, res) {
-  const projectCategory = req.headers.category;
+  // const projectCategory = req.headers.category;
+  const projectCategory = req.params.category + "-projects";
+  console.log(`Project Category: ${projectCategory}`);
   if (!projectCategory) {
     return res.status(404).json("No category sent in header");
   }
-
-  const projectCollection = Project;
+  const projectCollection = mongoose.connection.db.collection(projectCategory);
+  if (projectCollection) {
+    const posts = await projectCollection.find({}).toArray();
+    console.log(`Posts: ${posts}`);
+    console.log(`Project Posts for ${projectCategory} Returned Successfully`);
+    return res.status(200).json(posts);
+  }
+  return res.status(404).json(`Nothing returned for ${projectCategory}`);
 };
 
 export const createNewProject = async (req, res) => {
   if (!req.body.pid) {
     return res.status(400).json("Invalid project");
   }
-  const projectCategoryExists = [];
   let collectionName = req.body.category;
   try {
-    collectionName = collectionName.toLowerCase().replace(" ", "_");
-    collectionName = collectionName + "_projects";
+    collectionName = collectionName.toLowerCase().replaceAll(" ", "-");
+    collectionName = collectionName + "-projects";
   } catch (e) {
     console.log(`Couldn't adjust category name: ${e}`);
   }
   let projectCollection;
+  let reqProjectCategory;
 
   try {
     console.log(collectionName);
     // Find the collection in the DB that matches the category field in the body
-    const projectCategoryExists = mongoose.connection.db.collection({
+    reqProjectCategory = mongoose.connection.db.collection({
       name: collectionName,
     }).collectionName;
-    console.log(projectCategoryExists);
+    console.log(reqProjectCategory);
   } catch (e) {
     console.log(`Couldn't find collection in DB: ${e}`);
   }
   // If the collection doesn't exist, create one with the given schema
-  if (!projectCategoryExists) {
+  if (!reqProjectCategory) {
     console.log("Project Category Doesn't Exist. Creating...");
     const projectPostSchema = new mongoose.Schema({
       pid: { type: String, required: true },
+      user: { type: String, required: true },
       title: { type: String, required: true },
       category: { type: String, required: true },
       description: { type: String, required: true },
@@ -115,6 +124,7 @@ export const createNewProject = async (req, res) => {
   }
   const newProject = await projectCollection.insertOne({
     pid: req.body.pid,
+    user: req.body.user,
     title: req.body.title,
     category: req.body.category,
     description: req.body.description,

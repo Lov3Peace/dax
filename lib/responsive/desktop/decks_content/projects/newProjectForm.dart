@@ -74,7 +74,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
 
   // Teammates Search Dropdown
   // final MultipleSearchController _teammatesSearchController =MultipleSearchController();
-  late FocusNode teammatesNode;
+  late FocusNode teammateOptionsNode;
+  FocusNode _teammatesTextFieldFocusNode = FocusNode();
   final TextEditingController _teammatesSearchController =
       TextEditingController();
   var searchItemsList = [];
@@ -83,7 +84,6 @@ class _NewProjectFormState extends State<NewProjectForm> {
   int highlightIndex = 0;
   var _teammatesSelected = [];
   bool isHighlighted = false;
-  FocusNode _teammatesTextFieldFocusNode = FocusNode();
   List<String> _selectedTeammates = [];
   bool isSearchEmpty = true;
   bool isTeammateSelected = false;
@@ -524,7 +524,9 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 });
                                 for (var user in users) {
                                   if (!teammateOptionsList
-                                      .contains(user["username"])) {
+                                          .contains(user["username"]) &&
+                                      !_selectedTeammates
+                                          .contains(user["username"])) {
                                     teammateOptionsList.add(user["username"]);
                                   }
                                 }
@@ -574,12 +576,12 @@ class _NewProjectFormState extends State<NewProjectForm> {
 // to get access to the onKeyEvent() function. We must return a KeyEventResult for each
 // scenario. This is to give the ability to use arrow keys to cycle through the options.
 // This will be turned into its own widget.
-                              teammatesNode =
+                              teammateOptionsNode =
                                   Focus.of(textFieldKey.currentContext!);
 
-                              teammatesNode.onKeyEvent = (node, event) {
+                              teammateOptionsNode.onKeyEvent = (node, event) {
                                 if (value.isNotEmpty) {
-                                  teammatesNode.requestFocus();
+                                  // teammateOptionsNode.requestFocus();
                                   // DOWN ARROW
                                   if (event is KeyDownEvent &&
                                       event.logicalKey ==
@@ -716,43 +718,62 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             removeEvent: (removedItem) => setState(() {
                               _selectedTeammates.remove(removedItem);
                             }),
-                            onSelected: (selectedItem) => setState(() {
-                              // This takes whatever you click on (selectedItem) and changes teammateOptionsList
-                              // to that (so like teammateOptionsList = [l3x]). Then it appends
-                              // teammateOptionsList to _selectedTeammates. Not sure why it works this way but
-                              // it does. So, we use one variable (optionSelected) and adjust it to be the
-                              // option that is highlighted when user presses Enter (teammateOptionsList[highlightIndex])
-                              //or the option that is clicked (teammateOptionsList[0])
-                              // var tolLen = teammateOptionsList.length;
-                              // var optionSelected = teammateOptionsList[
-                              //     0]; // default val is the first index
-                              // if (tolLen != 1) {
-                              // only change to the highlightIndex if tol_len != 1 (tol_len only == 1
-                              // if you click on the option...not sure why)
-                              var optionSelected =
-                                  teammateOptionsList[highlightIndex];
-                              // }
-                              // print("Users: $users");
-                              // print("TOL Length: $tol_len");
-                              // print("TOL: $teammateOptionsList");
-                              // print("optionSelected: $optionSelected");
-                              // // _selectedTeammates.add(optionSelected);
+                            onSelected: (selectedItem) {
+                              setState(() {
+                                // This takes whatever you click on (selectedItem) and changes teammateOptionsList
+                                // to that (so like teammateOptionsList = [l3x]). Then it appends
+                                // teammateOptionsList to _selectedTeammates. Not sure why it works this way but
+                                // it does. So, we use one variable (optionSelected) and adjust it to be the
+                                // option that is highlighted when user presses Enter (teammateOptionsList[highlightIndex])
+                                //or the option that is clicked (teammateOptionsList[0])
+                                // var tolLen = teammateOptionsList.length;
+                                // var optionSelected = teammateOptionsList[
+                                //     0]; // default val is the first index
+                                // if (tolLen != 1) {
+                                // only change to the highlightIndex if tol_len != 1 (tol_len only == 1
+                                // if you click on the option...not sure why)
+                                var optionSelected =
+                                    teammateOptionsList[highlightIndex];
+                                // }
+                                // print("Users: $users");
+                                // print("TOL Length: $tol_len");
+                                // print("TOL: $teammateOptionsList");
+                                // print("optionSelected: $optionSelected");
+                                // // _selectedTeammates.add(optionSelected);
 
-                              // ON CLICK
-                              if (teammatesNode.hasFocus &&
-                                  teammateOptionsList.contains(selectedItem)) {
-                                _selectedTeammates.add(selectedItem);
-                              }
+                                print("SELECTED ITEM: $selectedItem");
+                                // ON CLICK
+                                if (teammateOptionsNode.hasFocus &&
+                                    teammateOptionsList
+                                        .contains(selectedItem) &&
+                                    !_selectedTeammates
+                                        .contains(selectedItem)) {
+                                  _selectedTeammates.add(selectedItem);
+                                }
 
-                              // ON PRESS ENTER
-                              if (teammatesNode.hasFocus &&
-                                  teammateOptionsList
-                                      .contains(optionSelected) &&
-                                  !_selectedTeammates.contains(selectedItem)) {
-                                _selectedTeammates.add(optionSelected);
+                                print("OPTION SELECTED: $optionSelected");
+                                // ON PRESS ENTER
+                                if (teammateOptionsNode.hasFocus &&
+                                    teammateOptionsList
+                                        .contains(optionSelected) &&
+                                    !_selectedTeammates
+                                        .contains(selectedItem) &&
+                                    !_selectedTeammates
+                                        .contains(optionSelected)) {
+                                  _selectedTeammates.add(optionSelected);
+                                }
+                                highlightIndex = 0;
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  _teammatesTextFieldFocusNode.requestFocus();
+                                });
+                              });
+                              _teammatesTextFieldFocusNode.requestFocus();
+                              if (_teammatesTextFieldFocusNode.hasFocus) {
+                                print(
+                                    "_teammatesTextFieldFocusNode  HAS FOCUS");
                               }
-                              highlightIndex = 0;
-                            }),
+                            },
                             // customTextField because you can't change the input text font
                             // size otherwise. Pass the textFieldKey and everything works.
                             customTextField: ({
@@ -764,6 +785,9 @@ class _NewProjectFormState extends State<NewProjectForm> {
                               required suffixIcon,
                               required textFieldKey,
                             }) {
+                              if (focusNode.hasFocus) {
+                                print("focusNode HAS FOCUS");
+                              }
                               return TextField(
                                 key: textFieldKey,
                                 controller: controller,

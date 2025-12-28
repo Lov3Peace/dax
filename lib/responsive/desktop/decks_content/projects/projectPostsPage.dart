@@ -92,7 +92,7 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
     return FutureBuilder(
         future: _getPosts,
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return WebUiTemplate(
               title: "Projects",
               button1: CommunitiesButton(),
@@ -281,5 +281,12 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
             ),
           );
         });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _getPosts;
   }
 }

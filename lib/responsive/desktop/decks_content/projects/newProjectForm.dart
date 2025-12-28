@@ -20,6 +20,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:optimized_search_field/optimized_search_field.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:provider/provider.dart';
+import 'package:supercharged/supercharged.dart';
 import 'package:uuid/v4.dart';
 
 class NewProjectForm extends StatefulWidget {
@@ -88,14 +89,17 @@ class _NewProjectFormState extends State<NewProjectForm> {
   bool isTeammateSelected = false;
   final textFieldKey = GlobalKey();
   var searchResultsListKey = GlobalKey();
-  var teammateOptionsList;
+  List<String> placeholderUsers = [];
+  List<String> teammateOptionsList = [];
+  var users;
+  bool searching = true;
   //     items: projectUserList,
   //     displayProperty: (user) => user,
   //     filterProperty: (user) => user);
+  final client = httpClient.BrowserClient()..withCredentials = true;
   Future createProjectPost() async {
     try {
       final createProjectEndpoint = Uri.parse("$hostname/api/createNewProject");
-      final client = httpClient.BrowserClient()..withCredentials = true;
       final pid = const UuidV4().generate();
       final title = _projectTitleController.text;
       final description = _projectDescriptionController.text;
@@ -181,6 +185,27 @@ class _NewProjectFormState extends State<NewProjectForm> {
     } catch (e) {
       print("Couldn't eeen do it: $e");
     }
+  }
+
+  Future _fetchUsers(searchString) async {
+    try {
+      final getUsersEndpoint =
+          Uri.parse("$hostname/api/getUsers?searchString=$searchString");
+      final res = await client.get(
+        getUsersEndpoint,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      );
+      final body = jsonDecode(res.body);
+      setState(() {
+        users = body;
+      });
+      return users;
+    } catch (e) {
+      print("COULDNT EEN DO IT: $e");
+    }
+    // });
   }
 
   @override
@@ -473,7 +498,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           ),
                           const SizedBox(height: 15),
                           BaseMultiSearchField<String>(
-                            dropDownList: projectUserList,
+                            dropDownList: placeholderUsers,
                             values: _selectedTeammates,
                             item: (user) => Text(user),
                             textFieldKey: textFieldKey,
@@ -485,24 +510,31 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             showErrorText: true,
                             controller: _teammatesSearchController,
                             optionsBuilder:
-                                (TextEditingValue textEditingValue) {
+                                (TextEditingValue textEditingValue) async {
                               if (textEditingValue.text.isEmpty) {
                                 return [];
                               }
-                              setState(() {
-                                // Return list where the input is within a value in the
-                                // projectUserList and isn't in the already
-                                //_selectedTeammates list
-                                teammateOptionsList = projectUserList
-                                    .where((value) =>
-                                        value.contains(textEditingValue.text) &&
-                                        !_selectedTeammates.contains(value))
-                                    .toList();
-                              });
-                              return teammateOptionsList;
+                              if (textEditingValue.text.length > 1) {
+                                await _fetchUsers(textEditingValue.text)
+                                    .then((_) {
+                                  setState(() {
+                                    searching = false;
+                                    teammateOptionsList.clear();
+                                  });
+                                });
+                                for (var user in users) {
+                                  if (!teammateOptionsList
+                                      .contains(user["username"])) {
+                                    teammateOptionsList.add(user["username"]);
+                                  }
+                                }
+
+                                return teammateOptionsList;
+                              }
+                              return [];
                             },
                             getItemText: (text) {
-                              if (projectUserList.contains(text)) {
+                              if (teammateOptionsList.contains(text)) {
                                 return text;
                               }
                               return "";
@@ -547,6 +579,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
 
                               teammatesNode.onKeyEvent = (node, event) {
                                 if (value.isNotEmpty) {
+                                  teammatesNode.requestFocus();
                                   // DOWN ARROW
                                   if (event is KeyDownEvent &&
                                       event.logicalKey ==
@@ -569,8 +602,6 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                     }
                                     setState(() {
                                       highlightIndex++;
-                                      print(
-                                          "DOWN ARROW teammateOptionsList: $teammateOptionsList");
                                       _teammatesScrollController;
                                     });
                                     return KeyEventResult.handled;
@@ -654,7 +685,34 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                       borderColor: tran,
                                       borderRadius: 10.w(context)));
                             },
+                            menuList: ({required item, required length}) {
+                              if (searching == true) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.black87,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(1.w(context)),
+                                    child: CircularProgressIndicator(
+                                      color: red,
+                                    ),
+                                  ),
+                                );
+                              }
 
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.black87,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: ListView.builder(
+                                  itemCount: length,
+                                  controller: _teammatesScrollController,
+                                  itemBuilder: (context, index) => item(index),
+                                ),
+                              );
+                            },
                             removeEvent: (removedItem) => setState(() {
                               _selectedTeammates.remove(removedItem);
                             }),
@@ -665,26 +723,32 @@ class _NewProjectFormState extends State<NewProjectForm> {
                               // it does. So, we use one variable (optionSelected) and adjust it to be the
                               // option that is highlighted when user presses Enter (teammateOptionsList[highlightIndex])
                               //or the option that is clicked (teammateOptionsList[0])
-                              var tol = teammateOptionsList.length;
-                              var optionSelected = teammateOptionsList[
-                                  0]; // default val is the first index
-                              if (tol != 1) {
-                                // only change to the highlightIndex if tol != 1 (tol only == 1
-                                // if you click on the option...not sure why)
-                                optionSelected =
-                                    teammateOptionsList[highlightIndex];
-                              }
-                              if (projectUserList.contains(selectedItem)) {
-                                _selectedTeammates.add(optionSelected);
-                                print("ADDED SELECTED ITEM");
+                              // var tolLen = teammateOptionsList.length;
+                              // var optionSelected = teammateOptionsList[
+                              //     0]; // default val is the first index
+                              // if (tolLen != 1) {
+                              // only change to the highlightIndex if tol_len != 1 (tol_len only == 1
+                              // if you click on the option...not sure why)
+                              var optionSelected =
+                                  teammateOptionsList[highlightIndex];
+                              // }
+                              // print("Users: $users");
+                              // print("TOL Length: $tol_len");
+                              // print("TOL: $teammateOptionsList");
+                              // print("optionSelected: $optionSelected");
+                              // // _selectedTeammates.add(optionSelected);
+
+                              // ON CLICK
+                              if (teammatesNode.hasFocus &&
+                                  teammateOptionsList.contains(selectedItem)) {
+                                _selectedTeammates.add(selectedItem);
                               }
 
-                              if ((projectUserList.contains(selectedItem) ||
-                                      projectUserList
-                                          .contains(optionSelected)) &&
-                                  !_selectedTeammates.contains(selectedItem) &&
-                                  teammatesNode.hasFocus) {
-                                print("ADDED HIGHLIGHTED ITEM");
+                              // ON PRESS ENTER
+                              if (teammatesNode.hasFocus &&
+                                  teammateOptionsList
+                                      .contains(optionSelected) &&
+                                  !_selectedTeammates.contains(selectedItem)) {
                                 _selectedTeammates.add(optionSelected);
                               }
                               highlightIndex = 0;
@@ -724,6 +788,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                     borderSide: BorderSide(color: white),
                                   ),
                                 ),
+                                cursorColor: red,
                                 style: TextStyle(
                                   fontSize: 3.sp(context),
                                   color: Colors.white,

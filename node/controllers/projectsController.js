@@ -57,8 +57,14 @@ export const getProjectPosts = async function (req, res) {
   if (!projectCategory) {
     return res.status(404).json("No category sent in header");
   }
-  const projectCollection = mongoose.connection.db.collection(projectCategory);
-  if (projectCollection) {
+
+  const collections = await mongoose.connection.db.listCollections().toArray();
+  const collectionExists = collections.some((i) => i.name === projectCategory);
+
+  if (collectionExists) {
+    console.log(collections);
+    const projectCollection =
+      mongoose.connection.db.collection(projectCategory);
     const posts = await projectCollection.find({}).toArray();
     console.log(`Posts: ${posts}`);
     console.log(`Project Posts for ${projectCategory} Returned Successfully`);

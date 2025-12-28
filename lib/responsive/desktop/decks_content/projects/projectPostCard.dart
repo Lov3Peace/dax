@@ -122,8 +122,10 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 10),
                         Text.rich(
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                           TextSpan(children: [
                             TextSpan(
                               text: "Description: ",
@@ -136,6 +138,8 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                         ),
                         SizedBox(height: 10),
                         Text.rich(
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           TextSpan(children: [
                             TextSpan(
                               text: "Roles Needed: ",

@@ -1,3 +1,4 @@
+import { Client } from "pg";
 import User from "../storage/models/user.js";
 // Logger for info, debug, errors, etc.
 import { errorLog, infoLog } from "../log.js";
@@ -236,4 +237,14 @@ export const changeUsername = async (req, res) => {
   } catch (error) {
     res.status(500).json(error);
   }
+};
+
+export const pgLogin = async (req, res) => {
+  const client = new Client();
+  client.connect({
+    host: "localhost",
+    port: "5432",
+    user: "carbon_dev",
+    password: process.env.PG_DB_PW,
+  });
 };

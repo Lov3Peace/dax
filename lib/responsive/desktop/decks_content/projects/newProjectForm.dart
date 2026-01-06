@@ -747,19 +747,11 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                     teammateOptionsList
                                         .contains(selectedItem) &&
                                     !_selectedTeammates
-                                        .contains(selectedItem)) {
-                                  _selectedTeammates.add(selectedItem);
-                                }
-
-                                print("OPTION SELECTED: $optionSelected");
-                                // ON PRESS ENTER
-                                if (teammateOptionsNode.hasFocus &&
-                                    teammateOptionsList
-                                        .contains(optionSelected) &&
-                                    !_selectedTeammates
                                         .contains(selectedItem) &&
                                     !_selectedTeammates
                                         .contains(optionSelected)) {
+                                  _selectedTeammates.add(selectedItem);
+                                } else if (teammateOptionsNode.hasFocus) {
                                   _selectedTeammates.add(optionSelected);
                                 }
                                 highlightIndex = 0;
@@ -768,11 +760,6 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                   _teammatesTextFieldFocusNode.requestFocus();
                                 });
                               });
-                              _teammatesTextFieldFocusNode.requestFocus();
-                              if (_teammatesTextFieldFocusNode.hasFocus) {
-                                print(
-                                    "_teammatesTextFieldFocusNode  HAS FOCUS");
-                              }
                             },
                             // customTextField because you can't change the input text font
                             // size otherwise. Pass the textFieldKey and everything works.

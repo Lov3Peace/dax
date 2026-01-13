@@ -8,6 +8,7 @@ import { generateKeyPairSync } from "crypto";
 import { privKey, pubKey } from "../auth/keygen.js";
 import { v4 as uuidv4 } from "uuid";
 
+// Check if user exists; reused so created function
 const userCheck = async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
@@ -24,8 +25,10 @@ const userCheck = async (req, res) => {
   return user;
 };
 
+// 30 Day variable to reuse (value in ms)
 const thirtyDays = 30 * 24 * 60 * 60 * 1000;
 
+// Register new user
 export const register = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -92,6 +95,7 @@ export const register = async (req, res) => {
   }
 };
 
+// Log user in
 export const login = async (req, res) => {
   try {
     console.log("Login Endpoint Hit!");
@@ -164,6 +168,7 @@ export const login = async (req, res) => {
   }
 };
 
+// Log user out
 export const logout = async (req, res) => {
   try {
     const cookies = req.cookies;
@@ -190,6 +195,7 @@ export const logout = async (req, res) => {
   }
 };
 
+// Delete user account
 export const deleteUser = async (req, res) => {
   try {
     // const inputUsername = req.body.username;
@@ -217,6 +223,7 @@ export const deleteUser = async (req, res) => {
   }
 };
 
+// Change username
 export const changeUsername = async (req, res) => {
   const { username, password, newUsername } = req.body;
   try {
@@ -239,12 +246,4 @@ export const changeUsername = async (req, res) => {
   }
 };
 
-export const pgLogin = async (req, res) => {
-  const client = new Client();
-  client.connect({
-    host: "localhost",
-    port: "5432",
-    user: "carbon_dev",
-    password: process.env.PG_DB_PW,
-  });
-};
+export const pgLogin = async (req, res) => {};

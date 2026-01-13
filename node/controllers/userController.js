@@ -6,7 +6,7 @@ export const getUsers = async (req, res) => {
   console.log("Get Users Hit");
   const param = req.query.searchString;
   const users = await User.find({ username: { $regex: param } });
-  console.log(`Users: ${users}`);
+  // console.log(`Users: ${users}`);
   return res.status(200).json(users);
 };
 

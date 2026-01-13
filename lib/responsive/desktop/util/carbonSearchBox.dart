@@ -1,27 +1,30 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:optimized_search_field/base_multi_search_field.dart';
+import 'package:http/browser_client.dart' as httpClient;
 
 class CarbonSearchBox extends StatefulWidget {
   const CarbonSearchBox(
       {super.key,
       required this.fetchFunction,
       required this.initialList,
-      required this.selectedValues,
       required this.labelText,
       required this.parameter,
       required this.searchController,
-      required this.resultList});
-  final Function fetchFunction;
+      required this.optionsMenuWidth,
+      this.endpoint});
+  final Future Function(String) fetchFunction;
   final List<String> initialList;
-  final List<String> selectedValues;
   final String labelText;
   final String parameter;
   final TextEditingController searchController;
-  final List resultList;
+  final String? endpoint;
+  final double optionsMenuWidth;
 
   @override
   State<CarbonSearchBox> createState() => _CarbonSearchBoxState();
@@ -42,11 +45,35 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   var users;
   bool searching = true;
   Color formFieldOutlineColor = const Color.fromARGB(151, 255, 255, 255);
+
+  final client = httpClient.BrowserClient()..withCredentials = true;
+  // Future _fetchUsers(searchString) async {
+  //   print("Users before setState fetch: $users");
+  //   try {
+  //     String endpoint = widget.endpoint!;
+  //     final getUsersEndpoint =
+  //         Uri.parse("$hostname/api/$endpoint?searchString=$searchString");
+  //     final res = await client.get(
+  //       getUsersEndpoint,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     );
+  //     final body = jsonDecode(res.body);
+  //     users = body;
+  //     print("Users after setState fetch: $users");
+  //     return users;
+  //   } catch (e) {
+  //     print("COULDNT EEN DO IT: $e");
+  //   }
+  //   // });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return BaseMultiSearchField<String>(
       dropDownList: widget.initialList,
-      values: widget.selectedValues,
+      values: _selectedOptions,
       item: (user) => Text(user),
       textFieldKey: textFieldKey,
 
@@ -60,16 +87,18 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
           return [];
         }
         if (textEditingValue.text.length > 1) {
-          await widget.fetchFunction(textEditingValue.text).then((_) {
-            setState(() {
-              searching = false;
-              optionsList.clear();
-            });
+          var res = await widget.fetchFunction(textEditingValue.text);
+          if (!mounted) return [];
+          setState(() {
+            searching = false;
+            optionsList.clear();
           });
-          for (var result in widget.resultList) {
+          for (var result in res) {
             if (!optionsList.contains(result[widget.parameter]) &&
                 !_selectedOptions.contains(result[widget.parameter])) {
-              optionsList.add(result[widget.parameter]);
+              setState(() {
+                optionsList.add(result[widget.parameter]);
+              });
             }
           }
 
@@ -229,9 +258,10 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         }
 
         return Container(
+          width: widget.optionsMenuWidth,
           decoration: BoxDecoration(
             color: Colors.black87,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(1.w(context)),
           ),
           child: ListView.builder(
             itemCount: length,
@@ -244,49 +274,34 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         _selectedOptions.remove(removedItem);
       }),
       onSelected: (selectedItem) {
+        // This takes whatever you click on (selectedItem) and changes optionsList
+        // to that (so like optionsList = [l3x]). Then it appends
+        // optionsList to _selectedOptions. Not sure why it works this way but
+        // it does. So, we use one variable (optionSelected) and adjust it to be the
+        // option that is highlighted when user presses Enter (optionsList[highlightIndex])
+        //or the option that is clicked (optionsList[0])
+        // var tolLen = optionsList.length;
+        // var optionSelected = optionsList[
+        //     0]; // default val is the first index
+        // if (tolLen != 1) {
+        // only change to the highlightIndex if tol_len != 1 (tol_len only == 1
+        // if you click on the option...not sure why)
         setState(() {
-          // This takes whatever you click on (selectedItem) and changes optionsList
-          // to that (so like optionsList = [l3x]). Then it appends
-          // optionsList to _selectedOptions. Not sure why it works this way but
-          // it does. So, we use one variable (optionSelected) and adjust it to be the
-          // option that is highlighted when user presses Enter (optionsList[highlightIndex])
-          //or the option that is clicked (optionsList[0])
-          // var tolLen = optionsList.length;
-          // var optionSelected = optionsList[
-          //     0]; // default val is the first index
-          // if (tolLen != 1) {
-          // only change to the highlightIndex if tol_len != 1 (tol_len only == 1
-          // if you click on the option...not sure why)
           var optionSelected = optionsList[highlightIndex];
-          // }
-          // print("Users: $users");
-          // print("TOL Length: $tol_len");
-          // print("TOL: $optionsList");
-          // print("optionSelected: $optionSelected");
-          // // _selectedOptions.add(optionSelected);
-
-          print("SELECTED ITEM: $selectedItem");
-          // ON CLICK
           if (optionsNode.hasFocus &&
               optionsList.contains(selectedItem) &&
-              !_selectedOptions.contains(selectedItem)) {
-            _selectedOptions.add(selectedItem);
-          }
-
-          print("OPTION SELECTED: $optionSelected");
-          // ON PRESS ENTER
-          if (optionsNode.hasFocus &&
-              optionsList.contains(optionSelected) &&
               !_selectedOptions.contains(selectedItem) &&
               !_selectedOptions.contains(optionSelected)) {
+            _selectedOptions.add(selectedItem);
+          } else if (optionsNode.hasFocus) {
             _selectedOptions.add(optionSelected);
           }
           highlightIndex = 0;
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _textFieldFocusNode.requestFocus();
-          });
         });
-        _textFieldFocusNode.requestFocus();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (!mounted) return;
+          _textFieldFocusNode.requestFocus();
+        });
       },
       // customTextField because you can't change the input text font
       // size otherwise. Pass the textFieldKey and everything works.

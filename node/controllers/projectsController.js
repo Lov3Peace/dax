@@ -3,6 +3,7 @@ import { minioClient } from "../clients/minio.js";
 import { errorLog, infoLog } from "../log.js";
 import ProjectCategories from "../storage/models/projectCategory.js";
 
+// Update Project Categories List on Server Startup
 export const updateProjectCategoriesCollection = async function () {
   const categories = await ProjectCategories.find({});
   const bucketStream = minioClient.listObjectsV2(
@@ -40,6 +41,7 @@ export const updateProjectCategoriesCollection = async function () {
   });
 };
 
+// Get Project Posts
 export const getProjectsCategoryAssets = async (req, res) => {
   // debugger;
   // *ModelName*.find({}) returns all objects in the collection
@@ -65,7 +67,7 @@ export const getProjectPosts = async function (req, res) {
     console.log(collections);
     const projectCollection =
       mongoose.connection.db.collection(projectCategory);
-    const posts = await projectCollection.find({}).toArray();
+    const posts = await projectCollection.find({ public: true }).toArray();
     console.log(`Posts: ${posts}`);
     console.log(`Project Posts for ${projectCategory} Returned Successfully`);
     return res.status(200).json(posts);
@@ -73,6 +75,7 @@ export const getProjectPosts = async function (req, res) {
   return res.status(404).json(`Nothing returned for ${projectCategory}`);
 };
 
+// Create New Project Post
 export const createNewProject = async (req, res) => {
   if (!req.body.pid) {
     return res.status(400).json("Invalid project");

@@ -1,3 +1,4 @@
+import "package:flutter_application_1/responsive/desktop/desk_decks.dart";
 import "package:flutter_application_1/util/imports.dart";
 import "package:flutter_application_1/util/tactile_button.dart";
 import "package:google_fonts/google_fonts.dart";
@@ -9,7 +10,8 @@ class ProjectPostCard extends StatefulWidget {
     required this.category,
     required this.postTitle,
     required this.user,
-    required this.content,
+    required this.description,
+    required this.rolesNeeded,
     required this.timestamp,
     this.height,
     required this.gradient1,
@@ -20,9 +22,10 @@ class ProjectPostCard extends StatefulWidget {
     this.textConstraint,
   });
   final String category;
-  final Text postTitle;
+  final String postTitle;
   final String user;
-  final String content;
+  final String description;
+  final String rolesNeeded;
   final String timestamp;
   final double? height;
   final Image? image;
@@ -31,12 +34,12 @@ class ProjectPostCard extends StatefulWidget {
   final Color gradient2;
   final Color neonGlow;
   final Color shadowColor;
+
   @override
   State<ProjectPostCard> createState() => _ProjectPostCardState();
 }
 
 class _ProjectPostCardState extends State<ProjectPostCard> {
-  @override
   bool isLiked = false;
   @override
   Widget build(BuildContext context) {
@@ -47,15 +50,13 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
         // Parent Container
         //
         decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [
-            Color.fromARGB(240, 19, 19, 19),
-            Color.fromARGB(194, 33, 33, 33),
-          ], transform: GradientRotation(180)),
-          borderRadius: BorderRadius.circular(1.w(context)),
-          border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
+          color: const Color.fromRGBO(17, 17, 17, 0.55),
+          borderRadius: BorderRadius.circular(1.25.w(context)),
+          border: Border.all(color: deckBorderColor),
         ),
         // constraints: const BoxConstraints(),
-        width: 34.75.w(context),
+        height: 35.25.w(context),
+        width: 35.25.w(context),
         // height: 2 * textBoxHeight,
         child: Padding(
           padding: EdgeInsets.all(1.5.w(context)),
@@ -66,19 +67,28 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                      width: widget.textConstraint, child: widget.postTitle),
+                      width: widget.textConstraint,
+                      child: Text(
+                        widget.postTitle,
+                        style: TextStyle(
+                            fontSize: 5.sp(context),
+                            color: white,
+                            fontWeight: FontWeight.w800),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      )),
                   Container(
                     child: Row(
                       // spacing: 0.5.w(context),
                       children: [
-                        Placeholder(
-                          child: Text('Badge'),
-                          // fallbackWidth: 3.sp(context),
-                          fallbackHeight: 3.sp(context),
+                        Image.asset(
+                          "images/creator.png",
+                          width: 2.w(context),
                         ),
+                        SizedBox(width: 0.5.w(context)),
                         Text(widget.user,
                             style: TextStyle(
-                                fontSize: 3.sp(context),
+                                fontSize: 4.sp(context),
                                 fontWeight: FontWeight.w500)),
                       ],
                     ),
@@ -88,14 +98,59 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
               //
               // Post Content
               //
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2.sp(context)),
-                  child: Container(
-                    child: Text(
-                      widget.content,
-                      style: TextStyle(fontSize: 2.5.sp(context)),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 2.sp(context)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 35.5.w(context),
+                            width: 35.5.w(context),
+                            constraints: const BoxConstraints(
+                                minHeight: 350, minWidth: 350),
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.circular(1.25.w(context)),
+                              // clipBehavior: Clip.hardEdge,
+                              child: Image.network(
+                                  fit: BoxFit.cover,
+                                  "https://assets.crbn.cx/carbon-assets/images/${widget.category == "Fashion" ? widget.category.toLowerCase() + ".webp" : widget.category.toLowerCase() + ".jpg"}"),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text.rich(
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          TextSpan(children: [
+                            TextSpan(
+                              text: "Description: ",
+                              style: TextStyle(
+                                  fontSize: 3.sp(context),
+                                  fontWeight: FontWeight.w800),
+                            ),
+                            TextSpan(text: widget.description)
+                          ]),
+                        ),
+                        SizedBox(height: 10),
+                        Text.rich(
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          TextSpan(children: [
+                            TextSpan(
+                              text: "Roles Needed: ",
+                              style: TextStyle(
+                                  fontSize: 3.sp(context),
+                                  fontWeight: FontWeight.w800),
+                            ),
+                            TextSpan(text: widget.rolesNeeded)
+                          ]),
+                        ),
+                      ],
                     ),
                   ),
                 ),

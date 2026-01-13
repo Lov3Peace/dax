@@ -33,7 +33,7 @@ class Deck extends StatefulWidget {
   final String headingText;
   final String subText;
   final double labelTextSize;
-  final double? textConstraint;
+  final double? headingTextSize;
   final double? subTextConstraint;
   final r.RiveAnimation? riveAnim;
   final Image? image;
@@ -49,7 +49,7 @@ class Deck extends StatefulWidget {
     required this.headingText,
     required this.subText,
     required this.labelTextSize,
-    this.textConstraint,
+    this.headingTextSize,
     this.image,
     this.onTap,
     this.subTextConstraint,
@@ -110,18 +110,15 @@ class _DeckState extends State<Deck> {
                       constraints: BoxConstraints(),
                       padding: EdgeInsets.fromLTRB(2.w(context),
                           widget.deckHeight * 0.12, 2.w(context), 0),
-                      width: widget.textConstraint,
-                      child: Text(
-                        widget.headingText,
-                        softWrap: true,
-                        style: GoogleFonts.montserrat(
+                      child: Text(widget.headingText,
+                          maxLines: 2,
+                          // softWrap: true,
+                          style: GoogleFonts.montserrat(
                             height: 1.1,
                             textStyle: TextStyle(
-                                fontSize: 100.w(context) >= 1920
-                                    ? 6.25.sp(context)
-                                    : 36),
-                            fontWeight: FontWeight.w600),
-                      ),
+                                fontSize: widget.headingTextSize,
+                                fontWeight: FontWeight.w600),
+                          )),
                     ),
                   ),
                   // Subheading Text
@@ -150,7 +147,6 @@ class _DeckState extends State<Deck> {
               bottom: 0,
               child: Container(
                 margin: EdgeInsets.only(bottom: 0),
-                width: widget.textConstraint,
                 child: widget.image,
               ),
             ),

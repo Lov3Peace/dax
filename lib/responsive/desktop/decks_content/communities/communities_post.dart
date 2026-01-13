@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/decks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
@@ -48,12 +49,9 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
         // Parent Container
         //
         decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [
-            Color.fromARGB(240, 19, 19, 19),
-            Color.fromARGB(194, 33, 33, 33),
-          ], transform: GradientRotation(180)),
-          borderRadius: BorderRadius.circular(1.w(context)),
-          border: Border.all(color: const Color.fromARGB(182, 60, 60, 60)),
+          color: const Color.fromRGBO(17, 17, 17, 0.55),
+          borderRadius: BorderRadius.circular(1.25.w(context)),
+          border: Border.all(color: deckBorderColor),
         ),
         // constraints: const BoxConstraints(),
         width: 34.75.w(context),
@@ -66,7 +64,8 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(width: widget.textConstraint, child: widget.postTitle),
+                  Container(
+                      width: widget.textConstraint, child: widget.postTitle),
                   Container(
                     child: Row(
                       // spacing: 0.5.w(context),
@@ -76,7 +75,10 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
                           // fallbackWidth: 3.sp(context),
                           fallbackHeight: 3.sp(context),
                         ),
-                        Text(widget.user, style: TextStyle(fontSize: 3.sp(context), fontWeight: FontWeight.w500)),
+                        Text(widget.user,
+                            style: TextStyle(
+                                fontSize: 3.sp(context),
+                                fontWeight: FontWeight.w500)),
                       ],
                     ),
                   )
@@ -105,23 +107,34 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [widget.gradient1, widget.gradient2]),
-                        boxShadow: [BoxShadow(color: widget.neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
-                        borderRadius: const BorderRadius.all(Radius.circular(20))),
+                        gradient: LinearGradient(
+                            colors: [widget.gradient1, widget.gradient2]),
+                        boxShadow: [
+                          BoxShadow(
+                              color: widget.neonGlow,
+                              blurRadius: 20,
+                              blurStyle: BlurStyle.solid)
+                        ],
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20))),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                       child: Text(
                         widget.category,
-                        style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, shadows: [
-                          Shadow(
-                            color: widget.shadowColor,
-                            blurRadius: 1,
-                          ),
-                          Shadow(
-                            color: widget.shadowColor,
-                            blurRadius: 2,
-                          ),
-                        ]),
+                        style: GoogleFonts.montserrat(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                color: widget.shadowColor,
+                                blurRadius: 1,
+                              ),
+                              Shadow(
+                                color: widget.shadowColor,
+                                blurRadius: 2,
+                              ),
+                            ]),
                       ),
                     ),
                   ),

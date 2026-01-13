@@ -32,38 +32,30 @@ class _NewsDeckState extends State<NewsDeck> {
 
   @override
   Widget build(BuildContext context) {
+    double deckHeight = 22.h(context);
+    double deckWidth = 35.25.w(context);
+    double headingTextSize = 6.5.sp(context);
+    double labelTextSize = 2.5.sp(context);
+    if (100.w(context) < 1440) {
+      // headingTextSize = headingTextSize * 0.8;
+    }
     return TactileButton(
       onTap: () {
         router.go("/news");
       },
-      child: newsDeck(),
-    );
-  }
-
-  Widget newsDeck({VoidCallback? onTap, Color? color}) {
-    // values set in desk_decks.dart
-    double deckHeight = 22.sp(context);
-    double deckWidth = 35.25.w(context);
-    double halfDeckWidth = 17.325.w(context);
-    double headerTextSize = 6.5.sp(context);
-    subTextSize = 2.5.sp(context);
-    profBubTextSize = 20;
-    double labelTextSize = 2.5.sp(context);
-    textConstraint = 500;
-    subTextConstraint = 500;
-    return Deck(
-      deckHeight: deckHeight,
-      deckWidth: deckWidth,
-      deckName: 'News',
-      gradient1: blue,
-      gradient2: purp,
-      neonGlow: blue,
-      labelTextSize: labelTextSize,
-      textConstraint: 30.w(context),
-      subTextConstraint: 25.w(context),
-      headingText: 'Stay up to date.',
-      subText:
-          'Add your preferred news source to get news updates to your feed.',
+      child: Deck(
+        deckHeight: deckHeight,
+        deckWidth: deckWidth,
+        deckName: 'News',
+        gradient1: blue,
+        gradient2: purp,
+        neonGlow: blue,
+        labelTextSize: labelTextSize,
+        headingTextSize: headingTextSize,
+        headingText: 'Stay up to date.',
+        subText:
+            'Add your preferred news source to get news updates to your feed.',
+      ),
     );
   }
 }

@@ -1,6 +1,9 @@
+// ignore_for_file: unused_import
+
 import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
+import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
@@ -24,14 +27,7 @@ class LaunchPage extends StatefulWidget {
   State<LaunchPage> createState() => _LaunchPageState();
 }
 
-const hostname = String.fromEnvironment("HOSTNAME", defaultValue: "localhost");
-final loginEndpoint = Uri(
-    scheme: "https",
-    host: hostname,
-    port: hostname.contains("localhost") ? 7777 : null,
-    path: "/api/login");
-final registerEndpoint = Uri.parse('https://$hostname/api/register');
-final initEndpoint = Uri.parse('https://$hostname/api/');
+final initLoginCheckEndpoint = Uri.parse("$hostname/api/");
 final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 bool _rememberMe = false;
@@ -42,13 +38,12 @@ Future initLoginCheck(context) async {
   final userProvider = Provider.of<UserProvider>(context, listen: false);
   final client = httpClient.BrowserClient()..withCredentials = true;
   try {
-    var res = await client.get(initEndpoint, headers: {
+    var res = await client.get(initLoginCheckEndpoint, headers: {
       "Content-Type": "application/json",
     });
     final body = json.decode(res.body);
     final status = res.statusCode;
     final username = body["username"];
-    print("GET REQUEST USERNAME: $username");
     print(body);
     _rememberMe = bool.parse(body["rememberMe"]);
     print(_rememberMe);
@@ -90,7 +85,7 @@ loginCheckRoute(context, mounted) async {
             );
           });
 
-      Future.delayed(Duration(seconds: 2), () {
+      Future.delayed(Duration(seconds: 1), () {
         router.pop();
         router.go("/");
       });
@@ -102,10 +97,6 @@ class _LaunchPageState extends State<LaunchPage> {
   @override
   void initState() {
     super.initState();
-    var userAuthProvider =
-        Provider.of<UserAuthProvider>(context, listen: false);
-    print("(LaunchPage) AuthNotifier().isLoggedIn = " +
-        userAuthProvider.isLoggedIn.toString());
     loginCheckRoute(context, mounted);
   }
 
@@ -251,6 +242,7 @@ class _LaunchPageState extends State<LaunchPage> {
                             if (authnotifier.rememberMe == true) {
                               authnotifier.enableRememberMe();
                             }
+                            _passwordController.clear();
                           },
                           obscureText: true,
                           decoration: InputDecoration(
@@ -451,6 +443,7 @@ class _LaunchPageState extends State<LaunchPage> {
                                     _rememberMe,
                                     context,
                                     mounted);
+                                _passwordController.clear();
                               },
                               child: GradientContainer(
                                 gradient1: red,

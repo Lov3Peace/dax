@@ -20,36 +20,31 @@ class ProjectsDeck extends StatefulWidget {
 class _ProjectsDeckState extends State<ProjectsDeck> {
   @override
   Widget build(BuildContext context) {
-    return TactileButton(
-        onTap: () {
-          router.go("/projects");
-        },
-        child: projectDeck());
-  }
-
-  Widget projectDeck({VoidCallback? onTap, Color? color}) {
-    // values set in desk_decks.dart
-    double deckHeight = 22.sp(context);
+    double deckHeight = 22.h(context);
     double deckWidth = 35.25.w(context);
-    subTextSize = 2.5.sp(context);
-    profBubTextSize = 20;
+    double headingTextSize = 6.25.sp(context);
     double labelTextSize = 2.5.sp(context);
-    textConstraint = 500;
-    subTextConstraint = 500;
-    return Deck(
-      deckHeight: deckHeight,
-      deckWidth: deckWidth,
-      deckName: 'Projects',
-      gradient1: red,
-      gradient2: pink,
-      neonGlow: pink,
-      labelTextSize: labelTextSize,
-      textConstraint: 30.w(context),
-      subTextConstraint: 20.w(context),
-      headingText: 'Collaborate and innovate.',
-      subText:
-          'Post, join, or support independent projects anywhere in the world.',
-      riveAnim: r.RiveAnimation.asset('rive/building_apartments.riv'),
+    if (100.w(context) < 1440) {
+      // headingTextSize = headingTextSize * 0.9;
+    }
+    return TactileButton(
+      onTap: () {
+        router.go("/projects");
+      },
+      child: Deck(
+        deckHeight: deckHeight,
+        deckWidth: deckWidth,
+        deckName: 'Projects',
+        gradient1: red,
+        gradient2: pink,
+        neonGlow: pink,
+        labelTextSize: labelTextSize,
+        headingText: 'Collaborate and innovate.',
+        headingTextSize: headingTextSize,
+        subText:
+            'Post, join, or support independent projects anywhere in the world.',
+        riveAnim: r.RiveAnimation.asset('rive/building_apartments.riv'),
+      ),
     );
   }
 }

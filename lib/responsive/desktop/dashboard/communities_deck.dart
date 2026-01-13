@@ -23,36 +23,32 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
 
   @override
   Widget build(BuildContext context) {
-    return TactileButton(
-      onTap: () {
-        router.go("/communities");
-      },
-      child: communityDeck(),
-    );
-  }
-
-  Widget communityDeck({VoidCallback? onTap, Color? color}) {
-    // values set in desk_decks.dart
-    double deckHeight = 22.sp(context);
-    double deckWidth = 35.25.w(context);
+    double deckHeight = 22.h(context);
     double halfDeckWidth = 17.325.w(context);
-    double headerTextSize = 6.5.sp(context);
+    double headingTextSize = 6.25.sp(context);
     subTextSize = 2.5.sp(context);
     double labelTextSize = 2.5.sp(context);
     textConstraint = 500;
     subTextConstraint = 500;
-    return Deck(
-      deckHeight: deckHeight,
-      deckWidth: halfDeckWidth,
-      deckName: 'Communities',
-      gradient1: red,
-      gradient2: orange,
-      neonGlow: orangeGlow,
-      labelTextSize: labelTextSize,
-      textConstraint: halfDeckWidth,
-      subTextConstraint: halfDeckWidth * 0.7,
-      headingText: 'Find your community.',
-      subText: "Connect with others and say what's on your mind.",
-    );
+    if (100.w(context) < 1440) {
+      headingTextSize = headingTextSize * 0.9;
+    }
+    return TactileButton(
+        onTap: () {
+          router.go("/communities");
+        },
+        // values set in desk_decks.dart
+        child: Deck(
+          deckHeight: deckHeight,
+          deckWidth: halfDeckWidth,
+          deckName: 'Communities',
+          gradient1: red,
+          gradient2: orange,
+          neonGlow: orangeGlow,
+          labelTextSize: labelTextSize,
+          headingTextSize: headingTextSize,
+          headingText: 'Find your community.',
+          subText: "Connect with others and say what's on your mind.",
+        ));
   }
 }

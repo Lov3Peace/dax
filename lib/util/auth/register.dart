@@ -21,7 +21,7 @@ import 'forget_password_form.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/browser_client.dart' as httpClient;
 
-final registerEndpoint = Uri.parse("https://$hostname/api/register");
+final registerEndpoint = Uri.parse("$hostname/api/register");
 
 Future register(username, password, email, rememberMe, context, mounted) async {
   try {
@@ -72,8 +72,11 @@ Future register(username, password, email, rememberMe, context, mounted) async {
             );
           });
       Future.delayed(Duration(seconds: 1), () {
-        router.pop();
-      }).then((done) => router.go("/"));
+        if (router.state != null) {
+          router.pop();
+        }
+        router.go("/");
+      });
       var loggedIn = userAuthProvider.isLoggedIn;
       print("Logged In: $loggedIn");
     } else {

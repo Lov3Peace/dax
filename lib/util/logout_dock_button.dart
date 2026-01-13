@@ -19,8 +19,6 @@ import 'package:http/browser_client.dart' as httpClient;
 import 'providers/userAuthProvider.dart';
 import 'providers/userProvider.dart';
 
-const hostname = String.fromEnvironment("HOSTNAME", defaultValue: "localhost");
-
 class LogoutWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}
   const LogoutWindowButton({super.key, required});
@@ -64,7 +62,7 @@ class LogoutWindowPopupCard extends StatefulWidget {
 /// {@macro add_todo_popup_card}
 class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
     with AnimationMixin {
-  var logoutEndpoint = Uri.parse("https://$hostname/api/logout");
+  var logoutEndpoint = Uri.parse("$hostname/api/logout");
   Future logout() async {
     try {
       // Hitting the Login endpoint

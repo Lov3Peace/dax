@@ -30,7 +30,7 @@ const port = process.env.PORT;
 updateProjectCategoriesCollection();
 app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 
-const client = new Client({
+export const pgClient = new Client({
   host: process.env.PG_DB_HOST,
   port: process.env.PG_DB_PORT,
   database: process.env.PG_DB_NAME,
@@ -38,7 +38,7 @@ const client = new Client({
   password: process.env.PG_DB_PW,
 });
 
-client
+pgClient
   .connect()
   .then(() => console.log(`Postgres Database Connection Established`))
   .catch((error) => console.log(error));

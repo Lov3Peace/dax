@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 import { minioClient } from "../clients/minio.js";
+import { pgClient } from "../server.js";
 import { errorLog, infoLog } from "../log.js";
 import ProjectCategories from "../storage/models/projectCategory.js";
+import format from "pg-format";
 
 // Update Project Categories List on Server Startup
 export const updateProjectCategoriesCollection = async function () {
@@ -11,10 +13,11 @@ export const updateProjectCategoriesCollection = async function () {
     "images",
     true,
   );
+  // Get blobs from minio bucket for category name, image path, and route
   bucketStream.on("data", async function (obj) {
     const fileExtReg = /\.\w+/;
     let category = obj.name
-      .replace("-", " ")
+      .replaceAll("-", " ")
       .replace("images/", "")
       .replace(fileExtReg, "");
     let capList = [];
@@ -24,19 +27,60 @@ export const updateProjectCategoriesCollection = async function () {
       capList.push(w);
     });
     let capWord;
-    capList.forEach(function () {
-      capWord = capList.join(" ");
-    });
+    capList.forEach(() => (capWord = capList.join(" ")));
+    // Table variable setup
+    category = capWord;
     const route = capWord.replace(" ", "-");
-    // console.log(categories);
-    if ((await ProjectCategories.find({ category: capWord })) < 1) {
-      const newCategory = await ProjectCategories.create({
-        category: capWord,
-        description: " ",
-        image: obj.name,
-        route: route,
-      });
-      console.log(capWord);
+
+    try {
+      // Begin SQL Transaction
+      await pgClient.query("BEGIN");
+      // Query to get list of categories
+      const categories = await pgClient.query(
+        `select category from projects.project_categories`,
+      );
+      // Name of schema and table to check for and create in db
+      const schemaName = `${category.replaceAll(" ", "_").toLowerCase()}_projects`;
+      const tableName = category.toLowerCase().replaceAll(" ", "_") + "_posts";
+
+      // Check if category is in projects.project_categories
+      const categoryCheck = categories.rows.some(
+        (i) => i.category === category,
+      );
+
+      // If schema not in db then insert row in project categories table, create schema, and corresponding table
+      if (!categoryCheck) {
+        await pgClient.query(
+          format("CREATE SCHEMA IF NOT EXISTS %I", schemaName),
+        );
+        // Creating table if doesn't exist and inserting into db
+        await pgClient.query(
+          format(
+            "CREATE TABLE IF NOT EXISTS %I.%I (id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, username VARCHAR NOT NULL, title VARCHAR NOT NULL, category VARCHAR NOT NULL, description VARCHAR NOT NULL, acceptance_criteria VARCHAR NOT NULL, is_public BOOLEAN NOT NULL, is_group BOOLEAN NOT NULL, teammates text[], etc VARCHAR, roles_needed text[], timestamp TIMESTAMPTZ NOT NULL DEFAULT now(), images TEXT[])  ",
+            schemaName,
+            tableName,
+          ),
+        );
+        console.log(`Table ${tableName} Created Successfully`);
+        const schemaCheck = await pgClient.query(
+          `SELECT schema_name from information_schema.schemata WHERE schema_name = $1`,
+          [schemaName],
+        );
+
+        // Insert row into projects.project_categories
+        if (schemaCheck.rowCount > 0) {
+          await pgClient.query(
+            `INSERT INTO projects.project_categories ( category, description, image, route) VALUES ( $1, $2, $3, $4) `,
+            [category, "DESCRIPTION", obj.name, route],
+          );
+          console.log(`Inserted Successfully for ${category}`);
+        }
+        // End SQL Transaction
+      }
+      await pgClient.query("COMMIT");
+    } catch (e) {
+      await pgClient.query("ROLLBACK");
+      console.log("Transaction Failed and Rolled Back: ", e);
     }
   });
 };
@@ -45,106 +89,153 @@ export const updateProjectCategoriesCollection = async function () {
 export const getProjectsCategoryAssets = async (req, res) => {
   // debugger;
   // *ModelName*.find({}) returns all objects in the collection
-  const categories = await ProjectCategories.find({});
-  if (!categories) {
-    return res.status(404).json("No categories found");
+  // const categories = await ProjectCategories.find({});
+  try {
+    let categories = await pgClient.query(
+      `select * from projects.project_categories`,
+    );
+    categories = categories.rows;
+    console.log(categories);
+    if (!categories) {
+      return res.status(404).json("No categories found");
+    }
+    return res.status(200).json(categories);
+  } catch (e) {
+    console.log("Error: ", e);
   }
-  return res.status(200).json(categories);
 };
 
 export const getProjectPosts = async function (req, res) {
-  // const projectCategory = req.headers.category;
-  const projectCategory = req.params.category + "-projects";
-  console.log(`Project Category: ${projectCategory}`);
-  if (!projectCategory) {
-    return res.status(404).json("No category sent in header");
-  }
+  try {
+    // const projectCategory = req.headers.category;
+    const projectCategory = req.params.category + "-projects";
+    console.log(`Project Category: ${projectCategory}`);
+    if (!projectCategory) {
+      return res.status(404).json("No category sent in header");
+    }
 
-  const collections = await mongoose.connection.db.listCollections().toArray();
-  const collectionExists = collections.some((i) => i.name === projectCategory);
+    const collections = await mongoose.connection.db
+      .listCollections()
+      .toArray();
+    const collectionExists = collections.some(
+      (i) => i.name === projectCategory,
+    );
 
-  if (collectionExists) {
-    console.log(collections);
-    const projectCollection =
-      mongoose.connection.db.collection(projectCategory);
-    const posts = await projectCollection.find({ public: true }).toArray();
-    console.log(`Posts: ${posts}`);
-    console.log(`Project Posts for ${projectCategory} Returned Successfully`);
-    return res.status(200).json(posts);
+    if (collectionExists) {
+      // console.log(collections);
+      const projectCollection =
+        mongoose.connection.db.collection(projectCategory);
+      const posts = await projectCollection.find({ public: true }).toArray();
+      // console.log(`Posts: ${posts}`);
+      console.log(`Project Posts for ${projectCategory} Returned Successfully`);
+      return res.status(200).json(posts);
+    }
+  } catch (e) {
+    console.log("Error: ", e);
   }
   return res.status(404).json(`Nothing returned for ${projectCategory}`);
 };
 
 // Create New Project Post
 export const createNewProject = async (req, res) => {
-  if (!req.body.pid) {
+  // if (!req.body.pid) {
+  //   return res.status(400).json("Invalid project");
+  // }
+  let category = req.body.category;
+  if (!category) {
     return res.status(400).json("Invalid project");
   }
-  let collectionName = req.body.category;
-  try {
-    collectionName = collectionName.toLowerCase().replaceAll(" ", "-");
-    collectionName = collectionName + "-projects";
-  } catch (e) {
-    console.log(`Couldn't adjust category name: ${e}`);
-  }
-  let projectCollection;
-  let reqProjectCategory;
+
+  const schemaName = `${category.replaceAll(" ", "_").toLowerCase()}_projects`;
+  const tableName = category.toLowerCase().replaceAll(" ", "_") + "_posts";
 
   try {
-    console.log(collectionName);
-    // Find the collection in the DB that matches the category field in the body
-    reqProjectCategory = mongoose.connection.db.collection({
-      name: collectionName,
-    }).collectionName;
-    console.log(reqProjectCategory);
+    await pgClient.query("BEGIN");
+    const categoryTable = await pgClient.query(
+      format(
+        `INSERT INTO %I.%I (username , title , category , description , acceptance_criteria , is_public , is_group , teammates , etc , roles_needed , images ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
+        schemaName,
+        tableName,
+      ),
+      [
+        req.body.username,
+        req.body.title,
+        req.body.category,
+        req.body.description,
+        req.body.acceptance_criteria,
+        req.body.is_public,
+        req.body.is_group,
+        req.body.teammates,
+        req.body.etc,
+        req.body.roles_needed,
+        req.body.images,
+      ],
+    );
+    await pgClient.query("COMMIT");
+    console.log(`Project ${req.body.title} Posted Successfully`);
   } catch (e) {
-    console.log(`Couldn't find collection in DB: ${e}`);
+    await pgClient.query("ROLLBACK");
+    console.log("Could not insert into table: ", e);
+    return res.status(400).json("Could not insert into database");
   }
-  // If the collection doesn't exist, create one with the given schema
-  if (!reqProjectCategory) {
-    console.log("Project Category Doesn't Exist. Creating...");
-    const projectPostSchema = new mongoose.Schema({
-      pid: { type: String, required: true },
-      user: { type: String, required: true },
-      title: { type: String, required: true },
-      category: { type: String, required: true },
-      description: { type: String, required: true },
-      acceptanceCriteria: { type: String, required: true },
-      public: { type: Boolean, required: true },
-      group: { type: Boolean, required: true },
-      teammates: { type: Array, required: false },
-      etc: { type: String, required: true },
-      rolesNeeded: { type: String, required: false },
-      timestamp: { type: String, required: true },
-      images: { type: String, required: false },
-    });
-    try {
-      projectCollection = mongoose.model(collectionName, projectPostSchema);
-    } catch (e) {
-      console.log(`Unable to instantiate model: ${e}`);
-    }
-  } else {
-    console.log(`Project Category: ${collectionName} exists!`);
-    try {
-      projectCollection = mongoose.connection.db.collection(collectionName);
-    } catch (e) {
-      console.log(`Unable to find collection: ${e}`);
-    }
-  }
-  const newProject = await projectCollection.insertOne({
-    pid: req.body.pid,
-    user: req.body.user,
-    title: req.body.title,
-    category: req.body.category,
-    description: req.body.description,
-    acceptanceCriteria: req.body.acceptanceCriteria,
-    public: req.body.public,
-    group: req.body.group,
-    teammates: req.body.teammates,
-    etc: req.body.etc,
-    rolesNeeded: req.body.rolesNeeded,
-    timestamp: req.body.timestamp,
-    images: "",
-  });
+
+  // try {
+  //   // console.log(collectionName);
+  //   // Find the collection in the DB that matches the category field in the body
+  //   // reqProjectCategory = pgClient.query(`select category from projects.project_categories where category = ${reqCategory}`);
+  //   // reqProjectCategory = mongoose.connection.db.collection({
+  //   //   name: collectionName,
+  //   // }).collectionName;
+  //   // console.log(reqProjectCategory);
+  // } catch (e) {
+  //   console.log(`Couldn't find collection in DB: ${e}`);
+  // }
+  // // If the collection doesn't exist, create one with the given schema
+  //
+  // if (reqProjectCategory) {
+  //   console.log("Project Category Doesn't Exist. Creating...");
+  //   // const projectPostSchema = new mongoose.Schema({
+  //   //   pid: { type: String, required: true },
+  //   //   user: { type: String, required: true },
+  //   //   title: { type: String, required: true },
+  //   //   category: { type: String, required: true },
+  //   //   description: { type: String, required: true },
+  //   //   acceptanceCriteria: { type: String, required: true },
+  //   //   public: { type: Boolean, required: true },
+  //   //   group: { type: Boolean, required: true },
+  //   //   teammates: { type: Array, required: false },
+  //   //   etc: { type: String, required: true },
+  //   //   rolesNeeded: { type: String, required: false },
+  //   //   timestamp: { type: String, required: true },
+  //   //   images: { type: String, required: false },
+  //   // });
+  //   try {
+  //     projectCollection = mongoose.model(collectionName, projectPostSchema);
+  //   } catch (e) {
+  //     console.log(`Unable to instantiate model: ${e}`);
+  //   }
+  // } else {
+  //   console.log(`Project Category: ${collectionName} exists!`);
+  //   try {
+  //     projectCollection = mongoose.connection.db.collection(collectionName);
+  //   } catch (e) {
+  //     console.log(`Unable to find collection: ${e}`);
+  //   }
+  // }
+  // const newProject = await projectCollection.insertOne({
+  //   pid: req.body.pid,
+  //   user: req.body.user,
+  //   title: req.body.title,
+  //   category: req.body.category,
+  //   description: req.body.description,
+  //   acceptanceCriteria: req.body.acceptanceCriteria,
+  //   public: req.body.public,
+  //   group: req.body.group,
+  //   teammates: req.body.teammates,
+  //   etc: req.body.etc,
+  //   rolesNeeded: req.body.rolesNeeded,
+  //   timestamp: req.body.timestamp,
+  //   images: "",
+  // });
   return res.status(200).json(`Project ${req.body.title} Posted Successfully`);
 };

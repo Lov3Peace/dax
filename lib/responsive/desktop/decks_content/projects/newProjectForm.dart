@@ -99,13 +99,12 @@ class _NewProjectFormState extends State<NewProjectForm> {
   Future createProjectPost() async {
     try {
       final createProjectEndpoint = Uri.parse("$hostname/api/createNewProject");
-      final pid = const UuidV4().generate();
+      // final pid = const UuidV4().generate();
       final title = _projectTitleController.text;
       final description = _projectDescriptionController.text;
       final category = _projectCategoryValue.toString();
       final acceptanceCriteria = _acceptanceCriteriaController.text;
       final etc = etcValuesValue.toString() + " " + etcUnitsValue.toString();
-      final timestamp = DateTime.now().toString();
       var errorText = "";
 
       if (title.isEmpty) {
@@ -160,18 +159,17 @@ class _NewProjectFormState extends State<NewProjectForm> {
 
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       projectData.addAll({
-        "pid": pid,
+        // "pid": pid,
         "user": userProvider.username,
         "title": title,
         "category": category,
         "description": description,
-        "acceptanceCriteria": acceptanceCriteria,
+        "acceptance_criteria": acceptanceCriteria,
         "public": isPublic,
         "group": isGroupProject,
         "teammates": _selectedTeammates,
         "etc": etc,
-        "rolesNeeded": rolesNeededValue,
-        "timestamp": timestamp,
+        "roles_needed": rolesNeededValue,
       });
       final res = await client.post(createProjectEndpoint,
           headers: {

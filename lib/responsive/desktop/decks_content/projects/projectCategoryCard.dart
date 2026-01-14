@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../util/imports.dart';
 
 class ProjectCategory extends StatelessWidget {
-  ProjectCategory({
+  const ProjectCategory({
     super.key,
     required this.category,
     required this.description,
@@ -60,7 +60,24 @@ class ProjectCategory extends StatelessWidget {
                       width: 35.5.w(context),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(1.25.w(context)),
-                        child: Image.network(imageDir, fit: BoxFit.cover),
+                        child: Image.network(
+                          imageDir,
+                          fit: BoxFit.cover,
+                          loadingBuilder:
+                              (BuildContext context, widget, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return widget;
+                            } else {
+                              return Center(
+                                child: Container(
+                                    width: 5.w(context),
+                                    height: 5.w(context),
+                                    child:
+                                        CircularProgressIndicator(color: red)),
+                              );
+                            }
+                          },
+                        ),
                       ),
                     ),
                   ],

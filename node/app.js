@@ -9,7 +9,6 @@ import projectsRouter from "./routers/projectsRouter.js";
 const app = express();
 app.use(express.json());
 
-// app.use(cors({ credentials: true, origin: "http://10.7.77.8:7778" })); // for web build
 app.use(
   cors({
     credentials: true,
@@ -20,15 +19,11 @@ app.use(
 
 app.use(cookieParser());
 
+// Routers
 app.use("/api/", authRouter);
 
 app.use("/api/", userDataRouter);
 
 app.use("/api/", projectsRouter);
-
-// app.get('/node', (req, res) => {
-//     console.log(`Connected: ${req.ip}`);a
-//     res.send({ success: true });
-// });
 
 export default app;

@@ -52,6 +52,8 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
                 imageDir: cdnBaseUrl + project["image"],
                 route: project["route"]),
           );
+          // 50ms delay between each setState to avoid building every
+          // widget at once
           Future.delayed(Duration(milliseconds: 50));
         });
         projectCategoryDropdownItems.add(DropdownMenuItem(
@@ -99,7 +101,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
                 ? EdgeInsets.all(10)
                 : EdgeInsets.all(0.25.w(context)),
             childHeight: 30.w(context),
-            physics: const NeverScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
           ),
           NewProjectButton()
         ],

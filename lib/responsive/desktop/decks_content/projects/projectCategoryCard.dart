@@ -34,7 +34,7 @@ class ProjectCategory extends StatelessWidget {
     }
     return TactileButton(
       onTap: () {
-        router.goNamed("category-posts", pathParameters: {"category": route});
+        router.goNamed("category_posts", pathParameters: {"category": route});
       },
       child: Container(
         decoration: BoxDecoration(

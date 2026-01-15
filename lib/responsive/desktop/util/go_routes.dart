@@ -64,7 +64,7 @@ final GoRouter router = GoRouter(
       },
       routes: [
         GoRoute(
-          name: "category-posts",
+          name: "category_posts",
           path: '/:category',
           pageBuilder: (context, state) {
             final parameter = state.pathParameters['category']!;

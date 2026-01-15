@@ -96,6 +96,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   bool searching = true;
   String searchVal = "";
   final client = httpClient.BrowserClient()..withCredentials = true;
+  bool successfulPost = false;
   Future createProjectPost() async {
     try {
       final createProjectEndpoint = Uri.parse("$hostname/api/createNewProject");
@@ -160,13 +161,13 @@ class _NewProjectFormState extends State<NewProjectForm> {
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       projectData.addAll({
         // "pid": pid,
-        "user": userProvider.username,
+        "username": userProvider.username,
         "title": title,
         "category": category,
         "description": description,
         "acceptance_criteria": acceptanceCriteria,
-        "public": isPublic,
-        "group": isGroupProject,
+        "is_public": isPublic,
+        "is_group": isGroupProject,
         "teammates": _selectedTeammates,
         "etc": etc,
         "roles_needed": rolesNeededValue,
@@ -176,9 +177,14 @@ class _NewProjectFormState extends State<NewProjectForm> {
             "Content-Type": "application/json",
           },
           body: jsonEncode(projectData));
+      final resStatus = res.statusCode;
       final resBody = res.body;
+      if (resStatus == 201) {
+        return true;
+      } else {
+        return false;
+      }
       print("Project Post Response: $resBody");
-      return 1;
     } catch (e) {
       print("Couldn't eeen do it: $e");
     }
@@ -696,33 +702,38 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         Expanded(child: SizedBox()),
                         TactileButton(
                           onTap: () async {
+                            // res returns a boolean based on if the db write was successful
                             final res = await createProjectPost();
-                            print("Res: $res");
-                            if (res == 1) {
+                            if (!mounted) {
+                              return;
+                            }
+                            if (res is bool) {
                               router.pop();
-                              if (!mounted) {
-                                return;
-                              }
                               showDialog(
                                   barrierDismissible: true,
                                   context: context,
                                   builder: (context) {
                                     return Center(
                                       child: BlurryContainer(
-                                          width: 30.w(context),
-                                          height: 7.w(context),
+                                          width: 42.w(context),
+                                          height: 9.w(context),
                                           child: Center(
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                const Icon(
-                                                  Ionicons.checkmark_circle,
-                                                  color: green,
+                                                Icon(
+                                                  res
+                                                      ? Ionicons
+                                                          .checkmark_circle
+                                                      : Icons.error,
+                                                  color: res ? green : red,
                                                 ),
                                                 SizedBox(width: 1.w(context)),
                                                 Text(
-                                                  "Project Posted Successfully",
+                                                  res
+                                                      ? "Project Posted Successfully"
+                                                      : "There was an error posting the project :(",
                                                   style: TextStyle(
                                                       fontSize: 5.sp(context),
                                                       fontWeight:

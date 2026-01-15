@@ -15,22 +15,22 @@ export const updateProjectCategoriesCollection = async function () {
   );
   // Get blobs from minio bucket for category name, image path, and route
   bucketStream.on("data", async function (obj) {
+    // Create category name value using file name
     const fileExtReg = /\.\w+/;
-    let category = obj.name
-      .replaceAll("-", " ")
-      .replace("images/", "")
-      .replace(fileExtReg, "");
+    let category = obj.name.replace("images/", "").replace(fileExtReg, "");
     let capList = [];
-    const catSplit = category.split(" ");
+    const catSplit = category.split("_");
     catSplit.forEach(function (word) {
       const w = word.charAt(0).toUpperCase().concat(word.slice(1));
       capList.push(w);
     });
-    let capWord;
-    capList.forEach(() => (capWord = capList.join(" ")));
-    // Table variable setup
-    category = capWord;
-    const route = capWord.replace(" ", "-");
+    let capitalWordSpaced;
+    capList.forEach(() => (capitalWordSpaced = capList.join(" ")));
+
+    // Table value setup
+    const capitalWordWithUnderscores = capitalWordSpaced.replace(" ", "_");
+    category = capitalWordSpaced;
+    const route = capitalWordWithUnderscores;
 
     try {
       // Begin SQL Transaction
@@ -40,8 +40,8 @@ export const updateProjectCategoriesCollection = async function () {
         `select category from projects.project_categories`,
       );
       // Name of schema and table to check for and create in db
-      const schemaName = `${category.replaceAll(" ", "_").toLowerCase()}_projects`;
-      const tableName = category.toLowerCase().replaceAll(" ", "_") + "_posts";
+      const schemaName = capitalWordWithUnderscores.toLowerCase() + "_projects";
+      const tableName = capitalWordWithUnderscores.toLowerCase() + "_posts";
 
       // Check if category is in projects.project_categories
       const categoryCheck = categories.rows.some(
@@ -61,7 +61,6 @@ export const updateProjectCategoriesCollection = async function () {
             tableName,
           ),
         );
-        console.log(`Table ${tableName} Created Successfully`);
         const schemaCheck = await pgClient.query(
           `SELECT schema_name from information_schema.schemata WHERE schema_name = $1`,
           [schemaName],
@@ -106,34 +105,60 @@ export const getProjectsCategoryAssets = async (req, res) => {
 };
 
 export const getProjectPosts = async function (req, res) {
+  let projectCategory = req.params.category;
   try {
     // const projectCategory = req.headers.category;
-    const projectCategory = req.params.category + "-projects";
+    const schemaName = projectCategory + "_projects";
+    const tableName = projectCategory + "_posts";
     console.log(`Project Category: ${projectCategory}`);
     if (!projectCategory) {
       return res.status(404).json("No category sent in header");
     }
 
-    const collections = await mongoose.connection.db
-      .listCollections()
-      .toArray();
-    const collectionExists = collections.some(
-      (i) => i.name === projectCategory,
-    );
+    try {
+      await pgClient.query("BEGIN");
 
-    if (collectionExists) {
-      // console.log(collections);
-      const projectCollection =
-        mongoose.connection.db.collection(projectCategory);
-      const posts = await projectCollection.find({ public: true }).toArray();
-      // console.log(`Posts: ${posts}`);
-      console.log(`Project Posts for ${projectCategory} Returned Successfully`);
-      return res.status(200).json(posts);
+      const posts = await pgClient.query(
+        format(
+          `SELECT * FROM %I.%I WHERE timestamp < now() ORDER BY timestamp DESC LIMIT 20`,
+
+          schemaName,
+          tableName,
+        ),
+      );
+      await pgClient.query("COMMIT");
+      return res.status(200).json(posts.rows);
+    } catch (e) {
+      console.log("Unable to read from DB. Rolling Back...");
+      await pgClient.query("ROLLBACK");
+      return res
+        .status(400)
+        .json(
+          `There was an error retrieving posts for ${projectCategory}: ${e}`,
+        );
     }
+    // const collections = await mongoose.connection.db
+    //   .listCollections()
+    //   .toArray();
+    // const collectionExists = collections.some(
+    //   (i) => i.name === projectCategory,
+    // );
+    //
+    // if (collectionExists) {
+    //   // console.log(collections);
+    //   const projectCollection =
+    //     mongoose.connection.db.collection(projectCategory);
+    //   const posts = await projectCollection.find({ public: true }).toArray();
+    //   // console.log(`Posts: ${posts}`);
+    //   console.log(`Project Posts for ${projectCategory} Returned Successfully`);
+    //   return res.status(200).json(posts);
+    // }
   } catch (e) {
     console.log("Error: ", e);
+    return res
+      .status(404)
+      .json(`There was an error retrieving posts for ${projectCategory}: ${e}`);
   }
-  return res.status(404).json(`Nothing returned for ${projectCategory}`);
 };
 
 // Create New Project Post
@@ -237,5 +262,5 @@ export const createNewProject = async (req, res) => {
   //   timestamp: req.body.timestamp,
   //   images: "",
   // });
-  return res.status(200).json(`Project ${req.body.title} Posted Successfully`);
+  return res.status(201).json(`Project ${req.body.title} Posted Successfully`);
 };

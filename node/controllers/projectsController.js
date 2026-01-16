@@ -7,7 +7,7 @@ import format from "pg-format";
 
 // Update Project Categories List on Server Startup
 export const updateProjectCategoriesCollection = async function () {
-  const categories = await ProjectCategories.find({});
+  // const categories = await ProjectCategories.find({});
   const bucketStream = minioClient.listObjectsV2(
     "carbon-assets",
     "images",

@@ -66,33 +66,25 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                      width: widget.textConstraint,
-                      child: Text(
-                        widget.postTitle,
-                        style: TextStyle(
-                            fontSize: 5.sp(context),
-                            color: white,
-                            fontWeight: FontWeight.w800),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      )),
-                  Container(
-                    child: Row(
-                      // spacing: 0.5.w(context),
-                      children: [
-                        Image.asset(
-                          "images/creator.png",
-                          width: 2.w(context),
-                        ),
-                        SizedBox(width: 0.5.w(context)),
-                        Text(widget.user,
-                            style: TextStyle(
-                                fontSize: 4.sp(context),
-                                fontWeight: FontWeight.w500)),
-                      ],
+                  Expanded(
+                    child: Text(
+                      widget.postTitle,
+                      style: TextStyle(
+                          fontSize: 5.sp(context),
+                          color: white,
+                          fontWeight: FontWeight.w800),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  )
+                  ),
+                  Image.asset(
+                    "images/creator.png",
+                    width: 2.w(context),
+                  ),
+                  SizedBox(width: 0.5.w(context)),
+                  Text(widget.user,
+                      style: TextStyle(
+                          fontSize: 4.sp(context), fontWeight: FontWeight.w500))
                 ],
               ),
               //

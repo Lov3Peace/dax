@@ -18,7 +18,7 @@ class ProjectPostCard extends StatefulWidget {
     required this.gradient2,
     required this.neonGlow,
     required this.shadowColor,
-    this.image,
+    this.imageEndpoint,
     this.textConstraint,
   });
   final String category;
@@ -28,7 +28,7 @@ class ProjectPostCard extends StatefulWidget {
   final String rolesNeeded;
   final String timestamp;
   final double? height;
-  final Image? image;
+  final String? imageEndpoint;
   final double? textConstraint;
   final Color gradient1;
   final Color gradient2;
@@ -66,33 +66,26 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                      width: widget.textConstraint,
+                  Expanded(
                       child: Text(
-                        widget.postTitle,
-                        style: TextStyle(
-                            fontSize: 5.sp(context),
-                            color: white,
-                            fontWeight: FontWeight.w800),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      )),
-                  Container(
-                    child: Row(
-                      // spacing: 0.5.w(context),
-                      children: [
-                        Image.asset(
-                          "images/creator.png",
-                          width: 2.w(context),
-                        ),
-                        SizedBox(width: 0.5.w(context)),
-                        Text(widget.user,
-                            style: TextStyle(
-                                fontSize: 4.sp(context),
-                                fontWeight: FontWeight.w500)),
-                      ],
-                    ),
-                  )
+                    widget.postTitle,
+                    style: TextStyle(
+                        fontSize: 5.sp(context),
+                        color: white,
+                        fontWeight: FontWeight.w800),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  )),
+                  Image.asset(
+                    "images/creator.png",
+                    width: 2.w(context),
+                  ),
+                  SizedBox(width: 0.5.w(context)),
+                  Text(widget.user,
+                      style: TextStyle(
+                          fontSize: 4.sp(context), fontWeight: FontWeight.w500),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis)
                 ],
               ),
               //
@@ -123,18 +116,29 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                           ),
                         ),
                         SizedBox(height: 10),
-                        Text.rich(
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          TextSpan(children: [
-                            TextSpan(
-                              text: "Description: ",
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text.rich(
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              TextSpan(children: [
+                                TextSpan(
+                                  text: "Description: ",
+                                  style: TextStyle(
+                                      fontSize: 3.sp(context),
+                                      fontWeight: FontWeight.w800),
+                                ),
+                                TextSpan(text: widget.description)
+                              ]),
+                            ),
+                            Text(
+                              widget.timestamp,
                               style: TextStyle(
                                   fontSize: 3.sp(context),
                                   fontWeight: FontWeight.w800),
-                            ),
-                            TextSpan(text: widget.description)
-                          ]),
+                            )
+                          ],
                         ),
                         SizedBox(height: 10),
                         Text.rich(
@@ -147,7 +151,7 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                                   fontSize: 3.sp(context),
                                   fontWeight: FontWeight.w800),
                             ),
-                            TextSpan(text: widget.rolesNeeded)
+                            TextSpan(text: widget.rolesNeeded.toString())
                           ]),
                         ),
                       ],

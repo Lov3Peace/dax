@@ -61,13 +61,16 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
               postTitle: post["title"],
               user: post["username"],
               description: post["description"],
-              rolesNeeded: post["roles_needed"] ?? "None",
+              rolesNeeded: post["roles_needed"].toString() == "[]" ||
+                      post["roles_needed"].toString() == "null"
+                  ? "None"
+                  : post["roles_needed"].toString(),
               timestamp: post["timestamp"],
               gradient1: red,
               gradient2: pink,
               neonGlow: pink,
               shadowColor: tran));
-          Future.delayed(Duration(milliseconds: 50));
+          Future.delayed(Duration(milliseconds: 100));
         });
       }
       return body;

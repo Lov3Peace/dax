@@ -44,6 +44,6 @@ pgClient
   .catch((error) => console.log(error));
 
 mongoose
-  .connect(process.env.DB_CONN)
+  .connect(process.env.MONGO_DB_CONN)
   .then(() => console.log(`Mongo Database Connection Established`))
   .catch((error) => console.log(error));

@@ -7,7 +7,7 @@ import format from "pg-format";
 
 // Update Project Categories List on Server Startup
 export const updateProjectCategoriesCollection = async function () {
-  const categories = await ProjectCategories.find({});
+  // const categories = await ProjectCategories.find({});
   const bucketStream = minioClient.listObjectsV2(
     "carbon-assets",
     "images",
@@ -120,7 +120,7 @@ export const getProjectPosts = async function (req, res) {
 
       const posts = await pgClient.query(
         format(
-          `SELECT * FROM %I.%I WHERE timestamp < now() ORDER BY timestamp DESC LIMIT 20`,
+          `SELECT * FROM %I.%I WHERE timestamp < now() AND is_public = true ORDER BY timestamp DESC LIMIT 20`,
 
           schemaName,
           tableName,
@@ -156,7 +156,7 @@ export const getProjectPosts = async function (req, res) {
   } catch (e) {
     console.log("Error: ", e);
     return res
-      .status(404)
+      .status(500)
       .json(`There was an error retrieving posts for ${projectCategory}: ${e}`);
   }
 };

@@ -101,7 +101,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
                 ? EdgeInsets.all(10)
                 : EdgeInsets.all(0.25.w(context)),
             childHeight: 30.w(context),
-            physics: const AlwaysScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
           ),
           NewProjectButton()
         ],

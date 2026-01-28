@@ -53,6 +53,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   var etcUnitsValue;
   var etcValuesValue;
   var rolesNeededValue;
+  List rolesNeeded = [];
   ScrollController formScrollContrller = ScrollController();
 
 // Group vs Solo
@@ -170,7 +171,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
         "is_group": isGroupProject,
         "teammates": _selectedTeammates,
         "etc": etc,
-        "roles_needed": rolesNeededValue,
+        "roles_needed": rolesNeeded,
       });
       final res = await client.post(createProjectEndpoint,
           headers: {
@@ -678,6 +679,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             onChanged: (selectedValue) {
                               setState(() {
                                 rolesNeededValue = selectedValue;
+                                rolesNeeded.add(selectedValue);
                               });
                             },
                             style: TextStyle(

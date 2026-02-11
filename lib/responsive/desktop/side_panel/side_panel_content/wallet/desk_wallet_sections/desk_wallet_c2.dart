@@ -3,252 +3,223 @@ import 'package:flutter_application_1/util/imports.dart';
 import '../../../../../../util/gradient_label.dart';
 import '../../../../../../util/tactile_button.dart';
 
-class WalletC2 extends StatefulWidget {
-  WalletC2({Key? key}) : super(key: key);
+class CashWalletSection2 extends StatefulWidget {
+  const CashWalletSection2({super.key});
 
   @override
-  State<WalletC2> createState() => _WalletC2State();
+  State<CashWalletSection2> createState() => CashWalletSection2State();
 }
 
-class _WalletC2State extends State<WalletC2> {
-  final TextEditingController _controller = TextEditingController();
-  bool isEditable = false;
-  bool isHidden = true;
-  bool isSwitch = false;
-  bool isSwitch2 = false;
+class CashWalletSection2State extends State<CashWalletSection2> {
+  List<Map<String, String>> cards = [];
+  int frontCardIndex = 0;
+
+  List<Map<String, dynamic>> transactions = [];
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 1.5.h(context)),
-      child: Container(
-        height: 35.h(context),
-        width: 33.w(context),
-        decoration: const BoxDecoration(
-          color: const Color.fromARGB(70, 32, 32, 40),
-          borderRadius: BorderRadius.all(Radius.circular(40)),
-        ),
-        child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: 2.w(context), vertical: 3.h(context)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //This row contains textfiled for the linked card, visibility icon, and save/edit tactile button
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _controller,
-                        enabled: isEditable,
-                        obscureText: isHidden,
-                        style: const TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          hintText: 'Linked Card',
-                          hintStyle: const TextStyle(color: Colors.white70),
-                          filled: false,
-                          contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 16),
-                          border: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          suffixIcon: IconButton(
-                            onPressed: () =>
-                                setState(() => isHidden = !isHidden),
-                            icon: Icon(
-                              isHidden
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: Colors.white70,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    TactileButton(
-                      onTap: () {
-                        if (isEditable) {
-                          debugPrint('Saved: ${_controller.text}');
-                        }
-                        setState(() => isEditable = !isEditable);
-                      },
-                      child: GradientContainer(
-                        gradient1: isEditable ? blue : Colors.transparent,
-                        gradient2: isEditable
-                            ? const Color.fromARGB(255, 85, 221, 89)
-                            : Colors.transparent,
-                        height: 1.h(context),
-                        width: 2.h(context),
-                        neonGlow: isEditable ? greenGlow : Colors.transparent,
-                        text: isEditable ? 'Save' : 'Edit',
-                        textSize: 2.sp(context),
-                        borderColor: Colors.white38,
-                        borderRadius: 500,
-                        // Use default color if not editable
-                      ),
-                    ),
-                  ],
-                ),
-                const Divider(color: Colors.grey),
-                SizedBox(
-                  height: 1.h(context),
-                ),
-                //this colummn holds the multifactor Authentication and the Blur info on load swicthes
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Security & Privacy',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 3.sp(context),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 1.h(context),
-                    ),
-                    buildSwitchRow(
-                      context,
-                      'Multifactor Authentication',
-                      isSwitch,
-                      (bool value) => setState(() => isSwitch = value),
-                    ),
-                    SizedBox(
-                      height: 1.h(context),
-                    ),
-                    buildSwitchRow(
-                      context,
-                      'Blur Info On Load',
-                      isSwitch2,
-                      (bool value) => setState(() => isSwitch2 = value),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 1.h(context),
-                ),
-                const Divider(color: Colors.grey),
-                SizedBox(
-                  height: 1.h(context),
-                ),
-                //this column holds financial statements for the duration of account access
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Statements',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 3.sp(context),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          getCurrentMonth(),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 2.sp(context),
-                          ),
-                        ),
-                        TactileButton(
-                          onTap: () {},
-                          child: GradientContainer(
-                            gradient1: blue,
-                            gradient2: const Color.fromARGB(255, 85, 221, 89),
-                            height: 1.h(context),
-                            width: 2.h(context),
-                            neonGlow: greenGlow,
-                            text: 'View',
-                            textSize: 2.sp(context),
-                            borderColor: Colors.white38,
-                            borderRadius: 500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ─────────────────────────
+        // CARDS HEADER
+        // ─────────────────────────
+        Row(
+          spacing: 7.w(context),
+          children: [
+            Text(
+              'Cards',
+              style: TextStyle(
+                fontSize: 7.sp(context),
+                fontWeight: FontWeight.w800,
+              ),
             ),
+            TactileButton(
+              onTap: () {},
+              child: GradientContainer(
+                gradient1: const Color.fromARGB(255, 85, 221, 89),
+                gradient2: tran,
+                height: 2.h(context),
+                width: 4.w(context),
+                neonGlow: tran,
+                text: '+',
+                textSize: 3.sp(context),
+                borderColor: Colors.transparent,
+                borderRadius: 500,
+              ),
+            ),
+          ],
+        ),
+
+        SizedBox(height: 1.5.h(context)),
+
+        // ─────────────────────────
+        // CARD STACK / EMPTY STATE
+        // ─────────────────────────
+        cards.isEmpty
+            ? emptyCards(context)
+            : SizedBox(
+                height: 24.h(context),
+                width: 30.w(context),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: List.generate(cards.length, (index) {
+                    final int pos =
+                        (index - frontCardIndex + cards.length) % cards.length;
+
+                    return Positioned(
+                      top: pos * 10,
+                      left: 0,
+                      right: 0,
+                      child: GestureDetector(
+                        onTap: () => setState(() => frontCardIndex = index),
+                        child: AnimatedScale(
+                          duration: const Duration(milliseconds: 200),
+                          scale: pos == 0 ? 1.0 : 0.96,
+                          child: buildCard(context, cards[index]),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+
+        SizedBox(height: 2.h(context)),
+
+        // ─────────────────────────
+        // TRANSACTIONS HEADER
+        // ─────────────────────────
+        Text(
+          'Transaction History',
+          style: TextStyle(
+            fontSize: 4.sp(context),
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+        SizedBox(height: .5.h(context)),
+        Text(
+          'Last 7 days',
+          style: TextStyle(
+            fontSize: 2.5.sp(context),
+            fontWeight: FontWeight.w700,
+            decoration: TextDecoration.underline,
+          ),
+        ),
+
+        SizedBox(height: 1.5.h(context)),
+
+        // ─────────────────────────
+        // TRANSACTION LIST
+        // ─────────────────────────
+        transactionList(context),
+      ],
+    );
+  }
+
+  // ===========================================================
+  // EMPTY CARD STATE
+  // ===========================================================
+  Widget emptyCards(BuildContext context) {
+    return Container(
+      height: 24.h(context),
+      width: 30.w(context),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.white24),
+      ),
+      child: Center(
+        child: Text(
+          "No cards added",
+          style: TextStyle(
+            fontSize: 3.sp(context),
+            color: Colors.white60,
           ),
         ),
       ),
     );
   }
 
-  Widget buildSwitchRow(BuildContext context, String label, bool value,
-      ValueChanged<bool> onChanged) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 2.sp(context),
-          ),
+  Widget buildCard(BuildContext context, Map<String, String> card) {
+    return Container(
+      height: 24.h(context),
+      width: 30.w(context),
+      padding: EdgeInsets.all(3.w(context)),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [blue, Color.fromARGB(255, 85, 221, 89)],
         ),
-        GestureDetector(
-          onTap: () => onChanged(!value),
-          child: Container(
-            width: 50,
-            height: 28,
-            padding: const EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: value
-                  ? const LinearGradient(
-                      colors: [blue, Color.fromARGB(255, 85, 221, 89)],
-                    )
-                  : const LinearGradient(
-                      colors: [Colors.grey, Colors.grey],
-                    ),
-            ),
-            child: AnimatedAlign(
-              duration: const Duration(milliseconds: 200),
-              alignment: value ? Alignment.centerRight : Alignment.centerLeft,
-              child: Container(
-                width: 22,
-                height: 22,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+        boxShadow: const [
+          BoxShadow(
+            color: blue,
+            blurRadius: 10,
           ),
-        ),
-      ],
+        ],
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(card["name"] ?? "", style: TextStyle(fontSize: 4.sp(context))),
+          SizedBox(height: 1.h(context)),
+          Text(card["number"] ?? "", style: TextStyle(fontSize: 4.sp(context))),
+          const Spacer(),
+          Text("Valid Thru: ${card["valid"] ?? ""}",
+              style: TextStyle(fontSize: 3.sp(context))),
+          Text("PIN: ${card["pin"] ?? ""}",
+              style: TextStyle(fontSize: 3.sp(context))),
+        ],
+      ),
     );
   }
 
-  String getCurrentMonth() {
-    final now = DateTime.now();
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ];
-    return '${months[now.month - 1]} ${now.year}';
+  Widget transactionList(BuildContext context) {
+    if (transactions.isEmpty) {
+      return Container(
+        height: 32.5.h(context),
+        width: 30.w(context),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: Colors.white24),
+        ),
+        child: Center(
+          child: Text(
+            "No transactions in the last 7 days",
+            style: TextStyle(
+              fontSize: 3.sp(context),
+              color: Colors.white60,
+            ),
+          ),
+        ),
+      );
+    }
+
+    return ListView.separated(
+      physics: const BouncingScrollPhysics(
+        parent: AlwaysScrollableScrollPhysics(),
+      ),
+      itemCount: transactions.length,
+      separatorBuilder: (_, __) => SizedBox(height: 1.2.h(context)),
+      itemBuilder: (_, i) {
+        final tx = transactions[i];
+        return Container(
+          padding: EdgeInsets.all(2.w(context)),
+          decoration: BoxDecoration(
+            color: const Color(0xFF24283B),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(tx["name"],
+                  style: TextStyle(
+                      fontSize: 3.5.sp(context), color: Colors.white)),
+              Text("\$${tx["amount"]}",
+                  style: TextStyle(
+                      fontSize: 3.5.sp(context), color: Colors.white70)),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

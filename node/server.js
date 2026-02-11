@@ -5,10 +5,13 @@ import https from "https";
 import fs from "fs";
 import { minioClient } from "./clients/minio.js";
 import {
-  getProjectsCategoryAssets,
-  updateProjectCategoriesCollection,
+	getProjectsCategoryAssets,
+	updateProjectCategoriesCollection,
 } from "./controllers/projectsController.js";
-
+import {
+	getProfileCrestAssets,
+	updateProfileCrestsCollection,
+} from "./controllers/profileController.js";
 // used for env variables
 dotenv.config();
 
@@ -29,11 +32,13 @@ const port = process.env.PORT;
 updateProjectCategoriesCollection();
 app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 
+updateProfileCrestsCollection();
+
 mongoose
-  .connect(process.env.DB_CONN)
-  .then(() => console.log(`Database Connection Established`))
-  .catch((error) => console.log(error));
-// mongoose
-//   .connect(process.env.LOCAL_DB_CONN)
-//   .then(() => console.log(`Database Connection Established`))
-//   .catch((error) => console.log(error));
+	.connect(process.env.DB_CONN)
+	.then(() => console.log(`Database Connection Established`))
+	.catch((error) => console.log(error));
+
+
+
+

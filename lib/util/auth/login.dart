@@ -15,16 +15,12 @@ import '../providers/userAuthProvider.dart';
 import '../providers/userProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-const hostname = String.fromEnvironment("HOSTNAME", defaultValue: "localhost");
-final loginEndpoint = Uri(
-    scheme: "https",
-    host: hostname,
-    port: hostname.contains("localhost") ? 7777 : null,
-    path: "/api/login");
+final loginEndpoint = Uri.parse("$hostname/api/login");
 Future login(username, password, rememberMe, context, mounted) async {
   try {
     // Hitting the Login endpoint
     print('Fetching...');
+    print(loginEndpoint);
     final client = httpClient.BrowserClient()..withCredentials = true;
     print("(login) RememberMe: $rememberMe");
     var res = await client.post(
@@ -112,10 +108,9 @@ void showErrorMessage(String message, context) {
               content: Container(
                 padding: EdgeInsetsGeometry.all(1.w(context)),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.5.w(context)),
-                  color: deckColor,
-                  border: Border.all(color: deckBorderColor),
-                ),
+                    borderRadius: BorderRadius.circular(1.5.w(context)),
+                    color: deckColor,
+                    border: Border.all(color: deckBorderColor)),
                 child: Text(
                   message,
                   textAlign: TextAlign.center,

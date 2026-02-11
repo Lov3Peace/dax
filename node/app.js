@@ -4,7 +4,7 @@ import cors from "cors";
 import authRouter from "./routers/authRouter.js";
 import cookieParser from "cookie-parser";
 import authCheck from "./auth/authCheck.js";
-import userDataRouter from "./routers/userDataRouter.js";
+import profileRouter from "./routers/profileRouter.js";
 import projectsRouter from "./routers/projectsRouter.js";
 app.use(express.json());
 
@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 app.use("/api/", authRouter);
 
-app.use("/api/", userDataRouter);
+app.use("/api/", profileRouter);
 
 app.use("/api/", projectsRouter);
 

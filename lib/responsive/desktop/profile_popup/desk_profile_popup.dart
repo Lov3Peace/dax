@@ -12,9 +12,6 @@ import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_p
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/pc_carousel_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'profile_pop_pages.dart/pc3_sections/pc3_section1.dart';
-import 'profile_pop_pages.dart/pc3_sections/pc3_section2.dart';
-import 'profile_pop_pages.dart/pc3_sections/pc3_section3.dart';
 
 // ProfileNotifier class for state management
 class ProfileNotifier extends ChangeNotifier {
@@ -38,8 +35,8 @@ class _ProfilePopupState extends State<ProfilePopup> {
         return PCProjects();
       case 1:
         return PCTeams();
-      case 2:
-        return PCProjects();
+      // case 2:
+      //   return PCProjects();
     }
   }
 
@@ -92,7 +89,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
                               Center(
                                 child: AnimatedSmoothIndicator(
                                   activeIndex: currentSlide,
-                                  count: 3,
+                                  count: 2,
                                   effect: ExpandingDotsEffect(
                                     activeDotColor: Colors.white,
                                     dotColor: Colors.white.withOpacity(0.3),
@@ -151,25 +148,25 @@ class _ProfilePopupState extends State<ProfilePopup> {
                                   ),
                                 ),
                               ),
-                              PcCarouselTemplate(
-                                child: SingleChildScrollView(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CarouselContentsTemp(
-                                        child: Pc3Section1(),
-                                      ),
-                                      CarouselContentsTemp(
-                                        child: Pc3Section2(),
-                                      ),
-                                      CarouselContentsTemp(
-                                        child: Pc3Section3(),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                              // PcCarouselTemplate(
+                              //   child: SingleChildScrollView(
+                              //     child: Row(
+                              //       mainAxisAlignment:
+                              //           MainAxisAlignment.spaceBetween,
+                              //       children: [
+                              //         CarouselContentsTemp(
+                              //           child: Pc3Section1(),
+                              //         ),
+                              //         CarouselContentsTemp(
+                              //           child: Pc3Section2(),
+                              //         ),
+                              //         // CarouselContentsTemp(
+                              //         //   child: Pc3Section3(),
+                              //         // ),
+                              //       ],
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                           Divider(

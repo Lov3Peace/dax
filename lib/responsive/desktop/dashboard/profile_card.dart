@@ -36,7 +36,7 @@ class _ProfileCardState extends State<ProfileCard> {
     print("AuthNotifier decodedToken: $decodedToken");
     final bool isAdmin = decodedToken["isAdmin"];
     adminOrUser = isAdmin == true ? "Admin" : "User";
-    // print("Profile Card Rebuilt");
+    print("Profile Card Rebuilt");
     return TactileButton(
         onTap: () {
           Navigator.of(context).push(
@@ -44,17 +44,19 @@ class _ProfileCardState extends State<ProfileCard> {
               opaque: false,
               barrierDismissible: true,
               barrierLabel: 'Dimiss',
-              transitionDuration: Duration(milliseconds: 300),
+              transitionDuration: Duration(milliseconds: 500),
+              reverseTransitionDuration: Duration(milliseconds: 500),
               barrierColor: Colors.black54, // Dims the background
               pageBuilder: (_, __, ___) => Hero(
                 tag: 'profileHeroTag',
-                flightShuttleBuilder: flightShuttleBuilder,
+                // flightShuttleBuilder: flightShuttleBuilder,
                 child: ProfilePopup(),
               ),
             ),
           );
         },
-        child: profileCard(context: context));
+        child: profileCard(context: context)
+				);
   }
 
   Widget profileCard({VoidCallback? onTap, Color? color, context}) {
@@ -79,3 +81,4 @@ class _ProfileCardState extends State<ProfileCard> {
     );
   }
 }
+

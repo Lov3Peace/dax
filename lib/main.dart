@@ -4,6 +4,7 @@ import 'package:flutter_application_1/util/auth/loginCheck.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/appStateProvider.dart';
+import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/browser_client.dart' as httpClient;
@@ -41,6 +42,7 @@ Future main() async {
         ChangeNotifierProvider(create: (context) => ButtonState()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => UserAuthProvider()),
+        ChangeNotifierProvider(create: (_) => ProjectProvider()),
         // Add more providers as needed
       ],
       child: const MyApp(),
@@ -72,7 +74,7 @@ class _MyAppState extends State<MyApp> {
       routerConfig: router,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          fontFamily: GoogleFonts.montserrat().fontFamily,
+          fontFamily: GoogleFonts.redHatDisplay().fontFamily,
           colorScheme:
               const ColorScheme.dark(secondary: red, onSurface: Colors.white),
           scaffoldBackgroundColor: const Color.fromARGB(255, 17, 17, 17)),

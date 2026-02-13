@@ -24,6 +24,7 @@ class NewProjectButton extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: Hero(
                 tag: "newProjectForm",
+                flightShuttleBuilder: flightShuttleBuilder,
                 // transitionOnUserGestures: true,
                 child: Container(
                   padding: EdgeInsets.all(buttonContainerPadding),

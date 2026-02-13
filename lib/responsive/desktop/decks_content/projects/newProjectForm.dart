@@ -15,6 +15,7 @@ import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/blurryContainer.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
@@ -91,7 +92,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   bool isTeammateSelected = false;
   final textFieldKey = GlobalKey();
   var searchResultsListKey = GlobalKey();
-  List<String> placeholderUsers = [];
+  List<String> teammates = [];
   List<String> teammateOptionsList = [];
   List users = [];
   bool searching = true;
@@ -160,6 +161,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
       }
 
       var userProvider = Provider.of<UserProvider>(context, listen: false);
+      var projectProvider =
+          Provider.of<ProjectProvider>(context, listen: false);
       projectData.addAll({
         // "pid": pid,
         "username": userProvider.username,
@@ -169,10 +172,11 @@ class _NewProjectFormState extends State<NewProjectForm> {
         "acceptance_criteria": acceptanceCriteria,
         "is_public": isPublic,
         "is_group": isGroupProject,
-        "teammates": _selectedTeammates,
+        "teammates": projectProvider.teammates,
         "etc": etc,
         "roles_needed": rolesNeeded,
       });
+      print("Project Data Request: $projectData");
       final res = await client.post(createProjectEndpoint,
           headers: {
             "Content-Type": "application/json",
@@ -424,7 +428,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           scale: 1.05,
                           onTap: () {
                             setState(() {
-                              _selectedTeammates.clear();
+                              teammates.clear();
                               grpButtonColor1 = pink;
                               grpButtonColor2 = red;
                               grpButtonBorderColor = tran;
@@ -504,7 +508,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           const SizedBox(height: 15),
                           CarbonSearchBox(
                             fetchFunction: _fetchUsers,
-                            initialList: placeholderUsers,
+                            initialList: teammates,
                             labelText: "Search for users...",
                             parameter: "username",
                             searchController: _teammatesSearchController,

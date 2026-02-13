@@ -97,6 +97,7 @@ dependencies:
   flutter_dotenv: ^6.0.0
   dropdown_button2: ^2.3.9
   optimized_search_field: ^2.0.2
+  dotted_line: ^3.2.3
 
 dev_dependencies:
   flutter_test:

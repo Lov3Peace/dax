@@ -57,15 +57,22 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
       for (final post in body) {
         setState(() {
           posts.add(ProjectPostCard(
-              category: widget.parameter,
+              category: post["category"],
               postTitle: post["title"],
               user: post["username"],
               description: post["description"],
+              teammates: post["teammates"].toString() == '[]'
+                  ? 'None'
+                  : post["teammates"]
+                      .toString()
+                      .replaceAll("[", "")
+                      .replaceAll("]", ""),
               rolesNeeded: post["roles_needed"].toString() == "[]" ||
                       post["roles_needed"].toString() == "null"
                   ? "None"
                   : post["roles_needed"].toString(),
-              timestamp: post["timestamp"],
+              timestamp: post["display_timestamp"],
+              image: post["images"][0],
               gradient1: red,
               gradient2: pink,
               neonGlow: pink,
@@ -129,20 +136,22 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
                           ),
                         ),
                       )
-                    : LargeStaggerLoad(
+                    : StaggerLoad(
+                        duration: 300,
+                        layer: 1,
+                        delay: 100,
+                        scrollDirection: Axis.vertical,
                         widgets: posts,
-                        scale: 1.02,
-                        constraints: const BoxConstraints(minHeight: 450),
+                        scale: 1.01,
                         listPadding: EdgeInsets.fromLTRB(
                             0.5.w(context),
                             100.h(context) < 875 ? 100 : 10.h(context),
                             0.5.w(context),
-                            0),
+                            7.w(context)),
                         childPadding: 100.w(context) > 2200
-                            ? EdgeInsets.all(10)
-                            : EdgeInsets.all(0.25.w(context)),
-                        childHeight: 35.w(context),
-                        physics: const NeverScrollableScrollPhysics(),
+                            ? EdgeInsets.all(20)
+                            : EdgeInsets.all(0.5.w(context)),
+                        physics: const AlwaysScrollableScrollPhysics(),
                       ),
                 //
                 // New Project Button
@@ -153,6 +162,7 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
                       alignment: Alignment.bottomRight,
                       child: Hero(
                         tag: "newProjectForm",
+                        flightShuttleBuilder: flightShuttleBuilder,
                         // transitionOnUserGestures: true,
                         child: Container(
                           padding: EdgeInsets.all(buttonContainerPadding),

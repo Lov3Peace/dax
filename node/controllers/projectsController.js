@@ -86,7 +86,6 @@ export const updateProjectCategoriesCollection = async function () {
 
 // Get Project Posts
 export const getProjectsCategoryAssets = async (req, res) => {
-  // debugger;
   // *ModelName*.find({}) returns all objects in the collection
   // const categories = await ProjectCategories.find({});
   try {
@@ -120,7 +119,7 @@ export const getProjectPosts = async function (req, res) {
 
       const posts = await pgClient.query(
         format(
-          `SELECT * FROM %I.%I WHERE timestamp < now() AND is_public = true ORDER BY timestamp DESC LIMIT 20`,
+          `SELECT username, title, category, description, acceptance_criteria, is_public, is_group, teammates, etc, roles_needed, timestamp, to_char(timestamp,'FMMonth, DD FMHH12:MI AM') as display_timestamp, images FROM %I.%I WHERE timestamp < now() AND is_public = true ORDER BY timestamp DESC LIMIT 20`,
 
           schemaName,
           tableName,
@@ -130,42 +129,27 @@ export const getProjectPosts = async function (req, res) {
       return res.status(200).json(posts.rows);
     } catch (e) {
       console.log("Unable to read from DB. Rolling Back...");
+      errorLog.error(
+        `There was an error retrieving posts for ${projectCategory}: ${e}`,
+      );
       await pgClient.query("ROLLBACK");
       return res
         .status(400)
-        .json(
-          `There was an error retrieving posts for ${projectCategory}: ${e}`,
-        );
+        .json(`There was an error retrieving posts for ${projectCategory}`);
     }
-    // const collections = await mongoose.connection.db
-    //   .listCollections()
-    //   .toArray();
-    // const collectionExists = collections.some(
-    //   (i) => i.name === projectCategory,
-    // );
-    //
-    // if (collectionExists) {
-    //   // console.log(collections);
-    //   const projectCollection =
-    //     mongoose.connection.db.collection(projectCategory);
-    //   const posts = await projectCollection.find({ public: true }).toArray();
-    //   // console.log(`Posts: ${posts}`);
-    //   console.log(`Project Posts for ${projectCategory} Returned Successfully`);
-    //   return res.status(200).json(posts);
-    // }
   } catch (e) {
     console.log("Error: ", e);
+    errorLog.error(
+      `There was an error retrieving posts for ${projectCategory}: ${e}`,
+    );
     return res
       .status(500)
-      .json(`There was an error retrieving posts for ${projectCategory}: ${e}`);
+      .json(`There was an error retrieving posts for ${projectCategory}`);
   }
 };
 
 // Create New Project Post
 export const createNewProject = async (req, res) => {
-  // if (!req.body.pid) {
-  //   return res.status(400).json("Invalid project");
-  // }
   let category = req.body.category;
   if (!category) {
     return res.status(400).json("Invalid project");
@@ -175,10 +159,11 @@ export const createNewProject = async (req, res) => {
   const tableName = category.toLowerCase().replaceAll(" ", "_") + "_posts";
 
   try {
+    console.log(req);
     await pgClient.query("BEGIN");
     const categoryTable = await pgClient.query(
       format(
-        `INSERT INTO %I.%I (username , title , category , description , acceptance_criteria , is_public , is_group , teammates , etc , roles_needed , images ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
+        `INSERT INTO %I.%I (username , title , category , description , acceptance_criteria , is_public , is_group , teammates , etc , roles_needed , images ) VALUES ($1, $2, $3, $4, $5, $6, $7, COALESCE($8, DEFAULT), $9, $10, $11)`,
         schemaName,
         tableName,
       ),
@@ -204,63 +189,5 @@ export const createNewProject = async (req, res) => {
     return res.status(400).json("Could not insert into database");
   }
 
-  // try {
-  //   // console.log(collectionName);
-  //   // Find the collection in the DB that matches the category field in the body
-  //   // reqProjectCategory = pgClient.query(`select category from projects.project_categories where category = ${reqCategory}`);
-  //   // reqProjectCategory = mongoose.connection.db.collection({
-  //   //   name: collectionName,
-  //   // }).collectionName;
-  //   // console.log(reqProjectCategory);
-  // } catch (e) {
-  //   console.log(`Couldn't find collection in DB: ${e}`);
-  // }
-  // // If the collection doesn't exist, create one with the given schema
-  //
-  // if (reqProjectCategory) {
-  //   console.log("Project Category Doesn't Exist. Creating...");
-  //   // const projectPostSchema = new mongoose.Schema({
-  //   //   pid: { type: String, required: true },
-  //   //   user: { type: String, required: true },
-  //   //   title: { type: String, required: true },
-  //   //   category: { type: String, required: true },
-  //   //   description: { type: String, required: true },
-  //   //   acceptanceCriteria: { type: String, required: true },
-  //   //   public: { type: Boolean, required: true },
-  //   //   group: { type: Boolean, required: true },
-  //   //   teammates: { type: Array, required: false },
-  //   //   etc: { type: String, required: true },
-  //   //   rolesNeeded: { type: String, required: false },
-  //   //   timestamp: { type: String, required: true },
-  //   //   images: { type: String, required: false },
-  //   // });
-  //   try {
-  //     projectCollection = mongoose.model(collectionName, projectPostSchema);
-  //   } catch (e) {
-  //     console.log(`Unable to instantiate model: ${e}`);
-  //   }
-  // } else {
-  //   console.log(`Project Category: ${collectionName} exists!`);
-  //   try {
-  //     projectCollection = mongoose.connection.db.collection(collectionName);
-  //   } catch (e) {
-  //     console.log(`Unable to find collection: ${e}`);
-  //   }
-  // }
-  // const newProject = await projectCollection.insertOne({
-  //   pid: req.body.pid,
-  //   user: req.body.user,
-  //   title: req.body.title,
-  //   category: req.body.category,
-  //   description: req.body.description,
-  //   acceptanceCriteria: req.body.acceptanceCriteria,
-  //   public: req.body.public,
-  //   group: req.body.group,
-  //   teammates: req.body.teammates,
-  //   etc: req.body.etc,
-  //   rolesNeeded: req.body.rolesNeeded,
-  //   timestamp: req.body.timestamp,
-  //   images: "",
-  // });
   return res.status(201).json(`Project ${req.body.title} Posted Successfully`);
 };

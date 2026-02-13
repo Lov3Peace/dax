@@ -11,6 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "debug": "nodemon --watch node --inspect ./node/server.js",
+    "migrate": "node-pg-migrate -m ./node/migrations",
     "start": "nodemon --watch node ./node/server.js"
   },
   "repository": {
@@ -31,7 +32,7 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "minio": "^8.0.5",
+    "minio": "^8.0.1",
     "mongoose": "^8.14.2",
     "pg": "^8.16.3",
     "pg-format": "^1.0.4",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "eslint": "^9.28.0",
     "eslint_d": "^14.3.0",
+    "node-pg-migrate": "^8.0.4",
     "nodemon": "^3.1.10"
   }
 }

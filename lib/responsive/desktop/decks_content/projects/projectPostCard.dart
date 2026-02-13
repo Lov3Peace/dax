@@ -1,3 +1,4 @@
+import "package:dotted_line/dotted_line.dart";
 import "package:flutter_application_1/responsive/desktop/desk_decks.dart";
 import "package:flutter_application_1/util/imports.dart";
 import "package:flutter_application_1/util/tactile_button.dart";
@@ -11,6 +12,7 @@ class ProjectPostCard extends StatefulWidget {
     required this.postTitle,
     required this.user,
     required this.description,
+    required this.teammates,
     required this.rolesNeeded,
     required this.timestamp,
     this.height,
@@ -18,17 +20,18 @@ class ProjectPostCard extends StatefulWidget {
     required this.gradient2,
     required this.neonGlow,
     required this.shadowColor,
-    this.imageEndpoint,
+    required this.image,
     this.textConstraint,
   });
   final String category;
   final String postTitle;
   final String user;
   final String description;
+  final String teammates;
   final String rolesNeeded;
   final String timestamp;
   final double? height;
-  final String? imageEndpoint;
+  final String image;
   final double? textConstraint;
   final Color gradient1;
   final Color gradient2;
@@ -55,8 +58,7 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
           border: Border.all(color: deckBorderColor),
         ),
         // constraints: const BoxConstraints(),
-        height: 35.25.w(context),
-        width: 35.25.w(context),
+        height: 40.w(context),
         // height: 2 * textBoxHeight,
         child: Padding(
           padding: EdgeInsets.all(1.5.w(context)),
@@ -88,79 +90,144 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                       overflow: TextOverflow.ellipsis)
                 ],
               ),
+              SizedBox(height: 15),
               //
               // Post Content
               //
               Expanded(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 2.sp(context)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 35.5.w(context),
-                            width: 35.5.w(context),
-                            constraints: const BoxConstraints(
-                                minHeight: 350, minWidth: 350),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      // Row for Image | Divider | Content
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Expanded(
                             child: ClipRRect(
                               borderRadius:
                                   BorderRadius.circular(1.25.w(context)),
                               // clipBehavior: Clip.hardEdge,
                               child: Image.network(
-                                  fit: BoxFit.cover,
-                                  "https://assets.crbn.cx/carbon-assets/images/${widget.category == "Fashion" ? widget.category.toLowerCase() + ".webp" : widget.category.toLowerCase() + ".jpg"}"),
+                                fit: BoxFit.cover,
+                                widget.image,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text.rich(
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              TextSpan(children: [
-                                TextSpan(
-                                  text: "Description: ",
-                                  style: TextStyle(
-                                      fontSize: 3.sp(context),
-                                      fontWeight: FontWeight.w800),
+                          SizedBox(width: 2.w(context)),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Description",
+                                      style: TextStyle(
+                                          fontSize: 5.sp(context),
+                                          fontWeight: FontWeight.w800),
+                                    ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 5),
+                                      child: DottedLine(
+                                        direction: Axis.horizontal,
+                                        lineThickness: 1,
+                                        dashColor: Colors.grey,
+                                        dashGapLength: 2,
+                                        dashLength: 2,
+                                      ),
+                                    ),
+                                    Text.rich(
+                                      maxLines: 5,
+                                      overflow: TextOverflow.ellipsis,
+                                      TextSpan(children: [
+                                        TextSpan(
+                                            text: widget.description,
+                                            style: TextStyle(
+                                                fontSize: 3.sp(context)))
+                                      ]),
+                                    ),
+                                  ],
                                 ),
-                                TextSpan(text: widget.description)
-                              ]),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Teammates",
+                                      style: TextStyle(
+                                          fontSize: 5.sp(context),
+                                          fontWeight: FontWeight.w800),
+                                    ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 5),
+                                      child: DottedLine(
+                                        direction: Axis.horizontal,
+                                        lineThickness: 1,
+                                        dashColor: Colors.grey,
+                                        dashGapLength: 2,
+                                        dashLength: 2,
+                                      ),
+                                    ),
+                                    Text.rich(
+                                      maxLines: 5,
+                                      overflow: TextOverflow.ellipsis,
+                                      TextSpan(children: [
+                                        TextSpan(
+                                            text: widget.teammates,
+                                            style: TextStyle(
+                                                fontSize: 3.sp(context))),
+                                      ]),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Roles Needed",
+                                      style: TextStyle(
+                                          fontSize: 5.sp(context),
+                                          fontWeight: FontWeight.w800),
+                                    ),
+                                    const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 5),
+                                      child: DottedLine(
+                                        direction: Axis.horizontal,
+                                        lineThickness: 1,
+                                        dashColor: Colors.grey,
+                                        dashGapLength: 2,
+                                        dashLength: 2,
+                                      ),
+                                    ),
+                                    Text.rich(
+                                      maxLines: 5,
+                                      overflow: TextOverflow.ellipsis,
+                                      TextSpan(children: [
+                                        TextSpan(
+                                            text: widget.rolesNeeded,
+                                            style: TextStyle(
+                                                fontSize: 3.sp(context)))
+                                      ]),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                            Text(
-                              widget.timestamp,
-                              style: TextStyle(
-                                  fontSize: 3.sp(context),
-                                  fontWeight: FontWeight.w800),
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 10),
-                        Text.rich(
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          TextSpan(children: [
-                            TextSpan(
-                              text: "Roles Needed: ",
-                              style: TextStyle(
-                                  fontSize: 3.sp(context),
-                                  fontWeight: FontWeight.w800),
-                            ),
-                            TextSpan(text: widget.rolesNeeded.toString())
-                          ]),
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
+              SizedBox(height: 20),
               //
-              // Category Label
+              // Category Label | Actions+Timestamp
               //
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -199,31 +266,44 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                     ),
                   ),
                   //
-                  // Row of Like, Reply, Share Buttons
+                  // Row of Like, Add Request, Share Buttons (Actions)
                   //
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      IconButton(
-                        onPressed: liked,
-                        icon: Icon(
-                          Ionicons.heart,
-                          color: isLiked ? orange : white,
-                        ),
+                      Row(
+                        spacing: 15,
+                        children: [
+                          IconButton(
+                            onPressed: liked,
+                            icon: Icon(
+                              Ionicons.heart,
+                              color: isLiked ? orange : white,
+                            ),
+                          ),
+                          const IconButton(
+                            onPressed: null,
+                            icon: Icon(
+                              Ionicons.person_add,
+                              color: white,
+                            ),
+                          ),
+                          const IconButton(
+                            onPressed: null,
+                            icon: Icon(
+                              Icons.share,
+                              color: white,
+                            ),
+                          )
+                        ],
                       ),
-                      const IconButton(
-                        onPressed: null,
-                        icon: Icon(
-                          Icons.reply,
-                          color: white,
-                        ),
+                      Text(
+                        widget.timestamp,
+                        style: TextStyle(
+                            fontSize: 4.sp(context),
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey),
                       ),
-                      const IconButton(
-                        onPressed: null,
-                        icon: Icon(
-                          Icons.share,
-                          color: white,
-                        ),
-                      )
                     ],
                   )
                 ],

@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:optimized_search_field/base_multi_search_field.dart';
 import 'package:http/browser_client.dart' as httpClient;
+import 'package:provider/provider.dart';
 
 class CarbonSearchBox extends StatefulWidget {
   const CarbonSearchBox(
@@ -30,6 +32,8 @@ class CarbonSearchBox extends StatefulWidget {
   State<CarbonSearchBox> createState() => _CarbonSearchBoxState();
 }
 
+List<String> selectedOptions = [];
+
 class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   late FocusNode optionsNode;
   FocusNode _textFieldFocusNode = FocusNode();
@@ -38,7 +42,6 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   final ScrollController _scrollController = ScrollController();
   int highlightIndex = 0;
   bool isHighlighted = false;
-  List<String> _selectedOptions = [];
   final textFieldKey = GlobalKey();
   List<String> initialList = [];
   List<String> optionsList = [];
@@ -73,7 +76,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   Widget build(BuildContext context) {
     return BaseMultiSearchField<String>(
       dropDownList: widget.initialList,
-      values: _selectedOptions,
+      values: selectedOptions,
       item: (user) => Text(user),
       textFieldKey: textFieldKey,
 
@@ -95,7 +98,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
           });
           for (var result in res) {
             if (!optionsList.contains(result[widget.parameter]) &&
-                !_selectedOptions.contains(result[widget.parameter])) {
+                !selectedOptions.contains(result[widget.parameter])) {
               setState(() {
                 optionsList.add(result[widget.parameter]);
               });
@@ -119,7 +122,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         scale: 1.07,
         // Remove the selected option on tap
         onTap: () => setState(() {
-          _selectedOptions.remove(user);
+          selectedOptions.remove(user);
         }),
         child: GradientContainer(
           height: 2.w(context),
@@ -271,12 +274,12 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         );
       },
       removeEvent: (removedItem) => setState(() {
-        _selectedOptions.remove(removedItem);
+        selectedOptions.remove(removedItem);
       }),
       onSelected: (selectedItem) {
         // This takes whatever you click on (selectedItem) and changes optionsList
         // to that (so like optionsList = [l3x]). Then it appends
-        // optionsList to _selectedOptions. Not sure why it works this way but
+        // optionsList to selectedOptions. Not sure why it works this way but
         // it does. So, we use one variable (optionSelected) and adjust it to be the
         // option that is highlighted when user presses Enter (optionsList[highlightIndex])
         //or the option that is clicked (optionsList[0])
@@ -290,14 +293,17 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
           var optionSelected = optionsList[highlightIndex];
           if (optionsNode.hasFocus &&
               optionsList.contains(selectedItem) &&
-              !_selectedOptions.contains(selectedItem) &&
-              !_selectedOptions.contains(optionSelected)) {
-            _selectedOptions.add(selectedItem);
+              !selectedOptions.contains(selectedItem) &&
+              !selectedOptions.contains(optionSelected)) {
+            selectedOptions.add(selectedItem);
           } else if (optionsNode.hasFocus) {
-            _selectedOptions.add(optionSelected);
+            selectedOptions.add(optionSelected);
           }
           highlightIndex = 0;
         });
+        var projectProvider =
+            Provider.of<ProjectProvider>(context, listen: false);
+        projectProvider.saveTeammates(selectedOptions);
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!mounted) return;
           _textFieldFocusNode.requestFocus();

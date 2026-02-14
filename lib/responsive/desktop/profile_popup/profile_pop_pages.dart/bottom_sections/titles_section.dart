@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -98,8 +99,8 @@ class _PCTitlesState extends State<PCTitles> {
               child: GradientContainer(
                 gradient1: Colors.blue,
                 gradient2: Colors.purple,
-                height: 1.h(context),
-                width: 1.5.w(context),
+                height: 4.h(context),
+                width: 7.w(context),
                 neonGlow: Colors.purple,
                 text: 'Confirm',
                 textSize: 2.5.sp(context),
@@ -140,8 +141,8 @@ class _PCTitlesState extends State<PCTitles> {
                           child: GradientContainer(
                             gradient1: Colors.blue,
                             gradient2: Colors.purple,
-                            height: 1.h(context),
-                            width: 1.5.w(context),
+                            height: 4.h(context),
+                            width: 7.w(context),
                             neonGlow: Colors.purple,
                             text: 'Choose Titles',
                             textSize: 2.5.sp(context),
@@ -167,13 +168,13 @@ class _PCTitlesState extends State<PCTitles> {
                               child: GradientContainer(
                                 gradient1: gradientColors[0],
                                 gradient2: gradientColors[1],
-                                height: 5,
-                                width: 20,
+                                height: 4.h(context),
+                                width: 9.w(context),
                                 neonGlow: gradientColors[1],
                                 text: button["label"],
                                 textSize: 2.5.sp(context),
-                                borderColor: Colors.transparent,
-                                borderRadius: 500,
+                                borderColor: deckBorderColor,
+                                borderRadius: 100,
                               ),
                             ),
                           );

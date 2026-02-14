@@ -9,7 +9,10 @@ import {
   getProjectsCategoryAssets,
   updateProjectCategoriesCollection,
 } from "./controllers/projectsController.js";
-
+import {
+  getProfileCrestAssets,
+  updateProfileCrestsCollection,
+} from "./controllers/profileController.js";
 // used for env variables
 dotenv.config();
 
@@ -28,6 +31,9 @@ const port = process.env.PORT;
 //   );
 
 updateProjectCategoriesCollection();
+
+updateProfileCrestsCollection();
+
 app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 
 export const pgClient = new Client({

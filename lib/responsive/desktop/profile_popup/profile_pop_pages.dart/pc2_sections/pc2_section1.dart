@@ -6,6 +6,7 @@ import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../main.dart';
+import '../../../desk_decks.dart';
 
 class Pc2Section1 extends StatefulWidget {
   Pc2Section1({super.key});
@@ -215,9 +216,11 @@ class Pc2Section1State extends State<Pc2Section1> {
       height: 21.5.h(context),
       width: 20.w(context),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 34, 38, 42),
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Colors.white70),
+        color: const Color.fromARGB(70, 32, 32, 40),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(40),
+        ),
+        border: Border.all(color: deckBorderColor),
       ),
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -256,9 +259,11 @@ class Pc2Section1State extends State<Pc2Section1> {
       height: 21.5.h(context),
       width: 20.w(context),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 34, 38, 42),
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Colors.white70),
+        color: const Color.fromARGB(70, 32, 32, 40),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(40),
+        ),
+        border: Border.all(color: deckBorderColor),
       ),
       child: Padding(
         padding: EdgeInsets.all(2.h(context)),
@@ -278,8 +283,8 @@ class Pc2Section1State extends State<Pc2Section1> {
               child: GradientContainer(
                 gradient1: red,
                 gradient2: purp,
-                height: 5,
-                width: 20,
+                height: 4.h(context),
+                width: 7.w(context),
                 neonGlow: purp,
                 text: 'Select Skills',
                 textSize: 2.5.sp(context),

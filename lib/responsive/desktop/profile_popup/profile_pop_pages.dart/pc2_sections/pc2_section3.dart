@@ -5,6 +5,7 @@ import 'package:flutter_application_1/util/tactile_button.dart';
 
 import '../../../../../main.dart';
 import '../../../../../util/gradient_label.dart';
+import '../../../desk_decks.dart';
 
 class Pc2Section3 extends StatefulWidget {
   Pc2Section3({super.key});
@@ -14,39 +15,22 @@ class Pc2Section3 extends StatefulWidget {
 }
 
 class _Pc2Section3State extends State<Pc2Section3> {
-  final TextEditingController shortTermController = TextEditingController();
-  final TextEditingController longTermController = TextEditingController();
-  List<String> shortTermGoals = [];
-  List<String> longTermGoals = [];
+  final TextEditingController goalsController = TextEditingController();
 
-  void addShortTermGoal() {
-    if (shortTermController.text.isNotEmpty) {
+  List<String> goals = [];
+
+  void addGoal() {
+    if (goalsController.text.isNotEmpty) {
       setState(() {
-        shortTermGoals.add(shortTermController.text);
-        shortTermController.clear();
+        goals.add(goalsController.text);
+        goalsController.clear();
       });
     }
   }
 
-  void addLongTermGoal() {
-    if (longTermController.text.isNotEmpty) {
-      setState(() {
-        longTermGoals.add(longTermController.text);
-        longTermController.clear();
-      });
-    }
-  }
-
-  void removeShortTermGoal(int index) {
+  void removeGoal(int index) {
     setState(() {
-      shortTermGoals.removeAt(index);
-    });
-    showGoalsDialog();
-  }
-
-  void removeLongTermGoal(int index) {
-    setState(() {
-      longTermGoals.removeAt(index);
+      goals.removeAt(index);
     });
     showGoalsDialog();
   }
@@ -64,32 +48,16 @@ class _Pc2Section3State extends State<Pc2Section3> {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (shortTermGoals.isNotEmpty) ...[
-                    const Text('Short-Term Goals:',
+                  if (goals.isNotEmpty) ...[
+                    const Text('Goals:',
                         style: TextStyle(fontWeight: FontWeight.bold)),
-                    ...shortTermGoals.asMap().entries.map((entry) => ListTile(
+                    ...goals.asMap().entries.map((entry) => ListTile(
                           leading: Text("${entry.key + 1}"),
                           title: Text(entry.value),
                           trailing: IconButton(
                             icon: const Icon(Icons.check, color: Colors.green),
                             onPressed: () {
-                              setState(
-                                  () => shortTermGoals.removeAt(entry.key));
-                              this.setState(() {});
-                            },
-                          ),
-                        )),
-                  ],
-                  if (longTermGoals.isNotEmpty) ...[
-                    const Text('Long-Term Goals:',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    ...longTermGoals.asMap().entries.map((entry) => ListTile(
-                          leading: Text("${entry.key + 1}"),
-                          title: Text(entry.value),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.check, color: Colors.green),
-                            onPressed: () {
-                              setState(() => longTermGoals.removeAt(entry.key));
+                              setState(() => goals.removeAt(entry.key));
                               this.setState(() {});
                             },
                           ),
@@ -101,8 +69,8 @@ class _Pc2Section3State extends State<Pc2Section3> {
                 TactileButton(
                   onTap: () {
                     setState(() {
-                      shortTermGoals.clear();
-                      longTermGoals.clear();
+                      // shortTermGoals.clear();
+                      goals.clear();
                     });
                     this.setState(() {});
                     Navigator.of(context).pop();
@@ -110,8 +78,8 @@ class _Pc2Section3State extends State<Pc2Section3> {
                   child: GradientContainer(
                     gradient1: red,
                     gradient2: purp,
-                    height: 5,
-                    width: 20,
+                    height: 4.h(context),
+                    width: 7.w(context),
                     neonGlow: purp,
                     text: 'Delete Goals',
                     textSize: 2.5.sp(context),
@@ -124,8 +92,8 @@ class _Pc2Section3State extends State<Pc2Section3> {
                   child: GradientContainer(
                     gradient1: red,
                     gradient2: purp,
-                    height: 5,
-                    width: 20,
+                    height: 4.h(context),
+                    width: 7.w(context),
                     neonGlow: purp,
                     text: 'Close',
                     textSize: 2.5.sp(context),
@@ -167,9 +135,11 @@ class _Pc2Section3State extends State<Pc2Section3> {
       height: 21.5.h(context),
       width: 20.w(context),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 34, 38, 42),
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Colors.white70),
+        color: const Color.fromARGB(70, 32, 32, 40),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(40),
+        ),
+        border: Border.all(color: deckBorderColor),
       ),
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -195,9 +165,11 @@ class _Pc2Section3State extends State<Pc2Section3> {
       height: 21.5.h(context),
       width: 20.w(context),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 34, 38, 42),
-        borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: Colors.white70),
+        color: const Color.fromARGB(70, 32, 32, 40),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(40),
+        ),
+        border: Border.all(color: deckBorderColor),
       ),
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -212,37 +184,24 @@ class _Pc2Section3State extends State<Pc2Section3> {
                     fontSize: 5.sp(context), fontWeight: FontWeight.bold),
               ),
               TextField(
-                controller: shortTermController,
+                controller: goalsController,
                 decoration: const InputDecoration(
-                  hintText: 'Short-Term Goals?',
+                  hintText: ' Any Goals?',
                   hintStyle: TextStyle(color: Colors.white54),
                   border: InputBorder.none, // No underline
                 ),
                 style: const TextStyle(color: Colors.white),
                 onSubmitted: (value) {
                   if (value.trim().isNotEmpty) {
-                    addShortTermGoal();
-                    shortTermController.clear();
+                    addGoal();
+                    goalsController.clear();
                   }
                 },
               ),
-              TextField(
-                controller: longTermController,
-                decoration: const InputDecoration(
-                  hintText: 'Long-Term Goals?',
-                  hintStyle: TextStyle(color: Colors.white54),
-                  border: InputBorder.none, // No underline
-                ),
-                style: const TextStyle(color: Colors.white),
-                onSubmitted: (value) {
-                  if (value.trim().isNotEmpty) {
-                    addLongTermGoal();
-                    longTermController.clear();
-                  }
-                },
+              SizedBox(
+                height: 1.h(context),
               ),
-              Divider(),
-              shortTermGoals.isEmpty && longTermGoals.isEmpty
+              goals.isEmpty
                   ? const Center(
                       child: Text(
                         'You have no current goals.',
@@ -254,8 +213,8 @@ class _Pc2Section3State extends State<Pc2Section3> {
                       child: GradientContainer(
                         gradient1: red,
                         gradient2: purp,
-                        height: 5,
-                        width: 20,
+                        height: 4.h(context),
+                        width: 7.w(context),
                         neonGlow: purp,
                         text: 'View Goals',
                         textSize: 2.5.sp(context),

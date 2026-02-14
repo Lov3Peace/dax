@@ -108,10 +108,9 @@ void showErrorMessage(String message, context) {
               content: Container(
                 padding: EdgeInsetsGeometry.all(1.w(context)),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.5.w(context)),
-                  color: deckColor,
-                  border: Border.all(color: deckBorderColor),
-                ),
+                    borderRadius: BorderRadius.circular(1.5.w(context)),
+                    color: deckColor,
+                    border: Border.all(color: deckBorderColor)),
                 child: Text(
                   message,
                   textAlign: TextAlign.center,

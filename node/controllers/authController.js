@@ -206,7 +206,7 @@ export const deleteUser = async (req, res) => {
     const matched = await bcrypt.compare(password, hashedDbPw);
     if (matched) {
       // JWT Generation and Verification
-      const decoded = jwt.verify(accessToken, pubKey, { algorithms: "RS256" });
+      // const decoded = jwt.verify(accessToken, pubKey, { algorithms: "RS256" });
       const deletedUser = await User.deleteOne({ username: user.username });
       infoLog.info(`User '${user.username}' deleted successfully`);
       return res

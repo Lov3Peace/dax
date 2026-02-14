@@ -1,10 +1,10 @@
 import Router from "express";
 import {
-    changeUsername,
-    deleteUser,
-    login,
-    logout,
-    register,
+  changeUsername,
+  deleteUser,
+  login,
+  logout,
+  register,
 } from "../controllers/authController.js";
 import { initLoginCheck } from "../auth/init.js";
 import authCheck from "../auth/authCheck.js";
@@ -14,7 +14,7 @@ authRouter.get("/", initLoginCheck);
 
 authRouter.post("/register", register);
 
-authRouter.delete("/deleteUser", authCheck, deleteUser);
+authRouter.delete("/deleteUser", deleteUser);
 
 authRouter.post("/login", login);
 

@@ -1,0 +1,46 @@
+// Create project_categories table
+CREATE TABLE projects.project_categories (id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, category VARCHAR NOT NULL, description VARCHAR, image VARCHAR NOT NULL, route VARCHAR NOT NULL, timestamp TIMESTAMPTZ NOT NULL DEFAULT now());
+
+// Grant usage on projects schema
+GRANT USAGE ON SCHEMA projects TO carbon_dev1;
+
+// Grant all privileges for all tables in schema
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA projects TO carbon_dev1; 
+// Alter default privileges for future tables in schema
+ALTER DEFAULT PRIVILEGES FOR ROLE carbon_dev1 IN SCHEMA projects GRANT ALL PRIVILEGES ON TABLES TO carbon_dev1;
+
+// Check for blocking transactions
+SELECT pid, usename, state, query FROM pg_stat_activity WHERE state <> 'idle';
+
+
+-- 1. create table
+CREATE TABLE posts (
+  id BIGSERIAL PRIMARY KEY,
+  user_id BIGINT NOT NULL,
+  title TEXT,
+  description TEXT,
+  created_at TIMESTAMPTZ NOT NULL
+);
+
+-- 2. create index for feed queries
+CREATE INDEX idx_posts_user_created
+ON posts (user_id, created_at DESC);
+
+-- 3. insert data
+INSERT INTO posts (user_id, title, description, created_at)
+VALUES (42, 'hello', 'first post', now());
+
+-- 4. query (return all columns)
+SELECT *
+FROM posts
+WHERE user_id = 42
+ORDER BY created_at DESC
+LIMIT 20;
+
+-- 5. paginated query
+SELECT *
+FROM posts
+WHERE user_id = 42
+  AND created_at < $1
+ORDER BY created_at DESC
+LIMIT 20;

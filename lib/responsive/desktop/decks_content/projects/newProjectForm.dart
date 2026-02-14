@@ -53,6 +53,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   var etcUnitsValue;
   var etcValuesValue;
   var rolesNeededValue;
+  List rolesNeeded = [];
   ScrollController formScrollContrller = ScrollController();
 
 // Group vs Solo
@@ -96,16 +97,16 @@ class _NewProjectFormState extends State<NewProjectForm> {
   bool searching = true;
   String searchVal = "";
   final client = httpClient.BrowserClient()..withCredentials = true;
+  bool successfulPost = false;
   Future createProjectPost() async {
     try {
       final createProjectEndpoint = Uri.parse("$hostname/api/createNewProject");
-      final pid = const UuidV4().generate();
+      // final pid = const UuidV4().generate();
       final title = _projectTitleController.text;
       final description = _projectDescriptionController.text;
       final category = _projectCategoryValue.toString();
       final acceptanceCriteria = _acceptanceCriteriaController.text;
       final etc = etcValuesValue.toString() + " " + etcUnitsValue.toString();
-      final timestamp = DateTime.now().toString();
       var errorText = "";
 
       if (title.isEmpty) {
@@ -160,27 +161,31 @@ class _NewProjectFormState extends State<NewProjectForm> {
 
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       projectData.addAll({
-        "pid": pid,
-        "user": userProvider.username,
+        // "pid": pid,
+        "username": userProvider.username,
         "title": title,
         "category": category,
         "description": description,
-        "acceptanceCriteria": acceptanceCriteria,
-        "public": isPublic,
-        "group": isGroupProject,
+        "acceptance_criteria": acceptanceCriteria,
+        "is_public": isPublic,
+        "is_group": isGroupProject,
         "teammates": _selectedTeammates,
         "etc": etc,
-        "rolesNeeded": rolesNeededValue,
-        "timestamp": timestamp,
+        "roles_needed": rolesNeeded,
       });
       final res = await client.post(createProjectEndpoint,
           headers: {
             "Content-Type": "application/json",
           },
           body: jsonEncode(projectData));
+      final resStatus = res.statusCode;
       final resBody = res.body;
+      if (resStatus == 201) {
+        return true;
+      } else {
+        return false;
+      }
       print("Project Post Response: $resBody");
-      return 1;
     } catch (e) {
       print("Couldn't eeen do it: $e");
     }
@@ -674,6 +679,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             onChanged: (selectedValue) {
                               setState(() {
                                 rolesNeededValue = selectedValue;
+                                rolesNeeded.add(selectedValue);
                               });
                             },
                             style: TextStyle(
@@ -698,33 +704,38 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         Expanded(child: SizedBox()),
                         TactileButton(
                           onTap: () async {
+                            // res returns a boolean based on if the db write was successful
                             final res = await createProjectPost();
-                            print("Res: $res");
-                            if (res == 1) {
+                            if (!mounted) {
+                              return;
+                            }
+                            if (res is bool) {
                               router.pop();
-                              if (!mounted) {
-                                return;
-                              }
                               showDialog(
                                   barrierDismissible: true,
                                   context: context,
                                   builder: (context) {
                                     return Center(
                                       child: BlurryContainer(
-                                          width: 30.w(context),
-                                          height: 7.w(context),
+                                          width: 42.w(context),
+                                          height: 9.w(context),
                                           child: Center(
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                const Icon(
-                                                  Ionicons.checkmark_circle,
-                                                  color: green,
+                                                Icon(
+                                                  res
+                                                      ? Ionicons
+                                                          .checkmark_circle
+                                                      : Icons.error,
+                                                  color: res ? green : red,
                                                 ),
                                                 SizedBox(width: 1.w(context)),
                                                 Text(
-                                                  "Project Posted Successfully",
+                                                  res
+                                                      ? "Project Posted Successfully"
+                                                      : "There was an error posting the project :(",
                                                   style: TextStyle(
                                                       fontSize: 5.sp(context),
                                                       fontWeight:

@@ -35,13 +35,13 @@ export const updateProfileCrestsCollection = async function () {
     capList.forEach(function () {
       capWord = capList.join(" ");
     });
-    console.log(crests);
+    // console.log(crests);
     if ((await ProfileCrests.find({ rank: capWord })) < 1) {
       const newCrest = await ProfileCrests.create({
         rank: capWord,
         image: obj.name,
       });
-      console.log(capWord);
+      // console.log(capWord);
     }
   });
 };

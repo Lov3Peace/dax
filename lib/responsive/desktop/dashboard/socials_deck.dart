@@ -32,39 +32,35 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
+    double deckHeight = 22.h(context);
+    double deckWidth = 35.25.w(context);
+    double headingTextSize = 6.25.sp(context);
+    double labelTextSize = 2.5.sp(context);
+    if (100.w(context) < 1440) {
+      // headingTextSize = headingTextSize * 0.9;
+    }
     return TactileButton(
       onTap: () {
         router.go("/socials");
       },
-      child: socialsDeck(),
-    );
-  }
-
-  Widget socialsDeck({VoidCallback? onTap, Color? color}) {
-    // values set in desk_decks.dart
-    subTextSize = 2.5.sp(context);
-    profBubTextSize = 20;
-    double labelTextSize = 2.5.sp(context);
-    textConstraint = 500;
-    subTextConstraint = 500;
-    return Deck(
-      deckHeight: 22.sp(context),
-      deckWidth: 35.25.w(context),
-      deckName: 'Socials',
-      gradient1: orange,
-      gradient2: purp,
-      neonGlow: orange,
-      labelTextSize: labelTextSize,
-      textConstraint: 30.w(context),
-      headingText: 'All of your socials in one place.',
-      subText:
-          'Just link your social media accounts and access them all in one place.',
-      subTextConstraint: 25.w(context),
-      riveAnim: const r.RiveAnimation.asset(
-        "rive/twitter_rv.riv",
-        fit: BoxFit.fitWidth,
+      child: Deck(
+        deckHeight: deckHeight,
+        deckWidth: deckWidth,
+        deckName: 'Socials',
+        gradient1: orange,
+        gradient2: purp,
+        neonGlow: orange,
+        labelTextSize: labelTextSize,
+        headingText: 'All of your socials in one place.',
+        headingTextSize: headingTextSize,
+        subText:
+            'Just link your social media accounts and access them all in one place.',
+        riveAnim: const r.RiveAnimation.asset(
+          "rive/twitter_rv.riv",
+          fit: BoxFit.fitWidth,
+        ),
+        // image: Image.asset('images/crest1.png'),
       ),
-      // image: Image.asset('images/crest1.png'),
     );
   }
 }

@@ -45,7 +45,7 @@ dependencies:
   animated_image_list: ^1.0.0
   visibility_detector: ^0.4.0+2
   get: ^4.6.5
-  uuid: ^4.0.0
+  uuid: ^4.5.2
   responsive_builder: ^0.7.0
   vertical_card_pager: ^1.5.0
   google_fonts: ^5.1.0
@@ -94,6 +94,9 @@ dependencies:
   size_setter: ^1.1.1
   dashmon: ^0.0.3
   jwt_decoder: ^2.0.1
+  flutter_dotenv: ^6.0.0
+  dropdown_button2: ^2.3.9
+  optimized_search_field: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -122,6 +125,7 @@ flutter:
   assets:
     - images/
     - rive/
+    - ./.env
     
   #   - images/a_dot_ham.jpeg
 

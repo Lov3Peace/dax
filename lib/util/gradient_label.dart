@@ -9,6 +9,7 @@ class GradientContainer extends StatefulWidget {
     required this.width,
     required this.text,
     required this.textSize,
+    this.fontWeight = FontWeight.w600,
     required this.gradient1,
     required this.gradient2,
     required this.neonGlow,
@@ -18,6 +19,7 @@ class GradientContainer extends StatefulWidget {
   double height;
   double width;
   String text;
+  FontWeight fontWeight;
   double textSize;
   Color gradient1;
   Color gradient2;
@@ -54,7 +56,7 @@ class _GradientContainerState extends State<GradientContainer> {
           widget.text,
           style: GoogleFonts.montserrat(
             fontSize: widget.textSize,
-            fontWeight: FontWeight.w600,
+            fontWeight: widget.fontWeight,
             color: Colors.white,
           ),
         ),

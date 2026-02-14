@@ -1,9 +1,11 @@
 import 'package:flutter_application_1/responsive/desktop/util/error_page.dart';
 import 'package:flutter_application_1/responsive/desktop/util/routes.dart';
+import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_application_1/util/providers/userAuthProvider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_application_1/main.dart';
 
 /// The route configuration.
 final GoRouter router = GoRouter(
@@ -30,6 +32,7 @@ final GoRouter router = GoRouter(
           }
         },
         pageBuilder: (context, state) {
+          print("GoRoutes Hostname Value: $hostname");
           return CustomTransitionPage(
             child: LaunchPage(),
             transitionsBuilder:
@@ -64,8 +67,9 @@ final GoRouter router = GoRouter(
           name: "category-posts",
           path: '/:category',
           pageBuilder: (context, state) {
+            final parameter = state.pathParameters['category']!;
             return CustomTransitionPage(
-              child: DesktopProjectPostsPage(),
+              child: DesktopProjectPostsPage(parameter: parameter),
               transitionsBuilder:
                   (context, animation, secondaryAnimation, child) {
                 return FadeTransition(opacity: animation, child: child);

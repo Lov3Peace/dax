@@ -1,8 +1,9 @@
 import 'dart:async';
+import 'package:flutter_application_1/responsive/desktop/util/test_page.dart';
 import 'package:flutter_application_1/util/auth/loginCheck.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
-// import 'package:flutter_application_1/util/providers/appStateProvider.dart';
+import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/browser_client.dart' as httpClient;
@@ -36,7 +37,7 @@ Future main() async {
   runApp(
     MultiProvider(
       providers: [
-        //ChangeNotifierProvider(create: (_) => AppStateProvider()),
+        ChangeNotifierProvider(create: (_) => AppStateProvider()),
         ChangeNotifierProvider(create: (context) => ButtonState()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => UserAuthProvider()),
@@ -107,5 +108,79 @@ Widget flightShuttleBuilder(
     type: MaterialType.transparency, // no background, respects child size
     textStyle: DefaultTextStyle.of(fromHeroContext).style,
     child: shuttleChild,
+  );
+}
+
+Widget flightShuttleBuilder2(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection direction,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
+  final Widget toHero = toHeroContext.widget;
+  final Widget fromHero = fromHeroContext.widget;
+
+  // Wrap in an AnimatedBuilder to fade the contents
+  return AnimatedBuilder(
+    animation: animation,
+    builder: (context, _) {
+      final fadeValue = direction == HeroFlightDirection.pop
+          ? 1.0 - animation.value.clamp(0.0, 1.0)
+          : animation.value.clamp(0.0, 1.0);
+
+      // Only fade the text, not the whole hero shape
+      return Opacity(
+        opacity: fadeValue,
+        child: direction == HeroFlightDirection.push ? toHero : fromHero,
+      );
+    },
+  );
+}
+
+Widget textFlightShuttleBuilder(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection flightDirection,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
+  return Material(
+    type: MaterialType.transparency, // no background, respects child size
+    textStyle: DefaultTextStyle.of(fromHeroContext).style,
+    child: toHeroContext.widget,
+  );
+}
+
+Widget textFlightShuttleBuilder2(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection flightDirection,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
+  // Determine which child to show based on push or pop
+  final Widget shuttleChild = (flightDirection == HeroFlightDirection.push)
+      ? (toHeroContext.widget as Hero).child
+      : (fromHeroContext.widget as Hero).child;
+
+  return Material(
+    type: MaterialType.transparency, // no background, respects child size
+    // textStyle: TextStyle(color: tran),
+    child: shuttleChild,
+  );
+}
+
+Widget staticFlightShuttleBuilder(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection flightDirection,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
+  return Material(
+    type: MaterialType.transparency, // no background, respects child size
+    textStyle: DefaultTextStyle.of(fromHeroContext).style,
+    child: toHeroContext.widget,
   );
 }

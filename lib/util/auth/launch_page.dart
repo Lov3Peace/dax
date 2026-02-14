@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
-// import 'package:flutter_application_1/util/providers/appStateProvider.dart';
+import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
@@ -242,6 +242,7 @@ class _LaunchPageState extends State<LaunchPage> {
                             if (authnotifier.rememberMe == true) {
                               authnotifier.enableRememberMe();
                             }
+                            _passwordController.clear();
                           },
                           obscureText: true,
                           decoration: InputDecoration(
@@ -442,6 +443,7 @@ class _LaunchPageState extends State<LaunchPage> {
                                     _rememberMe,
                                     context,
                                     mounted);
+                                _passwordController.clear();
                               },
                               child: GradientContainer(
                                 gradient1: red,
@@ -473,4 +475,3 @@ class _LaunchPageState extends State<LaunchPage> {
     );
   }
 }
-

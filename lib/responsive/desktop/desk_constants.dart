@@ -289,7 +289,6 @@ class _MTProfileCardState extends State<MTProfileCard> with AnimationMixin {
       gradient2: tran,
       neonGlow: tran,
       labelTextSize: labelTextSize,
-      textConstraint: halfDeckWidth * 0.8,
       headingText: getCurrentUsername(),
       subText: '',
     );

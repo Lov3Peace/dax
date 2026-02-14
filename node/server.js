@@ -36,7 +36,7 @@ updateProfileCrestsCollection();
 
 app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 
-export const client = new Client({
+export const pgClient = new Client({
   host: process.env.PG_DB_HOST,
   port: process.env.PG_DB_PORT,
   database: process.env.PG_DB_NAME,
@@ -44,12 +44,12 @@ export const client = new Client({
   password: process.env.PG_DB_PW,
 });
 
-client
+pgClient
   .connect()
   .then(() => console.log(`Postgres Database Connection Established`))
   .catch((error) => console.log(error));
 
 mongoose
-  .connect(process.env.DB_CONN)
+  .connect(process.env.MONGO_DB_CONN)
   .then(() => console.log(`Mongo Database Connection Established`))
   .catch((error) => console.log(error));

@@ -36,7 +36,7 @@ updateProfileCrestsCollection();
 
 app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 
-const client = new Client({
+export const client = new Client({
   host: process.env.PG_DB_HOST,
   port: process.env.PG_DB_PORT,
   database: process.env.PG_DB_NAME,

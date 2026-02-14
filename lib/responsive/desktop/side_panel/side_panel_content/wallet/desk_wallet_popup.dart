@@ -4,7 +4,6 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../desk_decks.dart';
 import 'desk_wallet_sections/desk_crypto_wallet_s1.dart';
-import 'desk_wallet_sections/desk_crypto_wallet_s2.dart';
 import 'desk_wallet_sections/desk_wallet_c1.dart';
 import 'desk_wallet_sections/desk_wallet_c2.dart';
 
@@ -113,10 +112,6 @@ class WalletPopUpState extends State<WalletPopUp> with AnimationMixin {
           color: tran,
           indent: 100,
           endIndent: 100,
-        ),
-        CryptoWalletSection2(
-          selectedAsset:
-              selectedAsset, // <- update this when you tap an asset row
         ),
       ],
     );

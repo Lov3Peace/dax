@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
-  getUserDashboardData,
-  getUsers,
+	getUserDashboardData,
+	getUsers,
 } from "../controllers/userController.js";
 
 const userDataRouter = Router();

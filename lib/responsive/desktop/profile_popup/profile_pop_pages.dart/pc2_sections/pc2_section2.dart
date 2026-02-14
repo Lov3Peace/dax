@@ -8,6 +8,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import '../../../../../main.dart';
 import '../../../../../util/gradient_label.dart';
 import '../../../../../util/tactile_button.dart';
+import '../../../desk_decks.dart';
 
 class Pc2Section2 extends StatefulWidget {
   Pc2Section2({super.key});
@@ -41,9 +42,11 @@ class _Pc2Section2State extends State<Pc2Section2> {
     return CarouselContentsTemp(
       child: Container(
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 34, 38, 42),
-          borderRadius: BorderRadius.circular(30),
-          border: Border.all(color: Colors.white70),
+          color: const Color.fromARGB(70, 32, 32, 40),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(40),
+          ),
+          border: Border.all(color: deckBorderColor),
         ),
         child: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
@@ -85,8 +88,8 @@ class _Pc2Section2State extends State<Pc2Section2> {
                   child: GradientContainer(
                     gradient1: red,
                     gradient2: purp,
-                    height: 5,
-                    width: 20,
+                    height: 4.h(context),
+                    width: 7.w(context),
                     neonGlow: purp,
                     text: 'Upload Files',
                     textSize: 2.5.sp(context),

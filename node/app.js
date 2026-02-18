@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import authCheck from "./auth/authCheck.js";
 import profileRouter from "./routers/profileRouter.js";
 import projectsRouter from "./routers/projectsRouter.js";
+import userDataRouter from "./routers/userDataRouter.js";
 
 const app = express();
 app.use(express.json());
@@ -23,6 +24,8 @@ app.use(cookieParser());
 app.use("/api/", authRouter);
 
 app.use("/api/", profileRouter);
+
+app.use("/api/", userDataRouter);
 
 app.use("/api/", projectsRouter);
 

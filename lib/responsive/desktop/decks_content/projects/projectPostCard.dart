@@ -297,9 +297,17 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                   // Row of Like, Add Request, Share Buttons (Actions)
                   //
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     spacing: 15,
                     children: [
-                      Spacer(),
+                      Text(
+                        "Completion Status",
+                        style: TextStyle(
+                            fontSize: 2.5.sp(context),
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey),
+                      ),
+                      const Spacer(),
                       IconButton(
                         onPressed: liked,
                         icon: Icon(

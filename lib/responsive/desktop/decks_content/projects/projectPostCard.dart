@@ -1,9 +1,14 @@
+import "package:dotted_border/dotted_border.dart";
+import "package:dotted_decoration/dotted_decoration.dart";
 import "package:dotted_line/dotted_line.dart";
+import "package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart";
 import "package:flutter_application_1/responsive/desktop/desk_decks.dart";
+import "package:flutter_application_1/responsive/desktop/util/dottedLine.dart";
 import "package:flutter_application_1/util/imports.dart";
 import "package:flutter_application_1/util/tactile_button.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:ionicons/ionicons.dart";
+import "package:score_progress_pretty_display/score_progress_pretty_display.dart";
 
 class ProjectPostCard extends StatefulWidget {
   const ProjectPostCard({
@@ -103,8 +108,11 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Expanded(
+                          Container(
+                            constraints:
+                                BoxConstraints(maxWidth: 40.w(context)),
                             child: ClipRRect(
+                              clipBehavior: Clip.hardEdge,
                               borderRadius:
                                   BorderRadius.circular(1.25.w(context)),
                               // clipBehavior: Clip.hardEdge,
@@ -132,13 +140,11 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                                     const Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 5),
-                                      child: DottedLine(
-                                        direction: Axis.horizontal,
-                                        lineThickness: 1,
-                                        dashColor: Colors.grey,
-                                        dashGapLength: 2,
-                                        dashLength: 2,
-                                      ),
+                                      child: CarbonDottedLine(
+                                          color: Colors.grey,
+                                          dashThickness: 1,
+                                          dashLength: 1.5,
+                                          gapLength: 2),
                                     ),
                                     Text.rich(
                                       maxLines: 5,
@@ -164,13 +170,11 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                                     const Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 5),
-                                      child: DottedLine(
-                                        direction: Axis.horizontal,
-                                        lineThickness: 1,
-                                        dashColor: Colors.grey,
-                                        dashGapLength: 2,
-                                        dashLength: 2,
-                                      ),
+                                      child: CarbonDottedLine(
+                                          color: Colors.grey,
+                                          dashThickness: 1,
+                                          dashLength: 1.5,
+                                          gapLength: 2),
                                     ),
                                     Text.rich(
                                       maxLines: 5,
@@ -196,13 +200,11 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                                     const Padding(
                                       padding:
                                           EdgeInsets.symmetric(vertical: 5),
-                                      child: DottedLine(
-                                        direction: Axis.horizontal,
-                                        lineThickness: 1,
-                                        dashColor: Colors.grey,
-                                        dashGapLength: 2,
-                                        dashLength: 2,
-                                      ),
+                                      child: CarbonDottedLine(
+                                          color: Colors.grey,
+                                          dashThickness: 1,
+                                          dashLength: 1.5,
+                                          gapLength: 2),
                                     ),
                                     Text.rich(
                                       maxLines: 5,
@@ -225,77 +227,123 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
+              // SizedBox(height: 20),
               //
               // Category Label | Actions+Timestamp
               //
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [widget.gradient1, widget.gradient2]),
-                        boxShadow: [
-                          BoxShadow(
-                              color: widget.neonGlow,
-                              blurRadius: 20,
-                              blurStyle: BlurStyle.solid)
-                        ],
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20))),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                      child: Text(
-                        widget.category,
-                        style: GoogleFonts.montserrat(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                            shadows: [
-                              Shadow(
-                                color: widget.shadowColor,
-                                blurRadius: 1,
-                              ),
-                              Shadow(
-                                color: widget.shadowColor,
-                                blurRadius: 2,
-                              ),
-                            ]),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //       gradient: LinearGradient(
+                  //           colors: [widget.gradient1, widget.gradient2]),
+                  //       boxShadow: [
+                  //         BoxShadow(
+                  //             color: widget.neonGlow,
+                  //             blurRadius: 20,
+                  //             blurStyle: BlurStyle.solid)
+                  //       ],
+                  //       borderRadius:
+                  //           const BorderRadius.all(Radius.circular(20))),
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  //     child: Text(
+                  //       widget.category,
+                  //       style: GoogleFonts.montserrat(
+                  //           fontSize: 14,
+                  //           fontWeight: FontWeight.w600,
+                  //           color: Colors.white,
+                  //           shadows: [
+                  //             Shadow(
+                  //               color: widget.shadowColor,
+                  //               blurRadius: 1,
+                  //             ),
+                  //             Shadow(
+                  //               color: widget.shadowColor,
+                  //               blurRadius: 2,
+                  //             ),
+                  //           ]),
+                  //     ),
+                  //   ),
+                  // ),
                   //
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: 2.w(context)),
+                  //   child: PrimaryArcAnimationComponent(
+                  //     score: 77,
+                  //     maxScore: 100,
+                  //     arcHeight: 70,
+                  //     arcWidth: 70,
+                  //     backgroundArcStrokeThickness: 10,
+                  //     progressArcStrokeThickness: 10,
+                  //     enableStepperEffect: false,
+                  //     isRoundEdges: true,
+                  //     minScoreTextFontSize: 14,
+                  //     maxScoreTextFontSize: 14,
+                  //     isRoundOffScoreWhileProgress: true,
+                  //     isRoundOffScore: true,
+                  //     showOutOfScoreFormat: false,
+                  //     isPrgressCurveFilled: false,
+                  //     scoreAnimationDuration: Duration(seconds: 3),
+                  //     // scoreTextAnimationDuration: Duration(milliseconds: 700),
+                  //     arcBackgroundColor: deckBorderColor,
+                  //     arcProgressGradientColors: [red, pink, purp, blue],
+                  //     scoreTextStyle: TextStyle(fontSize: 14),
+                  //   ),
+                  // ),
+                  // Spacer(),
                   // Row of Like, Add Request, Share Buttons (Actions)
                   //
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                  Row(
+                    spacing: 15,
                     children: [
-                      Row(
-                        spacing: 15,
-                        children: [
-                          IconButton(
-                            onPressed: liked,
-                            icon: Icon(
-                              Ionicons.heart,
-                              color: isLiked ? orange : white,
-                            ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: liked,
+                        icon: Icon(
+                          Ionicons.heart,
+                          color: isLiked ? orange : white,
+                        ),
+                      ),
+                      const IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Ionicons.person_add,
+                          color: white,
+                        ),
+                      ),
+                      const IconButton(
+                        onPressed: null,
+                        icon: Icon(
+                          Icons.share,
+                          color: white,
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 2.w(context)),
+                          child: FAProgressBar(
+                            maxValue: 100,
+                            currentValue: 50,
+                            size: 17,
+                            displayTextStyle: TextStyle(
+                                fontSize: 10, fontWeight: FontWeight.w600),
+                            displayText: "%",
+                            borderRadius: BorderRadius.circular(10.w(context)),
+                            backgroundColor: deckBorderColor,
+                            animatedDuration: Duration(milliseconds: 300),
+                            // border: BoxBorder.all(color: deckBorderColor),
+                            progressGradient:
+                                LinearGradient(colors: [purp, pink, red]),
+                            direction: Axis.horizontal,
                           ),
-                          const IconButton(
-                            onPressed: null,
-                            icon: Icon(
-                              Ionicons.person_add,
-                              color: white,
-                            ),
-                          ),
-                          const IconButton(
-                            onPressed: null,
-                            icon: Icon(
-                              Icons.share,
-                              color: white,
-                            ),
-                          )
-                        ],
+                        ),
                       ),
                       Text(
                         widget.timestamp,
@@ -303,9 +351,9 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
                             fontSize: 4.sp(context),
                             fontWeight: FontWeight.w600,
                             color: Colors.grey),
-                      ),
+                      )
                     ],
-                  )
+                  ),
                 ],
               ),
             ],

@@ -37,7 +37,7 @@ class SettingsToggle extends StatelessWidget {
               child: Switch(
                 value: value,
                 onChanged: onChanged,
-                activeThumbColor: Colors.white,
+                // activeThumbColor: Colors.white,
                 activeTrackColor: Colors.white24,
                 inactiveThumbColor: Colors.white70,
                 inactiveTrackColor: Colors.white24,

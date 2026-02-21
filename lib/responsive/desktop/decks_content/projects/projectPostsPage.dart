@@ -55,31 +55,33 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
 
       // print(cdnBaseUrl + body[0]["image"]);
       for (final post in body) {
-        setState(() {
-          posts.add(ProjectPostCard(
-              category: post["category"],
-              postTitle: post["title"],
-              user: post["username"],
-              description: post["description"],
-              teammates: post["teammates"].toString() == '[]'
-                  ? 'None'
-                  : post["teammates"]
-                      .toString()
-                      .replaceAll("[", "")
-                      .replaceAll("]", ""),
-              rolesNeeded: post["roles_needed"].toString() == "[]" ||
-                      post["roles_needed"].toString() == "null"
-                  ? "None"
-                  : post["roles_needed"].toString(),
-              timestamp: post["display_timestamp"],
-              image: post["images"][0],
-              gradient1: red,
-              gradient2: pink,
-              neonGlow: pink,
-              shadowColor: tran));
-          Future.delayed(Duration(milliseconds: 100));
-        });
+        posts.add(ProjectPostCard(
+            category: post["category"],
+            postTitle: post["title"],
+            user: post["username"],
+            description: post["description"],
+            teammates: post["teammates"].toString() == '[]'
+                ? 'None'
+                : post["teammates"]
+                    .toString()
+                    .replaceAll("[", "")
+                    .replaceAll("]", ""),
+            rolesNeeded: post["roles_needed"].toString() == "[]" ||
+                    post["roles_needed"].toString() == "null"
+                ? "None"
+                : post["roles_needed"].toString(),
+            timestamp: post["display_timestamp"],
+            image: post["images"][0],
+            gradient1: red,
+            gradient2: pink,
+            neonGlow: pink,
+            shadowColor: tran));
       }
+      setState(() {
+        print(posts);
+        posts = posts;
+        // Future.delayed(Duration(milliseconds: 100));
+      });
       return body;
     } catch (e) {
       print("Couldn't eeen do it: $e");
@@ -143,14 +145,9 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
                         scrollDirection: Axis.vertical,
                         widgets: posts,
                         scale: 1.01,
-                        listPadding: EdgeInsets.fromLTRB(
-                            0.5.w(context),
-                            100.h(context) < 875 ? 100 : 10.h(context),
-                            0.5.w(context),
-                            7.w(context)),
-                        childPadding: 100.w(context) > 2200
-                            ? EdgeInsets.all(20)
-                            : EdgeInsets.all(0.5.w(context)),
+                        listPadding: EdgeInsets.fromLTRB(0.5.w(context),
+                            7.w(context), 0.5.w(context), 7.w(context)),
+                        childPadding: EdgeInsets.all(0.5.w(context)),
                         physics: const AlwaysScrollableScrollPhysics(),
                       ),
                 //

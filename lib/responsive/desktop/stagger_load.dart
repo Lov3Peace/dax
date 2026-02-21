@@ -10,7 +10,7 @@ class StaggerLoad extends StatelessWidget {
     required this.scrollDirection,
     required this.delay,
     required this.scale,
-    required this.layer,
+    this.layer = 1,
     this.controller,
     this.listPadding,
     this.childPadding,

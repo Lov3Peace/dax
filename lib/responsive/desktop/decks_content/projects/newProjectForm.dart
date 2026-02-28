@@ -163,6 +163,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       var projectProvider =
           Provider.of<ProjectProvider>(context, listen: false);
+      if (projectProvider.teammates == []) {}
       projectData.addAll({
         // "pid": pid,
         "username": userProvider.username,
@@ -172,10 +173,15 @@ class _NewProjectFormState extends State<NewProjectForm> {
         "acceptance_criteria": acceptanceCriteria,
         "is_public": isPublic,
         "is_group": isGroupProject,
-        "teammates": projectProvider.teammates,
         "etc": etc,
         "roles_needed": rolesNeeded,
       });
+
+      if (projectProvider.teammates.isNotEmpty) {
+        print("Populated teammates passed: ${projectProvider.teammates}");
+        projectData["teammates"] = projectProvider.teammates;
+      }
+
       print("Project Data Request: $projectData");
       final res = await client.post(createProjectEndpoint,
           headers: {

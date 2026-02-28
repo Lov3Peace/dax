@@ -55,23 +55,19 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
 
       // print(cdnBaseUrl + body[0]["image"]);
       for (final post in body) {
+        print(post);
         posts.add(ProjectPostCard(
             category: post["category"],
             postTitle: post["title"],
             user: post["username"],
             description: post["description"],
-            teammates: post["teammates"].toString() == '[]'
-                ? 'None'
-                : post["teammates"]
-                    .toString()
-                    .replaceAll("[", "")
-                    .replaceAll("]", ""),
+            teammates: post["teammates"].toString(),
             rolesNeeded: post["roles_needed"].toString() == "[]" ||
                     post["roles_needed"].toString() == "null"
                 ? "None"
                 : post["roles_needed"].toString(),
             timestamp: post["display_timestamp"],
-            image: post["images"][0],
+            image: post["images"][0].replaceAll("[", "").replaceAll("]", ""),
             gradient1: red,
             gradient2: pink,
             neonGlow: pink,

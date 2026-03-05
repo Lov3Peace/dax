@@ -157,50 +157,29 @@ export const createNewProject = async (req, res) => {
 
   const schemaName = `${category.replaceAll(" ", "_").toLowerCase()}_projects`;
   const tableName = category.toLowerCase().replaceAll(" ", "_") + "_posts";
-  const columns = Object.values(req.body);
-  // console.log(typeof req.body);
-  console.log(columns);
+  const columns = Object.keys(req.body);
+  const values = Object.values(req.body);
+  let valuePlaceholders = [];
+
+  for (let i = 1; i <= values.length; i++) {
+    const placeHolder = `$${i}`;
+    valuePlaceholders.push(placeHolder);
+  }
+
+  console.log("COLUMNS: ", columns);
+  console.log("VALUES: ", values);
+  console.log("PLACEHOLDERS: ", valuePlaceholders);
 
   try {
-    // console.log(req);
     await pgClient.query("BEGIN");
-    const imagesAdded = Array.isArray(req.body.images);
-    const teammatesAdded = Array.isArray(req.body.teammates);
-
-    const columns = [
-      "username",
-      "title",
-      "category",
-      "description",
-      "acceptance_criteria",
-      "is_public",
-      "is_group",
-      ...(teammatesAdded ? "teammates" : []),
-      "etc",
-      "roles_needed",
-      ...(imagesAdded ? ["images"] : []),
-    ];
-
-    const values = [
-      req.body.username,
-      req.body.title,
-      req.body.category,
-      req.body.description,
-      req.body.acceptance_criteria,
-      req.body.is_public,
-      req.body.is_group,
-      ...(teammatesAdded ? req.body.teammates : []),
-      req.body.etc,
-      req.body.roles_needed,
-      ...(imagesAdded ? req.body.images : []),
-    ];
-
-    const valueIndices = values.map((_, i) => `$${i + 1}`);
-
-    await pgClient.query(
+    const categoryTable = await pgClient.query(
+      // format(
+      //   `INSERT INTO %I.%I (username , title , category , description , acceptance_criteria , is_public , is_group , teammates , etc , roles_needed , images ) VALUES ($1, $2, $3, $4, $5, $6, $7, DEFAULT, $8, DEFAULT, DEFAULT)`,
+      //   schemaName,
+      //   tableName,
+      // ),
       format(
-        `INSERT INTO %I.%I (${columns.join(", ")})
-     VALUES (${valueIndices.join(", ")})`,
+        `INSERT INTO %I.%I (${columns}) VALUES (${valuePlaceholders})`,
         schemaName,
         tableName,
       ),

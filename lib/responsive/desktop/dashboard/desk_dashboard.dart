@@ -70,133 +70,128 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
     textConstraint = 500;
     subTextConstraint = 500;
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      body: SingleChildScrollView(
+      body: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
-        child: Container(
-          height: 100.h(context),
-          width: 100.w(context),
-          constraints: 100.w(context) > 2560
-              ? BoxConstraints(minHeight: 1440)
-              : BoxConstraints(minHeight: 900),
-          child: Stack(
-            children: [
-              // Background(),
-              ArtBoardScreen(),
+        children: [
+          Container(
+            height: 100.h(context),
+            width: 100.w(context),
+            constraints: 100.w(context) > 2560
+                ? BoxConstraints(minHeight: 1440)
+                : BoxConstraints(minHeight: 900),
+            child: Stack(
+              children: [
+                // Background(),
+                ArtBoardScreen(),
 
-              Row(
-                children: [
-                  DesktopSidePanel(),
-                  Container(
-                    height: 90.h(context),
-                    // width: 87.5.w(context),
-                    constraints: 100.w(context) > 2560
-                        ? BoxConstraints(minHeight: 1440)
-                        : BoxConstraints(minHeight: 900),
-                    //
-                    // Row for Decks + Messages
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 0.25.w(context)),
-                          child: Column(
-                            children: [
-                              //
-                              // Row for Title, Profile, Projects, and Communities Decks
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    //
-                                    // Stagger Load Animation
-                                    StaggerLoad(
-                                        layer: 1,
-                                        scale: 1.03,
-                                        scrollDirection: Axis.horizontal,
-                                        duration: 200,
-                                        delay: 75,
-                                        childPadding:
-                                            EdgeInsets.all(0.25.w(context)),
-                                        widgets: [
-                                          //
-                                          //Column of Title Bubble and Profile Card
-                                          Column(
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsets.only(
-                                                    bottom: 0.25.w(context)),
-                                                child: TitleBubble(
-                                                  deckName: "Dashboard",
+                Row(
+                  children: [
+                    DesktopSidePanel(),
+                    Container(
+                      height: 90.h(context),
+                      // width: 87.5.w(context),
+                      constraints: 100.w(context) > 2560
+                          ? BoxConstraints(minHeight: 1440)
+                          : BoxConstraints(minHeight: 900),
+                      //
+                      // Row for Decks + Messages
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 0.25.w(context)),
+                            child: Column(
+                              children: [
+                                //
+                                // Row for Title, Profile, Projects, and Communities Decks
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      //
+                                      // Stagger Load Animation
+                                      StaggerLoad(
+                                          layer: 1,
+                                          scale: 1.03,
+                                          scrollDirection: Axis.horizontal,
+                                          duration: 200,
+                                          delay: 75,
+                                          childPadding:
+                                              EdgeInsets.all(0.25.w(context)),
+                                          widgets: [
+                                            //
+                                            //Column of Title Bubble and Profile Card
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      bottom: 0.25.w(context)),
+                                                  child: TitleBubble(
+                                                    deckName: "Dashboard",
+                                                  ),
                                                 ),
-                                              ),
-                                              Expanded(
-                                                child: Hero(
-                                                  tag: 'profileHeroTag',
-                                                  flightShuttleBuilder:
-                                                      flightShuttleBuilder,
+                                                Expanded(
                                                   child: ProfileCard(),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          ProjectsDeck(),
-                                          CommunitiesDeck(),
-                                        ]),
-                                  ],
+                                              ],
+                                            ),
+                                            ProjectsDeck(),
+                                            CommunitiesDeck(),
+                                          ]),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              //
-                              // Row for Socials and News Decks
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    StaggerLoad(
-                                        layer: 2,
-                                        scale: 1.03,
-                                        scrollDirection: Axis.horizontal,
-                                        duration: 200,
-                                        delay: 75,
-                                        childPadding:
-                                            EdgeInsets.all(0.25.w(context)),
-                                        widgets: [
-                                          SocialsDeck(),
-                                          NewsDeck(),
-                                        ]),
-                                  ],
+                                //
+                                // Row for Socials and News Decks
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      StaggerLoad(
+                                          layer: 2,
+                                          scale: 1.03,
+                                          scrollDirection: Axis.horizontal,
+                                          duration: 200,
+                                          delay: 75,
+                                          childPadding:
+                                              EdgeInsets.all(0.25.w(context)),
+                                          widgets: [
+                                            SocialsDeck(),
+                                            NewsDeck(),
+                                          ]),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        // // ignore: prefer_const_constructors
-                      ],
+                          // // ignore: prefer_const_constructors
+                        ],
+                      ),
                     ),
-                  ),
 
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 1.w(context)),
-                    child: StaggerLoad(
-                      widgets: [Messages()],
-                      duration: 200,
-                      delay: 75,
-                      layer: 3,
-                      scale: 1.03,
-                      scrollDirection: Axis.horizontal,
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 1.w(context)),
+                      child: StaggerLoad(
+                        widgets: [Messages()],
+                        duration: 200,
+                        delay: 75,
+                        layer: 3,
+                        scale: 1.03,
+                        scrollDirection: Axis.horizontal,
+                      ),
                     ),
-                  ),
-                  // ignore: prefer_const_constructors
-                ],
-              ),
+                    // ignore: prefer_const_constructors
+                  ],
+                ),
 
-              // Positioned.fill(
-              //   child: BackdropFilter(
-              //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-              //       child:  SizedBox()),
-              // ),
-            ],
+                // Positioned.fill(
+                //   child: BackdropFilter(
+                //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+                //       child:  SizedBox()),
+                // ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

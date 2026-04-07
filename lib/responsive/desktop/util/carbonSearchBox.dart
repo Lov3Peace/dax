@@ -143,7 +143,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
           required onPressed,
           required value}) {
         isHighlighted = index == highlightIndex ? true : false;
-        highlightedColor = isHighlighted ? red : tran;
+        highlightedColor = isHighlighted ? Colors.grey.shade800 : tran;
 
 // We create a FocusNode for the textFieldKey(thankfully this is a parameter of the widget
 // to get access to the onKeyEvent() function. We must return a KeyEventResult for each

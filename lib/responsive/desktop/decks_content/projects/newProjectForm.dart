@@ -19,6 +19,7 @@ import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:optimized_search_field/optimized_search_field.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:provider/provider.dart';
@@ -99,15 +100,20 @@ class _NewProjectFormState extends State<NewProjectForm> {
   String searchVal = "";
   final client = httpClient.BrowserClient()..withCredentials = true;
   bool successfulPost = false;
+  final rolesController = MultiSelectController<String>();
   Future createProjectPost() async {
     try {
       final createProjectEndpoint = Uri.parse("$hostname/api/createNewProject");
-      // final pid = const UuidV4().generate();
       final title = _projectTitleController.text;
       final description = _projectDescriptionController.text;
       final category = _projectCategoryValue.toString();
       final acceptanceCriteria = _acceptanceCriteriaController.text;
       final etc = etcValuesValue.toString() + " " + etcUnitsValue.toString();
+      // User Provider to get username
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
+      // Project Provider to get values of teammates and roles needed
+      var projectProvider =
+          Provider.of<ProjectProvider>(context, listen: false);
       var errorText = "";
 
       if (title.isEmpty) {
@@ -126,6 +132,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
         errorText = errorText +
             "- Estimated Time of Completion Fields Cannot Be Empty\n";
       }
+
       if (errorText.startsWith("-")) {
         return showDialog(
             context: context,
@@ -160,12 +167,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
             });
       }
 
-      var userProvider = Provider.of<UserProvider>(context, listen: false);
-      var projectProvider =
-          Provider.of<ProjectProvider>(context, listen: false);
       if (projectProvider.teammates == []) {}
       projectData.addAll({
-        // "pid": pid,
         "username": userProvider.username,
         "title": title,
         "category": category,
@@ -178,11 +181,15 @@ class _NewProjectFormState extends State<NewProjectForm> {
       });
 
       if (projectProvider.teammates.isNotEmpty) {
-        print("Populated teammates passed: ${projectProvider.teammates}");
+        debugPrint("Populated teammates passed: ${projectProvider.teammates}");
         projectData["teammates"] = projectProvider.teammates;
       }
+      if (projectProvider.rolesNeeded.isNotEmpty) {
+        debugPrint("Populated roles passed: ${projectProvider.rolesNeeded}");
+        projectData["roles_needed"] = projectProvider.rolesNeeded;
+      }
 
-      print("Project Data Request: $projectData");
+      debugPrint("Project Data Request: $projectData");
       final res = await client.post(createProjectEndpoint,
           headers: {
             "Content-Type": "application/json",
@@ -197,13 +204,13 @@ class _NewProjectFormState extends State<NewProjectForm> {
       }
       print("Project Post Response: $resBody");
     } catch (e) {
-      print("Couldn't eeen do it: $e");
+      debugPrint("Unable to post project: $e");
     }
   }
 
-// String searchVal = _teammatesSearchController.text;
+  // Fetch Users Future to get users from database (used in CarbonSearchBox)
   Future _fetchUsers(searchString) async {
-    print("Users before setState fetch: $users");
+    debugPrint("Users before setState fetch: $users");
     try {
       final getUsersEndpoint =
           Uri.parse("$hostname/api/getUsers?searchString=$searchString");
@@ -215,10 +222,10 @@ class _NewProjectFormState extends State<NewProjectForm> {
       );
       final body = jsonDecode(res.body);
       users = body;
-      print("Users after setState fetch: $users");
+      debugPrint("Users after setState fetch: $users");
       return users;
     } catch (e) {
-      print("COULDNT EEN DO IT: $e");
+      debugPrint("Could not fetch users: $e");
     }
     // });
   }
@@ -285,7 +292,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(1.w(context)),
-                          borderSide: BorderSide(color: white),
+                          borderSide: const BorderSide(color: white),
                         ),
                       ),
                     ),
@@ -370,7 +377,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(1.w(context)),
-                          borderSide: BorderSide(color: white, width: 1),
+                          borderSide: const BorderSide(color: white, width: 1),
                         ),
                       ),
                     ),
@@ -412,7 +419,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(1.w(context)),
-                          borderSide: BorderSide(color: white, width: 1),
+                          borderSide: const BorderSide(color: white, width: 1),
                         ),
                       ),
                     ),
@@ -427,7 +434,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           fontSize: 4.sp(context),
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         TactileButton(
@@ -462,7 +469,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             borderRadius: 10.w(context),
                           ),
                         ),
-                        SizedBox(width: 25),
+                        const SizedBox(width: 25),
                         TactileButton(
                           scale: 1.05,
                           onTap: () {
@@ -525,7 +532,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       ),
                     ),
 
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     //
                     // Estimated Time to Completion
                     Row(
@@ -548,7 +555,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         DropdownButton2(
@@ -571,7 +578,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 ),
                               )),
                         ),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         DropdownButton2(
                           items: etcUnits,
                           value: etcUnitsValue,
@@ -595,7 +602,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       ],
                     ),
 
-                    SizedBox(height: 25),
+                    const SizedBox(height: 25),
                     //
                     // Privacy
                     Text(
@@ -606,7 +613,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           fontSize: 4.sp(context),
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         TactileButton(
@@ -637,7 +644,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             borderRadius: 10.w(context),
                           ),
                         ),
-                        SizedBox(width: 25),
+                        const SizedBox(width: 25),
                         TactileButton(
                           scale: 1.05,
                           onTap: () {
@@ -668,7 +675,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
                       ],
                     ),
                     SizedBox(height: 25),
-
+//
+// Roles Needed
                     Visibility(
                       visible: isRolesNeededVisible,
                       child: Column(
@@ -683,27 +691,50 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                 fontWeight: FontWeight.w600),
                           ),
                           SizedBox(height: 20),
-                          DropdownButton2(
+                          MultiDropdown<String>(
                             items: projectRoles,
-                            value: rolesNeededValue,
-                            onChanged: (selectedValue) {
-                              setState(() {
-                                rolesNeededValue = selectedValue;
-                                rolesNeeded.add(selectedValue);
-                              });
-                            },
-                            style: TextStyle(
-                                fontSize: 3.sp(context), color: white),
-                            dropdownStyleData: DropdownStyleData(
-                                maxHeight: 15.w(context),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(1.w(context))),
-                                  border: Border.all(
-                                    color: deckBorderColor,
-                                  ),
+                            controller: rolesController,
+                            fieldDecoration: FieldDecoration(
+                                hintText: "Select Roles",
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(1.w(context)),
+                                  borderSide:
+                                      BorderSide(color: formFieldOutlineColor),
                                 )),
+                            searchEnabled: true,
+                            selectedItemBuilder: (item) {
+                              return TactileButton(
+                                child: Chip(
+                                  label: Text(item.value),
+                                  deleteIcon: Icon(Icons.close),
+                                  onDeleted: () {
+                                    rolesController.unselectWhere(
+                                        (selectedItem) =>
+                                            selectedItem.value == item.value);
+                                  },
+                                  mouseCursor: SystemMouseCursors.click,
+                                  backgroundColor: Colors.grey.shade800,
+                                  shape: const StadiumBorder(
+                                    side: BorderSide(
+                                      color: tran,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            chipDecoration:
+                                ChipDecoration(backgroundColor: red),
+                            onSelectionChange: (selectedItems) {
+                              var projectProvider =
+                                  Provider.of<ProjectProvider>(context,
+                                      listen: false);
+                              projectProvider.saveRolesNeeded(selectedItems);
+
+                              debugPrint('Selected: $selectedItems');
+                            },
                           ),
+                          SizedBox(height: 20),
                         ],
                       ),
                     ),
@@ -711,11 +742,12 @@ class _NewProjectFormState extends State<NewProjectForm> {
                     // Submit
                     Row(
                       children: [
-                        Expanded(child: SizedBox()),
+                        const Expanded(child: SizedBox()),
                         TactileButton(
                           onTap: () async {
                             // res returns a boolean based on if the db write was successful
                             final res = await createProjectPost();
+                            // guarding against passing context across async gap
                             if (!mounted) {
                               return;
                             }

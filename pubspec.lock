@@ -201,6 +201,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.3"
+  dotted_border:
+    dependency: "direct main"
+    description:
+      name: dotted_border
+      sha256: "99b091ec6891ba0c5331fdc2b502993c7c108f898995739a73c6845d71dad70c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
+  dotted_decoration:
+    dependency: "direct main"
+    description:
+      name: dotted_decoration
+      sha256: a5c5771367690b4f64ebfa7911954ab472b9675f025c373f514e32ac4bb81d5e
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
+  dotted_line:
+    dependency: "direct main"
+    description:
+      name: dotted_line
+      sha256: "41e3d655939559815daa1370fc1e07673a205fa628cf40ce3af45d90029a77b6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.3"
+  dropdown_button2:
+    dependency: "direct main"
+    description:
+      name: dropdown_button2
+      sha256: b0fe8d49a030315e9eef6c7ac84ca964250155a6224d491c1365061bc974a9e1
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.9"
   easy_scroll_animation:
     dependency: "direct main"
     description:
@@ -326,6 +358,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.0"
+  flutter_animation_progress_bar:
+    dependency: "direct main"
+    description:
+      name: flutter_animation_progress_bar
+      sha256: "85f05404faeef7141b1c5b53571293fc19359c120c4aea4430b2b7d808461d09"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
   flutter_bloc:
     dependency: "direct main"
     description:
@@ -342,6 +382,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: d4130c4a43e0b13fefc593bc3961f2cb46e30cb79e253d4a526b1b5d24ae1ce4
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.0"
   flutter_linkify:
     dependency: transitive
     description:
@@ -720,6 +768,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  optimized_search_field:
+    dependency: "direct main"
+    description:
+      name: optimized_search_field
+      sha256: "7dd81ecbd065ee930e306e250bbafa72909d307c6f5b71024dd593ebe92f81d0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   page_transition:
     dependency: "direct main"
     description:
@@ -880,6 +936,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  score_progress_pretty_display:
+    dependency: "direct main"
+    description:
+      name: score_progress_pretty_display
+      sha256: "9173374d4fa4462c77b985009c4f9b8f6a3cd014faecd977b432afb7754686f5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -989,14 +1053,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  sprintf:
-    dependency: transitive
-    description:
-      name: sprintf
-      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -1029,6 +1085,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.1"
+  styled_divider:
+    dependency: "direct main"
+    description:
+      name: styled_divider
+      sha256: c360502fb8caf55c17467b0a59edfff68b465343ae040ce76cb08948992c2708
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.5"
   supercharged:
     dependency: "direct main"
     description:
@@ -1153,10 +1217,10 @@ packages:
     dependency: "direct main"
     description:
       name: uuid
-      sha256: f33d6bb662f0e4f79dcd7ada2e6170f3b3a2530c28fc41f49a411ddedd576a77
+      sha256: a11b666489b1954e01d992f3d601b1804a33937b5a8fe677bd26b8a9f96f96e8
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.0"
+    version: "4.5.2"
   vector_graphics:
     dependency: transitive
     description:
@@ -1254,5 +1318,5 @@ packages:
     source: hosted
     version: "6.5.0"
 sdks:
-  dart: ">=3.7.0-0 <4.0.0"
+  dart: ">=3.7.2 <4.0.0"
   flutter: ">=3.19.0"

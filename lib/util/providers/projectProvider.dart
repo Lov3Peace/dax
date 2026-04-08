@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+
+class ProjectProvider with ChangeNotifier {
+  List _teammates = [];
+  List _rolesNeeded = [];
+  List _images = [];
+
+  List get teammates => _teammates;
+  void saveTeammates(teammates) {
+    _teammates = teammates;
+    notifyListeners();
+  }
+
+  List get rolesNeeded => _rolesNeeded;
+  void saveRolesNeeded(rolesNeeded) {
+    _rolesNeeded = rolesNeeded;
+    notifyListeners();
+  }
+
+  List get images => _images;
+  void saveImages(images) {
+    _images = images;
+    notifyListeners();
+  }
+}

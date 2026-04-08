@@ -157,29 +157,33 @@ export const createNewProject = async (req, res) => {
 
   const schemaName = `${category.replaceAll(" ", "_").toLowerCase()}_projects`;
   const tableName = category.toLowerCase().replaceAll(" ", "_") + "_posts";
+  const columns = Object.keys(req.body);
+  const values = Object.values(req.body);
+  let valuePlaceholders = [];
+
+  for (let i = 1; i <= values.length; i++) {
+    const placeHolder = `$${i}`;
+    valuePlaceholders.push(placeHolder);
+  }
+
+  console.log("COLUMNS: ", columns);
+  console.log("VALUES: ", values);
+  console.log("PLACEHOLDERS: ", valuePlaceholders);
 
   try {
-    console.log(req);
     await pgClient.query("BEGIN");
     const categoryTable = await pgClient.query(
+      // format(
+      //   `INSERT INTO %I.%I (username , title , category , description , acceptance_criteria , is_public , is_group , teammates , etc , roles_needed , images ) VALUES ($1, $2, $3, $4, $5, $6, $7, DEFAULT, $8, DEFAULT, DEFAULT)`,
+      //   schemaName,
+      //   tableName,
+      // ),
       format(
-        `INSERT INTO %I.%I (username , title , category , description , acceptance_criteria , is_public , is_group , teammates , etc , roles_needed , images ) VALUES ($1, $2, $3, $4, $5, $6, $7, COALESCE($8, DEFAULT), $9, $10, $11)`,
+        `INSERT INTO %I.%I (${columns}) VALUES (${valuePlaceholders})`,
         schemaName,
         tableName,
       ),
-      [
-        req.body.username,
-        req.body.title,
-        req.body.category,
-        req.body.description,
-        req.body.acceptance_criteria,
-        req.body.is_public,
-        req.body.is_group,
-        req.body.teammates,
-        req.body.etc,
-        req.body.roles_needed,
-        req.body.images,
-      ],
+      values,
     );
     await pgClient.query("COMMIT");
     console.log(`Project ${req.body.title} Posted Successfully`);

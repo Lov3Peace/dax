@@ -23,29 +23,28 @@ class BlurryContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(1.5.w(context)),
-      child: Padding(
-        padding: EdgeInsets.all(padding),
-        child: Container(
-          height: height,
-          width: width,
-          child: Stack(children: [
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-              child: SizedBox(),
+      borderRadius: BorderRadius.circular(borderRadius),
+      child: Container(
+        height: height,
+        width: width,
+        child: Stack(children: [
+          BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+            child: SizedBox(),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(borderRadius),
+              color: color,
+              border: Border.all(color: const Color.fromARGB(182, 75, 75, 75)),
             ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(borderRadius),
-                color: color,
-                border:
-                    Border.all(color: const Color.fromARGB(182, 75, 75, 75)),
-              ),
-              // constraints: const BoxConstraints(minHeight: 500, minWidth: 700),
-            ),
-            child,
-          ]),
-        ),
+            // constraints: const BoxConstraints(minHeight: 500, minWidth: 700),
+          ),
+          Padding(
+            padding: EdgeInsets.all(padding),
+            child: child,
+          ),
+        ]),
       ),
     );
   }

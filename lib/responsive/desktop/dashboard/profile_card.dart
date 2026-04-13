@@ -1,5 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +42,7 @@ class ProfileCard extends StatelessWidget {
               opaque: false,
               barrierDismissible: true,
               fullscreenDialog: false,
-              transitionDuration: Duration(milliseconds: 700),
+              transitionDuration: const Duration(milliseconds: 700),
               pageBuilder: (_, __, ___) {
                 return Hero(
                   tag: 'profileHeroTag',
@@ -59,17 +57,37 @@ class ProfileCard extends StatelessWidget {
             ),
           );
         },
-        child: Deck(
-          deckHeight: deckHeight,
-          deckWidth: halfDeckWidth,
-          deckName: '',
-          gradient1: tran,
-          gradient2: tran,
-          neonGlow: tran,
-          labelTextSize: labelTextSize,
-          headingText: userData["username"],
-          headingTextSize: headingTextSize,
-          subText: adminOrUser,
+        child: BlurryContainer(
+          width: 18.w(context),
+          padding: 1.5.w(context),
+          borderRadius: 2.w(context),
+          child: Column(
+            children: [
+              Text(
+                userData["username"],
+                style: TextStyle(fontSize: 4.sp(context)),
+              ),
+              Expanded(
+                  child: BlurryContainer(
+                color: tran,
+                borderRadius: 2.w(context),
+                child: SizedBox(),
+              ))
+            ],
+          ),
         ));
+
+    // child: Deck(
+    //   deckHeight: deckHeight,
+    //   deckWidth: halfDeckWidth,
+    //   deckName: '',
+    //   gradient1: tran,
+    //   gradient2: tran,
+    //   neonGlow: tran,
+    //   labelTextSize: labelTextSize,
+    //   headingText: userData["username"],
+    //   headingTextSize: headingTextSize,
+    //   subText: adminOrUser,
+    // ));
   }
 }

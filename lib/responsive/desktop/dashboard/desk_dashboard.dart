@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/tasks_deck.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
@@ -87,87 +88,19 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                 Row(
                   children: [
                     DesktopSidePanel(),
-                    Container(
-                      height: 90.h(context),
-                      // width: 87.5.w(context),
-                      constraints: 100.w(context) > 2560
-                          ? BoxConstraints(minHeight: 1440)
-                          : BoxConstraints(minHeight: 900),
-                      //
-                      // Row for Decks + Messages
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 0.25.w(context)),
-                            child: Column(
-                              children: [
-                                //
-                                // Row for Title, Profile, Projects, and Communities Decks
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      //
-                                      // Stagger Load Animation
-                                      StaggerLoad(
-                                          layer: 1,
-                                          scale: 1.03,
-                                          scrollDirection: Axis.horizontal,
-                                          duration: 200,
-                                          delay: 75,
-                                          childPadding:
-                                              EdgeInsets.all(0.25.w(context)),
-                                          widgets: [
-                                            //
-                                            //Column of Title Bubble and Profile Card
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 0.25.w(context)),
-                                                  child: TitleBubble(
-                                                    deckName: "Dashboard",
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  child: ProfileCard(),
-                                                ),
-                                              ],
-                                            ),
-                                            ProjectsDeck(),
-                                            CommunitiesDeck(),
-                                          ]),
-                                    ],
-                                  ),
-                                ),
-                                //
-                                // Row for Socials and News Decks
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      StaggerLoad(
-                                          layer: 2,
-                                          scale: 1.03,
-                                          scrollDirection: Axis.horizontal,
-                                          duration: 200,
-                                          delay: 75,
-                                          childPadding:
-                                              EdgeInsets.all(0.25.w(context)),
-                                          widgets: [
-                                            SocialsDeck(),
-                                            NewsDeck(),
-                                          ]),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // // ignore: prefer_const_constructors
-                        ],
-                      ),
+                    Column(
+                      children: [
+                        TitleBubble(deckName: "Dashboard"),
+                        Expanded(child: ProfileCard()),
+                      ],
                     ),
-
+                    Column(
+                      children: [
+                        ProjectsDeck(),
+                        CommunitiesDeck(),
+                        TasksDeck(),
+                      ],
+                    ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 1.w(context)),
                       child: StaggerLoad(

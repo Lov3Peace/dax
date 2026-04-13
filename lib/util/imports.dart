@@ -13,3 +13,5 @@ export '../responsive/desktop/decks_content/desk_socials_page.dart';
 export '../responsive/desktop/decks_content/desk_news_page.dart';
 export '../responsive/desktop/util/responsive_shorthand.dart';
 export './auth/loginCheck.dart';
+export './blurryContainer.dart';
+export './ui/gradient_text.dart';

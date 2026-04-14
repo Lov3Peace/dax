@@ -10,6 +10,7 @@ class BlurryContainer extends StatelessWidget {
       this.width,
       this.borderRadius = 100,
       this.color = const Color.fromARGB(220, 22, 19, 22),
+      this.constraints,
       required this.child,
       this.padding = 0});
   final double? height;
@@ -17,6 +18,7 @@ class BlurryContainer extends StatelessWidget {
   final Color color;
   final Widget child;
   final double borderRadius;
+  final BoxConstraints? constraints;
 
   final double padding;
 
@@ -27,6 +29,7 @@ class BlurryContainer extends StatelessWidget {
       child: Container(
         height: height,
         width: width,
+        constraints: constraints,
         child: Stack(children: [
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),

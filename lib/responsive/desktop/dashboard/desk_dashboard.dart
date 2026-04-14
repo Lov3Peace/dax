@@ -2,6 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/events_deck.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/my_projects_mini_dash.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/tasks_deck.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
@@ -73,55 +75,72 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
     return Scaffold(
       body: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
         children: [
-          Container(
-            height: 100.h(context),
-            width: 100.w(context),
-            constraints: 100.w(context) > 2560
-                ? BoxConstraints(minHeight: 1440)
-                : BoxConstraints(minHeight: 900),
-            child: Stack(
-              children: [
-                // Background(),
-                ArtBoardScreen(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              height: 100.h(context),
+              width: 100.w(context),
+              constraints: 100.w(context) > 2560
+                  ? BoxConstraints(minHeight: 1440, minWidth: 1400)
+                  : BoxConstraints(minHeight: 900, minWidth: 1400),
+              child: Stack(
+                children: [
+                  // Background(),
+                  ArtBoardScreen(),
 
-                Row(
-                  children: [
-                    DesktopSidePanel(),
-                    Column(
-                      children: [
-                        TitleBubble(deckName: "Dashboard"),
-                        Expanded(child: ProfileCard()),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        ProjectsDeck(),
-                        CommunitiesDeck(),
-                        TasksDeck(),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 1.w(context)),
-                      child: StaggerLoad(
-                        widgets: [Messages()],
-                        duration: 200,
-                        delay: 75,
-                        layer: 3,
-                        scale: 1.03,
-                        scrollDirection: Axis.horizontal,
+                  Row(
+                    children: [
+                      DesktopSidePanel(),
+                      //
+                      // Column: Top Half and Bottom Half Widgets
+                      ProfileCard(),
+                      // Column(
+                      //   children: [
+                      //     Row(
+                      //       children: [
+                      //         Column(
+                      //           children: [
+                      //             TitleBubble(deckName: "Dashboard"),
+                      //             ProfileCard(),
+                      //           ],
+                      //         ),
+                      //         Column(
+                      //           children: [
+                      //             ProjectsDeck(),
+                      //             CommunitiesDeck(),
+                      //             TasksDeck(),
+                      //           ],
+                      //         ),
+                      //         EventsDeck(),
+                      //       ],
+                      //     ),
+                      //     MyProjectsMiniDashDeck()
+                      //   ],
+                      // ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 1.w(context)),
+                        child: StaggerLoad(
+                          widgets: [Messages()],
+                          duration: 200,
+                          delay: 75,
+                          layer: 3,
+                          scale: 1.03,
+                          scrollDirection: Axis.horizontal,
+                        ),
                       ),
-                    ),
-                    // ignore: prefer_const_constructors
-                  ],
-                ),
+                      // ignore: prefer_const_constructors
+                    ],
+                  ),
 
-                // Positioned.fill(
-                //   child: BackdropFilter(
-                //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                //       child:  SizedBox()),
-                // ),
-              ],
+                  // Positioned.fill(
+                  //   child: BackdropFilter(
+                  //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+                  //       child:  SizedBox()),
+                  // ),
+                ],
+              ),
             ),
           ),
         ],

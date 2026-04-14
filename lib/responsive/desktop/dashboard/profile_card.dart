@@ -59,13 +59,21 @@ class ProfileCard extends StatelessWidget {
         },
         child: BlurryContainer(
           width: 18.w(context),
+          height: 20.w(context),
           padding: 1.5.w(context),
           borderRadius: 2.w(context),
           child: Column(
             children: [
-              Text(
-                userData["username"],
-                style: TextStyle(fontSize: 4.sp(context)),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    userData["username"],
+                    style: TextStyle(
+                        fontSize: 7.sp(context), fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
               Expanded(
                   child: BlurryContainer(

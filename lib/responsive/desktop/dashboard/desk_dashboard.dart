@@ -95,7 +95,12 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                       DesktopSidePanel(),
                       //
                       // Column: Top Half and Bottom Half Widgets
-                      ProfileCard(),
+                      Column(
+                        children: [
+                          Expanded(child: TitleBubble(deckName: "Dashboard")),
+                          Expanded(flex: 5, child: ProfileCard()),
+                        ],
+                      ),
                       // Column(
                       //   children: [
                       //     Row(

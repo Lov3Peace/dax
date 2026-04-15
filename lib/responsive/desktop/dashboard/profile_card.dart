@@ -27,14 +27,6 @@ class ProfileCard extends StatelessWidget {
     final bool isAdmin = decodedToken["isAdmin"];
     adminOrUser = isAdmin == true ? "Admin" : "User";
 
-    double deckHeight = 22.h(context);
-    double halfDeckWidth = 17.325.w(context);
-    double headingTextSize = 6.25.sp(context);
-    subTextSize = 2.5.sp(context);
-    double labelTextSize = 2.5.sp(context);
-    if (100.w(context) < 1440) {
-      headingTextSize = headingTextSize * 0.9;
-    }
     return TactileButton(
         onTap: () {
           Navigator.of(context).push(
@@ -58,8 +50,10 @@ class ProfileCard extends StatelessWidget {
           );
         },
         child: BlurryContainer(
-          width: 18.w(context),
-          height: 20.w(context),
+          // width: 18.w(context),
+          // height: 20.w(context),
+          color: deckBackgroundColor,
+          constraints: BoxConstraints(minWidth: 300, minHeight: 500),
           padding: 1.5.w(context),
           borderRadius: 2.w(context),
           child: Column(
@@ -79,6 +73,7 @@ class ProfileCard extends StatelessWidget {
                   child: BlurryContainer(
                 color: tran,
                 borderRadius: 2.w(context),
+                constraints: BoxConstraints(minWidth: 200),
                 child: SizedBox(),
               ))
             ],

@@ -50,11 +50,10 @@ class ProfileCard extends StatelessWidget {
           );
         },
         child: BlurryContainer(
-          // width: 18.w(context),
-          // height: 20.w(context),
+          width: 18.w(context),
+          constraints: BoxConstraints(minWidth: 250),
           color: deckBackgroundColor,
-          constraints: BoxConstraints(minWidth: 300, minHeight: 500),
-          padding: 1.5.w(context),
+          padding: 1.5.w(context).clamp(desktopContainerPadLowerLimit, 100),
           borderRadius: 2.w(context),
           child: Column(
             children: [
@@ -69,11 +68,13 @@ class ProfileCard extends StatelessWidget {
                   ),
                 ),
               ),
+              //Expanded so this container expands to the available space in the profile card
               Expanded(
                   child: BlurryContainer(
                 color: tran,
+                padding:
+                    1.5.w(context).clamp(desktopContainerPadLowerLimit, 100),
                 borderRadius: 2.w(context),
-                constraints: BoxConstraints(minWidth: 200),
                 child: SizedBox(),
               ))
             ],

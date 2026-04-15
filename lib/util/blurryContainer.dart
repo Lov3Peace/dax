@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/responsive_shorthand.dart';
 
 class BlurryContainer extends StatelessWidget {
@@ -39,7 +40,7 @@ class BlurryContainer extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(borderRadius),
               color: color,
-              border: Border.all(color: const Color.fromARGB(182, 75, 75, 75)),
+              border: Border.all(color: deckBorderColor),
             ),
             // constraints: const BoxConstraints(minHeight: 500, minWidth: 700),
           ),

@@ -7,7 +7,6 @@ import '../../../main.dart';
 import '../../../util/tactile_button.dart';
 import '../../mobile/mobile_socials_page.dart';
 import '../../tablet/tablet_socials_page.dart';
-import '../desk_constants.dart';
 import '../desk_decks.dart';
 import '../decks_content/desk_socials_page.dart';
 import 'package:rive/rive.dart' as r;

@@ -19,31 +19,24 @@ class TitleBubble extends StatefulWidget {
 }
 
 class _TitleBubbleState extends State<TitleBubble> {
-  final Color shadowColor = Colors.white;
-
-  final Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
-
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(3.w(context)),
-          color: deckColor,
-          border: Border.all(color: deckBorderColor),
-        ),
-        constraints: const BoxConstraints(minHeight: 70, maxHeight: 300),
-        // height: 5.w(context),
-        // width: 17.25.w(context),
-        child: Center(
-          child: Text(
-            widget.deckName,
-            style: GoogleFonts.montserrat(
-              fontSize: 4.sp(context),
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(3.w(context)),
+        color: deckColor,
+        border: Border.all(color: deckBorderColor),
+      ),
+      constraints: const BoxConstraints(minWidth: 250),
+      // height: 5.h(context),
+      // width: 17.25.w(context),
+      child: Center(
+        child: Text(
+          widget.deckName,
+          style: GoogleFonts.montserrat(
+            fontSize: 4.sp(context),
+            fontWeight: FontWeight.w600,
+            color: Colors.white,
           ),
         ),
       ),

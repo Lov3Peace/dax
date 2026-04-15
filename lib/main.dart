@@ -82,6 +82,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+//COLORS
 const Color red = Color.fromARGB(255, 255, 85, 85);
 const Color purp = Color.fromARGB(255, 182, 47, 255);
 const Color pink = Color.fromARGB(255, 255, 148, 253);
@@ -94,6 +95,17 @@ const Color hoverGreen = Color.fromARGB(255, 170, 255, 147);
 const Color tran = Color.fromARGB(0, 0, 0, 0);
 const Color white = Colors.white;
 const Color deckBackgroundColor = Color.fromARGB(160, 22, 19, 22);
+
+//FONTSIZES
+double headerlowerlimit = 20;
+double subheaderlowerlimit = 18;
+double paragraphlowerlimit = 16;
+double smallestLowerLimit = 12;
+
+//PADDING
+double desktopContainerPadLowerLimit = 20;
+double mobilContainerPadLowerLimit = 10;
+
 // Used to fix Hero animation bug
 Widget flightShuttleBuilder(
   BuildContext flightContext,

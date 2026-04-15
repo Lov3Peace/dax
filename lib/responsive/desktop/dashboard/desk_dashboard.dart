@@ -77,75 +77,77 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
         physics: const AlwaysScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Container(
-              height: 100.h(context),
-              width: 100.w(context),
-              constraints: 100.w(context) > 2560
-                  ? BoxConstraints(minHeight: 1440, minWidth: 1400)
-                  : BoxConstraints(minHeight: 900, minWidth: 1400),
-              child: Stack(
-                children: [
-                  // Background(),
-                  ArtBoardScreen(),
+          Container(
+            height: 100.h(context),
+            //     .clamp(100.h(context) > 2560 ? 1440 : 700, 100.h(context)),
+            width: 100.w(context),
+            constraints: 100.w(context) > 2560
+                ? BoxConstraints(minHeight: 1440, minWidth: 1400)
+                : BoxConstraints(minHeight: 900, minWidth: 1400),
+            child: Stack(
+              children: [
+                // Background(),
+                ArtBoardScreen(),
 
-                  Row(
-                    children: [
-                      DesktopSidePanel(),
-                      //
-                      // Column: Top Half and Bottom Half Widgets
-                      Column(
-                        children: [
-                          Expanded(child: TitleBubble(deckName: "Dashboard")),
-                          Expanded(flex: 5, child: ProfileCard()),
-                        ],
-                      ),
-                      // Column(
-                      //   children: [
-                      //     Row(
-                      //       children: [
-                      //         Column(
-                      //           children: [
-                      //             TitleBubble(deckName: "Dashboard"),
-                      //             ProfileCard(),
-                      //           ],
-                      //         ),
-                      //         Column(
-                      //           children: [
-                      //             ProjectsDeck(),
-                      //             CommunitiesDeck(),
-                      //             TasksDeck(),
-                      //           ],
-                      //         ),
-                      //         EventsDeck(),
-                      //       ],
-                      //     ),
-                      //     MyProjectsMiniDashDeck()
-                      //   ],
-                      // ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 1.w(context)),
-                        child: StaggerLoad(
-                          widgets: [Messages()],
-                          duration: 200,
-                          delay: 75,
-                          layer: 3,
-                          scale: 1.03,
-                          scrollDirection: Axis.horizontal,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    //
+                    // ListView expanded inside the row to allow for horizontal scrolling on screen shrink
+                    DesktopSidePanel(),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      Expanded(
+                                          child: TitleBubble(
+                                              deckName: "Dashboard")),
+                                      Expanded(flex: 5, child: ProfileCard()),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Expanded(child: ProjectsDeck()),
+                                      Expanded(child: CommunitiesDeck()),
+                                      Expanded(flex: 3, child: TasksDeck()),
+                                    ],
+                                  ),
+                                  EventsDeck()
+                                ],
+                              ),
+                            ),
+                            Expanded(child: MyProjectsMiniDashDeck())
+                          ],
                         ),
                       ),
-                      // ignore: prefer_const_constructors
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 1.w(context)),
+                      child: StaggerLoad(
+                        widgets: [Messages()],
+                        duration: 200,
+                        delay: 75,
+                        layer: 3,
+                        scale: 1.03,
+                        scrollDirection: Axis.horizontal,
+                      ),
+                    ),
+                    // ignore: prefer_const_constructors
+                  ],
+                ),
 
-                  // Positioned.fill(
-                  //   child: BackdropFilter(
-                  //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                  //       child:  SizedBox()),
-                  // ),
-                ],
-              ),
+                // Positioned.fill(
+                //   child: BackdropFilter(
+                //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+                //       child:  SizedBox()),
+                // ),
+              ],
             ),
           ),
         ],

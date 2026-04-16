@@ -68,10 +68,6 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
 
   @override
   Widget build(BuildContext context) {
-    subTextSize = 2.5.sp(context);
-    profBubTextSize = 20;
-    textConstraint = 500;
-    subTextConstraint = 500;
     return Scaffold(
       body: ListView(
         physics: const AlwaysScrollableScrollPhysics(),
@@ -97,11 +93,14 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                     DesktopSidePanel(),
                     Expanded(
                       child: SingleChildScrollView(
+                        physics: AlwaysScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         child: Column(
                           children: [
                             Expanded(
                               child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     children: [
@@ -127,16 +126,13 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 1.w(context)),
-                      child: StaggerLoad(
-                        widgets: [Messages()],
-                        duration: 200,
-                        delay: 75,
-                        layer: 3,
-                        scale: 1.03,
-                        scrollDirection: Axis.horizontal,
-                      ),
+                    StaggerLoad(
+                      widgets: [Messages()],
+                      duration: 200,
+                      delay: 75,
+                      layer: 3,
+                      scale: 1.03,
+                      scrollDirection: Axis.horizontal,
                     ),
                     // ignore: prefer_const_constructors
                   ],

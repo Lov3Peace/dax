@@ -10,8 +10,8 @@ class EventsDeck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
-        height: 25.w(context),
         width: 18.w(context),
+        constraints: const BoxConstraints(minWidth: 250),
         padding: 1.5.w(context),
         borderRadius: 2.w(context),
         color: deckBackgroundColor,

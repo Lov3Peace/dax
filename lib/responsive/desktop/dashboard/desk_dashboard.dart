@@ -87,7 +87,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                 ArtBoardScreen(),
 
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     DesktopSidePanel(),
                     //
@@ -95,55 +95,18 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                     Expanded(
                       child: Scrollbar(
                         thumbVisibility: true,
-                        // interactive: true,
+                        interactive: true,
                         controller: horizontalScrollController,
                         child: SingleChildScrollView(
                           controller: horizontalScrollController,
                           physics: AlwaysScrollableScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(minWidth: 1920),
+                          child: Container(
+                            color: red,
+                            constraints: BoxConstraints(minWidth: 1375),
                             child: Column(
                               children: [
-                                Row(
-                                  children: [
-                                    Column(
-                                      children: [
-                                        Container(
-                                            color: red,
-                                            width: 18.w(context),
-                                            height: 5.w(context)),
-                                        Container(
-                                            color: pink,
-                                            width: 18.w(context),
-                                            height: 40.h(context)),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Container(
-                                          color: blue,
-                                          width: 25.w(context),
-                                          height: 10.h(context),
-                                          constraints:
-                                              BoxConstraints(minHeight: 100),
-                                        ),
-                                        Container(
-                                            color: purp,
-                                            width: 25.w(context),
-                                            height: 10.h(context)),
-                                        Container(
-                                            color: orange,
-                                            width: 25.w(context),
-                                            height: 20.h(context)),
-                                      ],
-                                    ),
-                                    Container(
-                                        color: green, width: 300, height: 300),
-                                  ],
-                                ),
-                                Container(
-                                    color: white, width: 300, height: 300),
+                                TitleBubble(deckName: "Home"),
                               ],
                             ),
                           ),

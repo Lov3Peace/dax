@@ -29,8 +29,9 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
         child: BlurryContainer(
           height: 7.w(context),
           width: 30.w(context),
+          constraints: BoxConstraints(minHeight: 200),
           borderRadius: 50.w(context),
-          padding: 15,
+          padding: 0.5.w(context),
           color: deckBackgroundColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -53,7 +54,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
                       GradientText(
                         text: "Projects",
                         gradients: const [pink, red],
-                        fontSize: 5.sp(context),
+                        fontSize: 3.sp(context),
                         fontWeight: FontWeight.bold,
                       ),
                       Text(

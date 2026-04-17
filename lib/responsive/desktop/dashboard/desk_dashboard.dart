@@ -38,6 +38,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
       Uri.parse('https://$hostname/api/getUserDashboardData');
   var _getData;
   var userData;
+  final ScrollController horizontalScrollController = ScrollController();
 
   // Future getUserDataFetch() async {
   //   final client = httpClient.BrowserClient()..withCredentials = true;
@@ -88,41 +89,64 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    //
-                    // ListView expanded inside the row to allow for horizontal scrolling on screen shrink
                     DesktopSidePanel(),
+                    //
+                    // SingleChildScrollView expanded inside the row to allow for horizontal scrolling on screen shrink
                     Expanded(
-                      child: SingleChildScrollView(
-                        physics: AlwaysScrollableScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        child: Column(
-                          children: [
-                            Expanded(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Expanded(
-                                          child: TitleBubble(
-                                              deckName: "Dashboard")),
-                                      Expanded(flex: 5, child: ProfileCard()),
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Expanded(child: ProjectsDeck()),
-                                      Expanded(child: CommunitiesDeck()),
-                                      Expanded(flex: 3, child: TasksDeck()),
-                                    ],
-                                  ),
-                                  EventsDeck()
-                                ],
-                              ),
+                      child: Scrollbar(
+                        thumbVisibility: true,
+                        // interactive: true,
+                        controller: horizontalScrollController,
+                        child: SingleChildScrollView(
+                          controller: horizontalScrollController,
+                          physics: AlwaysScrollableScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(minWidth: 1920),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Container(
+                                            color: red,
+                                            width: 18.w(context),
+                                            height: 5.w(context)),
+                                        Container(
+                                            color: pink,
+                                            width: 18.w(context),
+                                            height: 40.h(context)),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Container(
+                                          color: blue,
+                                          width: 25.w(context),
+                                          height: 10.h(context),
+                                          constraints:
+                                              BoxConstraints(minHeight: 100),
+                                        ),
+                                        Container(
+                                            color: purp,
+                                            width: 25.w(context),
+                                            height: 10.h(context)),
+                                        Container(
+                                            color: orange,
+                                            width: 25.w(context),
+                                            height: 20.h(context)),
+                                      ],
+                                    ),
+                                    Container(
+                                        color: green, width: 300, height: 300),
+                                  ],
+                                ),
+                                Container(
+                                    color: white, width: 300, height: 300),
+                              ],
                             ),
-                            Expanded(child: MyProjectsMiniDashDeck())
-                          ],
+                          ),
                         ),
                       ),
                     ),

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:math' as math;
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/events_deck.dart';
@@ -80,7 +82,7 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
             width: 100.w(context),
             constraints: 100.w(context) > 2560
                 ? BoxConstraints(minHeight: 1440, minWidth: 1400)
-                : BoxConstraints(minHeight: 900, minWidth: 1400),
+                : BoxConstraints(minHeight: 900, minWidth: 1200),
             child: Stack(
               children: [
                 // Background(),
@@ -93,24 +95,68 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                     //
                     // SingleChildScrollView expanded inside the row to allow for horizontal scrolling on screen shrink
                     Expanded(
-                      child: Scrollbar(
-                        thumbVisibility: true,
-                        interactive: true,
-                        controller: horizontalScrollController,
-                        child: SingleChildScrollView(
-                          controller: horizontalScrollController,
-                          physics: AlwaysScrollableScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          child: Container(
-                            color: red,
-                            constraints: BoxConstraints(minWidth: 1375),
-                            child: Column(
-                              children: [
-                                TitleBubble(deckName: "Home"),
-                              ],
-                            ),
-                          ),
-                        ),
+                      child: LayoutBuilder(
+                        builder: ((context, constraints) {
+                          return Scrollbar(
+                              controller: horizontalScrollController,
+                              thumbVisibility: true,
+                              interactive: true,
+                              child: SingleChildScrollView(
+                                  controller: horizontalScrollController,
+                                  physics: AlwaysScrollableScrollPhysics(),
+                                  scrollDirection: Axis.horizontal,
+                                  child: Container(
+                                    // color: red,
+                                    width: math.max(1200, constraints.maxWidth),
+                                    height: 70.w(context),
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              //
+                                              // Weather + ProfileCard
+                                              Expanded(
+                                                flex: 3,
+                                                child: Column(
+                                                  children: [
+                                                    Expanded(
+                                                      child: TitleBubble(
+                                                          deckName:
+                                                              "[Weather]"),
+                                                    ),
+                                                    Expanded(
+                                                        flex: 5,
+                                                        child: ProfileCard()),
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 5,
+                                                child: Column(
+                                                  children: [
+                                                    Expanded(
+                                                        child: ProjectsDeck()),
+                                                    Expanded(
+                                                        child:
+                                                            CommunitiesDeck()),
+                                                    Expanded(
+                                                        flex: 2,
+                                                        child: TasksDeck()),
+                                                  ],
+                                                ),
+                                              ),
+                                              Expanded(
+                                                  flex: 3, child: EventsDeck()),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                            child: MyProjectsMiniDashDeck())
+                                      ],
+                                    ),
+                                  )));
+                        }),
                       ),
                     ),
                     StaggerLoad(

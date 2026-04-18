@@ -39,7 +39,7 @@ class _MessagesState extends State<Messages> {
       ),
 
       // height: 90.h(context),
-      width: 15.w(context),
+      width: 12.5.w(context),
       // margin: EdgeInsets.only(right: 0.5.w(context)),
 
       child: Column(

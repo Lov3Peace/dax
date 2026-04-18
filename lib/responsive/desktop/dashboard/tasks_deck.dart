@@ -10,8 +10,8 @@ class TasksDeck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
-        height: 14.w(context),
-        width: 30.w(context),
+        // height: 14.w(context),
+        // width: 30.w(context),
         padding: 1.5.w(context),
         borderRadius: 2.w(context),
         color: deckBackgroundColor,

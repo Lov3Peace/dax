@@ -27,9 +27,9 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
           router.go("/projects");
         },
         child: BlurryContainer(
-          height: 7.w(context),
-          width: 30.w(context),
-          constraints: BoxConstraints(minHeight: 200),
+          // height: 7.w(context),
+          // width: 30.w(context),
+          constraints: BoxConstraints(minHeight: 100),
           borderRadius: 50.w(context),
           padding: 0.5.w(context),
           color: deckBackgroundColor,
@@ -37,7 +37,7 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
                   width: 5.w(context),
                   child: const r.RiveAnimation.asset(
@@ -47,14 +47,15 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 0),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GradientText(
                         text: "Projects",
                         gradients: const [pink, red],
-                        fontSize: 3.sp(context),
+                        fontSize: 5.sp(context),
                         fontWeight: FontWeight.bold,
                       ),
                       Text(

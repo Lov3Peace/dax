@@ -21,9 +21,7 @@ class ProfileCard extends StatelessWidget {
         Provider.of<UserAuthProvider>(context, listen: false);
     userData = userProvider.userData;
     var token = userAuthProvider.token;
-    print("AuthNotifier Token: $token");
     var decodedToken = JwtDecoder.decode(token);
-    print("AuthNotifier decodedToken: $decodedToken");
     final bool isAdmin = decodedToken["isAdmin"];
     adminOrUser = isAdmin == true ? "Admin" : "User";
 
@@ -50,8 +48,9 @@ class ProfileCard extends StatelessWidget {
           );
         },
         child: BlurryContainer(
-          width: 18.w(context),
-          constraints: BoxConstraints(minWidth: 250),
+          // width: 18.w(context),
+          // height: 45.h(context),
+          constraints: BoxConstraints(minWidth: 250, minHeight: 450),
           color: deckBackgroundColor,
           padding: 1.5.w(context).clamp(desktopContainerPadLowerLimit, 100),
           borderRadius: 2.w(context),

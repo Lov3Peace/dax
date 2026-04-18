@@ -10,9 +10,8 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
-        height: 29.w(context),
-        width: 70.w(context),
-        constraints: BoxConstraints(maxHeight: 50.h(context)),
+        // height: 45.h(context),
+        constraints: BoxConstraints(minWidth: 250, minHeight: 450),
         padding: 1.5.w(context),
         borderRadius: 2.w(context),
         color: deckBackgroundColor,

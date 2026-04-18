@@ -29,8 +29,8 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
           router.go("/communities");
         },
         child: BlurryContainer(
-          height: 7.w(context),
-          width: 30.w(context),
+          // height: 7.w(context),
+          // width: 30.w(context),
           borderRadius: 50.w(context),
           padding: 15,
           color: deckBackgroundColor,
@@ -38,7 +38,7 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
                   width: 5.w(context),
                   child: const r.RiveAnimation.asset(
@@ -48,8 +48,9 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 0),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GradientText(

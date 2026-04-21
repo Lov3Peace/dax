@@ -5,22 +5,13 @@ import 'package:rive/rive.dart' as r;
 import '../../../util/tactile_button.dart';
 import '../desk_decks.dart';
 
-class CommunitiesDeck extends StatefulWidget {
-  const CommunitiesDeck({
-    super.key,
-  });
-
-  @override
-  State<CommunitiesDeck> createState() => _CommunitiesDeckState();
-}
-
-class _CommunitiesDeckState extends State<CommunitiesDeck> {
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
+class CommunitiesDeck extends StatelessWidget {
+  const CommunitiesDeck(
+      {Key? key, this.height = 0, this.width = 0, required this.constraints})
+      : super(key: key);
+  final double height;
+  final double width;
+  final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +20,11 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
           router.go("/communities");
         },
         child: BlurryContainer(
-          // height: 7.w(context),
-          // width: 30.w(context),
+          height: height,
+          width: width,
+          constraints: constraints,
           borderRadius: 50.w(context),
-          padding: 15,
+          padding: 1.w(context),
           color: deckBackgroundColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -41,9 +33,9 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
                   width: 5.w(context),
-                  child: const r.RiveAnimation.asset(
-                    'rive/twitter_rv.riv',
-                  ),
+                  // child: const r.RiveAnimation.asset(
+                  //   'rive/twitter_rv.riv',
+                  // ),
                 ),
               ),
               Expanded(
@@ -59,6 +51,14 @@ class _CommunitiesDeckState extends State<CommunitiesDeck> {
                         fontSize: 5.sp(context),
                         fontWeight: FontWeight.bold,
                       ),
+                      // Text(
+                      //   "Communities",
+                      //   // gradients: const [pink, red],
+                      //   style: TextStyle(
+                      //     fontSize: 5.sp(context),
+                      //     fontWeight: FontWeight.bold,
+                      //   ),
+                      // ),
                       Text(
                         'Post, join, or support independent projects anywhere in the world.',
                         style: TextStyle(

@@ -5,13 +5,18 @@ import 'package:rive/rive.dart' as r;
 import '../../../util/imports.dart';
 
 class EventsDeck extends StatelessWidget {
-  const EventsDeck({super.key});
+  const EventsDeck(
+      {super.key, this.height = 0, this.width = 0, required this.constraints});
+  final double height;
+  final double width;
+  final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
-        width: 18.w(context),
-        constraints: const BoxConstraints(minWidth: 250),
+        height: height,
+        width: width,
+        constraints: constraints,
         padding: 1.5.w(context),
         borderRadius: 2.w(context),
         color: deckBackgroundColor,

@@ -5,12 +5,16 @@ import 'package:rive/rive.dart' as r;
 import '../../../util/imports.dart';
 
 class MyProjectsMiniDashDeck extends StatelessWidget {
-  const MyProjectsMiniDashDeck({super.key});
+  const MyProjectsMiniDashDeck(
+      {super.key, this.height = 450, this.width = 1200});
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
-        // height: 45.h(context),
+        height: height,
+        width: width,
         constraints: BoxConstraints(minWidth: 250, minHeight: 450),
         padding: 1.5.w(context),
         borderRadius: 2.w(context),

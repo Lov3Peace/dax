@@ -8,8 +8,12 @@ import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 
 class ProfileCard extends StatelessWidget {
-  ProfileCard({super.key});
+  ProfileCard(
+      {super.key, this.height = 0, this.width = 0, required this.constraints});
 
+  final double height;
+  final double width;
+  final BoxConstraints constraints;
   String adminOrUser = '';
 
   var userData = {};
@@ -48,12 +52,12 @@ class ProfileCard extends StatelessWidget {
           );
         },
         child: BlurryContainer(
-          // width: 18.w(context),
-          // height: 45.h(context),
-          constraints: BoxConstraints(minWidth: 250, minHeight: 450),
+          width: width,
+          height: height,
+          constraints: constraints,
           color: deckBackgroundColor,
-          padding: 1.5.w(context).clamp(desktopContainerPadLowerLimit, 100),
-          borderRadius: 2.w(context),
+          padding: 1.w(context).clamp(desktopContainerPadLowerLimit, 100),
+          borderRadius: 1.5.w(context),
           child: Column(
             children: [
               Padding(
@@ -71,9 +75,8 @@ class ProfileCard extends StatelessWidget {
               Expanded(
                   child: BlurryContainer(
                 color: tran,
-                padding:
-                    1.5.w(context).clamp(desktopContainerPadLowerLimit, 100),
-                borderRadius: 2.w(context),
+                padding: 1.w(context).clamp(desktopContainerPadLowerLimit, 100),
+                borderRadius: 1.5.w(context),
                 child: SizedBox(),
               ))
             ],

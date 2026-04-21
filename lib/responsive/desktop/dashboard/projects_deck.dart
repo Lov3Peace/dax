@@ -12,14 +12,14 @@ import 'package:rive/rive.dart' as r;
 
 import '../decks_content/projects/desktop_projects_page.dart';
 
-class ProjectsDeck extends StatefulWidget {
-  const ProjectsDeck({Key? key}) : super(key: key);
+class ProjectsDeck extends StatelessWidget {
+  const ProjectsDeck(
+      {Key? key, this.height = 0, this.width = 0, required this.constraints})
+      : super(key: key);
+  final double height;
+  final double width;
+  final BoxConstraints constraints;
 
-  @override
-  State<ProjectsDeck> createState() => _ProjectsDeckState();
-}
-
-class _ProjectsDeckState extends State<ProjectsDeck> {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
@@ -27,11 +27,11 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
           router.go("/projects");
         },
         child: BlurryContainer(
-          // height: 7.w(context),
-          // width: 30.w(context),
-          constraints: BoxConstraints(minHeight: 100),
+          height: height,
+          width: width,
+          constraints: constraints,
           borderRadius: 50.w(context),
-          padding: 0.5.w(context),
+          padding: 1.w(context),
           color: deckBackgroundColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,10 +39,10 @@ class _ProjectsDeckState extends State<ProjectsDeck> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
-                  width: 5.w(context),
-                  child: const r.RiveAnimation.asset(
-                    'rive/building_apartments.riv',
-                  ),
+                  width: 3.w(context),
+                  // child: const r.RiveAnimation.asset(
+                  //   'rive/building_apartments.riv',
+                  // ),
                 ),
               ),
               Expanded(

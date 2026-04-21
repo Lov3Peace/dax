@@ -5,13 +5,22 @@ import 'package:rive/rive.dart' as r;
 import '../../../util/imports.dart';
 
 class TasksDeck extends StatelessWidget {
-  const TasksDeck({super.key});
+  const TasksDeck({
+    Key? key,
+    this.height = 0,
+    this.width = 0,
+    required this.constraints,
+  }) : super(key: key);
+  final double height;
+  final double width;
+  final BoxConstraints constraints;
 
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
-        // height: 14.w(context),
-        // width: 30.w(context),
+        height: height,
+        width: width,
+        constraints: constraints,
         padding: 1.5.w(context),
         borderRadius: 2.w(context),
         color: deckBackgroundColor,

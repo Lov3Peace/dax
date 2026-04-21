@@ -48,7 +48,7 @@ class WebUiTemplate extends StatelessWidget {
               ArtBoardScreen(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //
                   // Side Panel

@@ -9,7 +9,7 @@ class StaggerLoad extends StatelessWidget {
     required this.widgets,
     required this.scrollDirection,
     required this.delay,
-    required this.scale,
+    this.scale = 1.015,
     this.layer = 1,
     this.controller,
     this.listPadding,
@@ -38,34 +38,36 @@ class StaggerLoad extends StatelessWidget {
         controller: controller,
         padding: listPadding,
         itemBuilder: (context, index) {
-          return Container(
-            padding: childPadding,
-            child: widgets[index], //
-            // animation chaining
-          )
-              .animate()
-              .fadeIn(
-                duration: Duration(milliseconds: duration),
-                delay: Duration(
-                    milliseconds: ((2 * layer) + (index + layer)) * delay),
-                // eg. (2(2) + (1+2)) * 200 = 1400 [if the index=1 and layer=2 and delay=200]
-              )
-              .scale(
-                duration: Duration(milliseconds: duration),
-                delay: Duration(
-                    milliseconds: ((2 * layer) + (index + layer)) * delay),
-                begin: Offset(1.0, 1.0),
-                end: Offset(scale, scale), // initial scale (eg. 1.0 => 1.05)
-              )
-              .then()
-              .scale(
-                duration: Duration(milliseconds: duration),
-                begin: Offset(scale, scale),
-                end: Offset(
-                    1.0 / scale,
-                    1.0 /
-                        scale), // eg. 1.0/1.05 to get original scale value (resetting it to normal val of 1.0)
-              );
+          return Expanded(
+            child: Container(
+              padding: childPadding,
+              child: widgets[index], //
+              // animation chaining
+            )
+                .animate()
+                .fadeIn(
+                  duration: Duration(milliseconds: duration),
+                  delay: Duration(
+                      milliseconds: ((2 * layer) + (index + layer)) * delay),
+                  // eg. (2(2) + (1+2)) * 200 = 1400 [if the index=1 and layer=2 and delay=200]
+                )
+                .scale(
+                  duration: Duration(milliseconds: duration),
+                  delay: Duration(
+                      milliseconds: ((2 * layer) + (index + layer)) * delay),
+                  begin: Offset(1.0, 1.0),
+                  end: Offset(scale, scale), // initial scale (eg. 1.0 => 1.05)
+                )
+                .then()
+                .scale(
+                  duration: Duration(milliseconds: duration),
+                  begin: Offset(scale, scale),
+                  end: Offset(
+                      1.0 / scale,
+                      1.0 /
+                          scale), // eg. 1.0/1.05 to get original scale value (resetting it to normal val of 1.0)
+                ),
+          );
         });
   }
 }

@@ -18,7 +18,7 @@ class _MessagesState extends State<Messages> {
     return Container(
       constraints: 100.w(context) > 2560
           ? BoxConstraints(minHeight: 900, minWidth: 250)
-          : BoxConstraints(minHeight: 450, minWidth: 250),
+          : BoxConstraints(minHeight: 450, minWidth: 225),
       // margin: EdgeInsets.all(1.w(context)),
       decoration: BoxDecoration(
         color: deckColor,

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter_application_1/responsive/desktop/util/dottedLine.dart';
 import 'package:flutter_application_1/util/tactile_button.dart';
 import 'package:rive/rive.dart' as r;
@@ -5,8 +7,7 @@ import 'package:rive/rive.dart' as r;
 import '../../../util/imports.dart';
 
 class MyProjectsMiniDashDeck extends StatelessWidget {
-  const MyProjectsMiniDashDeck(
-      {super.key, this.height = 450, this.width = 1200});
+  const MyProjectsMiniDashDeck({super.key, this.height = 0, this.width = 0});
   final double height;
   final double width;
 
@@ -15,9 +16,9 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
     return BlurryContainer(
         height: height,
         width: width,
-        constraints: BoxConstraints(minWidth: 250, minHeight: 450),
+        constraints: BoxConstraints(minWidth: 1000, minHeight: 450),
         padding: 1.5.w(context),
-        borderRadius: 2.w(context),
+        borderRadius: 1.5.w(context),
         color: deckBackgroundColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +28,7 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
               style: TextStyle(
                   fontSize: 5.sp(context), fontWeight: FontWeight.bold),
             ),
-            Divider(endIndent: 50.w(context)),
+            Divider(endIndent: math.min(50.w(context), 700)),
             Row(
               children: [
                 // Padding(

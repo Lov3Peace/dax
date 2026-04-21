@@ -27,9 +27,6 @@ class DesktopSidePanel extends StatefulWidget {
 
 class _DesktopSidePanelState extends State<DesktopSidePanel>
     with AnimationMixin {
-  late Animation<double> scale;
-  late Animation<double> opacity;
-
   @override
   void initState() {
     // TODO: implement initState
@@ -47,7 +44,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
           height: 100.h(context),
           constraints: 100.w(context) > 2560
               ? BoxConstraints(minHeight: 1440, minWidth: 250)
-              : BoxConstraints(minHeight: 1440, minWidth: 250),
+              : BoxConstraints(minHeight: 1440, minWidth: 200),
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
               color: const Color.fromARGB(185, 21, 19, 22),

@@ -33,9 +33,9 @@ class CommunitiesDeck extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
                   width: 5.w(context),
-                  // child: const r.RiveAnimation.asset(
-                  //   'rive/twitter_rv.riv',
-                  // ),
+                  child: const r.RiveAnimation.asset(
+                    'rive/twitter_rv.riv',
+                  ),
                 ),
               ),
               Expanded(

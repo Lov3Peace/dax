@@ -71,156 +71,164 @@ class DesktopDashboard extends StatelessWidget {
                     child: Scrollbar(
                       thumbVisibility: true,
                       interactive: true,
+                      controller: horizontalScrollController,
                       child: SingleChildScrollView(
+                        controller: horizontalScrollController,
                         scrollDirection: Axis.horizontal,
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Container(
-                                width: 75.w(context),
-                                height: 25.w(context),
-                                constraints: BoxConstraints(
-                                    minWidth: 1000, minHeight: 450),
-                                child: Row(
-                                  // mainAxisAlignment:
-                                  //     MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(
-                                                  math.max(5, 0.25.w(context))),
-                                              child: ScaleFadeIn(
-                                                duration: 200,
-                                                delay: 0,
-                                                child: TitleBubble(
-                                                  deckName: "[Weather]",
-                                                  // height: 5.w(context),
-                                                  width: double.infinity,
-                                                  constraints: BoxConstraints(
-                                                      minWidth: 300,
-                                                      minHeight: 75),
+                          child: Container(
+                            width: 75.w(context),
+                            height: 50.w(context),
+                            padding: EdgeInsetsGeometry.symmetric(
+                                horizontal: 0.5.w(context)),
+                            constraints:
+                                BoxConstraints(minWidth: 1000, minHeight: 900),
+                            child: Column(
+                              // crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    // mainAxisAlignment:
+                                    // MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 50,
+                                                  child: TitleBubble(
+                                                    deckName: "[Weather]",
+                                                    // height: 5.w(context),
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                        minWidth: 300,
+                                                        minHeight: 75),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 4,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(
-                                                  math.max(5, 0.25.w(context))),
-                                              child: ScaleFadeIn(
-                                                duration: 200,
-                                                delay: 150,
-                                                child: ProfileCard(
-                                                  // height: 20.w(context),
-                                                  width: double.infinity,
-                                                  constraints: BoxConstraints(
-                                                      minWidth: 300,
-                                                      minHeight: 375),
+                                            Expanded(
+                                              flex: 4,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 150,
+                                                  child: ProfileCard(
+                                                    // height: 20.w(context),
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                        minWidth: 300,
+                                                        minHeight: 375),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      flex: 4,
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(
-                                                  math.max(5, 0.25.w(context))),
-                                              child: ScaleFadeIn(
-                                                duration: 200,
-                                                delay: 300,
-                                                child: ProjectsDeck(
-                                                  width: double.infinity,
-                                                  constraints: BoxConstraints(
-                                                      minWidth: 450,
-                                                      minHeight: 100),
+                                      Expanded(
+                                        flex: 4,
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              flex: 1,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 250,
+                                                  child: ProjectsDeck(
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                        minWidth: 450,
+                                                        minHeight: 100),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(
-                                                  math.max(5, 0.25.w(context))),
-                                              child: ScaleFadeIn(
-                                                duration: 200,
-                                                delay: 450,
-                                                child: CommunitiesDeck(
-                                                  width: double.infinity,
-                                                  constraints: BoxConstraints(
-                                                      minWidth: 450,
-                                                      minHeight: 100),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 350,
+                                                  child: CommunitiesDeck(
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                        minWidth: 450,
+                                                        minHeight: 100),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Padding(
-                                              padding: EdgeInsets.all(
-                                                  math.max(5, 0.25.w(context))),
-                                              child: ScaleFadeIn(
-                                                duration: 200,
-                                                delay: 600,
-                                                child: TasksDeck(
-                                                  width: double.infinity,
-                                                  constraints: BoxConstraints(
-                                                      minWidth: 450,
-                                                      minHeight: 250),
+                                            Expanded(
+                                              flex: 2,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 450,
+                                                  child: TasksDeck(
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                        minWidth: 450,
+                                                        minHeight: 250),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      flex: 3,
-                                      child: Padding(
-                                        padding: EdgeInsets.all(
-                                            math.max(5, 0.25.w(context))),
-                                        child: ScaleFadeIn(
-                                          duration: 200,
-                                          delay: 750,
-                                          child: EventsDeck(
-                                            height: 25.w(context),
-                                            constraints: BoxConstraints(
-                                                minWidth: 500, minHeight: 450),
+                                      Expanded(
+                                        flex: 3,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(
+                                              math.max(5, 0.25.w(context))),
+                                          child: ScaleFadeIn(
+                                            duration: 200,
+                                            delay: 550,
+                                            child: EventsDeck(
+                                              height: 25.w(context),
+                                              constraints: BoxConstraints(
+                                                  minWidth: 500,
+                                                  minHeight: 450),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(
-                                    math.max(5, 0.25.w(context))),
-                                child: ScaleFadeIn(
-                                  duration: 200,
-                                  delay: 900,
-                                  child: MyProjectsMiniDashDeck(
-                                    height: 25.w(context),
-                                    width: 75.w(context),
+                                    ],
                                   ),
                                 ),
-                              )
-                            ],
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.all(
+                                        math.max(5, 0.25.w(context))),
+                                    child: ScaleFadeIn(
+                                      duration: 200,
+                                      delay: 650,
+                                      child: MyProjectsMiniDashDeck(
+                                        width: double.infinity,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

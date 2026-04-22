@@ -40,9 +40,9 @@ class ProjectsDeck extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
                   width: 3.w(context),
-                  // child: const r.RiveAnimation.asset(
-                  //   'rive/building_apartments.riv',
-                  // ),
+                  child: const r.RiveAnimation.asset(
+                    'rive/building_apartments.riv',
+                  ),
                 ),
               ),
               Expanded(

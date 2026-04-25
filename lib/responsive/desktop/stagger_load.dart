@@ -42,10 +42,11 @@ class StaggerLoad extends StatelessWidget {
         itemBuilder: (context, index) {
           return Container(
             width: childWidth,
+            height: childWidth,
             padding: childPadding,
             child: widgets[index], //
-            // animation chaining
           )
+              // animation chaining
               .animate()
               .fadeIn(
                 duration: Duration(milliseconds: duration),
@@ -57,7 +58,7 @@ class StaggerLoad extends StatelessWidget {
                 duration: Duration(milliseconds: duration),
                 delay: Duration(
                     milliseconds: ((2 * layer) + (index + layer)) * delay),
-                begin: Offset(1.0, 1.0),
+                begin: const Offset(1.0, 1.0),
                 end: Offset(scale, scale), // initial scale (eg. 1.0 => 1.05)
               )
               .then()

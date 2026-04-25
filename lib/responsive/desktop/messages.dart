@@ -51,7 +51,7 @@ class _MessagesState extends State<Messages> {
             child: Text(
               'Messages',
               style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(fontSize: 5.sp(context), height: 1.0),
+                  textStyle: TextStyle(fontSize: 4.sp(context)),
                   fontWeight: FontWeight.w600),
             ),
           ),

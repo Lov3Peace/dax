@@ -231,7 +231,7 @@ class DesktopDashboard extends StatelessWidget {
                                               height: double.infinity,
                                               constraints: BoxConstraints(
                                                   minWidth: 500,
-                                                  minHeight: 450),
+                                                  minHeight: 250),
                                             ),
                                           ),
                                         ),

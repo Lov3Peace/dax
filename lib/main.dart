@@ -95,6 +95,7 @@ const Color hoverGreen = Color.fromARGB(255, 170, 255, 147);
 const Color tran = Color.fromARGB(0, 0, 0, 0);
 const Color white = Colors.white;
 const Color deckBackgroundColor = Color.fromARGB(160, 22, 19, 22);
+// Color deckBorderColor = const Color.fromARGB(182, 75, 75, 75);
 
 //FONTSIZES
 double headerlowerlimit = 26;

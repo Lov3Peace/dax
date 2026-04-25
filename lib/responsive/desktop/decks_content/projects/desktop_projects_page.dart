@@ -98,13 +98,13 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
               // constraints: BoxConstraints(minWidth: 750),
               child: LargeStaggerLoad(
                 widgets: projects,
-                scale: 1.02,
+                scale: 1.010,
                 constraints:
                     const BoxConstraints(minHeight: 450, minWidth: 450),
                 listPadding: EdgeInsets.symmetric(vertical: 7.w(context)),
                 childPadding: EdgeInsets.all(0.5.w(context)),
-                // rowWidth: 75.w(context),
                 childHeight: 30.w(context),
+                // childWidth: 37.5.w(context),
                 physics: const NeverScrollableScrollPhysics(),
               ),
             ),

@@ -14,5 +14,6 @@ export '../responsive/desktop/decks_content/desk_news_page.dart';
 export '../responsive/desktop/util/responsive_shorthand.dart';
 export './auth/loginCheck.dart';
 export './blurryContainer.dart';
+export './gradient_label.dart';
 export './ui/gradient_text.dart';
 export 'dart:math';

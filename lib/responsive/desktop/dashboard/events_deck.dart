@@ -17,7 +17,8 @@ class EventsDeck extends StatelessWidget {
         height: height,
         width: width,
         constraints: constraints,
-        padding: 1.5.w(context),
+        padding:
+            EdgeInsets.all(max(desktopContainerPadLowerLimit, 1.5.w(context))),
         borderRadius: 2.w(context),
         color: deckBackgroundColor,
         child: Column(

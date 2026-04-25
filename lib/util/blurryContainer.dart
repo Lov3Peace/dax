@@ -13,15 +13,14 @@ class BlurryContainer extends StatelessWidget {
       this.color = const Color.fromARGB(220, 22, 19, 22),
       this.constraints,
       required this.child,
-      this.padding = 0});
+      this.padding = const EdgeInsets.all(0)});
   final double? height;
   final double? width;
   final Color color;
   final Widget child;
   final double borderRadius;
   final BoxConstraints? constraints;
-
-  final double padding;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class BlurryContainer extends StatelessWidget {
             // constraints: const BoxConstraints(minHeight: 500, minWidth: 700),
           ),
           Padding(
-            padding: EdgeInsets.all(padding),
+            padding: padding,
             child: child,
           ),
         ]),

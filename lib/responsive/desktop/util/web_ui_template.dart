@@ -32,10 +32,9 @@ class WebUiTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: Container(
           height: 100.h(context),
           width: 100.w(context),
@@ -55,12 +54,7 @@ class WebUiTemplate extends StatelessWidget {
                   DesktopSidePanel(),
                   //
                   // Content
-                  Container(
-                    height: 100.h(context),
-                    width: 72.5.w(context),
-                    constraints: 100.w(context) > 2560
-                        ? BoxConstraints(minHeight: 1440)
-                        : BoxConstraints(minHeight: 900),
+                  Expanded(
                     child: Stack(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         // crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,19 +118,7 @@ class WebUiTemplate extends StatelessWidget {
                   ),
                   //
                   // Messages
-                  Align(
-                    // alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 1.w(context)),
-                      child: Container(
-                        // height: 90.h(context),
-                        constraints: 100.w(context) > 1920
-                            ? BoxConstraints(minHeight: 1440)
-                            : BoxConstraints(minHeight: 900),
-                        child: Messages(),
-                      ),
-                    ),
-                  ),
+                  Messages(),
                 ],
               ),
 

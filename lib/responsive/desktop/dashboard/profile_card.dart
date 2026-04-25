@@ -56,18 +56,21 @@ class ProfileCard extends StatelessWidget {
           height: height,
           constraints: constraints,
           color: deckBackgroundColor,
-          padding: 1.w(context).clamp(desktopContainerPadLowerLimit, 100),
-          borderRadius: 1.5.w(context),
+          padding:
+              EdgeInsets.all(max(desktopContainerPadLowerLimit, 1.w(context))),
+          borderRadius: max(cardBorderRadiusLowerLimit, 1.5.w(context)),
           child: Column(
             children: [
               Padding(
+                // space between username and card slot
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     userData["username"],
                     style: TextStyle(
-                        fontSize: 7.sp(context), fontWeight: FontWeight.bold),
+                        fontSize: max(headerlowerlimit, 5.sp(context)),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -75,7 +78,8 @@ class ProfileCard extends StatelessWidget {
               Expanded(
                   child: BlurryContainer(
                 color: tran,
-                padding: 1.w(context).clamp(desktopContainerPadLowerLimit, 100),
+                padding: EdgeInsets.all(
+                    max(desktopContainerPadLowerLimit, 1.w(context))),
                 borderRadius: 1.5.w(context),
                 child: SizedBox(),
               ))

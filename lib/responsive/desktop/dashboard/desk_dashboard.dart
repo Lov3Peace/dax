@@ -83,20 +83,21 @@ class DesktopDashboard extends StatelessWidget {
                             padding: EdgeInsetsGeometry.symmetric(
                                 horizontal: 0.5.w(context)),
                             constraints:
-                                BoxConstraints(minWidth: 1000, minHeight: 900),
+                                BoxConstraints(minWidth: 900, minHeight: 950),
                             child: Column(
-                              // crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Expanded(
                                   child: Row(
-                                    // mainAxisAlignment:
-                                    // MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
+                                        // handles width
                                         flex: 2,
                                         child: Column(
                                           children: [
+                                            //
+                                            // Weather
                                             Expanded(
+                                              // handles height
                                               flex: 1,
                                               child: Padding(
                                                 padding: EdgeInsets.all(math
@@ -109,13 +110,17 @@ class DesktopDashboard extends StatelessWidget {
                                                     // height: 5.w(context),
                                                     width: double.infinity,
                                                     constraints: BoxConstraints(
-                                                        minWidth: 300,
-                                                        minHeight: 75),
+                                                      minWidth: 300,
+                                                      minHeight: 75,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
+                                            //
+                                            // ProfileCard
                                             Expanded(
+                                              // handles height
                                               flex: 4,
                                               child: Padding(
                                                 padding: EdgeInsets.all(math
@@ -127,8 +132,9 @@ class DesktopDashboard extends StatelessWidget {
                                                     // height: 20.w(context),
                                                     width: double.infinity,
                                                     constraints: BoxConstraints(
-                                                        minWidth: 300,
-                                                        minHeight: 375),
+                                                      minWidth: 300,
+                                                      minHeight: 375,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -136,11 +142,17 @@ class DesktopDashboard extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      //
+                                      // ProjectsDeck
                                       Expanded(
+                                        // handles width
                                         flex: 4,
                                         child: Column(
                                           children: [
+                                            //
+                                            // ProjectsDeck
                                             Expanded(
+                                              // handles height
                                               flex: 1,
                                               child: Padding(
                                                 padding: EdgeInsets.all(math
@@ -151,13 +163,17 @@ class DesktopDashboard extends StatelessWidget {
                                                   child: ProjectsDeck(
                                                     width: double.infinity,
                                                     constraints: BoxConstraints(
-                                                        minWidth: 450,
-                                                        minHeight: 100),
+                                                      minWidth: 450,
+                                                      minHeight: 150,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
+                                            //
+                                            // CommunitiesDeck
                                             Expanded(
+                                              // handles height
                                               flex: 1,
                                               child: Padding(
                                                 padding: EdgeInsets.all(math
@@ -168,13 +184,17 @@ class DesktopDashboard extends StatelessWidget {
                                                   child: CommunitiesDeck(
                                                     width: double.infinity,
                                                     constraints: BoxConstraints(
-                                                        minWidth: 450,
-                                                        minHeight: 100),
+                                                      minWidth: 450,
+                                                      minHeight: 100,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
+                                            //
+                                            // TasksDeck
                                             Expanded(
+                                              // handles height
                                               flex: 2,
                                               child: Padding(
                                                 padding: EdgeInsets.all(math
@@ -185,8 +205,9 @@ class DesktopDashboard extends StatelessWidget {
                                                   child: TasksDeck(
                                                     width: double.infinity,
                                                     constraints: BoxConstraints(
-                                                        minWidth: 450,
-                                                        minHeight: 250),
+                                                      minWidth: 450,
+                                                      minHeight: 250,
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -194,7 +215,10 @@ class DesktopDashboard extends StatelessWidget {
                                           ],
                                         ),
                                       ),
+                                      //
+                                      // EventsDeck
                                       Expanded(
+                                        // handles width
                                         flex: 3,
                                         child: Padding(
                                           padding: EdgeInsets.all(
@@ -203,7 +227,8 @@ class DesktopDashboard extends StatelessWidget {
                                             duration: 200,
                                             delay: 550,
                                             child: EventsDeck(
-                                              height: 25.w(context),
+                                              // handles height
+                                              height: double.infinity,
                                               constraints: BoxConstraints(
                                                   minWidth: 500,
                                                   minHeight: 450),
@@ -214,6 +239,8 @@ class DesktopDashboard extends StatelessWidget {
                                     ],
                                   ),
                                 ),
+                                //
+                                // MyProjectsMiniDashDeck
                                 Expanded(
                                   child: Padding(
                                     padding: EdgeInsets.all(

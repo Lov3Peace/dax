@@ -15,3 +15,4 @@ export '../responsive/desktop/util/responsive_shorthand.dart';
 export './auth/loginCheck.dart';
 export './blurryContainer.dart';
 export './ui/gradient_text.dart';
+export 'dart:math';

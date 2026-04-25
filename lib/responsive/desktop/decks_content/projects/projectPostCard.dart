@@ -64,6 +64,7 @@ class _ProjectPostCardState extends State<ProjectPostCard> {
         ),
         // constraints: const BoxConstraints(),
         height: 40.w(context),
+        // width: double.infinity,
         // height: 2 * textBoxHeight,
         child: Padding(
           padding: EdgeInsets.all(1.5.w(context)),

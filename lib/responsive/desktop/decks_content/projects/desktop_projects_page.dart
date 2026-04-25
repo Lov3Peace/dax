@@ -91,17 +91,23 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
       button3: NewsButton(),
       child: Stack(
         children: [
-          LargeStaggerLoad(
-            widgets: projects,
-            scale: 1.02,
-            constraints: const BoxConstraints(minHeight: 450),
-            listPadding: EdgeInsets.fromLTRB(0.5.w(context),
-                100.h(context) < 875 ? 100 : 10.h(context), 0.5.w(context), 0),
-            childPadding: 100.w(context) > 2200
-                ? EdgeInsets.all(10)
-                : EdgeInsets.all(0.25.w(context)),
-            childHeight: 30.w(context),
-            physics: const NeverScrollableScrollPhysics(),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              width: 75.w(context),
+              // constraints: BoxConstraints(minWidth: 750),
+              child: LargeStaggerLoad(
+                widgets: projects,
+                scale: 1.02,
+                constraints:
+                    const BoxConstraints(minHeight: 450, minWidth: 450),
+                listPadding: EdgeInsets.symmetric(vertical: 7.w(context)),
+                childPadding: EdgeInsets.all(0.5.w(context)),
+                // rowWidth: 75.w(context),
+                childHeight: 30.w(context),
+                physics: const NeverScrollableScrollPhysics(),
+              ),
+            ),
           ),
           NewProjectButton()
         ],

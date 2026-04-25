@@ -24,23 +24,27 @@ class CommunitiesDeck extends StatelessWidget {
           width: width,
           constraints: constraints,
           borderRadius: 50.w(context),
-          padding: 1.w(context),
+          padding: EdgeInsets.symmetric(
+              horizontal: max(desktopContainerPadLowerLimit, 1.w(context))),
           color: deckBackgroundColor,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
-                child: Container(
-                  width: 5.w(context),
-                  child: const r.RiveAnimation.asset(
-                    'rive/twitter_rv.riv',
-                  ),
+              //
+              // Communities Rive Animation
+              Container(
+                width: max(50, 3.w(context)),
+                child: const r.RiveAnimation.asset(
+                  'rive/twitter_rv.riv',
                 ),
               ),
+              //
+              // Communities Heading and Description
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal:
+                          max(desktopContainerPadLowerLimit, 0.5.w(context))),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +52,7 @@ class CommunitiesDeck extends StatelessWidget {
                       GradientText(
                         text: "Communities",
                         gradients: const [orange, purp],
-                        fontSize: 5.sp(context),
+                        fontSize: max(24, 5.sp(context)),
                         fontWeight: FontWeight.bold,
                       ),
                       // Text(
@@ -62,7 +66,7 @@ class CommunitiesDeck extends StatelessWidget {
                       Text(
                         'Post, join, or support independent projects anywhere in the world.',
                         style: TextStyle(
-                            fontSize: 2.5.sp(context),
+                            fontSize: max(10, 2.5.sp(context)),
                             fontWeight: FontWeight.normal),
                       ),
                     ],

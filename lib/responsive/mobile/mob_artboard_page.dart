@@ -17,7 +17,7 @@ class _ArtBoardScreenState extends State<ArtBoardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: 100.h(context),
+        height: double.infinity,
         width: 100.w(context),
         child: Stack(
           children: [

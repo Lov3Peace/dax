@@ -17,7 +17,8 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
         height: height,
         width: width,
         constraints: BoxConstraints(minWidth: 1000, minHeight: 450),
-        padding: 1.5.w(context),
+        padding:
+            EdgeInsets.all(max(desktopContainerPadLowerLimit, 1.5.w(context))),
         borderRadius: 1.5.w(context),
         color: deckBackgroundColor,
         child: Column(

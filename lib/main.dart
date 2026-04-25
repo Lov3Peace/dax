@@ -97,7 +97,7 @@ const Color white = Colors.white;
 const Color deckBackgroundColor = Color.fromARGB(160, 22, 19, 22);
 
 //FONTSIZES
-double headerlowerlimit = 20;
+double headerlowerlimit = 26;
 double subheaderlowerlimit = 18;
 double paragraphlowerlimit = 16;
 double smallestLowerLimit = 12;
@@ -105,6 +105,9 @@ double smallestLowerLimit = 12;
 //PADDING
 double desktopContainerPadLowerLimit = 20;
 double mobilContainerPadLowerLimit = 10;
+
+// BORDER RADIUS
+double cardBorderRadiusLowerLimit = 20;
 
 // Used to fix Hero animation bug
 Widget flightShuttleBuilder(

@@ -54,7 +54,7 @@ class _CommunitiesPostState extends State<CommunitiesPost> {
           border: Border.all(color: deckBorderColor),
         ),
         // constraints: const BoxConstraints(),
-        width: 34.75.w(context),
+        // width: 34.75.w(context),
         // height: 2 * textBoxHeight,
         child: Padding(
           padding: EdgeInsets.all(1.5.w(context)),

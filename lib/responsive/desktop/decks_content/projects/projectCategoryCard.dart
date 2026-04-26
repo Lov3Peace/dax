@@ -44,7 +44,7 @@ class ProjectCategory extends StatelessWidget {
         ),
         // constraints: const BoxConstraints(minHeight: 460, minWidth: 450),
         height: 35.25.w(context),
-        width: 36.5.w(context),
+        // width: double.infinity,
         child: Padding(
           padding: EdgeInsets.all(1.w(context)),
           child: Column(

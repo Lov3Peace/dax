@@ -7,28 +7,33 @@ import 'package:flutter_application_1/util/test_container.dart';
 class LargeStaggerLoad extends StatelessWidget {
   LargeStaggerLoad({
     super.key,
+    required this.duration,
     required this.widgets,
-    required this.childHeight,
-    required this.scale,
-    required this.constraints,
-    this.rowWidth,
-    this.childWidth,
+    required this.delay,
+    required this.rowWidth,
+    this.scale = 1.015,
+    this.layer = 1,
+    this.scrollController,
     this.listPadding,
     this.childPadding,
     this.physics,
+    this.childWidth,
+    required this.childHeight,
+    required this.itemsPerRow,
   });
-
   final List widgets;
+  final double rowWidth;
+  final int itemsPerRow;
   final double scale;
-  final BoxConstraints constraints;
-  final double? rowWidth;
+  final int layer;
+  final int duration;
+  final int delay;
   final double? childWidth;
   final double childHeight;
   final EdgeInsets? listPadding;
   final EdgeInsets? childPadding;
   final ScrollPhysics? physics;
-
-  final ScrollController scrollController = ScrollController();
+  final ScrollController? scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +42,11 @@ class LargeStaggerLoad extends StatelessWidget {
       controller: scrollController,
       padding: listPadding,
       itemBuilder: (context, index) => Container(
-        constraints: constraints,
+        // constraints: constraints,
         height: childHeight,
-        width: childWidth,
+        width: rowWidth,
         child: StaggerLoad(
+          childWidth: rowWidth / itemsPerRow,
           duration: 300,
           // childWidth: childWidth,
           // had to use math and conditions for this. If the length of the
@@ -57,7 +63,7 @@ class LargeStaggerLoad extends StatelessWidget {
           // delay: index % 2 == 0 ? 400 : 600,
           delay: (index * childHeight) < 100.h(context) ? (index * 100) : 300,
           scale: scale,
-          layer: 1,
+          layer: 3,
           childPadding: childPadding,
           physics: physics,
         ),

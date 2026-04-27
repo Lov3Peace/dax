@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/dottedLine.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
@@ -17,61 +18,189 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
-        height: height,
-        width: width,
-        constraints: BoxConstraints(minWidth: 1000, minHeight: 450),
-        padding:
-            EdgeInsets.all(max(desktopContainerPadLowerLimit, 1.5.w(context))),
-        borderRadius: 1.5.w(context),
-        color: deckBackgroundColor,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      height: height,
+      width: width,
+      constraints: BoxConstraints(minWidth: 1000, minHeight: 450),
+      padding: EdgeInsets.all(max(20, 0.5.w(context))),
+      borderRadius: 1.5.w(context),
+      color: deckBackgroundColor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //
+          // My Project Heading, Open Button, More Actions
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "My Projects",
+                style: TextStyle(
+                    fontSize: max(headerlowerlimit, 4.sp(context)),
+                    fontWeight: FontWeight.bold),
+              ),
+              Column(
+                children: [
+                  Text(
+                    "17%",
+                    style: TextStyle(
+                        fontSize: 5.sp(context), fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    width: max(250, 25.w(context)),
+                    child: FAProgressBar(
+                      maxValue: 100,
+                      currentValue: 17,
+                      size: 17,
+                      borderRadius: BorderRadius.circular(10.w(context)),
+                      backgroundColor: deckBorderColor,
+                      animatedDuration: const Duration(milliseconds: 300),
+                      // border: BoxBorder.all(color: deckBorderColor),
+                      progressGradient: const LinearGradient(
+                          colors: [orangeGlow, orange, orangeGlow]),
+                      direction: Axis.horizontal,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                spacing: max(10, 1.w(context)),
+                children: [
+                  TactileButton(
+                      scale: 1.04,
+                      child: GradientContainer(
+                        height: max(25, 2.w(context)),
+                        width: max(100, 7.w(context)),
+                        text: 'Open',
+                        textSize: max(12, 2.5.sp(context)),
+                        gradient1: pink,
+                        gradient2: red,
+                        neonGlow: tran,
+                        borderColor: tran,
+                        borderRadius: 50.w(context),
+                      )),
+                  const TactileButton(
+                    scale: 1.05,
+                    child: Icon(Ionicons.ellipsis_horizontal),
+                  )
+                ],
+              ),
+            ],
+          ),
+          Divider(endIndent: math.max(650, 55.w(context))),
+          //
+          // Feed, Team, Current Workload
+          Expanded(
+            child: Row(
               children: [
-                Text(
-                  "My Projects",
-                  style: TextStyle(
-                      fontSize: max(headerlowerlimit, 5.sp(context)),
-                      fontWeight: FontWeight.bold),
+                //
+                // Project Title, Feed
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: max(10, 0.25.w(context))),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        GradientText(
+                          text: "Carbon",
+                          gradients: [pink, red],
+                          fontSize: max(headerlowerlimit, 6.sp(context)),
+                          fontWeight: FontWeight.bold,
+                          lineHeight: 1,
+                        ),
+                        //
+                        // Feed
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(
+                              0,
+                              max(5, 0.25.w(context)),
+                              max(5, 0.25.w(context)),
+                              max(5, 0.25.w(context)),
+                            ),
+                            child: BlurryContainer(
+                              constraints: const BoxConstraints(
+                                  minWidth: 250, minHeight: 150),
+                              color: tran,
+                              padding: EdgeInsets.all(max(20, 1.w(context))),
+                              borderRadius: 1.5.w(context),
+                              child: Column(
+                                children: [
+                                  Text("Feed",
+                                      style: TextStyle(
+                                          fontSize: max(20, 3.5.sp(context)),
+                                          fontWeight: FontWeight.bold))
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                Row(
-                  spacing: max(10, 1.w(context)),
-                  children: [
-                    TactileButton(
-                        scale: 1.04,
-                        child: GradientContainer(
-                          height: max(25, 2.w(context)),
-                          width: max(100, 7.w(context)),
-                          text: 'Open',
-                          textSize: max(12, 2.5.sp(context)),
-                          gradient1: pink,
-                          gradient2: red,
-                          neonGlow: tran,
-                          borderColor: tran,
-                          borderRadius: 50.w(context),
-                        )),
-                    const TactileButton(
-                      scale: 1.05,
-                      child: Icon(Ionicons.ellipsis_horizontal),
-                    )
-                  ],
+                //
+                // Team
+                Expanded(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              max(5, 0.25.w(context)),
+                              max(5, 0.25.w(context)),
+                              0,
+                              max(5, 0.25.w(context))),
+                          child: BlurryContainer(
+                            color: tran,
+                            padding: EdgeInsets.all(1.w(context)),
+                            constraints: const BoxConstraints(
+                                minWidth: 250, minHeight: 150),
+                            borderRadius: max(20, 1.5.w(context)),
+                            child: Column(
+                              children: [
+                                Text("Team",
+                                    style: TextStyle(
+                                        fontSize: max(20, 3.5.sp(context)),
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      //
+                      // Current Workload
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              max(5, 0.25.w(context)),
+                              max(5, 0.25.w(context)),
+                              0,
+                              max(5, 0.25.w(context))),
+                          child: BlurryContainer(
+                            color: tran,
+                            padding: EdgeInsets.all(1.w(context)),
+                            constraints: const BoxConstraints(
+                                minWidth: 250, minHeight: 150),
+                            borderRadius: max(20, 1.5.w(context)),
+                            child: Column(
+                              children: [
+                                Text("Current Workload",
+                                    style: TextStyle(
+                                        fontSize: max(20, 3.5.sp(context)),
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-            Divider(endIndent: math.max(500, 50.w(context))),
-            Row(
-              children: [
-                GradientText(
-                  text: "Carbon",
-                  gradients: [pink, red],
-                  fontSize: max(headerlowerlimit, 5.sp(context)),
-                  fontWeight: FontWeight.bold,
-                )
-              ],
-            )
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

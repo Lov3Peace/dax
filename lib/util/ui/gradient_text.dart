@@ -6,6 +6,7 @@ class GradientText extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final String? fontFamily;
+  final double lineHeight;
 
   const GradientText(
       {required this.text,
@@ -13,6 +14,7 @@ class GradientText extends StatelessWidget {
       this.fontSize = 16,
       this.fontWeight = FontWeight.normal,
       this.fontFamily,
+      this.lineHeight = 1.25,
       super.key});
 
   @override
@@ -24,11 +26,11 @@ class GradientText extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-          fontFamily: fontFamily,
-          color: Colors.white,
-        ),
+            fontSize: fontSize,
+            fontWeight: fontWeight,
+            fontFamily: fontFamily,
+            color: Colors.white,
+            height: lineHeight),
       ),
     );
   }

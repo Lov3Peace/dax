@@ -93,22 +93,18 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
         children: [
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: Container(
-              width: 75.w(context),
-              // constraints: BoxConstraints(minWidth: 750),
-              child: LargeStaggerLoad(
-                widgets: projects,
-                rowWidth: 75.w(context),
-                itemsPerRow: 2,
-                scale: 1.010,
-                duration: 300,
-                delay: 1000,
-                listPadding: EdgeInsets.symmetric(vertical: 7.w(context)),
-                childPadding: EdgeInsets.all(0.5.w(context)),
-                childHeight: 30.w(context),
-                // childWidth: 37.5.w(context),
-                physics: const NeverScrollableScrollPhysics(),
-              ),
+            child: LargeStaggerLoad(
+              widgets: projects,
+              rowWidth: 75.w(context),
+              itemsPerRow: 2,
+              scale: 1.010,
+              duration: 300,
+              delay: 1000,
+              listPadding: EdgeInsets.symmetric(vertical: 7.w(context)),
+              childPadding: EdgeInsets.all(0.5.w(context)),
+              childHeight: 30.w(context),
+              // childWidth: 37.5.w(context),
+              physics: const NeverScrollableScrollPhysics(),
             ),
           ),
           NewProjectButton()

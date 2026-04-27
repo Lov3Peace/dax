@@ -32,7 +32,7 @@ class EventsDeck extends StatelessWidget {
                   fontSize: max(headerlowerlimit, 5.sp(context)),
                   fontWeight: FontWeight.bold),
             ),
-            Divider(endIndent: 12.5.w(context)),
+            Divider(endIndent: max(100, 10.w(context))),
             Padding(
               padding: EdgeInsets.only(top: 0.5.w(context)),
               child: Column(

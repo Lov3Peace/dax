@@ -38,30 +38,6 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
                     fontSize: max(headerlowerlimit, 4.sp(context)),
                     fontWeight: FontWeight.bold),
               ),
-              Column(
-                children: [
-                  Text(
-                    "17%",
-                    style: TextStyle(
-                        fontSize: 5.sp(context), fontWeight: FontWeight.bold),
-                  ),
-                  Container(
-                    width: max(250, 25.w(context)),
-                    child: FAProgressBar(
-                      maxValue: 100,
-                      currentValue: 17,
-                      size: 17,
-                      borderRadius: BorderRadius.circular(10.w(context)),
-                      backgroundColor: deckBorderColor,
-                      animatedDuration: const Duration(milliseconds: 300),
-                      // border: BoxBorder.all(color: deckBorderColor),
-                      progressGradient: const LinearGradient(
-                          colors: [orangeGlow, orange, orangeGlow]),
-                      direction: Axis.horizontal,
-                    ),
-                  ),
-                ],
-              ),
               Row(
                 spacing: max(10, 1.w(context)),
                 children: [
@@ -86,55 +62,90 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
               ),
             ],
           ),
-          Divider(endIndent: math.max(650, 55.w(context))),
+          Divider(
+            endIndent: math.max(550, 50.w(context)),
+            color: const Color.fromRGBO(150, 150, 150, 0.50),
+            height: 20,
+          ),
+          //
+          // Project Title, Progress Bar, Spacer
+          Padding(
+            padding: EdgeInsets.only(bottom: max(10, 1.5.w(context))),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: GradientText(
+                      text: "Carbon",
+                      gradients: [pink, red],
+                      fontSize: max(headerlowerlimit, 6.sp(context)),
+                      fontWeight: FontWeight.bold,
+                      lineHeight: 1,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Text(
+                          "17%",
+                          style: TextStyle(
+                              fontSize: 5.sp(context),
+                              fontWeight: FontWeight.bold,
+                              height: 1),
+                        ),
+                        Container(
+                          width: max(250, 25.w(context)),
+                          child: FAProgressBar(
+                            maxValue: 100,
+                            currentValue: 17,
+                            size: 17,
+                            borderRadius: BorderRadius.circular(10.w(context)),
+                            backgroundColor: deckBorderColor,
+                            animatedDuration: const Duration(milliseconds: 300),
+                            // border: BoxBorder.all(color: deckBorderColor),
+                            progressGradient: const LinearGradient(
+                                colors: [orangeGlow, orange, orangeGlow]),
+                            direction: Axis.horizontal,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Spacer(),
+              ],
+            ),
+          ),
           //
           // Feed, Team, Current Workload
           Expanded(
             child: Row(
               children: [
                 //
-                // Project Title, Feed
+                // Feed
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(top: max(10, 0.25.w(context))),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GradientText(
-                          text: "Carbon",
-                          gradients: [pink, red],
-                          fontSize: max(headerlowerlimit, 6.sp(context)),
-                          fontWeight: FontWeight.bold,
-                          lineHeight: 1,
-                        ),
-                        //
-                        // Feed
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(
-                              0,
-                              max(5, 0.25.w(context)),
-                              max(5, 0.25.w(context)),
-                              max(5, 0.25.w(context)),
-                            ),
-                            child: BlurryContainer(
-                              constraints: const BoxConstraints(
-                                  minWidth: 250, minHeight: 150),
-                              color: tran,
-                              padding: EdgeInsets.all(max(20, 1.w(context))),
-                              borderRadius: 1.5.w(context),
-                              child: Column(
-                                children: [
-                                  Text("Feed",
-                                      style: TextStyle(
-                                          fontSize: max(20, 3.5.sp(context)),
-                                          fontWeight: FontWeight.bold))
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    padding: EdgeInsets.only(right: max(5, 0.25.w(context))),
+                    child: BlurryContainer(
+                      constraints:
+                          const BoxConstraints(minWidth: 250, minHeight: 150),
+                      color: tran,
+                      padding: EdgeInsets.all(max(20, 1.w(context))),
+                      borderRadius: 1.5.w(context),
+                      child: Column(
+                        children: [
+                          Text("Feed",
+                              style: TextStyle(
+                                fontSize: max(20, 3.5.sp(context)),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ))
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -144,12 +155,10 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
                   child: Column(
                     children: [
                       Expanded(
+                        flex: 2,
                         child: Padding(
-                          padding: EdgeInsets.fromLTRB(
-                              max(5, 0.25.w(context)),
-                              max(5, 0.25.w(context)),
-                              0,
-                              max(5, 0.25.w(context))),
+                          padding: EdgeInsets.fromLTRB(max(5, 0.25.w(context)),
+                              0, 0, max(5, 0.25.w(context))),
                           child: BlurryContainer(
                             color: tran,
                             padding: EdgeInsets.all(1.w(context)),
@@ -160,8 +169,10 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
                               children: [
                                 Text("Team",
                                     style: TextStyle(
-                                        fontSize: max(20, 3.5.sp(context)),
-                                        fontWeight: FontWeight.bold))
+                                      fontSize: max(20, 3.5.sp(context)),
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey,
+                                    ))
                               ],
                             ),
                           ),
@@ -170,12 +181,14 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
                       //
                       // Current Workload
                       Expanded(
+                        flex: 3,
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(
-                              max(5, 0.25.w(context)),
-                              max(5, 0.25.w(context)),
-                              0,
-                              max(5, 0.25.w(context))),
+                            max(5, 0.25.w(context)),
+                            max(5, 0.25.w(context)),
+                            0,
+                            0,
+                          ),
                           child: BlurryContainer(
                             color: tran,
                             padding: EdgeInsets.all(1.w(context)),
@@ -187,7 +200,8 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
                                 Text("Current Workload",
                                     style: TextStyle(
                                         fontSize: max(20, 3.5.sp(context)),
-                                        fontWeight: FontWeight.bold))
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.grey))
                               ],
                             ),
                           ),

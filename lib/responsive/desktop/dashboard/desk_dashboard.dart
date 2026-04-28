@@ -79,7 +79,7 @@ class DesktopDashboard extends StatelessWidget {
                           scrollDirection: Axis.vertical,
                           child: Container(
                             width: 75.w(context),
-                            height: 50.w(context),
+                            height: 55.w(context),
                             padding: EdgeInsetsGeometry.symmetric(
                                 horizontal: 0.5.w(context)),
                             constraints:

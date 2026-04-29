@@ -7,6 +7,8 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/main.dart';
 
+import '../dashboard/desk_dashboard.dart';
+
 /// The route configuration.
 final GoRouter router = GoRouter(
   initialLocation: "/launch",

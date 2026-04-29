@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:convert';
 import 'dart:math' as math;
-
+import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/events_deck.dart';
@@ -14,34 +15,38 @@ import 'package:flutter_application_1/responsive/desktop/dashboard/communities_d
 import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projects_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/stagger_load.dart';
+import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:provider/provider.dart';
+import 'package:supercharged/supercharged.dart';
+import 'package:weather/weather.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../side_panel/side_panel.dart';
 import '../messages.dart';
-import '../util/title_bubble.dart';
+import '../util/weather_date.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
-class DesktopDashboard extends StatelessWidget {
+class DesktopDashboard extends StatefulWidget {
   DesktopDashboard({Key? key}) : super(key: key);
+
+  @override
+  State<DesktopDashboard> createState() => _DesktopDashboardState();
+}
+
+late LocationServicesProvider locationServicesProvider;
+final locationEndpoint = Uri.parse("$hostname/api/getLocation/");
+
+class _DesktopDashboardState extends State<DesktopDashboard> {
+  @override
+  void initState() {
+    super.initState();
+    locationServicesProvider = context.read<LocationServicesProvider>();
+    locationServicesProvider.getWeather();
+  }
 
 //globals
   final ScrollController horizontalScrollController = ScrollController();
-
-// Future getUserDataFetch() async {
-//   final client = httpClient.BrowserClient()..withCredentials = true;
-//   try {
-//     var res = await client.get(getUserDataEndpoint, headers: {
-//       "Content-Type": "application/json",
-//     }).timeout(const Duration(seconds: 5));
-//     final body = json.decode(res.body);
-//     final resStatus = res.statusCode;
-//     print("Get Status: $resStatus");
-//     userData = body;
-//     return userData;
-//   } catch (e) {
-//     print("Error: $e");
-//   }
-// }
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +110,12 @@ class DesktopDashboard extends StatelessWidget {
                                                 child: ScaleFadeIn(
                                                   duration: 200,
                                                   delay: 50,
-                                                  child: TitleBubble(
-                                                    deckName: "[Weather]",
+                                                  child: WeatherDate(
                                                     // height: 5.w(context),
                                                     width: double.infinity,
                                                     constraints: BoxConstraints(
                                                       minWidth: 300,
-                                                      minHeight: 75,
+                                                      minHeight: 50,
                                                     ),
                                                   ),
                                                 ),
@@ -121,7 +125,7 @@ class DesktopDashboard extends StatelessWidget {
                                             // ProfileCard
                                             Expanded(
                                               // handles height
-                                              flex: 4,
+                                              flex: 8,
                                               child: Padding(
                                                 padding: EdgeInsets.all(math
                                                     .max(5, 0.25.w(context))),

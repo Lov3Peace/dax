@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:weather/weather.dart';
 
 class TitleBubble extends StatelessWidget {
   TitleBubble({
@@ -28,6 +30,18 @@ class TitleBubble extends StatelessWidget {
   VoidCallback? onTap;
   Color shadowColor = Colors.white;
   Color buttonColor = const Color.fromARGB(255, 29, 29, 29);
+  WeatherFactory wf = WeatherFactory(String.fromEnvironment("WEATHER_API_KEY"));
+  // final weather = wf.currentWeatherfinal;
+  getLocation() async {
+    final LocationSettings locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 100,
+    );
+
+    Position position = await Geolocator.getCurrentPosition();
+    return position.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -65,27 +79,16 @@ class TitleBubble extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [gradient1, gradient2]),
-                    boxShadow: [BoxShadow(color: neonGlow, blurRadius: 20, blurStyle: BlurStyle.solid)],
+                    boxShadow: [
+                      BoxShadow(
+                          color: neonGlow,
+                          blurRadius: 20,
+                          blurStyle: BlurStyle.solid)
+                    ],
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                  child: Text(
-                    deckName,
-                    style: GoogleFonts.montserrat(
-                        fontSize: textSize,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        shadows: [
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 1,
-                          ),
-                          Shadow(
-                            color: shadowColor,
-                            blurRadius: 2,
-                          ),
-                        ]),
-                  ),
+                  child: Text(getLocation()),
                 ),
               ),
             ),

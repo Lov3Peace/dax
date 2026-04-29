@@ -4,6 +4,7 @@ import 'package:flutter_application_1/util/auth/loginCheck.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/appStateProvider.dart';
+import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
@@ -43,6 +44,7 @@ Future main() async {
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => UserAuthProvider()),
         ChangeNotifierProvider(create: (_) => ProjectProvider()),
+        ChangeNotifierProvider(create: (_) => LocationServicesProvider()),
         // Add more providers as needed
       ],
       child: const MyApp(),

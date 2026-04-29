@@ -2,7 +2,6 @@ export '../main.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_application_1/util/auth/launch_page.dart';
 export '../responsive/desktop/devPage.dart';
-export '../responsive/desktop/dashboard/desk_dashboard.dart';
 export '../responsive/desktop/stagger_load.dart';
 export '../util/auth/auth_check.dart';
 export '../responsive/responsive_layout.dart';

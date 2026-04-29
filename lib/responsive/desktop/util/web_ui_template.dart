@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../mobile/mob_artboard_page.dart';
-import 'title_bubble.dart';
+import 'weather_date.dart';
 import '../side_panel/side_panel.dart';
 
 import '../messages.dart';
@@ -93,13 +93,18 @@ class WebUiTemplate extends StatelessWidget {
                                     children: [
                                       //
                                       // Title of Screen
-                                      TitleBubble(
-                                        deckName: "[Weather]",
+                                      BlurryContainer(
                                         height: 5.w(context),
                                         width: 17.25.w(context),
-                                        constraints: BoxConstraints(
-                                            minWidth: 250, minHeight: 50),
-                                        // height: 50,
+                                        borderRadius: 50.w(context),
+                                        color: deckBackgroundColor,
+                                        child: Center(
+                                          child: WeatherDate(
+                                            constraints: BoxConstraints(
+                                                minWidth: 250, minHeight: 50),
+                                            // height: 50,
+                                          ),
+                                        ),
                                       ),
 
                                       //

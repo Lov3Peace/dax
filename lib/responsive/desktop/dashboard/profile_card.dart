@@ -20,14 +20,14 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context);
     final userAuthProvider =
         Provider.of<UserAuthProvider>(context, listen: false);
     userData = userProvider.userData;
     var token = userAuthProvider.token;
-    var decodedToken = JwtDecoder.decode(token);
-    final bool isAdmin = decodedToken["isAdmin"];
-    adminOrUser = isAdmin == true ? "Admin" : "User";
+    // var decodedToken = JwtDecoder.decode(token);
+    // final bool isAdmin = decodedToken["isAdmin"];
+    // adminOrUser = isAdmin == true ? "Admin" : "User";
 
     return TactileButton(
         onTap: () {

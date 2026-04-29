@@ -90,15 +90,18 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
                   child: Center(
                     child: Column(
                       children: [
-                        Text(
-                          "17%",
-                          style: TextStyle(
-                              fontSize: 5.sp(context),
-                              fontWeight: FontWeight.bold,
-                              height: 1),
+                        TactileButton(
+                          scale: 1.05,
+                          child: Text(
+                            "17%",
+                            style: TextStyle(
+                                fontSize: 5.sp(context),
+                                fontWeight: FontWeight.bold,
+                                height: 1.5),
+                          ),
                         ),
                         Container(
-                          width: max(250, 25.w(context)),
+                          width: max(250, 20.w(context)),
                           child: FAProgressBar(
                             maxValue: 100,
                             currentValue: 17,

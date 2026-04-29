@@ -70,7 +70,7 @@ class _DesktopProjectsPageState extends State<DesktopProjectsPage> {
   Widget build(BuildContext context) {
     print(100.w(context));
 
-    while (projects.isEmpty) {
+    if (projects.isEmpty) {
       return WebUiTemplate(
         title: "Projects",
         button1: CommunitiesButton(),

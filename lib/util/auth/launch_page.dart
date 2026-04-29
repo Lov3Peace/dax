@@ -28,6 +28,8 @@ class LaunchPage extends StatefulWidget {
 }
 
 final initLoginCheckEndpoint = Uri.parse("$hostname/api/");
+final ipApiEndpoint = Uri.parse(
+    "https://api.ipapi.com/api/check?access_key=5b20163bd553535fc71b6addd2ab130c");
 final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 bool _rememberMe = false;
@@ -54,7 +56,16 @@ Future initLoginCheck(context) async {
       final headers = res.headers;
       final token = headers["authorization"];
       userAuthProvider.setToken(token);
+      // final locationRes = await client.get(locationEndpoint);
+      // final locationResBody = json.decode(locationRes.body);
+      // final location = {
+      //   "lat": locationResBody["latitude"],
+      //   "lon": locationResBody["longitude"]
+      // };
+      //
+      // debugPrint("Location Response: $location");
     }
+
     print("Init Status Code from API: $status");
     return status;
   } catch (e) {

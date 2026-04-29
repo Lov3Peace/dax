@@ -7,7 +7,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
 import '../../mobile/mob_artboard_page.dart';
-import 'title_bubble.dart';
+import 'weather_date.dart';
 import '../side_panel/side_panel.dart';
 
 import '../messages.dart';
@@ -95,8 +95,7 @@ class TestWebUiTemplate extends StatelessWidget {
                                   children: [
                                     //
                                     // Title of Screen
-                                    TitleBubble(
-                                      deckName: "[Weather]",
+                                    WeatherDate(
                                       height: 5.w(context),
                                       width: 17.25.w(context),
                                       constraints: BoxConstraints(

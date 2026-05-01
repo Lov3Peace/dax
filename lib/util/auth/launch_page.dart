@@ -2,7 +2,9 @@
 
 import 'dart:convert';
 import 'dart:ui';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
+import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +14,6 @@ import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:rive/rive.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../gradient_label.dart';
 import '../providers/userAuthProvider.dart';
 import '../providers/userProvider.dart';
 import '../tactile_button.dart';
@@ -34,81 +35,50 @@ final TextEditingController _usernameController = TextEditingController();
 final TextEditingController _passwordController = TextEditingController();
 bool _rememberMe = false;
 
-Future initLoginCheck(context) async {
-  final userAuthProvider =
-      Provider.of<UserAuthProvider>(context, listen: false);
-  final userProvider = Provider.of<UserProvider>(context, listen: false);
-  final client = httpClient.BrowserClient()..withCredentials = true;
-  try {
-    var res = await client.get(initLoginCheckEndpoint, headers: {
-      "Content-Type": "application/json",
-    });
-    final body = json.decode(res.body);
-    final status = res.statusCode;
-    final username = body["username"];
-    print(body);
-    _rememberMe = bool.parse(body["rememberMe"]);
-    print(_rememberMe);
-    if (status == 200) {
-      userAuthProvider.loggedIn();
-      userProvider.saveUserData(body);
-      userProvider.saveUsername(username);
-      final headers = res.headers;
-      final token = headers["authorization"];
-      userAuthProvider.setToken(token);
-      // final locationRes = await client.get(locationEndpoint);
-      // final locationResBody = json.decode(locationRes.body);
-      // final location = {
-      //   "lat": locationResBody["latitude"],
-      //   "lon": locationResBody["longitude"]
-      // };
-      //
-      // debugPrint("Location Response: $location");
-    }
-
-    print("Init Status Code from API: $status");
-    return status;
-  } catch (e) {
-    print("initLoginCheck failed!");
-    print("Error: $e");
-  }
-}
-
-loginCheckRoute(context, mounted) async {
-  // final userAuthProvider = Provider.of<AuthNotifier>(context, listen: false);
-  initLoginCheck(context).then((res) {
-    if (res == 200) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return Stack(
-              children: [
-                // ArtBoardScreen(),
-                Center(
-                  child: Container(
-                      height: 350,
-                      child:
-                          RiveAnimation.asset("rive/futuristic-loading.riv")),
-                  // RiveAnimation.asset("rive/progress_bar_concept.riv")),
-                  // RiveAnimation.asset("rive/loadingsquare.riv")),
-                ),
-              ],
-            );
-          });
-
-      Future.delayed(Duration(seconds: 1), () {
-        router.pop();
-        router.go("/");
-      });
-    }
-  });
-}
-
 class _LaunchPageState extends State<LaunchPage> {
   @override
   void initState() {
     super.initState();
-    loginCheckRoute(context, mounted);
+    // Instantiate Providers and run initLoginCheck in Future.microtask to protect the context. (Runs the Future right after the widget is mounted in the
+    // widget tree)
+    Future.microtask(() async {
+      final userAuthProvider = context.read<UserAuthProvider>();
+      final userProvider = context.read<UserProvider>();
+      final LoginRes res = await userAuthProvider.initLoginCheck();
+
+      // check if widget still mounted (async gap)
+      if (!context.mounted) return;
+
+      print(res.success);
+      if (res.success == true && res.body["rememberMe"] == "true") {
+        userProvider.saveUsername(res.body["username"]);
+        userProvider.saveUserData(res.body);
+
+        showDialog(
+            context: context,
+            builder: (dialogContext) {
+              return Stack(
+                children: [
+                  // ArtBoardScreen(),
+                  Center(
+                    child: Container(
+                        height: 350,
+                        child:
+                            RiveAnimation.asset("rive/futuristic-loading.riv")),
+                    // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                    // RiveAnimation.asset("rive/loadingsquare.riv")),
+                  ),
+                ],
+              );
+            });
+
+        Future.delayed(Duration(seconds: 1));
+        // check mount after future
+        if (!context.mounted) return;
+        router.pop();
+        router.go("/");
+      }
+    });
   }
 
   @override
@@ -241,18 +211,44 @@ class _LaunchPageState extends State<LaunchPage> {
                           controller: _passwordController,
                           // handles pressing 'Enter'
                           onSubmitted: (value) async {
-                            var authnotifier = Provider.of<UserAuthProvider>(
-                                context,
-                                listen: false);
-                            await login(
-                                _usernameController.text,
-                                _passwordController.text,
-                                authnotifier.rememberMe,
-                                context,
-                                mounted);
-                            if (authnotifier.rememberMe == true) {
-                              authnotifier.enableRememberMe();
+                            final userAuthProvider =
+                                context.read<UserAuthProvider>();
+                            final userProvider = context.read<UserProvider>();
+                            final LoginRes res = await userAuthProvider.login(
+                              _usernameController.text,
+                              _passwordController.text,
+                              _rememberMe,
+                            );
+                            if (!context.mounted) return;
+                            if (!res.success) {
+                              showErrorMessage(res.error, context);
+                            } else {
+                              userProvider.saveUsername(res.body["username"]);
+                              userProvider.saveUserData(res.body);
+                              // Navigate to Dashboard
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Stack(
+                                      children: [
+                                        // ArtBoardScreen(),
+                                        Center(
+                                          child: Container(
+                                              height: 350,
+                                              child: const RiveAnimation.asset(
+                                                  "rive/futuristic-loading.riv")),
+                                          // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                                          // RiveAnimation.asset("rive/loadingsquare.riv")),
+                                        ),
+                                      ],
+                                    );
+                                  });
+                              Future.delayed(Duration(seconds: 2), () {
+                                router.pop();
+                                router.go("/");
+                              });
                             }
+
                             _passwordController.clear();
                           },
                           obscureText: true,
@@ -448,12 +444,54 @@ class _LaunchPageState extends State<LaunchPage> {
                             TactileButton(
                               scale: 1.05,
                               onTap: () async {
-                                await login(
-                                    _usernameController.text,
-                                    _passwordController.text,
-                                    _rememberMe,
-                                    context,
-                                    mounted);
+                                // User and UserAuthProviders
+                                final userAuthProvider =
+                                    context.read<UserAuthProvider>();
+                                final userProvider =
+                                    context.read<UserProvider>();
+                                // Return a LoginRes object from the login function for type safety
+                                final LoginRes res =
+                                    await userAuthProvider.login(
+                                  _usernameController.text,
+                                  _passwordController.text,
+                                  _rememberMe,
+                                );
+                                // check mount after await
+                                if (!context.mounted) return;
+                                router.pop();
+                                if (!res.success) {
+                                  showErrorMessage(res.error, context);
+                                } else {
+                                  userProvider
+                                      .saveUsername(res.body["username"]);
+                                  userProvider.saveUserData(res.body);
+                                  // Navigate to Dashboard
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Stack(
+                                          children: [
+                                            // ArtBoardScreen(),
+                                            Center(
+                                              child: Container(
+                                                  height: 350,
+                                                  child: const RiveAnimation
+                                                      .asset(
+                                                      "rive/futuristic-loading.riv")),
+                                              // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                                              // RiveAnimation.asset("rive/loadingsquare.riv")),
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                  Future.delayed(Duration(seconds: 2), () {
+                                    // check mount after future
+                                    if (!context.mounted) return;
+                                    router.go("/");
+                                  });
+                                }
+
+                                // clear password always
                                 _passwordController.clear();
                               },
                               child: GradientContainer(
@@ -484,5 +522,36 @@ class _LaunchPageState extends State<LaunchPage> {
         ),
       ),
     );
+  }
+
+  void showErrorMessage(String message, context) {
+    showDialog(
+        context: (context),
+        builder: (context) {
+          return Center(
+            child: Stack(children: [
+              BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                blendMode: BlendMode.darken,
+                child: SizedBox(),
+              ),
+              AlertDialog(
+                backgroundColor: tran,
+                content: Container(
+                  padding: EdgeInsetsGeometry.all(1.w(context)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(1.5.w(context)),
+                      color: deckColor,
+                      border: Border.all(color: deckBorderColor)),
+                  child: Text(
+                    message,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 3.sp(context), color: white),
+                  ),
+                ),
+              )
+            ]),
+          );
+        });
   }
 }

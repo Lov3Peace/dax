@@ -16,7 +16,7 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  void saveUserData(userData) {
+  void saveUserData(Map userData) {
     _userdata = userData;
     notifyListeners();
   }

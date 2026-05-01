@@ -51,7 +51,7 @@ Future register(username, password, email, rememberMe, context, mounted) async {
       var userProvider = Provider.of<UserProvider>(context, listen: false);
       final token = res.headers["authorization"];
       userAuthProvider.setToken(token);
-      userAuthProvider.loggedIn();
+      userAuthProvider.loggedOut();
       userProvider.saveUserData(body);
       // Navigate to Dashboard
       showDialog(

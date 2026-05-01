@@ -28,3 +28,30 @@ export const getUserDashboardData = async (req, res) => {
   }
   return res.status(404).json("User not found");
 };
+
+export const getLocation = async (req, res) => {
+  try {
+    let ip = req.ip;
+    // for local testing
+    if (ip === "::1" || ip === "127.0.0.1") {
+      ip = "8.8.8.8"; // test only
+    }
+    console.log("IP: ", ip);
+    if (!ip) {
+      return res.status(404).json("Sorry, no location data available");
+    }
+    // Fetch location details from ipApi
+    let locationRes = await fetch(
+      "https://api.ipapi.com/api/check?access_key=5b20163bd553535fc71b6addd2ab130c",
+    );
+
+    locationRes = await locationRes.json();
+
+    return res.status(200).json({
+      latitude: locationRes.latitude,
+      longitude: locationRes.longitude,
+    });
+  } catch (e) {
+    return res.status(500).json("Error: ", e);
+  }
+};

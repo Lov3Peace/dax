@@ -8,7 +8,6 @@ import 'package:simple_animations/simple_animations.dart';
 import '../../../util/button_state.dart';
 import '../../../util/soft_close.dart';
 import '../../../util/test_list.dart';
-import '../util/title_bubble.dart';
 import '../desk_decks.dart';
 import '../large_stagger_load.dart';
 import '../util/web_ui_template.dart';

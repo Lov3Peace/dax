@@ -20,6 +20,9 @@ app.use(
 
 app.use(cookieParser());
 
+// for proxy calling APIs
+app.set("trust proxy", true);
+
 // Routers
 app.use("/api/", authRouter);
 

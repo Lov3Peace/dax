@@ -100,6 +100,7 @@ export const getProjectsCategoryAssets = async (req, res) => {
     return res.status(200).json(categories);
   } catch (e) {
     console.log("Error: ", e);
+    return res.status(500).json({ error: e });
   }
 };
 

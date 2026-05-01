@@ -45,10 +45,10 @@ class LocationServicesProvider with ChangeNotifier {
       }
       // final WeatherFactory wf =
       //     WeatherFactory("5b6c5e649bd2f3b6973cdc9d083da9bc");
-      final WeatherFactory wf =
-          WeatherFactory(const String.fromEnvironment("WEATHER_API_KEY"));
-      Weather w = await wf.currentWeatherByLocation(
-          location["latitude"] ?? 0, location["longitude"] ?? 0);
+      final WeatherFactory wf = WeatherFactory(const String.fromEnvironment(
+          "WEATHER_API_KEY")); // get API key from --dart-define/.env
+      Weather w = await wf.currentWeatherByLocation(location["latitude"] ?? 0,
+          location["longitude"] ?? 0); // fallback to 0 if null
       var weatherF = w.temperature!.fahrenheit!.round().toString() + "°";
 
       // Save location in Provider

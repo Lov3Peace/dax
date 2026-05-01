@@ -90,10 +90,10 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
         router.pop();
         router.go("/launch");
       } else {
-        showErrorMessage('Could not log out - try again later. $body', context);
+        // showErrorMessage('Could not log out - try again later. $body', context);
       }
     } catch (e) {
-      showErrorMessage('Could not log out - try again later. $e', context);
+      // showErrorMessage('Could not log out - try again later. $e', context);
       print('Could not log out - try again later. $e');
     }
   }

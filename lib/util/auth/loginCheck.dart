@@ -28,7 +28,7 @@ Future loginCheck(context) async {
     router.go("/");
     print("LoginCheck failed - user has been automatically logged out.");
   } else {
-    userAuthProvider.loggedIn();
+    // userAuthProvider.loggedIn();
     bool isLoggedIn = userAuthProvider.isLoggedIn;
     print("Updated isLoggedIn: $isLoggedIn");
   }

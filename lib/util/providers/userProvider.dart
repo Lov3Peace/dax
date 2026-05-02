@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class UserProvider with ChangeNotifier {
   String _username = '';
@@ -9,9 +8,9 @@ class UserProvider with ChangeNotifier {
   Map _userdata = {};
   Map get userData => _userdata;
 
-  void loadUsername(User? user) {
+  void loadUsername(String? user) {
     if (user != null) {
-      _username = user.displayName ?? user.email?.split('@')[0] ?? '';
+      // _username = user.displayName ?? user.email?.split('@')[0] ?? '';
       notifyListeners();
     }
   }

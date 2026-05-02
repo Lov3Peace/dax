@@ -21,7 +21,7 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
       height: height,
       width: width,
       constraints: BoxConstraints(minWidth: 1000, minHeight: 450),
-      padding: EdgeInsets.all(max(20, 0.5.w(context))),
+      padding: EdgeInsets.all(max(20, 1.w(context))),
       borderRadius: 1.5.w(context),
       color: deckBackgroundColor,
       child: Column(
@@ -65,7 +65,7 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
           Divider(
             endIndent: math.max(550, 50.w(context)),
             color: const Color.fromRGBO(150, 150, 150, 0.50),
-            height: 20,
+            height: 10,
           ),
           //
           // Project Title, Progress Bar, Spacer

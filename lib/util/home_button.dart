@@ -1,16 +1,20 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/desk_dashboard.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../responsive/mobile/mob_constants.dart';
 import '../responsive/mobile/mobile_dashboard.dart';
 import '../responsive/tablet/tablet_dashboard.dart';
 
 class HomeButton extends StatefulWidget {
-  HomeButton({super.key, required this.gradient1, required this.gradient2, required this.glow});
+  HomeButton(
+      {super.key,
+      required this.gradient1,
+      required this.gradient2,
+      required this.glow});
   Color gradient1;
   Color gradient2;
   Color glow;
@@ -56,8 +60,14 @@ class _HomeButtonState extends State<HomeButton> {
         },
         child: Container(
           decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [widget.gradient1, widget.gradient2]),
-              boxShadow: [BoxShadow(color: widget.glow, blurRadius: 10, blurStyle: BlurStyle.solid)],
+              gradient:
+                  LinearGradient(colors: [widget.gradient1, widget.gradient2]),
+              boxShadow: [
+                BoxShadow(
+                    color: widget.glow,
+                    blurRadius: 10,
+                    blurStyle: BlurStyle.solid)
+              ],
               borderRadius: const BorderRadius.all(Radius.circular(15))),
           child: IconButton(
             icon: const Icon(Icons.dashboard_rounded),
@@ -92,7 +102,7 @@ class _HomeButtonState extends State<HomeButton> {
         Future.delayed(const Duration(milliseconds: 200)).then((_) {
           Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
             // ignore: prefer_const_constructors
-            return AuthCheck();
+            return DesktopDashboard();
           }));
         });
       }

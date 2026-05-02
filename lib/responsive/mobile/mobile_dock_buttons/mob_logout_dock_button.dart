@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
@@ -71,7 +70,7 @@ class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
       ),
     );
 
-    FirebaseAuth.instance.signOut();
+    // FirebaseAuth.instance.signOut();
   }
 
   @override

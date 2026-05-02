@@ -54,10 +54,6 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         headingTextSize: headingTextSize,
         subText:
             'Just link your social media accounts and access them all in one place.',
-        riveAnim: const r.RiveAnimation.asset(
-          "rive/twitter_rv.riv",
-          fit: BoxFit.fitWidth,
-        ),
         // image: Image.asset('images/crest1.png'),
       ),
     );

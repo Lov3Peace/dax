@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter_application_1/responsive/desktop/util/test_page.dart';
-import 'package:flutter_application_1/util/auth/loginCheck.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/appStateProvider.dart';
@@ -18,6 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart';
+import 'package:rive/rive.dart' as rive;
 import 'responsive/desktop/util/error_page.dart';
 import 'util/providers/userAuthProvider.dart';
 import 'util/providers/userProvider.dart';
@@ -25,17 +25,8 @@ import 'responsive/desktop/util/go_routes.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-        options: const FirebaseOptions(
-            apiKey: "AIzaSyC6cmRlApktLp8pr73JJ9ulx9TOxeYI4_o",
-            appId: "1:28990487504:web:1c7d24fea847542a88d7d5",
-            messagingSenderId: "28990487504",
-            projectId: "omni-fb089"));
-  } else {
-    await Firebase.initializeApp();
-  }
-
+  // recommended to initalize Rive before running the app
+  await rive.RiveNative.init();
   runApp(
     MultiProvider(
       providers: [

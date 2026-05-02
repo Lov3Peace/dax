@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:rive/rive.dart' as r;
+import 'package:rive/rive.dart' as rive;
 import '../../../util/tactile_button.dart';
 import '../desk_decks.dart';
 
@@ -33,11 +33,23 @@ class CommunitiesDeck extends StatelessWidget {
               //
               // Communities Rive Animation
               Container(
-                width: max(50, 3.w(context)),
-                child: const r.RiveAnimation.asset(
-                  'rive/twitter_rv.riv',
-                ),
-              ),
+                  width: max(50, 3.w(context)),
+                  child: rive.RiveWidgetBuilder(
+                    fileLoader: rive.FileLoader.fromAsset("rive/twitter_rv.riv",
+                        riveFactory: rive.Factory.rive),
+                    builder: (context, state) => switch (state) {
+                      rive.RiveLoading() =>
+                        const Center(child: CircularProgressIndicator()),
+                      rive.RiveFailed() => ErrorWidget.withDetails(
+                          message: state.error.toString(),
+                          error: FlutterError(state.error.toString()),
+                        ),
+                      rive.RiveLoaded() => rive.RiveWidget(
+                          controller: state.controller,
+                          fit: rive.Fit.contain,
+                        )
+                    },
+                  )),
               //
               // Communities Heading and Description
               Expanded(

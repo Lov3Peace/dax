@@ -3,14 +3,9 @@ import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/blurryContainer.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/ui/gradient_text.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import '../../../main.dart';
 import '../../../util/tactile_button.dart';
-import '../desk_decks.dart';
-import 'package:rive/rive.dart' as r;
-
-import '../decks_content/projects/desktop_projects_page.dart';
+import 'package:rive/rive.dart' as rive;
 
 class ProjectsDeck extends StatelessWidget {
   const ProjectsDeck(
@@ -40,11 +35,25 @@ class ProjectsDeck extends StatelessWidget {
               //
               // Project Rive Animation
               Container(
-                width: max(50, 3.w(context)),
-                child: const r.RiveAnimation.asset(
-                  'rive/building_apartments.riv',
-                ),
-              ),
+                  width: max(50, 3.w(context)),
+                  child: rive.RiveWidgetBuilder(
+                    fileLoader: rive.FileLoader.fromAsset(
+                        "rive/building_apartments.riv",
+                        riveFactory: rive.Factory.rive),
+                    builder: (context, state) => switch (state) {
+                      rive.RiveLoading() =>
+                        const Center(child: CircularProgressIndicator()),
+                      rive.RiveFailed() => ErrorWidget.withDetails(
+                          message: state.error.toString(),
+                          error: FlutterError(state.error.toString()),
+                        ),
+                      rive.RiveLoaded() => rive.RiveWidget(
+                          controller: state.controller,
+                          fit: rive.Fit.contain,
+                        )
+                    },
+                    // fit: rive.Fit.cover,
+                  )),
               //
               // Project Heading and Description
               Expanded(

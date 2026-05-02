@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
@@ -13,6 +11,7 @@ import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:simple_animations/simple_animations.dart';
 import '../providers/userAuthProvider.dart';
 import '../providers/userProvider.dart';
@@ -28,14 +27,14 @@ class LaunchPage extends StatefulWidget {
   State<LaunchPage> createState() => _LaunchPageState();
 }
 
-final initLoginCheckEndpoint = Uri.parse("$hostname/api/");
-final ipApiEndpoint = Uri.parse(
-    "https://api.ipapi.com/api/check?access_key=5b20163bd553535fc71b6addd2ab130c");
-final TextEditingController _usernameController = TextEditingController();
-final TextEditingController _passwordController = TextEditingController();
-bool _rememberMe = false;
-
 class _LaunchPageState extends State<LaunchPage> {
+//
+  final ipApiEndpoint = Uri.parse(
+      "https://api.ipapi.com/api/check?access_key=5b20163bd553535fc71b6addd2ab130c");
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _rememberMe = false;
+
   @override
   void initState() {
     super.initState();
@@ -63,8 +62,24 @@ class _LaunchPageState extends State<LaunchPage> {
                   Center(
                     child: Container(
                         height: 350,
-                        child:
-                            RiveAnimation.asset("rive/futuristic-loading.riv")),
+                        child: rive.RiveWidgetBuilder(
+                          fileLoader: rive.FileLoader.fromAsset(
+                              "rive/completed.riv",
+                              riveFactory: rive.Factory.rive),
+                          builder: (context, state) => switch (state) {
+                            RiveLoading() =>
+                              const Center(child: CircularProgressIndicator()),
+                            RiveFailed() => ErrorWidget.withDetails(
+                                message: state.error.toString(),
+                                error: FlutterError(state.error.toString()),
+                              ),
+                            RiveLoaded() => RiveWidget(
+                                controller: state.controller,
+                                fit: Fit.cover,
+                              )
+                          },
+                          // fit: rive.Fit.cover,
+                        )),
                     // RiveAnimation.asset("rive/progress_bar_concept.riv")),
                     // RiveAnimation.asset("rive/loadingsquare.riv")),
                   ),
@@ -79,6 +94,11 @@ class _LaunchPageState extends State<LaunchPage> {
         router.go("/");
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -235,8 +255,33 @@ class _LaunchPageState extends State<LaunchPage> {
                                         Center(
                                           child: Container(
                                               height: 350,
-                                              child: const RiveAnimation.asset(
-                                                  "rive/futuristic-loading.riv")),
+                                              child: rive.RiveWidgetBuilder(
+                                                fileLoader:
+                                                    rive.FileLoader.fromAsset(
+                                                        "rive/completed.riv",
+                                                        riveFactory:
+                                                            rive.Factory.rive),
+                                                builder: (context, state) =>
+                                                    switch (state) {
+                                                  RiveLoading() => const Center(
+                                                      child:
+                                                          CircularProgressIndicator()),
+                                                  RiveFailed() =>
+                                                    ErrorWidget.withDetails(
+                                                      message: state.error
+                                                          .toString(),
+                                                      error: FlutterError(state
+                                                          .error
+                                                          .toString()),
+                                                    ),
+                                                  RiveLoaded() => RiveWidget(
+                                                      controller:
+                                                          state.controller,
+                                                      fit: Fit.contain,
+                                                    )
+                                                },
+                                                // fit: rive.Fit.cover,
+                                              )),
                                           // RiveAnimation.asset("rive/progress_bar_concept.riv")),
                                           // RiveAnimation.asset("rive/loadingsquare.riv")),
                                         ),
@@ -458,7 +503,7 @@ class _LaunchPageState extends State<LaunchPage> {
                                 );
                                 // check mount after await
                                 if (!context.mounted) return;
-                                router.pop();
+
                                 if (!res.success) {
                                   showErrorMessage(res.error, context);
                                 } else {
@@ -475,18 +520,46 @@ class _LaunchPageState extends State<LaunchPage> {
                                             Center(
                                               child: Container(
                                                   height: 350,
-                                                  child: const RiveAnimation
-                                                      .asset(
-                                                      "rive/futuristic-loading.riv")),
+                                                  child: rive.RiveWidgetBuilder(
+                                                    fileLoader: rive.FileLoader
+                                                        .fromAsset(
+                                                            "rive/completed.riv",
+                                                            riveFactory: rive
+                                                                .Factory.rive),
+                                                    builder: (context, state) =>
+                                                        switch (state) {
+                                                      RiveLoading() =>
+                                                        const Center(
+                                                            child:
+                                                                CircularProgressIndicator()),
+                                                      RiveFailed() =>
+                                                        ErrorWidget.withDetails(
+                                                          message: state.error
+                                                              .toString(),
+                                                          error: FlutterError(
+                                                              state.error
+                                                                  .toString()),
+                                                        ),
+                                                      RiveLoaded() =>
+                                                        RiveWidget(
+                                                          controller:
+                                                              state.controller,
+                                                          fit: Fit.cover,
+                                                        )
+                                                    },
+                                                    // fit: rive.Fit.cover,
+                                                  )),
                                               // RiveAnimation.asset("rive/progress_bar_concept.riv")),
                                               // RiveAnimation.asset("rive/loadingsquare.riv")),
                                             ),
                                           ],
                                         );
                                       });
-                                  Future.delayed(Duration(seconds: 2), () {
-                                    // check mount after future
+                                  Future.delayed(const Duration(seconds: 2),
+                                      () {
                                     if (!context.mounted) return;
+                                    router.pop();
+                                    // check mount after future
                                     router.go("/");
                                   });
                                 }

@@ -6,7 +6,6 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/desk_dashboard.dart';
-import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';

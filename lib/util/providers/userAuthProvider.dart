@@ -10,6 +10,7 @@ class UserAuthProvider extends ChangeNotifier {
   String get token => _token;
 
   final client = httpClient.BrowserClient()..withCredentials = true;
+  final initLoginCheckEndpoint = Uri.parse("$hostname/api/");
   final loginEndpoint = Uri.parse("$hostname/api/login");
   final registerEndpoint = Uri.parse("$hostname/api/register");
 

@@ -3,7 +3,6 @@ export 'package:flutter/material.dart';
 export 'package:flutter_application_1/util/auth/launch_page.dart';
 export '../responsive/desktop/devPage.dart';
 export '../responsive/desktop/stagger_load.dart';
-export '../util/auth/auth_check.dart';
 export '../responsive/responsive_layout.dart';
 export '../responsive/desktop/decks_content/projects/desktop_projects_page.dart';
 export '../responsive/desktop/decks_content/projects/projectPostsPage.dart';
@@ -11,7 +10,6 @@ export '../responsive/desktop/decks_content/communities/desk_hero_communities_pa
 export '../responsive/desktop/decks_content/desk_socials_page.dart';
 export '../responsive/desktop/decks_content/desk_news_page.dart';
 export '../responsive/desktop/util/responsive_shorthand.dart';
-export './auth/loginCheck.dart';
 export './blurryContainer.dart';
 export './gradient_label.dart';
 export './ui/gradient_text.dart';

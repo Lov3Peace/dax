@@ -1,21 +1,19 @@
 import 'dart:ui';
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
-import 'package:flutter_application_1/util/auth/register.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/auth/auth_check.dart';
 import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/providers/userAuthProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import 'package:simple_animations/simple_animations.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
@@ -33,9 +31,6 @@ class InitSignUpButton extends StatefulWidget {
 }
 
 class _InitSignUpButtonState extends State<InitSignUpButton> {
-  // bool isSignUpDialogShown = false;
-  //controls button
-
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -143,6 +138,21 @@ class _SignUpFormState extends State<SignUpForm> {
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  late rive.RiveWidgetController riveController;
+
+  @override
+  void initState() {
+    super.initState();
+    initRive();
+  }
+
+// Initiallize Rive
+  void initRive() async {
+    final riveFuturisticLoading = await rive.File.asset(
+        "rive/futuristic-loading.riv",
+        riveFactory: rive.Factory.rive);
+    riveController = rive.RiveWidgetController(riveFuturisticLoading!);
+  }
 
   @override
   void dispose() {
@@ -258,8 +268,26 @@ class _SignUpFormState extends State<SignUpForm> {
                               Center(
                                 child: Container(
                                     height: 350,
-                                    child: const RiveAnimation.asset(
-                                        "rive/futuristic-loading.riv")),
+                                    child: rive.RiveWidgetBuilder(
+                                      fileLoader: rive.FileLoader.fromAsset(
+                                          "rive/completed.riv",
+                                          riveFactory: rive.Factory.rive),
+                                      builder: (context, state) =>
+                                          switch (state) {
+                                        RiveLoading() => const Center(
+                                            child: CircularProgressIndicator()),
+                                        RiveFailed() => ErrorWidget.withDetails(
+                                            message: state.error.toString(),
+                                            error: FlutterError(
+                                                state.error.toString()),
+                                          ),
+                                        RiveLoaded() => RiveWidget(
+                                            controller: state.controller,
+                                            fit: Fit.cover,
+                                          )
+                                      },
+                                      // fit: rive.Fit.cover,
+                                    )),
                                 // RiveAnimation.asset("rive/progress_bar_concept.riv")),
                                 // RiveAnimation.asset("rive/loadingsquare.riv")),
                               ),
@@ -347,8 +375,28 @@ class _SignUpFormState extends State<SignUpForm> {
                                 Center(
                                   child: Container(
                                       height: 350,
-                                      child: const RiveAnimation.asset(
-                                          "rive/futuristic-loading.riv")),
+                                      child: rive.RiveWidgetBuilder(
+                                        fileLoader: rive.FileLoader.fromAsset(
+                                            "rive/completed.riv",
+                                            riveFactory: rive.Factory.rive),
+                                        builder: (context, state) =>
+                                            switch (state) {
+                                          RiveLoading() => const Center(
+                                              child:
+                                                  CircularProgressIndicator()),
+                                          RiveFailed() =>
+                                            ErrorWidget.withDetails(
+                                              message: state.error.toString(),
+                                              error: FlutterError(
+                                                  state.error.toString()),
+                                            ),
+                                          RiveLoaded() => RiveWidget(
+                                              controller: state.controller,
+                                              fit: Fit.cover,
+                                            )
+                                        },
+                                        // fit: rive.Fit.cover,
+                                      )),
                                   // RiveAnimation.asset("rive/progress_bar_concept.riv")),
                                   // RiveAnimation.asset("rive/loadingsquare.riv")),
                                 ),

@@ -17,9 +17,9 @@ class _TabArtBoardScreenState extends State<TabArtBoardScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          const RiveAnimation.asset(
-            "rive/mobile_artboard.riv",
-          ),
+          // const RiveAnimation.asset(
+          //   "rive/mobile_artboard.riv",
+          // ),
           Positioned.fill(
             child: BackdropFilter(
               //Now it looks perfecto

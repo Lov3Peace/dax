@@ -16,31 +16,35 @@ class _ArtBoardScreenState extends State<ArtBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // const RiveAnimation.asset(
-          //   "rive/mobile_artboard.riv",
-          // ),
-          // Image.asset("images/bright-blue-yellow-orbs.jpg"),
-          // Image.asset("images/aperture-vintage-GlsKHybjdS0-unsplash.jpg"),
-          // Image.asset("images/bright-blue-yellow-orbs.jpg"),
-          Image.asset("images/aperture-vintage-3FS0H6gB3uY-unsplash.jpg"),
-          Opacity(
-            child: Image.asset("images/bright-blue-yellow-orbs.jpg"),
-            opacity: 0.7,
-          ),
-          Positioned.fill(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                sigmaX: 100,
-                sigmaY: 100,
-              ),
-              child: Container(
-                  // color: Color.fromARGB(48, 0, 0, 0),
-                  ),
+      body: Container(
+        height: double.infinity,
+        width: 100.w(context),
+        child: Stack(
+          children: [
+            // const RiveAnimation.asset(
+            //   "rive/mobile_artboard.riv",
+            // ),
+            // Image.asset("images/bright-blue-yellow-orbs.jpg"),
+            // Image.asset("images/aperture-vintage-GlsKHybjdS0-unsplash.jpg"),
+            // Image.asset("images/bright-blue-yellow-orbs.jpg"),
+            Image.asset("images/aperture-vintage-3FS0H6gB3uY-unsplash.jpg"),
+            Opacity(
+              child: Image.asset("images/bright-blue-yellow-orbs.jpg"),
+              opacity: 0.7,
             ),
-          ),
-        ],
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 100,
+                  sigmaY: 100,
+                ),
+                child: Container(
+                    // color: Color.fromARGB(48, 0, 0, 0),
+                    ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

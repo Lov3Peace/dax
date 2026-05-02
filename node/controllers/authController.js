@@ -14,12 +14,12 @@ const userCheck = async (req, res) => {
   const user = await User.findOne({ username });
   if (!username || !password) {
     infoLog.info(`Username/password cannot be null`);
-    res.status(400).json(`Must input username and password!`);
+    res.status(400).json({ error: "Must input username and password!" });
     return user;
   }
   if (!user) {
-    infoLog.info(`User '${username}' not found`);
-    res.status(404).json(`User '${username}' not found`);
+    infoLog.info(`User ${username} not found`);
+    res.status(404).json({ error: `User ${username} not found` });
     return user;
   }
   return user;
@@ -34,9 +34,9 @@ export const register = async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     if (user) {
-      return res
-        .status(400)
-        .json(`User already exists. Please enter a unique username.`);
+      return res.status(400).json({
+        error: "User already exists. Please enter a unique username.",
+      });
     }
     const hashedPw = await bcrypt.hash(req.body.password, 10);
     const refreshToken = uuidv4();
@@ -86,9 +86,12 @@ export const register = async (req, res) => {
     // If it fails then return status code of 500 and
     // the error in JSON format
     infoLog.info(`User ${newUser.username} Account Created Successfully`);
-    return res
-      .status(201)
-      .json({ username: newUser.username, accessToken: accessToken });
+    return res.status(201).json({
+      message: `User ${user} created successfully!`,
+      username: newUser.username,
+      accessToken: accessToken,
+      error: "",
+    });
   } catch (error) {
     errorLog.error("error", error);
     return res.status(500).json(error);
@@ -154,17 +157,24 @@ export const login = async (req, res) => {
         console.log(`${user.username} logged in Successfully`);
 
         res.setHeader("Authorization", accessToken);
+        res.setHeader("rememberMe", rememberMe);
 
-        return res.status(200).json({ username: user.username });
+        return res.status(200).json({
+          message: "Login Successful",
+          username: user.username,
+          error: "",
+        });
       } else {
         infoLog.info(`Invalid username / password - try again.`);
         console.log(`Invalid username / password - try again.`);
-        return res.status(401).json(`Invalid username / password - try again.`);
+        return res
+          .status(401)
+          .json({ error: `Invalid username / password - try again.` });
       }
     }
   } catch (error) {
-    errorLog.error("error", error);
-    return res.status(500).json(`Error: ${error} `);
+    errorLog.error("error: ", error);
+    return res.status(500).json({ error: `${error} ` });
   }
 };
 
@@ -187,7 +197,7 @@ export const logout = async (req, res) => {
       secure: true, // match secure
       sameSite: "Strict", // match sameSite
     });
-    return res.status(200).json(`User has been logged out.`);
+    return res.status(200).json({ message: `User has been logged out.` });
   } catch (error) {
     errorLog.error(`Unable to log out: ${error} `);
     console.log(`Unable to log out: ${error} `);
@@ -211,11 +221,11 @@ export const deleteUser = async (req, res) => {
       infoLog.info(`User '${user.username}' deleted successfully`);
       return res
         .status(200)
-        .json(`User '${user.username}' deleted successfully`);
+        .json({ message: `User '${user.username}' deleted successfully` });
     } else {
       return res
         .status(401)
-        .json(`Authentication for '${user.username}' failed`);
+        .json({ error: `Authentication for '${user.username}' failed` });
     }
   } catch (error) {
     errorLog.error(error);
@@ -235,14 +245,19 @@ export const changeUsername = async (req, res) => {
         { username: username },
         { $set: { username: newUsername } },
       );
-      res.status(200).json({ OldUsername: username, NewUsername: newUsername });
+      res.status(200).json({
+        message: `Username changed from ${username} => ${newUsername}`,
+        OldUsername: username,
+        NewUsername: newUsername,
+        error: "",
+      });
     } else {
       return res
         .status(401)
-        .json(`Authentication for '${user.username}' failed`);
+        .json({ error: `Authentication for '${user.username}' failed` });
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ error: error });
   }
 };
 

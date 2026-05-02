@@ -9,12 +9,13 @@ class StaggerLoad extends StatelessWidget {
     required this.widgets,
     required this.scrollDirection,
     required this.delay,
-    required this.scale,
+    this.scale = 1.015,
     this.layer = 1,
     this.controller,
     this.listPadding,
     this.childPadding,
     this.physics,
+    this.childWidth,
   });
   final List widgets;
   final double scale;
@@ -22,6 +23,7 @@ class StaggerLoad extends StatelessWidget {
   final int duration;
   final int delay;
   final Axis scrollDirection;
+  final double? childWidth;
   final EdgeInsets? listPadding;
   final EdgeInsets? childPadding;
   final ScrollPhysics? physics;
@@ -39,10 +41,12 @@ class StaggerLoad extends StatelessWidget {
         padding: listPadding,
         itemBuilder: (context, index) {
           return Container(
+            width: childWidth,
+            height: childWidth,
             padding: childPadding,
             child: widgets[index], //
-            // animation chaining
           )
+              // animation chaining
               .animate()
               .fadeIn(
                 duration: Duration(milliseconds: duration),
@@ -54,7 +58,7 @@ class StaggerLoad extends StatelessWidget {
                 duration: Duration(milliseconds: duration),
                 delay: Duration(
                     milliseconds: ((2 * layer) + (index + layer)) * delay),
-                begin: Offset(1.0, 1.0),
+                begin: const Offset(1.0, 1.0),
                 end: Offset(scale, scale), // initial scale (eg. 1.0 => 1.05)
               )
               .then()

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/newStagger.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
@@ -7,7 +8,6 @@ import 'package:simple_animations/simple_animations.dart';
 import '../../../util/button_state.dart';
 import '../../../util/soft_close.dart';
 import '../../../util/test_list.dart';
-import '../util/title_bubble.dart';
 import '../desk_decks.dart';
 import '../large_stagger_load.dart';
 import '../util/web_ui_template.dart';
@@ -49,17 +49,13 @@ class _DeskCommunitiesPageState extends State<DeskCommunitiesPage>
           button2: SocialsButton(),
           button3: NewsButton(),
           //Column for Title, Dock Buttons, and Content
-          child: Expanded(
-            child: LargeStaggerLoad(
+          child: NewStagger(
+              duration: 300,
               widgets: test_big_list,
-              scale: 1.02,
-              constraints: BoxConstraints(minHeight: 350),
-              childHeight: 50.h(context),
-              childWidth: 35.w(context),
-              childPadding: EdgeInsets.all(0.5.w(context)),
-              physics: const NeverScrollableScrollPhysics(),
-            ),
-          ),
+              delay: 100,
+              rowWidth: 75.w(context),
+              childHeight: 30.w(context),
+              itemsPerRow: 2),
         ),
       ),
     );

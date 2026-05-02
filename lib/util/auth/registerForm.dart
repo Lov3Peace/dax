@@ -1,23 +1,16 @@
 import 'dart:ui';
-import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
-import 'package:flutter_application_1/util/auth/register.dart';
+import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/auth/auth_check.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_application_1/util/providers/userAuthProvider.dart';
+import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_animations/simple_animations.dart';
+import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' as rive;
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
-import 'forget_password_form.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/browser_client.dart' as httpClient;
 
 //Actual BUTTON DAVON or PHIL Whatever the hell you want to be called these days.
 //if you ask me, you just formerly go by: Primate
@@ -29,9 +22,6 @@ class InitSignUpButton extends StatefulWidget {
 }
 
 class _InitSignUpButtonState extends State<InitSignUpButton> {
-  // bool isSignUpDialogShown = false;
-  //controls button
-
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -140,14 +130,6 @@ class _SignUpFormState extends State<SignUpForm> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
   //Global Key
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -228,10 +210,66 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               child: TextField(
                 controller: _passwordController,
-                onSubmitted: (value) {
-                  router.pop();
-                  register(_usernameController.text, _passwordController.text,
-                      _emailController.text, _rememberMe, context, mounted);
+                onSubmitted: (value) async {
+                  final userAuthProvider = context.read<UserAuthProvider>();
+                  final userProvider = context.read<UserProvider>();
+                  final LoginRes res = await userAuthProvider.register(
+                      _usernameController.text,
+                      _passwordController.text,
+                      _emailController.text,
+                      _rememberMe);
+                  // check mount after await
+                  if (!context.mounted) return;
+                  if (!res.success) {
+                    showErrorMessage(res.error, context);
+                  } else {
+                    userProvider.saveUsername(res.body["username"]);
+                    userProvider.saveUserData(res.body);
+                    // Navigate to Dashboard
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Stack(
+                            children: [
+                              // ArtBoardScreen(),
+                              Center(
+                                child: Container(
+                                    height: 350,
+                                    child: rive.RiveWidgetBuilder(
+                                      fileLoader: rive.FileLoader.fromAsset(
+                                          "rive/completed.riv",
+                                          riveFactory: rive.Factory.rive),
+                                      builder: (context, state) =>
+                                          switch (state) {
+                                        RiveLoading() => const Center(
+                                            child: CircularProgressIndicator()),
+                                        RiveFailed() => ErrorWidget.withDetails(
+                                            message: state.error.toString(),
+                                            error: FlutterError(
+                                                state.error.toString()),
+                                          ),
+                                        RiveLoaded() => RiveWidget(
+                                            controller: state.controller,
+                                            fit: Fit.contain,
+                                          )
+                                      },
+                                      // fit: rive.Fit.cover,
+                                    )),
+                                // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                                // RiveAnimation.asset("rive/loadingsquare.riv")),
+                              ),
+                            ],
+                          );
+                        });
+
+                    Future.delayed(const Duration(seconds: 3), () {
+                      // check mount after future
+                      if (!context.mounted) return;
+                      router.pop();
+                      router.pop();
+                      router.go("/");
+                    });
+                  }
                 },
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
@@ -279,10 +317,68 @@ class _SignUpFormState extends State<SignUpForm> {
                 padding: const EdgeInsets.only(left: 15),
                 child: TactileButton(
                   scale: 1.05,
-                  onTap: () {
-                    router.pop();
-                    register(_usernameController.text, _passwordController.text,
-                        _emailController.text, _rememberMe, context, mounted);
+                  onTap: () async {
+                    final userAuthProvider = context.read<UserAuthProvider>();
+                    final userProvider = context.read<UserProvider>();
+                    final LoginRes res = await userAuthProvider.register(
+                        _usernameController.text,
+                        _passwordController.text,
+                        _emailController.text,
+                        _rememberMe);
+                    if (!context.mounted) return;
+                    if (!res.success) {
+                      showErrorMessage(res.error, context);
+                    } else {
+                      userProvider.saveUsername(res.body["username"]);
+                      userProvider.saveUserData(res.body);
+                      if (!context.mounted) return;
+                      //
+                      // Navigate to Dashboard
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Stack(
+                              children: [
+                                // ArtBoardScreen(),
+                                Center(
+                                  child: Container(
+                                      height: 350,
+                                      child: rive.RiveWidgetBuilder(
+                                        fileLoader: rive.FileLoader.fromAsset(
+                                            "rive/completed.riv",
+                                            riveFactory: rive.Factory.rive),
+                                        builder: (context, state) =>
+                                            switch (state) {
+                                          RiveLoading() => const Center(
+                                              child:
+                                                  CircularProgressIndicator()),
+                                          RiveFailed() =>
+                                            ErrorWidget.withDetails(
+                                              message: state.error.toString(),
+                                              error: FlutterError(
+                                                  state.error.toString()),
+                                            ),
+                                          RiveLoaded() => RiveWidget(
+                                              controller: state.controller,
+                                              fit: Fit.contain,
+                                            )
+                                        },
+                                        // fit: rive.Fit.cover,
+                                      )),
+                                  // RiveAnimation.asset("rive/progress_bar_concept.riv")),
+                                  // RiveAnimation.asset("rive/loadingsquare.riv")),
+                                ),
+                              ],
+                            );
+                          });
+                      Future.delayed(const Duration(seconds: 3), () {
+                        // check mount after future
+                        if (!context.mounted) return;
+                        router.pop();
+                        router.pop();
+                        router.go("/");
+                      });
+                    }
                   },
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 150, maxHeight: 50),
@@ -306,4 +402,35 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
+}
+
+void showErrorMessage(String message, context) {
+  showDialog(
+      context: (context),
+      builder: (context) {
+        return Center(
+          child: Stack(children: [
+            BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+              blendMode: BlendMode.darken,
+              child: SizedBox(),
+            ),
+            AlertDialog(
+              backgroundColor: tran,
+              content: Container(
+                padding: EdgeInsetsGeometry.all(1.w(context)),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(1.5.w(context)),
+                    color: deckColor,
+                    border: Border.all(color: deckBorderColor)),
+                child: Text(
+                  message,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 3.sp(context), color: white),
+                ),
+              ),
+            )
+          ]),
+        );
+      });
 }

@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../mobile/mob_artboard_page.dart';
-import 'title_bubble.dart';
+import 'weather_date.dart';
 import '../side_panel/side_panel.dart';
 
 import '../messages.dart';
@@ -32,10 +32,9 @@ class WebUiTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
         child: Container(
           height: 100.h(context),
           width: 100.w(context),
@@ -48,19 +47,14 @@ class WebUiTemplate extends StatelessWidget {
               ArtBoardScreen(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //
                   // Side Panel
                   DesktopSidePanel(),
                   //
                   // Content
-                  Container(
-                    height: 100.h(context),
-                    width: 72.5.w(context),
-                    constraints: 100.w(context) > 2560
-                        ? BoxConstraints(minHeight: 1440)
-                        : BoxConstraints(minHeight: 900),
+                  Expanded(
                     child: Stack(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         // crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,8 +93,18 @@ class WebUiTemplate extends StatelessWidget {
                                     children: [
                                       //
                                       // Title of Screen
-                                      TitleBubble(
-                                        deckName: title,
+                                      BlurryContainer(
+                                        height: 5.w(context),
+                                        width: 17.25.w(context),
+                                        borderRadius: 50.w(context),
+                                        color: deckBackgroundColor,
+                                        child: Center(
+                                          child: WeatherDate(
+                                            constraints: BoxConstraints(
+                                                minWidth: 250, minHeight: 50),
+                                            // height: 50,
+                                          ),
+                                        ),
                                       ),
 
                                       //
@@ -119,19 +123,7 @@ class WebUiTemplate extends StatelessWidget {
                   ),
                   //
                   // Messages
-                  Align(
-                    // alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 1.w(context)),
-                      child: Container(
-                        // height: 90.h(context),
-                        constraints: 100.w(context) > 1920
-                            ? BoxConstraints(minHeight: 1440)
-                            : BoxConstraints(minHeight: 900),
-                        child: Messages(),
-                      ),
-                    ),
-                  ),
+                  Messages(),
                 ],
               ),
 

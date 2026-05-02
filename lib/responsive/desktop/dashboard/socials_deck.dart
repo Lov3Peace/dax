@@ -7,7 +7,6 @@ import '../../../main.dart';
 import '../../../util/tactile_button.dart';
 import '../../mobile/mobile_socials_page.dart';
 import '../../tablet/tablet_socials_page.dart';
-import '../desk_constants.dart';
 import '../desk_decks.dart';
 import '../decks_content/desk_socials_page.dart';
 import 'package:rive/rive.dart' as r;
@@ -55,10 +54,6 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
         headingTextSize: headingTextSize,
         subText:
             'Just link your social media accounts and access them all in one place.',
-        riveAnim: const r.RiveAnimation.asset(
-          "rive/twitter_rv.riv",
-          fit: BoxFit.fitWidth,
-        ),
         // image: Image.asset('images/crest1.png'),
       ),
     );

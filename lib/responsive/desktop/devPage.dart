@@ -16,8 +16,11 @@ class Devpage extends StatelessWidget {
       button3: NewsButton(),
       child: LargeStaggerLoad(
         widgets: [],
-        scale: 1.02,
-        constraints: const BoxConstraints(minHeight: 450),
+        rowWidth: 75.w(context),
+        itemsPerRow: 2,
+        scale: 1.010,
+        duration: 300,
+        delay: 75,
         listPadding: EdgeInsets.only(top: 10.h(context)),
         childPadding: EdgeInsets.all(0.25.w(context)),
         childHeight: 52.h(context),

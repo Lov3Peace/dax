@@ -3,11 +3,12 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/util/button_state.dart';
+import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../util/soft_close.dart';
 import '../../../util/test_list.dart';
-import '../util/title_bubble.dart';
+import '../util/weather_date.dart';
 import '../desk_decks.dart';
 import '../util/web_ui_template.dart';
 
@@ -17,6 +18,8 @@ class DeskSocialsPage extends StatefulWidget {
   @override
   State<DeskSocialsPage> createState() => _DeskSocialsPageState();
 }
+
+LocationServicesProvider locationServicesProvider = locationServicesProvider;
 
 class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
   //globals
@@ -32,6 +35,7 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
   void initState() {
     scale = Tween<double>(begin: 1.0, end: 0.9).animate(controller);
     opacity = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
+    locationServicesProvider = context.read<LocationServicesProvider>();
     controller.stop();
 
     super.initState();
@@ -62,8 +66,11 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                   children: [
                     //
                     // Title of Screen
-                    TitleBubble(
-                      deckName: 'Socials',
+                    WeatherDate(
+                      height: 5.w(context),
+                      width: 17.25.w(context),
+                      constraints: BoxConstraints(minWidth: 250, minHeight: 50),
+                      // height: 50,
                     ),
 
                     //

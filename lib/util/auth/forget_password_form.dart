@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../main.dart';
@@ -26,9 +25,9 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
 
   Future passwordReset() async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(
-        email: _emailController.text,
-      );
+      // await FirebaseAuth.instance.sendPasswordResetEmail(
+      //   email: _emailController.text,
+      // );
       showDialog(
         context: context,
         builder: (context) {
@@ -37,14 +36,15 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
           );
         },
       );
-    } on FirebaseAuthException catch (e) {
+    } on Exception catch (e) {
       print(e);
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             content: Text(
-              e.message.toString(),
+              // e.message.toString(),
+              e.toString(),
             ),
           );
         },

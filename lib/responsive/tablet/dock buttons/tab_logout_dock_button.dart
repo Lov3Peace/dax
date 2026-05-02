@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
@@ -50,16 +49,19 @@ class TabLogoutWindowPopupCard extends StatefulWidget {
     required dynamic Function()? onPressed,
   }) : super(key: key);
   @override
-  State<TabLogoutWindowPopupCard> createState() => _TabLogoutwindowPopupCardState();
+  State<TabLogoutWindowPopupCard> createState() =>
+      _TabLogoutwindowPopupCardState();
   // TODO: implement createState
 }
 
 /// {@macro add_todo_popup_card}
-class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard> with AnimationMixin {
+class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard>
+    with AnimationMixin {
   Future signOut() async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const MobileLaunchPage()));
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const MobileLaunchPage()));
 
-    FirebaseAuth.instance.signOut();
+    // FirebaseAuth.instance.signOut();
   }
 
   @override
@@ -74,8 +76,10 @@ class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard> wit
               child: Container(
                 height: 35.h(context),
                 width: 85.w(context),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(32)),
-                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(32)),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
                 child: Hero(
                   tag: _heroLogoutWindow,
                   flightShuttleBuilder: flightShuttleBuilder,
@@ -93,7 +97,9 @@ class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard> wit
                             child: Container(
                                 height: 85.h(context),
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: const Color.fromARGB(182, 31, 31, 31)),
+                                  border: Border.all(
+                                      color: const Color.fromARGB(
+                                          182, 31, 31, 31)),
                                   borderRadius: BorderRadius.circular(24),
                                 )),
                           ),
@@ -108,7 +114,10 @@ class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard> wit
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: 'Logout',
-                                    hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                                    hintStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
                                     border: InputBorder.none,
                                   ),
                                   cursorColor: Colors.white,
@@ -117,7 +126,10 @@ class _TabLogoutwindowPopupCardState extends State<TabLogoutWindowPopupCard> wit
                                   textAlign: TextAlign.center,
                                   decoration: InputDecoration(
                                     hintText: 'Would you like to log out?',
-                                    hintStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                                    hintStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
                                     border: InputBorder.none,
                                   ),
                                   cursorColor: Colors.white,

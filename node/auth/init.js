@@ -16,6 +16,11 @@ export const initLoginCheck = async (req, res, next) => {
       console.log("Token didn't load or got erased");
       accessToken = "noToken";
     }
+    if (!rememberMe) {
+      return res
+        .status(404)
+        .json({ error: "No token and remember me not set" });
+    }
     const newRefreshToken = uuidv4();
     const user = await User.findOneAndUpdate(
       { refreshToken: refreshToken },
@@ -25,7 +30,7 @@ export const initLoginCheck = async (req, res, next) => {
     //decoded.user_id and get the data from db call and put in res
     // const userID = decoded._id;
     if (!user) {
-      return res.status(404).json("User not found");
+      return res.status(404).json({ error: "User not found" });
     }
     if (user && rememberMe == "true") {
       const accessToken = jwt.sign(
@@ -58,25 +63,29 @@ export const initLoginCheck = async (req, res, next) => {
         message: "Valid access token found - login successful",
         username: user.username,
         rememberMe: rememberMe,
+        error: "",
       });
     } else {
       infoLog.info("User not found or Remember Me not active");
-      return res.status(401).json("User not found or Remember Me not active");
+      return res
+        .status(401)
+        .json({ error: "User not found or Remember Me not active" });
     }
   } catch (error) {
     // if (error.message.includes("expired")) {
     const refreshTokenCookie = req.cookies.refreshToken;
-    const userDbRefreshToken = User.findOne({
+    const userByRefreshToken = User.findOne({
       refreshToken: refreshTokenCookie,
     });
 
-    if (userDbRefreshToken && req.cookies.rememberMe == "true") {
+    if (userByRefreshToken && req.cookies.rememberMe == "true") {
+      const username = userByRefreshToken.username;
       const accessToken = jwt.sign(
         {
-          id: userDbRefreshToken._id,
-          username: userDbRefreshToken.username,
-          roles: userDbRefreshToken.roles,
-          isAdmin: userDbRefreshToken.isAdmin,
+          id: userByRefreshToken._id,
+          username: userByRefreshToken.username,
+          roles: userByRefreshToken.roles,
+          isAdmin: userByRefreshToken.isAdmin,
         },
         privKey,
         { algorithm: "RS256", expiresIn: "1m" },
@@ -89,7 +98,7 @@ export const initLoginCheck = async (req, res, next) => {
       });
 
       const refreshToken = User.updateOne(
-        { username: userDbRefreshToken.username },
+        { username: userByRefreshToken.username },
         { refreshToken: uuidv4() },
       );
       res.cookie("refreshToken", refreshToken, {
@@ -99,11 +108,15 @@ export const initLoginCheck = async (req, res, next) => {
         maxAge: thirtyDays,
       });
       console.log("Successfully generated refresh token");
-      return res.status(200).json("Refresh token generated - login successful");
+      return res.status(200).json({
+        message: "Refresh token generated - login successful",
+        username: username,
+        error: "",
+      });
     }
     // }
     console.log(`Error: ${error}`);
     errorLog.error(error);
-    res.status(401).json(`Token expired or invalid`);
+    res.status(401).json({ error: "Token expired or invalid" });
   }
 };

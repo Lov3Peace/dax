@@ -1,203 +1,284 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:convert';
+import 'dart:math' as math;
+import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/events_deck.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/my_projects_mini_dash.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/tasks_deck.dart';
+import 'package:flutter_application_1/util/animations/scaleFadeIn.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/news_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projects_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/socials_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/stagger_load.dart';
+import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import '../../../util/providers/userProvider.dart';
+import 'package:supercharged/supercharged.dart';
+import 'package:weather/weather.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../side_panel/side_panel.dart';
 import '../messages.dart';
-import '../util/go_routes.dart';
-import '../util/title_bubble.dart';
+import '../util/weather_date.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class DesktopDashboard extends StatefulWidget {
-  const DesktopDashboard({Key? key}) : super(key: key);
+  DesktopDashboard({Key? key}) : super(key: key);
 
   @override
   State<DesktopDashboard> createState() => _DesktopDashboardState();
 }
 
+late LocationServicesProvider locationServicesProvider;
+final locationEndpoint = Uri.parse("$hostname/api/getLocation/");
+
 class _DesktopDashboardState extends State<DesktopDashboard> {
-  //globals
-  final getUserDataEndpoint =
-      Uri.parse('https://$hostname/api/getUserDashboardData');
-  var _getData;
-  var userData;
-
-  // Future getUserDataFetch() async {
-  //   final client = httpClient.BrowserClient()..withCredentials = true;
-  //   try {
-  //     var res = await client.get(getUserDataEndpoint, headers: {
-  //       "Content-Type": "application/json",
-  //     }).timeout(const Duration(seconds: 5));
-  //     final body = json.decode(res.body);
-  //     final resStatus = res.statusCode;
-  //     print("Get Status: $resStatus");
-  //     userData = body;
-  //     return userData;
-  //   } catch (e) {
-  //     print("Error: $e");
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
-    // set it to a private variable to call it in the FutureBuilder
-    // so it only returns the value once in the FutureBuilder instead
-    // of calling the function DIRECTLY infinite times inside of the Build
-    // _getData = getUserDataFetch();
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    userData = userProvider.userData;
+    locationServicesProvider = context.read<LocationServicesProvider>();
+    locationServicesProvider.getWeather();
   }
+
+//globals
+  final ScrollController horizontalScrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    subTextSize = 2.5.sp(context);
-    profBubTextSize = 20;
-    textConstraint = 500;
-    subTextConstraint = 500;
     return Scaffold(
-      body: ListView(
+      body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
-        children: [
-          Container(
-            height: 100.h(context),
-            width: 100.w(context),
-            constraints: 100.w(context) > 2560
-                ? BoxConstraints(minHeight: 1440)
-                : BoxConstraints(minHeight: 900),
-            child: Stack(
-              children: [
-                // Background(),
-                ArtBoardScreen(),
+        scrollDirection: Axis.vertical,
+        child: Container(
+          height: 100.h(context),
+          //     .clamp(100.h(context) > 2560 ? 1440 : 700, 100.h(context)),
+          width: 100.w(context),
+          constraints: BoxConstraints(minHeight: 900),
+          // constraints: 100.w(context) > 2560
+          //     ? BoxConstraints(minHeight: 1440, minWidth: 1200)
+          //     : BoxConstraints(minHeight: 900, minWidth: 1200),
+          child: Stack(
+            children: [
+              // Background(),
+              ArtBoardScreen(),
 
-                Row(
-                  children: [
-                    DesktopSidePanel(),
-                    Container(
-                      height: 90.h(context),
-                      // width: 87.5.w(context),
-                      constraints: 100.w(context) > 2560
-                          ? BoxConstraints(minHeight: 1440)
-                          : BoxConstraints(minHeight: 900),
-                      //
-                      // Row for Decks + Messages
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 0.25.w(context)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  DesktopSidePanel(),
+
+                  Expanded(
+                    child: Scrollbar(
+                      thumbVisibility: true,
+                      interactive: true,
+                      controller: horizontalScrollController,
+                      child: SingleChildScrollView(
+                        controller: horizontalScrollController,
+                        scrollDirection: Axis.horizontal,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Container(
+                            width: 75.w(context),
+                            height: 52.w(context),
+                            padding: EdgeInsetsGeometry.symmetric(
+                                horizontal: 0.5.w(context)),
+                            constraints:
+                                BoxConstraints(minWidth: 900, minHeight: 950),
                             child: Column(
                               children: [
-                                //
-                                // Row for Title, Profile, Projects, and Communities Decks
                                 Expanded(
                                   child: Row(
                                     children: [
-                                      //
-                                      // Stagger Load Animation
-                                      StaggerLoad(
-                                          layer: 1,
-                                          scale: 1.03,
-                                          scrollDirection: Axis.horizontal,
-                                          duration: 200,
-                                          delay: 75,
-                                          childPadding:
-                                              EdgeInsets.all(0.25.w(context)),
-                                          widgets: [
+                                      Expanded(
+                                        // handles width
+                                        flex: 2,
+                                        child: Column(
+                                          children: [
                                             //
-                                            //Column of Title Bubble and Profile Card
-                                            Column(
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom: 0.25.w(context)),
-                                                  child: TitleBubble(
-                                                    deckName: "Dashboard",
+                                            // Weather
+                                            Expanded(
+                                              // handles height
+                                              flex: 1,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 50,
+                                                  child: WeatherDate(
+                                                    // height: 5.w(context),
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                      minWidth: 300,
+                                                      minHeight: 50,
+                                                    ),
                                                   ),
                                                 ),
-                                                Expanded(
-                                                  child: ProfileCard(),
-                                                ),
-                                              ],
+                                              ),
                                             ),
-                                            ProjectsDeck(),
-                                            CommunitiesDeck(),
-                                          ]),
+                                            //
+                                            // ProfileCard
+                                            Expanded(
+                                              // handles height
+                                              flex: 8,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 150,
+                                                  child: ProfileCard(
+                                                    // height: 20.w(context),
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                      minWidth: 300,
+                                                      minHeight: 375,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      //
+                                      // ProjectsDeck
+                                      Expanded(
+                                        // handles width
+                                        flex: 4,
+                                        child: Column(
+                                          children: [
+                                            //
+                                            // ProjectsDeck
+                                            Expanded(
+                                              // handles height
+                                              flex: 1,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 250,
+                                                  child: ProjectsDeck(
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                      minWidth: 450,
+                                                      minHeight: 150,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            //
+                                            // CommunitiesDeck
+                                            Expanded(
+                                              // handles height
+                                              flex: 1,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 350,
+                                                  child: CommunitiesDeck(
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                      minWidth: 450,
+                                                      minHeight: 100,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            //
+                                            // TasksDeck
+                                            Expanded(
+                                              // handles height
+                                              flex: 2,
+                                              child: Padding(
+                                                padding: EdgeInsets.all(math
+                                                    .max(5, 0.25.w(context))),
+                                                child: ScaleFadeIn(
+                                                  duration: 200,
+                                                  delay: 450,
+                                                  child: TasksDeck(
+                                                    width: double.infinity,
+                                                    constraints: BoxConstraints(
+                                                      minWidth: 450,
+                                                      minHeight: 250,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      //
+                                      // EventsDeck
+                                      Expanded(
+                                        // handles width
+                                        flex: 3,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(
+                                              math.max(5, 0.25.w(context))),
+                                          child: ScaleFadeIn(
+                                            duration: 200,
+                                            delay: 550,
+                                            child: EventsDeck(
+                                              // handles height
+                                              height: double.infinity,
+                                              constraints: BoxConstraints(
+                                                  minWidth: 500,
+                                                  minHeight: 250),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
                                 //
-                                // Row for Socials and News Decks
+                                // MyProjectsMiniDashDeck
                                 Expanded(
-                                  child: Row(
-                                    children: [
-                                      StaggerLoad(
-                                          layer: 2,
-                                          scale: 1.03,
-                                          scrollDirection: Axis.horizontal,
-                                          duration: 200,
-                                          delay: 75,
-                                          childPadding:
-                                              EdgeInsets.all(0.25.w(context)),
-                                          widgets: [
-                                            SocialsDeck(),
-                                            NewsDeck(),
-                                          ]),
-                                    ],
+                                  child: Padding(
+                                    padding: EdgeInsets.all(
+                                        math.max(5, 0.25.w(context))),
+                                    child: ScaleFadeIn(
+                                      duration: 200,
+                                      delay: 650,
+                                      child: MyProjectsMiniDashDeck(
+                                        width: double.infinity,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           ),
-                          // // ignore: prefer_const_constructors
-                        ],
+                        ),
                       ),
                     ),
+                  ),
+                  Messages()
+                  // ignore: prefer_const_constructors
+                ],
+              ),
 
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 1.w(context)),
-                      child: StaggerLoad(
-                        widgets: [Messages()],
-                        duration: 200,
-                        delay: 75,
-                        layer: 3,
-                        scale: 1.03,
-                        scrollDirection: Axis.horizontal,
-                      ),
-                    ),
-                    // ignore: prefer_const_constructors
-                  ],
-                ),
-
-                // Positioned.fill(
-                //   child: BackdropFilter(
-                //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
-                //       child:  SizedBox()),
-                // ),
-              ],
-            ),
+              // Positioned.fill(
+              //   child: BackdropFilter(
+              //       filter: ImageFilter.blur(sigmaX: 70, sigmaY: 70),
+              //       child:  SizedBox()),
+              // ),
+            ],
           ),
-        ],
+        ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

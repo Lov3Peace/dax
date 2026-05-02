@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter_application_1/responsive/desktop/util/test_page.dart';
-import 'package:flutter_application_1/util/auth/loginCheck.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/appStateProvider.dart';
+import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +17,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:http/http.dart';
+import 'package:rive/rive.dart' as rive;
 import 'responsive/desktop/util/error_page.dart';
 import 'util/providers/userAuthProvider.dart';
 import 'util/providers/userProvider.dart';
@@ -24,17 +25,8 @@ import 'responsive/desktop/util/go_routes.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kIsWeb) {
-    await Firebase.initializeApp(
-        options: const FirebaseOptions(
-            apiKey: "AIzaSyC6cmRlApktLp8pr73JJ9ulx9TOxeYI4_o",
-            appId: "1:28990487504:web:1c7d24fea847542a88d7d5",
-            messagingSenderId: "28990487504",
-            projectId: "omni-fb089"));
-  } else {
-    await Firebase.initializeApp();
-  }
-
+  // recommended to initalize Rive before running the app
+  await rive.RiveNative.init();
   runApp(
     MultiProvider(
       providers: [
@@ -43,6 +35,7 @@ Future main() async {
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => UserAuthProvider()),
         ChangeNotifierProvider(create: (_) => ProjectProvider()),
+        ChangeNotifierProvider(create: (_) => LocationServicesProvider()),
         // Add more providers as needed
       ],
       child: const MyApp(),
@@ -82,6 +75,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
+//COLORS
 const Color red = Color.fromARGB(255, 255, 85, 85);
 const Color purp = Color.fromARGB(255, 182, 47, 255);
 const Color pink = Color.fromARGB(255, 255, 148, 253);
@@ -93,6 +87,22 @@ const Color greenGlow = Color.fromARGB(169, 34, 255, 0);
 const Color hoverGreen = Color.fromARGB(255, 170, 255, 147);
 const Color tran = Color.fromARGB(0, 0, 0, 0);
 const Color white = Colors.white;
+const Color deckBackgroundColor = Color.fromARGB(160, 22, 19, 22);
+// Color deckBorderColor = const Color.fromARGB(182, 75, 75, 75);
+
+//FONTSIZES
+double headerlowerlimit = 26;
+double subheaderlowerlimit = 18;
+double paragraphlowerlimit = 16;
+double smallestLowerLimit = 12;
+
+//PADDING
+double desktopContainerPadLowerLimit = 20;
+double mobilContainerPadLowerLimit = 10;
+
+// BORDER RADIUS
+double cardBorderRadiusLowerLimit = 20;
+
 // Used to fix Hero animation bug
 Widget flightShuttleBuilder(
   BuildContext flightContext,

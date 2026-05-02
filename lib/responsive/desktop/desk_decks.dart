@@ -35,7 +35,7 @@ class Deck extends StatefulWidget {
   final double labelTextSize;
   final double? headingTextSize;
   final double? subTextConstraint;
-  final r.RiveAnimation? riveAnim;
+  final Widget? riveAnim;
   final Image? image;
   final VoidCallback? onTap;
 

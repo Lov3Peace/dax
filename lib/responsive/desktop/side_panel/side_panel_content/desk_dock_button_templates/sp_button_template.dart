@@ -71,14 +71,16 @@ class SpButtonTemplateState extends State<SpButtonTemplate> {
                   color: isHover ? Colors.white : Colors.white54,
                   size: 5.sp(context),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(left: 0.5.w(context)),
-                  child: Text(
-                    widget.deskButtonText,
-                    style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(fontSize: 2.sp(context)),
-                      fontWeight: FontWeight.w400,
-                      color: isHover ? Colors.white : Colors.white54,
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 0.5.w(context)),
+                    child: Text(
+                      widget.deskButtonText,
+                      style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(fontSize: 2.sp(context)),
+                        fontWeight: FontWeight.w400,
+                        color: isHover ? Colors.white : Colors.white54,
+                      ),
                     ),
                   ),
                 ),

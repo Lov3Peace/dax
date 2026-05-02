@@ -17,8 +17,8 @@ class _MessagesState extends State<Messages> {
   Widget build(BuildContext context) {
     return Container(
       constraints: 100.w(context) > 2560
-          ? BoxConstraints(minHeight: 900, minWidth: 100)
-          : BoxConstraints(minHeight: 450, minWidth: 100),
+          ? BoxConstraints(minHeight: 900, minWidth: 225)
+          : BoxConstraints(minHeight: 450, minWidth: 200),
       // margin: EdgeInsets.all(1.w(context)),
       decoration: BoxDecoration(
         color: deckColor,
@@ -39,7 +39,7 @@ class _MessagesState extends State<Messages> {
       ),
 
       // height: 90.h(context),
-      width: 15.w(context),
+      width: 12.5.w(context),
       // margin: EdgeInsets.only(right: 0.5.w(context)),
 
       child: Column(
@@ -51,7 +51,7 @@ class _MessagesState extends State<Messages> {
             child: Text(
               'Messages',
               style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(fontSize: 5.sp(context), height: 1.0),
+                  textStyle: TextStyle(fontSize: 4.sp(context)),
                   fontWeight: FontWeight.w600),
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:flutter_application_1/responsive/desktop/node_test.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profilePage.dart';
 import '../../../util/imports.dart';
+import '../dashboard/desk_dashboard.dart';
 
 var routes = {
   '/profile': ProfilePage(),

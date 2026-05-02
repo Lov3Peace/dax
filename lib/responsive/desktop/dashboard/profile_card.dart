@@ -1,5 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
@@ -10,33 +8,26 @@ import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 
 class ProfileCard extends StatelessWidget {
-  ProfileCard({super.key});
+  ProfileCard(
+      {super.key, this.height = 0, this.width = 0, required this.constraints});
 
+  final double height;
+  final double width;
+  final BoxConstraints constraints;
   String adminOrUser = '';
 
   var userData = {};
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final userAuthProvider =
-        Provider.of<UserAuthProvider>(context, listen: false);
+    final userProvider = context.watch<UserProvider>();
     userData = userProvider.userData;
-    var token = userAuthProvider.token;
-    print("AuthNotifier Token: $token");
-    var decodedToken = JwtDecoder.decode(token);
-    print("AuthNotifier decodedToken: $decodedToken");
-    final bool isAdmin = decodedToken["isAdmin"];
-    adminOrUser = isAdmin == true ? "Admin" : "User";
+    // final userAuthProvider = context.watch<UserAuthProvider>();
+    // var token = userAuthProvider.token;
+    // var decodedToken = JwtDecoder.decode(token);
+    // final bool isAdmin = decodedToken["isAdmin"];
+    // adminOrUser = isAdmin == true ? "Admin" : "User";
 
-    double deckHeight = 22.h(context);
-    double halfDeckWidth = 17.325.w(context);
-    double headingTextSize = 6.25.sp(context);
-    subTextSize = 2.5.sp(context);
-    double labelTextSize = 2.5.sp(context);
-    if (100.w(context) < 1440) {
-      headingTextSize = headingTextSize * 0.9;
-    }
     return TactileButton(
         onTap: () {
           Navigator.of(context).push(
@@ -44,7 +35,7 @@ class ProfileCard extends StatelessWidget {
               opaque: false,
               barrierDismissible: true,
               fullscreenDialog: false,
-              transitionDuration: Duration(milliseconds: 700),
+              transitionDuration: const Duration(milliseconds: 700),
               pageBuilder: (_, __, ___) {
                 return Hero(
                   tag: 'profileHeroTag',
@@ -59,17 +50,40 @@ class ProfileCard extends StatelessWidget {
             ),
           );
         },
-        child: Deck(
-          deckHeight: deckHeight,
-          deckWidth: halfDeckWidth,
-          deckName: '',
-          gradient1: tran,
-          gradient2: tran,
-          neonGlow: tran,
-          labelTextSize: labelTextSize,
-          headingText: userData["username"],
-          headingTextSize: headingTextSize,
-          subText: adminOrUser,
+        child: BlurryContainer(
+          width: width,
+          height: height,
+          constraints: constraints,
+          color: deckBackgroundColor,
+          padding:
+              EdgeInsets.all(max(desktopContainerPadLowerLimit, 1.w(context))),
+          borderRadius: max(cardBorderRadiusLowerLimit, 1.5.w(context)),
+          child: Column(
+            children: [
+              Padding(
+                // space between username and card slot
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    userData["username"],
+                    style: TextStyle(
+                        fontSize: max(headerlowerlimit, 5.sp(context)),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              //Expanded so this container expands to the available space in the profile card
+              Expanded(
+                  child: BlurryContainer(
+                color: tran,
+                padding: EdgeInsets.all(
+                    max(desktopContainerPadLowerLimit, 1.w(context))),
+                borderRadius: 1.5.w(context),
+                child: SizedBox(),
+              ))
+            ],
+          ),
         ));
   }
 }

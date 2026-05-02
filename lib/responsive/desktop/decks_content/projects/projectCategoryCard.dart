@@ -42,9 +42,8 @@ class ProjectCategory extends StatelessWidget {
           borderRadius: BorderRadius.circular(1.25.w(context)),
           border: Border.all(color: deckBorderColor),
         ),
-        constraints: const BoxConstraints(minHeight: 460, minWidth: 450),
+        // constraints: const BoxConstraints(minHeight: 460, minWidth: 450),
         height: 35.25.w(context),
-        width: 35.25.w(context),
         // width: double.infinity,
         child: Padding(
           padding: EdgeInsets.all(1.w(context)),
@@ -54,8 +53,8 @@ class ProjectCategory extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      constraints:
-                          const BoxConstraints(minHeight: 350, minWidth: 350),
+                      // constraints:
+                      // const BoxConstraints(minHeight: 350, minWidth: 350),
                       height: 35.5.w(context),
                       width: 35.5.w(context),
                       child: ClipRRect(

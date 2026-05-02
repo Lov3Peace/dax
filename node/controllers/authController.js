@@ -18,8 +18,8 @@ const userCheck = async (req, res) => {
     return user;
   }
   if (!user) {
-    infoLog.info(`User '${username}' not found`);
-    res.status(404).json({ error: "User '${username}' not found" });
+    infoLog.info(`User ${username} not found`);
+    res.status(404).json({ error: `User ${username} not found` });
     return user;
   }
   return user;

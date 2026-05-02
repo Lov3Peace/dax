@@ -544,7 +544,7 @@ class _LaunchPageState extends State<LaunchPage> {
                                                         RiveWidget(
                                                           controller:
                                                               state.controller,
-                                                          fit: Fit.cover,
+                                                          fit: Fit.contain,
                                                         )
                                                     },
                                                     // fit: rive.Fit.cover,

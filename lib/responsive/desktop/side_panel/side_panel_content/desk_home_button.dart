@@ -1,15 +1,5 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/desk_dashboard.dart';
-import 'package:flutter_application_1/util/auth/auth_check.dart';
-import 'package:flutter_application_1/util/imports.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/browser_client.dart' as httpClient;
 
@@ -30,22 +20,20 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
       onEnter: (event) {
         setState(() {
           isHover = true;
-          // print(isHover);
         });
       },
       onExit: (event) {
         setState(() {
           isHover = false;
-          // print(isHover);
         });
       },
       child: GestureDetector(
         onTap: () {
-          // loginCheck();
           router.go("/");
         },
         child: Stack(
           children: [
+            // Animated background rail that expands on hover.
             Row(
               children: [
                 AnimatedContainer(
@@ -60,14 +48,13 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
                 Expanded(
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    // color: blue,
                     height: 7.sp(context),
                   ),
                 ),
               ],
             ),
-            // Since they're not in a row, have to use Positioned. This allows
-            // the animated container to pass under the icon
+
+            // Foreground content stays fixed while the background animates beneath it.
             Positioned(
               top: 1.sp(context),
               left: 0.5.w(context),
@@ -99,13 +86,4 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
       ),
     );
   }
-
-  // Future loginCheck() async {
-  //   final client = httpClient.BrowserClient()..withCredentials = true;
-  //   final loginCheckEndpoint =
-  //       Uri.parse('http://127.0.0.1/api/loginCheck');
-  //   var res = await client
-  //       .get(loginCheckEndpoint, headers: {"Content-Type": "application/json"});
-  //   return res;
-  // }
 }

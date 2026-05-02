@@ -8,6 +8,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../main.dart';
 import '../../../desk_decks.dart';
 
+/// Profile Card 2 Section1 - Profile bio and skills editor
+///
+/// Displays the first profile section for user-generated personal details,
+/// including a bio input and skills selection area. This widget manages
+/// local state and persists user-entered data with SharedPreferences
+/// for simple on-device storage between sessions.
+
 class Pc2Section1 extends StatefulWidget {
   Pc2Section1({super.key});
 
@@ -18,125 +25,11 @@ class Pc2Section1 extends StatefulWidget {
 class Pc2Section1State extends State<Pc2Section1> {
   TextEditingController bioController = TextEditingController();
   Set<String> selectedSkills = {};
-  // final Random random = Random();
-  // final List<Map<String, dynamic>> availableButtons = List.generate(
-  //     100,
-  //     (index) => {
-  //           "id": "btn$index",
-  //           "label": [
-  //             "Entrepreneurship",
-  //             "Business Strategy",
-  //             "Financial Literacy",
-  //             "Marketing & Branding",
-  //             "Sales Tactics",
-  //             "Public Speaking",
-  //             "Negotiation Skills",
-  //             "Networking",
-  //             "Customer Relationship Management",
-  //             "Leadership & Team Management",
-  //             "Problem Solving",
-  //             "Time Management",
-  //             "Critical Thinking",
-  //             "Decision Making",
-  //             "Creativity & Innovation",
-  //             "Product Development",
-  //             "Growth Hacking",
-  //             "Social Media Marketing",
-  //             "Content Creation",
-  //             "SEO & Digital Marketing",
-  //             "Copywriting",
-  //             "E-commerce Management",
-  //             "Crowdfunding & Fundraising",
-  //             "Financial Planning & Budgeting",
-  //             "Investment Strategies",
-  //             "Legal Basics for Entrepreneurs",
-  //             "Contract Negotiation",
-  //             "Intellectual Property Management",
-  //             "Risk Assessment",
-  //             "Crisis Management",
-  //             "Self-Discipline & Motivation",
-  //             "Work-Life Balance",
-  //             "Personal Branding",
-  //             "Emotional Intelligence",
-  //             "Project Management",
-  //             "Bootstrapping & Lean Startup Methods",
-  //             "Customer Service Excellence",
-  //             "Data-Driven Decision Making",
-  //             "Growth Mindset",
-  //             "Tech-Savviness",
-  //             "Remote Work Management",
-  //             "Automation & AI Integration",
-  //             "Freelancing & Gig Economy Skills",
-  //             "Hobby Monetization",
-  //             "DIY Skills",
-  //             "Photography & Videography",
-  //             "Graphic Design",
-  //             "Web Design & Development",
-  //             "Podcasting",
-  //             "Event Planning",
-  //             "Writing & Blogging",
-  //             "Music Production",
-  //             "Cooking & Culinary Arts",
-  //             "Fitness & Personal Training",
-  //             "Handcrafting & Artistry",
-  //             "Woodworking & Metalworking",
-  //             "Game Development",
-  //             "3D Printing & Prototyping",
-  //             "Fashion & Textile Design",
-  //             "Tattoo Artistry",
-  //             "Restoration & Upcycling",
-  //             "Automotive Mechanics",
-  //             "Home Improvement & Renovation",
-  //             "Gardening & Sustainable Living",
-  //             "Real Estate Investing",
-  //             "Trading & Cryptocurrency",
-  //             "Psychology & Persuasion",
-  //             "Spiritual Growth & Mindfulness",
-  //             "Survival Skills & Bushcraft",
-  //             "Martial Arts & Self-Defense",
-  //             "Drone Flying & Aerial Photography",
-  //             "Storytelling & Screenwriting",
-  //             "Language Learning & Translation",
-  //             "Coaching & Mentoring",
-  //             "Cybersecurity Awareness",
-  //             "Influencer Marketing",
-  //             "Livestreaming & Community Building",
-  //             "Passive Income Strategies",
-  //             "Public Relations",
-  //             "Crowdsourcing & Open Innovation",
-  //             "Consulting & Advisory Skills",
-  //             "AI & Automation for Entrepreneurs",
-  //             "Blockchain & Smart Contracts",
-  //             "Sustainable Business Practices",
-  //             "Ethical Business Leadership",
-  //             "Import & Export Management",
-  //             "Franchising & Licensing",
-  //             "Subscription Business Models",
-  //             "Psychological Pricing Strategies"
-  //           ][index % 100]
-  //         });
-
-  // Color getRandomColor() {
-  //   return Color.fromARGB(
-  //     255,
-  //     random.nextInt(256),
-  //     random.nextInt(256),
-  //     random.nextInt(256),
-  //   );
-  // }
-
-  // final Map<String, List<Color>> buttonGradients = {};
-
-  // List<Color> generateRandomGradient() {
-  //   return [getRandomColor(), getRandomColor()];
-  // }
 
   @override
   void initState() {
     super.initState();
-    // for (var button in availableButtons) {
-    //   buttonGradients[button["id"]] = generateRandomGradient();
-    // }
+
     loadBio();
   }
 
@@ -162,37 +55,6 @@ class Pc2Section1State extends State<Pc2Section1> {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList('selected_skills', selectedSkills.toList());
   }
-
-  // void showSkillsDialog() {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return AlertDialog(
-  //         title: Text("Select Skills"),
-  //         content: SingleChildScrollView(
-  //           child: Column(
-  //             children: availableButtons.map((skill) {
-  //               return CheckboxListTile(
-  //                 title: Text(skill["label"]),
-  //                 value: selectedSkills.contains(skill["label"]),
-  //                 onChanged: (bool? value) {
-  //                   setState(() {
-  //                     if (value == true) {
-  //                       selectedSkills.add(skill["label"]);
-  //                     } else {
-  //                       selectedSkills.remove(skill["label"]);
-  //                     }
-  //                   });
-  //                   Navigator.pop(context);
-  //                 },
-  //               );
-  //             }).toList(),
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -292,46 +154,6 @@ class Pc2Section1State extends State<Pc2Section1> {
                 borderRadius: 500,
               ),
             )
-            // Column(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: [
-            //     selectedSkills.isEmpty
-            //         ? TactileButton(
-            //             onTap: showSkillsDialog,
-            //             child: GradientContainer(
-            //               gradient1: red,
-            //               gradient2: purp,
-            //               height: 5,
-            //               width: 20,
-            //               neonGlow: purp,
-            //               text: 'Select Skills',
-            //               textSize: 2.5.sp,
-            //               borderColor: const Color.fromARGB(0, 255, 255, 255),
-            //               borderRadius: 500,
-            //             ),
-            //           )
-            //         : Wrap(
-            //             spacing: 8,
-            //             runSpacing: 8,
-            //             children: selectedSkills.map((skill) {
-            //               return TactileButton(
-            //                 onTap: showSkillsDialog, // Opens selection modal
-            //                 child: GradientContainer(
-            //                   gradient1: buttonGradients[skill]?[0] ?? getRandomColor(),
-            //                   gradient2: buttonGradients[skill]?[1] ?? getRandomColor(),
-            //                   height: 5,
-            //                   width: 20,
-            //                   neonGlow: buttonGradients[skill]?[1] ?? getRandomColor(),
-            //                   text: skill,
-            //                   textSize: 2.5.sp,
-            //                   borderColor: Colors.transparent,
-            //                   borderRadius: 500,
-            //                 ),
-            //               );
-            //             }).toList(),
-            //           ),
-            //   ],
-            // ),
           ],
         ),
       ),

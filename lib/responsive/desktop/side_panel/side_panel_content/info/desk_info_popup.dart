@@ -1,12 +1,11 @@
-import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../../desk_decks.dart';
 import 'info_side_panel.dart';
 import '../desk_dock_button_templates/sp_content_template.dart';
 
+/// Info popup with side navigation + carousel-based content switching
 class InfoPopUp extends StatefulWidget {
   const InfoPopUp({super.key});
 
@@ -15,97 +14,63 @@ class InfoPopUp extends StatefulWidget {
 }
 
 class _InfoPopUpState extends State<InfoPopUp> {
+  /// Controls carousel navigation programmatically
   final CarouselSliderController controller = CarouselSliderController();
 
+  /// Tracks current active slide/index
   int currentSlide = 0;
 
+  /// All content pages displayed in the carousel
   final List<Widget> slides = [
-    /*
-      About Us
-    */
+    // About Us
     SpContentPanel(
       headerTitle: 'About Us',
       sections: [
         InfoSection(
-          title: 'Mission',
-          content: 'Your custom mission content here...',
-        ),
-        InfoSection(
-          title: 'Origin',
-          content: 'Details about the origin...',
-        ),
-        InfoSection(
-          title: 'Founders',
-          content: 'Who started it and why...',
-        ),
+            title: 'Mission', content: 'Your custom mission content here...'),
+        InfoSection(title: 'Origin', content: 'Details about the origin...'),
+        InfoSection(title: 'Founders', content: 'Who started it and why...'),
       ],
     ),
-    /*
-      Contact Us
-     */
+
+    // Contact Us
     SpContentPanel(
       headerTitle: 'Contact Us',
       sections: [
         InfoSection(
-          title: 'Mission',
-          content: 'Your custom mission content here...',
-        ),
-        InfoSection(
-          title: 'Origin',
-          content: 'Details about the origin...',
-        ),
-        InfoSection(
-          title: 'Founders',
-          content: 'Who started it and why...',
-        ),
+            title: 'Mission', content: 'Your custom mission content here...'),
+        InfoSection(title: 'Origin', content: 'Details about the origin...'),
+        InfoSection(title: 'Founders', content: 'Who started it and why...'),
       ],
     ),
-    /*
-      Goals
-     */
+
+    // Goals
     SpContentPanel(
       headerTitle: 'Goals',
       sections: [
         InfoSection(
-          title: 'Mission',
-          content: 'Your custom mission content here...',
-        ),
-        InfoSection(
-          title: 'Origin',
-          content: 'Details about the origin...',
-        ),
-        InfoSection(
-          title: 'Founders',
-          content: 'Who started it and why...',
-        ),
+            title: 'Mission', content: 'Your custom mission content here...'),
+        InfoSection(title: 'Origin', content: 'Details about the origin...'),
+        InfoSection(title: 'Founders', content: 'Who started it and why...'),
       ],
     ),
-    /*
-      Terms & Conditions
-     */
+
+    // Terms & Conditions
     SpContentPanel(
       headerTitle: 'Terms & Conditions',
       sections: [
         InfoSection(
-          title: 'Mission',
-          content: 'Your custom mission content here...',
-        ),
-        InfoSection(
-          title: 'Origin',
-          content: 'Details about the origin...',
-        ),
-        InfoSection(
-          title: 'Founders',
-          content: 'Who started it and why...',
-        ),
+            title: 'Mission', content: 'Your custom mission content here...'),
+        InfoSection(title: 'Origin', content: 'Details about the origin...'),
+        InfoSection(title: 'Founders', content: 'Who started it and why...'),
       ],
     ),
   ];
 
+  /// Handles side panel button taps
+  /// Updates state + jumps carousel to selected page
   void handleButtonTap(int index) {
-    setState(() {
-      currentSlide = index;
-    });
+    setState(() => currentSlide = index);
     controller.jumpToPage(index);
   }
 
@@ -123,8 +88,7 @@ class _InfoPopUpState extends State<InfoPopUp> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // This column houses the title of the popup along with the container
-                  // that houses the class infosidepanel
+                  /// LEFT SIDE: Title + navigation panel
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -139,6 +103,8 @@ class _InfoPopUpState extends State<InfoPopUp> {
                           ),
                         ),
                       ),
+
+                      // Side navigation container
                       Container(
                         height: 70.h(context),
                         width: 14.w(context),
@@ -146,13 +112,11 @@ class _InfoPopUpState extends State<InfoPopUp> {
                             const BoxConstraints(maxWidth: 500, minHeight: 250),
                         decoration: BoxDecoration(
                           color: const Color.fromARGB(70, 32, 32, 40),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(20),
-                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(20)),
                           border: Border.all(
-                            color: const Color.fromARGB(18, 255, 255,
-                                255), // ← change this to any color you want
-                            width: 1.5, // ← adjust thickness
+                            color: const Color.fromARGB(18, 255, 255, 255),
+                            width: 1.5,
                           ),
                         ),
                         child: Padding(
@@ -169,32 +133,26 @@ class _InfoPopUpState extends State<InfoPopUp> {
                       ),
                     ],
                   ),
-                  // This container houses the container that holds the information for the specified button selected
-                  // in the info side panel.
+
+                  /// RIGHT SIDE: Content display (carousel)
                   Container(
                     height: 75.h(context),
                     width: 47.w(context),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(70, 32, 32, 40),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
-                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
                       border: Border.all(
-                        color: const Color.fromARGB(18, 255, 255,
-                            255), // ← change this to any color you want
-                        width: 1.5, // ← adjust thickness
+                        color: const Color.fromARGB(18, 255, 255, 255),
+                        width: 1.5,
                       ),
                     ),
                     child: Center(
-                      // The container that holds the information
                       child: Container(
                         height: 71.h(context),
                         width: 45.w(context),
                         decoration: const BoxDecoration(
                           color: Color.fromRGBO(15, 15, 17, 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
                         child: CarouselSlider(
                           carouselController: controller,
@@ -202,11 +160,17 @@ class _InfoPopUpState extends State<InfoPopUp> {
                             height: 69.h(context),
                             viewportFraction: .97,
                             enlargeCenterPage: true,
+
+                            /// Prevents swipe — navigation controlled via side panel
                             scrollPhysics: const NeverScrollableScrollPhysics(),
+
+                            /// Syncs UI when slide changes
                             onPageChanged: (index, _) {
                               setState(() => currentSlide = index);
                             },
                           ),
+
+                          /// Render each content panel
                           items: slides,
                         ),
                       ),

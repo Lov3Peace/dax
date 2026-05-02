@@ -1,6 +1,4 @@
-import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/help/help_side_panel.dart';
@@ -9,7 +7,7 @@ import 'package:provider/provider.dart';
 import '../../../desk_decks.dart';
 import '../desk_dock_button_templates/sp_content_template.dart';
 
-// Popup to the FAQs button of the dashboard side panel
+// Popup widget for the FAQs section accessed from the dashboard side panel
 class HelpPopUp extends StatefulWidget {
   const HelpPopUp({super.key});
 
@@ -18,13 +16,16 @@ class HelpPopUp extends StatefulWidget {
 }
 
 class HelpPopUpState extends State<HelpPopUp> {
+  // Controller used to programmatically control the carousel slider
   final CarouselSliderController controller = CarouselSliderController();
 
+  // Tracks the currently selected slide index
   int currentSlide = 0;
 
+  // List of all FAQ category panels (each slide represents a category)
   final List<Widget> slides = [
     /*
-      Questions
+      FAQ Category: Questions
     */
     SpContentPanel(
       headerTitle: 'Questions',
@@ -43,9 +44,10 @@ class HelpPopUpState extends State<HelpPopUp> {
         ),
       ],
     ),
+
     /*
-      Projects
-     */
+      FAQ Category: Projects
+    */
     SpContentPanel(
       headerTitle: 'Projects',
       sections: [
@@ -63,9 +65,10 @@ class HelpPopUpState extends State<HelpPopUp> {
         ),
       ],
     ),
+
     /*
-      Communities
-     */
+      FAQ Category: Communities
+    */
     SpContentPanel(
       headerTitle: 'Communities',
       sections: [
@@ -83,9 +86,10 @@ class HelpPopUpState extends State<HelpPopUp> {
         ),
       ],
     ),
+
     /*
-      Socials
-     */
+      FAQ Category: Socials
+    */
     SpContentPanel(
       headerTitle: 'Socials',
       sections: [
@@ -103,8 +107,9 @@ class HelpPopUpState extends State<HelpPopUp> {
         ),
       ],
     ),
+
     /*
-      News
+      FAQ Category: News
     */
     SpContentPanel(
       headerTitle: 'News',
@@ -123,9 +128,10 @@ class HelpPopUpState extends State<HelpPopUp> {
         ),
       ],
     ),
+
     /*
-      Wallet
-     */
+      FAQ Category: Wallet
+    */
     SpContentPanel(
       headerTitle: 'Wallet',
       sections: [
@@ -143,9 +149,10 @@ class HelpPopUpState extends State<HelpPopUp> {
         ),
       ],
     ),
+
     /*
-      Tips & Tricks
-     */
+      FAQ Category: Tips & Tricks
+    */
     SpContentPanel(
       headerTitle: 'Tips & Tricks',
       sections: [
@@ -165,6 +172,9 @@ class HelpPopUpState extends State<HelpPopUp> {
     ),
   ];
 
+  // Handles side panel button taps:
+  // - Updates the current index
+  // - Syncs the carousel to the selected page
   void handleButtonTap(int index) {
     setState(() {
       currentSlide = index;
@@ -180,16 +190,23 @@ class HelpPopUpState extends State<HelpPopUp> {
           height: 100.h(context),
           width: 71.w(context),
           borderColor: deckBorderColor,
+
+          // Outer padding for the popup content
           child: Padding(
             padding: EdgeInsets.all(1.h(context)),
+
+            // Allows vertical scrolling if content overflows
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // This column houses the title of the popup along with the container
-                      // that houses the class infosidepanel
+                      /*
+                        LEFT SIDE:
+                        - Title ("FAQs")
+                        - Navigation panel (categories)
+                      */
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -204,6 +221,8 @@ class HelpPopUpState extends State<HelpPopUp> {
                               ),
                             ),
                           ),
+
+                          // Side panel container for category navigation
                           Container(
                             height: 70.h(context),
                             width: 14.w(context),
@@ -215,11 +234,12 @@ class HelpPopUpState extends State<HelpPopUp> {
                                 Radius.circular(20),
                               ),
                               border: Border.all(
-                                color: const Color.fromARGB(18, 255, 255,
-                                    255), // ← change this to any color you want
-                                width: 1.5, // ← adjust thickness
+                                color: const Color.fromARGB(18, 255, 255, 255),
+                                width: 1.5,
                               ),
                             ),
+
+                            // Category buttons (FAQsSidePanel)
                             child: Padding(
                               padding: EdgeInsets.only(top: 2.h(context)),
                               child: Column(
@@ -234,8 +254,12 @@ class HelpPopUpState extends State<HelpPopUp> {
                           ),
                         ],
                       ),
-                      // This container houses the container that holds the information for the specified button selected
-                      // in the faqs side panel.
+
+                      /*
+                        RIGHT SIDE:
+                        - Displays content for selected FAQ category
+                        - Controlled via CarouselSlider
+                      */
                       Container(
                         height: 74.h(context),
                         width: 47.w(context),
@@ -245,13 +269,11 @@ class HelpPopUpState extends State<HelpPopUp> {
                             Radius.circular(20),
                           ),
                           border: Border.all(
-                            color: const Color.fromARGB(18, 255, 255,
-                                255), // ← change this to any color you want
-                            width: 1.5, // ← adjust thickness
+                            color: const Color.fromARGB(18, 255, 255, 255),
+                            width: 1.5,
                           ),
                         ),
                         child: Center(
-                          // The container that holds the information
                           child: Container(
                             height: 71.h(context),
                             width: 45.w(context),
@@ -261,18 +283,26 @@ class HelpPopUpState extends State<HelpPopUp> {
                                 Radius.circular(20),
                               ),
                             ),
+
+                            // Carousel for switching between FAQ categories
                             child: CarouselSlider(
                               carouselController: controller,
                               options: CarouselOptions(
                                 height: 69.h(context),
                                 viewportFraction: .97,
                                 enlargeCenterPage: true,
+
+                                // Disable swipe; navigation controlled via side panel
                                 scrollPhysics:
                                     const NeverScrollableScrollPhysics(),
+
+                                // Syncs carousel changes back to side panel state
                                 onPageChanged: (index, _) {
                                   setState(() => currentSlide = index);
                                 },
                               ),
+
+                              // Each slide corresponds to a FAQ category
                               items: slides,
                             ),
                           ),

@@ -7,6 +7,13 @@ import '../../../../../main.dart';
 import '../../../../../util/gradient_label.dart';
 import '../../../desk_decks.dart';
 
+/// Profile Card 2 Section 3: Stateful projects and goals section
+///
+/// Provides UI for adding and managing user goals, including a dialog
+/// interface for viewing and removing items. Goals are stored in local
+/// state and updated dynamically. Includes a placeholder for future
+/// project-related content and expansion.
+
 class Pc2Section3 extends StatefulWidget {
   Pc2Section3({super.key});
 
@@ -34,8 +41,6 @@ class _Pc2Section3State extends State<Pc2Section3> {
     });
     showGoalsDialog();
   }
-// This is a pop up so that you can see what goals you have and if you have completed them or not.
-// if not than it stays on your list until it is completed or you delete it
 
   void showGoalsDialog() {
     showDialog(

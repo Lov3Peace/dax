@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 
+/// PC1 - Emblem and badge display card
+///
+/// Displays a two-column card with creator info on the left
+/// and a badge section on the right. Built responsively using
+/// custom sizing extensions and structured for future dynamic data.
+
 class PC1 extends StatelessWidget {
   PC1({super.key});
 

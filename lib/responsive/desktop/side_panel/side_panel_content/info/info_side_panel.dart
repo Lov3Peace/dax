@@ -3,7 +3,10 @@ import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_c
 import 'package:flutter_application_1/util/imports.dart';
 
 class InfoSidePanel extends StatelessWidget {
+  /// Currently selected table of contents item
   final int currentIndex;
+
+  /// Handles navigation when a section is tapped
   final Function(int) onTap;
 
   const InfoSidePanel({
@@ -22,15 +25,19 @@ class InfoSidePanel extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
+          // Section title for the side panel
           Text(
             'Table of Contents :',
             style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-                fontSize: 3.sp(context)),
+              color: Colors.white70,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline,
+              fontSize: 3.sp(context),
+            ),
           ),
           SizedBox(height: 1.h(context)),
+
+          // Clickable list of sections
           TableofContentsTemplate(
             currentIndex: currentIndex,
             onTap: onTap,

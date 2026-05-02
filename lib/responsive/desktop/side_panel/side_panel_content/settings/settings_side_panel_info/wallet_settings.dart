@@ -71,7 +71,6 @@ class WalletSettingsState extends State<WalletSettings> {
         SettingsCard(
           title: "Display Preferences",
           children: [
-            // SizedBox(height: 1.h(context)),
             Row(
               children: [
                 Expanded(
@@ -116,7 +115,6 @@ class WalletSettingsState extends State<WalletSettings> {
         SettingsCard(
           title: "Security",
           children: [
-            // const SizedBox(height: 12),
             Row(
               children: [
                 SettingsToggle(

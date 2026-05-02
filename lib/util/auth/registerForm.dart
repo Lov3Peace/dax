@@ -1,25 +1,16 @@
 import 'dart:ui';
-import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/providers/userAuthProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 import 'package:rive/rive.dart' as rive;
-import 'package:simple_animations/simple_animations.dart';
 import '../tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
-import 'forget_password_form.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/browser_client.dart' as httpClient;
 
 //Actual BUTTON DAVON or PHIL Whatever the hell you want to be called these days.
 //if you ask me, you just formerly go by: Primate
@@ -138,29 +129,6 @@ class _SignUpFormState extends State<SignUpForm> {
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  late rive.RiveWidgetController riveController;
-
-  @override
-  void initState() {
-    super.initState();
-    initRive();
-  }
-
-// Initiallize Rive
-  void initRive() async {
-    final riveFuturisticLoading = await rive.File.asset(
-        "rive/futuristic-loading.riv",
-        riveFactory: rive.Factory.rive);
-    riveController = rive.RiveWidgetController(riveFuturisticLoading!);
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _usernameController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
 
   //Global Key
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -252,7 +220,6 @@ class _SignUpFormState extends State<SignUpForm> {
                       _rememberMe);
                   // check mount after await
                   if (!context.mounted) return;
-                  router.pop();
                   if (!res.success) {
                     showErrorMessage(res.error, context);
                   } else {
@@ -283,7 +250,7 @@ class _SignUpFormState extends State<SignUpForm> {
                                           ),
                                         RiveLoaded() => RiveWidget(
                                             controller: state.controller,
-                                            fit: Fit.cover,
+                                            fit: Fit.contain,
                                           )
                                       },
                                       // fit: rive.Fit.cover,
@@ -295,9 +262,10 @@ class _SignUpFormState extends State<SignUpForm> {
                           );
                         });
 
-                    Future.delayed(const Duration(seconds: 2), () {
+                    Future.delayed(const Duration(seconds: 3), () {
                       // check mount after future
                       if (!context.mounted) return;
+                      router.pop();
                       router.pop();
                       router.go("/");
                     });
@@ -358,12 +326,12 @@ class _SignUpFormState extends State<SignUpForm> {
                         _emailController.text,
                         _rememberMe);
                     if (!context.mounted) return;
-                    router.pop();
                     if (!res.success) {
                       showErrorMessage(res.error, context);
                     } else {
                       userProvider.saveUsername(res.body["username"]);
                       userProvider.saveUserData(res.body);
+                      if (!context.mounted) return;
                       //
                       // Navigate to Dashboard
                       showDialog(
@@ -392,7 +360,7 @@ class _SignUpFormState extends State<SignUpForm> {
                                             ),
                                           RiveLoaded() => RiveWidget(
                                               controller: state.controller,
-                                              fit: Fit.cover,
+                                              fit: Fit.contain,
                                             )
                                         },
                                         // fit: rive.Fit.cover,
@@ -403,9 +371,10 @@ class _SignUpFormState extends State<SignUpForm> {
                               ],
                             );
                           });
-                      Future.delayed(const Duration(seconds: 2), () {
+                      Future.delayed(const Duration(seconds: 3), () {
                         // check mount after future
                         if (!context.mounted) return;
+                        router.pop();
                         router.pop();
                         router.go("/");
                       });

@@ -20,11 +20,10 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
-    final userAuthProvider =
-        Provider.of<UserAuthProvider>(context, listen: false);
+    final userProvider = context.watch<UserProvider>();
     userData = userProvider.userData;
-    var token = userAuthProvider.token;
+    // final userAuthProvider = context.watch<UserAuthProvider>();
+    // var token = userAuthProvider.token;
     // var decodedToken = JwtDecoder.decode(token);
     // final bool isAdmin = decodedToken["isAdmin"];
     // adminOrUser = isAdmin == true ? "Admin" : "User";
@@ -86,18 +85,5 @@ class ProfileCard extends StatelessWidget {
             ],
           ),
         ));
-
-    // child: Deck(
-    //   deckHeight: deckHeight,
-    //   deckWidth: halfDeckWidth,
-    //   deckName: '',
-    //   gradient1: tran,
-    //   gradient2: tran,
-    //   neonGlow: tran,
-    //   labelTextSize: labelTextSize,
-    //   headingText: userData["username"],
-    //   headingTextSize: headingTextSize,
-    //   subText: adminOrUser,
-    // ));
   }
 }

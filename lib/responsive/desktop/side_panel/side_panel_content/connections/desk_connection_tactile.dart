@@ -1,36 +1,48 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../../../../util/gradient_label.dart';
 import '../../../../../util/tactile_button.dart';
 
 class ConnectionTactile extends StatefulWidget {
+  // Callback used to notify the parent which tab was selected
   final Function(int) onButtonTap;
 
-  const ConnectionTactile({super.key, required this.onButtonTap});
+  const ConnectionTactile({
+    super.key,
+    required this.onButtonTap,
+  });
 
   @override
   State<ConnectionTactile> createState() => ConnectionTactileState();
 }
 
 class ConnectionTactileState extends State<ConnectionTactile> {
-  int selectedIndex =
-      0; // <-- this makes the first button look selected on load
+  // Tracks which button is visually active inside this widget
+  // Defaults to the first tab ("All") on initial load
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    // Labels for each connection filter tab
     final List<String> buttonLabels = ['All', 'Favorite', 'Partner'];
 
     return Row(
+      // Evenly distributes the filter buttons across the container
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: List.generate(buttonLabels.length, (index) {
+        // Determines whether the current button should display
+        // its active / highlighted styling
         final bool isSelected = selectedIndex == index;
 
         return TactileButton(
           onTap: () {
+            // Updates the local selected state for button styling
             setState(() => selectedIndex = index);
-            widget.onButtonTap(index); // still trigger the linked page
+
+            // Notifies the parent so linked content can change
+            widget.onButtonTap(index);
           },
           child: GradientContainer(
+            // Applies the active gradient only to the selected tab
             gradient1: isSelected ? red : Colors.transparent,
             gradient2: isSelected ? purp : Colors.transparent,
             height: 3.h(context),

@@ -1,14 +1,22 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
 import 'package:flutter_application_1/util/imports.dart';
-
 import '../../../../../main.dart';
 import '../../../../../util/gradient_label.dart';
 import '../../../../../util/tactile_button.dart';
 import '../../../desk_decks.dart';
+
+/// Pc2Section2 - User showcase and file upload section
+///
+/// Builds a profile section that allows users to upload and manage
+/// files such as achievements, resumes, transcripts, or images.
+/// Files are selected using FilePicker and stored locally in state,
+/// with the ability to dynamically display and remove uploaded items.
+///
+/// Designed to serve as a user showcase/portfolio section and can be
+/// extended in the future for cloud storage or backend integration.
 
 class Pc2Section2 extends StatefulWidget {
   Pc2Section2({super.key});

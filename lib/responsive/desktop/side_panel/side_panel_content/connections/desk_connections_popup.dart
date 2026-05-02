@@ -1,6 +1,4 @@
-import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -18,11 +16,19 @@ class ConnectionsPopUp extends StatefulWidget {
 
 class ConnectionsPopUpState extends State<ConnectionsPopUp>
     with AnimationMixin {
+  // Controls the text entered into the search field
   final TextEditingController searchController = TextEditingController();
+
+  // Controls carousel page changes programmatically
   final CarouselSliderController carouselController =
       CarouselSliderController();
+
+  // Tracks the currently selected tab / carousel page
   int currentIndex = 0;
 
+  // Handles tab button presses by:
+  // 1. updating the selected index
+  // 2. animating the carousel to the matching page
   void handleButtonTap(int index) {
     setState(() => currentIndex = index);
 
@@ -36,21 +42,25 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
 
   @override
   Widget build(BuildContext context) {
+    // Each carousel item represents a filtered connection view
+    // such as All, Favorites, or Partners
     final List<Widget> carouselItems = [
       /*
-        this slide is controlled by the all button
+        Slide for the "All" connections tab
       */
       CustomDataTable(
         headers: ['Username', 'Status', 'Last Seen', 'Actions'],
         rows: [
           [
             Text('[Username]', style: TextStyle(fontSize: 2.5.sp(context))),
-            Text('[Online/Offline]',
-                style: TextStyle(fontSize: 2.5.sp(context))),
+            Text(
+              '[Online/Offline]',
+              style: TextStyle(fontSize: 2.5.sp(context)),
+            ),
             Text('[Time]', style: TextStyle(fontSize: 2.5.sp(context))),
             const ActionsButtons(),
           ],
-          // Add more rows as needed
+          // Additional rows can be added here as more connection data is loaded
         ],
         fontSize: 2.5.sp(context),
         columnSpacing: 7.w(context),
@@ -62,20 +72,23 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
           border: Border.all(color: deckBorderColor),
         ),
       ),
+
       /*
-        this slide is controlled by the favorites button
+        Slide for the "Favorites" tab
       */
       CustomDataTable(
         headers: ['Username', 'Status', 'Last Seen', 'Actions'],
         rows: [
           [
             Text('[Username]', style: TextStyle(fontSize: 2.5.sp(context))),
-            Text('[Online/Offline]',
-                style: TextStyle(fontSize: 2.5.sp(context))),
+            Text(
+              '[Online/Offline]',
+              style: TextStyle(fontSize: 2.5.sp(context)),
+            ),
             Text('[Time]', style: TextStyle(fontSize: 2.5.sp(context))),
             const ActionsButtons(),
           ],
-          // Add more rows as needed
+          // Additional rows can be added here as more connection data is loaded
         ],
         fontSize: 2.5.sp(context),
         columnSpacing: 7.w(context),
@@ -87,20 +100,23 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
           border: Border.all(color: deckBorderColor),
         ),
       ),
+
       /*
-        this slide is controlled by the partners button
+        Slide for the "Partners" tab
       */
       CustomDataTable(
         headers: ['Username', 'Status', 'Last Seen', 'Actions'],
         rows: [
           [
             Text('[Username]', style: TextStyle(fontSize: 2.5.sp(context))),
-            Text('[Online/Offline]',
-                style: TextStyle(fontSize: 2.5.sp(context))),
+            Text(
+              '[Online/Offline]',
+              style: TextStyle(fontSize: 2.5.sp(context)),
+            ),
             Text('[Time]', style: TextStyle(fontSize: 2.5.sp(context))),
             const ActionsButtons(),
           ],
-          // Add more rows as needed
+          // Additional rows can be added here as more connection data is loaded
         ],
         fontSize: 2.5.sp(context),
         columnSpacing: 7.w(context),
@@ -113,6 +129,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
         ),
       ),
     ];
+
     return SPCardTemplate(
       height: 100.h(context),
       width: 71.w(context),
@@ -121,7 +138,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
         padding: EdgeInsets.symmetric(vertical: 1.h(context)),
         child: Column(
           children: [
-            //Stories
+            // Popup title
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -135,6 +152,8 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                 ),
               ),
             ),
+
+            // Search field for filtering connections
             Padding(
               padding: EdgeInsets.fromLTRB(
                 1.5.w(context),
@@ -157,17 +176,22 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                   contentPadding: const EdgeInsets.only(left: 20),
                   suffixIcon: const Icon(Icons.search),
                 ),
+
+                // Intended place for live search / filtering logic
                 onChanged: (value) {
                   // Implement your search logic here
-                  // You can use the 'value' variable to perform search operations
+                  // Use the entered value to filter connections dynamically
                 },
               ),
             ),
 
-            //Container housing the tab buttons
+            // Container for tab buttons that switch between connection categories
             Padding(
               padding: EdgeInsets.only(
-                  left: 1.5.w(context), right: 1.5.w(context), bottom: 10),
+                left: 1.5.w(context),
+                right: 1.5.w(context),
+                bottom: 10,
+              ),
               child: Container(
                 height: 6.h(context),
                 width: double.infinity,
@@ -178,11 +202,13 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                   ),
                   border: Border.all(color: deckBorderColor),
                 ),
+
+                // Tab control that triggers carousel page changes
                 child: ConnectionTactile(onButtonTap: handleButtonTap),
               ),
             ),
 
-            // Container Housing Carousel slider
+            // Main content area displaying the currently selected connection list
             Expanded(
               child: CarouselSlider(
                 carouselController: carouselController,
@@ -191,6 +217,8 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                   viewportFraction: .95,
                   enableInfiniteScroll: false,
                   enlargeCenterPage: true,
+
+                  // Keeps the selected tab state synced with manual carousel changes
                   onPageChanged: (index, _) {
                     setState(() {
                       currentIndex = index;
@@ -208,6 +236,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
 
   @override
   void dispose() {
+    // Prevents memory leaks by cleaning up the text controller
     searchController.dispose();
     super.dispose();
   }

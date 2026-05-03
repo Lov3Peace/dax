@@ -3,8 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/dottedLine.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/gradient_label.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:rive/rive.dart' as r;
 

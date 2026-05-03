@@ -5,9 +5,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../../../util/button_state.dart';
-import '../../../util/soft_close.dart';
-import '../../../util/test_list.dart';
+import '../../../util/animations/soft_close.dart';
+import '../../../util/test/test_list.dart';
 import '../desk_decks.dart';
 import '../large_stagger_load.dart';
 import '../util/web_ui_template.dart';
@@ -39,24 +38,22 @@ class _DeskCommunitiesPageState extends State<DeskCommunitiesPage>
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ButtonState>(
-      builder: (context, value, child) => Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        body: WebUiTemplate(
-          title: "Communities",
-          button1: ProjectsButton(),
-          button2: SocialsButton(),
-          button3: NewsButton(),
-          //Column for Title, Dock Buttons, and Content
-          child: NewStagger(
-              duration: 300,
-              widgets: test_big_list,
-              delay: 100,
-              rowWidth: 75.w(context),
-              childHeight: 30.w(context),
-              itemsPerRow: 2),
-        ),
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      body: WebUiTemplate(
+        title: "Communities",
+        button1: ProjectsButton(),
+        button2: SocialsButton(),
+        button3: NewsButton(),
+        //Column for Title, Dock Buttons, and Content
+        child: NewStagger(
+            duration: 300,
+            widgets: test_big_list,
+            delay: 100,
+            rowWidth: 75.w(context),
+            childHeight: 30.w(context),
+            itemsPerRow: 2),
       ),
     );
   }

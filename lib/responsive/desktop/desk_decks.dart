@@ -1,11 +1,7 @@
 import 'dart:ui';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/neon_label.dart';
+import 'package:flutter_application_1/util/ui/neon_label.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rive/rive.dart' as r;
 
 // Global variables for all decks. Must be declared here so decks
 // can access the values. Also declared in the build so they can

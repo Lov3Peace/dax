@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
+import 'package:flutter_application_1/util/ui/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:optimized_search_field/base_multi_search_field.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:provider/provider.dart';

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/util/responsive_shorthand.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/gradient_label.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 
 class ScaledButton extends StatefulWidget {
   const ScaledButton({super.key});

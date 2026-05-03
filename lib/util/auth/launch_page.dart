@@ -1,23 +1,15 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
-import 'package:flutter_application_1/util/providers/appStateProvider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:go_router/go_router.dart';
-import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
-import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:rive/rive.dart';
 import 'package:rive/rive.dart' as rive;
-import 'package:simple_animations/simple_animations.dart';
 import '../providers/userAuthProvider.dart';
 import '../providers/userProvider.dart';
-import '../tactile_button.dart';
+import '../ui/tactile_button.dart';
 import 'forget_password_form.dart';
-import 'package:http/browser_client.dart' as httpClient;
 import 'package:provider/provider.dart';
 
 class LaunchPage extends StatefulWidget {
@@ -87,7 +79,7 @@ class _LaunchPageState extends State<LaunchPage> {
               );
             });
 
-        Future.delayed(Duration(seconds: 1));
+        await Future.delayed(Duration(seconds: 1));
         // check mount after future
         if (!context.mounted) return;
         router.pop();

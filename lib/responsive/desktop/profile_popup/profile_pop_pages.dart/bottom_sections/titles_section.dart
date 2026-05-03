@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
+import 'package:flutter_application_1/util/ui/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../../util/tactile_button.dart';
+import '../../../../../util/ui/tactile_button.dart';
 
 class PCTitles extends StatefulWidget {
   PCTitles({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter_application_1/util/imports.dart';
-import '../../../../../../util/gradient_label.dart';
-import '../../../../../../util/tactile_button.dart';
+import '../../../../../../util/ui/gradient_label.dart';
+import '../../../../../../util/ui/tactile_button.dart';
 
 /// WalletC2
 /// Secondary wallet panel for:

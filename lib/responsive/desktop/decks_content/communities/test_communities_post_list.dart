@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/test_container.dart';
-
-import '../../../../main.dart';
 import 'communities_post.dart';
 
 List comm_post_list = [

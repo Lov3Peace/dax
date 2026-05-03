@@ -1,8 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter_application_1/responsive/desktop/decks_content/communities/desk_hero_communities_page.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/desktop_projects_page.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectPostsPage.dart';
 import 'package:flutter_application_1/responsive/desktop/devPage.dart';
 import 'package:flutter_application_1/responsive/desktop/node_test.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profilePage.dart';
-import '../../../util/imports.dart';
 import '../dashboard/desk_dashboard.dart';
 
 var routes = {
@@ -13,7 +17,5 @@ var routes = {
   '/projects': DesktopProjectsPage(),
   '/project-posts': DesktopProjectPostsPage(),
   '/communities': DesktopCommunitiesPage(),
-  '/socials': DesktopSocialsPage(),
-  '/news': DesktopNewsPage(),
   '/nodetest': NodeTest(),
 };

@@ -11,10 +11,10 @@ import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/large_stagger_load.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
-import 'package:flutter_application_1/util/blurryContainer.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
-import 'package:flutter_application_1/util/test_container.dart';
+import 'package:flutter_application_1/util/ui/blurryContainer.dart';
+import 'package:flutter_application_1/util/ui/gradient_label.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
+import 'package:flutter_application_1/util/test/test_container.dart';
 import '../../../../util/imports.dart';
 import 'package:http/browser_client.dart' as httpClient;
 

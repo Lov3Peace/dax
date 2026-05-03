@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/util/decks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import '../../../../util/imports.dart';
-import '../../../../util/tactile_button.dart';
+import '../../../../util/ui/tactile_button.dart';
 
 class CommunitiesPost extends StatefulWidget {
   CommunitiesPost({

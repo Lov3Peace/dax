@@ -1,7 +1,7 @@
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/dottedLine.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/gradient_label.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:rive/rive.dart' as r;
 
 import '../../../util/imports.dart';

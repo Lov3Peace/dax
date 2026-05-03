@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 
 import 'package:flutter_application_1/util/logout_dock_button.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 import '../desk_decks.dart';

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../../../../main.dart';
-import '../../../../../util/gradient_label.dart';
-import '../../../../../util/tactile_button.dart';
+import '../../../../../util/ui/gradient_label.dart';
+import '../../../../../util/ui/tactile_button.dart';
 import '../../../desk_decks.dart';
 
 /// Pc2Section2 - User showcase and file upload section

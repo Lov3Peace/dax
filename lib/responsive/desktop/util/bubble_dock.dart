@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/util/imports.dart';
 
-import '../../../util/soft_close.dart';
+import '../../../util/animations/soft_close.dart';
 import '../desk_dock_bubbles.dart';
 import '../desk_decks.dart';
 

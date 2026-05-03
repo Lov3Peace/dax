@@ -7,7 +7,6 @@ import 'package:flutter_application_1/main.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../responsive/mobile/mob_constants.dart';
 import '../responsive/mobile/mobile_dashboard.dart';
-import '../responsive/tablet/tablet_dashboard.dart';
 
 class HomeButton extends StatefulWidget {
   HomeButton(
@@ -94,7 +93,7 @@ class _HomeButtonState extends State<HomeButton> {
         control = Control.play;
         Future.delayed(const Duration(milliseconds: 200)).then((_) {
           Navigator.of(context).push(MaterialPageRoute(builder: (buildContext) {
-            return const TabletDashboard();
+            return const MobileDashboard();
           }));
         });
       } else {

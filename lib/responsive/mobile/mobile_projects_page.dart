@@ -2,18 +2,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_application_1/util/projects_stacks_list2.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:supercharged/supercharged.dart';
-import '../../pages/keyboards_deck.dart';
 import '../../main.dart';
-import '../../util/auth/login.dart';
 import 'mob_artboard_page.dart';
 import 'mob_constants.dart';
 import 'mobile_dock.dart';
 
 final List<Widget> projStacks = ProjectStacks().mobProjectStacks;
-final List<Widget> projStacks2 = ProjectStacks2().projectStacks2;
 
 class MobProjectsPage extends StatefulWidget {
   final Animation<double> transitionAnimation;
@@ -133,7 +129,7 @@ class _MobProjectsPageState extends State<MobProjectsPage> {
                                   onTap: () {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) {
-                                      return const KeyboardsDeck();
+                                      return const SizedBox();
                                     }));
                                   },
                                   child:

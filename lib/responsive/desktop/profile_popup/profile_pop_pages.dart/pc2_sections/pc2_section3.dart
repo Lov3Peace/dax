@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 
 import '../../../../../main.dart';
-import '../../../../../util/gradient_label.dart';
+import '../../../../../util/ui/gradient_label.dart';
 import '../../../desk_decks.dart';
 
 /// Profile Card 2 Section 3: Stateful projects and goals section

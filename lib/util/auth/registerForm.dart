@@ -9,7 +9,7 @@ import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart';
 import 'package:rive/rive.dart' as rive;
-import '../tactile_button.dart';
+import '../ui/tactile_button.dart';
 import '../../responsive/mobile/mob_constants.dart';
 
 //Actual BUTTON DAVON or PHIL Whatever the hell you want to be called these days.

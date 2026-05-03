@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/mobile/mobile_login/mobile_launch_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../util/Window Route/logout_window_route.dart';
 import '../../../util/auth/launch_page.dart';
-import '../../responsive_layout.dart';
 import '../mob_constants.dart';
 
 class MobLogoutWindowButton extends StatelessWidget {
@@ -59,16 +59,7 @@ class MobLogoutWindowPopupCard extends StatefulWidget {
 class _LogoutwindowPopupCardState extends State<MobLogoutWindowPopupCard>
     with AnimationMixin {
   Future signOut() async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const ResponsiveLayout(
-          mobileVersion: MobileLaunchPage(),
-          tabletVersion: LaunchPage(),
-          desktopVersion: LaunchPage(),
-        ),
-      ),
-    );
+    context.go("/launch");
 
     // FirebaseAuth.instance.signOut();
   }

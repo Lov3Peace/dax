@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/deck_height_value.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:supercharged/supercharged.dart';
@@ -10,7 +9,6 @@ import 'mobile_finance_page.dart';
 import 'mobile_news_page.dart';
 import 'mobile_projects_page.dart';
 import 'mobile_socials_page.dart';
-import '../../util/auth/login.dart';
 
 //screen dimension variables to use instead of MediaQuery (context)
 var screenHeight = window.physicalSize.height / window.devicePixelRatio;
@@ -1071,7 +1069,7 @@ class FinancesStacks {
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
-      deckHeight: DeckHeight().deckHeight,
+      deckHeight: 100,
       deckWidth: 375,
       deckName: 'Current Investments',
       gradient1: const Color.fromARGB(255, 157, 255, 45),
@@ -1079,7 +1077,7 @@ class FinancesStacks {
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
-      deckHeight: DeckHeight().deckHeight,
+      deckHeight: 100,
       deckWidth: 375,
       deckName: 'Current Loans',
       gradient1: const Color.fromARGB(255, 157, 255, 45),
@@ -1087,7 +1085,7 @@ class FinancesStacks {
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
-      deckHeight: DeckHeight().deckHeight,
+      deckHeight: 100,
       deckWidth: 375,
       deckName: 'Current Loans',
       gradient1: const Color.fromARGB(255, 157, 255, 45),
@@ -1095,7 +1093,7 @@ class FinancesStacks {
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
-      deckHeight: DeckHeight().deckHeight,
+      deckHeight: 100,
       deckWidth: 375,
       deckName: 'Current Loans',
       gradient1: const Color.fromARGB(255, 157, 255, 45),
@@ -1103,7 +1101,7 @@ class FinancesStacks {
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
-      deckHeight: DeckHeight().deckHeight,
+      deckHeight: 100,
       deckWidth: 375,
       deckName: 'Current Loans',
       gradient1: const Color.fromARGB(255, 157, 255, 45),
@@ -1149,7 +1147,7 @@ class FinancesStacks {
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
-      deckHeight: DeckHeight().deckHeight,
+      deckHeight: 100,
       deckWidth: 375,
       deckName: 'Current Investments',
       gradient1: const Color.fromARGB(255, 157, 255, 45),
@@ -1157,7 +1155,7 @@ class FinancesStacks {
       neonGlow: const Color.fromARGB(129, 157, 255, 45),
     ),
     Deck(
-      deckHeight: DeckHeight().deckHeight,
+      deckHeight: 100,
       deckWidth: 375,
       deckName: 'Current Loans',
       gradient1: const Color.fromARGB(255, 157, 255, 45),

@@ -4,8 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
-import '../../../util/button_state.dart';
-import '../../../util/soft_close.dart';
+import '../../../util/animations/soft_close.dart';
 import '../../../util/test_list.dart';
 import '../desk_decks.dart';
 import '../util/web_ui_template.dart';
@@ -39,27 +38,25 @@ class _DeskNewsPageState extends State<DeskNewsPage> with AnimationMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ButtonState>(
-      builder: (context, value, child) => Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        body: WebUiTemplate(
-          title: "News",
-          button1: ProjectsButton(),
-          button2: CommunitiesButton(),
-          button3: SocialsButton(),
-          //Column for Title, Dock Buttons, and Content
-          child: Expanded(
-            child: StaggerLoad(
-              widgets: test_big_list,
-              childPadding: EdgeInsets.all(0.5.w(context)),
-              physics: const BouncingScrollPhysics(),
-              duration: 300,
-              scrollDirection: Axis.vertical,
-              delay: 5,
-              scale: 1.02,
-              layer: 1,
-            ),
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      body: WebUiTemplate(
+        title: "News",
+        button1: ProjectsButton(),
+        button2: CommunitiesButton(),
+        button3: SocialsButton(),
+        //Column for Title, Dock Buttons, and Content
+        child: Expanded(
+          child: StaggerLoad(
+            widgets: test_big_list,
+            childPadding: EdgeInsets.all(0.5.w(context)),
+            physics: const BouncingScrollPhysics(),
+            duration: 300,
+            scrollDirection: Axis.vertical,
+            delay: 5,
+            scale: 1.02,
+            layer: 1,
           ),
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter_application_1/util/imports.dart';
-import '../../../../../../util/gradient_label.dart';
-import '../../../../../../util/tactile_button.dart';
+import '../../../../../../util/ui/gradient_label.dart';
+import '../../../../../../util/ui/tactile_button.dart';
 
 /// A custom dropdown field that displays a list of linked cards
 /// using an Overlay instead of a traditional DropdownButton.

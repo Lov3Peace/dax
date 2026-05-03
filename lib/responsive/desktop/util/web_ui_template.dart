@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import '../../mobile/mob_artboard_page.dart';
-import 'weather_date.dart';
+import '../../../util/weather_date.dart';
 import '../side_panel/side_panel.dart';
 
 import '../messages.dart';

@@ -11,7 +11,6 @@ import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_application_1/util/button_state.dart';
 import 'package:flutter_application_1/responsive/desktop/util/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +30,6 @@ Future main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppStateProvider()),
-        ChangeNotifierProvider(create: (context) => ButtonState()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => UserAuthProvider()),
         ChangeNotifierProvider(create: (_) => ProjectProvider()),

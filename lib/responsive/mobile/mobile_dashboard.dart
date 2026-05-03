@@ -6,7 +6,6 @@ import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 
 import 'package:simple_animations/simple_animations.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../util/dashboard_decks.dart';
 import 'mob_artboard_page.dart';
 import 'mobile_dock.dart';
 //import 'package:responsive_framework/responsive_framework.dart';
@@ -47,7 +46,9 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
         children: [
           const ArtBoardScreen(),
           Positioned.fill(
-            child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30), child: const SizedBox()),
+            child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                child: const SizedBox()),
           ),
           GestureDetector(
             onTap: () {
@@ -66,7 +67,11 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                   child: AnimationLimiter(
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
-                      padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.035, 90, MediaQuery.of(context).size.width * 0.035, 0),
+                      padding: EdgeInsets.fromLTRB(
+                          MediaQuery.of(context).size.width * 0.035,
+                          90,
+                          MediaQuery.of(context).size.width * 0.035,
+                          0),
                       itemCount: 2,
                       itemBuilder: (BuildContext context, int index) {
                         return AnimationConfiguration.staggeredList(
@@ -77,10 +82,13 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                             scale: 0.7,
                             curve: Curves.easeOutBack,
                             child: FadeInAnimation(
-                              child: mobTabDashboardDecks1(
-                                const ProjectsDeck(),
-                                const SocialsDeck(),
-                              )[index],
+                              // child: mobTabDashboardDecks1(
+                              //   const ProjectsDeck(),
+                              //   const SocialsDeck(),
+                              // )[index],
+                              child: BlurryContainer(
+                                child: SizedBox(),
+                              ),
                             ),
                           ),
                         );
@@ -105,16 +113,25 @@ class _MobileDashboardState extends State<MobileDashboard> with AnimationMixin {
                             scale: 0.7,
                             curve: Curves.easeOutBack,
                             child: FadeInAnimation(
-                              child: mobTabDashboardDecks2(
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.035, 0, 0, 15),
-                                  child: const FinancesDeck(),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(MediaQuery.of(context).size.width * 0.035, 0, 0, 15),
-                                  child: const NewsDeck(),
-                                ),
-                              )[index],
+                              child: BlurryContainer(child: SizedBox()),
+                              // child: mobTabDashboardDecks2(
+                              //   Padding(
+                              //     padding: EdgeInsets.fromLTRB(
+                              //         MediaQuery.of(context).size.width * 0.035,
+                              //         0,
+                              //         0,
+                              //         15),
+                              //     child: const FinancesDeck(),
+                              //   ),
+                              //   Padding(
+                              //     padding: EdgeInsets.fromLTRB(
+                              //         MediaQuery.of(context).size.width * 0.035,
+                              //         0,
+                              //         0,
+                              //         15),
+                              //     child: const NewsDeck(),
+                              //   ),
+                              // )[index],
                             ),
                           ),
                         );

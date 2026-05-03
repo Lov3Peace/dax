@@ -4,10 +4,14 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/home_button.dart';
 import 'package:ionicons/ionicons.dart';
 
-import '../responsive/mobile/mob_constants.dart';
+import '../mob_constants.dart';
 
 class BigDock extends StatefulWidget {
-  BigDock({super.key, required this.newGrad1, required this.newGrad2, required this.newGlow});
+  BigDock(
+      {super.key,
+      required this.newGrad1,
+      required this.newGrad2,
+      required this.newGlow});
   Color newGrad1;
   Color newGrad2;
   Color newGlow;
@@ -30,7 +34,8 @@ class _BigDockState extends State<BigDock> {
                     Color.fromARGB(230, 24, 24, 24),
                   ], transform: GradientRotation(180)),
                   borderRadius: BorderRadius.circular(50),
-                  border: Border.all(color: const Color.fromARGB(148, 29, 29, 29)),
+                  border:
+                      Border.all(color: const Color.fromARGB(148, 29, 29, 29)),
                   boxShadow: const [
                     BoxShadow(
                       blurRadius: 5,
@@ -57,12 +62,16 @@ class _BigDockState extends State<BigDock> {
                       DockButton(
                         icon: Ionicons.caret_back,
                         onPressed: () {
-                          Future.delayed(const Duration(milliseconds: 100)).then((_) {
+                          Future.delayed(const Duration(milliseconds: 100))
+                              .then((_) {
                             Navigator.of(context).pop();
                           });
                         },
                       ),
-                      HomeButton(gradient1: widget.newGrad1, gradient2: widget.newGrad2, glow: widget.newGlow)
+                      HomeButton(
+                          gradient1: widget.newGrad1,
+                          gradient2: widget.newGrad2,
+                          glow: widget.newGlow)
                     ],
                   ),
                   // Row(

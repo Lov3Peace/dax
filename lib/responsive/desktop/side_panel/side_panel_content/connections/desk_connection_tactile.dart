@@ -1,6 +1,6 @@
 import 'package:flutter_application_1/util/imports.dart';
-import '../../../../../util/gradient_label.dart';
-import '../../../../../util/tactile_button.dart';
+import '../../../../../util/ui/gradient_label.dart';
+import '../../../../../util/ui/tactile_button.dart';
 
 class ConnectionTactile extends StatefulWidget {
   // Callback used to notify the parent which tab was selected

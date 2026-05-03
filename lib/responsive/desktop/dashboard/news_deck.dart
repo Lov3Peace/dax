@@ -1,16 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:simple_animations/simple_animations.dart';
-import '../../../main.dart';
-import '../../../util/tactile_button.dart';
-import '../../mobile/mobile_news_page.dart';
-import '../../tablet/tablet_news_page.dart';
+import '../../../util/ui/tactile_button.dart';
 import '../desk_decks.dart';
-import '../decks_content/desk_news_page.dart';
-import './desk_dashboard.dart';
 
 class NewsDeck extends StatefulWidget {
   const NewsDeck({

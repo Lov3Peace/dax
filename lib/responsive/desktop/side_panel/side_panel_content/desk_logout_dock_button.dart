@@ -9,8 +9,7 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
 
 import '../../../../util/Window Route/logout_window_route.dart';
-import '../../../../util/auth/login.dart';
-import '../../../../util/tactile_button.dart';
+import '../../../../util/ui/tactile_button.dart';
 
 class DesktopLogoutWindowButton extends StatelessWidget {
   /// {@macro add_todo_button}

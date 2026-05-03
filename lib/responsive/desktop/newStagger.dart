@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/util/test_container.dart';
-import 'package:flutter_application_1/util/test_list.dart';
+import 'package:flutter_application_1/util/test/test_container.dart';
+import 'package:flutter_application_1/util/test/test_list.dart';
 
 class NewStagger extends StatelessWidget {
   NewStagger({
@@ -76,4 +76,3 @@ class NewStagger extends StatelessWidget {
     );
   }
 }
-

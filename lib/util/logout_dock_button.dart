@@ -3,10 +3,9 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
-import 'package:flutter_application_1/util/auth/login.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
@@ -27,11 +26,7 @@ class LogoutWindowButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TactileButton(
       onTap: () {
-        Navigator.of(context).push(LogoutWindowRoute(builder: (context) {
-          return LogoutWindowPopupCard(
-            onPressed: () {},
-          );
-        }));
+        router.go('/launch');
       },
       child: Hero(
         tag: heroLogoutWindow,

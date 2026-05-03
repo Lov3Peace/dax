@@ -5,7 +5,7 @@ import "package:flutter_animation_progress_bar/flutter_animation_progress_bar.da
 import "package:flutter_application_1/responsive/desktop/desk_decks.dart";
 import "package:flutter_application_1/responsive/desktop/util/dottedLine.dart";
 import "package:flutter_application_1/util/imports.dart";
-import "package:flutter_application_1/util/tactile_button.dart";
+import "package:flutter_application_1/util/ui/tactile_button.dart";
 import "package:google_fonts/google_fonts.dart";
 import "package:ionicons/ionicons.dart";
 import "package:score_progress_pretty_display/score_progress_pretty_display.dart";

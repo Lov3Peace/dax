@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
@@ -7,15 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../desk_decks.dart';
-
 class WeatherDate extends StatelessWidget {
   final double width;
   final double height;
   final BoxConstraints constraints;
   final VoidCallback? onTap;
 
-  const WeatherDate({
+  WeatherDate({
     this.width = 0,
     this.height = 0,
     required this.constraints,
@@ -25,11 +21,13 @@ class WeatherDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Watch LocationServicesProvider in build
+    // Watch LocationServicesProvider in build to update the values when the getWeather() function runs
+    // on the Home Dashboard in initState()
     final locationServicesProvider = context.watch<LocationServicesProvider>();
-    weatherTemp = locationServicesProvider.weatherTemp;
-    weatherIcon = locationServicesProvider.weatherIcon;
-    weatherDescription = locationServicesProvider.weatherDescription;
+    final String weatherTemp = locationServicesProvider.weatherTemp;
+    final String weatherIcon = locationServicesProvider.weatherIcon;
+    final String weatherDescription =
+        locationServicesProvider.weatherDescription;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       // spacing: max(5, 0.25.w(context)),
@@ -77,7 +75,3 @@ class WeatherDate extends StatelessWidget {
     );
   }
 }
-
-String weatherTemp = "";
-String weatherDescription = "";
-String weatherIcon = "01d";

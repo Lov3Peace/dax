@@ -3,7 +3,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 import '../../../util/providers/userAuthProvider.dart';
 import '../../../util/providers/userProvider.dart';
-import '../../../util/tactile_button.dart';
+import '../../../util/ui/tactile_button.dart';
 import '../desk_decks.dart';
 import '../profile_popup/desk_profile_popup.dart';
 

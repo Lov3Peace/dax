@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
-import 'package:flutter_application_1/util/blurryContainer.dart';
+import 'package:flutter_application_1/util/ui/blurryContainer.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/ui/gradient_text.dart';
 import '../../../main.dart';
-import '../../../util/tactile_button.dart';
+import '../../../util/ui/tactile_button.dart';
 import 'package:rive/rive.dart' as rive;
 
 class ProjectsDeck extends StatelessWidget {

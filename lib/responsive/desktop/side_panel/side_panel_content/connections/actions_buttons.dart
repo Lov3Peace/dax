@@ -1,5 +1,5 @@
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
 
 class ActionsButtons extends StatelessWidget {

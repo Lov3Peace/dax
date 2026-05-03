@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/button_state.dart';
-import 'package:flutter_application_1/util/gradient_label.dart';
-import 'package:flutter_application_1/util/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/gradient_label.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 
 import '../../../main.dart';
 

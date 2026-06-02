@@ -41,7 +41,7 @@ export const pgClient = new Client({
   port: process.env.PG_DB_PORT,
   database: process.env.PG_DB_NAME,
   user: process.env.PG_DB_USER,
-  password: process.env.PG_USER_DB_PW,
+  password: process.env.PG_DB_USER_PW,
 });
 
 pgClient

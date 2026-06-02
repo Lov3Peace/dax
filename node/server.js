@@ -30,10 +30,6 @@ const port = process.env.PORT;
 //     console.log(`Dax Server Started with HTTPS on port: ${port}`),
 //   );
 
-updateProjectCategoriesCollection();
-
-updateProfileCrestsCollection();
-
 app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 
 export const pgClient = new Client({
@@ -46,7 +42,11 @@ export const pgClient = new Client({
 
 pgClient
   .connect()
-  .then(() => console.log(`Postgres Database Connection Established`))
+  .then(() => {
+    console.log(`Postgres Database Connection Established`);
+    updateProjectCategoriesCollection();
+    updateProfileCrestsCollection();
+  })
   .catch((error) => console.log(error));
 
 mongoose

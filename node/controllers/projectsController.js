@@ -35,6 +35,15 @@ export const updateProjectCategoriesCollection = async function () {
     try {
       // Begin SQL Transaction
       await pgClient.query("BEGIN");
+      // Check if schema and table exist before querying
+      const schemaTableCheck = await pgClient.query(
+        "select 1 FROM INFORMATION_SCHEMA.tables where table_schema = 'projects' and table_name = 'posts'",
+      );
+      if (schemaTableCheck.rowCount === 0) {
+        console.log("Schema or table has not been created yet!");
+        await pgClient.query("ROLLBACK");
+        return;
+      }
       // Query to get list of categories
       const categories = await pgClient.query(
         `select category from projects.project_categories`,

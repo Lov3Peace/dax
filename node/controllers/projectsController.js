@@ -40,40 +40,22 @@ export const updateProjectCategoriesCollection = async function () {
         `select category from projects.project_categories`,
       );
       // Name of schema and table to check for and create in db
-      const schemaName = capitalWordWithUnderscores.toLowerCase() + "_projects";
-      const tableName = capitalWordWithUnderscores.toLowerCase() + "_posts";
+      const schemaName = "projects";
+      const tableName = "project_categories";
 
       // Check if category is in projects.project_categories
       const categoryCheck = categories.rows.some(
-        (i) => i.category === category,
+        (row) => row.category === category,
       );
 
       // If schema not in db then insert row in project categories table, create schema, and corresponding table
       if (!categoryCheck) {
-        await pgClient.query(
-          format("CREATE SCHEMA IF NOT EXISTS %I", schemaName),
-        );
-        // Creating table if doesn't exist and inserting into db
-        await pgClient.query(
-          format(
-            "CREATE TABLE IF NOT EXISTS %I.%I (id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, username VARCHAR NOT NULL, title VARCHAR NOT NULL, category VARCHAR NOT NULL, description VARCHAR NOT NULL, acceptance_criteria VARCHAR NOT NULL, is_public BOOLEAN NOT NULL, is_group BOOLEAN NOT NULL, teammates text[], etc VARCHAR, roles_needed text[], timestamp TIMESTAMPTZ NOT NULL DEFAULT now(), images TEXT[])  ",
-            schemaName,
-            tableName,
-          ),
-        );
-        const schemaCheck = await pgClient.query(
-          `SELECT schema_name from information_schema.schemata WHERE schema_name = $1`,
-          [schemaName],
-        );
-
         // Insert row into projects.project_categories
-        if (schemaCheck.rowCount > 0) {
-          await pgClient.query(
-            `INSERT INTO projects.project_categories ( category, description, image, route) VALUES ( $1, $2, $3, $4) `,
-            [category, "DESCRIPTION", obj.name, route],
-          );
-          console.log(`Inserted Successfully for ${category}`);
-        }
+        await pgClient.query(
+          `INSERT INTO projects.project_categories ( category, description, image, route) VALUES ( $1, $2, $3, $4) `,
+          [category, "DESCRIPTION", obj.name, route],
+        );
+        console.log(`Inserted Successfully for ${category}`);
         // End SQL Transaction
       }
       await pgClient.query("COMMIT");
@@ -105,11 +87,11 @@ export const getProjectsCategoryAssets = async (req, res) => {
 };
 
 export const getProjectPosts = async function (req, res) {
-  let projectCategory = req.params.category;
+  const projectCategory = req.params.category.replaceAll("_", " ");
   try {
     // const projectCategory = req.headers.category;
-    const schemaName = projectCategory + "_projects";
-    const tableName = projectCategory + "_posts";
+    const schemaName = "projects";
+    const tableName = "posts";
     console.log(`Project Category: ${projectCategory}`);
     if (!projectCategory) {
       return res.status(404).json("No category sent in header");
@@ -120,7 +102,7 @@ export const getProjectPosts = async function (req, res) {
 
       const posts = await pgClient.query(
         format(
-          `SELECT username, title, category, description, acceptance_criteria, is_public, is_group, teammates, etc, roles_needed, timestamp, to_char(timestamp,'FMMonth, DD FMHH12:MI AM') as display_timestamp, images FROM %I.%I WHERE timestamp < now() AND is_public = true ORDER BY timestamp DESC LIMIT 20`,
+          `SELECT username, title, category, description, acceptance_criteria, is_public, is_group, teammates, etc, roles_needed, timestamp, to_char(timestamp,'FMMonth, DD FMHH12:MI AM') as display_timestamp, images FROM %I.%I WHERE category = '${projectCategory}' AND timestamp < now() AND is_public = true ORDER BY timestamp DESC LIMIT 20`,
 
           schemaName,
           tableName,
@@ -156,8 +138,8 @@ export const createNewProject = async (req, res) => {
     return res.status(400).json("Invalid project");
   }
 
-  const schemaName = `${category.replaceAll(" ", "_").toLowerCase()}_projects`;
-  const tableName = category.toLowerCase().replaceAll(" ", "_") + "_posts";
+  const schemaName = "projects";
+  const tableName = "posts";
   const columns = Object.keys(req.body);
   const values = Object.values(req.body);
   let valuePlaceholders = [];
@@ -174,11 +156,6 @@ export const createNewProject = async (req, res) => {
   try {
     await pgClient.query("BEGIN");
     const categoryTable = await pgClient.query(
-      // format(
-      //   `INSERT INTO %I.%I (username , title , category , description , acceptance_criteria , is_public , is_group , teammates , etc , roles_needed , images ) VALUES ($1, $2, $3, $4, $5, $6, $7, DEFAULT, $8, DEFAULT, DEFAULT)`,
-      //   schemaName,
-      //   tableName,
-      // ),
       format(
         `INSERT INTO %I.%I (${columns}) VALUES (${valuePlaceholders})`,
         schemaName,

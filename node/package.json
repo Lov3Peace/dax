@@ -11,8 +11,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "debug": "nodemon --watch node --inspect ./node/server.js",
-    "migrate": "node-pg-migrate -m ./node/migrations up",
-    "start": "nodemon --watch node ./node/server.js"
+    "migrate": "node-pg-migrate -m ./migrations up",
+    "start": "nodemon --watch node ./server.js"
   },
   "repository": {
     "type": "git",

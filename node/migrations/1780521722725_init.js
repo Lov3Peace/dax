@@ -15,7 +15,7 @@ export const up = (pgm) => {
   );
   pgm.sql("GRANT USAGE ON SCHEMA projects TO carbon_user");
   pgm.sql(
-    "ALTER DEFAULT PRIVILEGES IN SCHEMA projects GRANT USAGE, SELECT, INSERT, DELETE, UPDATE ON TABLES TO carbon_user",
+    "ALTER DEFAULT PRIVILEGES IN SCHEMA projects GRANT SELECT, INSERT, DELETE, UPDATE ON TABLES TO carbon_user",
   );
   pgm.sql(
     "CREATE TABLE IF NOT EXISTS projects.project_categories (id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, category VARCHAR NOT NULL, description VARCHAR NOT NULL, image VARCHAR NOT NULL, route VARCHAR NOT NULL, timestamp TIMESTAMPTZ NOT NULL DEFAULT now());",

@@ -45,7 +45,7 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
     // Header Format = projectCategory : category-with-dashes-delimiter
 
     try {
-      final parameter = widget.parameter.toLowerCase();
+      final parameter = widget.parameter;
       final getProjectPostsEndpoint =
           Uri.parse("$hostname/api/projectPosts/$parameter");
       print("GetProjectPostsEndpoint: $getProjectPostsEndpoint");

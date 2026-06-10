@@ -168,7 +168,6 @@ class _NewProjectFormState extends State<NewProjectForm> {
             });
       }
 
-      if (projectProvider.teammates == []) {}
       projectData.addAll({
         "username": userProvider.username,
         "title": title,
@@ -178,15 +177,21 @@ class _NewProjectFormState extends State<NewProjectForm> {
         "is_public": isPublic,
         "is_group": isGroupProject,
         "etc": etc,
-        "roles_needed": rolesNeeded,
+        "teammates": [],
+        "roles_needed": [],
+        "images": []
       });
 
+      if (projectProvider.images.isNotEmpty) {
+        debugPrint("Images Added: ${projectProvider.teammates}");
+        projectData["images"] = projectProvider.images;
+      }
       if (projectProvider.teammates.isNotEmpty) {
-        debugPrint("Populated teammates passed: ${projectProvider.teammates}");
+        debugPrint("Teammates Added: ${projectProvider.teammates}");
         projectData["teammates"] = projectProvider.teammates;
       }
       if (projectProvider.rolesNeeded.isNotEmpty) {
-        debugPrint("Populated roles passed: ${projectProvider.rolesNeeded}");
+        debugPrint("Roles Added: ${projectProvider.rolesNeeded}");
         projectData["roles_needed"] = projectProvider.rolesNeeded;
       }
 

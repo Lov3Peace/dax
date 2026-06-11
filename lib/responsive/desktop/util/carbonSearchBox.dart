@@ -368,4 +368,11 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
       listClipBehavior: Clip.none,
     );
   }
+
+  @override
+  void dispose() {
+    selectedOptions.clear();
+    print('SearchBox Disposed');
+    super.dispose();
+  }
 }

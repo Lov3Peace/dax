@@ -41,10 +41,10 @@ export const updateProjectCategoriesCollection = async function () {
         "select 1 FROM INFORMATION_SCHEMA.tables where table_schema = 'projects' and table_name = 'categories'",
       );
       if (schemaTableCheck.rowCount === 0) {
-        console.log("Schema or table has not been created yet!");
+        console.log("Schema projects.categories has not been created yet!");
         await pgClient.query("ROLLBACK");
-        return;
       }
+
       // Query to get list of categories
       const categories = await pgClient.query(
         `select category from projects.categories`,
@@ -75,8 +75,12 @@ export const updateProjectCategoriesCollection = async function () {
         const newCategoryCheck = await pgClient.query(
           `select category from projects.categories where category = '${category}'`,
         );
-        if (newCategoryCheck.rowCount == 1) {
+        if (newCategoryCheck.rowCount === 1) {
           console.log(`Inserted Successfully for ${category}`);
+          infoLog.info(`Inserted Successfully for ${category}`);
+        } else {
+          console.log(`Error Inserting Row for ${category}`);
+          errorLog.error(`Error Inserting Row for ${category}`);
         }
         // End SQL Transaction
       }

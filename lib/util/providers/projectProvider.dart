@@ -22,4 +22,12 @@ class ProjectProvider with ChangeNotifier {
     _images = images;
     notifyListeners();
   }
+
+  void clearData() {
+    _teammates = [];
+    _rolesNeeded = [];
+    _images = [];
+    notifyListeners();
+    print("Project Data Cleared! Teammates: $_teammates");
+  }
 }

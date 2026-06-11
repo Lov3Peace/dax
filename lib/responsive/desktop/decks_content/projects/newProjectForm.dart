@@ -1,31 +1,20 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/desktop_projects_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/estimatedTimeToCompletionLists.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectRolesList.dart';
-import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectUserList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/carbonSearchBox.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
-import 'package:flutter_application_1/util/ui/blurryContainer.dart';
-import 'package:flutter_application_1/util/ui/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
-import 'package:optimized_search_field/optimized_search_field.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:provider/provider.dart';
-import 'package:supercharged/supercharged.dart';
-import 'package:uuid/v4.dart';
 
 class NewProjectForm extends StatefulWidget {
   NewProjectForm({super.key});
@@ -52,10 +41,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
   bool isTeammatesVisible = true;
   bool isRolesNeededVisible = true;
   var _projectCategoryValue;
-  var projectUserListValue;
   var etcUnitsValue;
   var etcValuesValue;
-  var rolesNeededValue;
   List rolesNeeded = [];
   ScrollController formScrollContrller = ScrollController();
 
@@ -77,8 +64,6 @@ class _NewProjectFormState extends State<NewProjectForm> {
   Color privateButtonGlow = tran;
   Color privateButtonBorderColor = deckBorderColor;
 
-  // Teammates Search Dropdown
-  // final MultipleSearchController _teammatesSearchController =MultipleSearchController();
   late FocusNode teammateOptionsNode;
   FocusNode _teammatesTextFieldFocusNode = FocusNode();
   final TextEditingController _teammatesSearchController =
@@ -94,6 +79,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   bool isTeammateSelected = false;
   final textFieldKey = GlobalKey();
   var searchResultsListKey = GlobalKey();
+  // Initial Teammates List
   List<String> teammates = [];
   List<String> teammateOptionsList = [];
   List users = [];
@@ -756,6 +742,10 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           onTap: () async {
                             // res returns a boolean based on if the db write was successful
                             final res = await createProjectPost();
+                            final projectProvider =
+                                context.read<ProjectProvider>();
+                            projectProvider.clearData();
+
                             // guarding against passing context across async gap
                             if (!mounted) {
                               return;
@@ -823,5 +813,12 @@ class _NewProjectFormState extends State<NewProjectForm> {
             )),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    teammates.clear();
+    rolesNeeded.clear();
+    super.dispose();
   }
 }

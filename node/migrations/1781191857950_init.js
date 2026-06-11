@@ -19,7 +19,7 @@ export const up = (pgm) => {
     "GRANT SELECT, INSERT, DELETE, UPDATE ON ALL TABLES IN SCHEMA projects TO carbon_user",
   );
   pgm.sql(
-    "ALTER DEFAULT PRIVILEGES IN SCHEMA projects GRANT SELECT, INSERT, DELETE, UPDATE ON TABLES TO carbon_user",
+    "ALTER DEFAULT PRIVILEGES IN SCHEMA projects GRANT SELECT, INSERT, UPDATE ON TABLES TO carbon_user",
   );
   pgm.sql(
     "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO carbon_master;",

@@ -115,6 +115,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
       // Project Provider to get values of teammates and roles needed
       var projectProvider =
           Provider.of<ProjectProvider>(context, listen: false);
+
+      // Error Message Builder for Missing Fields
       var errorText = "";
 
       if (title.isEmpty) {
@@ -168,7 +170,6 @@ class _NewProjectFormState extends State<NewProjectForm> {
             });
       }
 
-      if (projectProvider.teammates == []) {}
       projectData.addAll({
         "username": userProvider.username,
         "title": title,
@@ -178,15 +179,22 @@ class _NewProjectFormState extends State<NewProjectForm> {
         "is_public": isPublic,
         "is_group": isGroupProject,
         "etc": etc,
-        "roles_needed": rolesNeeded,
+        "teammates": [],
+        "roles_needed": [],
+        "images": []
       });
 
+      // Populate lists if not empty
+      if (projectProvider.images.isNotEmpty) {
+        debugPrint("Images Added: ${projectProvider.teammates}");
+        projectData["images"] = projectProvider.images;
+      }
       if (projectProvider.teammates.isNotEmpty) {
-        debugPrint("Populated teammates passed: ${projectProvider.teammates}");
+        debugPrint("Teammates Added: ${projectProvider.teammates}");
         projectData["teammates"] = projectProvider.teammates;
       }
       if (projectProvider.rolesNeeded.isNotEmpty) {
-        debugPrint("Populated roles passed: ${projectProvider.rolesNeeded}");
+        debugPrint("Roles Added: ${projectProvider.rolesNeeded}");
         projectData["roles_needed"] = projectProvider.rolesNeeded;
       }
 

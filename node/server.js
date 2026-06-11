@@ -2,8 +2,6 @@ import mongoose from "mongoose";
 import app from "./app.js";
 import dotenv from "dotenv";
 import { Client } from "pg";
-import https from "https";
-import fs from "fs";
 import { minioClient } from "./clients/minio.js";
 import {
   getProjectsCategoryAssets,

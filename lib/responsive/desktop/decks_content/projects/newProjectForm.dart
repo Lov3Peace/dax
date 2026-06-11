@@ -115,6 +115,8 @@ class _NewProjectFormState extends State<NewProjectForm> {
       // Project Provider to get values of teammates and roles needed
       var projectProvider =
           Provider.of<ProjectProvider>(context, listen: false);
+
+      // Error Message Builder for Missing Fields
       var errorText = "";
 
       if (title.isEmpty) {
@@ -182,6 +184,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
         "images": []
       });
 
+      // Populate lists if not empty
       if (projectProvider.images.isNotEmpty) {
         debugPrint("Images Added: ${projectProvider.teammates}");
         projectData["images"] = projectProvider.images;

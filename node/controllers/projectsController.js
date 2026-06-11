@@ -61,11 +61,23 @@ export const updateProjectCategoriesCollection = async function () {
       // If schema not in db then insert row in project categories table, create schema, and corresponding table
       if (!categoryCheck) {
         // Insert row into projects.categories
-        await pgClient.query(
-          `INSERT INTO projects.categories ( category, description, image, route) VALUES ( $1, $2, $3, $4) `,
-          [category, "DESCRIPTION", obj.name, route],
+        const insertQuery = format(
+          `INSERT INTO %I.%I ( category, description, image, route) VALUES ( $1, $2, $3, $4) `,
+          schemaName,
+          tableName,
         );
-        console.log(`Inserted Successfully for ${category}`);
+        await pgClient.query(insertQuery, [
+          category,
+          "DESCRIPTION",
+          obj.name,
+          route,
+        ]);
+        const newCategoryCheck = await pgClient.query(
+          `select category from projects.categories where category = '${category}'`,
+        );
+        if (newCategoryCheck.rowCount == 1) {
+          console.log(`Inserted Successfully for ${category}`);
+        }
         // End SQL Transaction
       }
       await pgClient.query("COMMIT");

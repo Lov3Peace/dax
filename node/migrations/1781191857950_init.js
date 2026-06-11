@@ -16,7 +16,7 @@ export const up = (pgm) => {
   );
   pgm.sql("GRANT USAGE ON SCHEMA projects TO carbon_user");
   pgm.sql(
-    "GRANT SELECT, INSERT, DELETE, UPDATE ON ALL TABLES IN SCHEMA projects TO carbon_user",
+    "GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA projects TO carbon_user",
   );
   pgm.sql(
     "ALTER DEFAULT PRIVILEGES IN SCHEMA projects GRANT SELECT, INSERT, UPDATE ON TABLES TO carbon_user",

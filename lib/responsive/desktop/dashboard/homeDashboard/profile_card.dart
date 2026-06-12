@@ -1,10 +1,9 @@
 import 'package:flutter_application_1/responsive/desktop/profile_popup/desk_profile_popup.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/userProvider.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
-import '../../../../util/providers/userAuthProvider.dart';
-import '../../../../util/providers/userProvider.dart';
-import '../../../../util/ui/tactile_button.dart';
 
 class ProfileCard extends StatelessWidget {
   ProfileCard(

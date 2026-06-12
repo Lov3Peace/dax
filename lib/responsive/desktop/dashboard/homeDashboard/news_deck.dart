@@ -1,20 +1,18 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:simple_animations/simple_animations.dart';
-import '../../../../main.dart';
-import '../../../../util/ui/tactile_button.dart';
+import 'package:flutter_application_1/util/ui/tactile_button.dart';
 
-class SocialsDeck extends StatefulWidget {
-  const SocialsDeck({super.key});
+class NewsDeck extends StatefulWidget {
+  const NewsDeck({
+    super.key,
+  });
 
   @override
-  State<SocialsDeck> createState() => _SocialsDeckState();
+  State<NewsDeck> createState() => _NewsDeckState();
 }
 
-class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
-  @override
+class _NewsDeckState extends State<NewsDeck> {
   @override
   void initState() {
     // TODO: implement initState
@@ -26,28 +24,27 @@ class _SocialsDeckState extends State<SocialsDeck> with AnimationMixin {
   Widget build(BuildContext context) {
     double deckHeight = 22.h(context);
     double deckWidth = 35.25.w(context);
-    double headingTextSize = 6.25.sp(context);
+    double headingTextSize = 6.5.sp(context);
     double labelTextSize = 2.5.sp(context);
     if (100.w(context) < 1440) {
-      // headingTextSize = headingTextSize * 0.9;
+      // headingTextSize = headingTextSize * 0.8;
     }
     return TactileButton(
       onTap: () {
-        router.go("/socials");
+        router.go("/news");
       },
       child: Deck(
         deckHeight: deckHeight,
         deckWidth: deckWidth,
-        deckName: 'Socials',
-        gradient1: orange,
+        deckName: 'News',
+        gradient1: blue,
         gradient2: purp,
-        neonGlow: orange,
+        neonGlow: blue,
         labelTextSize: labelTextSize,
-        headingText: 'All of your socials in one place.',
         headingTextSize: headingTextSize,
+        headingText: 'Stay up to date.',
         subText:
-            'Just link your social media accounts and access them all in one place.',
-        // image: Image.asset('images/crest1.png'),
+            'Add your preferred news source to get news updates to your feed.',
       ),
     );
   }

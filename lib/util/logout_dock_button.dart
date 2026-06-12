@@ -28,14 +28,11 @@ class LogoutWindowButton extends StatelessWidget {
       onTap: () {
         router.go('/launch');
       },
-      child: Hero(
-        tag: heroLogoutWindow,
-        child: Material(
-          color: tran,
-          child: Icon(
-            Ionicons.log_out_outline,
-            size: 5.sp(context),
-          ),
+      child: Material(
+        color: tran,
+        child: Icon(
+          Ionicons.log_out_outline,
+          size: 5.sp(context),
         ),
       ),
     );

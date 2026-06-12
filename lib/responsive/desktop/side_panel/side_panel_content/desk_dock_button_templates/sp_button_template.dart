@@ -12,11 +12,15 @@ class SpButtonTemplate extends StatefulWidget {
   final IconData icon;
   final String deskButtonText;
   final Widget child;
+  final double hoverWidth;
+  final double slideOverWidth;
 
   const SpButtonTemplate({
     required this.icon,
     required this.deskButtonText,
     required this.child,
+    required this.hoverWidth,
+    required this.slideOverWidth,
     Key? key,
   }) : super(key: key);
   @override
@@ -48,7 +52,7 @@ class SpButtonTemplateState extends State<SpButtonTemplate> {
         child: AnimatedContainer(
           constraints: BoxConstraints(maxHeight: 30.h(context)),
           duration: const Duration(milliseconds: 200),
-          padding: EdgeInsets.only(left: isHover ? 10 : 0),
+          padding: EdgeInsets.only(left: isHover ? widget.slideOverWidth : 0),
           decoration: BoxDecoration(
             gradient: isHover
                 ? const LinearGradient(
@@ -59,7 +63,7 @@ class SpButtonTemplateState extends State<SpButtonTemplate> {
                 : null,
             borderRadius: BorderRadius.circular(60),
           ),
-          width: 10.w(context),
+          width: widget.hoverWidth,
           height: 8.sp(context),
           child: Padding(
             padding: EdgeInsets.only(left: 1.w(context)),

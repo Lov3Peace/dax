@@ -3,7 +3,10 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DeskHomeButton extends StatefulWidget {
-  const DeskHomeButton({super.key});
+  const DeskHomeButton(
+      {super.key, this.text = "Home", required this.hoverWidth});
+  final String text;
+  final double hoverWidth;
 
   @override
   State<DeskHomeButton> createState() => _DeskHomeButtonState();
@@ -41,7 +44,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
                     gradient: const LinearGradient(colors: [red, pink]),
                     borderRadius: BorderRadius.circular(60),
                   ),
-                  width: isHover ? 10.w(context) : 0.25.w(context),
+                  width: isHover ? widget.hoverWidth : 0.25.w(context),
                   height: 7.sp(context),
                 ),
                 Expanded(
@@ -69,7 +72,7 @@ class _DeskHomeButtonState extends State<DeskHomeButton> {
                   Padding(
                     padding: EdgeInsets.only(left: 0.5.w(context)),
                     child: Text(
-                      'Home',
+                      widget.text,
                       style: GoogleFonts.montserrat(
                         textStyle: TextStyle(fontSize: 2.sp(context)),
                         fontWeight: FontWeight.w400,

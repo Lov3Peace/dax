@@ -2,6 +2,7 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/communiti
 import 'package:flutter_application_1/responsive/desktop/decks_content/desk_news_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/desk_socials_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/desktop_projects_page.dart';
+import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectDashboard.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectPostsPage.dart';
 import 'package:flutter_application_1/responsive/desktop/util/error_page.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
@@ -159,6 +160,17 @@ final GoRouter router = GoRouter(
           },
         ),
       ],
+    ),
+    GoRoute(
+      path: "/projectDashboard",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: DesktopProjectDashboard(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
     ),
   ],
 );

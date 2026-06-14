@@ -2,11 +2,13 @@
 
 import 'dart:convert';
 import 'dart:math' as math;
+import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/communities_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/events_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/my_projects_mini_dash.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/profile_card.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/projects_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/tasks_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/messages.dart';
+import 'package:flutter_application_1/responsive/desktop/messages/messages.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
 import 'package:flutter_application_1/util/weather_date.dart';
@@ -16,9 +18,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/animations/scaleFadeIn.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/communities_deck.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/profile_card.dart';
-import 'package:flutter_application_1/responsive/desktop/stagger_load.dart';
 import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';

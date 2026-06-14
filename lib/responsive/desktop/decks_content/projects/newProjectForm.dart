@@ -5,8 +5,8 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/projects/
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/estimatedTimeToCompletionLists.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectRolesList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
 import 'package:flutter_application_1/responsive/desktop/util/carbonSearchBox.dart';
-import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
@@ -742,16 +742,11 @@ class _NewProjectFormState extends State<NewProjectForm> {
                           onTap: () async {
                             // res returns a boolean based on if the db write was successful
                             final res = await createProjectPost();
-                            final projectProvider =
-                                context.read<ProjectProvider>();
-                            projectProvider.clearData();
 
                             // guarding against passing context across async gap
-                            if (!mounted) {
-                              return;
-                            }
-                            if (res is bool) {
-                              router.pop();
+                            if (!mounted) return;
+                            if (!res) {
+                              //Error on Insert
                               showDialog(
                                   barrierDismissible: true,
                                   context: context,
@@ -765,18 +760,13 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Icon(
-                                                  res
-                                                      ? Ionicons
-                                                          .checkmark_circle
-                                                      : Icons.error,
-                                                  color: res ? green : red,
+                                                const Icon(
+                                                  Icons.error,
+                                                  color: red,
                                                 ),
                                                 SizedBox(width: 1.w(context)),
                                                 Text(
-                                                  res
-                                                      ? "Project Posted Successfully"
-                                                      : "There was an error posting the project :(",
+                                                  "There was an error posting the project :(",
                                                   style: TextStyle(
                                                       fontSize: 5.sp(context),
                                                       fontWeight:
@@ -788,8 +778,43 @@ class _NewProjectFormState extends State<NewProjectForm> {
                                           )),
                                     );
                                   });
-                              Future.delayed(Duration(seconds: 2))
-                                  .then((_) => router.pop());
+                            } else {
+                              // Successfully Inserted
+                              router.pop();
+                              final projectProvider =
+                                  context.read<ProjectProvider>();
+                              projectProvider.clearData();
+                              showDialog(
+                                  barrierDismissible: true,
+                                  context: context,
+                                  builder: (context) {
+                                    return Center(
+                                      child: BlurryContainer(
+                                          width: 42.w(context),
+                                          height: 9.w(context),
+                                          child: Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                const Icon(
+                                                  Ionicons.checkmark_circle,
+                                                  color: green,
+                                                ),
+                                                SizedBox(width: 1.w(context)),
+                                                Text(
+                                                  "Project Posted Successfully",
+                                                  style: TextStyle(
+                                                      fontSize: 5.sp(context),
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      color: white),
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                                    );
+                                  });
                             }
                           },
                           scale: 1.08,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
+import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
 import 'package:flutter_application_1/util/ui/gradient_label.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:google_fonts/google_fonts.dart';

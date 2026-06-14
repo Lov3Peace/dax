@@ -1,6 +1,6 @@
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
-import 'package:flutter_application_1/responsive/desktop/large_stagger_load.dart';
+import 'package:flutter_application_1/responsive/desktop/util/large_stagger_load.dart';
 import 'package:flutter_application_1/responsive/desktop/util/test_web_ui_template.dart';
 import '../../../../util/imports.dart';
 

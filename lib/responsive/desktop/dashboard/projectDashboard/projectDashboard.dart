@@ -1,4 +1,5 @@
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
+import 'package:flutter_application_1/responsive/desktop/messages/compactMessages.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/compactSidePanel.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
@@ -18,6 +19,7 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
     return WebUiTemplate(
       title: "Projects",
       sidePanel: CompactSidePanel(),
+      messages: CompactMessages(),
       button1: CommunitiesButton(),
       button2: SocialsButton(),
       button3: NewsButton(),

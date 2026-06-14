@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
+import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:rive/rive.dart' as rive;

@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/messages/messages.dart';
 import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
@@ -10,8 +11,6 @@ import 'package:flutter_application_1/util/imports.dart';
 import '../../mobile/mob_artboard_page.dart';
 import '../../../util/weather_date.dart';
 import '../side_panel/side_panel.dart';
-
-import '../messages.dart';
 
 //import 'package:responsive_framework/responsive_framework.dart';
 

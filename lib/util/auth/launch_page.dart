@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
+import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
@@ -79,7 +79,7 @@ class _LaunchPageState extends State<LaunchPage> {
               );
             });
 
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(Duration(seconds: 3));
         // check mount after future
         if (!context.mounted) return;
         router.pop();

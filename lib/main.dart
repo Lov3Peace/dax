@@ -1,26 +1,16 @@
 import 'dart:async';
-import 'package:flutter_application_1/responsive/desktop/util/test_page.dart';
-import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:go_router/go_router.dart';
-import 'package:http/browser_client.dart' as httpClient;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_application_1/responsive/desktop/util/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:http/http.dart';
 import 'package:rive/rive.dart' as rive;
-import 'responsive/desktop/util/error_page.dart';
 import 'util/providers/userAuthProvider.dart';
 import 'util/providers/userProvider.dart';
-import 'responsive/desktop/util/go_routes.dart';
+import 'responsive/desktop/routes/go_routes.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

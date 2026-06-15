@@ -9,7 +9,7 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/projects/
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 // import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
-import 'package:flutter_application_1/responsive/desktop/large_stagger_load.dart';
+import 'package:flutter_application_1/responsive/desktop/util/stagger_load.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/util/ui/blurryContainer.dart';
 import 'package:flutter_application_1/util/ui/gradient_label.dart';

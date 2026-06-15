@@ -1,3 +1,5 @@
+import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/desk_dashboard.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashboard.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/communities/desk_hero_communities_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/desk_news_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/desk_socials_page.dart';
@@ -10,8 +12,6 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_application_1/main.dart';
-
-import '../dashboard/desk_dashboard.dart';
 
 /// The route configuration.
 final GoRouter router = GoRouter(
@@ -159,6 +159,17 @@ final GoRouter router = GoRouter(
           },
         ),
       ],
+    ),
+    GoRoute(
+      path: "/projectDashboard",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: DesktopProjectDashboard(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
     ),
   ],
 );

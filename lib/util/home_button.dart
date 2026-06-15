@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/desk_dashboard.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/desk_dashboard.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:simple_animations/simple_animations.dart';

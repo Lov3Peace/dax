@@ -8,7 +8,6 @@ import 'package:simple_animations/simple_animations.dart';
 import '../../../util/animations/soft_close.dart';
 import '../../../util/test/test_list.dart';
 import '../desk_decks.dart';
-import '../large_stagger_load.dart';
 import '../util/web_ui_template.dart';
 
 class DeskCommunitiesPage extends StatefulWidget {

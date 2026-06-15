@@ -291,18 +291,20 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         // if you click on the option...not sure why)
         setState(() {
           var optionSelected = optionsList[highlightIndex];
+          //this handles the CLICK
           if (optionsNode.hasFocus &&
               optionsList.contains(selectedItem) &&
               !selectedOptions.contains(selectedItem) &&
               !selectedOptions.contains(optionSelected)) {
             selectedOptions.add(selectedItem);
+            optionsList.clear();
+            //this else if handles the ENTER key
           } else if (optionsNode.hasFocus) {
             selectedOptions.add(optionSelected);
           }
           highlightIndex = 0;
         });
-        var projectProvider =
-            Provider.of<ProjectProvider>(context, listen: false);
+        var projectProvider = context.read<ProjectProvider>();
         projectProvider.saveTeammates(selectedOptions);
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!mounted) return;

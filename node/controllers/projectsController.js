@@ -216,5 +216,8 @@ export const createNewProject = async (req, res) => {
     return res.status(400).json("Could not insert into database");
   }
 
-  return res.status(201).json(`Project ${req.body.title} Posted Successfully`);
+  return res.status(201).json({
+    message: `Project ${req.body.title} Posted Successfully`,
+    error: "",
+  });
 };

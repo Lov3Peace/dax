@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/responsive/desktop/messages/messages.dart';
 import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter/widgets.dart';
@@ -11,24 +12,26 @@ import '../../mobile/mob_artboard_page.dart';
 import '../../../util/weather_date.dart';
 import '../side_panel/side_panel.dart';
 
-import '../messages.dart';
-
 //import 'package:responsive_framework/responsive_framework.dart';
 
 class WebUiTemplate extends StatelessWidget {
-  const WebUiTemplate(
-      {Key? key,
-      required this.child,
-      required this.title,
-      required this.button1,
-      required this.button2,
-      required this.button3})
-      : super(key: key);
+  const WebUiTemplate({
+    Key? key,
+    required this.child,
+    required this.title,
+    required this.button1,
+    required this.button2,
+    required this.button3,
+    this.messages = const Messages(),
+    this.sidePanel = const DesktopSidePanel(),
+  }) : super(key: key);
   final Widget child;
   final String title;
   final Widget button1;
   final Widget button2;
   final Widget button3;
+  final Widget sidePanel;
+  final Widget messages;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +54,7 @@ class WebUiTemplate extends StatelessWidget {
                 children: [
                   //
                   // Side Panel
-                  DesktopSidePanel(),
+                  sidePanel,
                   //
                   // Content
                   Expanded(
@@ -123,7 +126,7 @@ class WebUiTemplate extends StatelessWidget {
                   ),
                   //
                   // Messages
-                  Messages(),
+                  messages,
                 ],
               ),
 

@@ -1,20 +1,15 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/responsive/desktop/util/go_routes.dart';
+import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../responsive/mobile/mob_constants.dart';
-import 'Window Route/logout_window_route.dart';
 import 'package:http/browser_client.dart' as httpClient;
-
 import 'providers/userAuthProvider.dart';
 import 'providers/userProvider.dart';
 
@@ -28,14 +23,11 @@ class LogoutWindowButton extends StatelessWidget {
       onTap: () {
         router.go('/launch');
       },
-      child: Hero(
-        tag: heroLogoutWindow,
-        child: Material(
-          color: tran,
-          child: Icon(
-            Ionicons.log_out_outline,
-            size: 5.sp(context),
-          ),
+      child: Material(
+        color: tran,
+        child: Icon(
+          Ionicons.log_out_outline,
+          size: 5.sp(context),
         ),
       ),
     );
@@ -63,7 +55,7 @@ class _LogoutwindowPopupCardState extends State<LogoutWindowPopupCard>
       // Hitting the Login endpoint
       print('Fetching...');
       final client = httpClient.BrowserClient()..withCredentials = true;
-      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      final userProvider = context.read<UserProvider>();
       final username = userProvider.username;
       print("Got Username: $username");
       var res = await client

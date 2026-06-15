@@ -5,8 +5,6 @@ import '../../util/imports.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'util/go_routes.dart';
-
 final node_endpoint = Uri.parse('$hostname/api/register');
 
 class NodeTest extends StatelessWidget {

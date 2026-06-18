@@ -39,6 +39,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
   Widget build(BuildContext context) {
     return Hero(
       tag: "sidePanel",
+      flightShuttleBuilder: textFlightShuttleBuilder,
       child: ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
@@ -46,8 +47,8 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
             width: 12.5.w(context),
             height: 100.h(context),
             constraints: 100.w(context) > 2560
-                ? BoxConstraints(minHeight: 1440, minWidth: 250)
-                : BoxConstraints(minHeight: 1440, minWidth: 200),
+                ? BoxConstraints(minHeight: 1440, minWidth: 185)
+                : BoxConstraints(minHeight: 1440, minWidth: 185),
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
                 color: const Color.fromARGB(185, 21, 19, 22),

@@ -67,7 +67,7 @@ class _LaunchPageState extends State<LaunchPage> {
                               ),
                             RiveLoaded() => RiveWidget(
                                 controller: state.controller,
-                                fit: Fit.cover,
+                                fit: Fit.contain,
                               )
                           },
                           // fit: rive.Fit.cover,
@@ -112,7 +112,7 @@ class _LaunchPageState extends State<LaunchPage> {
               width: 100.w(context),
               child: Image.asset(
                 "images/alex-pavor-T6kZsf30NW0-unsplash.jpg",
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             ),
             // Main Container w/ Blur
@@ -280,7 +280,7 @@ class _LaunchPageState extends State<LaunchPage> {
                                       ],
                                     );
                                   });
-                              Future.delayed(Duration(seconds: 2), () {
+                              Future.delayed(Duration(seconds: 3), () {
                                 router.pop();
                                 router.go("/");
                               });
@@ -547,7 +547,7 @@ class _LaunchPageState extends State<LaunchPage> {
                                           ],
                                         );
                                       });
-                                  Future.delayed(const Duration(seconds: 2),
+                                  Future.delayed(const Duration(seconds: 3),
                                       () {
                                     if (!context.mounted) return;
                                     router.pop();

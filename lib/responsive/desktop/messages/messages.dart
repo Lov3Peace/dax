@@ -17,10 +17,11 @@ class _MessagesState extends State<Messages> {
   Widget build(BuildContext context) {
     return Hero(
       tag: "messages",
+      flightShuttleBuilder: textFlightShuttleBuilder,
       child: Container(
         constraints: 100.w(context) > 2560
-            ? BoxConstraints(minHeight: 900, minWidth: 225)
-            : BoxConstraints(minHeight: 450, minWidth: 200),
+            ? BoxConstraints(minHeight: 900, minWidth: 185)
+            : BoxConstraints(minHeight: 450, minWidth: 185),
         // margin: EdgeInsets.all(1.w(context)),
         decoration: BoxDecoration(
           color: deckColor,

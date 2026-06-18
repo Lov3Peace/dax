@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashFeed.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashHeadingProgress.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/messages/compactMessages.dart';
@@ -24,30 +25,89 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
       button1: CommunitiesButton(),
       button2: SocialsButton(),
       button3: NewsButton(),
-      child: Center(
-        child: Hero(
-            tag: "projectDash",
-            flightShuttleBuilder: textFlightShuttleBuilder,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(20, 7.5.w(context), 20, 20),
-              child: BlurryContainer(
-                height: 50.w(context),
-                width: 90.w(context),
-                constraints: BoxConstraints(minWidth: 1000, minHeight: 450),
-                padding: EdgeInsets.all(max(20, 1.5.w(context))),
-                borderRadius: 1.5.w(context),
-                color: deckBackgroundColor,
-                child: const SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Row(
-                    children: [
-                      Expanded(flex: 2, child: ProjectDashHeadingProgress()),
-                      Expanded(flex: 3, child: SizedBox()),
-                    ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Center(
+          child: Hero(
+              tag: "projectDash",
+              flightShuttleBuilder: textFlightShuttleBuilder,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                    1.w(context), 7.5.w(context), 1.w(context), 1.w(context)),
+                child: BlurryContainer(
+                  height: 50.w(context),
+                  width: 85.w(context),
+                  constraints: BoxConstraints(minWidth: 1000, minHeight: 900),
+                  // padding: EdgeInsets.all(max(20, 1.5.w(context))),
+                  borderRadius: 1.w(context),
+                  color: deckBackgroundColor,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Container(
+                      height: max(700, 50.w(context)),
+                      padding: EdgeInsets.all(max(20, 1.5.w(context))),
+                      //
+                      // Progress Heading and Upcoming Events
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    flex: 2,
+                                    child: ProjectDashHeadingProgress()),
+                                Expanded(flex: 3, child: SizedBox()),
+                              ],
+                            ),
+                          ),
+                          //
+                          Expanded(
+                            flex: 3,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                    //
+                                    // Feed and Graph Column
+                                    child: Column(
+                                  children: [
+                                    Expanded(
+                                        child: Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                              0,
+                                              max(5, 0.25.w(context)),
+                                              max(5, 0.25.w(context)),
+                                              max(5, 0.25.w(context)),
+                                            ),
+                                            child: ProjectDashFeed())),
+                                    Expanded(
+                                        child: Padding(
+                                      padding: EdgeInsets.fromLTRB(
+                                        0,
+                                        max(5, 0.25.w(context)),
+                                        max(5, 0.25.w(context)),
+                                        max(5, 0.25.w(context)),
+                                      ),
+                                      child: BlurryContainer(
+                                        color: tran,
+                                        child: SizedBox(),
+                                      ),
+                                    ))
+                                  ],
+                                )),
+                                //
+                                // Team, Current Workload, and Task Progress Column
+                                Expanded(child: Column())
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            )),
+              )),
+        ),
       ),
     );
   }

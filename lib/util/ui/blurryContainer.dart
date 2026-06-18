@@ -9,7 +9,7 @@ class BlurryContainer extends StatelessWidget {
       {super.key,
       this.height,
       this.width,
-      this.borderRadius = 100,
+      this.borderRadius = 20,
       this.color = const Color.fromARGB(220, 22, 19, 22),
       this.constraints,
       required this.child,

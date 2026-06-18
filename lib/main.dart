@@ -77,6 +77,8 @@ const Color tran = Color.fromARGB(0, 0, 0, 0);
 const Color white = Colors.white;
 const Color deckBackgroundColor = Color.fromARGB(160, 22, 19, 22);
 // Color deckBorderColor = const Color.fromARGB(182, 75, 75, 75);
+Color grey = Colors.grey.shade500;
+Color darkGrey = Colors.grey.shade700;
 
 //FONTSIZES
 double headerlowerlimit = 26;

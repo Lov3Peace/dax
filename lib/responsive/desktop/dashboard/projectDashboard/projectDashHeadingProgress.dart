@@ -2,6 +2,7 @@ import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.da
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/scaledButton.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/ui/pillButton.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 
 class ProjectDashHeadingProgress extends StatefulWidget {
@@ -33,24 +34,22 @@ class _ProjectDashHeadingProgressState
                 child: GradientText(
                   text: "Carbon",
                   gradients: [pink, red],
-                  fontSize: max(headerlowerlimit, 10.sp(context)),
+                  fontSize: max(36, 10.sp(context)),
                   fontWeight: FontWeight.bold,
                   lineHeight: 1,
                 ),
               ),
             ),
-            TactileButton(
-                scale: 1.07,
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 1.5.w(context), vertical: 0.5.w(context)),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.w(context)),
-                    border: Border.all(color: white),
-                    color: tran,
-                  ),
-                  child: Text('Overview'),
-                ))
+            PillButton(
+              scale: 1.04,
+              padding: EdgeInsetsGeometry.symmetric(
+                  horizontal: 2.w(context), vertical: 0.5.w(context)),
+              color: tran,
+              textColor: darkGrey,
+              borderRadius: 10.w(context),
+              borderColor: darkGrey,
+              text: 'Overview',
+            ),
           ],
         ),
         Align(

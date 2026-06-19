@@ -18,6 +18,7 @@ class DesktopProjectDashboard extends StatefulWidget {
 class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
   @override
   Widget build(BuildContext context) {
+    print(50.w(context));
     return WebUiTemplate(
       title: "Projects",
       sidePanel: CompactSidePanel(),
@@ -25,32 +26,34 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
       button1: CommunitiesButton(),
       button2: SocialsButton(),
       button3: NewsButton(),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Center(
+      child: Center(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
           child: Hero(
               tag: "projectDash",
               flightShuttleBuilder: textFlightShuttleBuilder,
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
-                    1.w(context), 7.5.w(context), 1.w(context), 1.w(context)),
+                    0.w(context), 6.w(context), 0.w(context), 0.w(context)),
                 child: BlurryContainer(
                   height: 50.w(context),
                   width: 85.w(context),
-                  constraints: BoxConstraints(minWidth: 1000, minHeight: 900),
-                  // padding: EdgeInsets.all(max(20, 1.5.w(context))),
+                  constraints:
+                      const BoxConstraints(minWidth: 1000, minHeight: 700),
                   borderRadius: 1.w(context),
                   color: deckBackgroundColor,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Container(
-                      height: max(700, 50.w(context)),
+                      height: 50.w(context),
+                      constraints:
+                          const BoxConstraints(minWidth: 1000, minHeight: 700),
                       padding: EdgeInsets.all(max(20, 1.5.w(context))),
                       //
                       // Progress Heading and Upcoming Events
                       child: Column(
                         children: [
-                          Expanded(
+                          const Expanded(
                             flex: 1,
                             child: Row(
                               children: [
@@ -75,18 +78,18 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                         child: Padding(
                                             padding: EdgeInsets.fromLTRB(
                                               0,
-                                              max(5, 0.25.w(context)),
-                                              max(5, 0.25.w(context)),
-                                              max(5, 0.25.w(context)),
+                                              0.25.w(context),
+                                              0.25.w(context),
+                                              0.25.w(context),
                                             ),
                                             child: ProjectDashFeed())),
                                     Expanded(
                                         child: Padding(
                                       padding: EdgeInsets.fromLTRB(
                                         0,
-                                        max(5, 0.25.w(context)),
-                                        max(5, 0.25.w(context)),
-                                        max(5, 0.25.w(context)),
+                                        0.25.w(context),
+                                        0.25.w(context),
+                                        0.25.w(context),
                                       ),
                                       child: BlurryContainer(
                                         color: tran,

@@ -52,12 +52,12 @@ class CompactSidePanel extends StatelessWidget {
                           //Logo
                           Padding(
                             padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(1.5.w(context))),
-                                clipBehavior: Clip.hardEdge,
-                                child: Image.asset("images/omni-temp-logo.png",
-                                    height: 15.sp(context))),
+                            child: Text(
+                              "",
+                              style: TextStyle(
+                                  fontSize: max(16, 7.sp(context)),
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                           CompactSidePanelButtons(),
                           Spacer(),

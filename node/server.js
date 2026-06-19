@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import app from "./app.js";
 import dotenv from "dotenv";
-import { Client } from "pg";
+import { Pool } from "pg";
 import { minioClient } from "./clients/minio.js";
 import {
   getProjectsCategoryAssets,
@@ -18,12 +18,13 @@ const port = process.env.PORT;
 
 app.listen(port, console.log(`Dax Server listening on port ${port}!`));
 
-export const pgClient = new Client({
+export const pgClient = new Pool({
   host: process.env.PG_DB_HOST,
   port: process.env.PG_DB_PORT,
   database: process.env.PG_DB_NAME,
   user: process.env.PG_DB_USER,
   password: process.env.PG_DB_USER_PW,
+  max: 50,
 });
 
 pgClient

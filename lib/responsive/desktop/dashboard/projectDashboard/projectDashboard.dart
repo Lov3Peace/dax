@@ -31,6 +31,7 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
         child: Container(
           height: 100.h(context),
           width: 100.w(context),
+          constraints: BoxConstraints(minHeight: 900),
           child: Stack(
             children: [
               // Background(),
@@ -70,21 +71,10 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                       //
                                       // Title of Screen
                                       BlurryContainer(
-                                        height: 4.w(context),
-                                        width: 17.25.w(context),
                                         borderRadius: 50.w(context),
                                         color: deckBackgroundColor,
                                         child: Center(
-                                          child: WeatherDate(
-                                            constraints: 100.w(context) >= 2560
-                                                ? const BoxConstraints(
-                                                    minHeight: 100,
-                                                    maxHeight: 300)
-                                                : const BoxConstraints(
-                                                    minHeight: 70,
-                                                    maxHeight: 200),
-                                            // height: 50,
-                                          ),
+                                          child: WeatherDate(),
                                         ),
                                       ),
 
@@ -101,22 +91,23 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                             ],
                           ),
                           Expanded(
-                            child: Scrollbar(
-                              thumbVisibility: true,
-                              interactive: true,
-                              controller: horizontalScrollController,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: max(10, 1.w(context))),
+                              child: Scrollbar(
+                                thumbVisibility: true,
+                                interactive: true,
                                 controller: horizontalScrollController,
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
+                                  controller: horizontalScrollController,
                                   child: Center(
                                     child: Hero(
                                         tag: "projectDash",
                                         flightShuttleBuilder:
                                             textFlightShuttleBuilder,
                                         child: BlurryContainer(
-                                          height: 45.w(context),
+                                          height: 50.w(context),
                                           // CompactSidePanel and CompactMessages are 6.25.w wide each
                                           width: 85.25.w(context),
                                           constraints: const BoxConstraints(
@@ -132,9 +123,10 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                             //
                                             // Progress Heading and Upcoming Events
                                             child: Column(
+                                              spacing: max(10, 1.w(context)),
                                               children: [
                                                 const Expanded(
-                                                  flex: 1,
+                                                  flex: 3,
                                                   child: Row(
                                                     children: [
                                                       Expanded(
@@ -149,7 +141,7 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                 ),
                                                 //
                                                 Expanded(
-                                                  flex: 3,
+                                                  flex: 10,
                                                   child: Row(
                                                     children: [
                                                       Expanded(

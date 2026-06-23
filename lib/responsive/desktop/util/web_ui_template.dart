@@ -103,15 +103,8 @@ class WebUiTemplate extends StatelessWidget {
                                         color: deckBackgroundColor,
                                         child: Center(
                                           child: WeatherDate(
-                                            constraints: 100.w(context) >= 2560
-                                                ? const BoxConstraints(
-                                                    minHeight: 100,
-                                                    maxHeight: 300)
-                                                : const BoxConstraints(
-                                                    minHeight: 70,
-                                                    maxHeight: 200),
-                                            // height: 50,
-                                          ),
+                                              // height: 50,
+                                              ),
                                         ),
                                       ),
 

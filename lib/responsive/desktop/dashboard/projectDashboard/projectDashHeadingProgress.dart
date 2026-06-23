@@ -20,37 +20,38 @@ class _ProjectDashHeadingProgressState
     //
     // Project Title, Progress Bar, Spacer
     return Column(
+      // spacing is being determined by the flex ratio in projectDashboard.dart
       // crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: max(10, 0.5.w(context)),
+      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(bottom: max(0, 0.w(context))),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
                 child: GradientText(
                   text: "Carbon",
                   gradients: [pink, red],
-                  fontSize: max(16, 10.sp(context)),
+                  fontSize: max(headerlowerlimit, 10.sp(context)),
                   fontWeight: FontWeight.bold,
                   lineHeight: 1,
                 ),
               ),
-            ),
-            PillButton(
-              scale: 1.04,
-              padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: 2.w(context), vertical: 0.5.w(context)),
-              color: tran,
-              textColor: darkGrey,
-              borderRadius: 10.w(context),
-              borderColor: darkGrey,
-              text: 'Overview',
-              textSize: max(12, 2.sp(context)),
-            ),
-          ],
+              PillButton(
+                scale: 1.04,
+                padding: EdgeInsetsGeometry.symmetric(
+                    horizontal: 2.w(context), vertical: 0.5.w(context)),
+                color: tran,
+                textColor: darkGrey,
+                borderRadius: 10.w(context),
+                borderColor: darkGrey,
+                text: 'Overview',
+                textSize: max(12, 2.sp(context)),
+              ),
+            ],
+          ),
         ),
         Align(
           alignment: Alignment.centerLeft,
@@ -62,49 +63,45 @@ class _ProjectDashHeadingProgressState
                 color: Colors.grey.shade400),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              flex: 4,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: SizedBox(
-                  child: Text(
-                    "Turning ideas into projects and projects into companies.",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: max(12, 3.sp(context)),
-                        fontWeight: FontWeight.normal),
-                  ),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                flex: 4,
+                child: Text(
+                  "Turning ideas into projects and projects into companies.",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontSize: max(12, 3.sp(context)),
+                      fontWeight: FontWeight.normal),
                 ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Align(
-                alignment: Alignment.centerRight,
+              Expanded(
+                flex: 1,
                 child: TactileButton(
                   scale: 1.05,
                   child: Text(
                     "17%",
+                    textAlign: TextAlign.right,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        fontSize: max(headerlowerlimit, 5.5.sp(context)),
+                        fontSize: max(12, 5.5.sp(context)),
                         fontWeight: FontWeight.w800,
-                        height: 1.25),
+                        height: 1),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         Container(
           width: max(250, double.infinity),
           child: FAProgressBar(
             maxValue: 100,
             currentValue: 17,
-            size: 17,
+            size: 1.w(context),
             borderRadius: BorderRadius.circular(10.w(context)),
             backgroundColor: deckBorderColor,
             animatedDuration: const Duration(milliseconds: 300),

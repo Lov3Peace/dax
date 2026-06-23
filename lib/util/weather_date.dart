@@ -8,13 +8,11 @@ import 'package:provider/provider.dart';
 class WeatherDate extends StatelessWidget {
   final double width;
   final double height;
-  final BoxConstraints constraints;
   final VoidCallback? onTap;
 
   WeatherDate({
     this.width = 0,
     this.height = 0,
-    required this.constraints,
     this.onTap,
     Key? key,
   }) : super(key: key);

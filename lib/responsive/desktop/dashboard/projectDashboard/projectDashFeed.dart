@@ -12,7 +12,7 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
   @override
   Widget build(BuildContext context) {
     return BlurryContainer(
-      constraints: BoxConstraints(minWidth: 100, minHeight: 100),
+      // constraints: BoxConstraints(minWidth: 100, minHeight: 100),
       padding: EdgeInsets.all(max(5, 1.w(context))),
       color: tran,
       child: Column(

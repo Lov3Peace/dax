@@ -112,10 +112,6 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
                                                   child: WeatherDate(
                                                     // height: 5.w(context),
                                                     width: double.infinity,
-                                                    constraints: BoxConstraints(
-                                                      minWidth: 300,
-                                                      minHeight: 50,
-                                                    ),
                                                   ),
                                                 ),
                                               ),

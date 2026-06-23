@@ -19,7 +19,7 @@ class BubbleDock extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(0.75.w(context)),
-      height: 7.h(context),
+      height: 4.w(context),
       constraints: 100.w(context) >= 2560
           ? const BoxConstraints(minHeight: 100, maxHeight: 300)
           : const BoxConstraints(minHeight: 70, maxHeight: 200),

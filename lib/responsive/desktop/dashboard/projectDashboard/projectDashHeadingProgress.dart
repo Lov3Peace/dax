@@ -17,10 +17,9 @@ class _ProjectDashHeadingProgressState
     extends State<ProjectDashHeadingProgress> {
   @override
   Widget build(BuildContext context) {
-    return
-        //
-        // Project Title, Progress Bar, Spacer
-        Column(
+    //
+    // Project Title, Progress Bar, Spacer
+    return Column(
       // crossAxisAlignment: CrossAxisAlignment.start,
       spacing: max(10, 0.5.w(context)),
       children: [
@@ -34,7 +33,7 @@ class _ProjectDashHeadingProgressState
                 child: GradientText(
                   text: "Carbon",
                   gradients: [pink, red],
-                  fontSize: max(36, 10.sp(context)),
+                  fontSize: max(16, 10.sp(context)),
                   fontWeight: FontWeight.bold,
                   lineHeight: 1,
                 ),
@@ -49,6 +48,7 @@ class _ProjectDashHeadingProgressState
               borderRadius: 10.w(context),
               borderColor: darkGrey,
               text: 'Overview',
+              textSize: max(12, 2.sp(context)),
             ),
           ],
         ),

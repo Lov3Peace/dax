@@ -6,6 +6,7 @@ class PillButton extends StatelessWidget {
   PillButton(
       {super.key,
       this.text,
+      required this.textSize,
       required this.scale,
       required this.padding,
       required this.color,
@@ -15,6 +16,7 @@ class PillButton extends StatelessWidget {
 
   final EdgeInsetsGeometry padding;
   final String? text;
+  final double textSize;
   final double borderRadius;
   double scale = 1.03;
   Color color = tran;
@@ -32,7 +34,10 @@ class PillButton extends StatelessWidget {
             border: Border.all(color: borderColor),
             color: color,
           ),
-          child: Text(text ?? ''),
+          child: Text(
+            text ?? '',
+            style: TextStyle(fontSize: textSize),
+          ),
         ));
   }
 }

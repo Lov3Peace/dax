@@ -37,6 +37,7 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
                 borderRadius: 10.w(context),
                 borderColor: darkGrey,
                 text: 'New Post',
+                textSize: max(12, 2.sp(context)),
               )
             ],
           )

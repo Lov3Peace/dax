@@ -34,7 +34,7 @@ class _ProjectDashHeadingProgressState
                 child: GradientText(
                   text: "Carbon",
                   gradients: [pink, red],
-                  fontSize: max(headerlowerlimit, 10.sp(context)),
+                  fontSize: max(36, 10.sp(context)),
                   fontWeight: FontWeight.bold,
                   lineHeight: 1,
                 ),
@@ -87,7 +87,7 @@ class _ProjectDashHeadingProgressState
                     textAlign: TextAlign.right,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                        fontSize: max(12, 5.5.sp(context)),
+                        fontSize: max(headerlowerlimit, 5.5.sp(context)),
                         fontWeight: FontWeight.w800,
                         height: 1),
                   ),

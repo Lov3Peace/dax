@@ -22,8 +22,6 @@ ScrollController horizontalScrollController = ScrollController();
 class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
   @override
   Widget build(BuildContext context) {
-    print(45.w(context));
-    print(100.h(context));
     return Scaffold(
       body: SingleChildScrollView(
         physics: AlwaysScrollableScrollPhysics(),
@@ -46,78 +44,82 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                   //
                   // Content
                   Expanded(
-                    child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // crossAxisAlignment: CrossAxisAlignment.center,
-                        // mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
-                                // the padding on the LargeStagger list items)
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                      0.5.w(context),
-                                      1.w(context),
-                                      0.5.w(context),
-                                      0.5.w(context)),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      //
-                                      // Title of Screen
-                                      BlurryContainer(
-                                        borderRadius: 50.w(context),
-                                        color: deckBackgroundColor,
-                                        child: Center(
-                                          child: WeatherDate(),
+                    child: Padding(
+                      padding: EdgeInsets.all(0.5.w(context)),
+                      child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          // crossAxisAlignment: CrossAxisAlignment.center,
+                          // mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
+                                  // the padding on the LargeStagger list items)
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(
+                                        0.w(context),
+                                        1.w(context),
+                                        0.w(context),
+                                        0.w(context)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        //
+                                        // Title of Screen
+                                        BlurryContainer(
+                                          borderRadius: 50.w(context),
+                                          color: deckBackgroundColor,
+                                          width: max(250, 17.25.w(context)),
+                                          height: max(50, 4.w(context)),
+                                          child: Center(
+                                            child: WeatherDate(),
+                                          ),
                                         ),
-                                      ),
 
-                                      //
-                                      //Houses Deck Buttons
-                                      BubbleDock(
-                                          child1: CommunitiesButton(),
-                                          child2: SizedBox(),
-                                          child3: SizedBox()),
-                                    ],
+                                        //
+                                        //Houses Deck Buttons
+                                        BubbleDock(
+                                            child1: CommunitiesButton(),
+                                            child2: SizedBox(),
+                                            child3: SizedBox()),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  vertical: max(10, 1.w(context))),
-                              child: Scrollbar(
-                                thumbVisibility: true,
-                                interactive: true,
-                                controller: horizontalScrollController,
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
+                              ],
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: max(10, 1.w(context)),
+                                ),
+                                child: Scrollbar(
+                                  thumbVisibility: true,
+                                  interactive: true,
                                   controller: horizontalScrollController,
-                                  child: Center(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    controller: horizontalScrollController,
                                     child: Hero(
                                         tag: "projectDash",
                                         flightShuttleBuilder:
                                             textFlightShuttleBuilder,
                                         child: BlurryContainer(
-                                          height: 50.w(context),
+                                          // height: 50.w(context),
                                           // CompactSidePanel and CompactMessages are 6.25.w wide each
-                                          width: 85.25.w(context),
+                                          width: 86.w(context),
                                           constraints: const BoxConstraints(
-                                              minWidth: 1000, minHeight: 700),
+                                              minWidth: 1000, minHeight: 800),
                                           borderRadius: 1.w(context),
                                           color: deckBackgroundColor,
                                           child: Container(
                                             height: 50.w(context),
                                             constraints: const BoxConstraints(
-                                                minWidth: 1000, minHeight: 700),
+                                                minWidth: 1000, minHeight: 800),
                                             padding: EdgeInsets.all(
                                                 max(20, 1.5.w(context))),
                                             //
@@ -195,8 +197,8 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                 ),
                               ),
                             ),
-                          ),
-                        ]),
+                          ]),
+                    ),
                   ),
                   //
                   // Messages

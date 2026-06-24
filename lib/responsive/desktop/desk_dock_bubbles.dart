@@ -83,13 +83,13 @@ class CommunitiesButton extends StatelessWidget {
         child: GradientContainer(
           gradient1: red,
           gradient2: orange,
-          height: double.infinity,
-          width: 7.w(context),
+          height: max(50, double.infinity),
+          width: max(100, 7.w(context)),
           neonGlow: orangeGlow,
           text: 'Communities',
-          textSize: 2.sp(context),
+          textSize: max(10, 2.sp(context)),
           borderColor: const Color.fromARGB(0, 255, 255, 255),
-          borderRadius: 500,
+          borderRadius: max(100, 100.w(context)),
         ),
       ),
     );

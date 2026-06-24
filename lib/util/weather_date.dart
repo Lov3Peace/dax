@@ -54,7 +54,7 @@ class WeatherDate extends StatelessWidget {
           TextSpan(
               text: weatherTemp,
               style: GoogleFonts.montserrat(
-                fontSize: 3.sp(context),
+                fontSize: max(12, 3.sp(context)),
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               )),
@@ -64,7 +64,7 @@ class WeatherDate extends StatelessWidget {
           TextSpan(
               text: DateFormat.yMMMEd().format(DateTime.now()),
               style: GoogleFonts.montserrat(
-                fontSize: 3.sp(context),
+                fontSize: max(12, 3.sp(context)),
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ))

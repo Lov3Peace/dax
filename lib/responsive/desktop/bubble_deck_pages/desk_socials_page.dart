@@ -68,7 +68,6 @@ class _DeskSocialsPageState extends State<DeskSocialsPage> with AnimationMixin {
                   WeatherDate(
                     height: 5.w(context),
                     width: 17.25.w(context),
-                    constraints: BoxConstraints(minWidth: 250, minHeight: 50),
                     // height: 50,
                   ),
 

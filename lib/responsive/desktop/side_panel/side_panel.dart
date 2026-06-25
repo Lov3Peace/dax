@@ -39,6 +39,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
   Widget build(BuildContext context) {
     return Hero(
       tag: "sidePanel",
+      flightShuttleBuilder: textFlightShuttleBuilder,
       child: ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
@@ -46,8 +47,8 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
             width: 12.5.w(context),
             height: 100.h(context),
             constraints: 100.w(context) > 2560
-                ? BoxConstraints(minHeight: 1440, minWidth: 250)
-                : BoxConstraints(minHeight: 1440, minWidth: 200),
+                ? BoxConstraints(minHeight: 1440, minWidth: 185)
+                : BoxConstraints(minHeight: 1440, minWidth: 185),
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
                 color: const Color.fromARGB(185, 21, 19, 22),
@@ -64,35 +65,41 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: IntrinsicHeight(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 1.w(context)),
-                      child: Column(
-                        spacing: 20,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisSize: MainAxisSize.min,
-                        children: [
-                          //Logo
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(0, 50, 0, 20),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.all(
-                                    Radius.circular(1.5.w(context))),
-                                clipBehavior: Clip.hardEdge,
-                                child: Image.asset("images/omni-temp-logo.png",
-                                    height: 15.sp(context))),
-                          ),
-                          SidePanelButtons(),
-                          Spacer(),
-                          //Logout
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 20),
-                            child: TactileButton(
-                              child: LogoutWindowButton(),
+                    child: Column(
+                      spacing: 20,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // mainAxisSize: MainAxisSize.min,
+                      children: [
+                        //Logo
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: max(20, 5.w(context)),
+                                bottom: max(10, 2.w(context))),
+                            child: Text(
+                              "Carbon",
+                              style: TextStyle(
+                                  fontSize: max(14, 5.sp(context)),
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 1.w(context)),
+                          child: SidePanelButtons(),
+                        ),
+                        Spacer(),
+                        //Logout
+                        Padding(
+                          padding:
+                              EdgeInsets.only(left: 1.w(context), bottom: 20),
+                          child: TactileButton(
+                            child: LogoutWindowButton(),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

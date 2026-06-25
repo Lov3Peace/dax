@@ -97,16 +97,14 @@ class WebUiTemplate extends StatelessWidget {
                                       //
                                       // Title of Screen
                                       BlurryContainer(
-                                        height: 5.w(context),
+                                        height: 4.w(context),
                                         width: 17.25.w(context),
                                         borderRadius: 50.w(context),
                                         color: deckBackgroundColor,
                                         child: Center(
                                           child: WeatherDate(
-                                            constraints: BoxConstraints(
-                                                minWidth: 250, minHeight: 50),
-                                            // height: 50,
-                                          ),
+                                              // height: 50,
+                                              ),
                                         ),
                                       ),
 

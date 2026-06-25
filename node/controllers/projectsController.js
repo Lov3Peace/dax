@@ -221,3 +221,7 @@ export const createNewProject = async (req, res) => {
     error: "",
   });
 };
+
+export const getProjectFeed = async (req, res) => {
+  console.log("Retrieving Project Feed...");
+};

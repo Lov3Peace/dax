@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/desk_dashboard.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/desktop_home_dashboard.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/communities/desk_hero_communities_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/desktop_projects_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectPostsPage.dart';

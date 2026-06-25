@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/desk_dashboard.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/desktop_home_dashboard.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashboard.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/communities/desk_hero_communities_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/desk_news_page.dart';

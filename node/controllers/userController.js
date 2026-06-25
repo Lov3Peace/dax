@@ -5,9 +5,14 @@ import User from "../storage/models/user.js";
 export const getUsers = async (req, res) => {
   console.log("Get Users Hit");
   const param = req.query.searchString;
+  // Only search for users that have characters starting with the query string
+  const regex = new RegExp("^" + param, "i");
   let users;
   if (param) {
-    users = await User.find({ username: { $regex: param } }).limit(25);
+    // Only return the username in the response, not the whole user object
+    users = await User.find({ username: { $regex: regex } }, "username").limit(
+      25,
+    );
     return res.status(200).json(users);
   } else {
     return res.status(400).json("Search cannot be empty!");

@@ -10,7 +10,7 @@ export const shorthands = undefined;
  */
 export const up = (pgm) => {
   pgm.sql(
-    "CREATE TABLE projects.feeds (id BIGINT generated always as IDENTITY,pid BIGINT,user_id BIGINT,event_type smallint,content JSONB,timestamp TIMESTAMPTZ);",
+    "CREATE TABLE projects.feeds (id BIGINT generated always as IDENTITY PRIMARY KEY, pid BIGINT,username VARCHAR, event_type smallint, content JSONB, timestamp TIMESTAMPTZ DEFAULT NOW());",
   );
 };
 

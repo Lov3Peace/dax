@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { minioClient } from "../clients/minio.js";
-import { pgClient } from "../server.js";
-import { errorLog, infoLog } from "../log.js";
+import { io, pgClient } from "../server.js";
+import { logger } from "../log.js";
 import ProjectCategories from "../storage/models/projectCategory.js";
 import format from "pg-format";
 import categoriesJson from "../storage/models/projectCategories.json" with { type: "json" };
@@ -77,10 +77,10 @@ export const updateProjectCategoriesCollection = async function () {
         );
         if (newCategoryCheck.rowCount === 1) {
           console.log(`Inserted Successfully for ${category}`);
-          infoLog.info(`Inserted Successfully for ${category}`);
+          logger.info(`Inserted Successfully for ${category}`);
         } else {
           console.log(`Error Inserting Row for ${category}`);
-          errorLog.error(`Error Inserting Row for ${category}`);
+          logger.error(`Error Inserting Row for ${category}`);
         }
         // End SQL Transaction
       }
@@ -136,7 +136,7 @@ export const getProjectPosts = async function (req, res) {
       return res.status(200).json(posts.rows);
     } catch (e) {
       console.log("Unable to read from DB. Rolling Back...");
-      errorLog.error(
+      logger.error(
         `There was an error retrieving posts for ${projectCategory}: ${e}`,
       );
       await pgClient.query("ROLLBACK");
@@ -146,7 +146,7 @@ export const getProjectPosts = async function (req, res) {
     }
   } catch (e) {
     console.log("Error: ", e);
-    errorLog.error(
+    logger.error(
       `There was an error retrieving posts for ${projectCategory}: ${e}`,
     );
     return res
@@ -222,6 +222,51 @@ export const createNewProject = async (req, res) => {
   });
 };
 
-export const getProjectFeed = async (req, res) => {
-  console.log("Retrieving Project Feed...");
+export const createProjectFeedPost = async (socket) => {
+  // Create Project Feed Post Basded on PID
+  socket.on("createProjectFeedPost", async (reqBody) => {
+    console.log("Creating New Feed Post...");
+    const username = reqBody["username"];
+    const pid = reqBody["pid"];
+    const content = reqBody["content"];
+    const event_type = reqBody["event_type"];
+
+    await pgClient.query("BEGIN");
+    const feed = await pgClient.query(
+      format(
+        `INSERT INTO %I.%I (pid, username, event_type, content) VALUES ($1, $2, $3, $4)`,
+        "projects",
+        "feeds",
+      ),
+      [pid, username, event_type, content],
+    );
+    // console.log("Feed: ", feed.rows);
+
+    await pgClient.query("COMMIT");
+    // TO-DO
+    socket
+      .to(pid)
+      .emit("feedUpdate", { pid: pid, username: username, content: content });
+  });
+};
+
+export const getProjectFeed = (socket) => {
+  // Retrieve Project Feed Based on PID
+  socket.on("getProjectFeed", async (pid) => {
+    // Join Room for PID
+    socket.join(pid.toString());
+
+    console.log("Socket ID for getProjectFeed: ", socket.id);
+    console.log(`Retrieving Project Feed for PID: ${pid}...`);
+    // Query DB for Posts Based on PID
+    await pgClient.query("BEGIN");
+    const feed = await pgClient.query(
+      format(`SELECT * from %I.%I where pid = $1`, "projects", "feeds"),
+      [pid],
+    );
+    console.log("Feed: ", feed.rows);
+
+    await pgClient.query("COMMIT");
+    socket.emit("feedResponse", feed.rows);
+  });
 };

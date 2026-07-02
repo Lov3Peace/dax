@@ -1,5 +1,5 @@
 import { minioClient } from "../clients/minio.js";
-import { errorLog, infoLog } from "../log.js";
+import { logger } from "../log.js";
 import ProfileCrests from "../storage/models/profile-crests.js";
 
 export const getProfileCrestAssets = async (req, res) => {

@@ -1,7 +1,7 @@
 import { Client } from "pg";
 import User from "../storage/models/user.js";
 // Logger for info, debug, errors, etc.
-import { errorLog, infoLog } from "../log.js";
+import { logger } from "../log.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { generateKeyPairSync } from "crypto";
@@ -13,12 +13,12 @@ const userCheck = async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
   if (!username || !password) {
-    infoLog.info(`Username/password cannot be null`);
+    logger.info(`Username/password cannot be null`);
     res.status(400).json({ error: "Must input username and password!" });
     return user;
   }
   if (!user) {
-    infoLog.info(`User ${username} not found`);
+    logger.info(`User ${username} not found`);
     res.status(404).json({ error: `User ${username} not found` });
     return user;
   }
@@ -85,7 +85,7 @@ export const register = async (req, res) => {
     // response in JSON format with the 201 status code.
     // If it fails then return status code of 500 and
     // the error in JSON format
-    infoLog.info(`User ${newUser.username} Account Created Successfully`);
+    logger.info(`User ${newUser.username} Account Created Successfully`);
     return res.status(201).json({
       message: `User ${user} created successfully!`,
       username: newUser.username,
@@ -93,7 +93,7 @@ export const register = async (req, res) => {
       error: "",
     });
   } catch (error) {
-    errorLog.error("error", error);
+    logger.error("error", error);
     return res.status(500).json(error);
   }
 };
@@ -153,7 +153,7 @@ export const login = async (req, res) => {
           secure: true,
           maxAge: thirtyDays,
         });
-        infoLog.info(`${user.username} logged in successfully`);
+        logger.info(`${user.username} logged in successfully`);
         console.log(`${user.username} logged in Successfully`);
 
         res.setHeader("Authorization", accessToken);
@@ -165,7 +165,7 @@ export const login = async (req, res) => {
           error: "",
         });
       } else {
-        infoLog.info(`Invalid username / password - try again.`);
+        logger.info(`Invalid username / password - try again.`);
         console.log(`Invalid username / password - try again.`);
         return res
           .status(401)
@@ -173,7 +173,7 @@ export const login = async (req, res) => {
       }
     }
   } catch (error) {
-    errorLog.error("error: ", error);
+    logger.error("error: ", error);
     return res.status(500).json({ error: `${error} ` });
   }
 };
@@ -199,7 +199,7 @@ export const logout = async (req, res) => {
     });
     return res.status(200).json({ message: `User has been logged out.` });
   } catch (error) {
-    errorLog.error(`Unable to log out: ${error} `);
+    logger.error(`Unable to log out: ${error} `);
     console.log(`Unable to log out: ${error} `);
     return res.status(500).json(`Unable to log out - try again later.`);
   }
@@ -228,7 +228,7 @@ export const deleteUser = async (req, res) => {
         .json({ error: `Authentication for '${user.username}' failed` });
     }
   } catch (error) {
-    errorLog.error(error);
+    logger.error(error);
     return res.status(500).json(error);
   }
 };

@@ -1,6 +1,6 @@
 import User from "../storage/models/user.js";
 // Logger for info, debug, errors, etc.
-import { errorLog, infoLog } from "../log.js";
+import { logger } from "../log.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { generateKeyPairSync } from "crypto";
@@ -26,7 +26,7 @@ const authCheck = async (req, res, next) => {
     } else {
       // res.clearCookie("token");
       // res.clearCookie("username");
-      infoLog.info(`No token found`);
+      logger.info(`No token found`);
       return res.status(401).json(`No token found`);
     }
   } catch (error) {
@@ -49,7 +49,7 @@ const authCheck = async (req, res, next) => {
     } else {
       res.clearCookie("token");
       res.clearCookie("username");
-      infoLog.info(error);
+      logger.info(error);
       res.status(401).json(`Token expired or invalid`);
     }
   }

@@ -6,6 +6,7 @@ class PillButton extends StatelessWidget {
   PillButton(
       {super.key,
       this.text,
+      required this.onTap,
       required this.textSize,
       required this.scale,
       required this.padding,
@@ -14,6 +15,7 @@ class PillButton extends StatelessWidget {
       required this.borderRadius,
       required this.borderColor});
 
+  final VoidCallback onTap;
   final EdgeInsetsGeometry padding;
   final String? text;
   final double textSize;
@@ -26,6 +28,7 @@ class PillButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TactileButton(
+        onTap: onTap,
         scale: scale,
         child: Container(
           padding: padding,

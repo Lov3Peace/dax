@@ -35,7 +35,7 @@ class CarbonSearchBox extends StatefulWidget {
 List<String> selectedOptions = [];
 
 class _CarbonSearchBoxState extends State<CarbonSearchBox> {
-  late FocusNode optionsNode;
+  FocusNode optionsNode = FocusNode();
   FocusNode _textFieldFocusNode = FocusNode();
   var searchItemsList = [];
   Color highlightedColor = Colors.black87;
@@ -48,6 +48,15 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   var users;
   bool searching = true;
   Color formFieldOutlineColor = const Color.fromARGB(151, 255, 255, 255);
+  bool selectedWithEnterKey = false;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      optionsNode = Focus.of(textFieldKey.currentContext!);
+    });
+    super.initState();
+  }
 
   final client = httpClient.BrowserClient()..withCredentials = true;
   // Future _fetchUsers(searchString) async {
@@ -90,6 +99,8 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
           return [];
         }
         if (textEditingValue.text.length > 1) {
+          // This is the Fetch. Only begin fetch on second character to narrow the scope
+          // of the search
           var res = await widget.fetchFunction(textEditingValue.text);
           if (!mounted) return [];
           setState(() {
@@ -149,9 +160,10 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
 // to get access to the onKeyEvent() function. We must return a KeyEventResult for each
 // scenario. This is to give the ability to use arrow keys to cycle through the options.
 // This will be turned into its own widget.
-        optionsNode = Focus.of(textFieldKey.currentContext!);
 
         optionsNode.onKeyEvent = (node, event) {
+          print(
+              "Entered optionsNode.onKeyEvent() selectedWithEnterKey: $selectedWithEnterKey");
           if (value.isNotEmpty) {
             // optionsNode.requestFocus();
             // DOWN ARROW
@@ -206,10 +218,25 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
               });
               return KeyEventResult.handled;
             }
+
             // Must return a KeyEventResult
             return KeyEventResult.ignored;
           }
           // Must return a KeyEventResult
+          return KeyEventResult.ignored;
+        };
+
+        // Tracking Enter key on _textFieldFocusNode. optionsNode can't track it
+        _textFieldFocusNode.onKeyEvent = (node, event) {
+          if (event is KeyDownEvent &&
+              event.logicalKey == LogicalKeyboardKey.enter) {
+            setState(() {
+              selectedWithEnterKey = true;
+            });
+
+            print("KeyDownEvent selectedWithEnterKey: $selectedWithEnterKey");
+          }
+          // Ignore the result so that the node can process the onSubmitted function
           return KeyEventResult.ignored;
         };
         // WidgetsBinding.instance
@@ -277,38 +304,30 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         selectedOptions.remove(removedItem);
       }),
       onSelected: (selectedItem) {
-        // This takes whatever you click on (selectedItem) and changes optionsList
-        // to that (so like optionsList = [l3x]). Then it appends
-        // optionsList to selectedOptions. Not sure why it works this way but
-        // it does. So, we use one variable (optionSelected) and adjust it to be the
-        // option that is highlighted when user presses Enter (optionsList[highlightIndex])
-        //or the option that is clicked (optionsList[0])
-        // var tolLen = optionsList.length;
-        // var optionSelected = optionsList[
-        //     0]; // default val is the first index
-        // if (tolLen != 1) {
-        // only change to the highlightIndex if tol_len != 1 (tol_len only == 1
-        // if you click on the option...not sure why)
-        setState(() {
-          var optionSelected = optionsList[highlightIndex];
-          //this handles the CLICK
-          if (optionsNode.hasFocus &&
-              optionsList.contains(selectedItem) &&
-              !selectedOptions.contains(selectedItem) &&
-              !selectedOptions.contains(optionSelected)) {
+        String optionHilighted = optionsList[highlightIndex];
+
+        // Adds user to selectedOptions list if enter key was pressed for selection
+        if (selectedWithEnterKey) {
+          setState(() {
+            selectedOptions.add(optionHilighted);
+          });
+        }
+
+        // Adds user to selectedOptions if a user clicked on an item in the options list
+        if (optionsNode.hasFocus && !selectedWithEnterKey) {
+          setState(() {
             selectedOptions.add(selectedItem);
-            optionsList.clear();
-            //this else if handles the ENTER key
-          } else if (optionsNode.hasFocus) {
-            selectedOptions.add(optionSelected);
-          }
-          highlightIndex = 0;
-        });
+          });
+        }
         var projectProvider = context.read<ProjectProvider>();
         projectProvider.saveTeammates(selectedOptions);
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!mounted) return;
           _textFieldFocusNode.requestFocus();
+          setState(() {
+            highlightIndex = 0;
+            selectedWithEnterKey = false;
+          });
         });
       },
       // customTextField because you can't change the input text font
@@ -374,7 +393,6 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   @override
   void dispose() {
     selectedOptions.clear();
-    print('SearchBox Disposed');
     super.dispose();
   }
 }

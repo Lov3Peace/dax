@@ -1,4 +1,4 @@
-import { errorLog, infoLog } from "../log.js";
+import { logger } from "../log.js";
 import jwt from "jsonwebtoken";
 import { privKey, pubKey } from "./keygen.js";
 import User from "../storage/models/user.js";
@@ -66,7 +66,7 @@ export const initLoginCheck = async (req, res, next) => {
         error: "",
       });
     } else {
-      infoLog.info("User not found or Remember Me not active");
+      logger.info("User not found or Remember Me not active");
       return res
         .status(401)
         .json({ error: "User not found or Remember Me not active" });
@@ -116,7 +116,7 @@ export const initLoginCheck = async (req, res, next) => {
     }
     // }
     console.log(`Error: ${error}`);
-    errorLog.error(error);
+    logger.error(error);
     res.status(401).json({ error: "Token expired or invalid" });
   }
 };

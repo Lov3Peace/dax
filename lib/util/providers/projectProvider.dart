@@ -6,7 +6,6 @@ class ProjectProvider with ChangeNotifier {
   List _teammates = [];
   List _rolesNeeded = [];
   List _images = [];
-  List feed = ["hello"];
 
   List get teammates => _teammates;
   void saveTeammates(teammates) {

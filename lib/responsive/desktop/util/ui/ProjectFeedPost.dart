@@ -5,11 +5,11 @@ import 'package:flutter_application_1/util/imports.dart';
 class ProjectFeedPost extends StatefulWidget {
   const ProjectFeedPost(
       {super.key,
-      required this.user_id,
+      required this.username,
       required this.content,
       required this.timestamp});
 
-  final String user_id;
+  final String username;
   final String content;
   final String timestamp;
 
@@ -39,8 +39,10 @@ class _ProjectFeedPostState extends State<ProjectFeedPost> {
                 child: Image.asset("images/creator.png"),
               ),
             ),
+            //
+            // Username
             Text(
-              widget.user_id,
+              widget.username,
               style: TextStyle(
                   fontSize: max(16, 2.5.sp(context)),
                   fontWeight: FontWeight.bold),
@@ -48,6 +50,8 @@ class _ProjectFeedPostState extends State<ProjectFeedPost> {
               overflow: TextOverflow.ellipsis,
             ),
             SizedBox(width: max(10, 1.w(context))),
+            //
+            // Timestamp
             Text(
               widget.timestamp,
               style: TextStyle(color: grey, fontSize: max(14, 2.5.sp(context))),
@@ -61,6 +65,8 @@ class _ProjectFeedPostState extends State<ProjectFeedPost> {
             // This SizedBox is set to the total width of the profile icon + its padding
             SizedBox(width: 3.5.w(context)),
             Expanded(
+              //
+              // Content
               child: Text(
                 widget.content,
                 style: TextStyle(fontSize: max(14, 2.5.sp(context))),

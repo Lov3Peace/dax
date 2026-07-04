@@ -5,6 +5,7 @@ import { Pool } from "pg";
 import {
   createProjectFeedPost,
   getProjectFeed,
+  joinProjectRoom,
   updateProjectCategoriesCollection,
 } from "./controllers/projectsController.js";
 import { updateProfileCrestsCollection } from "./controllers/profileController.js";
@@ -38,18 +39,13 @@ io.on("connection", (socket) => {
   console.log("Client Connection Request Received");
   // console.log("Socket ID: ", socket.id);
   socket.emit("connected", "Connection to Socket.io Server Established");
+  // Join Project Room by PID
+  joinProjectRoom(socket);
   // Create Project Feed Post Based on PID
   createProjectFeedPost(socket);
   // // Get Project Feed Based on PID
-  // console.log("before register:", socket.listenerCount("getProjectFeed"));
   getProjectFeed(socket);
-  // console.log("after register:", socket.listenerCount("getProjectFeed"));
 });
-
-// io.on("msg", (socket) => {
-//   console.log("WE GOT DA MSG");
-//   socket.emit("res", "SHUT UP BOY");
-// });
 
 // Create Postgres Database Pool
 export const pgClient = new Pool({

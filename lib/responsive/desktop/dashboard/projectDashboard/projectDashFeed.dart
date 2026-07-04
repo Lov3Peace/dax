@@ -12,7 +12,6 @@ import "package:provider/provider.dart";
 
 final TextEditingController _projectFeedPostController =
     TextEditingController();
-bool showNewPostTextBox = false;
 
 class ProjectDashFeed extends StatefulWidget {
   const ProjectDashFeed({super.key});
@@ -29,7 +28,6 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
   void initState() {
     userProvider = context.read<UserProvider>();
     username = userProvider.username;
-
     super.initState();
   }
 
@@ -37,7 +35,6 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
   Widget build(BuildContext context) {
     // Watching the projectFeed Value in FeedSocketIoProvider and Updating on Change
     final feedSocketIoProvider = context.watch<FeedSocketIoProvider>();
-    List feed = feedSocketIoProvider.projectFeed;
 
     return BlurryContainer(
       // constraints: BoxConstraints(minWidth: 100, minHeight: 100),
@@ -58,10 +55,8 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
               ),
               PillButton(
                 onTap: () {
-                  setState(() {
-                    showNewPostTextBox = !showNewPostTextBox;
-                    _projectFeedPostController.clear();
-                  });
+                  feedSocketIoProvider.toggleNewPostTextBox();
+                  _projectFeedPostController.clear();
                 },
                 scale: 1.04,
                 padding: EdgeInsetsGeometry.symmetric(
@@ -72,7 +67,9 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
                 textColor: darkGrey,
                 borderRadius: 10.w(context),
                 borderColor: darkGrey,
-                text: showNewPostTextBox ? "Cancel" : "New Post",
+                text: feedSocketIoProvider.showNewPostTextBox
+                    ? "Cancel"
+                    : "New Post",
                 textSize: max(12, 2.sp(context)),
               )
             ],
@@ -84,9 +81,12 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
             child: StaggerLoad(
                 duration: 300,
                 childPadding: EdgeInsets.only(bottom: max(5, 0.5.w(context))),
-                widgets: [NewProjectFeedPostTextfield(), ...feed],
+                widgets: [
+                  NewProjectFeedPostTextfield(),
+                  ...feedSocketIoProvider.projectFeed
+                ],
                 scrollDirection: Axis.vertical,
-                delay: 75),
+                delay: 0),
           ),
         ],
       ),
@@ -95,18 +95,31 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    SocketIoClient.socket.off("feedResponse");
+    SocketIoClient.socket.off("feedUpdate");
     super.dispose();
   }
 }
 
-class NewProjectFeedPostTextfield extends StatelessWidget {
+class NewProjectFeedPostTextfield extends StatefulWidget {
   const NewProjectFeedPostTextfield({super.key});
 
   @override
+  State<NewProjectFeedPostTextfield> createState() =>
+      _NewProjectFeedPostTextfieldState();
+}
+
+class _NewProjectFeedPostTextfieldState
+    extends State<NewProjectFeedPostTextfield> {
+    @override
+      void initState() {
+        super.initState();
+      }
+  @override
   Widget build(BuildContext context) {
+    final feedSocketIoProvider = context.watch<FeedSocketIoProvider>();
     return Visibility(
-        visible: showNewPostTextBox,
+        visible: feedSocketIoProvider.showNewPostTextBox,
         child: Column(
           children: [
             const SizedBox(height: 20),
@@ -114,7 +127,7 @@ class NewProjectFeedPostTextfield extends StatelessWidget {
               autofocus: true,
               maxLines: 3,
               cursorColor: red,
-              // onSubmitted: ,
+              onSubmitted: (_) => post,
               style: TextStyle(fontSize: 3.sp(context)),
               controller: _projectFeedPostController,
               decoration: InputDecoration(
@@ -136,13 +149,10 @@ class NewProjectFeedPostTextfield extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: PillButton(
                   onTap: () {
-                    SocketIoClient.socket.emit("createProjectFeedPost", {
-                      "pid": 1,
-                      "username": username,
-                      "content": {"text": _projectFeedPostController.text},
-                      "event_type": 1
-                    });
-                    showNewPostTextBox = false;
+                    // Post If Textfield is Not Empty
+                    if (_projectFeedPostController.text != "") {
+                      post();
+                    }
                   },
                   textSize: max(12, 2.sp(context)),
                   scale: 1.03,
@@ -156,5 +166,26 @@ class NewProjectFeedPostTextfield extends StatelessWidget {
             ),
           ],
         ).animate().fadeIn(duration: Duration(milliseconds: 300)));
+  }
+
+  @override
+  void dispose() {
+    // Turn Off Sockets After Leaving the Page (dont need them persistent)
+    SocketIoClient.socket.off("feedResponse");
+    SocketIoClient.socket.off("feedUpdate");
+    super.dispose();
+  }
+
+  void post() {
+    final feedSocketIoProvider = context.read<FeedSocketIoProvider>();
+    logger.i("Emitting createProjectFeedPost...");
+    SocketIoClient.socket.emit("createProjectFeedPost", {
+      "pid": 1,
+      "username": username,
+      "content": {"text": _projectFeedPostController.text},
+      "event_type": 1
+    });
+    // Hide Textfield After
+    feedSocketIoProvider.toggleNewPostTextBox();
   }
 }

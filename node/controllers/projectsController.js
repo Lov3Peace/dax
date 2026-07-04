@@ -222,8 +222,16 @@ export const createNewProject = async (req, res) => {
   });
 };
 
+// Join Room for Project Feed by PID
+export const joinProjectRoom = (socket) => {
+  socket.on("joinProjectRoom", (pid) => {
+    socket.join(pid.toString());
+    console.log(`Socket ${socket.id} Joined Room Successfully`);
+  });
+};
+
+// Create Project Feed Post Basded on PID
 export const createProjectFeedPost = async (socket) => {
-  // Create Project Feed Post Basded on PID
   socket.on("createProjectFeedPost", async (reqBody) => {
     console.log("Creating New Feed Post...");
     const username = reqBody["username"];
@@ -232,36 +240,42 @@ export const createProjectFeedPost = async (socket) => {
     const event_type = reqBody["event_type"];
 
     await pgClient.query("BEGIN");
-    const feed = await pgClient.query(
+    // Insert New Post and Return It to Update Feed on Front End
+    let newPost = await pgClient.query(
       format(
-        `INSERT INTO %I.%I (pid, username, event_type, content) VALUES ($1, $2, $3, $4)`,
+        `INSERT INTO %I.%I (pid, username, event_type, content) VALUES ($1, $2, $3, $4) RETURNING *`,
         "projects",
         "feeds",
       ),
       [pid, username, event_type, content],
     );
-    // console.log("Feed: ", feed.rows);
+    newPost = newPost.rows[0];
+    console.log("Feed: ", newPost);
 
     await pgClient.query("COMMIT");
-    // TO-DO
-    socket
-      .to(pid)
-      .emit("feedUpdate", { pid: pid, username: username, content: content });
+
+    await pgClient.query("BEGIN");
+    console.log(`Emitting feedUpdate to Room: ${pid}...`);
+    // Emit to Specific Room
+    io.to(pid.toString()).emit("feedUpdate", newPost);
   });
 };
 
+// Retrieve Project Feed by PID
 export const getProjectFeed = (socket) => {
-  // Retrieve Project Feed Based on PID
   socket.on("getProjectFeed", async (pid) => {
     // Join Room for PID
-    socket.join(pid.toString());
 
-    console.log("Socket ID for getProjectFeed: ", socket.id);
-    console.log(`Retrieving Project Feed for PID: ${pid}...`);
+    console.log("Socket ID for getProjectFeed: ", socket.id, pid);
+    console.log(`Retrieving Project Feed for PID: ${pid}`);
     // Query DB for Posts Based on PID
     await pgClient.query("BEGIN");
     const feed = await pgClient.query(
-      format(`SELECT * from %I.%I where pid = $1`, "projects", "feeds"),
+      format(
+        `SELECT * from %I.%I where pid = $1 ORDER BY timestamp DESC LIMIT 20`,
+        "projects",
+        "feeds",
+      ),
       [pid],
     );
     console.log("Feed: ", feed.rows);

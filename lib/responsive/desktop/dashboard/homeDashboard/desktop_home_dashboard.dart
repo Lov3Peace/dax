@@ -47,9 +47,10 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
     locationServicesProvider.getWeather();
 
     // Get Feed for Project on Home Dashboard (Feed widget is watching with context.watch())
-    SocketIoClient.socket.emit("getProjectFeed", 1);
     final feedSocketIoProvider = context.read<FeedSocketIoProvider>();
+    feedSocketIoProvider.joinProjectRoom(1);
     feedSocketIoProvider.enableFeed();
+    SocketIoClient.socket.emit("getProjectFeed", 1);
   }
 
 //globals

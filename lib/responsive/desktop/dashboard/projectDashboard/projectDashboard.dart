@@ -7,7 +7,10 @@ import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
+import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
 import 'package:flutter_application_1/util/weather_date.dart';
+import 'package:provider/provider.dart';
 
 class DesktopProjectDashboard extends StatefulWidget {
   const DesktopProjectDashboard({super.key});
@@ -21,6 +24,14 @@ class DesktopProjectDashboard extends StatefulWidget {
 ScrollController horizontalScrollController = ScrollController();
 
 class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
+// Feed Socket Initialization
+  // late FeedSocketIoProvider feedSocketIoProvider;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -213,5 +224,10 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

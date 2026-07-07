@@ -7,21 +7,25 @@ class PillButton extends StatelessWidget {
       {super.key,
       this.text,
       required this.onTap,
+      this.isLoading = false,
       required this.textSize,
       required this.scale,
       required this.padding,
-      required this.color,
+      this.color1 = tran,
+      this.color2 = tran,
       required this.textColor,
       required this.borderRadius,
       required this.borderColor});
 
   final VoidCallback onTap;
+  bool isLoading;
   final EdgeInsetsGeometry padding;
   final String? text;
   final double textSize;
   final double borderRadius;
   double scale = 1.03;
-  Color color = tran;
+  Color color1 = tran;
+  Color color2 = tran;
   Color textColor = tran;
   Color borderColor = deckBorderColor;
 
@@ -35,11 +39,29 @@ class PillButton extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(borderRadius),
             border: Border.all(color: borderColor),
-            color: color,
+            gradient: LinearGradient(colors: [color1, color2]),
           ),
-          child: Text(
-            text ?? '',
-            style: TextStyle(fontSize: textSize),
+          child: Stack(
+            children: [
+              Visibility(
+                visible: !isLoading,
+                child: Text(
+                  text ?? '',
+                  style: TextStyle(fontSize: textSize),
+                ),
+              ),
+              Visibility(
+                visible: isLoading,
+                child: SizedBox(
+                  height: 1.w(context),
+                  width: 1.w(context),
+                  child: CircularProgressIndicator(
+                    color: white,
+                    strokeWidth: 2,
+                  ),
+                ),
+              )
+            ],
           ),
         ));
   }

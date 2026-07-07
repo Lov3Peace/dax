@@ -27,7 +27,7 @@ export const io = new Server(server, {
   cors: {
     origin: process.env.ORIGIN_URL || "http://localhost:7778",
   },
-  // connectionStateRecovery: {},
+  connectionStateRecovery: {},
 });
 
 // Start Socket.io Server
@@ -36,7 +36,8 @@ server.listen(port, () => {
 });
 
 io.on("connection", (socket) => {
-  console.log("Client Connection Request Received");
+  console.log("Connection from Socket ID: ", socket.id);
+  console.log("Number of Listeners: ", socket.listenerCount());
   // console.log("Socket ID: ", socket.id);
   socket.emit("connected", "Connection to Socket.io Server Established");
   // Join Project Room by PID

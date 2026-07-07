@@ -13,19 +13,17 @@ import "package:provider/provider.dart";
 final TextEditingController _projectFeedPostController =
     TextEditingController();
 
-final FocusNode focusNode = FocusNode();
-
-class ProjectDashFeed extends StatefulWidget {
-  const ProjectDashFeed({super.key});
+class MiniProjectDashFeed extends StatefulWidget {
+  const MiniProjectDashFeed({super.key});
 
   @override
-  State<ProjectDashFeed> createState() => _ProjectDashFeedState();
+  State<MiniProjectDashFeed> createState() => _MiniProjectDashFeedState();
 }
 
 late UserProvider userProvider;
 String username = "";
 
-class _ProjectDashFeedState extends State<ProjectDashFeed> {
+class _MiniProjectDashFeedState extends State<MiniProjectDashFeed> {
   @override
   void initState() {
     userProvider = context.read<UserProvider>();
@@ -58,7 +56,6 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
               PillButton(
                 onTap: () {
                   feedSocketIoProvider.toggleNewPostTextBox();
-                  focusNode.requestFocus();
                   _projectFeedPostController.clear();
                 },
                 scale: 1.04,
@@ -116,8 +113,6 @@ class _NewProjectFeedPostTextfieldState
     super.initState();
   }
 
-  bool isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     final feedSocketIoProvider = context.watch<FeedSocketIoProvider>();
@@ -127,7 +122,6 @@ class _NewProjectFeedPostTextfieldState
           children: [
             const SizedBox(height: 20),
             TextField(
-              focusNode: focusNode,
               autofocus: true,
               maxLines: 3,
               cursorColor: red,
@@ -155,13 +149,9 @@ class _NewProjectFeedPostTextfieldState
                   onTap: () {
                     // Post If Textfield is Not Empty
                     if (_projectFeedPostController.text != "") {
-                      setState(() {
-                        isLoading = true;
-                      });
                       post();
                     }
                   },
-                  isLoading: isLoading,
                   textSize: max(12, 2.sp(context)),
                   scale: 1.03,
                   padding: EdgeInsets.symmetric(
@@ -179,52 +169,23 @@ class _NewProjectFeedPostTextfieldState
 
   @override
   void dispose() {
+    // Turn Off Sockets After Leaving the Page (dont need them persistent)
+    SocketIoClient.socket.off("feedResponse");
+    SocketIoClient.socket.off("feedUpdate");
+    logger.i("Project Dash Feed Disposed");
     super.dispose();
   }
 
   void post() {
     final feedSocketIoProvider = context.read<FeedSocketIoProvider>();
     logger.i("Emitting createProjectFeedPost...");
-    SocketIoClient.socket.timeout(5000).emitWithAck("createProjectFeedPost", {
+    SocketIoClient.socket.emit("createProjectFeedPost", {
       "pid": 1,
       "username": username,
       "content": {"text": _projectFeedPostController.text},
       "event_type": 1
-    }, ack: (err) {
-      if (err != null) {
-        logger.e(err);
-        showDialog(
-            barrierLabel: "errorPosting",
-            barrierDismissible: true,
-            context: context,
-            builder: (context) {
-              return Center(
-                child: BlurryContainer(
-                    height: 5.w(context),
-                    width: 25.w(context),
-                    padding: EdgeInsets.all(1.w(context)),
-                    child: Center(
-                        child: Row(
-                      children: [
-                        const Icon(
-                          Icons.error,
-                          color: red,
-                        ),
-                        SizedBox(
-                          width: 1.w(context),
-                        ),
-                        const Text(
-                            "Unable to Submit Post. Server Might be Down"),
-                      ],
-                    ))),
-              );
-            });
-      }
-      setState(() {
-        isLoading = false;
-      });
-      feedSocketIoProvider.toggleNewPostTextBox();
     });
     // Hide Textfield After
+    feedSocketIoProvider.toggleNewPostTextBox();
   }
 }

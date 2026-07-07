@@ -17,16 +17,18 @@ class FeedSocketIoProvider extends ChangeNotifier {
   }
 
   void enableFeed() {
+    logger.i("Feed Socket Enabled");
+    logger.i("Socket ID: ${SocketIoClient.socket.id}");
     //
     // Register Listener for Getting the Feed from Server
     SocketIoClient.socket.on("feedResponse", (feed) {
       projectFeed.clear();
       // logger.e("Feed Response Received: $feed");
-      for (int i = 0; i < feed.length; i++) {
+      for (int i = 0; i < feed[0].length; i++) {
         projectFeed.add(ProjectFeedPost(
-          username: feed[i]["username"],
-          timestamp: feed[i]["timestamp"].toString(),
-          content: feed[i]["content"]["text"],
+          username: feed[0][i]["username"],
+          timestamp: feed[0][i]["timestamp"].toString(),
+          content: feed[0][i]["content"]["text"],
         ));
       }
       notifyListeners();
@@ -34,12 +36,12 @@ class FeedSocketIoProvider extends ChangeNotifier {
     //
     // Register Listener for Getting a New Project Feed Post from Server (after someone posted)
     SocketIoClient.socket.on("feedUpdate", (update) {
-      // logger.i("Feed Update Received: $update");
+      logger.i("Feed Update Received: $update");
       projectFeed = [
         ProjectFeedPost(
-          username: update["username"],
-          timestamp: update["timestamp"].toString(),
-          content: update["content"]["text"],
+          username: update[0]["username"],
+          timestamp: update[0]["timestamp"].toString(),
+          content: update[0]["content"]["text"],
         ),
         ...projectFeed
       ];
@@ -55,6 +57,9 @@ class FeedSocketIoProvider extends ChangeNotifier {
 
   // Used on StatefulWidget Disposal
   void disableFeed() {
+    SocketIoClient.socket.off("feedResponse");
+    SocketIoClient.socket.off("feedUpdate");
+    SocketIoClient.socket.off("roomJoined");
     logger.i("Feed Socket Disabled");
   }
 }

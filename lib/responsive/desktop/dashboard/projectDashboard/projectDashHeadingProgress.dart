@@ -48,7 +48,6 @@ class _ProjectDashHeadingProgressState
                 scale: 1.04,
                 padding: EdgeInsetsGeometry.symmetric(
                     horizontal: 2.w(context), vertical: 0.5.w(context)),
-                color: tran,
                 textColor: darkGrey,
                 borderRadius: 10.w(context),
                 borderColor: darkGrey,

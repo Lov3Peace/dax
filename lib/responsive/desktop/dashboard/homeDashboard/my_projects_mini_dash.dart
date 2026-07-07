@@ -3,18 +3,12 @@ import 'dart:math' as math;
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashFeed.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/util/dottedLine.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
 import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
-import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_application_1/util/ui/gradient_label.dart';
-import 'package:flutter_application_1/util/ui/pillButton.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:provider/provider.dart';
-import 'package:rive/rive.dart' as r;
 
 class MyProjectsMiniDashDeck extends StatefulWidget {
   MyProjectsMiniDashDeck({super.key, this.height = 0, this.width = 0});
@@ -236,7 +230,6 @@ class _MyProjectsMiniDashDeckState extends State<MyProjectsMiniDashDeck> {
 
   @override
   void dispose() {
-    // feedSocketIoProvider.disableFeed();
     super.dispose();
   }
 }

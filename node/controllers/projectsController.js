@@ -227,13 +227,14 @@ export const joinProjectRoom = (socket) => {
   socket.on("joinProjectRoom", (pid) => {
     socket.join(pid.toString());
     console.log(`Socket ${socket.id} Joined Room Successfully`);
+    socket.emit("roomJoined");
   });
 };
 
 // Create Project Feed Post Basded on PID
 export const createProjectFeedPost = async (socket) => {
-  socket.on("createProjectFeedPost", async (reqBody) => {
-    console.log("Creating New Feed Post...");
+  socket.on("createProjectFeedPost", async (reqBody, ack) => {
+    console.log("Creating Post for Socket ID: ", socket.id);
     const username = reqBody["username"];
     const pid = reqBody["pid"];
     const content = reqBody["content"];
@@ -256,6 +257,7 @@ export const createProjectFeedPost = async (socket) => {
 
     await pgClient.query("BEGIN");
     console.log(`Emitting feedUpdate to Room: ${pid}...`);
+    ack();
     // Emit to Specific Room
     io.to(pid.toString()).emit("feedUpdate", newPost);
   });
@@ -278,7 +280,7 @@ export const getProjectFeed = (socket) => {
       ),
       [pid],
     );
-    console.log("Feed: ", feed.rows);
+    // console.log("Feed: ", feed.rows);
 
     await pgClient.query("COMMIT");
     socket.emit("feedResponse", feed.rows);

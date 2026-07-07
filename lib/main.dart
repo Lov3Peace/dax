@@ -51,8 +51,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    final feedSocketIoProvider = context.read<FeedSocketIoProvider>();
     SocketIoClient.socket.connect();
     SocketIoClient.socket.on("connected", (res) => logger.w(res));
+    SocketIoClient.socket.onReconnect((_) {
+      feedSocketIoProvider.joinProjectRoom(1);
+    });
     super.initState();
   }
 

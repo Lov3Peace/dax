@@ -1,3 +1,4 @@
+import "package:flutter/services.dart";
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_application_1/responsive/desktop/desk_decks.dart";
 import "package:flutter_application_1/responsive/desktop/util/stagger_load.dart";
@@ -79,14 +80,12 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
           SizedBox(
             height: max(5, 0.5.w(context)),
           ),
+          NewProjectFeedPostTextfield(),
           Expanded(
             child: StaggerLoad(
                 duration: 300,
                 childPadding: EdgeInsets.only(bottom: max(5, 0.5.w(context))),
-                widgets: [
-                  NewProjectFeedPostTextfield(),
-                  ...feedSocketIoProvider.projectFeed
-                ],
+                widgets: feedSocketIoProvider.projectFeed,
                 scrollDirection: Axis.vertical,
                 delay: 0),
           ),
@@ -125,26 +124,36 @@ class _NewProjectFeedPostTextfieldState
         visible: feedSocketIoProvider.showNewPostTextBox,
         child: Column(
           children: [
-            const SizedBox(height: 20),
-            TextField(
-              focusNode: focusNode,
-              autofocus: true,
-              maxLines: 3,
-              cursorColor: red,
-              onSubmitted: (_) => post,
-              style: TextStyle(fontSize: 3.sp(context)),
-              controller: _projectFeedPostController,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(1.5.w(context)),
-                  borderSide: BorderSide(
-                    color: deckBorderColor,
-                    width: 0.05.w(context),
+            SizedBox(height: max(5, 0.5.w(context))),
+            KeyboardListener(
+              focusNode: FocusNode(),
+              onKeyEvent: (event) {
+                if (event is KeyDownEvent &&
+                    event.logicalKey == LogicalKeyboardKey.enter &&
+                    !HardwareKeyboard.instance.isShiftPressed) {
+                  post();
+                }
+              },
+              child: TextField(
+                focusNode: focusNode,
+                autofocus: true,
+                maxLines: 3,
+                minLines: 1,
+                cursorColor: red,
+                style: TextStyle(fontSize: 3.sp(context)),
+                controller: _projectFeedPostController,
+                decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(1.5.w(context)),
+                    borderSide: BorderSide(
+                      color: deckBorderColor,
+                      width: 0.05.w(context),
+                    ),
                   ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(1.w(context)),
-                  borderSide: const BorderSide(color: white),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(1.w(context)),
+                    borderSide: const BorderSide(color: white),
+                  ),
                 ),
               ),
             ),

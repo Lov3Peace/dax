@@ -14,7 +14,8 @@ import "package:provider/provider.dart";
 final TextEditingController _projectFeedPostController =
     TextEditingController();
 
-final FocusNode focusNode = FocusNode();
+final FocusNode textFieldFocusNode = FocusNode();
+final FocusNode keyboardListenerFocusNode = FocusNode();
 
 class ProjectDashFeed extends StatefulWidget {
   const ProjectDashFeed({super.key});
@@ -59,7 +60,7 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
               PillButton(
                 onTap: () {
                   feedSocketIoProvider.toggleNewPostTextBox();
-                  focusNode.requestFocus();
+                  textFieldFocusNode.requestFocus();
                   _projectFeedPostController.clear();
                 },
                 scale: 1.04,
@@ -126,7 +127,7 @@ class _NewProjectFeedPostTextfieldState
           children: [
             SizedBox(height: max(5, 0.5.w(context))),
             KeyboardListener(
-              focusNode: FocusNode(),
+              focusNode: keyboardListenerFocusNode,
               onKeyEvent: (event) {
                 if (event is KeyDownEvent &&
                     event.logicalKey == LogicalKeyboardKey.enter &&
@@ -135,7 +136,7 @@ class _NewProjectFeedPostTextfieldState
                 }
               },
               child: TextField(
-                focusNode: focusNode,
+                focusNode: textFieldFocusNode,
                 autofocus: true,
                 maxLines: 3,
                 minLines: 1,

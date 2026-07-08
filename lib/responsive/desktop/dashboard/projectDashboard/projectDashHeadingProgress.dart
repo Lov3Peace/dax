@@ -18,7 +18,7 @@ class _ProjectDashHeadingProgressState
   @override
   Widget build(BuildContext context) {
     //
-    // Project Title, Progress Bar, Spacer
+    // Project Title, Creators, Mission Statement, Progress Bar
     return Column(
       // spacing is being determined by the flex ratio in projectDashboard.dart
       // crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,6 +29,8 @@ class _ProjectDashHeadingProgressState
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              //
+              // Project Title
               Align(
                 alignment: Alignment.centerLeft,
                 child: GradientText(
@@ -39,11 +41,13 @@ class _ProjectDashHeadingProgressState
                   lineHeight: 1,
                 ),
               ),
+              //
+              // Overview Button
               PillButton(
+                onTap: () {},
                 scale: 1.04,
                 padding: EdgeInsetsGeometry.symmetric(
                     horizontal: 2.w(context), vertical: 0.5.w(context)),
-                color: tran,
                 textColor: darkGrey,
                 borderRadius: 10.w(context),
                 borderColor: darkGrey,
@@ -53,6 +57,8 @@ class _ProjectDashHeadingProgressState
             ],
           ),
         ),
+        //
+        // Creators
         Align(
           alignment: Alignment.centerLeft,
           child: Text(
@@ -63,6 +69,8 @@ class _ProjectDashHeadingProgressState
                 color: Colors.grey.shade400),
           ),
         ),
+        //
+        // Mission Statement
         Expanded(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,6 +86,8 @@ class _ProjectDashHeadingProgressState
                       fontWeight: FontWeight.normal),
                 ),
               ),
+              //
+              // Progress Percentage
               Expanded(
                 flex: 1,
                 child: TactileButton(
@@ -96,6 +106,8 @@ class _ProjectDashHeadingProgressState
             ],
           ),
         ),
+        //
+        // Progress Bar (FUTURE: RIVE ANIMATION)
         Container(
           width: max(250, double.infinity),
           child: FAProgressBar(
@@ -111,7 +123,8 @@ class _ProjectDashHeadingProgressState
             direction: Axis.horizontal,
           ),
         ),
-        // Spacer(),
+        //
+        // TO-DO: MILESTONES
       ],
     );
   }

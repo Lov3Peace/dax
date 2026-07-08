@@ -11,6 +11,9 @@ import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard
 import 'package:flutter_application_1/responsive/desktop/messages/messages.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
+import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
+import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
+import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_application_1/util/weather_date.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/cupertino.dart';
@@ -36,12 +39,21 @@ class DesktopDashboard extends StatefulWidget {
 late LocationServicesProvider locationServicesProvider;
 final locationEndpoint = Uri.parse("$hostname/api/getLocation/");
 
+late FeedSocketIoProvider feedSocketIoProvider;
+
 class _DesktopDashboardState extends State<DesktopDashboard> {
   @override
   void initState() {
-    super.initState();
-    locationServicesProvider = context.read<LocationServicesProvider>();
+    // Get Weather for User's Current Location
+    final locationServicesProvider = context.read<LocationServicesProvider>();
     locationServicesProvider.getWeather();
+
+    // Get Feed for Project on Home Dashboard (Feed widget is watching with context.watch())
+    feedSocketIoProvider = context.read<FeedSocketIoProvider>();
+    feedSocketIoProvider.joinProjectRoom(1);
+    feedSocketIoProvider.enableFeed();
+    SocketIoClient.socket.emit("getProjectFeed", 1);
+    super.initState();
   }
 
 //globals
@@ -275,5 +287,12 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // Turn Off Sockets After Leaving the Page (dont need them persistent)
+    feedSocketIoProvider.disableFeed();
+    super.dispose();
   }
 }

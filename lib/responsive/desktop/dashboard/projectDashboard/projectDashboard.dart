@@ -7,7 +7,10 @@ import 'package:flutter_application_1/responsive/desktop/util/bubble_dock.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
+import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
 import 'package:flutter_application_1/util/weather_date.dart';
+import 'package:provider/provider.dart';
 
 class DesktopProjectDashboard extends StatefulWidget {
   const DesktopProjectDashboard({super.key});
@@ -17,9 +20,18 @@ class DesktopProjectDashboard extends StatefulWidget {
       _DesktopProjectDashboardState();
 }
 
+// For the Project Dashboard to Scroll Horizontally if the Screen Width is Too Small
 ScrollController horizontalScrollController = ScrollController();
 
 class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
+// Feed Socket Initialization
+  // late FeedSocketIoProvider feedSocketIoProvider;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +41,7 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
         child: Container(
           height: 100.h(context),
           width: 100.w(context),
-          constraints: BoxConstraints(minHeight: 900),
+          constraints: BoxConstraints(minHeight: 950),
           child: Stack(
             children: [
               // Background(),
@@ -54,14 +66,8 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                             Row(
                               children: [
                                 Expanded(
-                                  // Uniform 0.5.w padding on Row and LargeStagger items (wanted it on the parent but couldnt because of
-                                  // the padding on the LargeStagger list items)
                                   child: Padding(
-                                    padding: EdgeInsets.fromLTRB(
-                                        0.w(context),
-                                        1.w(context),
-                                        0.w(context),
-                                        0.w(context)),
+                                    padding: EdgeInsets.only(top: 1.w(context)),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -136,8 +142,10 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                           child:
                                                               ProjectDashHeadingProgress()),
                                                       Expanded(
-                                                          flex: 3,
-                                                          child: SizedBox()),
+                                                        flex: 3,
+                                                        child:
+                                                            SizedBox(), // TO-DO: UPCOMING EVENTS
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -216,5 +224,10 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

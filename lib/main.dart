@@ -1,21 +1,26 @@
 import 'dart:async';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_application_1/util/socket_io/socket_io_client.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart' as rive;
 import 'util/providers/userAuthProvider.dart';
 import 'util/providers/userProvider.dart';
 import 'responsive/desktop/routes/go_routes.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // recommended to initalize Rive before running the app
   await rive.RiveNative.init();
+
   runApp(
     MultiProvider(
       providers: [
@@ -24,6 +29,7 @@ Future main() async {
         ChangeNotifierProvider(create: (_) => UserAuthProvider()),
         ChangeNotifierProvider(create: (_) => ProjectProvider()),
         ChangeNotifierProvider(create: (_) => LocationServicesProvider()),
+        ChangeNotifierProvider(create: (_) => FeedSocketIoProvider()),
         // Add more providers as needed
       ],
       child: const MyApp(),
@@ -45,6 +51,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    final feedSocketIoProvider = context.read<FeedSocketIoProvider>();
+    SocketIoClient.socket.connect();
+    SocketIoClient.socket.on("connected", (res) => logger.w(res));
+    SocketIoClient.socket.onReconnect((_) {
+      feedSocketIoProvider.joinProjectRoom(1);
+    });
     super.initState();
   }
 

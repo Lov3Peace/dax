@@ -1,27 +1,39 @@
 import 'dart:math' as math;
 
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashFeed.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/util/dottedLine.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
 import 'package:flutter_application_1/util/ui/gradient_label.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:rive/rive.dart' as r;
 
-class MyProjectsMiniDashDeck extends StatelessWidget {
-  const MyProjectsMiniDashDeck({super.key, this.height = 0, this.width = 0});
+class MyProjectsMiniDashDeck extends StatefulWidget {
+  MyProjectsMiniDashDeck({super.key, this.height = 0, this.width = 0});
   final double height;
   final double width;
 
+  @override
+  State<MyProjectsMiniDashDeck> createState() => _MyProjectsMiniDashDeckState();
+}
+
+class _MyProjectsMiniDashDeckState extends State<MyProjectsMiniDashDeck> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  late FeedSocketIoProvider feedSocketIoProvider;
   @override
   Widget build(BuildContext context) {
     return Hero(
       tag: "projectDash",
       child: BlurryContainer(
-        height: height,
-        width: width,
+        height: widget.height,
+        width: widget.width,
         constraints: BoxConstraints(minWidth: 1000, minHeight: 450),
         padding: EdgeInsets.all(max(20, 1.w(context))),
         borderRadius: 1.5.w(context),
@@ -84,7 +96,7 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: GradientText(
                         text: "Carbon",
-                        gradients: [pink, red],
+                        gradients: const [pink, red],
                         fontSize: max(headerlowerlimit, 6.sp(context)),
                         fontWeight: FontWeight.bold,
                         lineHeight: 1,
@@ -140,23 +152,7 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.only(right: max(5, 0.25.w(context))),
-                      child: BlurryContainer(
-                        constraints:
-                            const BoxConstraints(minWidth: 250, minHeight: 150),
-                        color: tran,
-                        padding: EdgeInsets.all(max(20, 1.w(context))),
-                        borderRadius: 1.5.w(context),
-                        child: Column(
-                          children: [
-                            Text("Feed",
-                                style: TextStyle(
-                                  fontSize: max(20, 3.5.sp(context)),
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey,
-                                ))
-                          ],
-                        ),
-                      ),
+                      child: ProjectDashFeed(),
                     ),
                   ),
                   //
@@ -230,5 +226,10 @@ class MyProjectsMiniDashDeck extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

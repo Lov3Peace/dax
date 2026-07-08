@@ -5,3 +5,5 @@ export 'ui/blurryContainer.dart';
 export 'ui/gradient_label.dart';
 export './ui/gradient_text.dart';
 export 'dart:math';
+export 'package:logger/logger.dart';
+export 'package:flutter_application_1/util/socket_io/socket_io_client.dart';

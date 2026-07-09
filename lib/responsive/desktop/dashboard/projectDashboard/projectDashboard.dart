@@ -98,6 +98,8 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                 ),
                               ],
                             ),
+                            //
+                            // Project Dashboard
                             Expanded(
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
@@ -119,13 +121,14 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                           // CompactSidePanel and CompactMessages are 6.25.w wide each
                                           width: 86.w(context),
                                           constraints: const BoxConstraints(
-                                              minWidth: 1000, minHeight: 800),
+                                              minWidth: 1200, minHeight: 1200),
                                           borderRadius: 1.w(context),
                                           color: deckBackgroundColor,
                                           child: Container(
                                             height: 50.w(context),
                                             constraints: const BoxConstraints(
-                                                minWidth: 1000, minHeight: 800),
+                                                minWidth: 1200,
+                                                minHeight: 1200),
                                             padding: EdgeInsets.all(
                                                 max(20, 1.5.w(context))),
                                             //

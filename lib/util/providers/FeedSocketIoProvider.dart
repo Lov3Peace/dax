@@ -3,7 +3,7 @@ import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
 
 class FeedSocketIoProvider extends ChangeNotifier {
-  List projectFeed = [];
+  List<Widget> projectFeed = [];
   List updatedFeed = [];
   bool showNewPostTextBox = false;
 

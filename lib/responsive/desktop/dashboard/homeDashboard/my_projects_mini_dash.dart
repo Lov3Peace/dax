@@ -176,12 +176,15 @@ class _MyProjectsMiniDashDeckState extends State<MyProjectsMiniDashDeck> {
                               borderRadius: max(20, 1.5.w(context)),
                               child: Column(
                                 children: [
-                                  Text("Team",
-                                      style: TextStyle(
-                                        fontSize: max(20, 3.5.sp(context)),
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.grey,
-                                      ))
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text("Team",
+                                        style: TextStyle(
+                                          fontSize: max(20, 3.5.sp(context)),
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.grey,
+                                        )),
+                                  )
                                 ],
                               ),
                             ),
@@ -206,11 +209,14 @@ class _MyProjectsMiniDashDeckState extends State<MyProjectsMiniDashDeck> {
                               borderRadius: max(20, 1.5.w(context)),
                               child: Column(
                                 children: [
-                                  Text("Current Workload",
-                                      style: TextStyle(
-                                          fontSize: max(20, 3.5.sp(context)),
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.grey))
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text("Current Workload",
+                                        style: TextStyle(
+                                            fontSize: max(20, 3.5.sp(context)),
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey)),
+                                  )
                                 ],
                               ),
                             ),

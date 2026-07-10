@@ -63,13 +63,15 @@ class _MiniProjectDashFeedState extends State<MiniProjectDashFeed> {
                   horizontal: max(10, 2.w(context)),
                   vertical: max(5, 0.5.w(context)),
                 ),
-                textColor: darkGrey,
                 borderRadius: 10.w(context),
                 borderColor: darkGrey,
-                text: feedSocketIoProvider.showNewPostTextBox
-                    ? "Cancel"
-                    : "New Post",
-                textSize: max(12, 2.sp(context)),
+                child: Text(
+                  feedSocketIoProvider.showNewPostTextBox
+                      ? "Cancel"
+                      : "New Post",
+                  style: TextStyle(
+                      fontSize: max(12, 2.sp(context)), color: darkGrey),
+                ),
               )
             ],
           ),
@@ -146,22 +148,25 @@ class _NewProjectFeedPostTextfieldState
             Align(
               alignment: Alignment.bottomRight,
               child: PillButton(
-                  onTap: () {
-                    // Post If Textfield is Not Empty
-                    if (_projectFeedPostController.text != "") {
-                      post();
-                    }
-                  },
-                  textSize: max(12, 2.sp(context)),
-                  scale: 1.03,
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 1.5.w(context), vertical: 0.5.w(context)),
-                  color1: pink,
-                  color2: red,
-                  text: "Post",
-                  textColor: white,
-                  borderRadius: 20.w(context),
-                  borderColor: tran),
+                onTap: () {
+                  // Post If Textfield is Not Empty
+                  if (_projectFeedPostController.text != "") {
+                    post();
+                  }
+                },
+                scale: 1.03,
+                padding: EdgeInsets.symmetric(
+                    horizontal: 1.5.w(context), vertical: 0.5.w(context)),
+                color1: pink,
+                color2: red,
+                borderRadius: 20.w(context),
+                borderColor: tran,
+                child: Text(
+                  "Post",
+                  style:
+                      TextStyle(fontSize: max(12, 2.sp(context)), color: white),
+                ),
+              ),
             ),
           ],
         ).animate().fadeIn(duration: Duration(milliseconds: 300)));

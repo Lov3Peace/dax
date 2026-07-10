@@ -5,7 +5,7 @@ import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../util/home_button.dart';
-import '../../util/logout_dock_button.dart';
+import '../../util/logout.dart';
 import 'mobile_dock_buttons/mob_friends_dock_button.dart';
 import 'mobile_dock_buttons/mob_help_dock_button.dart';
 import 'mobile_dock_buttons/mob_info_dock_button.dart';
@@ -84,7 +84,10 @@ class _MobDockState extends State<MobDock> with AnimationMixin {
                   DockButton(icon: Ionicons.person_circle_outline),
 
                   //Home
-                  HomeButton(gradient1: widget.newGrad1, gradient2: widget.newGrad2, glow: widget.newGlow),
+                  HomeButton(
+                      gradient1: widget.newGrad1,
+                      gradient2: widget.newGrad2,
+                      glow: widget.newGlow),
 
                   //Messages
                   const MobMessagesWindowButton(),
@@ -135,7 +138,7 @@ class _MobDockState extends State<MobDock> with AnimationMixin {
                   MobInfoWindowButton(),
 
                   //Logout
-                  LogoutWindowButton(),
+                  Logout(),
                 ],
               ),
             ],

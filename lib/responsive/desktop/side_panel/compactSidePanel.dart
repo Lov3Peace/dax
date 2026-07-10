@@ -2,10 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/CompactLogout.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/compactSidePanelButtons.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/sidePanelButtons.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/logout_dock_button.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/Logout.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 
 class CompactSidePanel extends StatelessWidget {
@@ -42,7 +43,9 @@ class CompactSidePanel extends StatelessWidget {
                   constraints: BoxConstraints(minHeight: constraints.maxHeight),
                   child: IntrinsicHeight(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 1.w(context)),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: max(10, 1.w(context)),
+                          vertical: max(10, 1.w(context))),
                       child: Column(
                         spacing: 20,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -62,12 +65,7 @@ class CompactSidePanel extends StatelessWidget {
                           CompactSidePanelButtons(),
                           Spacer(),
                           //Logout
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 20),
-                            child: TactileButton(
-                              child: LogoutWindowButton(),
-                            ),
-                          ),
+                          CompactLogout(),
                         ],
                       ),
                     ),

@@ -68,13 +68,17 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
                   horizontal: max(10, 2.w(context)),
                   vertical: max(5, 0.5.w(context)),
                 ),
-                textColor: darkGrey,
                 borderRadius: 10.w(context),
                 borderColor: darkGrey,
-                text: feedSocketIoProvider.showNewPostTextBox
-                    ? "Cancel"
-                    : "New Post",
-                textSize: max(12, 2.sp(context)),
+                child: Text(
+                  feedSocketIoProvider.showNewPostTextBox
+                      ? "Cancel"
+                      : "New Post",
+                  style: TextStyle(
+                    fontSize: max(12, 2.sp(context)),
+                    color: white,
+                  ),
+                ),
               )
             ],
           ),
@@ -126,14 +130,19 @@ class _NewProjectFeedPostTextfieldState
         child: Column(
           children: [
             SizedBox(height: max(5, 0.5.w(context))),
-            KeyboardListener(
+            Focus(
               focusNode: keyboardListenerFocusNode,
-              onKeyEvent: (event) {
+              onKeyEvent: (node, event) {
+                // only submit on enter if SHIFT is not held down and the
+                // content is not empty
                 if (event is KeyDownEvent &&
                     event.logicalKey == LogicalKeyboardKey.enter &&
-                    !HardwareKeyboard.instance.isShiftPressed) {
+                    !HardwareKeyboard.instance.isShiftPressed &&
+                    _projectFeedPostController.text.trim().isNotEmpty) {
                   post();
+                  return KeyEventResult.handled;
                 }
+                return KeyEventResult.ignored;
               },
               child: TextField(
                 focusNode: textFieldFocusNode,
@@ -172,16 +181,20 @@ class _NewProjectFeedPostTextfieldState
                     }
                   },
                   isLoading: isLoading,
-                  textSize: max(12, 2.sp(context)),
                   scale: 1.03,
                   padding: EdgeInsets.symmetric(
                       horizontal: 1.5.w(context), vertical: 0.5.w(context)),
                   color1: pink,
                   color2: red,
-                  text: "Post",
-                  textColor: white,
                   borderRadius: 20.w(context),
-                  borderColor: tran),
+                  borderColor: tran,
+                  child: Text(
+                    "Post",
+                    style: TextStyle(
+                      fontSize: max(12, 2.sp(context)),
+                      color: white,
+                    ),
+                  )),
             ),
           ],
         ).animate().fadeIn(duration: Duration(milliseconds: 300)));

@@ -45,7 +45,9 @@ class BlurryContainer extends StatelessWidget {
           ),
           Padding(
             padding: padding,
-            child: child,
+            child: Center(
+              child: child,
+            ),
           ),
         ]),
       ),

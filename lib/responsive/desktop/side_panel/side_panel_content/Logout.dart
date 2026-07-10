@@ -264,7 +264,8 @@ class _LogoutState extends State<Logout> {
                           child: Text(
                             "Logout",
                             style: TextStyle(
-                              fontSize: max(10, 2.5.sp(context)),
+                              fontSize: max(10, 2.sp(context)),
+                              fontWeight: FontWeight.bold,
                               color: white,
                             ),
                           ),

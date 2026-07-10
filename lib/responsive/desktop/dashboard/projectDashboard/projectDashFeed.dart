@@ -88,6 +88,7 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
           NewProjectFeedPostTextfield(),
           Expanded(
             child: StaggerLoad(
+                scale: 1.01,
                 duration: 300,
                 childPadding: EdgeInsets.only(bottom: max(5, 0.5.w(context))),
                 widgets: feedSocketIoProvider.projectFeed,

@@ -3,19 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/sidePanelButtons.dart';
 import 'package:flutter_application_1/util/imports.dart';
-
-import 'package:flutter_application_1/util/logout_dock_button.dart';
-import 'package:flutter_application_1/util/ui/tactile_button.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/Logout.dart';
 import 'package:simple_animations/simple_animations.dart';
-
 import '../desk_decks.dart';
-import 'side_panel_content/connections/desk_connections_popup.dart';
-import 'side_panel_content/desk_home_button.dart';
-import 'side_panel_content/help/desk_help_popup.dart';
-import 'side_panel_content/info/desk_info_popup.dart';
-import 'side_panel_content/settings/desk_settings_popup.dart';
-import 'side_panel_content/desk_dock_button_templates/sp_button_template.dart';
-import 'side_panel_content/wallet/desk_wallet_popup.dart';
 
 class DesktopSidePanel extends StatefulWidget {
   const DesktopSidePanel({
@@ -93,11 +83,8 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
                         Spacer(),
                         //Logout
                         Padding(
-                          padding:
-                              EdgeInsets.only(left: 1.w(context), bottom: 20),
-                          child: TactileButton(
-                            child: LogoutWindowButton(),
-                          ),
+                          padding: EdgeInsets.all(1.w(context)),
+                          child: Logout(),
                         ),
                       ],
                     ),

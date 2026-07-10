@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/ui/CarbonCircleAvatar.dart';
 
 class ProjectFeedPost extends StatefulWidget {
   const ProjectFeedPost(
@@ -29,15 +30,7 @@ class _ProjectFeedPostState extends State<ProjectFeedPost> {
           children: [
             Padding(
               padding: EdgeInsets.only(right: max(10, 1.w(context))),
-              child: Container(
-                width: max(40, 2.5.w(context)),
-                padding: EdgeInsets.all(max(9, 0.25.w(context))),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: deckBorderColor),
-                ),
-                child: Image.asset("images/creator.png"),
-              ),
+              child: const CarbonCircleAvatar(),
             ),
             //
             // Username

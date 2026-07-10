@@ -51,6 +51,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    // Initialize SocketIoProvider and Connect to SocketIo Server
     final feedSocketIoProvider = context.read<FeedSocketIoProvider>();
     SocketIoClient.socket.connect();
     SocketIoClient.socket.on("connected", (res) => logger.w(res));
@@ -62,6 +63,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // Adjust in Debugging to Analyze Animations and Errors
     timeDilation = 1;
     return MaterialApp.router(
       routerConfig: router,

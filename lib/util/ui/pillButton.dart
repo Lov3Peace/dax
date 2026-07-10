@@ -5,28 +5,24 @@ import "package:flutter_application_1/util/ui/tactile_button.dart";
 class PillButton extends StatelessWidget {
   PillButton(
       {super.key,
-      this.text,
+      required this.child,
       required this.onTap,
       this.isLoading = false,
-      required this.textSize,
       required this.scale,
       required this.padding,
       this.color1 = tran,
       this.color2 = tran,
-      required this.textColor,
       required this.borderRadius,
       required this.borderColor});
 
+  final Widget child;
   final VoidCallback onTap;
   bool isLoading;
   final EdgeInsetsGeometry padding;
-  final String? text;
-  final double textSize;
   final double borderRadius;
   double scale = 1.03;
   Color color1 = tran;
   Color color2 = tran;
-  Color textColor = tran;
   Color borderColor = deckBorderColor;
 
   @override
@@ -45,10 +41,7 @@ class PillButton extends StatelessWidget {
             children: [
               Visibility(
                 visible: !isLoading,
-                child: Text(
-                  text ?? '',
-                  style: TextStyle(fontSize: textSize),
-                ),
+                child: child,
               ),
               Visibility(
                 visible: isLoading,

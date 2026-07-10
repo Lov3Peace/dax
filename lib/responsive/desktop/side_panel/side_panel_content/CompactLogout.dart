@@ -242,26 +242,22 @@ class _CompactLogoutState extends State<CompactLogout> {
                       duration: Duration(milliseconds: 250),
                       child: Visibility(
                         visible: logoutIconClicked,
-                        child: TactileButton(
-                          child: PillButton(
-                            onTap: () async {
-                              bool res = await logout();
-                              if (!res && mounted) {
-                                showErrorMessage("Unable to log out!", context);
-                              } else {
-                                router.go("/launch");
-                              }
-                            },
-                            color1: red,
-                            color2: red,
-                            scale: 1.03,
-                            padding: EdgeInsetsGeometry.symmetric(
-                                horizontal: max(5, 0.5.w(context)),
-                                vertical: max(2.5, 0.25.w(context))),
-                            borderRadius: 50.w(context),
-                            borderColor: tran,
-                            child: Icon(Icons.chevron_left_rounded),
-                          ),
+                        child: PillButton(
+                          onTap: () async {
+                            bool res = await logout();
+                            if (!res && mounted) {
+                              showErrorMessage("Unable to log out!", context);
+                            } else {
+                              router.go("/launch");
+                            }
+                          },
+                          color1: red,
+                          color2: red,
+                          scale: 1.03,
+                          padding: EdgeInsets.all(max(5, 0.5.w(context))),
+                          borderRadius: 50.w(context),
+                          borderColor: tran,
+                          child: const Icon(Ionicons.chevron_back),
                         ),
                       ),
                     )),

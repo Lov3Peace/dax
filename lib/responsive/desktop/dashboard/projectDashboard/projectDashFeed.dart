@@ -140,6 +140,9 @@ class _NewProjectFeedPostTextfieldState
                     event.logicalKey == LogicalKeyboardKey.enter &&
                     !HardwareKeyboard.instance.isShiftPressed &&
                     _projectFeedPostController.text.trim().isNotEmpty) {
+                  setState(() {
+                    isLoading = true;
+                  });
                   post();
                   return KeyEventResult.handled;
                 }

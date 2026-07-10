@@ -87,14 +87,22 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
           ),
           NewProjectFeedPostTextfield(),
           Expanded(
-            child: StaggerLoad(
-                scale: 1.01,
-                duration: 300,
-                childPadding: EdgeInsets.only(bottom: max(5, 0.5.w(context))),
-                widgets: feedSocketIoProvider.projectFeed,
-                scrollDirection: Axis.vertical,
-                delay: 0),
+            child: ListView.builder(
+              itemCount: feedSocketIoProvider.projectFeed.length,
+              itemBuilder: (context, index) {
+                return feedSocketIoProvider.projectFeed[index];
+              },
+            ),
           ),
+          // Expanded(
+          //   child: StaggerLoad(
+          //       scale: 1.01,
+          //       duration: 300,
+          //       childPadding: EdgeInsets.only(bottom: max(5, 0.5.w(context))),
+          //       widgets: feedSocketIoProvider.projectFeed,
+          //       scrollDirection: Axis.vertical,
+          //       delay: 0),
+          // ),
         ],
       ),
     );
@@ -140,12 +148,16 @@ class _NewProjectFeedPostTextfieldState
                     event.logicalKey == LogicalKeyboardKey.enter &&
                     !HardwareKeyboard.instance.isShiftPressed &&
                     _projectFeedPostController.text.trim().isNotEmpty) {
+                  // Enable Loading Icon on Post Button
                   setState(() {
                     isLoading = true;
                   });
+                  // Submit Post
                   post();
+                  // Handle the Key Press Which Stops Propagation and Prevents Adding a Newline
                   return KeyEventResult.handled;
                 }
+                // Ignore the Key Press If the Condition is Not Met
                 return KeyEventResult.ignored;
               },
               child: TextField(
@@ -178,9 +190,11 @@ class _NewProjectFeedPostTextfieldState
                   onTap: () {
                     // Post If Textfield is Not Empty
                     if (_projectFeedPostController.text != "") {
+                      // Enable Loading Icon on Post Button
                       setState(() {
                         isLoading = true;
                       });
+                      // Send Post
                       post();
                     }
                   },

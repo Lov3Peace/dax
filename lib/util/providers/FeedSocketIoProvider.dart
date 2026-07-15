@@ -27,7 +27,7 @@ class FeedSocketIoProvider extends ChangeNotifier {
       for (int i = 0; i < feed[0].length; i++) {
         projectFeed.add(ProjectFeedPost(
           username: feed[0][i]["username"],
-          timestamp: feed[0][i]["timestamp"].toString(),
+          timestamp: feed[0][i]["display_timestamp"].toString(),
           content: feed[0][i]["content"]["text"],
         ));
       }
@@ -40,7 +40,7 @@ class FeedSocketIoProvider extends ChangeNotifier {
       projectFeed = [
         ProjectFeedPost(
           username: update[0]["username"],
-          timestamp: update[0]["timestamp"].toString(),
+          timestamp: update[0]["display_timestamp"].toString(),
           content: update[0]["content"]["text"],
         ),
         ...projectFeed

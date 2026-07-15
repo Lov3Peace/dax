@@ -323,6 +323,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         projectProvider.saveTeammates(selectedOptions);
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!mounted) return;
+          optionsList.clear();
           _textFieldFocusNode.requestFocus();
           setState(() {
             highlightIndex = 0;

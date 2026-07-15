@@ -98,22 +98,17 @@ class SpButtonTemplateState extends State<SpButtonTemplate> {
 
   void slideIn() {
     // toggle between control instructions
-    Future.delayed(
-      const Duration(milliseconds: 200),
-      () {
-        //slide animation
-        showGeneralDialog(
-            barrierDismissible: true,
-            barrierLabel: "Test",
-            context: context,
-            // transitionDuration: const Duration(milliseconds: 200),
-            pageBuilder: (context, _, __) => Center(
-                child: widget.child.animate().slideX(
-                    begin: -1,
-                    end: 0,
-                    curve: Curves.easeOutBack,
-                    duration: const Duration(milliseconds: 500))));
-      },
-    );
+    //slide animation
+    showGeneralDialog(
+        barrierDismissible: true,
+        barrierLabel: "Test",
+        context: context,
+        // transitionDuration: const Duration(milliseconds: 200),
+        pageBuilder: (context, _, __) => Center(
+            child: widget.child.animate().scale(
+                begin: Offset(0, 0),
+                end: Offset(1, 1),
+                curve: Curves.easeInOutSine,
+                duration: const Duration(milliseconds: 300))));
   }
 }

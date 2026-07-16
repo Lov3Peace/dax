@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
+import 'package:flutter_application_1/util/ErrorMessage.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
+import 'package:flutter_application_1/util/auth/launch_page/LaunchPagePasswordField.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/ui/pillButton.dart';
@@ -104,10 +106,13 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
   double passwordFieldY = 1;
   FocusNode passwordFocusNode = FocusNode();
   FocusNode usernameFocusNode = FocusNode();
-  late AnimationController usernameAnimationController =
+  late AnimationController usernameToPasswordAnimationController =
       AnimationController(vsync: this);
   late AnimationController passwordAnimationController =
       AnimationController(vsync: this);
+  Curve usernameToPasswordAnimationCurve = Curves.easeOutBack;
+  Duration usernameToPasswordAnimationDuration = 500.milliseconds;
+  Curve pageLoadAnimationCurve = Curves.easeOutBack;
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +171,7 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                       delay: 500.milliseconds,
                       begin: 0.1,
                       end: 0,
-                      curve: Curves.easeInOutBack),
+                      curve: pageLoadAnimationCurve),
               Center(
                 child: Stack(
                   alignment: Alignment.center,
@@ -177,18 +182,20 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                       width: 40.w(context),
                       child: Column(
                         children: [
+                          //
+                          // Username Help Text
                           Animate(
                             autoPlay: false,
-                            controller: usernameAnimationController,
+                            controller: usernameToPasswordAnimationController,
                             effects: [
                               SlideEffect(
-                                duration: 500.milliseconds,
+                                duration: 300.milliseconds,
                                 begin: Offset(0, 0),
-                                end: Offset(0, -1),
-                                curve: Curves.easeInOutBack,
+                                end: Offset(0, -2),
+                                curve: usernameToPasswordAnimationCurve,
                               ),
                               FadeEffect(
-                                  duration: 500.milliseconds, begin: 1, end: 0),
+                                  duration: 300.milliseconds, begin: 1, end: 0),
                             ],
                             child: Text(
                               "New or existing users, enter your username.",
@@ -208,37 +215,47 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                     delay: 625.milliseconds,
                                     begin: 2,
                                     end: 0,
-                                    curve: Curves.easeInOutBack),
+                                    curve: pageLoadAnimationCurve),
                           ),
                           SizedBox(height: 1.w(context)),
                           //
-                          // Username
-                          Animate(
-                            controller: usernameAnimationController,
-                            autoPlay: false,
-                            effects: [
-                              SlideEffect(
-                                duration: 500.milliseconds,
-                                delay: 250.milliseconds,
-                                begin: Offset(0, 0),
-                                end: Offset(0, -1),
-                                curve: Curves.easeInOutBack,
-                              ),
-                              FadeEffect(
-                                duration: 500.milliseconds,
-                                delay: 250.milliseconds,
-                                begin: 1,
-                                end: 0,
-                              ),
-                            ],
-                            //
-                            // Username TextField
-                            child: SizedBox(
-                              width: 40.w(context),
+                          // Username TextField
+                          SizedBox(
+                            width: 40.w(context),
+                            child: Animate(
+                              controller: usernameToPasswordAnimationController,
+                              autoPlay: false,
+                              effects: [
+                                SlideEffect(
+                                  delay: 50.milliseconds,
+                                  duration: 300.milliseconds,
+                                  begin: Offset(0, 0),
+                                  end: Offset(0, -1),
+                                  curve: usernameToPasswordAnimationCurve,
+                                ),
+                                FadeEffect(
+                                  delay: 50.milliseconds,
+                                  duration: 300.milliseconds,
+                                  begin: 1,
+                                  end: 0,
+                                ),
+                              ],
                               child: TextField(
                                 onSubmitted: (_) {
-                                  usernameAnimationController.forward();
-                                  passwordFocusNode.requestFocus();
+                                  if (_usernameController.text.trim().isEmpty) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return const ErrorMessage(
+                                              message:
+                                                  "Username Cannot Be Empty");
+                                        });
+                                    usernameFocusNode.requestFocus();
+                                  } else {
+                                    usernameToPasswordAnimationController
+                                        .forward();
+                                    passwordFocusNode.requestFocus();
+                                  }
                                 },
                                 focusNode: usernameFocusNode,
                                 autofocus: true,
@@ -253,10 +270,25 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                         EdgeInsets.only(right: 1.w(context)),
                                     child: TactileButton(
                                         onTap: () {
-                                          usernameAnimationController.forward();
+                                          if (_usernameController.text
+                                              .trim()
+                                              .isEmpty) {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return const ErrorMessage(
+                                                      message:
+                                                          "Username Cannot Be Empty");
+                                                });
+                                            usernameFocusNode.requestFocus();
+                                          } else {
+                                            usernameToPasswordAnimationController
+                                                .forward();
+                                            passwordFocusNode.requestFocus();
+                                          }
                                         },
                                         scale: 1.1,
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.arrow_circle_right_rounded,
                                         )),
                                   ),
@@ -280,20 +312,20 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                   ),
                                 ),
                               ),
-                            )
-                                //On Page Load Animation
-                                .animate()
-                                .fadeIn(
-                                    duration: 1000.milliseconds,
-                                    delay: 750.milliseconds,
-                                    begin: 0)
-                                .slideY(
-                                    duration: 1000.milliseconds,
-                                    delay: 750.milliseconds,
-                                    begin: 1,
-                                    end: 0,
-                                    curve: Curves.easeInOutBack),
-                          ),
+                            ),
+                          )
+                              //On Page Load Animation
+                              .animate()
+                              .fadeIn(
+                                  duration: 1000.milliseconds,
+                                  delay: 750.milliseconds,
+                                  begin: 0)
+                              .slideY(
+                                  duration: 1000.milliseconds,
+                                  delay: 750.milliseconds,
+                                  begin: 1,
+                                  end: 0,
+                                  curve: pageLoadAnimationCurve),
                         ],
                       ),
                     ),
@@ -306,21 +338,22 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                           Column(
                             children: [
                               Animate(
-                                controller: usernameAnimationController,
+                                controller:
+                                    usernameToPasswordAnimationController,
                                 autoPlay: false,
                                 effects: [
                                   SlideEffect(
-                                    duration: 500.milliseconds,
-                                    delay: 500.milliseconds,
+                                    delay: 100.milliseconds,
+                                    duration: 300.milliseconds,
                                     begin: Offset(0, 1),
                                     end: Offset(0, 0),
-                                    curve: Curves.easeInOutBack,
+                                    curve: usernameToPasswordAnimationCurve,
                                   ),
                                   FadeEffect(
-                                    duration: 500.milliseconds,
+                                    delay: 100.milliseconds,
+                                    duration: 300.milliseconds,
                                     begin: 0,
                                     end: 1,
-                                    delay: 500.milliseconds,
                                   ),
                                 ],
                                 child: Text(
@@ -335,140 +368,28 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                               SizedBox(
                                 width: 40.w(context),
                                 child: Animate(
-                                  controller: usernameAnimationController,
+                                  controller:
+                                      usernameToPasswordAnimationController,
                                   autoPlay: false,
                                   effects: [
                                     SlideEffect(
-                                      duration: 500.milliseconds,
-                                      delay: 500.milliseconds,
+                                      delay: 200.milliseconds,
+                                      duration: 300.milliseconds,
                                       begin: Offset(0, 1),
                                       end: Offset(0, 0),
-                                      curve: Curves.easeInOutBack,
+                                      curve: usernameToPasswordAnimationCurve,
                                     ),
                                     FadeEffect(
-                                        duration: 500.milliseconds,
-                                        delay: 500.milliseconds,
+                                        delay: 200.milliseconds,
+                                        duration: 300.milliseconds,
                                         begin: 0,
                                         end: 1),
                                   ],
-                                  child: TextField(
-                                    autofocus: true,
-                                    focusNode: passwordFocusNode,
-                                    cursorColor: red,
-                                    style: TextStyle(fontSize: 3.sp(context)),
-                                    controller: _passwordController,
-                                    // handles pressing 'Enter'
-                                    onSubmitted: (value) async {
-                                      final userAuthProvider =
-                                          context.read<UserAuthProvider>();
-                                      final userProvider =
-                                          context.read<UserProvider>();
-                                      final LoginRes res =
-                                          await userAuthProvider.login(
-                                        _usernameController.text,
-                                        _passwordController.text,
-                                        _rememberMe,
-                                      );
-                                      if (!context.mounted) return;
-                                      if (!res.success) {
-                                        showErrorMessage(res.error, context);
-                                      } else {
-                                        userProvider
-                                            .saveUsername(res.body["username"]);
-                                        userProvider.saveUserData(res.body);
-                                        // Navigate to Dashboard
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return Stack(
-                                                children: [
-                                                  // ArtBoardScreen(),
-                                                  Center(
-                                                    child: Container(
-                                                        height: 350,
-                                                        child: rive
-                                                            .RiveWidgetBuilder(
-                                                          fileLoader: rive
-                                                                  .FileLoader
-                                                              .fromAsset(
-                                                                  "rive/completed.riv",
-                                                                  riveFactory: rive
-                                                                      .Factory
-                                                                      .rive),
-                                                          builder: (context,
-                                                                  state) =>
-                                                              switch (state) {
-                                                            RiveLoading() =>
-                                                              const Center(
-                                                                  child:
-                                                                      CircularProgressIndicator()),
-                                                            RiveFailed() =>
-                                                              ErrorWidget
-                                                                  .withDetails(
-                                                                message: state
-                                                                    .error
-                                                                    .toString(),
-                                                                error: FlutterError(
-                                                                    state.error
-                                                                        .toString()),
-                                                              ),
-                                                            RiveLoaded() =>
-                                                              RiveWidget(
-                                                                controller: state
-                                                                    .controller,
-                                                                fit:
-                                                                    Fit.contain,
-                                                              )
-                                                          },
-                                                          // fit: rive.Fit.cover,
-                                                        )),
-                                                    // RiveAnimation.asset("rive/progress_bar_concept.riv")),
-                                                    // RiveAnimation.asset("rive/loadingsquare.riv")),
-                                                  ),
-                                                ],
-                                              );
-                                            });
-                                        Future.delayed(Duration(seconds: 3),
-                                            () {
-                                          router.pop();
-                                          router.go("/");
-                                        });
-                                      }
-
-                                      _passwordController.clear();
-                                    },
-                                    obscureText: true,
-                                    decoration: InputDecoration(
-                                      suffixIcon: Padding(
-                                        padding: EdgeInsets.only(
-                                            right: 1.w(context)),
-                                        child: TactileButton(
-                                            onTap: () {},
-                                            scale: 1.1,
-                                            child: Icon(
-                                              Icons.arrow_circle_right_rounded,
-                                            )),
-                                      ),
-                                      contentPadding:
-                                          EdgeInsets.all(1.25.w(context)),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            10.w(context)),
-                                        borderSide: BorderSide(
-                                          color: const Color.fromARGB(
-                                              151, 255, 255, 255),
-                                          width: 0.05.w(context),
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            10.w(context)),
-                                        borderSide: const BorderSide(
-                                            color: Color.fromARGB(
-                                                151, 255, 255, 255)),
-                                      ),
-                                    ),
-                                  ),
+                                  child: LaunchPagePasswordField(
+                                      passwordFocusNode: passwordFocusNode,
+                                      passwordController: _passwordController,
+                                      usernameController: _usernameController,
+                                      rememberMe: _rememberMe),
                                 ),
                               ),
                               Align(
@@ -477,26 +398,28 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                   padding: EdgeInsets.only(
                                       top: max(10, 1.w(context))),
                                   child: Animate(
-                                    controller: usernameAnimationController,
+                                    controller:
+                                        usernameToPasswordAnimationController,
                                     autoPlay: false,
                                     effects: [
                                       SlideEffect(
-                                        duration: 500.milliseconds,
-                                        delay: 750.milliseconds,
+                                        delay: 300.milliseconds,
+                                        duration: 300.milliseconds,
                                         begin: Offset(0, 1),
                                         end: Offset(0, 0),
-                                        curve: Curves.easeInOutBack,
+                                        curve: usernameToPasswordAnimationCurve,
                                       ),
                                       FadeEffect(
-                                          duration: 500.milliseconds,
-                                          delay: 750.milliseconds,
+                                          delay: 300.milliseconds,
+                                          duration: 300.milliseconds,
                                           begin: 0,
                                           end: 1),
                                     ],
                                     child: PillButton(
                                         onTap: () {
                                           usernameFocusNode.requestFocus();
-                                          usernameAnimationController.reverse();
+                                          usernameToPasswordAnimationController
+                                              .reverse();
                                         },
                                         scale: 1.05,
                                         padding: EdgeInsets.symmetric(

@@ -26,6 +26,7 @@ class ProjectDashFeed extends StatefulWidget {
 
 late UserProvider userProvider;
 String username = "";
+late FeedSocketIoProvider feedSocketIoProvider;
 
 class _ProjectDashFeedState extends State<ProjectDashFeed> {
   @override
@@ -38,7 +39,7 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
   @override
   Widget build(BuildContext context) {
     // Watching the projectFeed Value in FeedSocketIoProvider and Updating on Change
-    final feedSocketIoProvider = context.watch<FeedSocketIoProvider>();
+    feedSocketIoProvider = context.watch<FeedSocketIoProvider>();
 
     return BlurryContainer(
       // constraints: BoxConstraints(minWidth: 100, minHeight: 100),
@@ -133,7 +134,7 @@ class _NewProjectFeedPostTextfieldState
 
   @override
   Widget build(BuildContext context) {
-    final feedSocketIoProvider = context.watch<FeedSocketIoProvider>();
+    feedSocketIoProvider = context.watch<FeedSocketIoProvider>();
     return Visibility(
         visible: feedSocketIoProvider.showNewPostTextBox,
         child: Column(

@@ -33,26 +33,26 @@ class ProjectsDeck extends StatelessWidget {
             children: [
               //
               // Project Rive Animation
-              Container(
-                  width: max(50, 3.w(context)),
-                  child: rive.RiveWidgetBuilder(
-                    fileLoader: rive.FileLoader.fromAsset(
-                        "rive/building_apartments.riv",
-                        riveFactory: rive.Factory.rive),
-                    builder: (context, state) => switch (state) {
-                      rive.RiveLoading() =>
-                        const Center(child: CircularProgressIndicator()),
-                      rive.RiveFailed() => ErrorWidget.withDetails(
-                          message: state.error.toString(),
-                          error: FlutterError(state.error.toString()),
-                        ),
-                      rive.RiveLoaded() => rive.RiveWidget(
-                          controller: state.controller,
-                          fit: rive.Fit.contain,
-                        )
-                    },
-                    // fit: rive.Fit.cover,
-                  )),
+              // Container(
+              //     width: max(50, 3.w(context)),
+              //     child: rive.RiveWidgetBuilder(
+              //       fileLoader: rive.FileLoader.fromAsset(
+              //           "rive/building_apartments.riv",
+              //           riveFactory: rive.Factory.rive),
+              //       builder: (context, state) => switch (state) {
+              //         rive.RiveLoading() =>
+              //           const Center(child: CircularProgressIndicator()),
+              //         rive.RiveFailed() => ErrorWidget.withDetails(
+              //             message: state.error.toString(),
+              //             error: FlutterError(state.error.toString()),
+              //           ),
+              //         rive.RiveLoaded() => rive.RiveWidget(
+              //             controller: state.controller,
+              //             fit: rive.Fit.contain,
+              //           )
+              //       },
+              //       // fit: rive.Fit.cover,
+              //     )),
               //
               // Project Heading and Description
               Expanded(

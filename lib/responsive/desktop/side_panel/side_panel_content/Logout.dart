@@ -133,7 +133,10 @@ class _LogoutState extends State<Logout> {
                             cancelButtonY = 0;
                           });
                         },
-                        child: const Icon(Ionicons.chevron_back),
+                        child: Icon(
+                          Ionicons.chevron_back,
+                          size: 1.5.w(context),
+                        ),
                       ),
                     ),
                   ),

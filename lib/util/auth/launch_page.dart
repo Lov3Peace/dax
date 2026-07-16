@@ -265,6 +265,10 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                 decoration: InputDecoration(
                                   contentPadding:
                                       EdgeInsets.all(1.25.w(context)),
+                                  hintText: "Username",
+                                  hintStyle: TextStyle(
+                                    color: grey,
+                                  ),
                                   suffixIcon: Padding(
                                     padding:
                                         EdgeInsets.only(right: 1.w(context)),

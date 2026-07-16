@@ -71,6 +71,10 @@ class LaunchPagePasswordField extends StatelessWidget {
       },
       obscureText: true,
       decoration: InputDecoration(
+        hintText: "Password",
+        hintStyle: TextStyle(
+          color: grey,
+        ),
         suffixIcon: Padding(
           padding: EdgeInsets.only(right: 1.w(context)),
           child: TactileButton(

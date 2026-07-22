@@ -109,10 +109,12 @@ class LaunchPagePasswordField extends StatelessWidget {
                     router.go("/");
                   });
                 }
+                passwordController.clear();
               },
               scale: 1.1,
               child: Icon(
                 Icons.arrow_circle_right_rounded,
+                size: 1.5.w(context),
               )),
         ),
         contentPadding: EdgeInsets.all(1.25.w(context)),

@@ -292,8 +292,9 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                           }
                                         },
                                         scale: 1.1,
-                                        child: const Icon(
+                                        child: Icon(
                                           Icons.arrow_circle_right_rounded,
+                                          size: 1.5.w(context),
                                         )),
                                   ),
                                   // contentPadding:
@@ -396,44 +397,122 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                       rememberMe: _rememberMe),
                                 ),
                               ),
-                              Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      top: max(10, 1.w(context))),
-                                  child: Animate(
-                                    controller:
-                                        usernameToPasswordAnimationController,
-                                    autoPlay: false,
-                                    effects: [
-                                      SlideEffect(
-                                        delay: 300.milliseconds,
-                                        duration: 300.milliseconds,
-                                        begin: Offset(0, 1),
-                                        end: Offset(0, 0),
-                                        curve: usernameToPasswordAnimationCurve,
-                                      ),
-                                      FadeEffect(
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: max(10, 1.w(context))),
+                                    child: Animate(
+                                      controller:
+                                          usernameToPasswordAnimationController,
+                                      autoPlay: false,
+                                      effects: [
+                                        SlideEffect(
                                           delay: 300.milliseconds,
                                           duration: 300.milliseconds,
-                                          begin: 0,
-                                          end: 1),
-                                    ],
-                                    child: PillButton(
-                                        onTap: () {
-                                          usernameFocusNode.requestFocus();
-                                          usernameToPasswordAnimationController
-                                              .reverse();
-                                        },
-                                        scale: 1.05,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 1.5.w(context),
-                                            vertical: 0.5.w(context)),
-                                        borderRadius: 20.w(context),
-                                        borderColor: deckBorderColor,
-                                        child: Text("Back")),
+                                          begin: const Offset(0, 1),
+                                          end: const Offset(0, 0),
+                                          curve:
+                                              usernameToPasswordAnimationCurve,
+                                        ),
+                                        FadeEffect(
+                                            delay: 300.milliseconds,
+                                            duration: 300.milliseconds,
+                                            begin: 0,
+                                            end: 1),
+                                      ],
+                                      child: Row(
+                                        spacing: 1.w(context),
+                                        children: [
+                                          PillButton(
+                                              onTap: () {
+                                                usernameFocusNode
+                                                    .requestFocus();
+                                                usernameToPasswordAnimationController
+                                                    .reverse();
+                                              },
+                                              scale: 1.05,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 1.5.w(context),
+                                                  vertical: 0.5.w(context)),
+                                              borderRadius: 20.w(context),
+                                              borderColor: deckBorderColor,
+                                              child: const Text("Back")),
+                                          PillButton(
+                                              onTap: () {},
+                                              scale: 1.05,
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 1.5.w(context),
+                                                  vertical: 0.5.w(context)),
+                                              borderRadius: 20.w(context),
+                                              borderColor: deckBorderColor,
+                                              child: const Text(
+                                                  "Forgot Password?")),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: max(10, 1.w(context))),
+                                    child: Animate(
+                                      controller:
+                                          usernameToPasswordAnimationController,
+                                      autoPlay: false,
+                                      effects: [
+                                        SlideEffect(
+                                          delay: 300.milliseconds,
+                                          duration: 300.milliseconds,
+                                          begin: Offset(0, 1),
+                                          end: Offset(0, 0),
+                                          curve:
+                                              usernameToPasswordAnimationCurve,
+                                        ),
+                                        FadeEffect(
+                                            delay: 300.milliseconds,
+                                            duration: 300.milliseconds,
+                                            begin: 0,
+                                            end: 1),
+                                      ],
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "Remember Me",
+                                            style: TextStyle(
+                                                fontSize:
+                                                    max(12, 2.5.sp(context))),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.only(
+                                                left: 0.5.w(context)),
+                                            width: 3.5.w(context),
+                                            // height: 30,
+                                            child: FittedBox(
+                                              fit: BoxFit.fill,
+                                              child: Switch(
+                                                thumbIcon:
+                                                    const WidgetStatePropertyAll(
+                                                        Icon(Icons
+                                                            .lock_outline)),
+                                                value: _rememberMe,
+                                                activeColor: Colors.white,
+                                                activeTrackColor: pink,
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    _rememberMe = !_rememberMe;
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),

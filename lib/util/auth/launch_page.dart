@@ -342,6 +342,8 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                         children: [
                           Column(
                             children: [
+                              //
+                              // "Enter your password" Help Text
                               Animate(
                                 controller:
                                     usernameToPasswordAnimationController,
@@ -370,6 +372,8 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                 ),
                               ),
                               SizedBox(height: 1.w(context)),
+                              //
+                              // Password Textfield
                               SizedBox(
                                 width: 40.w(context),
                                 child: Animate(
@@ -427,6 +431,8 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                       child: Row(
                                         spacing: 1.w(context),
                                         children: [
+                                          //
+                                          // Back Button
                                           PillButton(
                                               onTap: () {
                                                 usernameFocusNode
@@ -441,6 +447,8 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                               borderRadius: 20.w(context),
                                               borderColor: deckBorderColor,
                                               child: const Text("Back")),
+                                          //
+                                          // Forgot Password Button
                                           PillButton(
                                               onTap: () {},
                                               scale: 1.05,
@@ -479,12 +487,16 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                       ],
                                       child: Row(
                                         children: [
+                                          //
+                                          // Remember Me Text
                                           Text(
                                             "Remember Me",
                                             style: TextStyle(
                                                 fontSize:
                                                     max(12, 2.5.sp(context))),
                                           ),
+                                          //
+                                          // Remember Me Switch
                                           Container(
                                             padding: EdgeInsets.only(
                                                 left: 0.5.w(context)),
@@ -522,6 +534,8 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                   ],
                 ),
               ),
+              //
+              // Carbon Footer
               Positioned(
                 bottom: 3.h(context),
                 right: 3.w(context),
@@ -540,6 +554,8 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
     );
   }
 
+//
+// Show Error Message Function
   void showErrorMessage(String message, context) {
     showDialog(
         context: (context),

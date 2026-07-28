@@ -125,6 +125,7 @@ class _DesktopProjectPostsPageState extends State<DesktopProjectPostsPage> {
                         child: BlurryContainer(
                           width: 20.w(context),
                           height: 7.w(context),
+                          borderRadius: 20.w(context),
                           child: Center(
                             child: Text("No Projects Found"),
                           ),

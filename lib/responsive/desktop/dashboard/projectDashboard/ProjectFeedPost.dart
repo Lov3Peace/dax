@@ -21,8 +21,6 @@ class ProjectFeedPost extends StatefulWidget {
 }
 
 class _ProjectFeedPostState extends State<ProjectFeedPost> {
-  bool isOverflowing = false;
-
   @override
   Widget build(BuildContext context) {
     return Column(

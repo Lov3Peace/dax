@@ -59,18 +59,6 @@ class _ProjectFeedPostState extends State<ProjectFeedPost> {
                 ),
               ],
             ),
-            Visibility(
-                visible: isOverflowing,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: TactileButton(
-                      onTap: openPost,
-                      child: Text(
-                        "Read More",
-                        style:
-                            TextStyle(color: grey, fontStyle: FontStyle.italic),
-                      )),
-                ))
           ],
         ),
         //
@@ -99,63 +87,5 @@ class _ProjectFeedPostState extends State<ProjectFeedPost> {
         ),
       ],
     );
-  }
-
-  void openPost() {
-    showDialog(
-        context: context,
-        barrierDismissible: true,
-        barrierLabel: "feedPost",
-        builder: (context) {
-          return Center(
-            child: Container(
-              padding: EdgeInsets.all(1.w(context)),
-              width: 30.w(context),
-              decoration: BoxDecoration(
-                border: BoxBorder.all(color: deckBorderColor),
-                borderRadius: BorderRadius.circular(max(10, 1.5.w(context))),
-                color: deckBackgroundColor,
-              ),
-              // height: 10.w(context),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsets.only(right: max(10, 1.w(context))),
-                          child: const CarbonCircleAvatar(),
-                        ),
-                        //
-                        // Username
-                        Text(
-                          widget.username,
-                          style: TextStyle(
-                              fontSize: max(16, 2.5.sp(context)),
-                              fontWeight: FontWeight.bold),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(width: max(10, 1.w(context))),
-                        //
-                        // Timestamp
-                        Text(
-                          widget.timestamp,
-                          style: TextStyle(
-                              color: grey, fontSize: max(14, 2.5.sp(context))),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      widget.content,
-                      style: TextStyle(fontSize: max(14, 2.5.sp(context))),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
   }
 }

@@ -1,7 +1,7 @@
 import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_application_1/responsive/desktop/desk_decks.dart";
 import "package:flutter_application_1/responsive/desktop/util/stagger_load.dart";
-import "package:flutter_application_1/responsive/desktop/util/ui/ProjectFeedPost.dart";
+import "package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/ProjectFeedPost.dart";
 import "package:flutter_application_1/util/imports.dart";
 import "package:flutter_application_1/util/logger/CarbonLogger.dart";
 import "package:flutter_application_1/util/providers/FeedSocketIoProvider.dart";

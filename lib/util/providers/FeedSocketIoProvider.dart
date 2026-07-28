@@ -1,4 +1,4 @@
-import 'package:flutter_application_1/responsive/desktop/util/ui/ProjectFeedPost.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/ProjectFeedPost.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
 

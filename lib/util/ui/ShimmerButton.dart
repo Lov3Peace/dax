@@ -30,69 +30,65 @@ class _ShimmerButtonState extends State<ShimmerButton>
   @override
   Widget build(BuildContext context) {
     return TactileButton(
-        child: Animate(
-      controller: animationController,
-      autoPlay: true,
-      effects: [
-        ShimmerEffect(
-          color: Color.fromARGB(255, 250, 140, 140),
-          curve: Curves.fastOutSlowIn,
-          delay: 3.seconds,
-          duration: 1.seconds,
-        )
-      ],
-      onPlay: (controller) {
-        controller.loop(reverse: true);
-      },
-      child: Container(
-        height: 5.h(context),
-        width: 10.w(context),
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        decoration: BoxDecoration(
-          border: Border.all(color: Color.fromARGB(255, 250, 140, 140)),
-          borderRadius: BorderRadius.circular(50.w(context)),
-          gradient: RadialGradient(
-            colors: [tran, Color.fromARGB(255, 255, 85, 0)],
-            stops: [0, 1],
-            focalRadius: 0.5,
-            radius: 2.5,
-            center: Alignment(-0.2, 0),
-          ),
-        ),
-        child: Stack(
-          children: [
-            Center(
-              child: Text(
-                "Open",
-                style: TextStyle(fontSize: 2.sp(context)),
+        child: Container(
+      height: 4.5.h(context),
+      width: 10.w(context),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      decoration: BoxDecoration(
+        border: Border.all(color: Color.fromARGB(255, 250, 140, 140)),
+        borderRadius: BorderRadius.circular(50.w(context)),
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Text("Open"),
+          OverflowBox(
+            maxHeight: 20.h(context),
+            child: Animate(
+              controller: animationController,
+              autoPlay: true,
+              effects: [
+                RotateEffect(
+                  curve: Curves.easeInToLinear,
+                  // delay: 1.5.seconds,
+                  duration: 2.seconds,
+                ),
+                ScaleEffect(
+                  curve: Curves.easeOutBack,
+                  delay: 1.seconds,
+                  duration: 2.seconds,
+                  begin: Offset(1, 1),
+                  end: Offset(1.25, 1.25),
+                )
+                // ShimmerEffect(
+                //   curve: Curves.linear,
+                //   delay: 1.5.seconds,
+                //   duration: 1.seconds,
+                // ),
+              ],
+              onPlay: (controller) {
+                controller.loop(reverse: true);
+              },
+              child: Container(
+                height: 20.h(context),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [tran, Color.fromARGB(255, 255, 85, 0)],
+                    stops: [0, 1],
+                    focalRadius: 1,
+                    radius: 1,
+                    center: Alignment(-0.2, 0),
+                  ),
+                ),
+                // gradient: RadialGradient(
+                //   colors: [Color.fromARGB(100, 250, 100, 100), tran],
+                //   radius: 2,
+                // ),
               ),
             ),
-            Animate(
-                controller: animationController,
-                autoPlay: true,
-                effects: [
-                  ShimmerEffect(
-                    curve: Curves.linear,
-                    delay: 2.seconds,
-                    duration: 1.seconds,
-                  )
-                ],
-                onPlay: (controller) {
-                  controller.loop();
-                },
-                child: Container(
-                  height: 5.h(context),
-                  width: 10.w(context),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50.w(context)),
-                    // gradient: RadialGradient(
-                    //   colors: [Color.fromARGB(100, 250, 100, 100), tran],
-                    //   radius: 2,
-                    // ),
-                  ),
-                )),
-          ],
-        ),
+          ),
+        ],
       ),
     ));
   }

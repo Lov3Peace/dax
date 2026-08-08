@@ -1,3 +1,4 @@
+import "package:flutter_animate/flutter_animate.dart";
 import "package:flutter_application_1/responsive/desktop/desk_decks.dart";
 import "package:flutter_application_1/util/imports.dart";
 import "package:flutter_application_1/util/ui/tactile_button.dart";
@@ -53,7 +54,7 @@ class PillButton extends StatelessWidget {
                     strokeWidth: 2,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ));

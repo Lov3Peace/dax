@@ -13,8 +13,8 @@ class ShimmerButton extends StatefulWidget {
     this.color = const Color.fromARGB(255, 255, 85, 0),
     this.borderColor = const Color.fromARGB(255, 250, 140, 140),
     this.padding = 0,
-    this.animationCurve = Curves.linear,
-    this.animationCurve2 = Curves.linear,
+    this.animationCurve = Curves.easeInOutSine,
+    this.animationCurve2 = Curves.easeInOutSine,
     this.borderRadius = 25,
   });
 
@@ -71,13 +71,15 @@ class _ShimmerButtonState extends State<ShimmerButton>
                   curve: widget.animationCurve,
                   delay: 1.5.seconds,
                   duration: 2.seconds,
+                  begin: 0,
+                  end: 1,
                 ),
                 ScaleEffect(
                   curve: widget.animationCurve2,
                   delay: 1.5.seconds,
                   duration: 2.seconds,
                   begin: const Offset(1, 1),
-                  end: const Offset(1.2, 1.2),
+                  end: const Offset(1.25, 1.25),
                 ),
                 SlideEffect(
                   delay: 1.5.seconds,

@@ -1,13 +1,33 @@
-import 'dart:ui';
-
-import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 
 class ShimmerButton extends StatefulWidget {
-  const ShimmerButton({super.key});
+  ShimmerButton({
+    super.key,
+    required this.height,
+    required this.width,
+    required this.child,
+    required this.animate,
+    this.color = const Color.fromARGB(255, 255, 85, 0),
+    this.borderColor = const Color.fromARGB(255, 250, 140, 140),
+    this.padding = 0,
+    this.animationCurve = Curves.linear,
+    this.animationCurve2 = Curves.linear,
+    this.borderRadius = 25,
+  });
+
+  final double height;
+  final double width;
+  final Widget child;
+  final bool animate;
+  final Color color;
+  final Color borderColor;
+  double padding;
+  double borderRadius;
+  Curve animationCurve;
+  Curve animationCurve2;
 
   @override
   State<ShimmerButton> createState() => _ShimmerButtonState();
@@ -17,9 +37,6 @@ class _ShimmerButtonState extends State<ShimmerButton>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController =
       AnimationController(vsync: this, duration: 1.seconds);
-
-  double gradientX = -0.2;
-  double gradientY = 0;
 
   @override
   void dispose() {
@@ -31,34 +48,42 @@ class _ShimmerButtonState extends State<ShimmerButton>
   Widget build(BuildContext context) {
     return TactileButton(
         child: Container(
-      height: 4.5.h(context),
-      width: 10.w(context),
+      height: widget.height,
+      width: widget.width,
+      padding: EdgeInsets.all(widget.padding),
       clipBehavior: Clip.antiAliasWithSaveLayer,
       decoration: BoxDecoration(
-        border: Border.all(color: Color.fromARGB(255, 250, 140, 140)),
-        borderRadius: BorderRadius.circular(50.w(context)),
+        border: Border.all(color: widget.borderColor),
+        borderRadius: BorderRadius.circular(widget.borderRadius),
       ),
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Text("Open"),
+          widget.child,
           OverflowBox(
-            maxHeight: 20.h(context),
+            maxHeight: widget.height + widget.width,
+            maxWidth: widget.height + widget.width,
             child: Animate(
               controller: animationController,
-              autoPlay: true,
+              autoPlay: widget.animate,
               effects: [
                 RotateEffect(
-                  curve: Curves.easeInToLinear,
-                  // delay: 1.5.seconds,
+                  curve: widget.animationCurve,
+                  delay: 1.5.seconds,
                   duration: 2.seconds,
                 ),
                 ScaleEffect(
-                  curve: Curves.easeOutBack,
-                  delay: 1.seconds,
+                  curve: widget.animationCurve2,
+                  delay: 1.5.seconds,
                   duration: 2.seconds,
-                  begin: Offset(1, 1),
-                  end: Offset(1.25, 1.25),
+                  begin: const Offset(1, 1),
+                  end: const Offset(1.2, 1.2),
+                ),
+                SlideEffect(
+                  delay: 1.5.seconds,
+                  duration: 2.seconds,
+                  begin: Offset(0, 0),
+                  end: Offset(0.2, 0),
                 )
                 // ShimmerEffect(
                 //   curve: Curves.linear,
@@ -70,14 +95,13 @@ class _ShimmerButtonState extends State<ShimmerButton>
                 controller.loop(reverse: true);
               },
               child: Container(
-                height: 20.h(context),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   gradient: RadialGradient(
-                    colors: [tran, Color.fromARGB(255, 255, 85, 0)],
+                    colors: [tran, widget.color],
                     stops: [0, 1],
-                    focalRadius: 1,
-                    radius: 1,
+                    // focalRadius: 1.5,
+                    radius: 0.75,
                     center: Alignment(-0.2, 0),
                   ),
                 ),

@@ -1,4 +1,6 @@
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/AddEventButton.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/EventsTile.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/ViewAllEventsButton.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashFeed.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashHeadingProgress.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
@@ -159,21 +161,44 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                           child: Row(
                                                             spacing:
                                                                 1.w(context),
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
                                                             children: [
                                                               EventsTile(
+                                                                day: "Today",
+                                                                time: "9:00AM",
                                                                 animate: true,
                                                               ),
                                                               EventsTile(
+                                                                day: "Tomorrow",
+                                                                time: "10:30AM",
                                                                 animate: false,
                                                                 color: tran,
                                                                 borderColor:
                                                                     deckBorderColor,
                                                               ),
                                                               EventsTile(
+                                                                day: "8.16.26",
+                                                                time: "1:30PM",
                                                                 animate: false,
                                                                 color: tran,
                                                                 borderColor:
                                                                     deckBorderColor,
+                                                              ),
+                                                              Expanded(
+                                                                child: Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  spacing: max(
+                                                                      10,
+                                                                      1.w(context)),
+                                                                  children: [
+                                                                    AddEventButton(),
+                                                                    ViewAllEventsButton(),
+                                                                  ],
+                                                                ),
                                                               )
                                                             ],
                                                           ),

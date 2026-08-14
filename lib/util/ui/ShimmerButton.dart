@@ -13,8 +13,18 @@ class ShimmerButton extends StatefulWidget {
     this.color = const Color.fromARGB(255, 255, 85, 0),
     this.borderColor = const Color.fromARGB(255, 250, 140, 140),
     this.padding = 0,
-    this.animationCurve = Curves.easeInOutSine,
-    this.animationCurve2 = Curves.easeInOutSine,
+    this.rotationAnimationDuration = const Duration(seconds: 2),
+    this.shimmerAnimationDuration = const Duration(seconds: 2),
+    this.scaleAnimationDuration = const Duration(seconds: 2),
+    this.slideAnimationDuration = const Duration(seconds: 2),
+    this.rotationAnimationDelay = const Duration(seconds: 2),
+    this.shimmerAnimationDelay = const Duration(seconds: 2),
+    this.scaleAnimationDelay = const Duration(seconds: 2),
+    this.slideAnimationDelay = const Duration(seconds: 2),
+    this.rotationAnimationCurve = Curves.easeInOutSine,
+    this.shimmerAnimationCurve = Curves.easeInOutSine,
+    this.scaleAnimationCurve = Curves.easeInOutSine,
+    this.slideAnimationCurve = Curves.easeInOutSine,
     this.borderRadius = 25,
   });
 
@@ -24,10 +34,20 @@ class ShimmerButton extends StatefulWidget {
   final bool animate;
   final Color color;
   final Color borderColor;
+  final Duration rotationAnimationDuration;
+  final Duration shimmerAnimationDuration;
+  final Duration scaleAnimationDuration;
+  final Duration slideAnimationDuration;
+  final Duration rotationAnimationDelay;
+  final Duration shimmerAnimationDelay;
+  final Duration scaleAnimationDelay;
+  final Duration slideAnimationDelay;
   double padding;
   double borderRadius;
-  Curve animationCurve;
-  Curve animationCurve2;
+  Curve rotationAnimationCurve;
+  Curve shimmerAnimationCurve;
+  Curve scaleAnimationCurve;
+  Curve slideAnimationCurve;
 
   @override
   State<ShimmerButton> createState() => _ShimmerButtonState();
@@ -68,33 +88,20 @@ class _ShimmerButtonState extends State<ShimmerButton>
               autoPlay: widget.animate,
               effects: [
                 RotateEffect(
-                  curve: widget.animationCurve,
-                  delay: 1.5.seconds,
-                  duration: 2.seconds,
-                  begin: 0,
-                  end: 1,
+                  delay: widget.rotationAnimationDelay,
+                  duration: widget.rotationAnimationDuration,
+                  curve: widget.rotationAnimationCurve,
                 ),
-                ScaleEffect(
-                  curve: widget.animationCurve2,
-                  delay: 1.5.seconds,
-                  duration: 2.seconds,
-                  begin: const Offset(1, 1),
-                  end: const Offset(1.25, 1.25),
+                ShimmerEffect(
+                  angle: -45,
+                  color: widget.color,
+                  curve: widget.shimmerAnimationCurve,
+                  delay: widget.shimmerAnimationDelay,
+                  duration: widget.shimmerAnimationDuration,
                 ),
-                SlideEffect(
-                  delay: 1.5.seconds,
-                  duration: 2.seconds,
-                  begin: Offset(0, 0),
-                  end: Offset(0.2, 0),
-                )
-                // ShimmerEffect(
-                //   curve: Curves.linear,
-                //   delay: 1.5.seconds,
-                //   duration: 1.seconds,
-                // ),
               ],
               onPlay: (controller) {
-                controller.loop(reverse: true);
+                controller.loop(reverse: false);
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -103,7 +110,7 @@ class _ShimmerButtonState extends State<ShimmerButton>
                     colors: [tran, widget.color],
                     stops: [0, 1],
                     // focalRadius: 1.5,
-                    radius: 0.75,
+                    radius: 0.60,
                     center: Alignment(-0.2, 0),
                   ),
                 ),

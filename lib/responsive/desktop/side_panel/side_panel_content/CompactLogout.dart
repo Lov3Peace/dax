@@ -161,33 +161,32 @@ class _CompactLogoutState extends State<CompactLogout> {
                     duration: Duration(milliseconds: 250),
                     child: Visibility(
                       visible: !logoutIconClicked,
-                      child: PillButton(
-                        scale: 1.05,
-                        color1: tran,
-                        color2: tran,
-                        padding: EdgeInsets.all(max(5, 0.5.w(context))),
-                        borderColor: deckBorderColor,
-                        borderRadius: 50.w(context),
-                        onTap: () {
-                          setState(() {
-                            logoutIconClicked = !logoutIconClicked;
-                            // logoutIcon and avatar
-                            logoutIconY = -1;
-                            avatarY = -1;
-                            logoutIconOpacity = 0;
-                            avatarOpacity = 0;
-                            // logoutButton and cancelButton
-                            logoutButtonOpacity = 1;
-                            cancelButtonOpacity = 1;
-                            logoutButtonY = 0;
-                            cancelButtonY = 0;
-                          });
-                        },
-                        child: Icon(
-                          Ionicons.chevron_back,
-                          size: 1.5.w(context),
-                        ),
-                      ),
+                      child: TactileButton(
+                          scale: 1.05,
+                          onTap: () {
+                            setState(() {
+                              logoutIconClicked = !logoutIconClicked;
+                              // logoutIcon and avatar
+                              logoutIconY = -1;
+                              avatarY = -1;
+                              logoutIconOpacity = 0;
+                              avatarOpacity = 0;
+                              // logoutButton and cancelButton
+                              logoutButtonOpacity = 1;
+                              cancelButtonOpacity = 1;
+                              logoutButtonY = 0;
+                              cancelButtonY = 0;
+                            });
+                          },
+                          child: Container(
+                              padding: EdgeInsets.all(0.5.w(context)),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: deckBorderColor)),
+                              child: Icon(
+                                Ionicons.chevron_back,
+                                size: 1.5.w(context),
+                              ))),
                     ),
                   ),
                 ),
@@ -237,15 +236,16 @@ class _CompactLogoutState extends State<CompactLogout> {
                 //
                 // Logout Button
                 AnimatedSlide(
-                    duration: Duration(milliseconds: 500),
-                    offset: Offset(0, logoutButtonY),
-                    curve: Curves.fastOutSlowIn,
-                    child: AnimatedOpacity(
+                  duration: Duration(milliseconds: 500),
+                  offset: Offset(0, logoutButtonY),
+                  curve: Curves.fastOutSlowIn,
+                  child: AnimatedOpacity(
                       opacity: logoutButtonOpacity,
                       duration: Duration(milliseconds: 250),
                       child: Visibility(
                         visible: logoutIconClicked,
-                        child: PillButton(
+                        child: TactileButton(
+                          scale: 1.05,
                           onTap: () async {
                             bool res = await logout();
                             if (!res && mounted) {
@@ -254,16 +254,17 @@ class _CompactLogoutState extends State<CompactLogout> {
                               router.go("/launch");
                             }
                           },
-                          color1: red,
-                          color2: red,
-                          scale: 1.03,
-                          padding: EdgeInsets.all(max(5, 0.5.w(context))),
-                          borderRadius: 50.w(context),
-                          borderColor: tran,
-                          child: const Icon(Ionicons.chevron_back),
+                          child: Container(
+                              padding: EdgeInsets.all(0.5.w(context)),
+                              decoration: BoxDecoration(
+                                  color: red, shape: BoxShape.circle),
+                              child: Icon(
+                                Ionicons.chevron_back,
+                                size: 1.5.w(context),
+                              )),
                         ),
-                      ),
-                    )),
+                      )),
+                ),
               ],
             ),
           ],

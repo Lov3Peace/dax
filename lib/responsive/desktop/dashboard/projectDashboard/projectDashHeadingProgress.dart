@@ -25,50 +25,52 @@ class _ProjectDashHeadingProgressState
       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              //
-              // Project Title
-              Align(
-                alignment: Alignment.centerLeft,
-                child: GradientText(
-                  text: "Carbon",
-                  gradients: [pink, red],
-                  fontSize: max(36, 10.sp(context)),
-                  fontWeight: FontWeight.bold,
-                  lineHeight: 1,
-                ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            //
+            // Project Title
+            Align(
+              alignment: Alignment.centerLeft,
+              child: GradientText(
+                text: "Carbon",
+                gradients: [pink, red],
+                fontSize: max(36, 10.sp(context)),
+                fontWeight: FontWeight.bold,
+                lineHeight: 1,
               ),
-              //
-              // Overview Button
-              PillButton(
-                onTap: () {},
-                scale: 1.04,
-                padding: EdgeInsetsGeometry.symmetric(
-                    horizontal: 2.w(context), vertical: 0.5.w(context)),
-                borderRadius: 10.w(context),
-                borderColor: darkGrey,
-                child: Text(
-                  'Overview',
-                  style:
-                      TextStyle(fontSize: max(12, 2.sp(context)), color: white),
-                ),
+            ),
+            //
+            // Overview Button
+            PillButton(
+              onTap: () {},
+              scale: 1.04,
+              padding: EdgeInsetsGeometry.symmetric(
+                  vertical: max(5, 1.h(context)),
+                  horizontal: max(10, 2.w(context))),
+              borderRadius: 50.w(context),
+              borderColor: darkGrey,
+              child: Text(
+                'Overview',
+                style:
+                    TextStyle(fontSize: max(12, 2.sp(context)), color: white),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
         //
         // Creators
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            "Creators: l3x, PrimeApe",
-            style: TextStyle(
-                fontSize: max(12, 3.sp(context)),
-                fontWeight: FontWeight.bold,
-                color: Colors.grey.shade400),
+          child: Padding(
+            padding: EdgeInsets.only(top: max(10, 2.h(context))),
+            child: Text(
+              "Creators: l3x, PrimeApe",
+              style: TextStyle(
+                  fontSize: max(12, 3.sp(context)),
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey.shade400),
+            ),
           ),
         ),
         //

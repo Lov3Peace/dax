@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/communities_deck.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/events_deck.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/mini_dash_feed.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/my_projects_mini_dash.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/profile_card.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/homeDashboard/projects_deck.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_application_1/responsive/desktop/messages/messages.dart'
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_artboard_page.dart';
 import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
+import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_application_1/util/weather_date.dart';
@@ -40,6 +42,7 @@ late LocationServicesProvider locationServicesProvider;
 final locationEndpoint = Uri.parse("$hostname/api/getLocation/");
 
 late FeedSocketIoProvider feedSocketIoProvider;
+late ConnectionsProvider connectionProvider;
 
 class _DesktopDashboardState extends State<DesktopDashboard> {
   @override
@@ -53,6 +56,10 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
     feedSocketIoProvider.joinProjectRoom(1);
     feedSocketIoProvider.enableFeed();
     SocketIoClient.socket.emit("getProjectFeed", 1);
+
+// Enable User Connections
+    connectionProvider = context.read<ConnectionsProvider>();
+    connectionProvider.enableConnections(username);
     super.initState();
   }
 

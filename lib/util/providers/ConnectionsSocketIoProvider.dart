@@ -27,30 +27,26 @@ class Connection {
   }
 }
 
-class ConnectionProvider extends ChangeNotifier {
+class ConnectionsProvider extends ChangeNotifier {
   List<Connection> pendingRequests = [];
   List<Connection> connections = [];
 
-  //
-  // Join User Room
-  void joinUserRoom(String userId) {
+  // Enable Connection Socket Listeners
+  void enableConnections(String username) {
+    logger.i("Connection Socket Enabled");
+    logger.i("Username: $username");
+    // logger.i("Socket ID: ${SocketIoClient.socket.id}");
+
+    // Join User Room
     SocketIoClient.socket.emit(
       "joinUserRoom",
-      userId,
+      username,
     );
 
     SocketIoClient.socket.on("userRoomJoined", (_) {
       logger.i("User Room Joined Successfully");
-    });
-  }
+    }); //
 
-  //
-  // Enable Connection Socket Listeners
-  void enableConnections() {
-    logger.i("Connection Socket Enabled");
-    logger.i("Socket ID: ${SocketIoClient.socket.id}");
-
-    //
     // New Connection Request
     SocketIoClient.socket.on(
       "connectionRequestReceived",
@@ -113,8 +109,7 @@ class ConnectionProvider extends ChangeNotifier {
       "connectionRemoved",
       (data) {
         connections.removeWhere(
-          (connection) =>
-              connection.requestId == data["connectionId"],
+          (connection) => connection.requestId == data["connectionId"],
         );
 
         notifyListeners();

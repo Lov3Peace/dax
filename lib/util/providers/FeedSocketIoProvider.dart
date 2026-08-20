@@ -12,7 +12,7 @@ class FeedSocketIoProvider extends ChangeNotifier {
   void joinProjectRoom(pid) {
     SocketIoClient.socket.emit("joinProjectRoom", pid);
     SocketIoClient.socket.on("roomJoined", (_) {
-      logger.i("Room Joined Successfully");
+      logger.i("Feed Room Joined Successfully");
     });
   }
 

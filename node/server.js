@@ -11,7 +11,12 @@ import {
 import { updateProfileCrestsCollection } from "./controllers/profileController.js";
 import { Server } from "socket.io";
 import { createServer } from "node:http";
-import { joinUserRoom } from "./controllers/userController.js";
+import {
+	joinUserRoom,
+	sendConnectionRequest,
+	acceptConnectionRequest,
+	rejectConnectionRequest
+} from "./controllers/userController.js";
 // used for env variables
 dotenv.config();
 
@@ -51,6 +56,12 @@ io.on("connection", (socket) => {
 	getProjectFeed(socket);
 	// Join User Room by Username
 	joinUserRoom(socket);
+	// Send a Connection Request
+	sendConnectionRequest(socket, io);
+	// User Accepted Connection Request
+	acceptConnectionRequest(socket, io);
+	// User Rejected Connection Request
+	rejectConnectionRequest(socket, io);
 });
 
 // Create Postgres Database Pool

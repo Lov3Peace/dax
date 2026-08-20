@@ -74,144 +74,116 @@ export const joinUserRoom = (socket) => {
 	});
 };
 
-export async function sendConnectionRequest(req, res) {
-	try {
+// Send Connection Request
+export const sendConnectionRequest = (socket, io) => {
+	socket.on("sendConnectionRequest", async (data) => {
+		try {
+			const { senderUsername, receiverUsername } = data;
 
-		const senderUsername = req.user.username;
-		const { receiverUsername } = req.body;
+			const result = await db.query(
+				`
+        INSERT INTO users.connection_requests
+          (sender_username, receiver_username, status)
+        VALUES
+          ($1, $2, 0)
+        RETURNING *
+        `,
+				[senderUsername, receiverUsername]
+			);
 
-		// Get Socket.IO instance from server.js
-		const io = req.app.get("io");
+			const connection = result.rows[0];
 
-		// Insert connection request into postgres
-		const result = await db.query(
-			`
-      INSERT INTO connections
-        (sender_username, receiver_username, status)
-      VALUES
-        ($1, $2, 0)
-      RETURNING *
-      `,
-			[senderUsername, receiverUsername]
-		);
+			io.to(`user:${receiverUsername}`)
+				.emit("connectionRequestReceived", connection);
 
-		const connection = result.rows[0];
+		} catch (error) {
+			console.error(error);
 
-		// Notify receiver in real time
-		io
-			.to(`user:${receiverUsername}`)
-			.emit("connection_request_received", {
-				connectionId: connection.id,
-				senderUsername,
-				status: "pending"
+			socket.emit("connectionRequestError", {
+				message: "Could not send connection request"
 			});
-
-		return res.status(201).json(connection);
-
-	} catch (error) {
-
-		console.error(error);
-
-		return res.status(500).json({
-			message: "Could not send connection request"
-		});
-	}
+		}
+	});
 };
-//
-// Accepting Connection Request
-export async function acceptConnection(req, res) {
-	try {
-		const username = req.user.username;
-		const connectionId = req.params.id;
 
-		// Get Socket.IO instance from server.js
-		const io = req.app.get("io");
 
-		// Insert connection request into postgres
-		const result = await db.query(
-			`
-      UPDATE connections
-      SET
-        status = 1
-      WHERE request_id = $1
-        AND receiver_username = $2
-      RETURNING *
-      `,
-			[connectionId, username]
-		);
+// Accept Connection Request
+export const acceptConnectionRequest = (socket, io) => {
+	socket.on("acceptConnection", async (data) => {
+		try {
+			const { requestId, username } = data;
 
-		const connection = result.rows[0];
+			const result = await db.query(
+				`
+        UPDATE users.connection_requests
+        SET status = 1
+        WHERE request_id = $1
+          AND receiver_username = $2
+        RETURNING *
+        `,
+				[requestId, username]
+			);
 
-		if (!connection) {
-			return res.status(404).json({
-				message: "Connection request not found"
+			const connection = result.rows[0];
+
+			if (!connection) {
+				return socket.emit("connectionRequestError", {
+					message: "Connection request not found"
+				});
+			}
+
+			io.to(`user:${connection.sender_username}`)
+				.emit("connectionRequestAccepted", connection);
+
+			io.to(`user:${connection.receiver_username}`)
+				.emit("connectionRequestAccepted", connection);
+
+		} catch (error) {
+			console.error(error);
+
+			socket.emit("connectionRequestError", {
+				message: "Could not accept request"
 			});
 		}
-		// Tell original sender.
-		io
-			.to(`user:${connection.sender_username}`)
-			.emit("connection_request_accepted", connection);
-		// Tell person who accepted it too.
-		io
-			.to(`user:${connection.receiver_username}`)
-			.emit("connection_updated", connection);
+	});
+};
 
-		return res.json(connection);
+// Reject Connection Request
+export const rejectConnectionRequest = (socket, io) => {
+	socket.on("rejectConnection", async (data) => {
+		try {
+			const { requestId, username } = data;
 
-	} catch (error) {
+			const result = await db.query(
+				`
+        DELETE FROM users.connection_requests
+        WHERE request_id = $1
+          AND receiver_username = $2
+        RETURNING *
+        `,
+				[requestId, username]
+			);
 
-		console.error(error);
+			const connection = result.rows[0];
 
-		return res.status(500).json({
-			message: "Could not accept request"
-		});
-	}
-}
-//
-// Rejecting Connection Request
-export async function rejectConnection(req, res) {
-	try {
-		const username = req.user.username;
-		const connectionId = req.params.id;
+			if (!connection) {
+				return socket.emit("connectionRequestError", {
+					message: "Connection request not found"
+				});
+			}
 
-		// Get Socket.IO instance from server.js
-		const io = req.app.get("io");
+			io.to(`user:${connection.sender_username}`)
+				.emit("connectionRequestRejected", connection);
 
-		// Insert connection request into Postgres
-		const result = await db.query(
-			`
-			DELETE FROM connections
-			WHERE request_id = $1
-				AND receiver_username = $2
-			RETURNING *
-			`,
-			[connectionId, username]
-		);
+			io.to(`user:${connection.receiver_username}`)
+				.emit("connectionRequestRejected", connection);
 
-		const connection = result.rows[0];
+		} catch (error) {
+			console.error(error);
 
-		if (!connection) {
-			return res.status(404).json({
-				message: "Connection request not found"
+			socket.emit("connectionRequestError", {
+				message: "Could not reject request"
 			});
 		}
-
-		io
-			.to(`user:${connection.sender_username}`)
-			.emit("connectionRequestRejected", connection);
-
-		io
-			.to(`user:${connection.receiver_username}`)
-			.emit("connectionRequestRejected", connection);
-
-		return res.json(connection);
-
-	} catch (error) {
-		console.error(error);
-
-		return res.status(500).json({
-			message: "Could not reject request"
-		});
-	}
-}
-
+	});
+};

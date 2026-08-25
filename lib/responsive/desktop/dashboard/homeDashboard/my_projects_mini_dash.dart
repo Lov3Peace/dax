@@ -186,12 +186,6 @@ class _MyProjectsMiniDashDeckState extends State<MyProjectsMiniDashDeck> {
                                           color: Colors.grey,
                                         )),
                                   ),
-                                  ShimmerButton(
-                                    animate: true,
-                                    height: 4.5.h(context),
-                                    width: 10.w(context),
-                                    child: Text("Open"),
-                                  ),
                                 ],
                               ),
                             ),

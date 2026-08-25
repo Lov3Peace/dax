@@ -20,14 +20,12 @@ class MiniProjectDashFeed extends StatefulWidget {
   State<MiniProjectDashFeed> createState() => _MiniProjectDashFeedState();
 }
 
-late UserProvider userProvider;
-String username = "";
+late UserProvider _userProvider;
 
 class _MiniProjectDashFeedState extends State<MiniProjectDashFeed> {
   @override
   void initState() {
-    userProvider = context.read<UserProvider>();
-    username = userProvider.username;
+    _userProvider = context.read<UserProvider>();
     super.initState();
   }
 
@@ -186,7 +184,7 @@ class _NewProjectFeedPostTextfieldState
     logger.i("Emitting createProjectFeedPost...");
     SocketIoClient.socket.emit("createProjectFeedPost", {
       "pid": 1,
-      "username": username,
+      "username": _userProvider.username,
       "content": {"text": _projectFeedPostController.text},
       "event_type": 1
     });

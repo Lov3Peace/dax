@@ -16,6 +16,7 @@ import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
 import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
+import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/weather_date.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:flutter/cupertino.dart';
@@ -43,6 +44,7 @@ final locationEndpoint = Uri.parse("$hostname/api/getLocation/");
 
 late FeedSocketIoProvider feedSocketIoProvider;
 late ConnectionsProvider connectionProvider;
+late UserProvider _userProvider;
 
 class _DesktopDashboardState extends State<DesktopDashboard> {
   @override
@@ -57,9 +59,11 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
     feedSocketIoProvider.enableFeed();
     SocketIoClient.socket.emit("getProjectFeed", 1);
 
+    _userProvider = context.read<UserProvider>();
+
 // Enable User Connections
     connectionProvider = context.read<ConnectionsProvider>();
-    connectionProvider.enableConnections(username);
+    connectionProvider.enableConnections(_userProvider.username);
     super.initState();
   }
 

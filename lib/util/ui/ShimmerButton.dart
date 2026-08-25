@@ -55,6 +55,7 @@ class ShimmerButton extends StatefulWidget {
 
 class _ShimmerButtonState extends State<ShimmerButton>
     with SingleTickerProviderStateMixin {
+  // controller
   late AnimationController animationController =
       AnimationController(vsync: this, duration: 1.seconds);
 
@@ -100,6 +101,9 @@ class _ShimmerButtonState extends State<ShimmerButton>
                   duration: widget.shimmerAnimationDuration,
                 ),
               ],
+              // this is causing a message to print out every time
+              // because onPlay isn't called if autoPlay = false. I just
+              // dont care...
               onPlay: (controller) {
                 controller.loop(reverse: false);
               },

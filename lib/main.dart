@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
@@ -30,6 +31,7 @@ Future main() async {
         ChangeNotifierProvider(create: (_) => ProjectProvider()),
         ChangeNotifierProvider(create: (_) => LocationServicesProvider()),
         ChangeNotifierProvider(create: (_) => FeedSocketIoProvider()),
+        ChangeNotifierProvider(create: (_) => ConnectionsProvider()),
         // Add more providers as needed
       ],
       child: const MyApp(),

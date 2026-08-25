@@ -199,8 +199,10 @@ class _NewProjectFeedPostTextfieldState
                   },
                   isLoading: isLoading,
                   scale: 1.03,
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 1.5.w(context), vertical: 0.5.w(context)),
+                  width: max(75, 5.w(context)),
+                  height: max(30, 2.w(context)),
+                  // padding: EdgeInsets.symmetric(
+                  //     horizontal: 1.5.w(context), vertical: 0.5.w(context)),
                   color1: pink,
                   color2: red,
                   borderRadius: 20.w(context),

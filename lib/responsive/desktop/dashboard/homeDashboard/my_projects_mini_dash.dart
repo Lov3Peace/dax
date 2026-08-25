@@ -5,6 +5,7 @@ import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashbo
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
+import 'package:flutter_application_1/util/ui/ShimmerButton.dart';
 import 'package:flutter_application_1/util/ui/gradient_label.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:go_router/go_router.dart';
@@ -184,7 +185,7 @@ class _MyProjectsMiniDashDeckState extends State<MyProjectsMiniDashDeck> {
                                           fontWeight: FontWeight.bold,
                                           color: Colors.grey,
                                         )),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

@@ -1,5 +1,9 @@
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/AddEventButton.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/EventsTile.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/ViewAllEventsButton.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashFeed.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashHeadingProgress.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
 import 'package:flutter_application_1/responsive/desktop/messages/compactMessages.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/compactSidePanel.dart';
@@ -136,18 +140,69 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                             child: Column(
                                               spacing: max(10, 1.w(context)),
                                               children: [
-                                                const Expanded(
+                                                Expanded(
                                                   flex: 3,
                                                   child: Row(
                                                     children: [
-                                                      Expanded(
-                                                          flex: 2,
+                                                      const Expanded(
+                                                          flex: 3,
                                                           child:
                                                               ProjectDashHeadingProgress()),
+                                                      // SizedBox(
+                                                      //   width: 15.w(context),
+                                                      // ),
                                                       Expanded(
-                                                        flex: 3,
-                                                        child:
-                                                            SizedBox(), // TO-DO: UPCOMING EVENTS
+                                                        flex: 4,
+                                                        child: Container(
+                                                          margin: EdgeInsetsGeometry
+                                                              .only(
+                                                                  left: 7.w(
+                                                                      context)),
+                                                          child: Row(
+                                                            spacing:
+                                                                1.w(context),
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              EventsTile(
+                                                                day: "Today",
+                                                                time: "9:00AM",
+                                                                animate: true,
+                                                              ),
+                                                              EventsTile(
+                                                                day: "Tomorrow",
+                                                                time: "10:30AM",
+                                                                animate: false,
+                                                                color: tran,
+                                                                borderColor:
+                                                                    deckBorderColor,
+                                                              ),
+                                                              EventsTile(
+                                                                day: "8.16.26",
+                                                                time: "1:30PM",
+                                                                animate: false,
+                                                                color: tran,
+                                                                borderColor:
+                                                                    deckBorderColor,
+                                                              ),
+                                                              Expanded(
+                                                                child: Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  spacing: max(
+                                                                      10,
+                                                                      1.w(context)),
+                                                                  children: [
+                                                                    AddEventButton(),
+                                                                    ViewAllEventsButton(),
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ), // TO-DO: UPCOMING EVENTS
                                                       ),
                                                     ],
                                                   ),

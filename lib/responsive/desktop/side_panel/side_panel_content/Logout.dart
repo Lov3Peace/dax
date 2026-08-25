@@ -89,7 +89,7 @@ class _LogoutState extends State<Logout> {
   Widget build(BuildContext context) {
     return BlurryContainer(
         borderRadius: 50.w(context),
-        height: max(25, 4.w(context)),
+        height: max(50, 4.w(context)),
         color: tran,
         // padding: EdgeInsetsGeometry.symmetric(
         // vertical: 2.w(context), horizontal: 5.w(context)),
@@ -111,33 +111,32 @@ class _LogoutState extends State<Logout> {
                     duration: Duration(milliseconds: 250),
                     child: Visibility(
                       visible: !logoutIconClicked,
-                      child: PillButton(
-                        scale: 1.05,
-                        color1: tran,
-                        color2: tran,
-                        padding: EdgeInsets.all(0.5.w(context)),
-                        borderColor: deckBorderColor,
-                        borderRadius: 50.w(context),
-                        onTap: () {
-                          setState(() {
-                            logoutIconClicked = !logoutIconClicked;
-                            // logoutIcon and avatar
-                            logoutIconY = -1;
-                            avatarY = -1;
-                            logoutIconOpacity = 0;
-                            avatarOpacity = 0;
-                            // logoutButton and cancelButton
-                            logoutButtonOpacity = 1;
-                            cancelButtonOpacity = 1;
-                            logoutButtonY = 0;
-                            cancelButtonY = 0;
-                          });
-                        },
-                        child: Icon(
-                          Ionicons.chevron_back,
-                          size: 1.5.w(context),
-                        ),
-                      ),
+                      child: TactileButton(
+                          scale: 1.05,
+                          onTap: () {
+                            setState(() {
+                              logoutIconClicked = !logoutIconClicked;
+                              // logoutIcon and avatar
+                              logoutIconY = -1;
+                              avatarY = -1;
+                              logoutIconOpacity = 0;
+                              avatarOpacity = 0;
+                              // logoutButton and cancelButton
+                              logoutButtonOpacity = 1;
+                              cancelButtonOpacity = 1;
+                              logoutButtonY = 0;
+                              cancelButtonY = 0;
+                            });
+                          },
+                          child: Container(
+                              padding: EdgeInsets.all(0.5.w(context)),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: deckBorderColor)),
+                              child: Icon(
+                                Ionicons.chevron_back,
+                                size: 1.5.w(context),
+                              ))),
                     ),
                   ),
                 ),
@@ -258,10 +257,12 @@ class _LogoutState extends State<Logout> {
                           },
                           color1: red,
                           color2: red,
-                          scale: 1.03,
-                          padding: EdgeInsetsGeometry.symmetric(
-                              horizontal: 1.w(context),
-                              vertical: 0.5.w(context)),
+                          scale: 1.05,
+                          width: max(75, 5.w(context)),
+                          height: max(25, 2.w(context)),
+                          // padding: EdgeInsetsGeometry.symmetric(
+                          //     horizontal: 1.w(context),
+                          //     vertical: 0.5.w(context)),
                           borderRadius: 50.w(context),
                           borderColor: tran,
                           child: Text(

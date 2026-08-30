@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/ui/pillButton.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../desk_decks.dart';
 import '../desk_dock_button_templates/messages_template.dart';
@@ -134,35 +136,56 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
       height: 100.h(context),
       width: 71.w(context),
       borderColor: deckBorderColor,
+      backgroundColor: deckBackgroundColor,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 1.h(context)),
+        padding: EdgeInsets.all(1.5.w(context)),
         child: Column(
           children: [
             // Popup title
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 1.5.w(context)),
-                child: Text(
-                  "Connections",
-                  style: TextStyle(
-                    fontSize: 7.sp(context),
-                    fontWeight: FontWeight.w800,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: max(5, 0.25.w(context)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Connections",
+                    style: TextStyle(
+                      fontSize: 7.sp(context),
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
-                ),
+                  PillButton(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: max(10, 1.5.w(context)),
+                        vertical: max(5, 0.75.w(context))),
+                    onTap: () {},
+                    borderRadius: 50.w(context),
+                    borderColor: deckBorderColor,
+                    child: Row(
+                      spacing: max(5, 0.5.w(context)),
+                      children: [
+                        Icon(
+                          Ionicons.person_add,
+                          size: max(10, 1.25.w(context)),
+                        ),
+                        Text("Add Connection"),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
 
             // Search field for filtering connections
             Padding(
-              padding: EdgeInsets.fromLTRB(
-                1.5.w(context),
-                10,
-                1.5.w(context),
-                10,
+              padding: EdgeInsets.symmetric(
+                vertical: max(5, 0.25.w(context)),
               ),
               child: TextFormField(
                 controller: searchController,
+                cursorColor: red,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: const Color.fromARGB(70, 32, 32, 40),
@@ -172,7 +195,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                     ),
                     borderSide: BorderSide(color: deckBorderColor),
                   ),
-                  hintText: 'Search...',
+                  hintText: 'Search Connections List...',
                   contentPadding: const EdgeInsets.only(left: 20),
                   suffixIcon: const Icon(Icons.search),
                 ),
@@ -187,10 +210,8 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
 
             // Container for tab buttons that switch between connection categories
             Padding(
-              padding: EdgeInsets.only(
-                left: 1.5.w(context),
-                right: 1.5.w(context),
-                bottom: 10,
+              padding: EdgeInsets.symmetric(
+                vertical: max(5, 0.25.w(context)),
               ),
               child: Container(
                 height: 6.h(context),
@@ -210,22 +231,27 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
 
             // Main content area displaying the currently selected connection list
             Expanded(
-              child: CarouselSlider(
-                carouselController: carouselController,
-                options: CarouselOptions(
-                  height: double.infinity,
-                  viewportFraction: .95,
-                  enableInfiniteScroll: false,
-                  enlargeCenterPage: true,
+              child: Padding(
+                padding:
+                    EdgeInsets.symmetric(vertical: max(5, 0.25.w(context))),
+                child: CarouselSlider(
+                  disableGesture: true,
+                  carouselController: carouselController,
+                  options: CarouselOptions(
+                    height: double.infinity,
+                    viewportFraction: 1,
+                    enableInfiniteScroll: false,
+                    enlargeCenterPage: true,
 
-                  // Keeps the selected tab state synced with manual carousel changes
-                  onPageChanged: (index, _) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
+                    // Keeps the selected tab state synced with manual carousel changes
+                    onPageChanged: (index, _) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                  ),
+                  items: carouselItems,
                 ),
-                items: carouselItems,
               ),
             ),
           ],

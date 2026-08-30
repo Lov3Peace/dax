@@ -169,11 +169,15 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                                 day: "Today",
                                                                 time: "9:00AM",
                                                                 animate: true,
+                                                                eventTitle:
+                                                                    "Daily Standup",
                                                               ),
                                                               EventsTile(
                                                                 day: "Tomorrow",
                                                                 time: "10:30AM",
                                                                 animate: false,
+                                                                eventTitle:
+                                                                    "Discuss API Changes",
                                                                 color: tran,
                                                                 borderColor:
                                                                     deckBorderColor,
@@ -182,22 +186,26 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                                 day: "8.16.26",
                                                                 time: "1:30PM",
                                                                 animate: false,
+                                                                eventTitle:
+                                                                    "3.12 Retrospective",
                                                                 color: tran,
                                                                 borderColor:
                                                                     deckBorderColor,
                                                               ),
                                                               Expanded(
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  spacing: max(
-                                                                      10,
-                                                                      1.w(context)),
-                                                                  children: [
-                                                                    AddEventButton(),
-                                                                    ViewAllEventsButton(),
-                                                                  ],
+                                                                child: Padding(
+                                                                  padding: EdgeInsets.only(
+                                                                      top: max(
+                                                                          15,
+                                                                          2.w(context))),
+                                                                  child: Column(
+                                                                    spacing: 1.w(
+                                                                        context),
+                                                                    children: const [
+                                                                      AddEventButton(),
+                                                                      ViewAllEventsButton(),
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               )
                                                             ],

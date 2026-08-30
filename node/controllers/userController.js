@@ -106,6 +106,38 @@ export const sendConnectionRequest = (socket, io) => {
 	});
 };
 
+// Get Pending Connection Requests
+export const getConnectionRequest = (socket) => {
+	socket.on("getConnectionRequests", async (username) => {
+		try {
+			const result = await db.query(
+				`
+        SELECT *
+        FROM users.connection_requests
+        WHERE receiver_username = $1
+          AND status = 0
+        ORDER BY timestamp DESC
+        `,
+				[username]
+			);
+
+			socket.emit(
+				"connectionRequestsResponse",
+				result.rows
+			);
+
+		} catch (error) {
+			console.error(error);
+
+			socket.emit(
+				"connectionRequestError",
+				{
+					message: "Could not load connection requests"
+				}
+			);
+		}
+	});
+};
 
 // Accept Connection Request
 export const acceptConnectionRequest = (socket, io) => {
@@ -184,6 +216,41 @@ export const rejectConnectionRequest = (socket, io) => {
 			socket.emit("connectionRequestError", {
 				message: "Could not reject request"
 			});
+		}
+	});
+};
+// Get Accepted Connections
+export const getConnections = (socket) => {
+	socket.on("getConnections", async (username) => {
+		try {
+			const result = await db.query(
+				`
+        SELECT *
+        FROM users.connection_requests
+        WHERE status = 1
+          AND (
+            sender_username = $1
+            OR receiver_username = $1
+          )
+        ORDER BY timestamp DESC
+        `,
+				[username]
+			);
+
+			socket.emit(
+				"connectionsResponse",
+				result.rows
+			);
+
+		} catch (error) {
+			console.error(error);
+
+			socket.emit(
+				"connectionRequestError",
+				{
+					message: "Could not load connections"
+				}
+			);
 		}
 	});
 };

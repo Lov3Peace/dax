@@ -14,8 +14,10 @@ import { createServer } from "node:http";
 import {
 	joinUserRoom,
 	sendConnectionRequest,
+	getConnectionRequest,
+	getConnections,
 	acceptConnectionRequest,
-	rejectConnectionRequest
+	rejectConnectionRequest,
 } from "./controllers/userController.js";
 // used for env variables
 dotenv.config();
@@ -58,6 +60,10 @@ io.on("connection", (socket) => {
 	joinUserRoom(socket);
 	// Send a Connection Request
 	sendConnectionRequest(socket, io);
+	// Get a Connection Request
+	getConnectionRequest(socket);
+	// Get Accepted Connections	
+	getConnections(socket);
 	// User Accepted Connection Request
 	acceptConnectionRequest(socket, io);
 	// User Rejected Connection Request

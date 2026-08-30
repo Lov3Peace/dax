@@ -5,6 +5,7 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/desk_news
 import 'package:flutter_application_1/responsive/desktop/decks_content/desk_socials_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/desktop_projects_page.dart';
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectPostsPage.dart';
+import 'package:flutter_application_1/responsive/desktop/devPage.dart';
 import 'package:flutter_application_1/responsive/desktop/util/error_page.dart';
 import 'package:flutter_application_1/util/auth/launch_page.dart';
 import 'package:flutter_application_1/util/providers/userAuthProvider.dart';
@@ -51,7 +52,7 @@ final GoRouter router = GoRouter(
       path: "/",
       pageBuilder: (context, state) {
         return CustomTransitionPage(
-          child: DesktopDashboard(),
+          child: DevPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },
@@ -165,6 +166,17 @@ final GoRouter router = GoRouter(
       pageBuilder: (context, state) {
         return CustomTransitionPage(
           child: DesktopProjectDashboard(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
+    ),
+    GoRoute(
+      path: "/dev",
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          child: DevPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },

@@ -66,3 +66,73 @@ class ActionsButtons extends StatelessWidget {
     );
   }
 }
+
+class RequestActionButtons extends StatelessWidget {
+  const RequestActionButtons({
+    super.key,
+    required this.onAccept,
+    required this.onReject,
+  });
+
+  final VoidCallback onAccept;
+  final VoidCallback onReject;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        //
+        // Accept Connection Request
+        TactileButton(
+          onTap: onAccept,
+          child: Container(
+            height: 3.5.h(context),
+            width: 4.h(context),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(1.5.w(context)),
+              ),
+              gradient: LinearGradient(
+                colors: [
+                  Colors.green.shade700,
+                  Colors.green.shade400,
+                ],
+              ),
+            ),
+            child: Icon(
+              Ionicons.checkmark,
+              size: 2.h(context),
+            ),
+          ),
+        ),
+
+        SizedBox(width: .5.h(context)),
+
+        //
+        // Reject Connection Request
+        TactileButton(
+          onTap: onReject,
+          child: Container(
+            height: 3.5.h(context),
+            width: 4.h(context),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(1.5.w(context)),
+              ),
+              gradient: LinearGradient(
+                colors: [
+                  Colors.red.shade800,
+                  Colors.red.shade500,
+                ],
+              ),
+            ),
+            child: Icon(
+              Ionicons.close,
+              size: 2.h(context),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

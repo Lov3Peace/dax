@@ -47,7 +47,39 @@ class ConnectionsProvider extends ChangeNotifier {
       logger.i("User Room Joined Successfully");
     }); //
 
-    // New Connection Request
+    // Existing Connection Requests
+    SocketIoClient.socket.on(
+      "connectionRequestsResponse",
+      (data) {
+        pendingRequests = (data as List)
+            .map(
+              (request) => Connection.fromJson(
+                Map<String, dynamic>.from(request),
+              ),
+            )
+            .toList();
+
+        notifyListeners();
+      },
+    );
+
+    // Existing Accepted Connections
+    SocketIoClient.socket.on(
+      "connectionsResponse",
+      (data) {
+        connections = (data as List)
+            .map(
+              (connection) => Connection.fromJson(
+                Map<String, dynamic>.from(connection),
+              ),
+            )
+            .toList();
+
+        notifyListeners();
+      },
+    );
+
+    // New Connection Requests
     SocketIoClient.socket.on(
       "connectionRequestReceived",
       (data) {
@@ -64,7 +96,6 @@ class ConnectionsProvider extends ChangeNotifier {
       },
     );
 
-    //
     // Connection Request Accepted
     SocketIoClient.socket.on(
       "connectionRequestAccepted",
@@ -86,7 +117,6 @@ class ConnectionsProvider extends ChangeNotifier {
       },
     );
 
-    //
     // Connection Request Rejected
     SocketIoClient.socket.on(
       "connectionRequestRejected",
@@ -103,7 +133,6 @@ class ConnectionsProvider extends ChangeNotifier {
       },
     );
 
-    //
     // Connection Removed
     SocketIoClient.socket.on(
       "connectionRemoved",
@@ -114,6 +143,15 @@ class ConnectionsProvider extends ChangeNotifier {
 
         notifyListeners();
       },
+    );
+    // Load Existing Pending Requests
+    SocketIoClient.socket.emit(
+      "getConnectionRequests",
+      username,
+    );
+    SocketIoClient.socket.emit(
+      "getConnections",
+      username,
     );
   }
 }

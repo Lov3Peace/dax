@@ -23,7 +23,7 @@ class ConnectionTactileState extends State<ConnectionTactile> {
   @override
   Widget build(BuildContext context) {
     // Labels for each connection filter tab
-    final List<String> buttonLabels = ['All', 'Favorites', 'Requests'];
+    final List<String> buttonLabels = ['All', 'Requests'];
 
     return Row(
       // Evenly distributes the filter buttons across the container

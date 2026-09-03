@@ -258,8 +258,9 @@ class _LogoutState extends State<Logout> {
                           color1: red,
                           color2: red,
                           scale: 1.05,
-                          width: max(75, 5.w(context)),
-                          height: max(25, 2.w(context)),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: max(10, 1.5.w(context)),
+                              vertical: max(5, 0.5.w(context))),
                           // padding: EdgeInsetsGeometry.symmetric(
                           //     horizontal: 1.w(context),
                           //     vertical: 0.5.w(context)),

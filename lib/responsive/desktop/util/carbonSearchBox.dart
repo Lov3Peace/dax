@@ -2,16 +2,21 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/util/auth/registerForm.dart';
+import 'package:flutter_application_1/util/providers/userProvider.dart';
+import 'package:flutter_application_1/util/ui/CarbonCircleAvatar.dart';
 import 'package:flutter_application_1/util/ui/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
+import 'package:flutter_application_1/util/ui/pillButton.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:optimized_search_field/base_multi_search_field.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:provider/provider.dart';
 
 class CarbonSearchBox extends StatefulWidget {
-  const CarbonSearchBox(
+  CarbonSearchBox(
       {super.key,
       required this.fetchFunction,
       required this.initialList,
@@ -19,6 +24,8 @@ class CarbonSearchBox extends StatefulWidget {
       required this.parameter,
       required this.searchController,
       required this.optionsMenuWidth,
+      required this.saveUserList,
+      required this.textfieldNode,
       this.endpoint});
   final Future Function(String) fetchFunction;
   final List<String> initialList;
@@ -27,6 +34,8 @@ class CarbonSearchBox extends StatefulWidget {
   final TextEditingController searchController;
   final String? endpoint;
   final double optionsMenuWidth;
+  final FocusNode textfieldNode;
+  void Function(List options) saveUserList;
 
   @override
   State<CarbonSearchBox> createState() => _CarbonSearchBoxState();
@@ -36,7 +45,6 @@ List<String> selectedOptions = [];
 
 class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   FocusNode optionsNode = FocusNode();
-  FocusNode _textFieldFocusNode = FocusNode();
   var searchItemsList = [];
   Color highlightedColor = Colors.black87;
   final ScrollController _scrollController = ScrollController();
@@ -49,11 +57,13 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   bool searching = true;
   Color formFieldOutlineColor = const Color.fromARGB(151, 255, 255, 255);
   bool selectedWithEnterKey = false;
+  late UserProvider _userProvider;
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       optionsNode = Focus.of(textFieldKey.currentContext!);
+      _userProvider = context.read<UserProvider>();
     });
     super.initState();
   }
@@ -105,11 +115,13 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
           if (!mounted) return [];
           setState(() {
             searching = false;
+            highlightIndex = 0;
             optionsList.clear();
           });
           for (var result in res) {
             if (!optionsList.contains(result[widget.parameter]) &&
-                !selectedOptions.contains(result[widget.parameter])) {
+                !selectedOptions.contains(result[widget.parameter]) &&
+                result[widget.parameter] != _userProvider.username) {
               setState(() {
                 optionsList.add(result[widget.parameter]);
               });
@@ -126,25 +138,23 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         }
         return "";
       },
-      focusNode: _textFieldFocusNode,
+      focusNode: widget.textfieldNode,
       // The scroll controller for the options list
       listController: _scrollController,
-      selectedWidget: (user) => TactileButton(
-        scale: 1.07,
-        // Remove the selected option on tap
+      selectedWidget: (user) => PillButton(
         onTap: () => setState(() {
           selectedOptions.remove(user);
         }),
-        child: GradientContainer(
-          height: 2.w(context),
-          width: 6.w(context),
-          text: user,
-          textSize: 2.sp(context),
-          gradient1: Colors.white12,
-          gradient2: Colors.white12,
-          neonGlow: tran,
-          borderColor: tran,
-          borderRadius: 10.w(context),
+        borderColor: deckBorderColor,
+        color1: tran,
+        color2: tran,
+        padding: EdgeInsets.symmetric(
+            vertical: max(5, 0.5.w(context)),
+            horizontal: max(10, 1.w(context))),
+        borderRadius: 10.w(context),
+        child: Text(
+          user,
+          style: TextStyle(fontSize: 2.5.sp(context)),
         ),
       ),
       listButtonItem: (
@@ -154,7 +164,8 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
           required onPressed,
           required value}) {
         isHighlighted = index == highlightIndex ? true : false;
-        highlightedColor = isHighlighted ? Colors.grey.shade800 : tran;
+        highlightedColor =
+            isHighlighted ? Color.fromRGBO(50, 50, 50, 0.5) : tran;
 
 // We create a FocusNode for the textFieldKey(thankfully this is a parameter of the widget
 // to get access to the onKeyEvent() function. We must return a KeyEventResult for each
@@ -227,7 +238,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         };
 
         // Tracking Enter key on _textFieldFocusNode. optionsNode can't track it
-        _textFieldFocusNode.onKeyEvent = (node, event) {
+        widget.textfieldNode.onKeyEvent = (node, event) {
           if (event is KeyDownEvent &&
               event.logicalKey == LogicalKeyboardKey.enter) {
             setState(() {
@@ -258,18 +269,35 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         //   }
         // });
         return TactileButton(
-            scale: 1.05,
-            onTap: onPressed,
-            child: GradientContainer(
-                height: 3.w(context),
-                width: 6.w(context),
-                text: value,
-                textSize: 3.sp(context),
-                gradient1: highlightedColor,
-                gradient2: highlightedColor,
-                neonGlow: tran,
-                borderColor: tran,
-                borderRadius: 10.w(context)));
+          scale: 1.01,
+          onTap: onPressed,
+          // child: GradientContainer(
+          //     height: 3.w(context),
+          //     width: 6.w(context),
+          //     text: value,
+          //     textSize: 3.sp(context),
+          //     gradient1: highlightedColor,
+          //     gradient2: highlightedColor,
+          //     neonGlow: tran,
+          //     borderColor: tran,
+          //     borderRadius: 0.w(context)),
+          child: Container(
+            color: highlightedColor,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: max(5, 1.w(context))),
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const CarbonCircleAvatar(),
+                  const SizedBox(width: 15),
+                  Text(value),
+                  const Spacer(),
+                  const Text("Online", style: TextStyle(color: green)),
+                ],
+              ),
+            ),
+          ),
+        );
       },
       menuList: ({required item, required length}) {
         if (searching == true) {
@@ -287,12 +315,8 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
           );
         }
 
-        return Container(
+        return BlurryContainer(
           width: widget.optionsMenuWidth,
-          decoration: BoxDecoration(
-            color: Colors.black87,
-            borderRadius: BorderRadius.circular(1.w(context)),
-          ),
           child: ListView.builder(
             itemCount: length,
             controller: _scrollController,
@@ -304,6 +328,10 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         selectedOptions.remove(removedItem);
       }),
       onSelected: (selectedItem) {
+        if (selectedOptions.length > 3) {
+          showErrorMessage("Maximum users reached.", context);
+          return;
+        }
         String optionHilighted = optionsList[highlightIndex];
 
         // Adds user to selectedOptions list if enter key was pressed for selection
@@ -319,12 +347,13 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
             selectedOptions.add(selectedItem);
           });
         }
-        var projectProvider = context.read<ProjectProvider>();
-        projectProvider.saveTeammates(selectedOptions);
+        // Passes the selectedOptions as an argument so we can use it in whatever Provider function we want
+        widget.saveUserList(selectedOptions);
+
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (!mounted) return;
           optionsList.clear();
-          _textFieldFocusNode.requestFocus();
+          widget.textfieldNode.requestFocus();
           setState(() {
             highlightIndex = 0;
             selectedWithEnterKey = false;

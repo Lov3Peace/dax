@@ -1,15 +1,65 @@
 import 'package:flutter/material.dart';
-class EventTile extends StatefulWidget 
-  const EventTile({super.key});
-  @override
-  State<EventTile> createState() => _EventTileState();
-}
+import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/ui/ShimmerButton.dart';
+import 'package:get/get_utils/src/extensions/export.dart';
 
-class _EventTileState extends State<EventTile> 
-  @override
+class EventTile extends StatelessWidget {
+  EventTile({
+    super.key,
+    required this.day,
+    required this.time,
+    required this.animate,
+    required this.eventTitle,
+    this.color = const Color.fromARGB(255, 255, 85, 0),
+    this.borderColor = const Color.fromARGB(255, 250, 140, 140),
+  });
+  final String day;
+  final String time;
+  final bool animate;
+  final String eventTitle;
+  final Color color;
+  final Color borderColor;
+
+  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      children: [
+        ShimmerButton(
+          animate: animate,
+          shimmerAnimationDelay: 1.75.seconds,
+          color: color,
+          borderColor: borderColor,
+          height: max(100, 8.w(context)),
+          width: max(150, 10.w(context)),
+          padding: 0.5.w(context),
+          borderRadius: 1.w(context),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                day,
+                style: TextStyle(
+                    fontSize: max(20, 3.5.sp(context)),
+                    color: darkGrey,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                time,
+                style: TextStyle(
+                    fontSize: max(24, 5.5.sp(context)),
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
+        ),
+        SizedBox(height: 10),
+        Text(
+          eventTitle,
+          style: TextStyle(fontSize: max(12, 2.5.sp(context))),
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
+    );
   }
 }
-
-

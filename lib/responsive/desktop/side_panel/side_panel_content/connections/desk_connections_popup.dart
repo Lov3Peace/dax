@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/connections/AddConnectionButton.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
@@ -42,206 +43,198 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
     );
   }
 
+  List<Widget> connectionPages = [];
+  late ConnectionsProvider _connectionsProvider;
+  late UserProvider _userProvider;
+
   @override
   void initState() {
     super.initState();
+    // User Provider
+    final userProvider = context.read<UserProvider>();
+    final currentUsername = userProvider.username;
+    // Connection Provider
+    _connectionsProvider = context.read<ConnectionsProvider>();
+    // Pending Requests
+    List pendingRequests = _connectionsProvider.pendingRequests;
+    // Accepted Connections
+    List connections = _connectionsProvider.connections;
+
+    // Each page represents a connection view
+    // such as All Connections or Requests
+    // connectionPages = [
+    //   //
+    //   // All Connections
+    //   CustomDataTable(
+    //     headers: [
+    //       'Username',
+    //       'Status',
+    //       'Last Seen',
+    //       'Actions',
+    //     ],
+    //     rows: connections.map((connection) {
+    //       // Determine the Other User
+    //       final username = connection.senderUsername == currentUsername
+    //           ? connection.receiverUsername
+    //           : connection.senderUsername;
+    //
+    //       return [
+    //         Text(
+    //           username,
+    //           style: TextStyle(
+    //             fontSize: 2.5.sp(context),
+    //           ),
+    //         ),
+    //         Text(
+    //           'Connected',
+    //           style: TextStyle(
+    //             fontSize: 2.5.sp(context),
+    //           ),
+    //         ),
+    //         Text(
+    //           connection.timestamp.toString(),
+    //           style: TextStyle(
+    //             fontSize: 2.5.sp(context),
+    //           ),
+    //         ),
+    //         const ActionsButtons(),
+    //       ];
+    //     }).toList(),
+    //     fontSize: 2.5.sp(context),
+    //     columnSpacing: 7.w(context),
+    //     horizontalMargin: 7.w(context),
+    //     topPadding: 1.h(context),
+    //     decoration: BoxDecoration(
+    //       color: const Color.fromARGB(
+    //         70,
+    //         32,
+    //         32,
+    //         40,
+    //       ),
+    //       borderRadius: BorderRadius.circular(
+    //         24,
+    //       ),
+    //       border: Border.all(
+    //         color: deckBorderColor,
+    //       ),
+    //     ),
+    //   ),
+    //
+    //   // Connection Requests
+    //   CustomDataTable(
+    //     headers: [
+    //       'Username',
+    //       'Status',
+    //       'Time',
+    //       'Actions',
+    //     ],
+    //     rows: pendingRequests.map((request) {
+    //       return [
+    //         Text(
+    //           request.senderUsername,
+    //           style: TextStyle(
+    //             fontSize: 2.5.sp(context),
+    //           ),
+    //         ),
+    //         Text(
+    //           request.status == 0 ? 'Pending' : 'Accepted',
+    //           style: TextStyle(
+    //             fontSize: 2.5.sp(context),
+    //           ),
+    //         ),
+    //         Text(
+    //           request.timestamp.toString(),
+    //           style: TextStyle(
+    //             fontSize: 2.5.sp(context),
+    //           ),
+    //         ),
+    //         RequestActionButtons(
+    //           onAccept: () {
+    //             SocketIoClient.socket.emit(
+    //               "acceptConnection",
+    //               {
+    //                 "requestId": request.requestId,
+    //                 "username": request.receiverUsername,
+    //               },
+    //             );
+    //           },
+    //           onReject: () {
+    //             SocketIoClient.socket.emit(
+    //               "rejectConnection",
+    //               {
+    //                 "requestId": request.requestId,
+    //                 "username": request.receiverUsername,
+    //               },
+    //             );
+    //           },
+    //         ),
+    //       ];
+    //     }).toList(),
+    //     fontSize: 2.5.sp(context),
+    //     columnSpacing: 7.w(context),
+    //     horizontalMargin: 7.w(context),
+    //     topPadding: 1.h(context),
+    //     decoration: BoxDecoration(
+    //       color: const Color.fromARGB(
+    //         70,
+    //         32,
+    //         32,
+    //         40,
+    //       ),
+    //       borderRadius: BorderRadius.circular(24),
+    //       border: Border.all(
+    //         color: deckBorderColor,
+    //       ),
+    //     ),
+    //   ),
+    // ];
   }
 
   @override
   Widget build(BuildContext context) {
-    // User Provider
-    final currentUsername = context.read<UserProvider>().username;
-    // Connection Provider
-    final connectionProvider = context.watch<ConnectionsProvider>();
-    // Pending Requests
-    final pendingRequests = connectionProvider.pendingRequests;
-    // Accepted Connections
-    final connections = connectionProvider.connections;
-
-    // Each page represents a connection view
-    // such as All Connections or Requests
-    final List<Widget> connectionPages = [
-      //
-      // All Connections
-      CustomDataTable(
-        headers: [
-          'Username',
-          'Status',
-          'Last Seen',
-          'Actions',
-        ],
-        rows: connections.map((connection) {
-          // Determine the Other User
-          final username = connection.senderUsername == currentUsername
-              ? connection.receiverUsername
-              : connection.senderUsername;
-
-          return [
-            Text(
-              username,
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
-              ),
-            ),
-            Text(
-              'Connected',
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
-              ),
-            ),
-            Text(
-              connection.timestamp.toString(),
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
-              ),
-            ),
-            const ActionsButtons(),
-          ];
-        }).toList(),
-        fontSize: 2.5.sp(context),
-        columnSpacing: 7.w(context),
-        horizontalMargin: 7.w(context),
-        topPadding: 1.h(context),
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(
-            70,
-            32,
-            32,
-            40,
-          ),
-          borderRadius: BorderRadius.circular(
-            24,
-          ),
-          border: Border.all(
-            color: deckBorderColor,
-          ),
-        ),
-      ),
-
-      // Connection Requests
-      CustomDataTable(
-        headers: [
-          'Username',
-          'Status',
-          'Time',
-          'Actions',
-        ],
-        rows: pendingRequests.map((request) {
-          return [
-            Text(
-              request.senderUsername,
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
-              ),
-            ),
-            Text(
-              request.status == 0 ? 'Pending' : 'Accepted',
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
-              ),
-            ),
-            Text(
-              request.timestamp.toString(),
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
-              ),
-            ),
-            RequestActionButtons(
-              onAccept: () {
-                SocketIoClient.socket.emit(
-                  "acceptConnection",
-                  {
-                    "requestId": request.requestId,
-                    "username": request.receiverUsername,
-                  },
-                );
-              },
-              onReject: () {
-                SocketIoClient.socket.emit(
-                  "rejectConnection",
-                  {
-                    "requestId": request.requestId,
-                    "username": request.receiverUsername,
-                  },
-                );
-              },
-            ),
-          ];
-        }).toList(),
-        fontSize: 2.5.sp(context),
-        columnSpacing: 7.w(context),
-        horizontalMargin: 7.w(context),
-        topPadding: 1.h(context),
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(
-            70,
-            32,
-            32,
-            40,
-          ),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: deckBorderColor,
-          ),
-        ),
-      ),
-    ];
-
     return SPCardTemplate(
       height: 100.h(context),
       width: 71.w(context),
       borderColor: deckBorderColor,
-      backgroundColor: deckBackgroundColor,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 1.h(context),
+        padding: EdgeInsets.all(
+          1.5.w(context),
         ),
         child: Column(
           children: [
-            //
-            // Popup Title
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 1.5.w(context),
-                ),
-                child: Text(
-                  "Connections",
-                  style: TextStyle(
-                    fontSize: 7.sp(context),
-                    fontWeight: FontWeight.w800,
-                  ),
-                  PillButton(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: max(10, 1.5.w(context)),
-                        vertical: max(5, 0.75.w(context))),
-                    onTap: () {},
-                    borderRadius: 50.w(context),
-                    borderColor: deckBorderColor,
-                    child: Row(
-                      spacing: max(5, 0.5.w(context)),
-                      children: [
-                        Icon(
-                          Ionicons.person_add,
-                          size: max(10, 1.25.w(context)),
-                        ),
-                        Text("Add Connection"),
-                      ],
+            Row(
+              children: [
+                //
+                // Popup Title
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 1.5.w(context),
+                    ),
+                    child: Text(
+                      "Connections",
+                      style: TextStyle(
+                        fontSize: 7.sp(context),
+                        fontWeight: FontWeight.w800,
+                      ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                const Expanded(child: AddConnectionButton()),
+              ],
             ),
 
             // Search Field
             Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: max(5, 0.25.w(context)),
+              padding: EdgeInsets.fromLTRB(
+                1.5.w(context),
+                10,
+                1.5.w(context),
+                10,
               ),
               child: TextFormField(
                 controller: searchController,
-                cursorColor: red,
                 decoration: InputDecoration(
                   filled: true,
                   fillColor: const Color.fromARGB(
@@ -286,8 +279,10 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
 
             // Connection Tabs
             Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: max(5, 0.25.w(context)),
+              padding: EdgeInsets.only(
+                left: 1.5.w(context),
+                right: 1.5.w(context),
+                bottom: 10,
               ),
               child: Container(
                 height: 6.h(context),

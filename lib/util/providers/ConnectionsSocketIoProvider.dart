@@ -30,6 +30,7 @@ class Connection {
 class ConnectionsProvider extends ChangeNotifier {
   List<Connection> pendingRequests = [];
   List<Connection> connections = [];
+  List<String> connectionRequestList = [];
 
   // Enable Connection Socket Listeners
   void enableConnections(String username) {
@@ -153,5 +154,11 @@ class ConnectionsProvider extends ChangeNotifier {
       "getConnections",
       username,
     );
+  }
+
+  // Save List of Users from Add Connection Search Box
+  saveUserList(connectionRequestList) {
+    this.connectionRequestList = connectionRequestList;
+    notifyListeners();
   }
 }

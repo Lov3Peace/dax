@@ -13,7 +13,7 @@ var routes = {
   '/profile': ProfilePage(),
   '/': DesktopDashboard(),
   '/launch': LaunchPage(),
-  '/dev': Devpage(),
+  '/dev': DevPage(),
   '/projects': DesktopProjectsPage(),
   '/project-posts': DesktopProjectPostsPage(),
   '/communities': DesktopCommunitiesPage(),

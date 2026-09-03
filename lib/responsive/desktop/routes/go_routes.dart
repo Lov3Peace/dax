@@ -52,7 +52,7 @@ final GoRouter router = GoRouter(
       path: "/",
       pageBuilder: (context, state) {
         return CustomTransitionPage(
-          child: DevPage(),
+          child: DesktopDashboard(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },

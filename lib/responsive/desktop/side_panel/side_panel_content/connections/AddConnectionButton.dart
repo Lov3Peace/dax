@@ -1,11 +1,15 @@
 import 'dart:convert';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/carbonSearchBox.dart';
+import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
+import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/pillButton.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:http/browser_client.dart' as httpClient;
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:supercharged/supercharged.dart';
 
 class AddConnectionButton extends StatefulWidget {
@@ -16,9 +20,10 @@ class AddConnectionButton extends StatefulWidget {
 }
 
 class _AddConnectionButtonState extends State<AddConnectionButton> {
+  List<String> _connectionsRequestList = [];
   bool showUserSearch = false;
   List users = [];
-  List<String> connectionsRequestList = [];
+  final FocusNode _connectionRequestFocusNode = FocusNode();
   final TextEditingController _teammatesSearchController =
       TextEditingController();
   final client = httpClient.BrowserClient()..withCredentials = true;
@@ -41,6 +46,16 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
       // debugPrint("Could not fetch users: $e");
     }
     // });
+  }
+
+  late ConnectionsProvider _connectionsProvider;
+  late UserProvider _userProvider;
+
+  @override
+  void initState() {
+    _connectionsProvider = context.read<ConnectionsProvider>();
+    _userProvider = context.read<UserProvider>();
+    super.initState();
   }
 
   @override
@@ -78,6 +93,7 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
           onTap: () {
             setState(() {
               showUserSearch = true;
+              _connectionRequestFocusNode.requestFocus();
             });
           },
           child: AnimatedContainer(
@@ -124,12 +140,19 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
                   Visibility(
                     visible: showUserSearch,
                     child: CarbonSearchBox(
+                      textfieldNode: _connectionRequestFocusNode,
                       fetchFunction: _fetchUsers,
-                      initialList: connectionsRequestList,
+                      initialList: [],
                       labelText: "Search for users...",
                       parameter: "username",
                       searchController: _teammatesSearchController,
                       optionsMenuWidth: 30.w(context),
+                      // userList is the selectedOptions that is only available in the CarbonSearchBox. So we pass it into
+                      // the saveUserList callback to be used in the _connectionsProvider.saveUserList(userList) call
+                      saveUserList: (userList) {
+                        _connectionsProvider.saveUserList(userList);
+                        print(_connectionsProvider.connectionRequestList);
+                      },
                     ),
                   )
                 ],
@@ -143,11 +166,21 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
         Visibility(
           visible: showUserSearch,
           child: PillButton(
-            onTap: () {},
+            onTap: () {
+              SocketIoClient.socket.emit("sendConnectionRequest", {
+                "sender": _userProvider.username,
+                "receivers": _connectionsProvider.connectionRequestList
+              });
+              setState(() {
+                showUserSearch = false;
+              });
+              showErrorMessage("Connection Request Sent!", context);
+            },
             borderRadius: 50.w(context),
             borderColor: tran,
-            height: max(35, 3.5.h(context)),
-            width: max(100, 7.w(context)),
+            padding: EdgeInsets.symmetric(
+                horizontal: max(10, 1.5.w(context)),
+                vertical: max(5, 0.5.w(context))),
             color1: pink,
             color2: red,
             child: Text("Connect",

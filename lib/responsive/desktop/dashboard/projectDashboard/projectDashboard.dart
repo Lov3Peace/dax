@@ -1,5 +1,5 @@
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/AddEventButton.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/EventsTile.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/EventTile.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/ViewAllEventsButton.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashFeed.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashHeadingProgress.dart';
@@ -165,14 +165,14 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                                 CrossAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              EventsTile(
+                                                              EventTile(
                                                                 day: "Today",
                                                                 time: "9:00AM",
                                                                 animate: true,
                                                                 eventTitle:
                                                                     "Daily Standup",
                                                               ),
-                                                              EventsTile(
+                                                              EventTile(
                                                                 day: "Tomorrow",
                                                                 time: "10:30AM",
                                                                 animate: false,
@@ -182,7 +182,7 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                                 borderColor:
                                                                     deckBorderColor,
                                                               ),
-                                                              EventsTile(
+                                                              EventTile(
                                                                 day: "8.16.26",
                                                                 time: "1:30PM",
                                                                 animate: false,

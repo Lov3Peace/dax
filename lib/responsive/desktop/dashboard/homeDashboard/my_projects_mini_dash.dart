@@ -111,7 +111,7 @@ class _MyProjectsMiniDashDeckState extends State<MyProjectsMiniDashDeck> {
                           TactileButton(
                             scale: 1.05,
                             child: Text(
-                              "17%",
+                              "23%",
                               style: TextStyle(
                                   fontSize: 5.sp(context),
                                   fontWeight: FontWeight.bold,
@@ -122,8 +122,8 @@ class _MyProjectsMiniDashDeckState extends State<MyProjectsMiniDashDeck> {
                             width: max(250, 20.w(context)),
                             child: FAProgressBar(
                               maxValue: 100,
-                              currentValue: 17,
-                              size: 17,
+                              currentValue: 23,
+                              size: 23,
                               borderRadius:
                                   BorderRadius.circular(10.w(context)),
                               backgroundColor: deckBorderColor,

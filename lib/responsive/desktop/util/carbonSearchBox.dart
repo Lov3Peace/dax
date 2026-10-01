@@ -290,9 +290,14 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                 children: [
                   const CarbonCircleAvatar(),
                   const SizedBox(width: 15),
-                  Text(value),
+                  Text(
+                    value,
+                    style: TextStyle(fontSize: max(12, 2.5.sp(context))),
+                  ),
                   const Spacer(),
-                  const Text("Online", style: TextStyle(color: green)),
+                  Text("Online",
+                      style: TextStyle(
+                          color: green, fontSize: max(12, 2.5.sp(context)))),
                 ],
               ),
             ),
@@ -380,6 +385,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
           decoration: InputDecoration(
             labelText: widget.labelText,
             labelStyle: TextStyle(fontSize: 2.5.sp(context), color: white),
+            contentPadding: EdgeInsetsGeometry.all(max(5, 0.75.w(context))),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(1.5.w(context)),
               borderSide: BorderSide(

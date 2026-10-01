@@ -8,6 +8,6 @@ Logger logger = Logger(
     colors: false, // Colorful log messages
     printEmojis: true, // Print an emoji for each log message
     // Should each log print contain a timestamp
-    dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
+    // dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
   ),
 );

@@ -97,7 +97,7 @@ class _ProjectDashHeadingProgressState
                 child: TactileButton(
                   scale: 1.05,
                   child: Text(
-                    "17%",
+                    "23%",
                     textAlign: TextAlign.right,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -116,7 +116,7 @@ class _ProjectDashHeadingProgressState
           width: max(250, double.infinity),
           child: FAProgressBar(
             maxValue: 100,
-            currentValue: 17,
+            currentValue: 23,
             size: 1.w(context),
             borderRadius: BorderRadius.circular(10.w(context)),
             backgroundColor: deckBorderColor,

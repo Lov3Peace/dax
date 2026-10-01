@@ -45,14 +45,17 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
 
   List<Widget> connectionPages = [];
   late ConnectionsProvider _connectionsProvider;
-  late UserProvider _userProvider;
+  late String currentUsername;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // User Provider
-    final userProvider = context.read<UserProvider>();
-    final currentUsername = userProvider.username;
+    currentUsername = context.read<UserProvider>().username;
     // Connection Provider
     _connectionsProvider = context.read<ConnectionsProvider>();
     // Pending Requests
@@ -62,136 +65,127 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
 
     // Each page represents a connection view
     // such as All Connections or Requests
-    // connectionPages = [
-    //   //
-    //   // All Connections
-    //   CustomDataTable(
-    //     headers: [
-    //       'Username',
-    //       'Status',
-    //       'Last Seen',
-    //       'Actions',
-    //     ],
-    //     rows: connections.map((connection) {
-    //       // Determine the Other User
-    //       final username = connection.senderUsername == currentUsername
-    //           ? connection.receiverUsername
-    //           : connection.senderUsername;
-    //
-    //       return [
-    //         Text(
-    //           username,
-    //           style: TextStyle(
-    //             fontSize: 2.5.sp(context),
-    //           ),
-    //         ),
-    //         Text(
-    //           'Connected',
-    //           style: TextStyle(
-    //             fontSize: 2.5.sp(context),
-    //           ),
-    //         ),
-    //         Text(
-    //           connection.timestamp.toString(),
-    //           style: TextStyle(
-    //             fontSize: 2.5.sp(context),
-    //           ),
-    //         ),
-    //         const ActionsButtons(),
-    //       ];
-    //     }).toList(),
-    //     fontSize: 2.5.sp(context),
-    //     columnSpacing: 7.w(context),
-    //     horizontalMargin: 7.w(context),
-    //     topPadding: 1.h(context),
-    //     decoration: BoxDecoration(
-    //       color: const Color.fromARGB(
-    //         70,
-    //         32,
-    //         32,
-    //         40,
-    //       ),
-    //       borderRadius: BorderRadius.circular(
-    //         24,
-    //       ),
-    //       border: Border.all(
-    //         color: deckBorderColor,
-    //       ),
-    //     ),
-    //   ),
-    //
-    //   // Connection Requests
-    //   CustomDataTable(
-    //     headers: [
-    //       'Username',
-    //       'Status',
-    //       'Time',
-    //       'Actions',
-    //     ],
-    //     rows: pendingRequests.map((request) {
-    //       return [
-    //         Text(
-    //           request.senderUsername,
-    //           style: TextStyle(
-    //             fontSize: 2.5.sp(context),
-    //           ),
-    //         ),
-    //         Text(
-    //           request.status == 0 ? 'Pending' : 'Accepted',
-    //           style: TextStyle(
-    //             fontSize: 2.5.sp(context),
-    //           ),
-    //         ),
-    //         Text(
-    //           request.timestamp.toString(),
-    //           style: TextStyle(
-    //             fontSize: 2.5.sp(context),
-    //           ),
-    //         ),
-    //         RequestActionButtons(
-    //           onAccept: () {
-    //             SocketIoClient.socket.emit(
-    //               "acceptConnection",
-    //               {
-    //                 "requestId": request.requestId,
-    //                 "username": request.receiverUsername,
-    //               },
-    //             );
-    //           },
-    //           onReject: () {
-    //             SocketIoClient.socket.emit(
-    //               "rejectConnection",
-    //               {
-    //                 "requestId": request.requestId,
-    //                 "username": request.receiverUsername,
-    //               },
-    //             );
-    //           },
-    //         ),
-    //       ];
-    //     }).toList(),
-    //     fontSize: 2.5.sp(context),
-    //     columnSpacing: 7.w(context),
-    //     horizontalMargin: 7.w(context),
-    //     topPadding: 1.h(context),
-    //     decoration: BoxDecoration(
-    //       color: const Color.fromARGB(
-    //         70,
-    //         32,
-    //         32,
-    //         40,
-    //       ),
-    //       borderRadius: BorderRadius.circular(24),
-    //       border: Border.all(
-    //         color: deckBorderColor,
-    //       ),
-    //     ),
-    //   ),
-    // ];
-  }
+    connectionPages = [
+      //
+      // All Connections
+      CustomDataTable(
+        headers: [
+          'Username',
+          'Status',
+          'Last Seen',
+          'Actions',
+        ],
+        rows: connections.map((connection) {
+          // Determine the Other User
+          final username = connection.senderUsername == currentUsername
+              ? connection.receiverUsername
+              : connection.senderUsername;
 
-  @override
-  Widget build(BuildContext context) {
+          return [
+            Text(
+              username,
+              style: TextStyle(
+                fontSize: 2.5.sp(context),
+              ),
+            ),
+            Text(
+              'Connected',
+              style: TextStyle(
+                fontSize: 2.5.sp(context),
+              ),
+            ),
+            Text(
+              connection.timestamp.toString(),
+              style: TextStyle(
+                fontSize: 2.5.sp(context),
+              ),
+            ),
+            const ActionsButtons(),
+          ];
+        }).toList(),
+        fontSize: 2.5.sp(context),
+        columnSpacing: 7.w(context),
+        horizontalMargin: 7.w(context),
+        topPadding: 1.h(context),
+        decoration: BoxDecoration(
+          color: deckBackgroundColor,
+          borderRadius: BorderRadius.circular(
+            1.w(context),
+          ),
+          border: Border.all(
+            color: deckBorderColor,
+          ),
+        ),
+      ),
+
+      // Connection Requests
+      CustomDataTable(
+        headers: [
+          'Username',
+          'Status',
+          'Time',
+          'Actions',
+        ],
+        rows: pendingRequests.map((request) {
+          return [
+            Text(
+              request.senderUsername,
+              style: TextStyle(
+                fontSize: 2.5.sp(context),
+              ),
+            ),
+            Text(
+              request.status == 0 ? 'Pending' : 'Accepted',
+              style: TextStyle(
+                fontSize: 2.5.sp(context),
+              ),
+            ),
+            Text(
+              request.timestamp.toString(),
+              style: TextStyle(
+                fontSize: 2.5.sp(context),
+              ),
+            ),
+            RequestActionButtons(
+              onAccept: () {
+                SocketIoClient.socket.emit(
+                  "acceptConnection",
+                  {
+                    "requestId": request.requestId,
+                    "username": request.receiverUsername,
+                  },
+                );
+              },
+              onReject: () {
+                SocketIoClient.socket.emit(
+                  "rejectConnection",
+                  {
+                    "requestId": request.requestId,
+                    "username": request.receiverUsername,
+                  },
+                );
+              },
+            ),
+          ];
+        }).toList(),
+        fontSize: 2.5.sp(context),
+        columnSpacing: 7.w(context),
+        horizontalMargin: 7.w(context),
+        topPadding: 1.h(context),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(
+            70,
+            32,
+            32,
+            40,
+          ),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(
+            color: deckBorderColor,
+          ),
+        ),
+      ),
+    ];
     return SPCardTemplate(
       height: 100.h(context),
       width: 71.w(context),
@@ -208,16 +202,11 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                 // Popup Title
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 1.5.w(context),
-                    ),
-                    child: Text(
-                      "Connections",
-                      style: TextStyle(
-                        fontSize: 7.sp(context),
-                        fontWeight: FontWeight.w800,
-                      ),
+                  child: Text(
+                    "Connections",
+                    style: TextStyle(
+                      fontSize: 7.sp(context),
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
@@ -228,15 +217,15 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
             // Search Field
             Padding(
               padding: EdgeInsets.fromLTRB(
-                1.5.w(context),
-                10,
-                1.5.w(context),
-                10,
+                0,
+                max(10, 1.w(context)),
+                0,
+                max(10, 1.w(context)),
               ),
               child: TextFormField(
                 controller: searchController,
                 decoration: InputDecoration(
-                  filled: true,
+                  // filled: true,
                   fillColor: const Color.fromARGB(
                     70,
                     32,
@@ -246,7 +235,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(
-                        5.w(context),
+                        50.w(context),
                       ),
                     ),
                     borderSide: BorderSide(
@@ -256,7 +245,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(
-                        5.w(context),
+                        3.w(context),
                       ),
                     ),
                     borderSide: BorderSide(
@@ -264,10 +253,12 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                     ),
                   ),
                   hintText: 'Search...',
-                  contentPadding: const EdgeInsets.only(
-                    left: 20,
+                  hintStyle: TextStyle(fontSize: max(12, 2.5.sp(context))),
+                  contentPadding: EdgeInsets.all(max(10, 0.75.w(context))),
+                  suffixIcon: Icon(
+                    Icons.search,
+                    size: 2.5.sp(context),
                   ),
-                  suffixIcon: const Icon(Icons.search),
                 ),
 
                 // Live Search Logic
@@ -280,9 +271,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
             // Connection Tabs
             Padding(
               padding: EdgeInsets.only(
-                left: 1.5.w(context),
-                right: 1.5.w(context),
-                bottom: 10,
+                bottom: max(10, 1.w(context)),
               ),
               child: Container(
                 height: 6.h(context),
@@ -294,8 +283,8 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                     32,
                     40,
                   ),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(40),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(50.w(context)),
                   ),
                   border: Border.all(
                     color: deckBorderColor,
@@ -309,23 +298,18 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
 
             // Connections / Requests Pages
             Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 1.5.w(context),
-                ),
-                child: PageView(
-                  controller: pageController,
+              child: PageView(
+                controller: pageController,
 
-                  // Allows user to manually swipe
-                  // between All and Requests
-                  onPageChanged: (index) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
+                // Allows user to manually swipe
+                // between All and Requests
+                onPageChanged: (index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
 
-                  children: connectionPages,
-                ),
+                children: connectionPages,
               ),
             ),
           ],

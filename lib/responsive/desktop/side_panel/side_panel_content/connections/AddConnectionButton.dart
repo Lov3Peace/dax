@@ -167,6 +167,7 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
           visible: showUserSearch,
           child: PillButton(
             onTap: () {
+              // Error Handled in Provider
               SocketIoClient.socket.emit("sendConnectionRequest", {
                 "sender": _userProvider.username,
                 "receivers": _connectionsProvider.connectionRequestList
@@ -175,6 +176,10 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
                 showUserSearch = false;
               });
               showErrorMessage("Connection Request Sent!", context);
+
+              SocketIoClient.socket.on("connectionRequestError", (_) {
+                showErrorMessage("Unable to Send Request!", context);
+              });
             },
             borderRadius: 50.w(context),
             borderColor: tran,

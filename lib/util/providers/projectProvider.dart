@@ -26,9 +26,9 @@ class ProjectProvider with ChangeNotifier {
   }
 
   void clearData() {
-    _teammates = [];
-    _rolesNeeded = [];
-    _images = [];
+    _teammates.clear();
+    _rolesNeeded.clear();
+    _images.clear();
     notifyListeners();
     print("Project Data Cleared! Teammates: $_teammates");
   }

@@ -1,5 +1,5 @@
 import authCheck from "../auth/authCheck.js";
-import { pgClient } from "../server.js";
+import { pgClient, io } from "../server.js";
 import user from "../storage/models/user.js";
 import User from "../storage/models/user.js";
 
@@ -74,7 +74,7 @@ export const joinUserRoom = (socket) => {
 };
 
 // Send Connection Request
-export const sendConnectionRequest = (socket, io) => {
+export const sendConnectionRequest = (socket) => {
   socket.on("sendConnectionRequest", async (data) => {
     try {
       const senderUsername = data.sender;
@@ -88,6 +88,7 @@ export const sendConnectionRequest = (socket, io) => {
       for (let user of receiverUsernames) {
         console.log(`This User is: ${user}`);
 
+        await pgClient.query("BEGIN");
         const result = await pgClient.query(
           `
         INSERT INTO users.connection_requests
@@ -102,8 +103,10 @@ export const sendConnectionRequest = (socket, io) => {
         const connection = result.rows[0];
 
         io.to(`user:${user}`).emit("connectionRequestReceived", connection);
+        await pgClient.query("COMMIT");
       }
     } catch (error) {
+      await pgClient.query("ROLLBACK");
       console.error(error);
 
       socket.emit("connectionRequestError", {
@@ -128,7 +131,7 @@ export const getConnectionRequest = (socket) => {
         [username],
       );
 
-      socket.emit("connectionRequestsResponse", result.rows);
+      socket.emit("currentConnectionRequests", result.rows);
     } catch (error) {
       console.error(error);
 
@@ -140,7 +143,7 @@ export const getConnectionRequest = (socket) => {
 };
 
 // Accept Connection Request
-export const acceptConnectionRequest = (socket, io) => {
+export const acceptConnectionRequest = (socket) => {
   socket.on("acceptConnection", async (data) => {
     try {
       const { requestId, username } = data;
@@ -184,7 +187,7 @@ export const acceptConnectionRequest = (socket, io) => {
 };
 
 // Reject Connection Request
-export const rejectConnectionRequest = (socket, io) => {
+export const rejectConnectionRequest = (socket) => {
   socket.on("rejectConnection", async (data) => {
     try {
       const { requestId, username } = data;
@@ -243,7 +246,7 @@ export const getConnections = (socket) => {
         [username],
       );
 
-      socket.emit("connectionsResponse", result.rows);
+      socket.emit("connections", result.rows);
     } catch (error) {
       console.error(error);
 

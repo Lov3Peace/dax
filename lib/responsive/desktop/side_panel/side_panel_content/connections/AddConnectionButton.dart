@@ -61,6 +61,7 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: AnimatedContainer(
@@ -68,6 +69,8 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
             height: 7.sp(context),
           ),
         ),
+        //
+        // Close Button
         Visibility(
           visible: showUserSearch,
           child: TactileButton(
@@ -88,6 +91,7 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
           ),
         ),
         SizedBox(width: max(10, 1.w(context))),
+        // Add Connection Button
         TactileButton(
           scale: showUserSearch ? 1.0 : 1.01,
           onTap: () {
@@ -137,6 +141,8 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
                       ),
                     ),
                   ),
+                  //
+                  // Search Box
                   Visibility(
                     visible: showUserSearch,
                     child: CarbonSearchBox(
@@ -163,33 +169,38 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
         SizedBox(
           width: max(10, 1.w(context)),
         ),
-        Visibility(
-          visible: showUserSearch,
-          child: PillButton(
-            onTap: () {
-              // Error Handled in Provider
-              SocketIoClient.socket.emit("sendConnectionRequest", {
-                "sender": _userProvider.username,
-                "receivers": _connectionsProvider.connectionRequestList
-              });
-              setState(() {
-                showUserSearch = false;
-              });
-              showErrorMessage("Connection Request Sent!", context);
+        //
+        // Connect Button
+        Padding(
+          padding: EdgeInsets.only(top: 0.25.w(context)),
+          child: Visibility(
+            visible: showUserSearch,
+            child: PillButton(
+              onTap: () {
+                // Error Handled in Provider
+                SocketIoClient.socket.emit("sendConnectionRequest", {
+                  "sender": _userProvider.username,
+                  "receivers": _connectionsProvider.connectionRequestList
+                });
+                setState(() {
+                  showUserSearch = false;
+                });
+                showErrorMessage("Connection Request Sent!", context);
 
-              SocketIoClient.socket.on("connectionRequestError", (_) {
-                showErrorMessage("Unable to Send Request!", context);
-              });
-            },
-            borderRadius: 50.w(context),
-            borderColor: tran,
-            padding: EdgeInsets.symmetric(
-                horizontal: max(10, 1.5.w(context)),
-                vertical: max(5, 0.5.w(context))),
-            color1: pink,
-            color2: red,
-            child: Text("Connect",
-                style: TextStyle(fontSize: max(12, 2.5.sp(context)))),
+                SocketIoClient.socket.on("connectionRequestError", (_) {
+                  showErrorMessage("Unable to Send Request!", context);
+                });
+              },
+              borderRadius: 50.w(context),
+              borderColor: tran,
+              padding: EdgeInsets.symmetric(
+                  horizontal: max(10, 1.5.w(context)),
+                  vertical: max(5, 0.5.w(context))),
+              color1: pink,
+              color2: red,
+              child: Text("Connect",
+                  style: TextStyle(fontSize: max(12, 2.5.sp(context)))),
+            ),
           ),
         ),
       ],

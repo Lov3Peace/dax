@@ -197,6 +197,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
         child: Column(
           children: [
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //
                 // Popup Title

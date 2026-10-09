@@ -12,8 +12,8 @@ import "package:provider/provider.dart";
 final TextEditingController _projectFeedPostController =
     TextEditingController();
 
-final FocusNode textFieldFocusNode = FocusNode();
-final FocusNode keyboardListenerFocusNode = FocusNode();
+final FocusNode _textFieldFocusNode = FocusNode();
+final FocusNode _keyboardListenerFocusNode = FocusNode();
 
 class ProjectDashFeed extends StatefulWidget {
   const ProjectDashFeed({super.key});
@@ -59,7 +59,7 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
               PillButton(
                 onTap: () {
                   feedSocketIoProvider.toggleNewPostTextBox();
-                  textFieldFocusNode.requestFocus();
+                  _textFieldFocusNode.requestFocus();
                   _projectFeedPostController.clear();
                 },
                 scale: 1.04,
@@ -139,7 +139,7 @@ class _NewProjectFeedPostTextfieldState
           children: [
             SizedBox(height: max(5, 0.5.w(context))),
             Focus(
-              focusNode: keyboardListenerFocusNode,
+              focusNode: _keyboardListenerFocusNode,
               onKeyEvent: (node, event) {
                 // only submit on enter if SHIFT is not held down and the
                 // content is not empty
@@ -160,7 +160,7 @@ class _NewProjectFeedPostTextfieldState
                 return KeyEventResult.ignored;
               },
               child: TextField(
-                focusNode: textFieldFocusNode,
+                focusNode: _textFieldFocusNode,
                 autofocus: true,
                 maxLines: 3,
                 minLines: 1,
@@ -168,6 +168,8 @@ class _NewProjectFeedPostTextfieldState
                 style: TextStyle(fontSize: 3.sp(context)),
                 controller: _projectFeedPostController,
                 decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsetsGeometry.all(max(15, 0.75.w(context))),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(1.5.w(context)),
                     borderSide: BorderSide(
@@ -199,10 +201,10 @@ class _NewProjectFeedPostTextfieldState
                   },
                   isLoading: isLoading,
                   scale: 1.03,
-                  width: max(75, 5.w(context)),
-                  height: max(30, 2.w(context)),
-                  // padding: EdgeInsets.symmetric(
-                  //     horizontal: 1.5.w(context), vertical: 0.5.w(context)),
+                  // width: max(75, 5.w(context)),
+                  // height: max(30, 2.w(context)),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 1.5.w(context), vertical: 0.5.w(context)),
                   color1: pink,
                   color2: red,
                   borderRadius: 20.w(context),

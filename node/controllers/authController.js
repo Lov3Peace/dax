@@ -260,5 +260,3 @@ export const changeUsername = async (req, res) => {
     res.status(500).json({ error: error });
   }
 };
-
-export const pgLogin = async (req, res) => {};

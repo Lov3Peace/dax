@@ -1,3 +1,4 @@
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/connections/AddConnectionButton.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
@@ -42,6 +43,10 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
     );
   }
 
+  List<Widget> connectionPages = [];
+  late ConnectionsProvider _connectionsProvider;
+  late String currentUsername;
+
   @override
   void initState() {
     super.initState();
@@ -50,17 +55,17 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
   @override
   Widget build(BuildContext context) {
     // User Provider
-    final currentUsername = context.read<UserProvider>().username;
+    currentUsername = context.read<UserProvider>().username;
     // Connection Provider
-    final connectionProvider = context.watch<ConnectionsProvider>();
+    _connectionsProvider = context.read<ConnectionsProvider>();
     // Pending Requests
-    final pendingRequests = connectionProvider.pendingRequests;
+    List pendingRequests = _connectionsProvider.pendingRequests;
     // Accepted Connections
-    final connections = connectionProvider.connections;
+    List connections = _connectionsProvider.connections;
 
     // Each page represents a connection view
     // such as All Connections or Requests
-    final List<Widget> connectionPages = [
+    connectionPages = [
       //
       // All Connections
       CustomDataTable(
@@ -103,14 +108,9 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
         horizontalMargin: 7.w(context),
         topPadding: 1.h(context),
         decoration: BoxDecoration(
-          color: const Color.fromARGB(
-            70,
-            32,
-            32,
-            40,
-          ),
+          color: deckBackgroundColor,
           borderRadius: BorderRadius.circular(
-            24,
+            1.w(context),
           ),
           border: Border.all(
             color: deckBorderColor,
@@ -186,47 +186,47 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
         ),
       ),
     ];
-
     return SPCardTemplate(
       height: 100.h(context),
       width: 71.w(context),
       borderColor: deckBorderColor,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 1.h(context),
+        padding: EdgeInsets.all(
+          1.5.w(context),
         ),
         child: Column(
           children: [
-            //
-            // Popup Title
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 1.5.w(context),
-                ),
-                child: Text(
-                  "Connections",
-                  style: TextStyle(
-                    fontSize: 7.sp(context),
-                    fontWeight: FontWeight.w800,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //
+                // Popup Title
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Connections",
+                    style: TextStyle(
+                      fontSize: 7.sp(context),
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
                 ),
-              ),
+                const Expanded(child: AddConnectionButton()),
+              ],
             ),
 
             // Search Field
             Padding(
               padding: EdgeInsets.fromLTRB(
-                1.5.w(context),
-                10,
-                1.5.w(context),
-                10,
+                0,
+                max(10, 1.w(context)),
+                0,
+                max(10, 1.w(context)),
               ),
               child: TextFormField(
                 controller: searchController,
                 decoration: InputDecoration(
-                  filled: true,
+                  // filled: true,
                   fillColor: const Color.fromARGB(
                     70,
                     32,
@@ -236,7 +236,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(
-                        5.w(context),
+                        50.w(context),
                       ),
                     ),
                     borderSide: BorderSide(
@@ -246,7 +246,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(
-                        5.w(context),
+                        3.w(context),
                       ),
                     ),
                     borderSide: BorderSide(
@@ -254,10 +254,12 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                     ),
                   ),
                   hintText: 'Search...',
-                  contentPadding: const EdgeInsets.only(
-                    left: 20,
+                  hintStyle: TextStyle(fontSize: max(12, 2.5.sp(context))),
+                  contentPadding: EdgeInsets.all(max(10, 0.75.w(context))),
+                  suffixIcon: Icon(
+                    Icons.search,
+                    size: 2.5.sp(context),
                   ),
-                  suffixIcon: const Icon(Icons.search),
                 ),
 
                 // Live Search Logic
@@ -270,9 +272,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
             // Connection Tabs
             Padding(
               padding: EdgeInsets.only(
-                left: 1.5.w(context),
-                right: 1.5.w(context),
-                bottom: 10,
+                bottom: max(10, 1.w(context)),
               ),
               child: Container(
                 height: 6.h(context),
@@ -284,8 +284,8 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                     32,
                     40,
                   ),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(40),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(50.w(context)),
                   ),
                   border: Border.all(
                     color: deckBorderColor,
@@ -299,23 +299,18 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
 
             // Connections / Requests Pages
             Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 1.5.w(context),
-                ),
-                child: PageView(
-                  controller: pageController,
+              child: PageView(
+                controller: pageController,
 
-                  // Allows user to manually swipe
-                  // between All and Requests
-                  onPageChanged: (index) {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
+                // Allows user to manually swipe
+                // between All and Requests
+                onPageChanged: (index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
 
-                  children: connectionPages,
-                ),
+                children: connectionPages,
               ),
             ),
           ],

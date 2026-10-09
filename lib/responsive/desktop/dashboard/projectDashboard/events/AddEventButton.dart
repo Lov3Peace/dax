@@ -12,11 +12,16 @@ class AddEventButton extends StatelessWidget {
       onTap: () {},
       height: max(25, 2.w(context)),
       width: max(75, 7.w(context)),
+      // padding: EdgeInsetsGeometry.symmetric(
+      //     horizontal: max(10, 1.5.w(context)),
+      //     vertical: max(5, 0.5.w(context))),
       borderRadius: 50.w(context),
       borderColor: deckBorderColor,
-      child: Text(
-        "Add Event",
-        style: TextStyle(fontSize: max(12, 2.sp(context))),
+      child: Center(
+        child: Text(
+          "Add Event",
+          style: TextStyle(fontSize: max(12, 2.sp(context))),
+        ),
       ),
     );
   }

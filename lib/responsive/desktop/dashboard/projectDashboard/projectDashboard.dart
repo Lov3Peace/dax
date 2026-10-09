@@ -1,5 +1,5 @@
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/AddEventButton.dart';
-import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/EventsTile.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/EventTile.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/events/ViewAllEventsButton.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashFeed.dart';
 import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashHeadingProgress.dart';
@@ -165,39 +165,47 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                                 CrossAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              EventsTile(
+                                                              EventTile(
                                                                 day: "Today",
                                                                 time: "9:00AM",
                                                                 animate: true,
+                                                                eventTitle:
+                                                                    "Daily Standup",
                                                               ),
-                                                              EventsTile(
+                                                              EventTile(
                                                                 day: "Tomorrow",
                                                                 time: "10:30AM",
                                                                 animate: false,
+                                                                eventTitle:
+                                                                    "Discuss API Changes",
                                                                 color: tran,
                                                                 borderColor:
                                                                     deckBorderColor,
                                                               ),
-                                                              EventsTile(
+                                                              EventTile(
                                                                 day: "8.16.26",
                                                                 time: "1:30PM",
                                                                 animate: false,
+                                                                eventTitle:
+                                                                    "3.12 Retrospective",
                                                                 color: tran,
                                                                 borderColor:
                                                                     deckBorderColor,
                                                               ),
                                                               Expanded(
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  spacing: max(
-                                                                      10,
-                                                                      1.w(context)),
-                                                                  children: [
-                                                                    AddEventButton(),
-                                                                    ViewAllEventsButton(),
-                                                                  ],
+                                                                child: Padding(
+                                                                  padding: EdgeInsets.only(
+                                                                      top: max(
+                                                                          15,
+                                                                          2.w(context))),
+                                                                  child: Column(
+                                                                    spacing: 1.w(
+                                                                        context),
+                                                                    children: const [
+                                                                      AddEventButton(),
+                                                                      ViewAllEventsButton(),
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               )
                                                             ],

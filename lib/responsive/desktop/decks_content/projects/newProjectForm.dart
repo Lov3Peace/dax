@@ -64,6 +64,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   Color privateButtonGlow = tran;
   Color privateButtonBorderColor = deckBorderColor;
 
+  late ProjectProvider _projectProvider;
   late FocusNode teammateOptionsNode;
   FocusNode _teammatesTextFieldFocusNode = FocusNode();
   final TextEditingController _teammatesSearchController =
@@ -222,6 +223,12 @@ class _NewProjectFormState extends State<NewProjectForm> {
       // debugPrint("Could not fetch users: $e");
     }
     // });
+  }
+
+  @override
+  void initState() {
+    _projectProvider = context.read<ProjectProvider>();
+    super.initState();
   }
 
   @override
@@ -519,13 +526,17 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             ),
                             const SizedBox(height: 15),
                             CarbonSearchBox(
-                              fetchFunction: _fetchUsers,
-                              initialList: teammates,
-                              labelText: "Search for users...",
-                              parameter: "username",
-                              searchController: _teammatesSearchController,
-                              optionsMenuWidth: 30.w(context),
-                            ),
+                                textfieldNode: _teammatesTextFieldFocusNode,
+                                fetchFunction: _fetchUsers,
+                                initialList: teammates,
+                                labelText: "Search for users...",
+                                parameter: "username",
+                                searchController: _teammatesSearchController,
+                                optionsMenuWidth: 30.w(context),
+                                saveUserList: (teammates) {
+                                  _projectProvider.saveTeammates(teammates);
+                                  print(_projectProvider.teammates);
+                                }),
                             const SizedBox(height: 20),
                           ],
                         ),

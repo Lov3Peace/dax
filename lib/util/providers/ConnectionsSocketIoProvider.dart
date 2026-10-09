@@ -1,8 +1,9 @@
+import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
 
 class Connection {
-  final int requestId;
+  final String requestId;
   final String senderUsername;
   final String receiverUsername;
   final int status;
@@ -30,12 +31,13 @@ class Connection {
 class ConnectionsProvider extends ChangeNotifier {
   List<Connection> pendingRequests = [];
   List<Connection> connections = [];
+  List<String> connectionRequestList = [];
 
   // Enable Connection Socket Listeners
   void enableConnections(String username) {
     logger.i("Connection Socket Enabled");
     logger.i("Username: $username");
-    // logger.i("Socket ID: ${SocketIoClient.socket.id}");
+    logger.i("Socket ID: ${SocketIoClient.socket.id}");
 
     // Join User Room
     SocketIoClient.socket.emit(
@@ -49,13 +51,13 @@ class ConnectionsProvider extends ChangeNotifier {
 
     // Existing Connection Requests
     SocketIoClient.socket.on(
-      "connectionRequestsResponse",
+      "currentConnectionRequests",
       (data) {
-        pendingRequests = (data as List)
+        logger.i("Event: currentConnectionRequests");
+        print(data);
+        pendingRequests = (data[0] as List)
             .map(
-              (request) => Connection.fromJson(
-                Map<String, dynamic>.from(request),
-              ),
+              (request) => Connection.fromJson(Map.from(request)),
             )
             .toList();
 
@@ -65,12 +67,13 @@ class ConnectionsProvider extends ChangeNotifier {
 
     // Existing Accepted Connections
     SocketIoClient.socket.on(
-      "connectionsResponse",
+      "connections",
       (data) {
+        logger.i("Event: connections");
         connections = (data as List)
             .map(
               (connection) => Connection.fromJson(
-                Map<String, dynamic>.from(connection),
+                (Map.from(connection)),
               ),
             )
             .toList();
@@ -83,14 +86,15 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRequestReceived",
       (data) {
-        final request = Connection.fromJson(
-          Map<String, dynamic>.from(data),
-        );
-
-        pendingRequests = [
-          request,
-          ...pendingRequests,
-        ];
+        logger.i("Event: connectionRequestReceived");
+        // final request = Connection.fromJson(
+        //   Map<String, dynamic>.from(data),
+        // );
+        //
+        // pendingRequests = [
+        //   request,
+        //   ...pendingRequests,
+        // ];
 
         notifyListeners();
       },
@@ -100,18 +104,19 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRequestAccepted",
       (data) {
-        final connection = Connection.fromJson(
-          Map<String, dynamic>.from(data),
-        );
-
-        pendingRequests.removeWhere(
-          (request) => request.requestId == connection.requestId,
-        );
-
-        connections = [
-          connection,
-          ...connections,
-        ];
+        logger.i("Event: connectionRequestAccepted");
+        // final connection = Connection.fromJson(
+        //   Map<String, dynamic>.from(data),
+        // );
+        //
+        // pendingRequests.removeWhere(
+        //   (request) => request.requestId == connection.requestId,
+        // );
+        //
+        // connections = [
+        //   connection,
+        //   ...connections,
+        // ];
 
         notifyListeners();
       },
@@ -121,13 +126,14 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRequestRejected",
       (data) {
-        final connection = Connection.fromJson(
-          Map<String, dynamic>.from(data),
-        );
-
-        pendingRequests.removeWhere(
-          (request) => request.requestId == connection.requestId,
-        );
+        logger.i("Event: connectionRequestRejected");
+        // final connection = Connection.fromJson(
+        //   Map<String, dynamic>.from(data),
+        // );
+        //
+        // pendingRequests.removeWhere(
+        //   (request) => request.requestId == connection.requestId,
+        // );
 
         notifyListeners();
       },
@@ -137,9 +143,10 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRemoved",
       (data) {
-        connections.removeWhere(
-          (connection) => connection.requestId == data["connectionId"],
-        );
+        logger.i("Event: connectionRemoved");
+        // connections.removeWhere(
+        //   (connection) => connection.requestId == data["connectionId"],
+        // );
 
         notifyListeners();
       },
@@ -153,5 +160,11 @@ class ConnectionsProvider extends ChangeNotifier {
       "getConnections",
       username,
     );
+  }
+
+  // Save List of Users from Add Connection Search Box
+  saveUserList(connectionRequestList) {
+    this.connectionRequestList = connectionRequestList;
+    notifyListeners();
   }
 }

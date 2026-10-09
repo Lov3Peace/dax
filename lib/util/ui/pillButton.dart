@@ -45,26 +45,24 @@ class PillButton extends StatelessWidget {
             border: Border.all(color: borderColor),
             gradient: LinearGradient(colors: [color1, color2]),
           ),
-          child: Center(
-            child: Stack(
-              children: [
-                Visibility(
-                  visible: !isLoading,
-                  child: child,
-                ),
-                Visibility(
-                  visible: isLoading,
-                  child: SizedBox(
-                    height: 1.w(context),
-                    width: 1.w(context),
-                    child: CircularProgressIndicator(
-                      color: white,
-                      strokeWidth: 2,
-                    ),
+          child: Stack(
+            children: [
+              Visibility(
+                visible: !isLoading,
+                child: child,
+              ),
+              Visibility(
+                visible: isLoading,
+                child: SizedBox(
+                  height: 1.w(context),
+                  width: 1.w(context),
+                  child: CircularProgressIndicator(
+                    color: white,
+                    strokeWidth: 2,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ));
   }

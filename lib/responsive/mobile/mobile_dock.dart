@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/responsive/mobile/mob_constants.dart';
-
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../util/home_button.dart';
-import '../../util/logout.dart';
 import 'mobile_dock_buttons/mob_friends_dock_button.dart';
 import 'mobile_dock_buttons/mob_help_dock_button.dart';
 import 'mobile_dock_buttons/mob_info_dock_button.dart';
@@ -138,7 +136,7 @@ class _MobDockState extends State<MobDock> with AnimationMixin {
                   MobInfoWindowButton(),
 
                   //Logout
-                  Logout(),
+                  // Logout(),
                 ],
               ),
             ],

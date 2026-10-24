@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/CarbonCircleAvatar.dart';
@@ -334,7 +335,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
       }),
       onSelected: (selectedItem) {
         if (selectedOptions.length > 3) {
-          showErrorMessage("Maximum users reached.", context);
+          showPopupMessage("Maximum users reached.", context);
           return;
         }
         String optionHilighted = optionsList[highlightIndex];

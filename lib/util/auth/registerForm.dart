@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/userAuthProvider.dart';
@@ -221,7 +222,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   // check mount after await
                   if (!context.mounted) return;
                   if (!res.success) {
-                    showErrorMessage(res.error, context);
+                    showPopupMessage(res.error, context);
                   } else {
                     userProvider.saveUsername(res.body["username"]);
                     userProvider.saveUserData(res.body);
@@ -327,7 +328,7 @@ class _SignUpFormState extends State<SignUpForm> {
                         _rememberMe);
                     if (!context.mounted) return;
                     if (!res.success) {
-                      showErrorMessage(res.error, context);
+                      showPopupMessage(res.error, context);
                     } else {
                       userProvider.saveUsername(res.body["username"]);
                       userProvider.saveUserData(res.body);
@@ -402,35 +403,4 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
-}
-
-void showErrorMessage(String message, context) {
-  showDialog(
-      context: (context),
-      builder: (context) {
-        return Center(
-          child: Stack(children: [
-            BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-              blendMode: BlendMode.darken,
-              child: SizedBox(),
-            ),
-            AlertDialog(
-              backgroundColor: tran,
-              content: Container(
-                padding: EdgeInsetsGeometry.all(1.w(context)),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(1.5.w(context)),
-                    color: deckColor,
-                    border: Border.all(color: deckBorderColor)),
-                child: Text(
-                  message,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 3.sp(context), color: white),
-                ),
-              ),
-            )
-          ]),
-        );
-      });
 }

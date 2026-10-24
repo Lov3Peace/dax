@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
-import 'package:flutter_application_1/util/ErrorMessage.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/auth/launch_page/LaunchPagePasswordField.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
@@ -246,7 +246,7 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                     showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return const ErrorMessage(
+                                          return const PopupDialog(
                                               message:
                                                   "Username Cannot Be Empty");
                                         });
@@ -280,7 +280,7 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                             showDialog(
                                                 context: context,
                                                 builder: (context) {
-                                                  return const ErrorMessage(
+                                                  return const PopupDialog(
                                                       message:
                                                           "Username Cannot Be Empty");
                                                 });

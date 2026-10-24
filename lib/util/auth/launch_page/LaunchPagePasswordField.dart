@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
 import 'package:flutter_application_1/responsive/desktop/util/responsive_shorthand.dart';
-import 'package:flutter_application_1/util/ErrorMessage.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/auth/launch_page/RiveLoadingAnimation.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
@@ -49,7 +49,7 @@ class LaunchPagePasswordField extends StatelessWidget {
           showDialog(
               context: context,
               builder: (context) {
-                return ErrorMessage(message: res.error);
+                return PopupDialog(message: res.error);
               });
           passwordFocusNode.requestFocus();
         } else {
@@ -92,7 +92,7 @@ class LaunchPagePasswordField extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return ErrorMessage(message: res.error);
+                        return PopupDialog(message: res.error);
                       });
                   passwordFocusNode.requestFocus();
                 } else {

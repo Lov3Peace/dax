@@ -17,6 +17,7 @@ import 'package:flutter_application_1/main.dart';
 /// The route configuration.
 final GoRouter router = GoRouter(
   initialLocation: "/launch",
+  navigatorKey: navigatorKey,
   errorBuilder: (BuildContext context, GoRouterState state) {
     return ErrorPage();
   },

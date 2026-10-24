@@ -65,9 +65,9 @@ export const getLocation = async (req, res) => {
 // Join Room for User by username
 export const joinUserRoom = (socket) => {
   socket.on("joinUserRoom", (username) => {
-    socket.join(`user:${username}`);
+    socket.join(`user: ${username}`);
 
-    console.log(`Socket ${socket.id} joined user:${username} successfully`);
+    console.log(`Socket ${socket.id} joined user: ${username} successfully`);
 
     socket.emit("userRoomJoined");
   });
@@ -85,8 +85,8 @@ export const sendConnectionRequest = (socket) => {
       );
 
       console.log(receiverUsernames.length);
-      for (let user of receiverUsernames) {
-        console.log(`This User is: ${user}`);
+      for (let receivingUser of receiverUsernames) {
+        console.log(`Receiving User: ${receivingUser}`);
 
         await pgClient.query("BEGIN");
         const result = await pgClient.query(
@@ -97,12 +97,24 @@ export const sendConnectionRequest = (socket) => {
           ($1, $2, 0)
         RETURNING *
         `,
-          [senderUsername, user],
+          [senderUsername, receivingUser],
         );
 
-        const connection = result.rows[0];
+        let connection = result.rows[0];
+        // connection = JSON.stringify(connection);
 
-        io.to(`user:${user}`).emit("connectionRequestReceived", connection);
+        // console.log(`Send Connection Request Result: ${connection}`);
+
+        io.to(`user: ${receivingUser}`).emit(
+          "connectionRequestReceived",
+          connection,
+        );
+
+        io.to(`user: ${senderUsername}`).emit(
+          "connectionRequestSent",
+          connection,
+        );
+
         await pgClient.query("COMMIT");
       }
     } catch (error) {
@@ -210,12 +222,12 @@ export const rejectConnectionRequest = (socket) => {
         });
       }
 
-      io.to(`user:${connection.sender_username}`).emit(
+      io.to(`user: ${connection.sender_username}`).emit(
         "connectionRequestRejected",
         connection,
       );
 
-      io.to(`user:${connection.receiver_username}`).emit(
+      io.to(`user: ${connection.receiver_username}`).emit(
         "connectionRequestRejected",
         connection,
       );

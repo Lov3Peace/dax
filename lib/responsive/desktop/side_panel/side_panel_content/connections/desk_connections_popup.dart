@@ -9,6 +9,7 @@ import '../../../desk_decks.dart';
 import '../desk_dock_button_templates/messages_template.dart';
 import 'actions_buttons.dart';
 import 'desk_connection_tactile.dart';
+import 'package:flutter_application_1/main.dart';
 
 class ConnectionsPopUp extends StatefulWidget {
   const ConnectionsPopUp({super.key});
@@ -55,13 +56,9 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
   @override
   Widget build(BuildContext context) {
     // User Provider
-    currentUsername = context.read<UserProvider>().username;
+    currentUsername = context.watch<UserProvider>().username;
     // Connection Provider
-    _connectionsProvider = context.read<ConnectionsProvider>();
-    // Pending Requests
-    List pendingRequests = _connectionsProvider.pendingRequests;
-    // Accepted Connections
-    List connections = _connectionsProvider.connections;
+    _connectionsProvider = context.watch<ConnectionsProvider>();
 
     // Each page represents a connection view
     // such as All Connections or Requests
@@ -75,7 +72,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
           'Last Seen',
           'Actions',
         ],
-        rows: connections.map((connection) {
+        rows: _connectionsProvider.connections.map((connection) {
           // Determine the Other User
           final username = connection.senderUsername == currentUsername
               ? connection.receiverUsername
@@ -126,7 +123,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
           'Time',
           'Actions',
         ],
-        rows: pendingRequests.map((request) {
+        rows: _connectionsProvider.pendingRequests.map((request) {
           return [
             Text(
               request.senderUsername,
@@ -223,49 +220,21 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                 0,
                 max(10, 1.w(context)),
               ),
-              child: TextFormField(
+              child: TextField(
+                cursorColor: red,
+                style: TextStyle(fontSize: 3.sp(context)),
                 controller: searchController,
                 decoration: InputDecoration(
-                  // filled: true,
-                  fillColor: const Color.fromARGB(
-                    70,
-                    32,
-                    32,
-                    40,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        50.w(context),
-                      ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(1.5.w(context)),
+                      borderSide: BorderSide(color: deckBorderColor, width: 1),
                     ),
-                    borderSide: BorderSide(
-                      color: deckBorderColor,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(1.w(context)),
+                      borderSide: const BorderSide(color: white, width: 1),
                     ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(
-                        3.w(context),
-                      ),
-                    ),
-                    borderSide: BorderSide(
-                      color: deckBorderColor,
-                    ),
-                  ),
-                  hintText: 'Search...',
-                  hintStyle: TextStyle(fontSize: max(12, 2.5.sp(context))),
-                  contentPadding: EdgeInsets.all(max(10, 0.75.w(context))),
-                  suffixIcon: Icon(
-                    Icons.search,
-                    size: 2.5.sp(context),
-                  ),
-                ),
-
-                // Live Search Logic
-                onChanged: (value) {
-                  // Filtering logic will go here
-                },
+                    labelText: "Search Connections...",
+                    labelStyle: TextStyle(color: grey)),
               ),
             ),
 

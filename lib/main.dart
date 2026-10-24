@@ -43,6 +43,9 @@ Future main() async {
 const hostname =
     String.fromEnvironment("HOSTNAME", defaultValue: "http://localhost:7777");
 
+// GlobalKey for Accessing Context Across Entire App
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -53,6 +56,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    super.initState();
     // Initialize SocketIoProvider and Connect to SocketIo Server
     final feedSocketIoProvider = context.read<FeedSocketIoProvider>();
     SocketIoClient.socket.connect();
@@ -60,7 +64,6 @@ class _MyAppState extends State<MyApp> {
     SocketIoClient.socket.onReconnect((_) {
       feedSocketIoProvider.joinProjectRoom(1);
     });
-    super.initState();
   }
 
   @override

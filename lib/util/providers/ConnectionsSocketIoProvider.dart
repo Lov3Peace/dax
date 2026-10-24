@@ -1,6 +1,7 @@
-import 'package:flutter_application_1/util/auth/registerForm.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
+import 'package:flutter_application_1/util/NotificationPopup.dart';
 
 class Connection {
   final String requestId;
@@ -65,37 +66,68 @@ class ConnectionsProvider extends ChangeNotifier {
       },
     );
 
-    // Existing Accepted Connections
+    // Current Connections
     SocketIoClient.socket.on(
       "connections",
       (data) {
-        logger.i("Event: connections");
-        connections = (data as List)
-            .map(
-              (connection) => Connection.fromJson(
-                (Map.from(connection)),
-              ),
-            )
-            .toList();
-
+        logger.i("Event: currentConnections\n$data");
+        // connections = (data as List)
+        //     .map(
+        //       (connection) => Connection.fromJson(
+        //         (Map.from(connection)),
+        //       ),
+        //     )
+        //     .toList();
+        //
         notifyListeners();
       },
     );
 
-    // New Connection Requests
+// Connection Request Sent
+    SocketIoClient.socket.on("connectionRequestSent", (_) {
+      logger.w("Event: connectionRequestSent");
+      showPopupMessage(
+          "Connection Request Sent!", navigatorKey.currentState?.context);
+      print("Sent!");
+    });
+
+// Connection Request error
+    SocketIoClient.socket.on("connectionRequestError", (_) {
+      showPopupMessage(
+          "Unable to Complete Request!", navigatorKey.currentState?.context);
+    });
+
+    // Connection Request Received
     SocketIoClient.socket.on(
       "connectionRequestReceived",
       (data) {
         logger.i("Event: connectionRequestReceived");
-        // final request = Connection.fromJson(
-        //   Map<String, dynamic>.from(data),
-        // );
-        //
-        // pendingRequests = [
-        //   request,
-        //   ...pendingRequests,
-        // ];
+        final reqObjType = data[0].runtimeType;
+        logger.i("Data[0] Type: $reqObjType");
+        final request = Connection.fromJson(
+          Map<String, dynamic>.from(data[0]),
+        );
+        final senderUsername = request.senderUsername;
+        logger.i("Sender Username: $senderUsername");
 
+        final reqType = request.runtimeType;
+        logger.i("Request Type: $reqType");
+        // dev.debugger();
+        pendingRequests = [
+          request,
+          ...pendingRequests,
+        ];
+        final context = navigatorKey.currentState?.overlay?.context;
+        if (context == null) return;
+        showNotificationPopup(
+          context,
+          NotificationPopup(
+              onAccept: () => logger.i("Connection Request Accepted"),
+              onDecline: () => logger.i("Connection Request Rejected"),
+              notificationHeader: "Connection Request Received",
+              notificationText: data[0]["sender_username"],
+              icon: const Icon(Icons.person)),
+        );
         notifyListeners();
       },
     );
@@ -109,7 +141,7 @@ class ConnectionsProvider extends ChangeNotifier {
         //   Map<String, dynamic>.from(data),
         // );
         //
-        // pendingRequests.removeWhere(
+        // _pendingRequests.removeWhere(
         //   (request) => request.requestId == connection.requestId,
         // );
         //
@@ -127,13 +159,14 @@ class ConnectionsProvider extends ChangeNotifier {
       "connectionRequestRejected",
       (data) {
         logger.i("Event: connectionRequestRejected");
-        // final connection = Connection.fromJson(
-        //   Map<String, dynamic>.from(data),
-        // );
-        //
-        // pendingRequests.removeWhere(
-        //   (request) => request.requestId == connection.requestId,
-        // );
+        final connection = Connection.fromJson(
+          Map<String, dynamic>.from(data[0]),
+        );
+
+        // dev.debugger();
+        pendingRequests.removeWhere(
+          (request) => request.requestId == connection.requestId,
+        );
 
         notifyListeners();
       },

@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/desk_profile_popup.dart';
 import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
@@ -249,7 +250,7 @@ class _CompactLogoutState extends State<CompactLogout> {
                           onTap: () async {
                             bool res = await logout();
                             if (!res && mounted) {
-                              showErrorMessage("Unable to log out!", context);
+                              showPopupMessage("Unable to log out!", context);
                             } else {
                               router.go("/launch");
                             }

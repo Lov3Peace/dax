@@ -102,6 +102,7 @@ class ConnectionsProvider extends ChangeNotifier {
       "connectionRequestReceived",
       (data) {
         logger.i("Event: connectionRequestReceived");
+        logger.i("Data: $data");
         final reqObjType = data[0].runtimeType;
         logger.i("Data[0] Type: $reqObjType");
         final request = Connection.fromJson(
@@ -122,10 +123,40 @@ class ConnectionsProvider extends ChangeNotifier {
         showNotificationPopup(
           context,
           NotificationPopup(
-              onAccept: () => logger.i("Connection Request Accepted"),
-              onDecline: () => logger.i("Connection Request Rejected"),
+              onAccept: () {
+                if (!SocketIoClient.socket.connected) {
+                  logger.e("Accept failed: socket not connected");
+                  return;
+                }
+                SocketIoClient.socket.emit(
+                  "acceptConnection",
+                  {
+                    "requestId": request.requestId,
+                    "username": request.receiverUsername,
+                  },
+                );
+                closeNoticiationPopup();
+                logger.i("Connection Request Accepted");
+              },
+              onReject: () {
+                if (!SocketIoClient.socket.connected) {
+                  logger.e("Reject failed: socket not connected");
+                  return;
+                }
+                SocketIoClient.socket.emit(
+                  "rejectConnection",
+                  {
+                    "requestId": request.requestId,
+                    "username": request.receiverUsername,
+                  },
+                );
+                closeNoticiationPopup();
+                logger.i("Connection Request Rejected");
+              },
               notificationHeader: "Connection Request Received",
               notificationText: data[0]["sender_username"],
+              width: 15.w(context),
+              height: 8.w(context),
               icon: const Icon(Icons.person)),
         );
         notifyListeners();

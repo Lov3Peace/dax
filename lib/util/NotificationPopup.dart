@@ -11,84 +11,116 @@ class NotificationPopup extends StatelessWidget {
       {super.key,
       required this.notificationHeader,
       required this.notificationText,
+      required this.width,
+      required this.height,
       required this.icon,
       this.onAccept,
-      this.onDecline});
+      this.onReject});
 
   final String notificationText;
   final String notificationHeader;
+  final double width;
+  final double height;
   final Icon icon;
   final VoidCallback? onAccept;
-  final VoidCallback? onDecline;
+  final VoidCallback? onReject;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(0.5.w(context)),
           child: BlurryContainer(
-            width: 15.w(context),
-            height: 5.w(context),
+            width: width,
+            height: height,
             padding: EdgeInsets.all(1.w(context)),
+            borderRadius: 1.w(context),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              // mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  notificationHeader,
-                  style: TextStyle(fontSize: max(12, 2.5.sp(context))),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                //
+                // Header
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    notificationHeader,
+                    style: TextStyle(
+                        fontSize: max(12, 2.5.sp(context)),
+                        fontWeight: FontWeight.bold,
+                        height: 1),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                Row(
-                  children: [
-                    icon,
-                    Expanded(
-                      child: Text(
-                        notificationText,
-                        style: TextStyle(
-                            fontSize: max(12, 2.5.sp(context)),
-                            overflow: TextOverflow.ellipsis),
+                //
+                // Notification Text
+                Expanded(
+                  flex: 3,
+                  child: Row(
+                    children: [
+                      icon,
+                      SizedBox(width: 0.5.w(context)),
+                      Expanded(
+                        child: Text(
+                          notificationText,
+                          style: TextStyle(
+                              fontSize: max(12, 3.sp(context)),
+                              overflow: TextOverflow.ellipsis),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                if (onAccept != null || onDecline != null)
-                  Padding(
-                    padding: EdgeInsets.only(top: 1.w(context)),
+                //
+                // Accept + Reject
+                if (onAccept != null || onReject != null)
+                  Expanded(
+                    flex: 2,
                     child: Row(
+                      spacing: 1.w(context),
                       children: [
-                        if (onAccept != null)
-                          Expanded(
-                            child: TactileButton(
-                              onTap: onAccept,
-                              child: Container(
-                                padding: EdgeInsets.all(0.5.w(context)),
-                                decoration: const BoxDecoration(
-                                  color: Colors.green,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(4)),
-                                ),
-                                child: Center(child: Text('Accept')),
+                        Expanded(
+                          child: TactileButton(
+                            onTap: onAccept,
+                            child: Container(
+                              padding: EdgeInsets.all(0.25.w(context)),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: [purp, pink]),
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(50.w(context))),
                               ),
+                              child: Center(
+                                  child: Text(
+                                'Accept',
+                                style: TextStyle(
+                                    fontSize: max(12, 2.sp(context)),
+                                    fontWeight: FontWeight.bold),
+                              )),
                             ),
                           ),
-                        if (onDecline != null)
-                          Expanded(
-                            child: TactileButton(
-                              onTap: onDecline,
-                              child: Container(
-                                padding: EdgeInsets.all(0.5.w(context)),
-                                decoration: const BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(4)),
-                                ),
-                                child: Center(child: Text('Decline')),
+                        ),
+                        Expanded(
+                          child: TactileButton(
+                            onTap: onReject,
+                            child: Container(
+                              padding: EdgeInsets.all(0.25.w(context)),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(colors: [orange, red]),
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(50.w(context))),
                               ),
+                              child: Center(
+                                  child: Text(
+                                'Reject',
+                                style: TextStyle(
+                                    fontSize: max(12, 2.sp(context)),
+                                    fontWeight: FontWeight.bold),
+                              )),
                             ),
                           ),
+                        ),
                       ],
                     ),
                   ),
@@ -96,19 +128,21 @@ class NotificationPopup extends StatelessWidget {
             ),
           ),
         ),
+        //
+        // Close Button
         Positioned(
           right: 0,
           child: TactileButton(
             onTap: () => closeNoticiationPopup(),
             child: Container(
                 padding: EdgeInsets.all(0.5.w(context)),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: orangeGlow,
+                  color: darkGrey,
                 ),
                 child: Icon(
                   Icons.close,
-                  size: 1.w(context),
+                  size: 0.75.w(context),
                 )),
           ),
         ),

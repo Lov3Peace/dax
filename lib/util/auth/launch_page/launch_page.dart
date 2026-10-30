@@ -12,10 +12,10 @@ import 'package:ionicons/ionicons.dart';
 import 'package:rive/rive.dart';
 import 'package:rive/rive.dart' as rive;
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
-import '../providers/userAuthProvider.dart';
-import '../providers/userProvider.dart';
-import '../ui/tactile_button.dart';
-import 'forget_password_form.dart';
+import '../../providers/userAuthProvider.dart';
+import '../../providers/userProvider.dart';
+import '../../ui/tactile_button.dart';
+import '../forget_password_form.dart';
 import 'package:provider/provider.dart';
 
 class LaunchPage extends StatefulWidget {
@@ -50,6 +50,9 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
       if (res.success == true && res.body["rememberMe"] == "true") {
         userProvider.saveUsername(res.body["username"]);
         userProvider.saveUserData(res.body);
+        userProvider.setOnlineStatus(true);
+        var status = userProvider.isOnline;
+        print("Online Status: $status");
 
         showDialog(
             context: context,
@@ -156,9 +159,9 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
               // Welcome
               Padding(
                 padding: EdgeInsets.only(right: 40.w(context), bottom: 300),
-                child: const Text(
+                child: Text(
                   "Welcome",
-                  style: TextStyle(fontSize: 120),
+                  style: TextStyle(fontSize: max(120, 30.sp(context))),
                 ),
               )
                   .animate()

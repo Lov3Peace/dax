@@ -42,6 +42,13 @@ class _LogoutState extends State<Logout> {
   double logoutButtonOpacity = 0;
   double cancelButtonOpacity = 0;
 
+  late UserProvider _userProvider;
+  @override
+  void initState() {
+    super.initState();
+    _userProvider = context.read<UserProvider>();
+  }
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -138,14 +145,15 @@ class _LogoutState extends State<Logout> {
                             );
                           },
                           scale: 1.05,
-                          child: const Stack(
+                          child: Stack(
                             children: [
                               CarbonCircleAvatar(),
                               Positioned(
                                 bottom: 0,
                                 right: 0,
                                 child: CircleAvatar(
-                                  backgroundColor: green,
+                                  backgroundColor:
+                                      _userProvider.isOnline ? green : red,
                                   radius: 5,
                                 ),
                               )
@@ -217,6 +225,7 @@ class _LogoutState extends State<Logout> {
                             if (!res && context.mounted) {
                               showPopupMessage("Unable to log out!", context);
                             } else {
+                              _userProvider.setOnlineStatus(false);
                               router.go("/launch");
                             }
                           },

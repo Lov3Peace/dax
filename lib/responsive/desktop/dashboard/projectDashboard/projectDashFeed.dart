@@ -22,15 +22,13 @@ class ProjectDashFeed extends StatefulWidget {
   State<ProjectDashFeed> createState() => _ProjectDashFeedState();
 }
 
-late UserProvider userProvider;
-String username = "";
+late UserProvider _userProvider;
 late FeedSocketIoProvider feedSocketIoProvider;
 
 class _ProjectDashFeedState extends State<ProjectDashFeed> {
   @override
   void initState() {
-    userProvider = context.read<UserProvider>();
-    username = userProvider.username;
+    _userProvider = context.read<UserProvider>();
     super.initState();
   }
 
@@ -227,11 +225,11 @@ class _NewProjectFeedPostTextfieldState
   }
 
   void post() {
-    final feedSocketIoProvider = context.read<FeedSocketIoProvider>();
+    final _feedSocketIoProvider = context.read<FeedSocketIoProvider>();
     logger.i("Emitting createProjectFeedPost...");
     SocketIoClient.socket.timeout(5000).emitWithAck("createProjectFeedPost", {
       "pid": 1,
-      "username": username,
+      "username": _userProvider.username,
       "content": {"text": _projectFeedPostController.text},
       "event_type": 1
     }, ack: (err) {
@@ -267,7 +265,7 @@ class _NewProjectFeedPostTextfieldState
       setState(() {
         isLoading = false;
       });
-      feedSocketIoProvider.toggleNewPostTextBox();
+      _feedSocketIoProvider.toggleNewPostTextBox();
     });
     // Hide Textfield After
   }

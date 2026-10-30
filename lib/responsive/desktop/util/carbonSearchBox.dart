@@ -54,6 +54,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   final textFieldKey = GlobalKey();
   List<String> initialList = [];
   List<String> optionsList = [];
+  List statusList = [];
   var users;
   bool searching = true;
   Color formFieldOutlineColor = const Color.fromARGB(151, 255, 255, 255);
@@ -118,6 +119,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
             searching = false;
             highlightIndex = 0;
             optionsList.clear();
+            statusList.clear();
           });
           for (var result in res) {
             if (!optionsList.contains(result[widget.parameter]) &&
@@ -125,9 +127,11 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                 result[widget.parameter] != _userProvider.username) {
               setState(() {
                 optionsList.add(result[widget.parameter]);
+                statusList.add(result["online"]);
               });
             }
           }
+          print("Status List: $statusList");
 
           return optionsList;
         }
@@ -296,9 +300,10 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                     style: TextStyle(fontSize: max(12, 2.5.sp(context))),
                   ),
                   const Spacer(),
-                  Text("Online",
+                  Text(statusList[index] == true ? "Online" : "Offline",
                       style: TextStyle(
-                          color: green, fontSize: max(12, 2.5.sp(context)))),
+                          color: statusList[index] == true ? green : red,
+                          fontSize: max(12, 2.5.sp(context)))),
                 ],
               ),
             ),

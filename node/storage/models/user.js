@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   roles: { type: Array, required: true, default: [] },
   skills: { type: Array },
   projects: { type: Array, required: true, default: [] },
+  online: { type: Boolean, required: true },
   // profile: {type: String, required: true, default: ''}
 });
 

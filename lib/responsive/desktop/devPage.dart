@@ -1,17 +1,11 @@
-import 'dart:convert';
-import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectsList.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/responsive/desktop/desk_dock_bubbles.dart';
-import 'package:flutter_application_1/responsive/desktop/util/carbonSearchBox.dart';
-import 'package:flutter_application_1/responsive/desktop/util/large_stagger_load.dart';
-import 'package:flutter_application_1/responsive/desktop/util/test_web_ui_template.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
 import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
 import 'package:flutter_application_1/util/ui/pillButton.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
-import 'package:get/get_utils/src/extensions/num_extensions.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_animations/animation_mixin/animation_mixin.dart';
 import '../../../../util/imports.dart';
 import 'package:http/browser_client.dart' as httpClient;
 
@@ -22,35 +16,19 @@ class DevPage extends StatefulWidget {
   State<DevPage> createState() => _DevPageState();
 }
 
-class _DevPageState extends State<DevPage> {
+class _DevPageState extends State<DevPage> with AnimationMixin {
   late ConnectionsProvider _connectionsProvider;
   bool showUserSearch = false;
-  List users = [];
+  List _users = [];
   List<String> _connectionsRequestList = [];
-  final TextEditingController _teammatesSearchController =
-      TextEditingController();
-  final FocusNode _userSearchFocusNode = FocusNode();
+  final TextEditingController _searchController = TextEditingController();
   final client = httpClient.BrowserClient()..withCredentials = true;
-  Future _fetchUsers(searchString) async {
-    // debugPrint("Users before setState fetch: $users");
-    try {
-      final getUsersEndpoint =
-          Uri.parse("$hostname/api/getUsers?searchString=$searchString");
-      final res = await client.get(
-        getUsersEndpoint,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      );
-      final body = jsonDecode(res.body);
-      users = body;
-      // debugPrint("Users after setState fetch: $users");
-      return users;
-    } catch (e) {
-      // debugPrint("Could not fetch users: $e");
-    }
-    // });
-  }
+  late AnimationController _animationController =
+      AnimationController(vsync: this);
+
+  List<String> _userList = ["l3x", "davonport", "goat", "port"];
+  List<String> _selectedOptions = [];
+  FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -59,113 +37,111 @@ class _DevPageState extends State<DevPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return WebUiTemplate(
-      title: "Dev",
-      button1: CommunitiesButton(),
-      button2: SocialsButton(),
-      button3: NewsButton(),
-      child: Center(
-        child: Row(
-          children: [
-            Expanded(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                height: 7.sp(context),
-              ),
-            ),
-            Visibility(
-              visible: showUserSearch,
-              child: TactileButton(
-                onTap: () {
-                  setState(() {
-                    showUserSearch = false;
-                  });
-                },
-                child: Container(
-                    padding: EdgeInsets.all(0.5.w(context)),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: deckBorderColor)),
-                    child: Icon(
-                      Icons.close,
-                      size: 1.5.w(context),
-                    )),
-              ),
-            ),
-            SizedBox(width: max(10, 1.w(context))),
-            TactileButton(
-              scale: showUserSearch ? 1.0 : 1.01,
-              onTap: () {
-                setState(() {
-                  showUserSearch = true;
-                });
-              },
-              child: AnimatedContainer(
-                width: showUserSearch ? 25.w(context) : 12.w(context),
-                height: 3.w(context),
-                duration: 300.milliseconds,
-                // padding: EdgeInsets.symmetric(
-                //     horizontal: 1.w(context), vertical: 0.5.w(context)),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50.w(context)),
-                  color: showUserSearch ? tran : deckBackgroundColor,
-                ),
-                child: Center(
-                  child: Stack(
-                    children: [
-                      Visibility(
-                        visible: !showUserSearch,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          spacing: max(5, 0.5.w(context)),
-                          children: [
-                            Icon(
-                              Ionicons.person_add,
-                              size: max(10, 1.25.w(context)),
-                            ),
-                            Text("Add Connection"),
-                          ],
+        title: "Test",
+        button1: SizedBox(),
+        button2: SizedBox(),
+        button3: SizedBox(),
+        child: Center(
+          child: SizedBox(
+            width: 30.w(context),
+            height: 20.h(context),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Autocomplete<String>(
+                  fieldViewBuilder: (BuildContext context,
+                      TextEditingController controller,
+                      FocusNode focusNode,
+                      void Function() onSubmitted) {
+                    return TextField(
+                      focusNode: focusNode,
+                      cursorColor: red,
+                      style: TextStyle(fontSize: 3.sp(context)),
+                      controller: controller,
+                      decoration: InputDecoration(
+                        prefixIcon: Container(
+                          height: 50,
+                          child: ListView.builder(
+                              itemCount: _selectedOptions.length,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return PillButton(
+                                    child: Text(_selectedOptions[index]),
+                                    onTap: () {
+                                      setState(() {
+                                        _searchController.clear();
+                                        _selectedOptions.removeAt(index);
+                                      });
+                                    },
+                                    borderRadius: 50.w(context),
+                                    borderColor: deckBorderColor);
+                              }),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(1.5.w(context)),
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(151, 255, 255, 255),
+                              width: 1),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(1.w(context)),
+                          borderSide: const BorderSide(color: white, width: 1),
                         ),
                       ),
-                      Visibility(
-                        visible: showUserSearch,
-                        child: CarbonSearchBox(
-                          textfieldNode: _userSearchFocusNode,
-                          fetchFunction: _fetchUsers,
-                          initialList: _connectionsRequestList,
-                          labelText: "Search for users...",
-                          parameter: "username",
-                          searchController: _teammatesSearchController,
-                          optionsMenuWidth: 30.w(context),
-                          saveUserList: _connectionsProvider
-                              .saveUserList(_connectionsRequestList),
-                        ),
-                      )
-                    ],
-                  ),
+                      onSubmitted: (selection) {
+                        setState(() {
+                          _searchController.clear();
+                          _selectedOptions.add(selection);
+                        });
+                      },
+                    );
+                  },
+                  // displayStringForOption: (user) => "HELLO",
+                  optionsViewBuilder: (
+                    BuildContext context,
+                    AutocompleteOnSelected<String> onSelected,
+                    Iterable<String> options,
+                  ) {
+                    return ListView.builder(
+                        itemCount: options.length,
+                        itemBuilder: (context, index) {
+                          return TactileButton(
+                            onTap: () {
+                              _searchController.clear();
+                              onSelected(options.elementAt(index));
+                            },
+                            child: Container(
+                                padding:
+                                    EdgeInsetsDirectional.all(0.5.w(context)),
+                                color: deckBackgroundColor,
+                                child: Text(options.elementAt(index))),
+                          );
+                        });
+                  },
+                  optionsBuilder: (TextEditingValue textEditingValue) {
+                    if (textEditingValue.text == '') {
+                      return [];
+                    }
+                    return _userList.where((user) =>
+                        user.contains(textEditingValue.text.toLowerCase()));
+                  },
+                  onSelected: (selection) {
+                    setState(() {
+                      _searchController.clear();
+                      _selectedOptions.add(selection);
+                    });
+                  },
                 ),
-              ),
+              ],
             ),
-            SizedBox(
-              width: max(10, 1.w(context)),
-            ),
-            Visibility(
-              visible: showUserSearch,
-              child: PillButton(
-                onTap: () {},
-                borderRadius: 50.w(context),
-                borderColor: tran,
-                height: 3.w(context),
-                width: 7.w(context),
-                color1: pink,
-                color2: red,
-                child: Text("Connect"),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

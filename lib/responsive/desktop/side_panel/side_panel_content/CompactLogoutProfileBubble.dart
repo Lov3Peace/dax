@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_application_1/responsive/desktop/dashboard/projectDashboard/projectDashFeed.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/desk_profile_popup.dart';
 import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
@@ -21,15 +22,17 @@ import 'package:http/browser_client.dart' as httpClient;
 import '../../../../util/providers/userAuthProvider.dart';
 import '../../../../util/providers/userProvider.dart';
 
-class CompactLogout extends StatefulWidget {
-  const CompactLogout({
+class CompactLogoutProfileBubble extends StatefulWidget {
+  const CompactLogoutProfileBubble({
     Key? key,
   }) : super(key: key);
   @override
-  State<CompactLogout> createState() => _CompactLogoutState();
+  State<CompactLogoutProfileBubble> createState() =>
+      _CompactLogoutProfileBubbleState();
 }
 
-class _CompactLogoutState extends State<CompactLogout> {
+class _CompactLogoutProfileBubbleState
+    extends State<CompactLogoutProfileBubble> {
   bool logoutIconClicked = false;
   // logoutIcon and avatar
   double logoutIconY = 0;
@@ -42,6 +45,7 @@ class _CompactLogoutState extends State<CompactLogout> {
   double logoutButtonOpacity = 0;
   double cancelButtonOpacity = 0;
 
+  late UserProvider _userProvider;
 //
 // Logout Function
   final logoutEndpoint = Uri.parse("$hostname/api/logout");
@@ -50,8 +54,7 @@ class _CompactLogoutState extends State<CompactLogout> {
       // Hitting the Login endpoint
       print('Fetching...');
       final client = httpClient.BrowserClient()..withCredentials = true;
-      final userProvider = context.read<UserProvider>();
-      final username = userProvider.username;
+      final username = _userProvider.username;
       print("Got Username: $username");
       var res = await client
           .post(
@@ -78,6 +81,13 @@ class _CompactLogoutState extends State<CompactLogout> {
       // showErrorMessage('Could not log out - try again later. $e', context);
       print('Could not log out - try again later. $e');
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _userProvider = context.read<UserProvider>();
   }
 
   @override
@@ -252,6 +262,7 @@ class _CompactLogoutState extends State<CompactLogout> {
                             if (!res && mounted) {
                               showPopupMessage("Unable to log out!", context);
                             } else {
+                              _userProvider.setOnlineStatus(false);
                               router.go("/launch");
                             }
                           },

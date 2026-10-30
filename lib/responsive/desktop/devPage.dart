@@ -55,34 +55,62 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Autocomplete<String>(
+                RawAutocomplete<String>(
+                  focusNode: _focusNode,
+                  textEditingController: _searchController,
                   fieldViewBuilder: (BuildContext context,
                       TextEditingController controller,
                       FocusNode focusNode,
                       void Function() onSubmitted) {
                     return TextField(
-                      focusNode: focusNode,
+                      focusNode: _focusNode,
                       cursorColor: red,
                       style: TextStyle(fontSize: 3.sp(context)),
-                      controller: controller,
+                      controller: _searchController,
                       decoration: InputDecoration(
-                        prefixIcon: Container(
-                          height: 50,
-                          child: ListView.builder(
-                              itemCount: _selectedOptions.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return PillButton(
-                                    child: Text(_selectedOptions[index]),
-                                    onTap: () {
-                                      setState(() {
-                                        _searchController.clear();
-                                        _selectedOptions.removeAt(index);
-                                      });
-                                    },
-                                    borderRadius: 50.w(context),
-                                    borderColor: deckBorderColor);
-                              }),
+                        contentPadding:
+                            EdgeInsetsDirectional.all(max(20, 1.w(context))),
+                        prefixIcon: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (_selectedOptions.isEmpty)
+                              Padding(
+                                padding:
+                                    EdgeInsets.all(max(10, 0.5.w(context))),
+                                child: const Icon(Icons.search),
+                              ),
+                            if (_selectedOptions.isNotEmpty)
+                              SizedBox(
+                                height: max(35, 1.w(context)),
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  itemCount: _selectedOptions.length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 0.5.w(context)),
+                                      child: PillButton(
+                                        padding:
+                                            EdgeInsetsDirectional.symmetric(
+                                                horizontal: 1.w(context),
+                                                vertical: 0.25.w(context)),
+                                        onTap: () {
+                                          setState(() {
+                                            controller.clear();
+                                            _selectedOptions.removeAt(index);
+                                            focusNode.requestFocus();
+                                          });
+                                        },
+                                        borderRadius: 50.w(context),
+                                        borderColor: deckBorderColor,
+                                        child: Text(_selectedOptions[index]),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                          ],
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(1.5.w(context)),
@@ -109,28 +137,47 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                     AutocompleteOnSelected<String> onSelected,
                     Iterable<String> options,
                   ) {
-                    return ListView.builder(
-                        itemCount: options.length,
-                        itemBuilder: (context, index) {
-                          return TactileButton(
-                            onTap: () {
-                              _searchController.clear();
-                              onSelected(options.elementAt(index));
-                            },
-                            child: Container(
-                                padding:
-                                    EdgeInsetsDirectional.all(0.5.w(context)),
-                                color: deckBackgroundColor,
-                                child: Text(options.elementAt(index))),
-                          );
-                        });
+                    return Padding(
+                      padding: EdgeInsets.only(top: max(5, 0.5.w(context))),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            max(10, 0.5.w(context)),
+                          ),
+                          color: deckBackgroundColor,
+                        ),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: options.length,
+                            padding: EdgeInsetsDirectional.all(
+                                max(10, 1.w(context))),
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: max(5, 0.25.w(context))),
+                                child: TactileButton(
+                                  scale: 1.01,
+                                  onTap: () {
+                                    _searchController.clear();
+                                    if (!_selectedOptions
+                                        .contains(options.elementAt(index)))
+                                      onSelected(options.elementAt(index));
+                                  },
+                                  child: Text(options.elementAt(index)),
+                                ),
+                              );
+                            }),
+                      ),
+                    );
                   },
                   optionsBuilder: (TextEditingValue textEditingValue) {
                     if (textEditingValue.text == '') {
                       return [];
                     }
+
                     return _userList.where((user) =>
-                        user.contains(textEditingValue.text.toLowerCase()));
+                        user.contains(textEditingValue.text.toLowerCase()) &&
+                        !_selectedOptions.contains(user));
                   },
                   onSelected: (selection) {
                     setState(() {

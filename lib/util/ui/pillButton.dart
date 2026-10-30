@@ -47,13 +47,9 @@ class PillButton extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              Visibility(
-                visible: !isLoading,
-                child: child,
-              ),
-              Visibility(
-                visible: isLoading,
-                child: SizedBox(
+              if (!isLoading) child,
+              if (isLoading)
+                SizedBox(
                   height: 1.w(context),
                   width: 1.w(context),
                   child: CircularProgressIndicator(
@@ -61,7 +57,6 @@ class PillButton extends StatelessWidget {
                     strokeWidth: 2,
                   ),
                 ),
-              ),
             ],
           ),
         ));

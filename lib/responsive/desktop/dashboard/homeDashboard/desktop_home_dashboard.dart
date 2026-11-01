@@ -63,6 +63,8 @@ class _DesktopDashboardState extends State<DesktopDashboard> {
 
 // Enable User Connections
     connectionProvider = context.read<ConnectionsProvider>();
+    logger.i("INIT USERNAME: ${_userProvider.username}");
+    logger.i("INIT SOCKET CONNECTED: ${SocketIoClient.socket.connected}");
     connectionProvider.enableConnections(_userProvider.username);
     super.initState();
   }

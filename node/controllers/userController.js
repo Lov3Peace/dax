@@ -73,45 +73,74 @@ export const joinUserRoom = (socket) => {
 	});
 };
 
+
 // Send Connection Request
 export const sendConnectionRequest = (socket) => {
 	socket.on("sendConnectionRequest", async (data) => {
 		try {
-
-			const dbInfo = await pgClient.query(
-				"SELECT current_user, current_database()"
-			);
-			console.log("DATABASE INFO:", dbInfo.rows);
 			const senderUsername = data.sender;
 			const receiverUsernames = data.receivers;
-			console.log(`data: ${data}`);
-			console.log(
-				`senderUsername: ${senderUsername}, receiverUsername: ${receiverUsernames}`,
-			);
 
-			console.log(receiverUsernames.length);
-			for (let user of receiverUsernames) {
-				console.log(`This User is: ${user}`);
+			for (const user of receiverUsernames) {
 
-				await pgClient.query("BEGIN");
+				// Check for an existing connection in either direction
+				const existingConnection = await pgClient.query(
+					`
+          SELECT status
+          FROM users.connection_requests
+          WHERE
+            (sender_username = $1 AND receiver_username = $2)
+            OR
+            (sender_username = $2 AND receiver_username = $1)
+          LIMIT 1
+          `,
+					[senderUsername, user],
+				);
+
+				if (existingConnection.rows.length > 0) {
+					socket.emit("connectionRequestError", {
+						message:
+							existingConnection.rows[0].status === 1
+								? `You are already connected with ${user}`
+								: `A connection request with ${user} is already pending`,
+					});
+
+					continue;
+				}
+
+				// Prevent sending a request to yourself
+				if (senderUsername === user) {
+					socket.emit("connectionRequestError", {
+						message: "You cannot send a connection request to yourself",
+					});
+
+					continue;
+				}
+
+				// Create connection request
 				const result = await pgClient.query(
 					`
-        INSERT INTO users.connection_requests
-          (sender_username, receiver_username, status)
-        VALUES
-          ($1, $2, 0)
-        RETURNING *
-        `,
+          INSERT INTO users.connection_requests
+            (sender_username, receiver_username, status)
+          VALUES
+            ($1, $2, 0)
+          RETURNING *
+          `,
 					[senderUsername, user],
 				);
 
 				const connection = result.rows[0];
 
-				io.to(`user:${user}`).emit("connectionRequestReceived", connection);
-				await pgClient.query("COMMIT");
+				// Notify recipient
+				io.to(`user:${user}`).emit(
+					"connectionRequestReceived",
+					connection,
+				);
+
+				// Confirm successful request to sender
+				socket.emit("connectionRequestSent", connection);
 			}
 		} catch (error) {
-			await pgClient.query("ROLLBACK");
 			console.error(error);
 
 			socket.emit("connectionRequestError", {
@@ -150,6 +179,7 @@ export const getConnectionRequest = (socket) => {
 // Accept Connection Request
 export const acceptConnectionRequest = (socket) => {
 	socket.on("acceptConnection", async (data) => {
+		console.log("ACCEPT CONNECTION RECEIVED:", data);
 		try {
 			const { requestId, username } = data;
 
@@ -202,6 +232,7 @@ export const rejectConnectionRequest = (socket) => {
         DELETE FROM users.connection_requests
         WHERE request_id = $1
           AND receiver_username = $2
+        AND status = 0
         RETURNING *
         `,
 				[requestId, username],

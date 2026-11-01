@@ -66,8 +66,6 @@ class ConnectionsProvider extends ChangeNotifier {
     );
 
     // Existing Accepted Connections
-    // Existing Accepted Connections
-    // Existing Accepted Connections
     SocketIoClient.socket.on(
       "connections",
       (data) {
@@ -104,7 +102,18 @@ class ConnectionsProvider extends ChangeNotifier {
         //   request,
         //   ...pendingRequests,
         // ];
+        final request = Connection.fromJson(
+          Map<String, dynamic>.from(data),
+        );
 
+        if (!pendingRequests.any(
+          (existing) => existing.requestId == request.requestId,
+        )) {
+          pendingRequests = [
+            request,
+            ...pendingRequests,
+          ];
+        }
         notifyListeners();
       },
     );
@@ -114,20 +123,10 @@ class ConnectionsProvider extends ChangeNotifier {
       "connectionRequestAccepted",
       (data) {
         logger.i("Event: connectionRequestAccepted");
-        // final connection = Connection.fromJson(
-        //   Map<String, dynamic>.from(data),
-        // );
-        //
-        // pendingRequests.removeWhere(
-        //   (request) => request.requestId == connection.requestId,
-        // );
-        //
-        // connections = [
-        //   connection,
-        //   ...connections,
-        // ];
+        logger.i("LIVE ACCEPT EVENT: $data");
+
         final connection = Connection.fromJson(
-          Map<String, dynamic>.from(data),
+          Map<String, dynamic>.from(data[0]),
         );
 
         pendingRequests.removeWhere(
@@ -137,11 +136,9 @@ class ConnectionsProvider extends ChangeNotifier {
         if (!connections.any(
           (existing) => existing.requestId == connection.requestId,
         )) {
-          connections = [
-            connection,
-            ...connections,
-          ];
+          connections.insert(0, connection);
         }
+
         notifyListeners();
       },
     );
@@ -151,13 +148,14 @@ class ConnectionsProvider extends ChangeNotifier {
       "connectionRequestRejected",
       (data) {
         logger.i("Event: connectionRequestRejected");
-        // final connection = Connection.fromJson(
-        //   Map<String, dynamic>.from(data),
-        // );
-        //
-        // pendingRequests.removeWhere(
-        //   (request) => request.requestId == connection.requestId,
-        // );
+
+        final connection = Connection.fromJson(
+          Map<String, dynamic>.from(data[0]),
+        );
+
+        pendingRequests.removeWhere(
+          (request) => request.requestId == connection.requestId,
+        );
 
         notifyListeners();
       },

@@ -70,18 +70,25 @@ class ConnectionsProvider extends ChangeNotifier {
       "connections",
       (data) {
         logger.i("Event: connections");
-        connections = (data as List)
+        logger.i("Raw connections: $data");
+
+        final records = data is List && data.isNotEmpty && data.first is List
+            ? data.first as List
+            : data as List;
+
+        connections = records
+            .whereType<Map>()
             .map(
-              (connection) => Connection.fromJson(
-                (Map.from(connection)),
+              (item) => Connection.fromJson(
+                Map<String, dynamic>.from(item),
               ),
             )
             .toList();
 
+        logger.i("Parsed connections: ${connections.length}");
         notifyListeners();
       },
     );
-
     // New Connection Requests
     SocketIoClient.socket.on(
       "connectionRequestReceived",
@@ -95,7 +102,18 @@ class ConnectionsProvider extends ChangeNotifier {
         //   request,
         //   ...pendingRequests,
         // ];
+        final request = Connection.fromJson(
+          Map<String, dynamic>.from(data),
+        );
 
+        if (!pendingRequests.any(
+          (existing) => existing.requestId == request.requestId,
+        )) {
+          pendingRequests = [
+            request,
+            ...pendingRequests,
+          ];
+        }
         notifyListeners();
       },
     );
@@ -105,18 +123,21 @@ class ConnectionsProvider extends ChangeNotifier {
       "connectionRequestAccepted",
       (data) {
         logger.i("Event: connectionRequestAccepted");
-        // final connection = Connection.fromJson(
-        //   Map<String, dynamic>.from(data),
-        // );
-        //
-        // pendingRequests.removeWhere(
-        //   (request) => request.requestId == connection.requestId,
-        // );
-        //
-        // connections = [
-        //   connection,
-        //   ...connections,
-        // ];
+        logger.i("LIVE ACCEPT EVENT: $data");
+
+        final connection = Connection.fromJson(
+          Map<String, dynamic>.from(data[0]),
+        );
+
+        pendingRequests.removeWhere(
+          (request) => request.requestId == connection.requestId,
+        );
+
+        if (!connections.any(
+          (existing) => existing.requestId == connection.requestId,
+        )) {
+          connections.insert(0, connection);
+        }
 
         notifyListeners();
       },
@@ -127,13 +148,14 @@ class ConnectionsProvider extends ChangeNotifier {
       "connectionRequestRejected",
       (data) {
         logger.i("Event: connectionRequestRejected");
-        // final connection = Connection.fromJson(
-        //   Map<String, dynamic>.from(data),
-        // );
-        //
-        // pendingRequests.removeWhere(
-        //   (request) => request.requestId == connection.requestId,
-        // );
+
+        final connection = Connection.fromJson(
+          Map<String, dynamic>.from(data[0]),
+        );
+
+        pendingRequests.removeWhere(
+          (request) => request.requestId == connection.requestId,
+        );
 
         notifyListeners();
       },

@@ -55,7 +55,29 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
   void initState() {
     _connectionsProvider = context.read<ConnectionsProvider>();
     _userProvider = context.read<UserProvider>();
+
+    // Connection Request Sent
+    SocketIoClient.socket.on("connectionRequestSent", (data) {
+      if (!mounted) return;
+
+      showErrorMessage("Connection Request Sent!", context);
+    });
+
+    // Connection Request Error
+    SocketIoClient.socket.on("connectionRequestError", (data) {
+      if (!mounted) return;
+
+      showErrorMessage(data[0]["message"], context);
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    SocketIoClient.socket.off("connectionRequestSent");
+    SocketIoClient.socket.off("connectionRequestError");
+
+    super.dispose();
   }
 
   @override
@@ -177,18 +199,13 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
             visible: showUserSearch,
             child: PillButton(
               onTap: () {
-                // Error Handled in Provider
                 SocketIoClient.socket.emit("sendConnectionRequest", {
                   "sender": _userProvider.username,
-                  "receivers": _connectionsProvider.connectionRequestList
+                  "receivers": _connectionsProvider.connectionRequestList,
                 });
+
                 setState(() {
                   showUserSearch = false;
-                });
-                showErrorMessage("Connection Request Sent!", context);
-
-                SocketIoClient.socket.on("connectionRequestError", (_) {
-                  showErrorMessage("Unable to Send Request!", context);
                 });
               },
               borderRadius: 50.w(context),

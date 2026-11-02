@@ -57,7 +57,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
     // User Provider
     currentUsername = context.read<UserProvider>().username;
     // Connection Provider
-    _connectionsProvider = context.read<ConnectionsProvider>();
+    _connectionsProvider = context.watch<ConnectionsProvider>();
     // Pending Requests
     List pendingRequests = _connectionsProvider.pendingRequests;
     // Accepted Connections

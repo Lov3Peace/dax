@@ -76,6 +76,8 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                     // The custom textfield
                     return TextField(
                       focusNode: _focusNode,
+                      autofocus: true,
+                      maxLines: 1,
                       cursorColor: red,
                       style: TextStyle(fontSize: 3.sp(context)),
                       controller: _searchController,
@@ -95,7 +97,7 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                             // Put selections to the left of the cursor in the textfield and hide otherwise
                             if (_selectedOptions.isNotEmpty)
                               SizedBox(
-                                height: max(35, 1.w(context)),
+                                height: 7.sp(context),
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   shrinkWrap: true,
@@ -105,12 +107,11 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                                       padding:
                                           EdgeInsets.only(left: 0.5.w(context)),
                                       child: PillButton(
+                                        text: _selectedOptions[index],
+                                        // fontSize: max(12, 2.sp(context)),
                                         color1: deckBackgroundColor,
                                         color2: deckColor,
-                                        padding:
-                                            EdgeInsetsDirectional.symmetric(
-                                                horizontal: 1.w(context),
-                                                vertical: 0.25.w(context)),
+                                        horizontalPadding: 1.w(context),
                                         onTap: () {
                                           setState(() {
                                             controller.clear();
@@ -120,7 +121,6 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                                         },
                                         borderRadius: 50.w(context),
                                         borderColor: deckBorderColor,
-                                        child: Text(_selectedOptions[index]),
                                       ),
                                     );
                                   },
@@ -167,36 +167,33 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                         child: ListView.builder(
                             shrinkWrap: true,
                             itemCount: options.length,
-                            padding: EdgeInsetsDirectional.all(
-                                max(10, 1.w(context))),
+                            // padding: EdgeInsetsDirectional.all(
+                            //     max(10, 1.w(context))),
                             itemBuilder: (context, index) {
                               int localHighlightedIndex =
                                   AutocompleteHighlightedOption.of(context);
                               highlightedIndex = localHighlightedIndex;
                               bool isHighlighted =
                                   localHighlightedIndex == index;
-                              return Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: max(5, 0.25.w(context))),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        max(10, 0.5.w(context))),
-                                    color: isHighlighted
-                                        ? darkGrey
-                                        : Colors.transparent,
-                                  ),
-                                  child: TactileButton(
-                                    scale: 1.01,
-                                    onTap: () {
-                                      _searchController.clear();
-                                      if (!_selectedOptions
-                                          .contains(options.elementAt(index))) {
-                                        onSelected(options.elementAt(index));
-                                      }
-                                    },
-                                    child: Text(options.elementAt(index)),
-                                  ),
+                              return Container(
+                                padding: EdgeInsetsGeometry.all(1.w(context)),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                      max(10, 0.5.w(context))),
+                                  color: isHighlighted
+                                      ? darkGrey.withValues(alpha: 0.2)
+                                      : tran,
+                                ),
+                                child: TactileButton(
+                                  scale: 1.01,
+                                  onTap: () {
+                                    _searchController.clear();
+                                    if (!_selectedOptions
+                                        .contains(options.elementAt(index))) {
+                                      onSelected(options.elementAt(index));
+                                    }
+                                  },
+                                  child: Text(options.elementAt(index)),
                                 ),
                               );
                             }),

@@ -6,10 +6,14 @@ import "package:flutter_application_1/util/ui/tactile_button.dart";
 class PillButton extends StatelessWidget {
   PillButton({
     super.key,
-    required this.child,
     required this.onTap,
     required this.borderRadius,
     required this.borderColor,
+    this.child,
+    this.text,
+    this.textStyle,
+    // this.fontSize,
+    this.horizontalPadding = 0,
     this.height,
     this.width,
     this.padding,
@@ -19,12 +23,16 @@ class PillButton extends StatelessWidget {
     this.color2 = tran,
   });
 
-  final Widget child;
+  final Widget? child;
   final VoidCallback onTap;
   final double borderRadius;
   final EdgeInsetsGeometry? padding;
+  final double horizontalPadding;
   final double? height;
   final double? width;
+  final String? text;
+  final TextStyle? textStyle;
+  // final fontSize;
   bool isLoading;
   double scale;
   Color color1 = tran;
@@ -39,25 +47,29 @@ class PillButton extends StatelessWidget {
         child: Container(
           height: height,
           width: width,
-          padding: padding,
+          padding: EdgeInsetsGeometry.symmetric(
+              horizontal: horizontalPadding, vertical: horizontalPadding / 2),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(borderRadius),
             border: Border.all(color: borderColor),
             gradient: LinearGradient(colors: [color1, color2]),
           ),
-          child: Stack(
-            children: [
-              if (!isLoading) child,
-              if (isLoading)
-                SizedBox(
-                  height: 1.w(context),
-                  width: 1.w(context),
-                  child: CircularProgressIndicator(
-                    color: white,
-                    strokeWidth: 2,
-                  ),
-                ),
-            ],
+          child: Center(
+            child: isLoading
+                ? SizedBox(
+                    height: 1.w(context),
+                    width: 1.w(context),
+                    child: const CircularProgressIndicator(
+                      color: white,
+                      strokeWidth: 2,
+                    ),
+                  )
+                : (text != null
+                    ? Text(
+                        text!,
+                        style: TextStyle(fontSize: 2.25.sp(context)),
+                      )
+                    : child ?? const SizedBox()),
           ),
         ));
   }

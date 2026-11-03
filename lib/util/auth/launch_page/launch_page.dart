@@ -158,7 +158,8 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
               //
               // Welcome
               Padding(
-                padding: EdgeInsets.only(right: 40.w(context), bottom: 300),
+                padding: EdgeInsets.only(
+                    right: 40.w(context), bottom: 20.w(context)),
                 child: Text(
                   "Welcome",
                   style: TextStyle(fontSize: max(120, 30.sp(context))),

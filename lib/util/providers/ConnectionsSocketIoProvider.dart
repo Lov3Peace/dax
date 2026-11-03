@@ -45,7 +45,6 @@ class ConnectionsProvider extends ChangeNotifier {
       "joinUserRoom",
       username,
     );
-
     SocketIoClient.socket.on("userRoomJoined", (_) {
       logger.i("User Room Joined Successfully");
     }); //

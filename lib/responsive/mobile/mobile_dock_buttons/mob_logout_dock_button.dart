@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../../../util/Window Route/logout_window_route.dart';
-import '../../../util/auth/launch_page.dart';
+import '../../../util/auth/launch_page/launch_page.dart';
 import '../mob_constants.dart';
 
 class MobLogoutWindowButton extends StatelessWidget {

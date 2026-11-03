@@ -6,7 +6,7 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/projects/
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectPostsPage.dart';
 import 'package:flutter_application_1/responsive/desktop/devPage.dart';
 import 'package:flutter_application_1/responsive/desktop/node_test.dart';
-import 'package:flutter_application_1/util/auth/launch_page.dart';
+import 'package:flutter_application_1/util/auth/launch_page/launch_page.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profilePage.dart';
 
 var routes = {

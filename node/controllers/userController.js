@@ -10,10 +10,12 @@ export const getUsers = async (req, res) => {
   const regex = new RegExp("^" + param, "i");
   let users;
   if (param) {
-    // Only return the username in the response, not the whole user object
-    users = await User.find({ username: { $regex: regex } }, "username").limit(
-      25,
-    );
+    // Only return the username and online status in the response, not the whole user object
+    users = await User.find({ username: { $regex: regex } }, [
+      "username",
+      "online",
+    ]).limit(25);
+    // console.log("Get Users Results: ", users);
     return res.status(200).json(users);
   } else {
     return res.status(400).json("Search cannot be empty!");
@@ -67,7 +69,9 @@ export const joinUserRoom = (socket) => {
   socket.on("joinUserRoom", (username) => {
     socket.join(`user: ${username}`);
 
-    console.log(`Socket ${socket.id} joined user: ${username} successfully`);
+    console.log(
+      `Socket ${socket.id} joined room 'user: ${username}' successfully`,
+    );
 
     socket.emit("userRoomJoined");
   });

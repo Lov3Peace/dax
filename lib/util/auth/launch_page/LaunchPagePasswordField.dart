@@ -9,6 +9,7 @@ import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/providers/userAuthProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
+import 'package:get/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart' as rive;
 import 'package:rive/rive.dart';
@@ -55,13 +56,16 @@ class LaunchPagePasswordField extends StatelessWidget {
         } else {
           userProvider.saveUsername(res.body["username"]);
           userProvider.saveUserData(res.body);
+          userProvider.setOnlineStatus(true);
+          var status = userProvider.isOnline;
+          print("Online Status: $status");
           // Navigate to Dashboard
           showDialog(
               context: context,
               builder: (context) {
                 return const RiveLoadingAnimation();
               });
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(3.seconds, () {
             router.pop();
             router.go("/");
           });
@@ -98,6 +102,7 @@ class LaunchPagePasswordField extends StatelessWidget {
                 } else {
                   userProvider.saveUsername(res.body["username"]);
                   userProvider.saveUserData(res.body);
+                  userProvider.setOnlineStatus(true);
                   // Navigate to Dashboard
                   showDialog(
                       context: context,

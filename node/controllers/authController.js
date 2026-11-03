@@ -38,7 +38,7 @@ export const register = async (req, res) => {
         error: "User already exists. Please enter a unique username.",
       });
     }
-    const hashedPw = await bcrypt.hash(req.body.password, 10);
+    const hashedPw = await bcrypt.hash(password, 10);
     const refreshToken = uuidv4();
 
     const newUser = await User.create({
@@ -81,6 +81,10 @@ export const register = async (req, res) => {
     });
 
     res.setHeader("Authorization", accessToken);
+
+    // Set Status to Online
+    await User.updateOne({ _id: newUser._id }, { $set: { online: true } });
+
     // Tries to save a newUser to the db and returns the
     // response in JSON format with the 201 status code.
     // If it fails then return status code of 500 and
@@ -90,6 +94,7 @@ export const register = async (req, res) => {
       message: `User ${user} created successfully!`,
       username: newUser.username,
       accessToken: accessToken,
+      online: true,
       error: "",
     });
   } catch (error) {
@@ -128,7 +133,7 @@ export const login = async (req, res) => {
         const newRefreshToken = uuidv4();
         await User.findOneAndUpdate(
           { username: username },
-          { $set: { refreshToken: newRefreshToken } },
+          { $set: { refreshToken: newRefreshToken, online: true } },
           { new: true },
         );
         // const decoded = jwt.verify(token, pubKey, { algorithms: "RS256" });
@@ -162,6 +167,7 @@ export const login = async (req, res) => {
         return res.status(200).json({
           message: "Login Successful",
           username: user.username,
+          online: true,
           error: "",
         });
       } else {
@@ -182,6 +188,13 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
   try {
     const cookies = req.cookies;
+
+    // Set Status to Offline
+    await User.updateOne(
+      { refreshToken: cookies.refreshToken },
+      { $set: { online: false } },
+    );
+
     res.clearCookie("accessToken", {
       httpOnly: true,
       sameSite: "None",

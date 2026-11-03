@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/sidePanelButtons.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/Logout.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/LogoutProfileBubble.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../desk_decks.dart';
 
@@ -84,7 +84,7 @@ class _DesktopSidePanelState extends State<DesktopSidePanel>
                         //Logout
                         Padding(
                           padding: EdgeInsets.all(1.w(context)),
-                          child: Logout(),
+                          child: LogoutProfileBubble(),
                         ),
                       ],
                     ),

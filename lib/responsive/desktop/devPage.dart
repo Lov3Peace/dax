@@ -26,9 +26,19 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
   late AnimationController _animationController =
       AnimationController(vsync: this);
 
-  List<String> _userList = ["l3x", "davonport", "goat", "port"];
+  List<String> _userList = [
+    "l3x",
+    "davonport",
+    "goat",
+    "port",
+    "davon",
+    "alex",
+    "alexander"
+  ];
   List<String> _selectedOptions = [];
+  Iterable<String> _optionsList = [];
   FocusNode _focusNode = FocusNode();
+  int highlightedIndex = 0;
 
   @override
   void initState() {
@@ -62,6 +72,8 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                       TextEditingController controller,
                       FocusNode focusNode,
                       void Function() onSubmitted) {
+                    //
+                    // The custom textfield
                     return TextField(
                       focusNode: _focusNode,
                       cursorColor: red,
@@ -73,12 +85,14 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                         prefixIcon: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
+                            // Show search icon if no selections have been made and hide otherwise
                             if (_selectedOptions.isEmpty)
                               Padding(
                                 padding:
                                     EdgeInsets.all(max(10, 0.5.w(context))),
                                 child: const Icon(Icons.search),
                               ),
+                            // Put selections to the left of the cursor in the textfield and hide otherwise
                             if (_selectedOptions.isNotEmpty)
                               SizedBox(
                                 height: max(35, 1.w(context)),
@@ -91,6 +105,8 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                                       padding:
                                           EdgeInsets.only(left: 0.5.w(context)),
                                       child: PillButton(
+                                        color1: deckBackgroundColor,
+                                        color2: deckColor,
                                         padding:
                                             EdgeInsetsDirectional.symmetric(
                                                 horizontal: 1.w(context),
@@ -125,13 +141,15 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                       ),
                       onSubmitted: (selection) {
                         setState(() {
+                          _selectedOptions
+                              .add(_optionsList.elementAt(highlightedIndex));
                           _searchController.clear();
-                          _selectedOptions.add(selection);
+                          _focusNode.requestFocus();
                         });
                       },
                     );
                   },
-                  // displayStringForOption: (user) => "HELLO",
+                  // // The logic for how the options drowdown should look
                   optionsViewBuilder: (
                     BuildContext context,
                     AutocompleteOnSelected<String> onSelected,
@@ -152,37 +170,58 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                             padding: EdgeInsetsDirectional.all(
                                 max(10, 1.w(context))),
                             itemBuilder: (context, index) {
+                              int localHighlightedIndex =
+                                  AutocompleteHighlightedOption.of(context);
+                              highlightedIndex = localHighlightedIndex;
+                              bool isHighlighted =
+                                  localHighlightedIndex == index;
                               return Padding(
                                 padding: EdgeInsets.symmetric(
                                     vertical: max(5, 0.25.w(context))),
-                                child: TactileButton(
-                                  scale: 1.01,
-                                  onTap: () {
-                                    _searchController.clear();
-                                    if (!_selectedOptions
-                                        .contains(options.elementAt(index)))
-                                      onSelected(options.elementAt(index));
-                                  },
-                                  child: Text(options.elementAt(index)),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                        max(10, 0.5.w(context))),
+                                    color: isHighlighted
+                                        ? darkGrey
+                                        : Colors.transparent,
+                                  ),
+                                  child: TactileButton(
+                                    scale: 1.01,
+                                    onTap: () {
+                                      _searchController.clear();
+                                      if (!_selectedOptions
+                                          .contains(options.elementAt(index))) {
+                                        onSelected(options.elementAt(index));
+                                      }
+                                    },
+                                    child: Text(options.elementAt(index)),
+                                  ),
                                 ),
                               );
                             }),
                       ),
                     );
                   },
+                  // The logic for building the options dropdown list
                   optionsBuilder: (TextEditingValue textEditingValue) {
                     if (textEditingValue.text == '') {
                       return [];
                     }
 
-                    return _userList.where((user) =>
-                        user.contains(textEditingValue.text.toLowerCase()) &&
+                    // Show users that match the search query and are not in the _selectedOptions list once the search is at least 2 characters
+                    // (smaller read on DB)
+                    _optionsList = _userList.where((user) =>
+                        textEditingValue.text.length > 1 &&
+                        user.startsWith(textEditingValue.text.toLowerCase()) &&
                         !_selectedOptions.contains(user));
+                    return _optionsList;
                   },
+                  // On select (mouse click) add the selection _selectedOptions and clear the search box
                   onSelected: (selection) {
                     setState(() {
-                      _searchController.clear();
                       _selectedOptions.add(selection);
+                      _searchController.clear();
                     });
                   },
                 ),

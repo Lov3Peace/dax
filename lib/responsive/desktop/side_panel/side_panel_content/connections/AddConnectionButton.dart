@@ -56,7 +56,16 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
   void initState() {
     _connectionsProvider = context.read<ConnectionsProvider>();
     _userProvider = context.read<UserProvider>();
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    SocketIoClient.socket.off("connectionRequestSent");
+    SocketIoClient.socket.off("connectionRequestError");
+
+    super.dispose();
   }
 
   @override
@@ -178,11 +187,11 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
             visible: showUserSearch,
             child: PillButton(
               onTap: () {
-                // Error Handled in Provider
                 SocketIoClient.socket.emit("sendConnectionRequest", {
                   "sender": _userProvider.username,
-                  "receivers": _connectionsProvider.connectionRequestList
+                  "receivers": _connectionsProvider.connectionRequestList,
                 });
+
                 setState(() {
                   showUserSearch = false;
                 });

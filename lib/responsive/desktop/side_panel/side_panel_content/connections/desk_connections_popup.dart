@@ -59,6 +59,10 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
     currentUsername = context.watch<UserProvider>().username;
     // Connection Provider
     _connectionsProvider = context.watch<ConnectionsProvider>();
+    // Pending Requests
+    List pendingRequests = _connectionsProvider.pendingRequests;
+    // Accepted Connections
+    List connections = _connectionsProvider.connections;
 
     // Each page represents a connection view
     // such as All Connections or Requests

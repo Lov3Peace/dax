@@ -66,24 +66,7 @@ class ConnectionsProvider extends ChangeNotifier {
       },
     );
 
-    // Current Connections
-    SocketIoClient.socket.on(
-      "connections",
-      (data) {
-        logger.i("Event: currentConnections\n$data");
-        // connections = (data as List)
-        //     .map(
-        //       (connection) => Connection.fromJson(
-        //         (Map.from(connection)),
-        //       ),
-        //     )
-        //     .toList();
-        //
-        notifyListeners();
-      },
-    );
-
-// Connection Request Sent
+    // Connection Request Sent
     SocketIoClient.socket.on("connectionRequestSent", (_) {
       logger.w("Event: connectionRequestSent");
       showPopupMessage(
@@ -91,33 +74,54 @@ class ConnectionsProvider extends ChangeNotifier {
       print("Sent!");
     });
 
-// Connection Request error
+    // Connection Request error
     SocketIoClient.socket.on("connectionRequestError", (_) {
       showPopupMessage(
           "Unable to Complete Request!", navigatorKey.currentState?.context);
     });
 
-    // Connection Request Received
+    // Current Connections
+    SocketIoClient.socket.on(
+      "connections",
+      (data) {
+        logger.i("Event: connections");
+        logger.i("Raw connections: $data");
+
+        final records = data is List && data.isNotEmpty && data.first is List
+            ? data.first as List
+            : data as List;
+
+        connections = records
+            .whereType<Map>()
+            .map(
+              (item) => Connection.fromJson(
+                Map<String, dynamic>.from(item),
+              ),
+            )
+            .toList();
+
+        logger.i("Parsed connections: ${connections.length}");
+        notifyListeners();
+      },
+    );
+
+    // New Connection Requests
     SocketIoClient.socket.on(
       "connectionRequestReceived",
       (data) {
         logger.i("Event: connectionRequestReceived");
-        logger.i("Data: $data");
-        final reqObjType = data[0].runtimeType;
-        logger.i("Data[0] Type: $reqObjType");
+        // logger.i("Data: $data");
+        // var req = data[0];
+        // logger.i("Req: $req");
         final request = Connection.fromJson(
           Map<String, dynamic>.from(data[0]),
         );
-        final senderUsername = request.senderUsername;
-        logger.i("Sender Username: $senderUsername");
 
-        final reqType = request.runtimeType;
-        logger.i("Request Type: $reqType");
-        // dev.debugger();
-        pendingRequests = [
-          request,
-          ...pendingRequests,
-        ];
+        if (!pendingRequests.any(
+          (existing) => existing.requestId == request.requestId,
+        )) {
+          pendingRequests.insert(0, request);
+        }
         final context = navigatorKey.currentState?.overlay?.context;
         if (context == null) return;
         showNotificationPopup(
@@ -168,19 +172,29 @@ class ConnectionsProvider extends ChangeNotifier {
       "connectionRequestAccepted",
       (data) {
         logger.i("Event: connectionRequestAccepted");
-        // final connection = Connection.fromJson(
-        //   Map<String, dynamic>.from(data),
-        // );
-        //
-        // _pendingRequests.removeWhere(
-        //   (request) => request.requestId == connection.requestId,
-        // );
-        //
-        // connections = [
-        //   connection,
-        //   ...connections,
-        // ];
 
+        final connection = Connection.fromJson(
+          Map<String, dynamic>.from(data[0]),
+        );
+
+        final context = navigatorKey.currentState?.overlay?.context;
+        if (context == null) return;
+        if (!connections.any(
+          (existing) => existing.requestId == connection.requestId,
+        )) {
+          pendingRequests.removeWhere(
+            (request) => request.requestId == connection.requestId,
+          );
+          connections.insert(0, connection);
+          showNotificationPopup(
+              context,
+              NotificationPopup(
+                  notificationHeader: "New Connection",
+                  notificationText: connection.receiverUsername,
+                  width: 15.w(context),
+                  height: 8.w(context),
+                  icon: const Icon(Icons.person)));
+        }
         notifyListeners();
       },
     );
@@ -190,11 +204,11 @@ class ConnectionsProvider extends ChangeNotifier {
       "connectionRequestRejected",
       (data) {
         logger.i("Event: connectionRequestRejected");
+
         final connection = Connection.fromJson(
           Map<String, dynamic>.from(data[0]),
         );
 
-        // dev.debugger();
         pendingRequests.removeWhere(
           (request) => request.requestId == connection.requestId,
         );

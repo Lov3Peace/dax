@@ -7,7 +7,7 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/projects/
 import 'package:flutter_application_1/responsive/desktop/decks_content/projects/projectPostsPage.dart';
 import 'package:flutter_application_1/responsive/desktop/devPage.dart';
 import 'package:flutter_application_1/responsive/desktop/util/error_page.dart';
-import 'package:flutter_application_1/util/auth/launch_page.dart';
+import 'package:flutter_application_1/util/auth/launch_page/launch_page.dart';
 import 'package:flutter_application_1/util/providers/userAuthProvider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_application_1/util/imports.dart';
@@ -17,6 +17,7 @@ import 'package:flutter_application_1/main.dart';
 /// The route configuration.
 final GoRouter router = GoRouter(
   initialLocation: "/launch",
+  navigatorKey: navigatorKey,
   errorBuilder: (BuildContext context, GoRouterState state) {
     return ErrorPage();
   },
@@ -39,7 +40,7 @@ final GoRouter router = GoRouter(
           }
         },
         pageBuilder: (context, state) {
-          print("GoRoutes Hostname Value: $hostname");
+          // print("GoRoutes Hostname Value: $hostname");
           return CustomTransitionPage(
             child: LaunchPage(),
             transitionsBuilder:
@@ -52,6 +53,7 @@ final GoRouter router = GoRouter(
       path: "/",
       pageBuilder: (context, state) {
         return CustomTransitionPage(
+          // child: DesktopDashboard(),
           child: DesktopDashboard(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);

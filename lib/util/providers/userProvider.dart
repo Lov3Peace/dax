@@ -8,11 +8,19 @@ class UserProvider with ChangeNotifier {
   Map _userdata = {};
   Map get userData => _userdata;
 
+  bool _isOnline = false;
+  bool get isOnline => _isOnline;
+
   void loadUsername(String? user) {
     if (user != null) {
       // _username = user.displayName ?? user.email?.split('@')[0] ?? '';
       notifyListeners();
     }
+  }
+
+  void setOnlineStatus(bool isOnline) {
+    _isOnline = isOnline;
+    notifyListeners();
   }
 
   void saveUserData(Map userData) {

@@ -24,9 +24,10 @@ export const initLoginCheck = async (req, res, next) => {
     const newRefreshToken = uuidv4();
     const user = await User.findOneAndUpdate(
       { refreshToken: refreshToken },
-      { $set: { refreshToken: newRefreshToken } },
+      { $set: { refreshToken: newRefreshToken, online: true } },
       { new: true },
     );
+    console.log("User Status Updated to Online");
     //decoded.user_id and get the data from db call and put in res
     // const userID = decoded._id;
     if (!user) {

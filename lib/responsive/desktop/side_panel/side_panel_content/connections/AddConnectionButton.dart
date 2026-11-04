@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/carbonSearchBox.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
@@ -56,19 +57,6 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
     _connectionsProvider = context.read<ConnectionsProvider>();
     _userProvider = context.read<UserProvider>();
 
-    // Connection Request Sent
-    SocketIoClient.socket.on("connectionRequestSent", (data) {
-      if (!mounted) return;
-
-      showErrorMessage("Connection Request Sent!", context);
-    });
-
-    // Connection Request Error
-    SocketIoClient.socket.on("connectionRequestError", (data) {
-      if (!mounted) return;
-
-      showErrorMessage(data[0]["message"], context);
-    });
     super.initState();
   }
 

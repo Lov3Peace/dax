@@ -1,6 +1,7 @@
-import 'package:flutter_application_1/util/auth/registerForm.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/logger/CarbonLogger.dart';
+import 'package:flutter_application_1/util/NotificationPopup.dart';
 
 class Connection {
   final String requestId;
@@ -44,7 +45,6 @@ class ConnectionsProvider extends ChangeNotifier {
       "joinUserRoom",
       username,
     );
-
     SocketIoClient.socket.on("userRoomJoined", (_) {
       logger.i("User Room Joined Successfully");
     }); //
@@ -65,7 +65,21 @@ class ConnectionsProvider extends ChangeNotifier {
       },
     );
 
-    // Existing Accepted Connections
+    // Connection Request Sent
+    SocketIoClient.socket.on("connectionRequestSent", (_) {
+      logger.w("Event: connectionRequestSent");
+      showPopupMessage(
+          "Connection Request Sent!", navigatorKey.currentState?.context);
+      print("Sent!");
+    });
+
+    // Connection Request error
+    SocketIoClient.socket.on("connectionRequestError", (_) {
+      showPopupMessage(
+          "Unable to Complete Request!", navigatorKey.currentState?.context);
+    });
+
+    // Current Connections
     SocketIoClient.socket.on(
       "connections",
       (data) {
@@ -89,31 +103,65 @@ class ConnectionsProvider extends ChangeNotifier {
         notifyListeners();
       },
     );
+
     // New Connection Requests
     SocketIoClient.socket.on(
       "connectionRequestReceived",
       (data) {
         logger.i("Event: connectionRequestReceived");
-        // final request = Connection.fromJson(
-        //   Map<String, dynamic>.from(data),
-        // );
-        //
-        // pendingRequests = [
-        //   request,
-        //   ...pendingRequests,
-        // ];
+        // logger.i("Data: $data");
+        // var req = data[0];
+        // logger.i("Req: $req");
         final request = Connection.fromJson(
-          Map<String, dynamic>.from(data),
+          Map<String, dynamic>.from(data[0]),
         );
 
         if (!pendingRequests.any(
           (existing) => existing.requestId == request.requestId,
         )) {
-          pendingRequests = [
-            request,
-            ...pendingRequests,
-          ];
+          pendingRequests.insert(0, request);
         }
+        final context = navigatorKey.currentState?.overlay?.context;
+        if (context == null) return;
+        showNotificationPopup(
+          context,
+          NotificationPopup(
+              onAccept: () {
+                if (!SocketIoClient.socket.connected) {
+                  logger.e("Accept failed: socket not connected");
+                  return;
+                }
+                SocketIoClient.socket.emit(
+                  "acceptConnection",
+                  {
+                    "requestId": request.requestId,
+                    "username": request.receiverUsername,
+                  },
+                );
+                closeNoticiationPopup();
+                logger.i("Connection Request Accepted");
+              },
+              onReject: () {
+                if (!SocketIoClient.socket.connected) {
+                  logger.e("Reject failed: socket not connected");
+                  return;
+                }
+                SocketIoClient.socket.emit(
+                  "rejectConnection",
+                  {
+                    "requestId": request.requestId,
+                    "username": request.receiverUsername,
+                  },
+                );
+                closeNoticiationPopup();
+                logger.i("Connection Request Rejected");
+              },
+              notificationHeader: "Connection Request Received",
+              notificationText: data[0]["sender_username"],
+              width: 15.w(context),
+              height: 8.w(context),
+              icon: const Icon(Icons.person)),
+        );
         notifyListeners();
       },
     );
@@ -123,22 +171,29 @@ class ConnectionsProvider extends ChangeNotifier {
       "connectionRequestAccepted",
       (data) {
         logger.i("Event: connectionRequestAccepted");
-        logger.i("LIVE ACCEPT EVENT: $data");
 
         final connection = Connection.fromJson(
           Map<String, dynamic>.from(data[0]),
         );
 
-        pendingRequests.removeWhere(
-          (request) => request.requestId == connection.requestId,
-        );
-
+        final context = navigatorKey.currentState?.overlay?.context;
+        if (context == null) return;
         if (!connections.any(
           (existing) => existing.requestId == connection.requestId,
         )) {
+          pendingRequests.removeWhere(
+            (request) => request.requestId == connection.requestId,
+          );
           connections.insert(0, connection);
+          showNotificationPopup(
+              context,
+              NotificationPopup(
+                  notificationHeader: "New Connection",
+                  notificationText: connection.receiverUsername,
+                  width: 15.w(context),
+                  height: 8.w(context),
+                  icon: const Icon(Icons.person)));
         }
-
         notifyListeners();
       },
     );

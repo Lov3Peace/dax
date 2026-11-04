@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
-import 'package:flutter_application_1/util/ErrorMessage.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/auth/launch_page/LaunchPagePasswordField.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
@@ -12,10 +12,10 @@ import 'package:ionicons/ionicons.dart';
 import 'package:rive/rive.dart';
 import 'package:rive/rive.dart' as rive;
 import 'package:simple_animations/animation_mixin/animation_mixin.dart';
-import '../providers/userAuthProvider.dart';
-import '../providers/userProvider.dart';
-import '../ui/tactile_button.dart';
-import 'forget_password_form.dart';
+import '../../providers/userAuthProvider.dart';
+import '../../providers/userProvider.dart';
+import '../../ui/tactile_button.dart';
+import '../forget_password_form.dart';
 import 'package:provider/provider.dart';
 
 class LaunchPage extends StatefulWidget {
@@ -50,6 +50,9 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
       if (res.success == true && res.body["rememberMe"] == "true") {
         userProvider.saveUsername(res.body["username"]);
         userProvider.saveUserData(res.body);
+        userProvider.setOnlineStatus(true);
+        var status = userProvider.isOnline;
+        print("Online Status: $status");
 
         showDialog(
             context: context,
@@ -155,10 +158,11 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
               //
               // Welcome
               Padding(
-                padding: EdgeInsets.only(right: 40.w(context), bottom: 300),
-                child: const Text(
+                padding: EdgeInsets.only(
+                    right: 40.w(context), bottom: 20.w(context)),
+                child: Text(
                   "Welcome",
-                  style: TextStyle(fontSize: 120),
+                  style: TextStyle(fontSize: max(120, 30.sp(context))),
                 ),
               )
                   .animate()
@@ -246,7 +250,7 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                     showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return const ErrorMessage(
+                                          return const PopupDialog(
                                               message:
                                                   "Username Cannot Be Empty");
                                         });
@@ -280,7 +284,7 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                             showDialog(
                                                 context: context,
                                                 builder: (context) {
-                                                  return const ErrorMessage(
+                                                  return const PopupDialog(
                                                       message:
                                                           "Username Cannot Be Empty");
                                                 });

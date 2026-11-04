@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/CarbonCircleAvatar.dart';
@@ -53,6 +54,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   final textFieldKey = GlobalKey();
   List<String> initialList = [];
   List<String> optionsList = [];
+  List statusList = [];
   var users;
   bool searching = true;
   Color formFieldOutlineColor = const Color.fromARGB(151, 255, 255, 255);
@@ -117,6 +119,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
             searching = false;
             highlightIndex = 0;
             optionsList.clear();
+            statusList.clear();
           });
           for (var result in res) {
             if (!optionsList.contains(result[widget.parameter]) &&
@@ -124,9 +127,11 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                 result[widget.parameter] != _userProvider.username) {
               setState(() {
                 optionsList.add(result[widget.parameter]);
+                statusList.add(result["online"]);
               });
             }
           }
+          print("Status List: $statusList");
 
           return optionsList;
         }
@@ -295,9 +300,10 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                     style: TextStyle(fontSize: max(12, 2.5.sp(context))),
                   ),
                   const Spacer(),
-                  Text("Online",
+                  Text(statusList[index] == true ? "Online" : "Offline",
                       style: TextStyle(
-                          color: green, fontSize: max(12, 2.5.sp(context)))),
+                          color: statusList[index] == true ? green : red,
+                          fontSize: max(12, 2.5.sp(context)))),
                 ],
               ),
             ),
@@ -334,7 +340,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
       }),
       onSelected: (selectedItem) {
         if (selectedOptions.length > 3) {
-          showErrorMessage("Maximum users reached.", context);
+          showPopupMessage("Maximum users reached.", context);
           return;
         }
         String optionHilighted = optionsList[highlightIndex];

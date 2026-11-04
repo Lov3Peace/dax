@@ -1,7 +1,11 @@
 import 'dart:convert';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:http/browser_client.dart' as httpClient;
+import 'package:provider/provider.dart';
+
+import '../imports.dart';
 
 class UserAuthProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
@@ -15,7 +19,7 @@ class UserAuthProvider extends ChangeNotifier {
   final registerEndpoint = Uri.parse("$hostname/api/register");
 
 //
-// Initial Login Check on Launch Page Load
+// Initial Login Check on Launch Page Load (rememberMe check)
   Future initLoginCheck() async {
     final client = httpClient.BrowserClient()..withCredentials = true;
     try {
@@ -86,6 +90,8 @@ class UserAuthProvider extends ChangeNotifier {
     }
   }
 
+//
+// Register Function
   Future register(username, password, email, rememberMe) async {
     try {
       // Hitting the Login endpoint
@@ -119,6 +125,42 @@ class UserAuthProvider extends ChangeNotifier {
     } catch (e, trace) {
       print('Registration Failed: $e' + trace.toString());
       return LoginRes(body: {"error": e}, success: false, error: e.toString());
+    }
+  }
+
+//
+// Logout Function
+  final logoutEndpoint = Uri.parse("$hostname/api/logout");
+  Future logout(BuildContext context) async {
+    try {
+      // Hitting the Login endpoint
+      print('Fetching...');
+      final client = httpClient.BrowserClient()..withCredentials = true;
+      final userProvider = context.read<UserProvider>();
+      final username = userProvider.username;
+      print("Got Username: $username");
+      var res = await client
+          .post(
+            logoutEndpoint,
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode({"username": username}),
+          )
+          .timeout(const Duration(seconds: 5));
+      final body = json.decode(res.body);
+      // cookie.sameSite
+      // cookie.maxAge = 30;
+      print('Fetched...');
+      print(res.body);
+      if (res.statusCode == 200 && context.mounted) {
+        loggedOut();
+        return true;
+      } else {
+        logger.e("Unable to log out");
+        return false;
+      }
+    } catch (e) {
+      // showErrorMessage('Could not log out - try again later. $e', context);
+      print('Could not log out - try again later. $e');
     }
   }
 

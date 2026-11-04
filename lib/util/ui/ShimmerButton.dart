@@ -11,6 +11,7 @@ class ShimmerButton extends StatefulWidget {
     required this.child,
     required this.animate,
     this.color = const Color.fromARGB(255, 255, 85, 0),
+    this.backgroundColor = tran,
     this.borderColor = const Color.fromARGB(255, 250, 140, 140),
     this.padding = 0,
     this.rotationAnimationDuration = const Duration(seconds: 2),
@@ -34,6 +35,7 @@ class ShimmerButton extends StatefulWidget {
   final bool animate;
   final Color color;
   final Color borderColor;
+  final Color backgroundColor;
   final Duration rotationAnimationDuration;
   final Duration shimmerAnimationDuration;
   final Duration scaleAnimationDuration;
@@ -76,6 +78,7 @@ class _ShimmerButtonState extends State<ShimmerButton>
       decoration: BoxDecoration(
         border: Border.all(color: widget.borderColor),
         borderRadius: BorderRadius.circular(widget.borderRadius),
+        color: widget.backgroundColor,
       ),
       child: Stack(
         alignment: Alignment.center,

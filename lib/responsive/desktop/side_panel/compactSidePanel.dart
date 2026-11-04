@@ -2,11 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel.dart';
-import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/CompactLogout.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/CompactLogoutProfileBubble.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/compactSidePanelButtons.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/sidePanelButtons.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/Logout.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/LogoutProfileBubble.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 
 class CompactSidePanel extends StatelessWidget {
@@ -65,7 +65,7 @@ class CompactSidePanel extends StatelessWidget {
                           CompactSidePanelButtons(),
                           Spacer(),
                           //Logout
-                          CompactLogout(),
+                          CompactLogoutProfileBubble(),
                         ],
                       ),
                     ),

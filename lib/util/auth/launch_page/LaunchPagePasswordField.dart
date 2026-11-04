@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
 import 'package:flutter_application_1/responsive/desktop/util/responsive_shorthand.dart';
-import 'package:flutter_application_1/util/ErrorMessage.dart';
+import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/LoginRes.dart';
 import 'package:flutter_application_1/util/auth/launch_page/RiveLoadingAnimation.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/providers/userAuthProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
+import 'package:get/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:rive/rive.dart' as rive;
 import 'package:rive/rive.dart';
@@ -49,19 +50,22 @@ class LaunchPagePasswordField extends StatelessWidget {
           showDialog(
               context: context,
               builder: (context) {
-                return ErrorMessage(message: res.error);
+                return PopupDialog(message: res.error);
               });
           passwordFocusNode.requestFocus();
         } else {
           userProvider.saveUsername(res.body["username"]);
           userProvider.saveUserData(res.body);
+          userProvider.setOnlineStatus(true);
+          var status = userProvider.isOnline;
+          print("Online Status: $status");
           // Navigate to Dashboard
           showDialog(
               context: context,
               builder: (context) {
                 return const RiveLoadingAnimation();
               });
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(3.seconds, () {
             router.pop();
             router.go("/");
           });
@@ -92,12 +96,13 @@ class LaunchPagePasswordField extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return ErrorMessage(message: res.error);
+                        return PopupDialog(message: res.error);
                       });
                   passwordFocusNode.requestFocus();
                 } else {
                   userProvider.saveUsername(res.body["username"]);
                   userProvider.saveUserData(res.body);
+                  userProvider.setOnlineStatus(true);
                   // Navigate to Dashboard
                   showDialog(
                       context: context,

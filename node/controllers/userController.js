@@ -341,3 +341,72 @@ export const getConnections = (socket) => {
     }
   });
 };
+// Remove a accepted connection
+export const removeConnection = (socket) => {
+  socket.on("removeConnection", async (data) => {
+    try {
+      const { requestId } = data;
+      const username = socket.data.username;
+      console.log("REMOVE CONNECTION REQUEST:", {
+        requestId,
+        username,
+      });
+      if (!username) {
+        return socket.emit("connectionRemovalError", {
+          message: "User not authenticated",
+        });
+      }
+
+      const result = await pgClient.query(
+        `
+        DELETE FROM users.connection_requests
+        WHERE request_id = $1
+          AND status = 1
+          AND (
+            sender_username = $2
+            OR receiver_username = $2
+          )
+        RETURNING *
+        `,
+        [requestId, username],
+      );
+
+      const connection = result.rows[0];
+
+      if (!connection) {
+        return socket.emit("connectionRemovalError", {
+          message: "Connection not found or unauthorized",
+        });
+      }
+      console.log("REMOVAL ROOMS:", {
+        sender: connection.sender_username,
+        receiver: connection.receiver_username,
+        senderRoom: `user:${connection.sender_username}`,
+        receiverRoom: `user:${connection.receiver_username}`,
+      });
+      console.log(
+        "SOCKETS IN RECEIVER ROOM:",
+        (
+          await io.in(`user:${connection.receiver_username}`).fetchSockets()
+        ).map((socket) => socket.id),
+      );
+      io.to(`user: ${connection.sender_username}`).emit("connectionRemoved", {
+        requestId: String(connection.request_id),
+      });
+
+      io.to(`user: ${connection.receiver_username}`).emit("connectionRemoved", {
+        requestId: String(connection.request_id),
+      });
+      socket.emit("connectionRemoved", {
+        requestId: String(connection.request_id),
+      });
+      socket.emit("refreshConnections");
+    } catch (error) {
+      console.error("REMOVE CONNECTION ERROR:", error);
+
+      socket.emit("connectionRemovalError", {
+        message: "Could not remove connection",
+      });
+    }
+  });
+};

@@ -18,6 +18,7 @@ import {
   getConnections,
   acceptConnectionRequest,
   rejectConnectionRequest,
+  removeConnection,
 } from "./controllers/userController.js";
 // used for env variables
 dotenv.config();
@@ -66,6 +67,8 @@ io.on("connection", (socket) => {
   acceptConnectionRequest(socket);
   // User Rejected Connection Request
   rejectConnectionRequest(socket);
+  // User Remove Existing Connections
+  removeConnection(socket);
 });
 
 // Create Postgres Database Pool

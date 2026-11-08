@@ -254,6 +254,8 @@ class ConnectionsProvider extends ChangeNotifier {
                   icon: const Icon(Icons.person)));
         }
         notifyListeners();
+
+        SocketIoClient.socket.emit("getConnections", username);
       },
     );
 
@@ -272,6 +274,9 @@ class ConnectionsProvider extends ChangeNotifier {
         );
 
         notifyListeners();
+
+        // Fetch the latest connections from PostgreSQL
+        SocketIoClient.socket.emit("getConnections", username);
       },
     );
 
@@ -279,28 +284,36 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRemoved",
       (data) {
-        logger.i("Event: connectionRemoved");
-        // connections.removeWhere(
-        //   (connection) => connection.requestId == data["connectionId"],
-        // );
+        logger.i("Event: connectionRemoved - $data");
 
+        final requestId = data["requestId"].toString();
+
+        connections.removeWhere(
+          (connection) => connection.requestId == requestId,
+        );
         notifyListeners();
       },
     );
-    // Load Existing Pending Requests
+    SocketIoClient.socket.off("refreshConnections");
 
-    //   "getConnectionRequests",
-    //   username,
-    // );
-    // SocketIoClient.socket.emit(
-    //   "getConnections",
-    //   username,
-    // );
+    SocketIoClient.socket.on("refreshConnections", (_) {
+      logger.i("Refreshing connections after removal");
+
+      SocketIoClient.socket.emit("getConnections", username);
+    });
   }
 
   // Save List of Users from Add Connection Search Box
   saveUserList(connectionRequestList) {
     this.connectionRequestList = connectionRequestList;
     notifyListeners();
+  }
+
+  void removeConnection(String requestId) {
+    logger.i("EMITTING REMOVE CONNECTION: $requestId");
+    SocketIoClient.socket.emit(
+      "removeConnection",
+      {"requestId": requestId},
+    );
   }
 }

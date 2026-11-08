@@ -10,6 +10,7 @@ import '../desk_dock_button_templates/messages_template.dart';
 import 'actions_buttons.dart';
 import 'desk_connection_tactile.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:intl/intl.dart';
 
 class ConnectionsPopUp extends StatefulWidget {
   const ConnectionsPopUp({super.key});
@@ -101,7 +102,12 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                 fontSize: 2.5.sp(context),
               ),
             ),
-            const ActionsButtons(),
+            ActionsButtons(
+              requestId: connection.requestId,
+              onRemoveConnection: (id) {
+                _connectionsProvider.removeConnection(id);
+              },
+            ),
           ];
         }).toList(),
         fontSize: 2.5.sp(context),
@@ -142,7 +148,8 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
               ),
             ),
             Text(
-              request.timestamp.toString(),
+              DateFormat('MMM d, yyyy • h:mm a')
+                  .format(request.timestamp.toLocal()),
               style: TextStyle(
                 fontSize: 2.5.sp(context),
               ),

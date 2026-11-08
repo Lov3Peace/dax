@@ -229,12 +229,11 @@ class _LogoutState extends State<Logout> {
                               router.go("/launch");
                             }
                           },
+                          width: 7.w(context),
                           color1: red,
                           color2: red,
                           scale: 1.05,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: max(10, 1.5.w(context)),
-                              vertical: max(5, 0.5.w(context))),
+                          horizontalPadding: max(10, 1.5.w(context)),
                           // padding: EdgeInsetsGeometry.symmetric(
                           //     horizontal: 1.w(context),
                           //     vertical: 0.5.w(context)),

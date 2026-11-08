@@ -166,7 +166,7 @@ class _LogoutProfileBubbleState extends State<LogoutProfileBubble> {
               ],
             ),
             Wrap(
-              spacing: 1.w(context),
+              spacing: 0.5.w(context),
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
                 //
@@ -230,25 +230,17 @@ class _LogoutProfileBubbleState extends State<LogoutProfileBubble> {
                               router.go("/launch");
                             }
                           },
+                          width: 5.75.w(context),
+                          // height: 2.25.w(context),
                           color1: red,
                           color2: red,
                           scale: 1.05,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: max(10, 1.5.w(context)),
-                              vertical: max(5, 0.5.w(context))),
-                          // padding: EdgeInsetsGeometry.symmetric(
-                          //     horizontal: 1.w(context),
-                          //     vertical: 0.5.w(context)),
+                          horizontalPadding: max(10, 1.w(context)),
                           borderRadius: 50.w(context),
                           borderColor: tran,
-                          child: Text(
-                            "Logout",
-                            style: TextStyle(
-                              fontSize: max(10, 2.sp(context)),
-                              fontWeight: FontWeight.bold,
-                              color: white,
-                            ),
-                          ),
+                          text: "Logout",
+                          textStyle:
+                              TextStyle(fontSize: max(10, 2.5.sp(context))),
                         ),
                       ),
                     )),

@@ -56,26 +56,22 @@ class _MiniProjectDashFeedState extends State<MiniProjectDashFeed> {
                   feedSocketIoProvider.toggleNewPostTextBox();
                   _projectFeedPostController.clear();
                 },
+                width: 8.w(context),
+                height: 30,
                 scale: 1.04,
-                padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: max(10, 2.w(context)),
-                  vertical: max(5, 0.5.w(context)),
-                ),
-                borderRadius: 10.w(context),
+                horizontalPadding: max(10, 2.w(context)),
+                borderRadius: 50.w(context),
                 borderColor: darkGrey,
-                child: Text(
-                  feedSocketIoProvider.showNewPostTextBox
-                      ? "Cancel"
-                      : "New Post",
-                  style: TextStyle(
-                      fontSize: max(12, 2.sp(context)), color: darkGrey),
-                ),
-              )
+                text: feedSocketIoProvider.showNewPostTextBox
+                    ? "sdaffs"
+                    : "dsafasdf",
+                textStyle: TextStyle(color: darkGrey),
+              ),
             ],
           ),
-          SizedBox(
-            height: max(5, 0.5.w(context)),
-          ),
+          // SizedBox(
+          //   height: max(5, 0.5.w(context)),
+          // ),
           Expanded(
             child: StaggerLoad(
                 duration: 300,
@@ -152,9 +148,9 @@ class _NewProjectFeedPostTextfieldState
                     post();
                   }
                 },
+                width: 7.w(context),
                 scale: 1.03,
-                padding: EdgeInsets.symmetric(
-                    horizontal: 1.5.w(context), vertical: 0.5.w(context)),
+                horizontalPadding: 1.5.w(context),
                 color1: pink,
                 color2: red,
                 borderRadius: 20.w(context),

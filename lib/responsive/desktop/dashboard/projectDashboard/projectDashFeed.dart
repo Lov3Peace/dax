@@ -60,11 +60,9 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
                   _textFieldFocusNode.requestFocus();
                   _projectFeedPostController.clear();
                 },
+                width: 8.w(context),
                 scale: 1.04,
-                padding: EdgeInsetsGeometry.symmetric(
-                  horizontal: max(10, 2.w(context)),
-                  vertical: max(5, 0.5.w(context)),
-                ),
+                horizontalPadding: max(10, 2.w(context)),
                 borderRadius: 10.w(context),
                 borderColor: darkGrey,
                 child: Text(
@@ -74,6 +72,7 @@ class _ProjectDashFeedState extends State<ProjectDashFeed> {
                   style: TextStyle(
                     fontSize: max(12, 2.sp(context)),
                     color: white,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               )
@@ -197,12 +196,12 @@ class _NewProjectFeedPostTextfieldState
                       post();
                     }
                   },
+                  width: 7.w(context),
                   isLoading: isLoading,
                   scale: 1.03,
                   // width: max(75, 5.w(context)),
                   // height: max(30, 2.w(context)),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: 1.5.w(context), vertical: 0.5.w(context)),
+                  horizontalPadding: 1.5.w(context),
                   color1: pink,
                   color2: red,
                   borderRadius: 20.w(context),

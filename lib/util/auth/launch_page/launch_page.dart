@@ -438,31 +438,31 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                           //
                                           // Back Button
                                           PillButton(
-                                              onTap: () {
-                                                usernameFocusNode
-                                                    .requestFocus();
-                                                usernameToPasswordAnimationController
-                                                    .reverse();
-                                              },
-                                              scale: 1.05,
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 1.5.w(context),
-                                                  vertical: 0.5.w(context)),
-                                              borderRadius: 20.w(context),
-                                              borderColor: deckBorderColor,
-                                              child: const Text("Back")),
+                                            onTap: () {
+                                              usernameFocusNode.requestFocus();
+                                              usernameToPasswordAnimationController
+                                                  .reverse();
+                                            },
+                                            width: 7.w(context),
+                                            // height: max(20, 2.w(context)),
+                                            scale: 1.05,
+                                            horizontalPadding: 1.5.w(context),
+                                            borderRadius: 20.w(context),
+                                            borderColor: deckBorderColor,
+                                            text: "Back",
+                                          ),
                                           //
                                           // Forgot Password Button
                                           PillButton(
-                                              onTap: () {},
-                                              scale: 1.05,
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 1.5.w(context),
-                                                  vertical: 0.5.w(context)),
-                                              borderRadius: 20.w(context),
-                                              borderColor: deckBorderColor,
-                                              child: const Text(
-                                                  "Forgot Password?")),
+                                            onTap: () {},
+                                            width: 12.w(context),
+                                            // height: max(20, 2.w(context)),
+                                            scale: 1.05,
+                                            horizontalPadding: 1.5.w(context),
+                                            borderRadius: 20.w(context),
+                                            borderColor: deckBorderColor,
+                                            text: "Forgot Password?",
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -497,14 +497,14 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                             "Remember Me",
                                             style: TextStyle(
                                                 fontSize:
-                                                    max(12, 2.5.sp(context))),
+                                                    max(12, 3.sp(context))),
                                           ),
                                           //
                                           // Remember Me Switch
                                           Container(
                                             padding: EdgeInsets.only(
                                                 left: 0.5.w(context)),
-                                            width: 3.5.w(context),
+                                            width: max(20, 3.5.w(context)),
                                             // height: 30,
                                             child: FittedBox(
                                               fit: BoxFit.fill,

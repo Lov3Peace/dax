@@ -207,7 +207,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                   child: Text(
                     "Connections",
                     style: TextStyle(
-                      fontSize: 7.sp(context),
+                      fontSize: 7.75.sp(context),
                       fontWeight: FontWeight.w800,
                     ),
                   ),

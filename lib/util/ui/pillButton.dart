@@ -7,37 +7,35 @@ class PillButton extends StatelessWidget {
   PillButton({
     super.key,
     required this.onTap,
+    required this.width,
     required this.borderRadius,
-    required this.borderColor,
+    this.maxWidth = 500,
     this.child,
     this.text,
-    this.textStyle,
-    // this.fontSize,
-    this.horizontalPadding = 0,
+    this.textStyle = const TextStyle(overflow: TextOverflow.ellipsis),
+    this.horizontalPadding = 10,
     this.height,
-    this.width,
-    this.padding,
     this.scale = 1.03,
     this.isLoading = false,
     this.color1 = tran,
     this.color2 = tran,
+    this.borderColor = tran,
   });
 
   final Widget? child;
   final VoidCallback onTap;
   final double borderRadius;
-  final EdgeInsetsGeometry? padding;
   final double horizontalPadding;
   final double? height;
-  final double? width;
+  final double width;
   final String? text;
   final TextStyle? textStyle;
-  // final fontSize;
+  final double maxWidth;
   bool isLoading;
   double scale;
-  Color color1 = tran;
-  Color color2 = tran;
-  Color borderColor = deckBorderColor;
+  Color color1;
+  Color color2;
+  Color borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -45,15 +43,17 @@ class PillButton extends StatelessWidget {
         onTap: onTap,
         scale: scale,
         child: Container(
-          height: height,
+          height: width / 3,
           width: width,
-          padding: EdgeInsetsGeometry.symmetric(
-              horizontal: horizontalPadding, vertical: horizontalPadding / 2),
+          padding: EdgeInsetsGeometry.symmetric(horizontal: horizontalPadding),
+          constraints: BoxConstraints(maxWidth: maxWidth),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(borderRadius),
             border: Border.all(color: borderColor),
             gradient: LinearGradient(colors: [color1, color2]),
           ),
+          // Show loading indicator if it's loading. Show text if text is null but the child if it's not. (Need text! and child ?? to bypass null
+          // requirements)
           child: Center(
             child: isLoading
                 ? SizedBox(
@@ -67,7 +67,7 @@ class PillButton extends StatelessWidget {
                 : (text != null
                     ? Text(
                         text!,
-                        style: TextStyle(fontSize: 2.25.sp(context)),
+                        style: textStyle,
                       )
                     : child ?? const SizedBox()),
           ),

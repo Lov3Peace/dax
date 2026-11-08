@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   skills: { type: Array },
   projects: { type: Array, required: true, default: [] },
   online: { type: Boolean, required: true },
+  lastSeen: { type: Date, default: null },
   // profile: {type: String, required: true, default: ''}
 });
 

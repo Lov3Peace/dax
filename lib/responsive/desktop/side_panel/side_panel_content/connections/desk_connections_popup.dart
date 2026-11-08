@@ -96,7 +96,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
               ),
             ),
             Text(
-              connection.timestamp.toString(),
+              connection.lastSeenDisplay,
               style: TextStyle(
                 fontSize: 2.5.sp(context),
               ),

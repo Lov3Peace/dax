@@ -9,6 +9,8 @@ class Connection {
   final String receiverUsername;
   final int status;
   final DateTime timestamp;
+  final bool online;
+  final DateTime? lastSeen;
 
   Connection({
     required this.requestId,
@@ -16,6 +18,8 @@ class Connection {
     required this.receiverUsername,
     required this.status,
     required this.timestamp,
+    required this.online,
+    required this.lastSeen,
   });
 
   factory Connection.fromJson(Map<String, dynamic> json) {
@@ -25,7 +29,31 @@ class Connection {
       receiverUsername: json["receiver_username"],
       status: json["status"],
       timestamp: DateTime.parse(json["timestamp"]),
+      online: json['online'] ?? false,
+      lastSeen:
+          json['lastSeen'] != null ? DateTime.parse(json['lastSeen']) : null,
     );
+  }
+
+  String get lastSeenDisplay {
+    if (online) return "Now";
+
+    if (lastSeen == null) return "Unknown";
+
+    final difference = DateTime.now().difference(lastSeen!);
+
+    if (difference.inMinutes < 1) return "Just now";
+    if (difference.inMinutes < 60) {
+      return "${difference.inMinutes}m ago";
+    }
+    if (difference.inHours < 24) {
+      return "${difference.inHours}h ago";
+    }
+    if (difference.inDays < 7) {
+      return "${difference.inDays}d ago";
+    }
+
+    return "${lastSeen!.toLocal().month}/${lastSeen!.toLocal().day}/${lastSeen!.toLocal().year}";
   }
 }
 
@@ -39,12 +67,43 @@ class ConnectionsProvider extends ChangeNotifier {
     logger.i("Connection Socket Enabled");
     logger.i("Username: $username");
     logger.i("Socket ID: ${SocketIoClient.socket.id}");
-
-    // Join User Room
-    SocketIoClient.socket.emit(
-      "joinUserRoom",
-      username,
+    logger.i(
+      "SOCKET CHECK: connected=${SocketIoClient.socket.connected}, "
+      "id=${SocketIoClient.socket.id}",
     );
+    // Join User Room
+    // SocketIoClient.socket.emit(
+    //   "joinUserRoom",
+    //   username,
+    // );
+    final socket = SocketIoClient.socket;
+
+    socket.off("currentConnectionRequests");
+    socket.off("connectionRequestSent");
+    socket.off("connectionRequestError");
+    socket.off("connectionRequestReceived");
+    socket.off("connectionRequestAccepted");
+    socket.off("connectionRequestRejected");
+    socket.off("connectionRemoved");
+    socket.off("connections");
+    socket.off("userRoomJoined");
+
+    void joinRoom() {
+      socket.emit("joinUserRoom", username);
+      socket.emit("getConnectionRequests", username);
+      socket.emit("getConnections", username);
+    }
+
+    if (socket.connected) {
+      joinRoom();
+    } else {
+      socket.once("connect", (_) {
+        joinRoom();
+      });
+
+      socket.connect();
+    }
+
     SocketIoClient.socket.on("userRoomJoined", (_) {
       logger.i("User Room Joined Successfully");
     }); //
@@ -229,14 +288,14 @@ class ConnectionsProvider extends ChangeNotifier {
       },
     );
     // Load Existing Pending Requests
-    SocketIoClient.socket.emit(
-      "getConnectionRequests",
-      username,
-    );
-    SocketIoClient.socket.emit(
-      "getConnections",
-      username,
-    );
+
+    //   "getConnectionRequests",
+    //   username,
+    // );
+    // SocketIoClient.socket.emit(
+    //   "getConnections",
+    //   username,
+    // );
   }
 
   // Save List of Users from Add Connection Search Box

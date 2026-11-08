@@ -67,6 +67,8 @@ export const getLocation = async (req, res) => {
 // Join Room for User by username
 export const joinUserRoom = (socket) => {
   socket.on("joinUserRoom", (username) => {
+    socket.data.username = username;
+
     socket.join(`user: ${username}`);
 
     console.log(
@@ -74,6 +76,30 @@ export const joinUserRoom = (socket) => {
     );
 
     socket.emit("userRoomJoined");
+  });
+
+  socket.on("disconnect", async () => {
+    const username = socket.data.username;
+
+    if (!username) return;
+
+    // Check whether the user has other active connections
+    const sockets = await io.in(`user:${username}`).fetchSockets();
+
+    if (sockets.length > 0) return;
+
+    console.log(`${username} went offline at ${new Date().toISOString()}`);
+
+    const result = await User.updateOne(
+      { username },
+      {
+        $set: {
+          online: false,
+          lastSeen: new Date(),
+        },
+      },
+    );
+    // Next: Save this timestamp to MongoDB
   });
 };
 
@@ -88,8 +114,7 @@ export const sendConnectionRequest = (socket) => {
         // Check for an existing connection in either direction
         const existingConnection = await pgClient.query(
           `
-          SELECT status
-          FROM users.connection_requests
+          SELECT status FROM users.connection_requests
           WHERE
             (sender_username = $1 AND receiver_username = $2)
             OR
@@ -230,7 +255,6 @@ export const rejectConnectionRequest = (socket) => {
   socket.on("rejectConnection", async (data) => {
     try {
       const { requestId, username } = data;
-
       const result = await pgClient.query(
         `
         DELETE FROM users.connection_requests
@@ -241,7 +265,6 @@ export const rejectConnectionRequest = (socket) => {
         `,
         [requestId, username],
       );
-
       const connection = result.rows[0];
 
       if (!connection) {
@@ -286,8 +309,29 @@ export const getConnections = (socket) => {
         `,
         [username],
       );
-      console.log("CONNECTIONS FOUND:", result.rows);
-      socket.emit("connections", result.rows);
+
+      // Get the other user's username for each connection
+      const connections = await Promise.all(
+        result.rows.map(async (connection) => {
+          const friendUsername =
+            connection.sender_username === username
+              ? connection.receiver_username
+              : connection.sender_username;
+
+          const user = await User.findOne({
+            username: friendUsername,
+          }).select("online lastSeen");
+
+          return {
+            ...connection,
+            online: user?.online ?? false,
+            lastSeen: user?.lastSeen ?? null,
+          };
+        }),
+      );
+
+      console.log("CONNECTIONS FOUND:", connections);
+      socket.emit("connections", connections);
     } catch (error) {
       console.error(error);
 

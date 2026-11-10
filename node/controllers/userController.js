@@ -70,7 +70,10 @@ export const joinUserRoom = (socket) => {
     socket.data.username = username;
 
     socket.join(`user: ${username}`);
-
+    socket.broadcast.emit("userPresenceChanged", {
+      username,
+      online: true,
+    });
     console.log(
       `Socket ${socket.id} joined room 'user: ${username}' successfully`,
     );
@@ -99,6 +102,11 @@ export const joinUserRoom = (socket) => {
         },
       },
     );
+    socket.broadcast.emit("userPresenceChanged", {
+      username,
+      online: false,
+      lastSeen: new Date().toISOString(),
+    });
     // Next: Save this timestamp to MongoDB
   });
 };
@@ -158,11 +166,9 @@ export const sendConnectionRequest = (socket) => {
 
         const connection = result.rows[0];
 
-        console.log(`Sending to ${user}`);
         // Notify recipient
         io.to(`user: ${user}`).emit("connectionRequestReceived", connection);
 
-        console.log(`From ${senderUsername}`);
         // Confirm successful request to sender
         io.to(`user: ${senderUsername}`).emit(
           "connectionRequestSent",
@@ -208,7 +214,6 @@ export const getConnectionRequest = (socket) => {
 // Accept Connection Request
 export const acceptConnectionRequest = (socket) => {
   socket.on("acceptConnection", async (data) => {
-    console.log("ACCEPT CONNECTION RECEIVED:", data);
     try {
       const { requestId, username } = data;
 
@@ -294,7 +299,6 @@ export const rejectConnectionRequest = (socket) => {
 // Get Accepted Connections
 export const getConnections = (socket) => {
   socket.on("getConnections", async (username) => {
-    console.log("GET CONNECTIONS HIT:", username);
     try {
       const result = await pgClient.query(
         `
@@ -330,7 +334,6 @@ export const getConnections = (socket) => {
         }),
       );
 
-      console.log("CONNECTIONS FOUND:", connections);
       socket.emit("connections", connections);
     } catch (error) {
       console.error(error);
@@ -347,10 +350,6 @@ export const removeConnection = (socket) => {
     try {
       const { requestId } = data;
       const username = socket.data.username;
-      console.log("REMOVE CONNECTION REQUEST:", {
-        requestId,
-        username,
-      });
       if (!username) {
         return socket.emit("connectionRemovalError", {
           message: "User not authenticated",
@@ -378,18 +377,6 @@ export const removeConnection = (socket) => {
           message: "Connection not found or unauthorized",
         });
       }
-      console.log("REMOVAL ROOMS:", {
-        sender: connection.sender_username,
-        receiver: connection.receiver_username,
-        senderRoom: `user:${connection.sender_username}`,
-        receiverRoom: `user:${connection.receiver_username}`,
-      });
-      console.log(
-        "SOCKETS IN RECEIVER ROOM:",
-        (
-          await io.in(`user:${connection.receiver_username}`).fetchSockets()
-        ).map((socket) => socket.id),
-      );
       io.to(`user: ${connection.sender_username}`).emit("connectionRemoved", {
         requestId: String(connection.request_id),
       });

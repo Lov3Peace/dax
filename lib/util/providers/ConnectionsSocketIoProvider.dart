@@ -112,7 +112,6 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "currentConnectionRequests",
       (data) {
-        logger.i("Event: currentConnectionRequests");
         print(data);
         pendingRequests = (data[0] as List)
             .map(
@@ -129,7 +128,6 @@ class ConnectionsProvider extends ChangeNotifier {
       logger.w("Event: connectionRequestSent");
       showPopupMessage(
           "Connection Request Sent!", navigatorKey.currentState?.context);
-      print("Sent!");
     });
 
     // Connection Request error
@@ -142,9 +140,6 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connections",
       (data) {
-        logger.i("Event: connections");
-        logger.i("Raw connections: $data");
-
         final records = data is List && data.isNotEmpty && data.first is List
             ? data.first as List
             : data as List;
@@ -158,7 +153,6 @@ class ConnectionsProvider extends ChangeNotifier {
             )
             .toList();
 
-        logger.i("Parsed connections: ${connections.length}");
         notifyListeners();
       },
     );
@@ -167,10 +161,6 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRequestReceived",
       (data) {
-        logger.i("Event: connectionRequestReceived");
-        // logger.i("Data: $data");
-        // var req = data[0];
-        // logger.i("Req: $req");
         final request = Connection.fromJson(
           Map<String, dynamic>.from(data[0]),
         );
@@ -198,7 +188,6 @@ class ConnectionsProvider extends ChangeNotifier {
                   },
                 );
                 closeNoticiationPopup();
-                logger.i("Connection Request Accepted");
               },
               onReject: () {
                 if (!SocketIoClient.socket.connected) {
@@ -213,7 +202,6 @@ class ConnectionsProvider extends ChangeNotifier {
                   },
                 );
                 closeNoticiationPopup();
-                logger.i("Connection Request Rejected");
               },
               notificationHeader: "Connection Request Received",
               notificationText: data[0]["sender_username"],
@@ -225,12 +213,19 @@ class ConnectionsProvider extends ChangeNotifier {
       },
     );
 
+    // Online / Offline Status
+    SocketIoClient.socket.off("userPresenceChanged");
+
+    SocketIoClient.socket.on("userPresenceChanged", (data) {
+      logger.i("Presence changed: $data");
+
+      SocketIoClient.socket.emit("getConnections", username);
+    });
+
     // Connection Request Accepted
     SocketIoClient.socket.on(
       "connectionRequestAccepted",
       (data) {
-        logger.i("Event: connectionRequestAccepted");
-
         final connection = Connection.fromJson(
           Map<String, dynamic>.from(data[0]),
         );
@@ -263,8 +258,6 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRequestRejected",
       (data) {
-        logger.i("Event: connectionRequestRejected");
-
         final connection = Connection.fromJson(
           Map<String, dynamic>.from(data[0]),
         );
@@ -284,9 +277,7 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRemoved",
       (data) {
-        logger.i("Event: connectionRemoved - $data");
-
-        final requestId = data["requestId"].toString();
+        final requestId = data[0]["requestId"].toString();
 
         connections.removeWhere(
           (connection) => connection.requestId == requestId,
@@ -297,8 +288,6 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.off("refreshConnections");
 
     SocketIoClient.socket.on("refreshConnections", (_) {
-      logger.i("Refreshing connections after removal");
-
       SocketIoClient.socket.emit("getConnections", username);
     });
   }
@@ -310,7 +299,6 @@ class ConnectionsProvider extends ChangeNotifier {
   }
 
   void removeConnection(String requestId) {
-    logger.i("EMITTING REMOVE CONNECTION: $requestId");
     SocketIoClient.socket.emit(
       "removeConnection",
       {"requestId": requestId},

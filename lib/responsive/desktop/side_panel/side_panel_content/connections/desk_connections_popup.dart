@@ -91,8 +91,9 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
               ),
             ),
             Text(
-              'Connected',
+              connection.online ? 'Online' : 'Offline',
               style: TextStyle(
+                color: connection.online ? Colors.green : Colors.red,
                 fontSize: 2.5.sp(context),
               ),
             ),

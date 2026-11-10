@@ -444,24 +444,34 @@ class _LaunchPageState extends State<LaunchPage> with AnimationMixin {
                                                   .reverse();
                                             },
                                             width: 7.w(context),
-                                            // height: max(20, 2.w(context)),
+                                            height: max(20, 2.5.w(context)),
                                             scale: 1.05,
                                             horizontalPadding: 1.5.w(context),
                                             borderRadius: 20.w(context),
                                             borderColor: deckBorderColor,
                                             text: "Back",
+                                            textStyle: TextStyle(
+                                                fontSize:
+                                                    max(12, 2.sp(context)),
+                                                overflow:
+                                                    TextOverflow.ellipsis),
                                           ),
                                           //
                                           // Forgot Password Button
                                           PillButton(
                                             onTap: () {},
-                                            width: 12.w(context),
-                                            // height: max(20, 2.w(context)),
+                                            width: 10.w(context),
+                                            height: max(20, 2.5.w(context)),
                                             scale: 1.05,
                                             horizontalPadding: 1.5.w(context),
                                             borderRadius: 20.w(context),
                                             borderColor: deckBorderColor,
                                             text: "Forgot Password?",
+                                            textStyle: TextStyle(
+                                                fontSize:
+                                                    max(12, 2.sp(context)),
+                                                overflow:
+                                                    TextOverflow.ellipsis),
                                           ),
                                         ],
                                       ),

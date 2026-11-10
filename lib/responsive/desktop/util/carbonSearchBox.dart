@@ -1,20 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
-import 'package:flutter_application_1/util/PopupDialog.dart';
-import 'package:flutter_application_1/util/auth/registerForm.dart';
-import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
-import 'package:flutter_application_1/util/providers/userProvider.dart';
-import 'package:flutter_application_1/util/ui/CarbonCircleAvatar.dart';
-import 'package:flutter_application_1/util/ui/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/providers/projectProvider.dart';
+import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/pillButton.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
-import 'package:optimized_search_field/base_multi_search_field.dart';
-import 'package:http/browser_client.dart' as httpClient;
 import 'package:provider/provider.dart';
 
 class CarbonSearchBox extends StatefulWidget {
@@ -27,6 +17,7 @@ class CarbonSearchBox extends StatefulWidget {
     this.submit,
     this.textStyle,
     this.chipWidth,
+    this.labelText,
   });
   final Future Function(String) fetch;
   final List selectedOptions;
@@ -35,6 +26,7 @@ class CarbonSearchBox extends StatefulWidget {
   final VoidCallback? submit;
   final TextStyle? textStyle;
   final double? chipWidth;
+  final String? labelText;
 
   @override
   State<CarbonSearchBox> createState() => _CarbonSearchBoxState();
@@ -42,6 +34,7 @@ class CarbonSearchBox extends StatefulWidget {
 
 class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   // late ConnectionsProvider _connectionsProvider;
+  late UserProvider _userProvider;
   final TextEditingController _searchController = TextEditingController();
   Iterable _userList = [];
   Iterable<String> _optionsList = [];
@@ -64,6 +57,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   void initState() {
     super.initState();
     // _connectionsProvider = context.read<ConnectionsProvider>();
+    _userProvider = context.read<UserProvider>();
     // Attach a global key handler to the shared focus node.
     // It will catch Backspace and remove the last selected chip.
     _focusNode.onKeyEvent = (node, event) {
@@ -107,6 +101,9 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
               2, // disable typing once _selectedOptions length hits 3 (they can still click Submit)
           decoration: InputDecoration(
             // Only need to put padding on prefixIcon since it also affects the suffixIcon
+            labelText: widget.labelText,
+            labelStyle:
+                TextStyle(fontSize: max(12, 2.sp(context)), color: grey),
             prefixIcon: Padding(
               padding: EdgeInsetsDirectional.all(max(10, 0.5.w(context))),
               child: Row(
@@ -131,6 +128,8 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                             padding: EdgeInsets.only(right: 0.5.w(context)),
                             child: PillButton(
                               text: widget.selectedOptions[index],
+                              textStyle:
+                                  TextStyle(fontSize: max(12, 2.sp(context))),
                               width: widget.chipWidth ?? 7.w(context),
                               color1: deckBackgroundColor,
                               color2: deckColor,
@@ -159,12 +158,13 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                     child: PillButton(
                         onTap: widget.submit ?? () {},
                         text: "Submit",
+                        textStyle: TextStyle(fontSize: max(12, 2.sp(context))),
                         width: widget.submitButtonWidth,
                         horizontalPadding: 1.w(context),
                         borderRadius: 50.w(context),
                         borderColor: tran,
-                        color1: pink,
-                        color2: red),
+                        color1: red,
+                        color2: pink),
                   )
                 : null,
             enabledBorder: OutlineInputBorder(
@@ -239,7 +239,10 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                           onSelected(options.elementAt(index));
                         }
                       },
-                      child: Text(options.elementAt(index)),
+                      child: Text(
+                        options.elementAt(index),
+                        style: TextStyle(fontSize: max(12, 2.5.sp(context))),
+                      ),
                     ),
                   );
                 }),
@@ -261,7 +264,8 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         _optionsList = usernames.where((user) =>
             textEditingValue.text.length > 1 &&
             user.startsWith(textEditingValue.text.toLowerCase()) &&
-            !widget.selectedOptions.contains(user));
+            !widget.selectedOptions.contains(user) &&
+            !user.contains(_userProvider.username));
         return _optionsList;
       },
       // On select (mouse click) add the selection _selectedOptions and clear the search box

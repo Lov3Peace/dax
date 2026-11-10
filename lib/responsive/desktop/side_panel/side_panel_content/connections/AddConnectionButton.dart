@@ -29,26 +29,6 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
   final TextEditingController _teammatesSearchController =
       TextEditingController();
   final client = httpClient.BrowserClient()..withCredentials = true;
-  Future _fetchUsers(searchString) async {
-    // debugPrint("Users before setState fetch: $users");
-    try {
-      final getUsersEndpoint =
-          Uri.parse("$hostname/api/getUsers?searchString=$searchString");
-      final res = await client.get(
-        getUsersEndpoint,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      );
-      final body = jsonDecode(res.body);
-      users = body;
-      // debugPrint("Users after setState fetch: $users");
-      return users;
-    } catch (e) {
-      // debugPrint("Could not fetch users: $e");
-    }
-    // });
-  }
 
   late ConnectionsProvider _connectionsProvider;
   late UserProvider _userProvider;
@@ -163,6 +143,8 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
                             _connectionsProvider.connectionRequestList,
                         submitButtonWidth: 7.w(context),
                         listViewHeight: 6.sp(context),
+                        labelText: "Search Users...",
+                        textStyle: TextStyle(fontSize: max(12, 2.sp(context))),
                         submit: () {
                           SocketIoClient.socket.emit("sendConnectionRequest", {
                             "sender": _userProvider.username,

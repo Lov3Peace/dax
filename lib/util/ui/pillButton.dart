@@ -43,7 +43,7 @@ class PillButton extends StatelessWidget {
         onTap: onTap,
         scale: scale,
         child: Container(
-          height: width / 3,
+          height: height ?? width / 3,
           width: width,
           padding: EdgeInsetsGeometry.symmetric(horizontal: horizontalPadding),
           constraints: BoxConstraints(maxWidth: maxWidth),

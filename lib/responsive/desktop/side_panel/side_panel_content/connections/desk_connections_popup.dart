@@ -59,10 +59,6 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
     currentUsername = context.watch<UserProvider>().username;
     // Connection Provider
     _connectionsProvider = context.watch<ConnectionsProvider>();
-    // Pending Requests
-    List pendingRequests = _connectionsProvider.pendingRequests;
-    // Accepted Connections
-    List connections = _connectionsProvider.connections;
 
     // Each page represents a connection view
     // such as All Connections or Requests
@@ -70,7 +66,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
       //
       // All Connections
       CustomDataTable(
-        headers: [
+        headers: const [
           'Username',
           'Status',
           'Last Seen',
@@ -107,7 +103,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
         fontSize: 2.5.sp(context),
         columnSpacing: 7.w(context),
         horizontalMargin: 7.w(context),
-        topPadding: 1.h(context),
+        // topPadding: 1.h(context),
         decoration: BoxDecoration(
           color: deckBackgroundColor,
           borderRadius: BorderRadius.circular(

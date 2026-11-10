@@ -231,7 +231,7 @@ class _LogoutProfileBubbleState extends State<LogoutProfileBubble> {
                             }
                           },
                           width: 5.75.w(context),
-                          // height: 2.25.w(context),
+                          height: 2.25.w(context),
                           color1: red,
                           color2: red,
                           scale: 1.05,
@@ -240,7 +240,7 @@ class _LogoutProfileBubbleState extends State<LogoutProfileBubble> {
                           borderColor: tran,
                           text: "Logout",
                           textStyle:
-                              TextStyle(fontSize: max(10, 2.5.sp(context))),
+                              TextStyle(fontSize: max(10, 2.sp(context))),
                         ),
                       ),
                     )),

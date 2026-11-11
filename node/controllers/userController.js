@@ -344,6 +344,37 @@ export const getConnections = (socket) => {
     }
   });
 };
+
+export const getUserProfile = (socket) => {
+  socket.on("getUserProfile", async (username) => {
+    try {
+      if (typeof username !== "string" || !username.trim()) {
+        return socket.emit("userProfileError", {
+          message: "Invalid username",
+        });
+      }
+
+      const user = await User.findOne({
+        username: username.trim(),
+      }).select("username skills projects profile online lastSeen");
+
+      if (!user) {
+        return socket.emit("userProfileError", {
+          message: "User not found",
+        });
+      }
+
+      socket.emit("userProfileResponse", user.toObject());
+    } catch (error) {
+      console.error("Error retrieving user profile:", error);
+
+      socket.emit("userProfileError", {
+        message: "Could not retrieve user profile",
+      });
+    }
+  });
+};
+
 // Remove a accepted connection
 export const removeConnection = (socket) => {
   socket.on("removeConnection", async (data) => {

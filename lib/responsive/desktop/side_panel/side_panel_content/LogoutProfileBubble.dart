@@ -136,7 +136,11 @@ class _LogoutProfileBubbleState extends State<LogoutProfileBubble> {
                                     tag: 'profileHeroTag',
                                     flightShuttleBuilder: flightShuttleBuilder,
                                     child: Center(
-                                      child: ProfilePopup(),
+                                      child: ProfilePopup(
+                                        username: context
+                                            .read<UserProvider>()
+                                            .username,
+                                      ),
                                     ),
                                   );
                                 },

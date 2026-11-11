@@ -16,6 +16,7 @@ import {
   sendConnectionRequest,
   getConnectionRequest,
   getConnections,
+  getUserProfile,
   acceptConnectionRequest,
   rejectConnectionRequest,
   removeConnection,
@@ -63,6 +64,8 @@ io.on("connection", (socket) => {
   getConnectionRequest(socket);
   // Get Accepted Connections
   getConnections(socket);
+  //Get User Profile
+  getUserProfile(socket);
   // User Accepted Connection Request
   acceptConnectionRequest(socket);
   // User Rejected Connection Request

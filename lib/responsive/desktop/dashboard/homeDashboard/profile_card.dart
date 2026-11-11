@@ -39,7 +39,9 @@ class ProfileCard extends StatelessWidget {
                   tag: 'profileHeroTag',
                   flightShuttleBuilder: flightShuttleBuilder,
                   child: Center(
-                    child: ProfilePopup(),
+                    child: ProfilePopup(
+                      username: context.read<UserProvider>().username,
+                    ),
                   ),
                 );
               },

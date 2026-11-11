@@ -12,6 +12,16 @@ const userSchema = new mongoose.Schema({
   projects: { type: Array, required: true, default: [] },
   online: { type: Boolean, required: true },
   lastSeen: { type: Date, default: null },
+  profile: {
+    bio: { type: String, default: "" },
+    emblem: { type: String, default: "starter" },
+    title: { type: String, default: "" },
+    titles: { type: [String], default: [] },
+    crests: { type: [String], default: [] },
+    badges: { type: [String], default: [] },
+    showcase: { type: [String], default: [] },
+    goals: { type: [String], default: [] },
+  },
   // profile: {type: String, required: true, default: ''}
 });
 

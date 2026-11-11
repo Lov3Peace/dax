@@ -12,6 +12,8 @@ import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_p
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/pc_carousel_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_application_1/util/providers/profileSocketIoProvider.dart';
+import 'package:provider/provider.dart';
 
 // ProfileNotifier class for state management
 class ProfileNotifier extends ChangeNotifier {
@@ -20,14 +22,42 @@ class ProfileNotifier extends ChangeNotifier {
 
 // ProfilePopup UI
 class ProfilePopup extends StatefulWidget {
-  ProfilePopup({super.key});
+  final String username;
 
+  const ProfilePopup({
+    super.key,
+    required this.username,
+  });
   @override
   State<ProfilePopup> createState() => _ProfilePopupState();
 }
 
 class _ProfilePopupState extends State<ProfilePopup> {
   int currentSlide = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
+      context.read<ProfileProvider>().getUserProfile(widget.username);
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant ProfilePopup oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.username != widget.username) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+
+        context.read<ProfileProvider>().getUserProfile(widget.username);
+      });
+    }
+  }
 
   ptSwitch() {
     switch (currentSlide) {
@@ -120,7 +150,7 @@ class _ProfilePopupState extends State<ProfilePopup> {
                             ),
                             items: [
                               PcCarouselTemplate(
-                                child: PC1(),
+                                child: PC1(username: widget.username),
                               ),
                               PcCarouselTemplate(
                                 child: SingleChildScrollView(
@@ -205,4 +235,3 @@ class _ProfilePopupState extends State<ProfilePopup> {
     );
   }
 }
-

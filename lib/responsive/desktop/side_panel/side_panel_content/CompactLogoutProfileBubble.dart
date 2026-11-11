@@ -135,7 +135,11 @@ class _CompactLogoutProfileBubbleState
                                     tag: 'profileHeroTag',
                                     flightShuttleBuilder: flightShuttleBuilder,
                                     child: Center(
-                                      child: ProfilePopup(),
+                                      child: ProfilePopup(
+                                        username: context
+                                            .read<UserProvider>()
+                                            .username,
+                                      ),
                                     ),
                                   );
                                 },

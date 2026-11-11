@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/main.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_1/util/providers/profileSocketIoProvider.dart';
 
 /// PC1 - Emblem and badge display card
 ///
@@ -9,10 +11,20 @@ import 'package:flutter_application_1/main.dart';
 /// custom sizing extensions and structured for future dynamic data.
 
 class PC1 extends StatelessWidget {
-  PC1({super.key});
+  final String username;
 
+  const PC1({
+    super.key,
+    required this.username,
+  });
   @override
   Widget build(BuildContext context) {
+    final profileProvider = context.watch<ProfileProvider>();
+    final profile = profileProvider.profile?['profile'] ?? {};
+
+    final emblem = profile['emblem'] ?? 'starter';
+    final title = profile['title'] ?? '';
+
     return Container(
       height: 45.h(context),
       width: double.infinity,
@@ -32,12 +44,12 @@ class PC1 extends StatelessWidget {
                   CrossAxisAlignment.center, // center horizontally
               children: [
                 Image.asset(
-                  "images/creator.png",
+                  'images/${emblem == "starter" ? "creator" : emblem}.png',
                   height: 35.h(context),
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "Creator",
+                  title,
                   style: TextStyle(
                     color: white,
                     fontSize: 5.sp(context),

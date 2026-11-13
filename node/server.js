@@ -9,6 +9,8 @@ import {
   updateProjectCategoriesCollection,
 } from "./controllers/projectsController.js";
 import { updateProfileCrestsCollection } from "./controllers/profileController.js";
+import jwt from "jsonwebtoken";
+import { pubKey } from "./auth/keygen.js";
 import { Server } from "socket.io";
 import { createServer } from "node:http";
 import {
@@ -20,6 +22,7 @@ import {
   acceptConnectionRequest,
   rejectConnectionRequest,
   removeConnection,
+  updateUserBio,
 } from "./controllers/userController.js";
 // used for env variables
 dotenv.config();
@@ -44,10 +47,40 @@ export const io = new Server(server, {
 server.listen(port, () => {
   console.log(`Dax Server listening on port ${port}!`);
 });
+io.use((socket, next) => {
+  try {
+    const cookies = socket.handshake.headers.cookie || "";
+
+    const token = cookies
+      .split(";")
+      .map((c) => c.trim())
+      .find((c) => c.startsWith("accessToken="))
+      ?.split("=")[1];
+
+    const decoded = jwt.verify(token, pubKey, { algorithms: ["RS256"] });
+
+    socket.data.username = decoded.username;
+    next();
+  } catch (error) {
+    next(new Error("Unauthorized"));
+  }
+});
 
 io.on("connection", (socket) => {
   console.log("Connection from Socket ID: ", socket.id);
   console.log("Number of Listeners: ", socket.listenerCount());
+  console.log(
+    "Socket cookie present:",
+    Boolean(socket.handshake.headers.cookie),
+  );
+  console.log(
+    "Access token present:",
+    socket.handshake.headers.cookie
+      ?.split(";")
+      .some((c) => c.trim().startsWith("accessToken=")),
+  );
+  console.log("Socket connected:", socket.id);
+  console.log("Cookie present:", !!socket.handshake.headers.cookie);
   // console.log("Socket ID: ", socket.id);
   socket.emit("connected", "Connection to Socket.io Server Established");
   // Join Project Room by PID
@@ -66,6 +99,8 @@ io.on("connection", (socket) => {
   getConnections(socket);
   //Get User Profile
   getUserProfile(socket);
+  // update user bio
+  updateUserBio(socket);
   // User Accepted Connection Request
   acceptConnectionRequest(socket);
   // User Rejected Connection Request

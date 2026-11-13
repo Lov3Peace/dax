@@ -24,6 +24,9 @@ class PC1 extends StatelessWidget {
 
     final emblem = profile['emblem'] ?? 'starter';
     final title = profile['title'] ?? '';
+    final badges = List<String>.from(
+      profile['badges'] ?? [],
+    );
 
     return Container(
       height: 45.h(context),
@@ -83,11 +86,18 @@ class PC1 extends StatelessWidget {
                 Text(
                   "Badges",
                   style: TextStyle(
-                    color: white,
+                    color: Colors.white,
                     fontSize: 5.sp(context),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                ...badges.map((badge) => Text(
+                      badge,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 2.5.sp(context),
+                      ),
+                    )),
               ],
             ),
           ],

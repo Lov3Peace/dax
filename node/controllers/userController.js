@@ -345,6 +345,7 @@ export const getConnections = (socket) => {
   });
 };
 
+// retrieves user profile from mondgo
 export const getUserProfile = (socket) => {
   socket.on("getUserProfile", async (username) => {
     try {
@@ -370,6 +371,41 @@ export const getUserProfile = (socket) => {
 
       socket.emit("userProfileError", {
         message: "Could not retrieve user profile",
+      });
+    }
+  });
+};
+
+// updates the user's bio
+export const updateUserBio = (socket) => {
+  socket.on("updateUserBio", async ({ bio }) => {
+    try {
+      const username = socket.data.username;
+
+      if (!username) {
+        return socket.emit("userProfileError", {
+          message: "User not authenticated",
+        });
+      }
+
+      const user = await User.findOneAndUpdate(
+        { username },
+        { $set: { "profile.bio": bio } },
+        { new: true, runValidators: true },
+      );
+
+      if (!user) {
+        return socket.emit("userProfileError", {
+          message: "User not found",
+        });
+      }
+
+      socket.emit("userProfileResponse", user.toObject());
+    } catch (error) {
+      console.error("Error updating bio:", error);
+
+      socket.emit("userProfileError", {
+        message: "Could not update bio",
       });
     }
   });

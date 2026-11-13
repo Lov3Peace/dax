@@ -44,4 +44,10 @@ class ProfileProvider extends ChangeNotifier {
     );
     SocketIoClient.socket.emit("getUserProfile", username);
   }
+
+  void updateUserBio(String bio) {
+    SocketIoClient.socket.emit("updateUserBio", {
+      "bio": bio.trim(),
+    });
+  }
 }

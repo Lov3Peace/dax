@@ -2,7 +2,7 @@ import 'package:flutter_application_1/responsive/desktop/profile_popup/desk_prof
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
+// import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -28,26 +28,27 @@ class ProfileCard extends StatelessWidget {
 
     return TactileButton(
         onTap: () {
-          Navigator.of(context).push(
-            PageRouteBuilder(
-              opaque: false,
-              barrierDismissible: true,
-              fullscreenDialog: false,
-              transitionDuration: const Duration(milliseconds: 700),
-              pageBuilder: (_, __, ___) {
-                return Hero(
-                  tag: 'profileHeroTag',
-                  flightShuttleBuilder: flightShuttleBuilder,
-                  child: Center(
-                    child: ProfilePopup(
-                      username: context.read<UserProvider>().username,
-                    ),
-                  ),
-                );
-              },
-              transitionsBuilder: (_, anim, __, child) =>
-                  FadeTransition(opacity: anim, child: child),
+          showGeneralDialog(
+            context: context,
+            barrierDismissible: true,
+            barrierLabel: 'Close Profile',
+            barrierColor: Colors.black54,
+            transitionDuration: const Duration(milliseconds: 300),
+            pageBuilder: (context, _, __) => Center(
+              child: ProfilePopup(
+                username: context.read<UserProvider>().username,
+              ),
             ),
+            transitionBuilder: (context, animation, _, child) {
+              if (animation.status == AnimationStatus.reverse) {
+                return const SizedBox.shrink();
+              }
+
+              return ScaleTransition(
+                scale: animation,
+                child: child,
+              );
+            },
           );
         },
         child: BlurryContainer(

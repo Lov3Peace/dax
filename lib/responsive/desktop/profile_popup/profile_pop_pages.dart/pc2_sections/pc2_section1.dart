@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/responsive/desktop/profile_popup/profile_pop_pages.dart/carousel_contents_temp.dart';
-import 'package:flutter_application_1/util/ui/gradient_label.dart';
 import 'package:flutter_application_1/util/imports.dart';
-import 'package:flutter_application_1/util/ui/tactile_button.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../../../main.dart';
+import '../../../../../util/providers/userProvider.dart';
 import '../../../desk_decks.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_application_1/util/providers/profileSocketIoProvider.dart';
 
 /// Profile Card 2 Section1 - Profile bio and skills editor
 ///
@@ -16,76 +14,92 @@ import '../../../desk_decks.dart';
 /// for simple on-device storage between sessions.
 
 class Pc2Section1 extends StatefulWidget {
-  Pc2Section1({super.key});
+  const Pc2Section1({super.key});
 
   @override
-  State<Pc2Section1> createState() => Pc2Section1State();
+  State<Pc2Section1> createState() => _Pc2Section1State();
 }
 
-class Pc2Section1State extends State<Pc2Section1> {
-  TextEditingController bioController = TextEditingController();
-  Set<String> selectedSkills = {};
+class _Pc2Section1State extends State<Pc2Section1> {
+  final bioController = TextEditingController();
+  final bioFocus = FocusNode();
+
+  String loadedUsername = '';
 
   @override
   void initState() {
     super.initState();
 
-    loadBio();
-  }
-
-  Future<void> loadBio() async {
-    final prefs = await SharedPreferences.getInstance();
-    bioController.text = prefs.getString('user_bio') ?? '';
-    setState(() {});
-  }
-
-  Future<void> saveBio() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('user_bio', bioController.text.trim());
-  }
-
-  Future<void> loadSelectedSkills() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      selectedSkills = prefs.getStringList('selected_skills')?.toSet() ?? {};
+    bioFocus.addListener(() {
+      if (!bioFocus.hasFocus) {
+        saveBio();
+      }
     });
   }
 
-  Future<void> saveSelectedSkills() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('selected_skills', selectedSkills.toList());
+  void saveBio() {
+    final profile = context.read<ProfileProvider>().profile;
+    final username = context.read<UserProvider>().username;
+
+    if (username.isNotEmpty &&
+        username == profile?['username'] &&
+        bioController.text != (profile?['profile']?['bio'] ?? '')) {
+      context.read<ProfileProvider>().updateUserBio(
+            bioController.text,
+          );
+    }
+  }
+
+  @override
+  void dispose() {
+    bioFocus.dispose();
+    bioController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final profile = context.watch<ProfileProvider>().profile;
+
+    final bio = profile?['profile']?['bio'] ?? '';
+    final username = profile?['username'] ?? '';
+
+    if (loadedUsername != username) {
+      loadedUsername = username;
+      bioController.text = bio;
+    }
+
+    final skills = List<String>.from(
+      profile?['skills'] ?? [],
+    );
+
+    final loggedInUsername = context.watch<UserProvider>().username;
+
+    final isOwner = loggedInUsername.isNotEmpty && loggedInUsername == username;
+
     return CarouselContentsTemp(
       child: SingleChildScrollView(
         child: Column(
           children: [
-            buildBio(),
-            SizedBox(
-              height: 1.h(context),
-            ),
-            buildSkills(),
+            buildBio(context, bio, isOwner),
+            SizedBox(height: 1.h(context)),
+            buildSkills(context, skills),
           ],
         ),
       ),
     );
   }
 
-  buildBio() {
+  Widget buildBio(BuildContext context, String bio, bool isOwner) {
     return Container(
       height: 21.5.h(context),
       width: 20.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(70, 32, 32, 40),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(40),
-        ),
+        borderRadius: BorderRadius.circular(40),
         border: Border.all(color: deckBorderColor),
       ),
       child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.all(2.h(context)),
           child: Column(
@@ -94,21 +108,32 @@ class Pc2Section1State extends State<Pc2Section1> {
               Text(
                 'Bio',
                 style: TextStyle(
-                    fontSize: 5.sp(context), fontWeight: FontWeight.bold),
-              ),
-              TextField(
-                controller: bioController,
-                style:
-                    TextStyle(fontSize: 2.5.sp(context), color: Colors.white),
-                decoration: const InputDecoration(
-                  hintText: "Tell Us About Yourself!",
-                  hintStyle: TextStyle(color: Colors.white54),
-                  border: InputBorder.none,
+                  fontSize: 5.sp(context),
+                  fontWeight: FontWeight.bold,
                 ),
-                maxLines: null, // Allows infinite lines
-                keyboardType: TextInputType.multiline,
-                onChanged: (text) => saveBio(),
               ),
+              isOwner
+                  ? TextField(
+                      controller: bioController,
+                      focusNode: bioFocus,
+                      style: TextStyle(
+                        fontSize: 2.5.sp(context),
+                        color: Colors.white,
+                      ),
+                      decoration: const InputDecoration(
+                        hintText: 'Tell Us About Yourself!',
+                        border: InputBorder.none,
+                      ),
+                      maxLines: null,
+                      onTapOutside: (_) => bioFocus.unfocus(),
+                    )
+                  : Text(
+                      bio.isEmpty ? 'No bio added yet.' : bio,
+                      style: TextStyle(
+                        fontSize: 2.5.sp(context),
+                        color: Colors.white,
+                      ),
+                    ),
             ],
           ),
         ),
@@ -116,15 +141,13 @@ class Pc2Section1State extends State<Pc2Section1> {
     );
   }
 
-  buildSkills() {
+  Widget buildSkills(BuildContext context, List<String> skills) {
     return Container(
       height: 21.5.h(context),
       width: 20.w(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(70, 32, 32, 40),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(40),
-        ),
+        borderRadius: BorderRadius.circular(40),
         border: Border.all(color: deckBorderColor),
       ),
       child: Padding(
@@ -135,25 +158,20 @@ class Pc2Section1State extends State<Pc2Section1> {
             Text(
               'Skills',
               style: TextStyle(
-                  fontSize: 5.sp(context), fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 1.h(context),
-            ),
-            TactileButton(
-              //             onTap: showSkillsDialog,
-              child: GradientContainer(
-                gradient1: red,
-                gradient2: purp,
-                height: 4.h(context),
-                width: 7.w(context),
-                neonGlow: purp,
-                text: 'Select Skills',
-                textSize: 2.5.sp(context),
-                borderColor: const Color.fromARGB(0, 255, 255, 255),
-                borderRadius: 500,
+                fontSize: 5.sp(context),
+                fontWeight: FontWeight.bold,
               ),
-            )
+            ),
+            SizedBox(height: 1.h(context)),
+            ...skills.map(
+              (skill) => Text(
+                skill,
+                style: TextStyle(
+                  fontSize: 2.5.sp(context),
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         ),
       ),

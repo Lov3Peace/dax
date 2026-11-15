@@ -23,6 +23,8 @@ import {
   rejectConnectionRequest,
   removeConnection,
   updateUserBio,
+  updateUserSkills,
+  updateUserGoals,
 } from "./controllers/userController.js";
 // used for env variables
 dotenv.config();
@@ -101,6 +103,10 @@ io.on("connection", (socket) => {
   getUserProfile(socket);
   // update user bio
   updateUserBio(socket);
+  // update user skills
+  updateUserSkills(socket);
+  // update user goals
+  updateUserGoals(socket);
   // User Accepted Connection Request
   acceptConnectionRequest(socket);
   // User Rejected Connection Request

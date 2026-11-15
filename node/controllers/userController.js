@@ -411,6 +411,102 @@ export const updateUserBio = (socket) => {
   });
 };
 
+// updates user skills
+export const updateUserSkills = (socket) => {
+  socket.on("updateUserSkills", async ({ skills }) => {
+    try {
+      const username = socket.data.username;
+
+      if (!username) {
+        return socket.emit("userProfileError", {
+          message: "User not authenticated",
+        });
+      }
+
+      if (
+        !Array.isArray(skills) ||
+        skills.length > 15 ||
+        skills.some(
+          (skill) =>
+            typeof skill !== "string" || !skill.trim() || skill.length > 40,
+        ) ||
+        new Set(skills.map((skill) => skill.trim().toLowerCase())).size !==
+          skills.length
+      ) {
+        return socket.emit("userProfileError", {
+          message: "Invalid skills",
+        });
+      }
+
+      const user = await User.findOneAndUpdate(
+        { username },
+        { $set: { skills: skills.map((skill) => skill.trim()) } },
+        { new: true, runValidators: true },
+      );
+
+      if (!user) {
+        return socket.emit("userProfileError", {
+          message: "User not found",
+        });
+      }
+
+      socket.emit("userProfileResponse", user.toObject());
+    } catch (error) {
+      console.error("Error updating skills:", error);
+
+      socket.emit("userProfileError", {
+        message: "Could not update skills",
+      });
+    }
+  });
+};
+// update users goals
+export const updateUserGoals = (socket) => {
+  socket.on("updateUserGoals", async ({ goals }) => {
+    try {
+      const username = socket.data.username;
+
+      if (!username) {
+        return socket.emit("userProfileError", {
+          message: "User not authenticated",
+        });
+      }
+
+      if (
+        !Array.isArray(goals) ||
+        goals.length > 5 ||
+        goals.some(
+          (goal) =>
+            typeof goal !== "string" || !goal.trim() || goal.length > 150,
+        )
+      ) {
+        return socket.emit("userProfileError", {
+          message: "Invalid goals",
+        });
+      }
+
+      const user = await User.findOneAndUpdate(
+        { username },
+        { $set: { "profile.goals": goals.map((goal) => goal.trim()) } },
+        { new: true, runValidators: true },
+      );
+
+      if (!user) {
+        return socket.emit("userProfileError", {
+          message: "User not found",
+        });
+      }
+
+      socket.emit("userProfileResponse", user.toObject());
+    } catch (error) {
+      console.error("Error updating goals:", error);
+      socket.emit("userProfileError", {
+        message: "Could not update goals",
+      });
+    }
+  });
+};
+
 // Remove a accepted connection
 export const removeConnection = (socket) => {
   socket.on("removeConnection", async (data) => {

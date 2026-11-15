@@ -22,6 +22,7 @@ class Pc2Section1 extends StatefulWidget {
 
 class _Pc2Section1State extends State<Pc2Section1> {
   final bioController = TextEditingController();
+  final skillController = TextEditingController();
   final bioFocus = FocusNode();
 
   String loadedUsername = '';
@@ -142,6 +143,28 @@ class _Pc2Section1State extends State<Pc2Section1> {
   }
 
   Widget buildSkills(BuildContext context, List<String> skills) {
+    final profile = context.watch<ProfileProvider>().profile;
+    final isOwner =
+        context.read<UserProvider>().username == profile?['username'];
+
+    void addSkill() {
+      final skill = skillController.text.trim();
+
+      if (skill.isEmpty ||
+          skill.length > 40 ||
+          skills.length >= 15 ||
+          skills.any((s) => s.toLowerCase() == skill.toLowerCase())) {
+        return;
+      }
+
+      context.read<ProfileProvider>().updateUserSkills([
+        ...skills,
+        skill,
+      ]);
+
+      skillController.clear();
+    }
+
     return Container(
       height: 21.5.h(context),
       width: 20.w(context),
@@ -163,15 +186,47 @@ class _Pc2Section1State extends State<Pc2Section1> {
               ),
             ),
             SizedBox(height: 1.h(context)),
-            ...skills.map(
-              (skill) => Text(
-                skill,
-                style: TextStyle(
-                  fontSize: 2.5.sp(context),
-                  color: Colors.white,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: skills.map((skill) {
+                    return Chip(
+                      label: Text(skill),
+                      onDeleted: isOwner
+                          ? () {
+                              context.read<ProfileProvider>().updateUserSkills(
+                                    skills.where((s) => s != skill).toList(),
+                                  );
+                            }
+                          : null,
+                    );
+                  }).toList(),
                 ),
               ),
             ),
+            if (isOwner && skills.length < 15)
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: skillController,
+                      maxLength: 40,
+                      decoration: const InputDecoration(
+                        hintText: 'Add a skill...',
+                        counterText: '',
+                        isDense: true,
+                      ),
+                      onSubmitted: (_) => addSkill(),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.add),
+                    onPressed: addSkill,
+                  ),
+                ],
+              ),
           ],
         ),
       ),

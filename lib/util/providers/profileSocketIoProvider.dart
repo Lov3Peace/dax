@@ -50,4 +50,16 @@ class ProfileProvider extends ChangeNotifier {
       "bio": bio.trim(),
     });
   }
+
+  void updateUserSkills(List<String> skills) {
+    SocketIoClient.socket.emit('updateUserSkills', {
+      'skills': skills,
+    });
+  }
+
+  void updateUserGoals(List<String> goals) {
+    SocketIoClient.socket.emit('updateUserGoals', {
+      'goals': goals,
+    });
+  }
 }

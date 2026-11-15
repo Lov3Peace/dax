@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/pillButton.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
@@ -33,7 +34,8 @@ class CarbonSearchBox extends StatefulWidget {
 }
 
 class _CarbonSearchBoxState extends State<CarbonSearchBox> {
-  // late ConnectionsProvider _connectionsProvider;
+  late ConnectionsProvider _connectionsProvider;
+  List _connections = [];
   late UserProvider _userProvider;
   final TextEditingController _searchController = TextEditingController();
   Iterable _userList = [];
@@ -56,7 +58,11 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   @override
   void initState() {
     super.initState();
-    // _connectionsProvider = context.read<ConnectionsProvider>();
+    _connectionsProvider = context.read<ConnectionsProvider>();
+    for (var conn in _connectionsProvider.connections) {
+      _connections.add(conn.senderUsername);
+    }
+    print("Connections: ${_connectionsProvider.connections}");
     _userProvider = context.read<UserProvider>();
     // Attach a global key handler to the shared focus node.
     // It will catch Backspace and remove the last selected chip.
@@ -265,7 +271,8 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
             textEditingValue.text.length > 1 &&
             user.startsWith(textEditingValue.text.toLowerCase()) &&
             !widget.selectedOptions.contains(user) &&
-            !user.contains(_userProvider.username));
+            !user.contains(_userProvider.username) &&
+            !_connections.contains(user));
         return _optionsList;
       },
       // On select (mouse click) add the selection _selectedOptions and clear the search box

@@ -60,128 +60,278 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
     // Connection Provider
     _connectionsProvider = context.watch<ConnectionsProvider>();
 
+    Widget heading(Widget child) => Padding(
+        padding: EdgeInsetsGeometry.symmetric(vertical: max(10, 1.w(context))),
+        child: child);
+    Widget cell(Widget child) => Padding(
+          padding:
+              EdgeInsetsGeometry.symmetric(vertical: max(10, 0.75.w(context))),
+          child: child,
+        );
     // Each page represents a connection view
     // such as All Connections or Requests
     connectionPages = [
+      Table(
+        children: [
+          TableRow(
+              decoration: BoxDecoration(
+                  border: BorderDirectional(
+                      bottom: BorderSide(width: 0.5, color: grey))),
+              children: [
+                heading(
+                  Center(
+                    child: Text(
+                      "Username",
+                      style: TextStyle(fontSize: max(12, 2.5.sp(context))),
+                    ),
+                  ),
+                ),
+                heading(
+                  Center(
+                    child: Text(
+                      "Status",
+                      style: TextStyle(fontSize: max(12, 2.5.sp(context))),
+                    ),
+                  ),
+                ),
+                heading(
+                  Center(
+                    child: Text(
+                      "Last Seen",
+                      style: TextStyle(fontSize: max(12, 2.5.sp(context))),
+                    ),
+                  ),
+                ),
+                heading(
+                  Center(
+                    child: Text(
+                      "Actions",
+                      style: TextStyle(fontSize: max(12, 2.5.sp(context))),
+                    ),
+                  ),
+                ),
+              ]),
+          ..._connectionsProvider.connections.map((connection) {
+            //     // Determine the Other User
+            final username = connection.senderUsername == currentUsername
+                ? connection.receiverUsername
+                : connection.senderUsername;
+
+            return TableRow(children: [
+              cell(Center(
+                child: Text(
+                  username,
+                  style: TextStyle(
+                    fontSize: 2.5.sp(context),
+                  ),
+                ),
+              )),
+              cell(
+                Center(
+                  child: Text(
+                    'Connected',
+                    style: TextStyle(
+                      fontSize: 2.5.sp(context),
+                    ),
+                  ),
+                ),
+              ),
+              cell(
+                Center(
+                  child: Text(
+                    connection.timestamp.toString(),
+                    style: TextStyle(
+                      fontSize: 2.5.sp(context),
+                    ),
+                  ),
+                ),
+              ),
+              cell(const Center(child: ActionsButtons())),
+            ]);
+          })
+        ],
+      ),
       //
       // All Connections
-      CustomDataTable(
-        headers: const [
-          'Username',
-          'Status',
-          'Last Seen',
-          'Actions',
+      DataTable(
+        headingTextStyle: TextStyle(fontSize: max(12, 2.5.sp(context))),
+        headingRowHeight: max(50, 3.w(context)),
+        dividerThickness: 0.5,
+        dataRowMinHeight: 25,
+        dataRowMaxHeight: 3.w(context),
+        columns: const [
+          DataColumn(
+              label: Text("Username"),
+              headingRowAlignment: MainAxisAlignment.center),
+          DataColumn(
+              label: Text("Status"),
+              headingRowAlignment: MainAxisAlignment.center),
+          DataColumn(
+              label: Text("Last Seen"),
+              headingRowAlignment: MainAxisAlignment.center),
+          DataColumn(
+              label: Text("Actions"),
+              headingRowAlignment: MainAxisAlignment.center),
         ],
         rows: _connectionsProvider.connections.map((connection) {
-          // Determine the Other User
+          //     // Determine the Other User
           final username = connection.senderUsername == currentUsername
               ? connection.receiverUsername
               : connection.senderUsername;
 
-          return [
-            Text(
-              username,
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
+          return DataRow(cells: [
+            DataCell(
+              Center(
+                child: Text(
+                  username,
+                  style: TextStyle(
+                    fontSize: 2.5.sp(context),
+                  ),
+                ),
               ),
             ),
-            Text(
-              'Connected',
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
+            DataCell(
+              Center(
+                child: Text(
+                  'Connected',
+                  style: TextStyle(
+                    fontSize: 2.5.sp(context),
+                  ),
+                ),
               ),
             ),
-            Text(
-              connection.timestamp.toString(),
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
+            DataCell(
+              Center(
+                child: Text(
+                  connection.timestamp.toString(),
+                  style: TextStyle(
+                    fontSize: 2.5.sp(context),
+                  ),
+                ),
               ),
             ),
-            const ActionsButtons(),
-          ];
+            const DataCell(
+              Center(child: ActionsButtons()),
+            ),
+          ]);
         }).toList(),
-        fontSize: 2.5.sp(context),
-        columnSpacing: 7.w(context),
-        horizontalMargin: 7.w(context),
-        // topPadding: 1.h(context),
-        decoration: BoxDecoration(
-          color: deckBackgroundColor,
-          borderRadius: BorderRadius.circular(
-            1.w(context),
-          ),
-          border: Border.all(
-            color: deckBorderColor,
-          ),
-        ),
+        // CustomDataTable(
+        //   headers: const [
+        //     'Username',
+        //     'Status',
+        //     'Last Seen',
+        //     'Actions',
+        //   ],
+        //   rows: _connectionsProvider.connections.map((connection) {
+        //     // Determine the Other User
+        //     final username = connection.senderUsername == currentUsername
+        //         ? connection.receiverUsername
+        //         : connection.senderUsername;
+        //
+        //     return [
+        //       Text(
+        //         username,
+        //         style: TextStyle(
+        //           fontSize: 2.5.sp(context),
+        //         ),
+        //       ),
+        //       Text(
+        //         'Connected',
+        //         style: TextStyle(
+        //           fontSize: 2.5.sp(context),
+        //         ),
+        //       ),
+        //       Text(
+        //         connection.timestamp.toString(),
+        //         style: TextStyle(
+        //           fontSize: 2.5.sp(context),
+        //         ),
+        //       ),
+        //       const ActionsButtons(),
+        //     ];
+        //   }).toList(),
+        //   fontSize: 2.5.sp(context),
+        //   columnSpacing: 7.w(context),
+        //   horizontalMargin: 7.w(context),
+        //   // topPadding: 1.h(context),
+        //   decoration: BoxDecoration(
+        //     color: deckBackgroundColor,
+        //     borderRadius: BorderRadius.circular(
+        //       1.w(context),
+        //     ),
+        //     border: Border.all(
+        //       color: deckBorderColor,
+        //     ),
+        //   ),
       ),
 
       // Connection Requests
-      CustomDataTable(
-        headers: [
-          'Username',
-          'Status',
-          'Time',
-          'Actions',
-        ],
-        rows: _connectionsProvider.pendingRequests.map((request) {
-          return [
-            Text(
-              request.senderUsername,
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
-              ),
-            ),
-            Text(
-              request.status == 0 ? 'Pending' : 'Accepted',
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
-              ),
-            ),
-            Text(
-              request.timestamp.toString(),
-              style: TextStyle(
-                fontSize: 2.5.sp(context),
-              ),
-            ),
-            RequestActionButtons(
-              onAccept: () {
-                SocketIoClient.socket.emit(
-                  "acceptConnection",
-                  {
-                    "requestId": request.requestId,
-                    "username": request.receiverUsername,
-                  },
-                );
-              },
-              onReject: () {
-                SocketIoClient.socket.emit(
-                  "rejectConnection",
-                  {
-                    "requestId": request.requestId,
-                    "username": request.receiverUsername,
-                  },
-                );
-              },
-            ),
-          ];
-        }).toList(),
-        fontSize: 2.5.sp(context),
-        columnSpacing: 7.w(context),
-        horizontalMargin: 7.w(context),
-        topPadding: 1.h(context),
-        decoration: BoxDecoration(
-          color: const Color.fromARGB(
-            70,
-            32,
-            32,
-            40,
-          ),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(
-            color: deckBorderColor,
-          ),
-        ),
-      ),
+      // CustomDataTable(
+      //   headers: [
+      //     'Username',
+      //     'Status',
+      //     'Time',
+      //     'Actions',
+      //   ],
+      //   rows: _connectionsProvider.pendingRequests.map((request) {
+      //     return [
+      //       Text(
+      //         request.senderUsername,
+      //         style: TextStyle(
+      //           fontSize: 2.5.sp(context),
+      //         ),
+      //       ),
+      //       Text(
+      //         request.status == 0 ? 'Pending' : 'Accepted',
+      //         style: TextStyle(
+      //           fontSize: 2.5.sp(context),
+      //         ),
+      //       ),
+      //       Text(
+      //         request.timestamp.toString(),
+      //         style: TextStyle(
+      //           fontSize: 2.5.sp(context),
+      //         ),
+      //       ),
+      //       RequestActionButtons(
+      //         onAccept: () {
+      //           SocketIoClient.socket.emit(
+      //             "acceptConnection",
+      //             {
+      //               "requestId": request.requestId,
+      //               "username": request.receiverUsername,
+      //             },
+      //           );
+      //         },
+      //         onReject: () {
+      //           SocketIoClient.socket.emit(
+      //             "rejectConnection",
+      //             {
+      //               "requestId": request.requestId,
+      //               "username": request.receiverUsername,
+      //             },
+      //           );
+      //         },
+      //       ),
+      //     ];
+      //   }).toList(),
+      //   fontSize: 2.5.sp(context),
+      //   columnSpacing: 7.w(context),
+      //   horizontalMargin: 7.w(context),
+      //   topPadding: 1.h(context),
+      //   decoration: BoxDecoration(
+      //     color: const Color.fromARGB(
+      //       70,
+      //       32,
+      //       32,
+      //       40,
+      //     ),
+      //     borderRadius: BorderRadius.circular(24),
+      //     border: Border.all(
+      //       color: deckBorderColor,
+      //     ),
+      //   ),
+      // ),
     ];
     return SPCardTemplate(
       height: 100.h(context),
@@ -239,30 +389,25 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
             ),
 
             // Connection Tabs
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: max(10, 1.w(context)),
+            Container(
+              height: 6.h(context),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(
+                  70,
+                  32,
+                  32,
+                  40,
+                ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(50.w(context)),
+                ),
+                border: Border.all(
+                  color: deckBorderColor,
+                ),
               ),
-              child: Container(
-                height: 6.h(context),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(
-                    70,
-                    32,
-                    32,
-                    40,
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(50.w(context)),
-                  ),
-                  border: Border.all(
-                    color: deckBorderColor,
-                  ),
-                ),
-                child: ConnectionTactile(
-                  onButtonTap: handleButtonTap,
-                ),
+              child: ConnectionTactile(
+                onButtonTap: handleButtonTap,
               ),
             ),
 

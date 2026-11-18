@@ -304,7 +304,9 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         print("Connections: $_connections");
         _optionsList = usernames.where((user) =>
             textEditingValue.text.length > 1 &&
-            user.startsWith(textEditingValue.text.toLowerCase()) &&
+            user
+                .toLowerCase()
+                .startsWith(textEditingValue.text.toLowerCase()) &&
             !widget.selectedOptions.contains(user) &&
             user != _userProvider.username &&
             !_connections.contains(user));

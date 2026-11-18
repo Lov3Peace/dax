@@ -8,6 +8,7 @@ class ActionsButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Primary action: opens chat / messaging interaction
         TactileButton(

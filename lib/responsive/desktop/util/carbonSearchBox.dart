@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
+import 'package:flutter_application_1/util/ui/CarbonCircleAvatar.dart';
 import 'package:flutter_application_1/util/ui/pillButton.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:provider/provider.dart';
@@ -58,12 +60,17 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
   @override
   void initState() {
     super.initState();
+    _userProvider = context.read<UserProvider>();
     _connectionsProvider = context.read<ConnectionsProvider>();
     for (var conn in _connectionsProvider.connections) {
-      _connections.add(conn.senderUsername);
+      if (conn.receiverUsername != _userProvider.username) {
+        _connections.add(conn.receiverUsername);
+      }
+      if (conn.senderUsername != _userProvider.username) {
+        _connections.add(conn.senderUsername);
+      }
     }
     print("Connections: ${_connectionsProvider.connections}");
-    _userProvider = context.read<UserProvider>();
     // Attach a global key handler to the shared focus node.
     // It will catch Backspace and remove the last selected chip.
     _focusNode.onKeyEvent = (node, event) {
@@ -134,8 +141,9 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                             padding: EdgeInsets.only(right: 0.5.w(context)),
                             child: PillButton(
                               text: widget.selectedOptions[index],
-                              textStyle:
-                                  TextStyle(fontSize: max(12, 2.sp(context))),
+                              textStyle: TextStyle(
+                                  fontSize: max(12, 2.sp(context)),
+                                  overflow: TextOverflow.ellipsis),
                               width: widget.chipWidth ?? 7.w(context),
                               color1: deckBackgroundColor,
                               color2: deckColor,
@@ -189,7 +197,7 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
             setState(() {
               _userList = res;
             });
-            // print("onchanged _userList: $_userList");
+            print("onchanged _userList: $_userList");
           },
           onSubmitted: (selection) {
             if (_searchController.text.isEmpty) return;
@@ -227,29 +235,55 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                       AutocompleteHighlightedOption.of(context);
                   highlightedIndex = localHighlightedIndex;
                   bool isHighlighted = localHighlightedIndex == index;
-                  return Container(
-                    padding: EdgeInsetsGeometry.all(1.w(context)),
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(max(10, 0.5.w(context))),
-                      color: isHighlighted
-                          ? darkGrey.withValues(alpha: 0.2)
-                          : tran,
-                    ),
-                    child: TactileButton(
-                      scale: 1.01,
-                      onTap: () {
-                        _searchController.clear();
-                        if (!widget.selectedOptions
-                            .contains(options.elementAt(index))) {
-                          onSelected(options.elementAt(index));
-                        }
-                      },
-                      child: Text(
-                        options.elementAt(index),
-                        style: TextStyle(fontSize: max(12, 2.5.sp(context))),
+                  return TactileButton(
+                    scale: 1.01,
+                    onTap: () {
+                      _searchController.clear();
+                      if (!widget.selectedOptions
+                          .contains(options.elementAt(index))) {
+                        onSelected(options.elementAt(index));
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsetsGeometry.all(1.w(context)),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(max(10, 0.5.w(context))),
+                        color: isHighlighted
+                            ? darkGrey.withValues(alpha: 0.2)
+                            : deckBackgroundColor,
                       ),
-                    ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            spacing: 1.w(context),
+                            children: [
+                              const CarbonCircleAvatar(),
+                              Text(
+                                options.elementAt(index),
+                                style: TextStyle(
+                                    fontSize: max(12, 2.5.sp(context))),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            _userList.elementAt(index)["online"]
+                                ? "Online"
+                                : "Offline",
+                            style: TextStyle(
+                                color: _userList.elementAt(index)["online"]
+                                    ? green
+                                    : red),
+                          ),
+                        ],
+                      ),
+                    ).animate().scale(
+                        begin: const Offset(0.9, 0.9),
+                        end: const Offset(1.0, 1.0),
+                        curve: Curves.easeOutBack,
+                        duration: 500.milliseconds,
+                        delay: 50.milliseconds * index),
                   );
                 }),
           ),
@@ -267,11 +301,12 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
         for (var user in _userList) {
           usernames.add(user["username"]); // ..add
         }
+        print("Connections: $_connections");
         _optionsList = usernames.where((user) =>
             textEditingValue.text.length > 1 &&
             user.startsWith(textEditingValue.text.toLowerCase()) &&
             !widget.selectedOptions.contains(user) &&
-            !user.contains(_userProvider.username) &&
+            user != _userProvider.username &&
             !_connections.contains(user));
         return _optionsList;
       },

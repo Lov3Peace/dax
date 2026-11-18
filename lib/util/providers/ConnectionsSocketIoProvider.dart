@@ -86,6 +86,8 @@ class ConnectionsProvider extends ChangeNotifier {
         logger.i("Event: connections");
         logger.i("Raw connections: $data");
 
+        // Check if the first element of data is a List then set records to it
+        // Otherwise, just make records = data and force it to be a list for safety
         final records = data is List && data.isNotEmpty && data.first is List
             ? data.first as List
             : data as List;
@@ -98,6 +100,7 @@ class ConnectionsProvider extends ChangeNotifier {
               ),
             )
             .toList();
+        logger.i("Connections from Socket Provider: ${connections}");
 
         logger.i("Parsed connections: ${connections.length}");
         notifyListeners();
@@ -131,6 +134,7 @@ class ConnectionsProvider extends ChangeNotifier {
                   logger.e("Accept failed: socket not connected");
                   return;
                 }
+                closeNoticiationPopup();
                 SocketIoClient.socket.emit(
                   "acceptConnection",
                   {
@@ -138,7 +142,6 @@ class ConnectionsProvider extends ChangeNotifier {
                     "username": request.receiverUsername,
                   },
                 );
-                closeNoticiationPopup();
                 logger.i("Connection Request Accepted");
               },
               onReject: () {
@@ -146,6 +149,7 @@ class ConnectionsProvider extends ChangeNotifier {
                   logger.e("Reject failed: socket not connected");
                   return;
                 }
+                closeNoticiationPopup();
                 SocketIoClient.socket.emit(
                   "rejectConnection",
                   {
@@ -153,7 +157,6 @@ class ConnectionsProvider extends ChangeNotifier {
                     "username": request.receiverUsername,
                   },
                 );
-                closeNoticiationPopup();
                 logger.i("Connection Request Rejected");
               },
               notificationHeader: "Connection Request Received",

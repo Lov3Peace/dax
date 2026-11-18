@@ -84,6 +84,7 @@ class RequestActionButtons extends StatelessWidget {
         //
         // Accept Connection Request
         TactileButton(
+          scale: 1.03,
           onTap: onAccept,
           child: Container(
             height: 3.5.h(context),
@@ -92,11 +93,8 @@ class RequestActionButtons extends StatelessWidget {
               borderRadius: BorderRadius.all(
                 Radius.circular(1.5.w(context)),
               ),
-              gradient: LinearGradient(
-                colors: [
-                  Colors.green.shade700,
-                  Colors.green.shade400,
-                ],
+              gradient: const LinearGradient(
+                colors: [purp, pink],
               ),
             ),
             child: Icon(
@@ -111,6 +109,7 @@ class RequestActionButtons extends StatelessWidget {
         //
         // Reject Connection Request
         TactileButton(
+          scale: 1.03,
           onTap: onReject,
           child: Container(
             height: 3.5.h(context),
@@ -120,10 +119,7 @@ class RequestActionButtons extends StatelessWidget {
                 Radius.circular(1.5.w(context)),
               ),
               gradient: LinearGradient(
-                colors: [
-                  Colors.red.shade800,
-                  Colors.red.shade500,
-                ],
+                colors: [orange, red],
               ),
             ),
             child: Icon(

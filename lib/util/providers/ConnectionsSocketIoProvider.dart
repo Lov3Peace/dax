@@ -192,7 +192,9 @@ class ConnectionsProvider extends ChangeNotifier {
               context,
               NotificationPopup(
                   notificationHeader: "New Connection",
-                  notificationText: connection.receiverUsername,
+                  notificationText: connection.receiverUsername == username
+                      ? connection.senderUsername
+                      : connection.receiverUsername,
                   width: 15.w(context),
                   height: 8.w(context),
                   icon: const Icon(Icons.person)));

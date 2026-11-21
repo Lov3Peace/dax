@@ -37,7 +37,7 @@ class _ProjectFeedPostState extends State<ProjectFeedPost> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(right: max(10, 1.w(context))),
-                  child: const CarbonCircleAvatar(),
+                  child: CarbonCircleAvatar(),
                 ),
                 Text(
                   widget.username,

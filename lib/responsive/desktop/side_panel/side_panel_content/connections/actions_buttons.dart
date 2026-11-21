@@ -8,9 +8,11 @@ class ActionsButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Primary action: opens chat / messaging interaction
         TactileButton(
+          scale: 1.05,
           child: Container(
             height: 3.5.h(context),
             width: 4.h(context),
@@ -37,6 +39,7 @@ class ActionsButtons extends StatelessWidget {
 
         // Secondary action: opens additional options (menu / settings)
         TactileButton(
+          scale: 1.05,
           child: Container(
             height: 3.5.h(context),
             width: 4.h(context),
@@ -80,10 +83,12 @@ class RequestActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         //
         // Accept Connection Request
         TactileButton(
+          scale: 1.05,
           onTap: onAccept,
           child: Container(
             height: 3.5.h(context),
@@ -92,11 +97,8 @@ class RequestActionButtons extends StatelessWidget {
               borderRadius: BorderRadius.all(
                 Radius.circular(1.5.w(context)),
               ),
-              gradient: LinearGradient(
-                colors: [
-                  Colors.green.shade700,
-                  Colors.green.shade400,
-                ],
+              gradient: const LinearGradient(
+                colors: [purp, pink],
               ),
             ),
             child: Icon(
@@ -111,6 +113,7 @@ class RequestActionButtons extends StatelessWidget {
         //
         // Reject Connection Request
         TactileButton(
+          scale: 1.05,
           onTap: onReject,
           child: Container(
             height: 3.5.h(context),
@@ -120,10 +123,7 @@ class RequestActionButtons extends StatelessWidget {
                 Radius.circular(1.5.w(context)),
               ),
               gradient: LinearGradient(
-                colors: [
-                  Colors.red.shade800,
-                  Colors.red.shade500,
-                ],
+                colors: [orange, red],
               ),
             ),
             child: Icon(

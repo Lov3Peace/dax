@@ -88,9 +88,7 @@ export const sendConnectionRequest = (socket) => {
         // Check for an existing connection in either direction
         const existingConnection = await pgClient.query(
           `
-          SELECT status
-          FROM users.connection_requests
-          WHERE
+          SELECT status FROM users.connection_requests WHERE
             (sender_username = $1 AND receiver_username = $2)
             OR
             (sender_username = $2 AND receiver_username = $1)
@@ -138,12 +136,11 @@ export const sendConnectionRequest = (socket) => {
         io.to(`user: ${user}`).emit("connectionRequestReceived", connection);
 
         console.log(`From ${senderUsername}`);
-        // Confirm successful request to sender
-        io.to(`user: ${senderUsername}`).emit(
-          "connectionRequestSent",
-          connection,
-        );
       }
+      // Confirm successful request to sender (only emit once for the sender)
+      io.to(`user: ${senderUsername}`).emit("connectionRequestSent", {
+        success: true,
+      });
     } catch (error) {
       console.error(error);
 

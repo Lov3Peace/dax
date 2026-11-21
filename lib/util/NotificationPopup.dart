@@ -5,6 +5,7 @@ import 'package:flutter_application_1/util/ui/tactile_button.dart';
 
 final _overlay = navigatorKey.currentState?.overlay;
 OverlayEntry? overlayEntry;
+AnimationController? _popupController;
 
 class NotificationPopup extends StatelessWidget {
   const NotificationPopup(
@@ -15,7 +16,8 @@ class NotificationPopup extends StatelessWidget {
       required this.height,
       required this.icon,
       this.onAccept,
-      this.onReject});
+      this.onReject,
+      this.timeout});
 
   final String notificationText;
   final String notificationHeader;
@@ -24,6 +26,7 @@ class NotificationPopup extends StatelessWidget {
   final Icon icon;
   final VoidCallback? onAccept;
   final VoidCallback? onReject;
+  final Duration? timeout;
 
   @override
   Widget build(BuildContext context) {
@@ -151,25 +154,48 @@ class NotificationPopup extends StatelessWidget {
   }
 }
 
-void closeNoticiationPopup() {
-  overlayEntry?.remove();
-  overlayEntry?.dispose();
+Future<void> closeNoticiationPopup() async {
+  final entry = overlayEntry;
+  final controller = _popupController;
+  if (entry == null) return;
+
+  // Clear first so timers and repeat calls don't act on this popup again
   overlayEntry = null;
+  _popupController = null;
+
+  // Slide out, then remove. Controller is null only if the popup never started playing.
+  if (controller != null) await controller.reverse();
+  entry.remove();
+  entry.dispose();
 }
 
 void showNotificationPopup(BuildContext context, Widget widget) {
   if (_overlay == null) return;
-  overlayEntry = OverlayEntry(
+  closeNoticiationPopup();
+
+  late final OverlayEntry entry;
+  entry = OverlayEntry(
       builder: (context) => Positioned(
           top: 20,
           right: 20,
           child: Material(
             type: MaterialType.transparency,
-            child: widget.animate().slideX(
-                duration: 350.milliseconds,
-                begin: 1,
-                end: 0,
-                curve: Curves.easeOutBack),
+            child: widget
+                .animate(
+                    onPlay: (controller) => _popupController = controller,
+                    onComplete: (controller) {
+                      Future.delayed(5.seconds, () {
+                        // Skip if closed or replaced before the timer fired
+                        if (!context.mounted || overlayEntry != entry) return;
+                        closeNoticiationPopup();
+                      });
+                    })
+                .slideX(
+                    duration: 350.milliseconds,
+                    begin: 1.5,
+                    end: 0,
+                    curve: Curves.easeOutBack),
           )));
-  _overlay?.insert(overlayEntry!);
+  overlayEntry = entry;
+  _overlay?.insert(entry);
 }

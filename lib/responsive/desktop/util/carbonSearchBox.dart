@@ -235,6 +235,19 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                       AutocompleteHighlightedOption.of(context);
                   highlightedIndex = localHighlightedIndex;
                   bool isHighlighted = localHighlightedIndex == index;
+                  if (_optionsList.isEmpty) {
+                    return Container(
+                      padding: EdgeInsetsGeometry.all(1.w(context)),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(max(10, 0.5.w(context))),
+                        color: isHighlighted
+                            ? darkGrey.withValues(alpha: 0.2)
+                            : deckBackgroundColor,
+                      ),
+                      child: CircularProgressIndicator.adaptive(),
+                    );
+                  }
                   return TactileButton(
                     scale: 1.01,
                     onTap: () {
@@ -259,11 +272,11 @@ class _CarbonSearchBoxState extends State<CarbonSearchBox> {
                           Row(
                             spacing: 1.w(context),
                             children: [
-                              const CarbonCircleAvatar(),
+                              CarbonCircleAvatar(),
                               Text(
                                 options.elementAt(index),
-                                style: TextStyle(
-                                    fontSize: max(12, 2.5.sp(context))),
+                                style:
+                                    TextStyle(fontSize: max(12, 3.sp(context))),
                               ),
                             ],
                           ),

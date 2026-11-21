@@ -145,10 +145,10 @@ class _CompactLogoutProfileBubbleState
                             );
                           },
                           scale: 1.05,
-                          child: const Stack(
+                          child: Stack(
                             children: [
                               CarbonCircleAvatar(),
-                              Positioned(
+                              const Positioned(
                                 bottom: 0,
                                 right: 0,
                                 child: CircleAvatar(

@@ -1,4 +1,6 @@
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/connections/AddConnectionButton.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/connections/ConnectionRequestsTable.dart';
+import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/connections/ConnectionsTable.dart';
 import 'package:flutter_application_1/responsive/desktop/side_panel/side_panel_content/desk_dock_button_templates/sp_card_template.dart';
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
@@ -68,223 +70,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
           padding: EdgeInsetsGeometry.only(top: max(10, 1.5.w(context))),
           child: child,
         );
-    // Each page represents a connection view
-    // such as All Connections or Requests
-    connectionPages = [
-      Table(
-        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-        children: [
-          TableRow(
-              decoration: BoxDecoration(
-                  border: BorderDirectional(
-                      bottom: BorderSide(width: 0.5, color: grey))),
-              children: [
-                heading(
-                  Center(
-                    child: Text(
-                      "Username",
-                      style: TextStyle(fontSize: max(12, 2.5.sp(context))),
-                    ),
-                  ),
-                ),
-                heading(
-                  Center(
-                    child: Text(
-                      "Status",
-                      style: TextStyle(fontSize: max(12, 2.5.sp(context))),
-                    ),
-                  ),
-                ),
-                heading(
-                  Center(
-                    child: Text(
-                      "Last Seen",
-                      style: TextStyle(fontSize: max(12, 2.5.sp(context))),
-                    ),
-                  ),
-                ),
-                heading(
-                  Center(
-                    child: Text(
-                      "Actions",
-                      style: TextStyle(fontSize: max(12, 2.5.sp(context))),
-                    ),
-                  ),
-                ),
-              ]),
-          ..._connectionsProvider.connections.map((connection) {
-            //     // Determine the Other User
-            final username = connection.senderUsername == currentUsername
-                ? connection.receiverUsername
-                : connection.senderUsername;
 
-            return TableRow(children: [
-              cell(
-                Row(
-                  children: [
-                    const Spacer(),
-                    const CarbonCircleAvatar(),
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(left: max(5, 0.5.w(context))),
-                        child: Text(
-                          username,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 2.5.sp(context),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: max(20, 2.w(context)))
-                  ],
-                ),
-              ),
-              cell(
-                Center(
-                  child: Text(
-                    'Connected',
-                    style: TextStyle(
-                      fontSize: 2.5.sp(context),
-                    ),
-                  ),
-                ),
-              ),
-              cell(
-                Center(
-                  child: Text(
-                    connection.timestamp.toString(),
-                    style: TextStyle(
-                      fontSize: 2.5.sp(context),
-                    ),
-                  ),
-                ),
-              ),
-              cell(const Center(child: ActionsButtons())),
-            ]);
-          })
-        ],
-      ),
-
-      //
-      // Connection Requests
-      Table(
-        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-        children: [
-          TableRow(
-              decoration: BoxDecoration(
-                  border: BorderDirectional(
-                      bottom: BorderSide(width: 0.5, color: grey))),
-              children: [
-                heading(
-                  Center(
-                    child: Text(
-                      "Username",
-                      style: TextStyle(fontSize: max(12, 3.sp(context))),
-                    ),
-                  ),
-                ),
-                heading(
-                  Center(
-                    child: Text(
-                      "Status",
-                      style: TextStyle(fontSize: max(12, 3.sp(context))),
-                    ),
-                  ),
-                ),
-                heading(
-                  Center(
-                    child: Text(
-                      "Time",
-                      style: TextStyle(fontSize: max(12, 3.sp(context))),
-                    ),
-                  ),
-                ),
-                heading(
-                  Center(
-                    child: Text(
-                      "Actions",
-                      style: TextStyle(fontSize: max(12, 3.sp(context))),
-                    ),
-                  ),
-                ),
-              ]),
-          if (_connectionsProvider.pendingRequests.isNotEmpty)
-            ..._connectionsProvider.pendingRequests.map((connection) {
-              return TableRow(children: [
-                cell(
-                  Row(
-                    children: [
-                      const Spacer(),
-                      const CarbonCircleAvatar(),
-                      Expanded(
-                        child: Padding(
-                          padding:
-                              EdgeInsets.only(left: max(5, 0.5.w(context))),
-                          child: Text(
-                            connection.senderUsername,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 2.5.sp(context),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: max(20, 2.w(context)))
-                    ],
-                  ),
-                ),
-                cell(
-                  Center(
-                    child: Text(
-                      connection.status == 0 ? 'Pending' : 'Accepted',
-                      style: TextStyle(
-                        fontSize: 2.5.sp(context),
-                      ),
-                    ),
-                  ),
-                ),
-                cell(
-                  Center(
-                    child: Text(
-                      connection.timestamp.toString(),
-                      style: TextStyle(
-                        fontSize: 2.5.sp(context),
-                      ),
-                    ),
-                  ),
-                ),
-                cell(
-                  Center(
-                    child: RequestActionButtons(
-                      onAccept: () {
-                        SocketIoClient.socket.emit(
-                          "acceptConnection",
-                          {
-                            "requestId": connection.requestId,
-                            "username": connection.receiverUsername,
-                          },
-                        );
-                      },
-                      onReject: () {
-                        SocketIoClient.socket.emit(
-                          "rejectConnection",
-                          {
-                            "requestId": connection.requestId,
-                            "username": connection.receiverUsername,
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ]);
-            })
-        ],
-      ),
-    ];
     return SPCardTemplate(
       height: 100.h(context),
       width: 71.w(context),
@@ -355,6 +141,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
             // Connections / Requests Pages
             Expanded(
               child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 3.w(context)),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: deckBorderColor,
@@ -365,6 +152,7 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                 ),
                 child: PageView(
                   controller: pageController,
+                  physics: const NeverScrollableScrollPhysics(),
 
                   // Allows user to manually swipe
                   // between All and Requests
@@ -374,7 +162,9 @@ class ConnectionsPopUpState extends State<ConnectionsPopUp>
                     });
                   },
 
-                  children: connectionPages,
+                  // Each page represents a connection view
+                  // such as All Connections or Requests
+                  children: [ConnectionsTable(), ConnectionRequestsTable()],
                 ),
               ),
             ),

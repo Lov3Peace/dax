@@ -12,6 +12,7 @@ class ActionsButtons extends StatelessWidget {
       children: [
         // Primary action: opens chat / messaging interaction
         TactileButton(
+          scale: 1.05,
           child: Container(
             height: 3.5.h(context),
             width: 4.h(context),
@@ -38,6 +39,7 @@ class ActionsButtons extends StatelessWidget {
 
         // Secondary action: opens additional options (menu / settings)
         TactileButton(
+          scale: 1.05,
           child: Container(
             height: 3.5.h(context),
             width: 4.h(context),
@@ -86,7 +88,7 @@ class RequestActionButtons extends StatelessWidget {
         //
         // Accept Connection Request
         TactileButton(
-          scale: 1.03,
+          scale: 1.05,
           onTap: onAccept,
           child: Container(
             height: 3.5.h(context),
@@ -111,7 +113,7 @@ class RequestActionButtons extends StatelessWidget {
         //
         // Reject Connection Request
         TactileButton(
-          scale: 1.03,
+          scale: 1.05,
           onTap: onReject,
           child: Container(
             height: 3.5.h(context),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/carbonSearchBox.dart';
+import 'package:flutter_application_1/util/FetchUsers.dart';
 import 'package:flutter_application_1/util/PopupDialog.dart';
 import 'package:flutter_application_1/util/auth/registerForm.dart';
 import 'package:flutter_application_1/util/imports.dart';
@@ -28,26 +29,6 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
   final TextEditingController _teammatesSearchController =
       TextEditingController();
   final client = httpClient.BrowserClient()..withCredentials = true;
-  Future _fetchUsers(searchString) async {
-    // debugPrint("Users before setState fetch: $users");
-    try {
-      final getUsersEndpoint =
-          Uri.parse("$hostname/api/getUsers?searchString=$searchString");
-      final res = await client.get(
-        getUsersEndpoint,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      );
-      final body = jsonDecode(res.body);
-      users = body;
-      // debugPrint("Users after setState fetch: $users");
-      return users;
-    } catch (e) {
-      // debugPrint("Could not fetch users: $e");
-    }
-    // });
-  }
 
   late ConnectionsProvider _connectionsProvider;
   late UserProvider _userProvider;
@@ -71,7 +52,7 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: AnimatedContainer(
@@ -87,6 +68,7 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
             onTap: () {
               setState(() {
                 showUserSearch = false;
+                _connectionsProvider.connectionRequestList.clear();
               });
             },
             child: Container(
@@ -112,7 +94,7 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
           },
           child: AnimatedContainer(
             width: showUserSearch
-                ? max(300, 25.w(context))
+                ? max(300, 35.w(context))
                 : max(150, 14.w(context)),
             // height: 3.w(context),
             duration: 500.milliseconds,
@@ -156,21 +138,26 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
                   Visibility(
                     visible: showUserSearch,
                     child: CarbonSearchBox(
-                      textfieldNode: _connectionRequestFocusNode,
-                      fetchFunction: _fetchUsers,
-                      initialList: [],
-                      labelText: "Search for users...",
-                      parameter: "username",
-                      searchController: _teammatesSearchController,
-                      optionsMenuWidth: 30.w(context),
-                      // userList is the selectedOptions that is only available in the CarbonSearchBox. So we pass it into
-                      // the saveUserList callback to be used in the _connectionsProvider.saveUserList(userList) call
-                      saveUserList: (userList) {
-                        _connectionsProvider.saveUserList(userList);
-                        print(_connectionsProvider.connectionRequestList);
-                      },
-                    ),
-                  )
+                        fetch: fetchUsers,
+                        selectedOptions:
+                            _connectionsProvider.connectionRequestList,
+                        submitButtonWidth: 7.w(context),
+                        listViewHeight: 6.sp(context),
+                        labelText: "Search Users...",
+                        textStyle: TextStyle(fontSize: max(12, 2.sp(context))),
+                        submit: () {
+                          SocketIoClient.socket.emit("sendConnectionRequest", {
+                            "sender": _userProvider.username,
+                            "receivers":
+                                _connectionsProvider.connectionRequestList,
+                          });
+                          _connectionsProvider.connectionRequestList.clear();
+
+                          setState(() {
+                            showUserSearch = false;
+                          });
+                        }),
+                  ),
                 ],
               ),
             ),
@@ -178,35 +165,6 @@ class _AddConnectionButtonState extends State<AddConnectionButton> {
         ),
         SizedBox(
           width: max(10, 1.w(context)),
-        ),
-        //
-        // Connect Button
-        Padding(
-          padding: EdgeInsets.only(top: 0.25.w(context)),
-          child: Visibility(
-            visible: showUserSearch,
-            child: PillButton(
-              onTap: () {
-                SocketIoClient.socket.emit("sendConnectionRequest", {
-                  "sender": _userProvider.username,
-                  "receivers": _connectionsProvider.connectionRequestList,
-                });
-
-                setState(() {
-                  showUserSearch = false;
-                });
-              },
-              borderRadius: 50.w(context),
-              borderColor: tran,
-              padding: EdgeInsets.symmetric(
-                  horizontal: max(10, 1.5.w(context)),
-                  vertical: max(5, 0.5.w(context))),
-              color1: pink,
-              color2: red,
-              child: Text("Connect",
-                  style: TextStyle(fontSize: max(12, 2.5.sp(context)))),
-            ),
-          ),
         ),
       ],
     );

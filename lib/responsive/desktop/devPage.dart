@@ -1,6 +1,10 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/util/web_ui_template.dart';
+import 'package:flutter_application_1/util/FetchUsers.dart';
 import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
 import 'package:flutter_application_1/util/ui/pillButton.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
@@ -10,40 +14,56 @@ import '../../../../util/imports.dart';
 import 'package:http/browser_client.dart' as httpClient;
 
 class DevPage extends StatefulWidget {
-  DevPage({super.key});
+  DevPage({super.key, this.submit, this.fetch});
 
+  final void submit;
+  final Future Function(String)? fetch;
   @override
   State<DevPage> createState() => _DevPageState();
 }
 
 class _DevPageState extends State<DevPage> with AnimationMixin {
-  late ConnectionsProvider _connectionsProvider;
-  bool showUserSearch = false;
-  List _users = [];
-  List<String> _connectionsRequestList = [];
+  // late ConnectionsProvider _connectionsProvider;
   final TextEditingController _searchController = TextEditingController();
-  final client = httpClient.BrowserClient()..withCredentials = true;
-  late AnimationController _animationController =
-      AnimationController(vsync: this);
+  // late AnimationController _animationController =
+  //     AnimationController(vsync: this);
 
-  List<String> _userList = [
-    "l3x",
-    "davonport",
-    "goat",
-    "port",
-    "davon",
-    "alex",
-    "alexander"
-  ];
+  Iterable _userList = [];
+
+  // List<String> _testUserList = [
+  //   "l3x",
+  //   "davonport",
+  //   "goat",
+  //   "port",
+  //   "davon",
+  //   "alex",
+  //   "alexander"
+  // ];
+
   List<String> _selectedOptions = [];
   Iterable<String> _optionsList = [];
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   int highlightedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _connectionsProvider = context.read<ConnectionsProvider>();
+    // _connectionsProvider = context.read<ConnectionsProvider>();
+    // Attach a global key handler to the shared focus node.
+    // It will catch Backspace and remove the last selected chip.
+    _focusNode.onKeyEvent = (node, event) {
+      if (event is KeyDownEvent &&
+          event.logicalKey == LogicalKeyboardKey.backspace) {
+        // Only act when the text field is empty to avoid interfering with normal deletion.
+        if (_searchController.text.isEmpty && _selectedOptions.isNotEmpty) {
+          setState(() {
+            _selectedOptions.removeLast();
+          });
+          return KeyEventResult.handled;
+        }
+      }
+      return KeyEventResult.ignored;
+    };
   }
 
   @override
@@ -60,7 +80,7 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
         button3: SizedBox(),
         child: Center(
           child: SizedBox(
-            width: 30.w(context),
+            width: 30.w(context), // maybe make this a parameter
             height: 20.h(context),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,8 +89,8 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                   focusNode: _focusNode,
                   textEditingController: _searchController,
                   fieldViewBuilder: (BuildContext context,
-                      TextEditingController controller,
-                      FocusNode focusNode,
+                      TextEditingController _,
+                      FocusNode __,
                       void Function() onSubmitted) {
                     //
                     // The custom textfield
@@ -81,52 +101,69 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                       cursorColor: red,
                       style: TextStyle(fontSize: 3.sp(context)),
                       controller: _searchController,
+                      readOnly: _selectedOptions.length >
+                          2, // disable typing once _selectedOptions length hits 3 (they can still click Submit)
                       decoration: InputDecoration(
-                        contentPadding:
-                            EdgeInsetsDirectional.all(max(20, 1.w(context))),
-                        prefixIcon: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // Show search icon if no selections have been made and hide otherwise
-                            if (_selectedOptions.isEmpty)
-                              Padding(
-                                padding:
-                                    EdgeInsets.all(max(10, 0.5.w(context))),
-                                child: const Icon(Icons.search),
-                              ),
-                            // Put selections to the left of the cursor in the textfield and hide otherwise
-                            if (_selectedOptions.isNotEmpty)
-                              SizedBox(
-                                height: 7.sp(context),
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  itemCount: _selectedOptions.length,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding:
-                                          EdgeInsets.only(left: 0.5.w(context)),
-                                      child: PillButton(
-                                        text: _selectedOptions[index],
-                                        // fontSize: max(12, 2.sp(context)),
-                                        color1: deckBackgroundColor,
-                                        color2: deckColor,
-                                        horizontalPadding: 1.w(context),
-                                        onTap: () {
-                                          setState(() {
-                                            controller.clear();
-                                            _selectedOptions.removeAt(index);
-                                            focusNode.requestFocus();
-                                          });
-                                        },
-                                        borderRadius: 50.w(context),
-                                        borderColor: deckBorderColor,
-                                      ),
-                                    );
-                                  },
+                        // Only need to put padding on prefixIcon since it also affects the suffixIcon
+                        prefixIcon: Padding(
+                          padding: EdgeInsetsDirectional.all(
+                              max(10, 0.5.w(context))),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Show search icon if no selections have been made and hide otherwise
+                              if (_selectedOptions.isEmpty)
+                                Icon(
+                                  Icons.search,
+                                  size: max(35, 0.5.w(context)),
                                 ),
-                              ),
-                          ],
+                              // Put selections to the left of the cursor in the textfield and hide otherwise
+                              if (_selectedOptions.isNotEmpty)
+                                SizedBox(
+                                  height:
+                                      8.sp(context), // make this a parameter
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: _selectedOptions.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(
+                                            right: 0.5.w(context)),
+                                        child: PillButton(
+                                          text: _selectedOptions[index],
+                                          width: 7.w(context),
+                                          color1: deckBackgroundColor,
+                                          color2: deckColor,
+                                          horizontalPadding: 1.w(context),
+                                          onTap: () {
+                                            setState(() {
+                                              _searchController.clear();
+                                              _selectedOptions.removeAt(index);
+                                              _focusNode.requestFocus();
+                                            });
+                                          },
+                                          borderRadius: 50.w(context),
+                                          borderColor: deckBorderColor,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                        suffixIcon: Padding(
+                          padding: EdgeInsets.only(right: 1.w(context)),
+                          child: PillButton(
+                              onTap: () => widget.submit,
+                              text: "Submit",
+                              width: 7.w(context),
+                              horizontalPadding: 1.w(context),
+                              borderRadius: 50.w(context),
+                              borderColor: tran,
+                              color1: pink,
+                              color2: red),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(1.5.w(context)),
@@ -139,7 +176,16 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                           borderSide: const BorderSide(color: white, width: 1),
                         ),
                       ),
+                      onChanged: (input) async {
+                        if (input.isEmpty) return;
+                        final res = await fetchUsers(input);
+                        setState(() {
+                          _userList = res;
+                        });
+                        print("onchanged _userList: $_userList");
+                      },
                       onSubmitted: (selection) {
+                        if (_searchController.text.isEmpty) return;
                         setState(() {
                           _selectedOptions
                               .add(_optionsList.elementAt(highlightedIndex));
@@ -208,7 +254,11 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
 
                     // Show users that match the search query and are not in the _selectedOptions list once the search is at least 2 characters
                     // (smaller read on DB)
-                    _optionsList = _userList.where((user) =>
+                    List<String> usernames = [];
+                    for (var user in _userList) {
+                      usernames.add(user["username"]); // ..add
+                    }
+                    _optionsList = usernames.where((user) =>
                         textEditingValue.text.length > 1 &&
                         user.startsWith(textEditingValue.text.toLowerCase()) &&
                         !_selectedOptions.contains(user));
@@ -219,6 +269,7 @@ class _DevPageState extends State<DevPage> with AnimationMixin {
                     setState(() {
                       _selectedOptions.add(selection);
                       _searchController.clear();
+                      _focusNode.requestFocus();
                     });
                   },
                 ),

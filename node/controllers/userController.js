@@ -120,15 +120,16 @@ export const sendConnectionRequest = (socket) => {
 
       for (const user of receiverUsernames) {
         // Check for an existing connection in either direction
+
         const existingConnection = await pgClient.query(
           `
-          SELECT status FROM users.connection_requests
-          WHERE
-            (sender_username = $1 AND receiver_username = $2)
-            OR
-            (sender_username = $2 AND receiver_username = $1)
-          LIMIT 1
-          `,
+  SELECT status FROM users.connection_requests
+  WHERE
+    (sender_username = $1 AND receiver_username = $2)
+    OR
+    (sender_username = $2 AND receiver_username = $1)
+  LIMIT 1
+  `,
           [senderUsername, user],
         );
 
@@ -169,12 +170,12 @@ export const sendConnectionRequest = (socket) => {
         // Notify recipient
         io.to(`user: ${user}`).emit("connectionRequestReceived", connection);
 
-        // Confirm successful request to sender
-        io.to(`user: ${senderUsername}`).emit(
-          "connectionRequestSent",
-          connection,
-        );
+        console.log(`From ${senderUsername}`);
       }
+      // Confirm successful request to sender (only emit once for the sender)
+      io.to(`user: ${senderUsername}`).emit("connectionRequestSent", {
+        success: true,
+      });
     } catch (error) {
       console.error(error);
 

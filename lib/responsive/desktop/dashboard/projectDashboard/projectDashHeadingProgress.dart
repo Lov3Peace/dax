@@ -44,10 +44,9 @@ class _ProjectDashHeadingProgressState
             // Overview Button
             PillButton(
               onTap: () {},
+              width: 7.w(context),
               scale: 1.04,
-              padding: EdgeInsetsGeometry.symmetric(
-                  vertical: max(5, 1.h(context)),
-                  horizontal: max(10, 2.w(context))),
+              // horizontalPadding: max(10, 2.w(context)),
               borderRadius: 50.w(context),
               borderColor: darkGrey,
               child: Text(

@@ -156,7 +156,7 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                         child: Container(
                                                           margin: EdgeInsetsGeometry
                                                               .only(
-                                                                  left: 7.w(
+                                                                  left: 5.w(
                                                                       context)),
                                                           child: Row(
                                                             spacing:
@@ -196,8 +196,8 @@ class _DesktopProjectDashboardState extends State<DesktopProjectDashboard> {
                                                                 child: Padding(
                                                                   padding: EdgeInsets.only(
                                                                       top: max(
-                                                                          15,
-                                                                          2.w(context))),
+                                                                          10,
+                                                                          1.w(context))),
                                                                   child: Column(
                                                                     spacing: 1.w(
                                                                         context),

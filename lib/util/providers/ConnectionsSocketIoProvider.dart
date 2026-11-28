@@ -136,10 +136,13 @@ class ConnectionsProvider extends ChangeNotifier {
           "Unable to Complete Request!", navigatorKey.currentState?.context);
     });
 
-    // Current Connections
+// Current Connections
     SocketIoClient.socket.on(
       "connections",
       (data) {
+        logger.i("Event: connections");
+        logger.i("Raw connections: $data");
+
         final records = data is List && data.isNotEmpty && data.first is List
             ? data.first as List
             : data as List;
@@ -153,11 +156,13 @@ class ConnectionsProvider extends ChangeNotifier {
             )
             .toList();
 
+        logger.i("Connections from Socket Provider: ${connections}");
+
         notifyListeners();
       },
     );
 
-    // New Connection Requests
+// New Connection Requests
     SocketIoClient.socket.on(
       "connectionRequestReceived",
       (data) {
@@ -170,46 +175,58 @@ class ConnectionsProvider extends ChangeNotifier {
         )) {
           pendingRequests.insert(0, request);
         }
+
+        notifyListeners();
+
         final context = navigatorKey.currentState?.overlay?.context;
         if (context == null) return;
+
         showNotificationPopup(
           context,
           NotificationPopup(
-              onAccept: () {
-                if (!SocketIoClient.socket.connected) {
-                  logger.e("Accept failed: socket not connected");
-                  return;
-                }
-                SocketIoClient.socket.emit(
-                  "acceptConnection",
-                  {
-                    "requestId": request.requestId,
-                    "username": request.receiverUsername,
-                  },
-                );
-                closeNoticiationPopup();
-              },
-              onReject: () {
-                if (!SocketIoClient.socket.connected) {
-                  logger.e("Reject failed: socket not connected");
-                  return;
-                }
-                SocketIoClient.socket.emit(
-                  "rejectConnection",
-                  {
-                    "requestId": request.requestId,
-                    "username": request.receiverUsername,
-                  },
-                );
-                closeNoticiationPopup();
-              },
-              notificationHeader: "Connection Request Received",
-              notificationText: data[0]["sender_username"],
-              width: 15.w(context),
-              height: 8.w(context),
-              icon: const Icon(Icons.person)),
+            onAccept: () {
+              if (!SocketIoClient.socket.connected) {
+                logger.e("Accept failed: socket not connected");
+                return;
+              }
+
+              closeNoticiationPopup();
+
+              SocketIoClient.socket.emit(
+                "acceptConnection",
+                {
+                  "requestId": request.requestId,
+                  "username": request.receiverUsername,
+                },
+              );
+
+              logger.i("Accept connection request emitted");
+            },
+            onReject: () {
+              if (!SocketIoClient.socket.connected) {
+                logger.e("Reject failed: socket not connected");
+                return;
+              }
+
+              closeNoticiationPopup();
+
+              SocketIoClient.socket.emit(
+                "rejectConnection",
+                {
+                  "requestId": request.requestId,
+                  "username": request.receiverUsername,
+                },
+              );
+
+              logger.i("Reject connection request emitted");
+            },
+            notificationHeader: "Connection Request Received",
+            notificationText: request.senderUsername,
+            width: 15.w(context),
+            height: 8.w(context),
+            icon: const Icon(Icons.person),
+          ),
         );
-        notifyListeners();
       },
     );
 
@@ -243,7 +260,9 @@ class ConnectionsProvider extends ChangeNotifier {
               context,
               NotificationPopup(
                   notificationHeader: "New Connection",
-                  notificationText: connection.receiverUsername,
+                  notificationText: connection.receiverUsername == username
+                      ? connection.senderUsername
+                      : connection.receiverUsername,
                   width: 15.w(context),
                   height: 8.w(context),
                   icon: const Icon(Icons.person)));

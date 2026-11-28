@@ -1,8 +1,6 @@
 import 'package:flutter_application_1/util/imports.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_application_1/util/providers/connectionsSocketIoProvider.dart';
 
 class ActionsButtons extends StatelessWidget {
   final String requestId;
@@ -17,9 +15,11 @@ class ActionsButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Primary action: opens chat / messaging interaction
         TactileButton(
+          scale: 1.05,
           child: Container(
             height: 3.5.h(context),
             width: 4.h(context),
@@ -45,16 +45,14 @@ class ActionsButtons extends StatelessWidget {
         SizedBox(width: .5.h(context)),
 
         // Secondary action: opens additional options (menu / settings)
+
         PopupMenuButton<String>(
           tooltip: "",
           offset: const Offset(0, 35),
           color: const Color(0xFF1E1E2A),
           onSelected: (value) {
-            print("MENU SELECTED: $value");
             if (value == "remove") {
-              print("REMOVE CLICKED: $requestId");
               onRemoveConnection(requestId);
-              // Remove Connection functionality goes here
             }
           },
           itemBuilder: (context) => [
@@ -74,14 +72,13 @@ class ActionsButtons extends StatelessWidget {
             ),
           ],
           child: TactileButton(
+            scale: 1.05,
             child: Container(
               height: 3.5.h(context),
               width: 4.h(context),
-
-              // Neutral styling to indicate lower priority action
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(2.5.w(context)),
+                  Radius.circular(1.5.w(context)),
                 ),
                 gradient: LinearGradient(
                   colors: [
@@ -90,7 +87,6 @@ class ActionsButtons extends StatelessWidget {
                   ],
                 ),
               ),
-
               child: Center(
                 child: Icon(
                   Ionicons.ellipsis_horizontal,
@@ -118,10 +114,12 @@ class RequestActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         //
         // Accept Connection Request
         TactileButton(
+          scale: 1.05,
           onTap: onAccept,
           child: Container(
             height: 3.5.h(context),
@@ -130,11 +128,8 @@ class RequestActionButtons extends StatelessWidget {
               borderRadius: BorderRadius.all(
                 Radius.circular(1.5.w(context)),
               ),
-              gradient: LinearGradient(
-                colors: [
-                  Colors.green.shade700,
-                  Colors.green.shade400,
-                ],
+              gradient: const LinearGradient(
+                colors: [purp, pink],
               ),
             ),
             child: Icon(
@@ -149,6 +144,7 @@ class RequestActionButtons extends StatelessWidget {
         //
         // Reject Connection Request
         TactileButton(
+          scale: 1.05,
           onTap: onReject,
           child: Container(
             height: 3.5.h(context),
@@ -158,10 +154,7 @@ class RequestActionButtons extends StatelessWidget {
                 Radius.circular(1.5.w(context)),
               ),
               gradient: LinearGradient(
-                colors: [
-                  Colors.red.shade800,
-                  Colors.red.shade500,
-                ],
+                colors: [orange, red],
               ),
             ),
             child: Icon(

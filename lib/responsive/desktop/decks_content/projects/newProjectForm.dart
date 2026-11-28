@@ -7,7 +7,9 @@ import 'package:flutter_application_1/responsive/desktop/decks_content/projects/
 import 'package:flutter_application_1/responsive/desktop/desk_decks.dart';
 import 'package:flutter_application_1/responsive/desktop/routes/go_routes.dart';
 import 'package:flutter_application_1/responsive/desktop/util/carbonSearchBox.dart';
+import 'package:flutter_application_1/util/FetchUsers.dart';
 import 'package:flutter_application_1/util/imports.dart';
+import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/ui/tactile_button.dart';
@@ -65,6 +67,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   Color privateButtonBorderColor = deckBorderColor;
 
   late ProjectProvider _projectProvider;
+  late ConnectionsProvider _connectionsProvider;
   late FocusNode teammateOptionsNode;
   FocusNode _teammatesTextFieldFocusNode = FocusNode();
   final TextEditingController _teammatesSearchController =
@@ -80,6 +83,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   bool isTeammateSelected = false;
   final textFieldKey = GlobalKey();
   var searchResultsListKey = GlobalKey();
+
   // Initial Teammates List
   List<String> teammates = [];
   List<String> teammateOptionsList = [];
@@ -89,6 +93,7 @@ class _NewProjectFormState extends State<NewProjectForm> {
   final client = httpClient.BrowserClient()..withCredentials = true;
   bool successfulPost = false;
   final rolesController = MultiSelectController<String>();
+
   Future createProjectPost() async {
     try {
       final createProjectEndpoint = Uri.parse("$hostname/api/createNewProject");
@@ -203,31 +208,10 @@ class _NewProjectFormState extends State<NewProjectForm> {
     }
   }
 
-  // Fetch Users Future to get users from database (used in CarbonSearchBox)
-  Future _fetchUsers(searchString) async {
-    // debugPrint("Users before setState fetch: $users");
-    try {
-      final getUsersEndpoint =
-          Uri.parse("$hostname/api/getUsers?searchString=$searchString");
-      final res = await client.get(
-        getUsersEndpoint,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      );
-      final body = jsonDecode(res.body);
-      users = body;
-      // debugPrint("Users after setState fetch: $users");
-      return users;
-    } catch (e) {
-      // debugPrint("Could not fetch users: $e");
-    }
-    // });
-  }
-
   @override
   void initState() {
     _projectProvider = context.read<ProjectProvider>();
+    _connectionsProvider = context.read<ConnectionsProvider>();
     super.initState();
   }
 
@@ -526,17 +510,12 @@ class _NewProjectFormState extends State<NewProjectForm> {
                             ),
                             const SizedBox(height: 15),
                             CarbonSearchBox(
-                                textfieldNode: _teammatesTextFieldFocusNode,
-                                fetchFunction: _fetchUsers,
-                                initialList: teammates,
-                                labelText: "Search for users...",
-                                parameter: "username",
-                                searchController: _teammatesSearchController,
-                                optionsMenuWidth: 30.w(context),
-                                saveUserList: (teammates) {
-                                  _projectProvider.saveTeammates(teammates);
-                                  print(_projectProvider.teammates);
-                                }),
+                              fetch: fetchUsers,
+                              selectedOptions:
+                                  _connectionsProvider.connectionRequestList,
+                              submitButtonWidth: 5.w(context),
+                              listViewHeight: 7.sp(context),
+                            ),
                             const SizedBox(height: 20),
                           ],
                         ),

@@ -47,6 +47,7 @@ export const register = async (req, res) => {
       email: req.body.email,
       isAdmin: req.body.isAdmin,
       refreshToken: refreshToken,
+      profile: {},
     });
 
     const accessToken = jwt.sign(

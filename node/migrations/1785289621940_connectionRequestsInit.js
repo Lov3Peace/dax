@@ -9,9 +9,15 @@ export const shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 export const up = (pgm) => {
-	pgm.sql(
-		"CREATE TABLE users.connection_requests (request_id BIGINT generated always as identity primary key, sender_username VARCHAR, receiver_username VARCHAR, status SMALLINT Default 0, timestamp TIMESTAMPTZ DEFAULT NOW(), CONSTRAINT unique_connection UNIQUE (sender_username,receiver_username));",
-	);
+  pgm.sql(
+    "CREATE TABLE users.connection_requests (request_id BIGINT generated always as identity primary key, sender_username VARCHAR, receiver_username VARCHAR, status SMALLINT Default 0, timestamp TIMESTAMPTZ DEFAULT NOW(), CONSTRAINT unique_connection UNIQUE (sender_username,receiver_username));",
+  );
+
+  pgm.sql(`
+        GRANT SELECT, INSERT, UPDATE, DELETE
+        ON TABLE users.connection_requests
+        TO carbon_user;
+    `);
 };
 
 /**
@@ -19,4 +25,4 @@ export const up = (pgm) => {
  * @param run {() => void | undefined}
  * @returns {Promise<void> | void}
  */
-export const down = (pgm) => { };
+export const down = (pgm) => {};

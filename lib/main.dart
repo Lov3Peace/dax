@@ -4,6 +4,7 @@ import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider
 import 'package:flutter_application_1/util/providers/FeedSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/appStateProvider.dart';
 import 'package:flutter_application_1/util/providers/locationServicesProvider.dart';
+import 'package:flutter_application_1/util/providers/profileSocketIoProvider.dart';
 import 'package:flutter_application_1/util/providers/projectProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -32,6 +33,8 @@ Future main() async {
         ChangeNotifierProvider(create: (_) => LocationServicesProvider()),
         ChangeNotifierProvider(create: (_) => FeedSocketIoProvider()),
         ChangeNotifierProvider(create: (_) => ConnectionsProvider()),
+        ChangeNotifierProvider(
+            create: (_) => ProfileProvider()..enableProfile()),
         // Add more providers as needed
       ],
       child: const MyApp(),

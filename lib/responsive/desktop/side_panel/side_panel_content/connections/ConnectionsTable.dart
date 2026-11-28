@@ -112,8 +112,9 @@ class ConnectionsTable extends StatelessWidget {
                 topPadding: max(10, 1.25.w(context)),
                 child: Center(
                   child: Text(
-                    'Connected',
+                    connection.online ? 'Online' : 'Offline',
                     style: TextStyle(
+                      color: connection.online ? Colors.green : Colors.red,
                       fontSize: 2.75.sp(context),
                     ),
                   ),
@@ -123,7 +124,7 @@ class ConnectionsTable extends StatelessWidget {
                 topPadding: max(10, 1.25.w(context)),
                 child: Center(
                   child: Text(
-                    connection.timestamp.toString(),
+                    connection.lastSeenDisplay,
                     style: TextStyle(
                       fontSize: 2.75.sp(context),
                     ),
@@ -131,8 +132,16 @@ class ConnectionsTable extends StatelessWidget {
                 ),
               ),
               cell(
-                  topPadding: max(10, 1.25.w(context)),
-                  child: const Center(child: ActionsButtons())),
+                topPadding: max(10, 1.25.w(context)),
+                child: Center(
+                  child: ActionsButtons(
+                    requestId: connection.requestId,
+                    onRemoveConnection: (id) {
+                      _connectionsProvider.removeConnection(id);
+                    },
+                  ),
+                ),
+              ),
             ]);
           })
         ],

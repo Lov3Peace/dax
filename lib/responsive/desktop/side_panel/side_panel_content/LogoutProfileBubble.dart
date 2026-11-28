@@ -136,7 +136,11 @@ class _LogoutProfileBubbleState extends State<LogoutProfileBubble> {
                                     tag: 'profileHeroTag',
                                     flightShuttleBuilder: flightShuttleBuilder,
                                     child: Center(
-                                      child: ProfilePopup(),
+                                      child: ProfilePopup(
+                                        username: context
+                                            .read<UserProvider>()
+                                            .username,
+                                      ),
                                     ),
                                   );
                                 },
@@ -226,6 +230,13 @@ class _LogoutProfileBubbleState extends State<LogoutProfileBubble> {
                             if (!res && context.mounted) {
                               showPopupMessage("Unable to log out!", context);
                             } else {
+                              print(
+                                  "Socket before logout: ${SocketIoClient.socket.connected}");
+
+                              SocketIoClient.socket.disconnect();
+
+                              print(
+                                  "Socket after logout: ${SocketIoClient.socket.connected}");
                               _userProvider.setOnlineStatus(false);
                               router.go("/launch");
                             }

@@ -9,9 +9,9 @@ export const shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 export const up = (pgm) => {
-	pgm.sql(
-		"CREATE SCHEMA users"
-	);
+  pgm.sql("CREATE SCHEMA users");
+
+  pgm.sql("GRANT USAGE ON SCHEMA users TO carbon_user;");
 };
 
 /**
@@ -19,4 +19,4 @@ export const up = (pgm) => {
  * @param run {() => void | undefined}
  * @returns {Promise<void> | void}
  */
-export const down = (pgm) => { };
+export const down = (pgm) => {};

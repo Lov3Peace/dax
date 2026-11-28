@@ -8,6 +8,7 @@ import 'package:flutter_application_1/util/providers/ConnectionsSocketIoProvider
 import 'package:flutter_application_1/util/providers/userProvider.dart';
 import 'package:flutter_application_1/util/socket_io/socket_io_client.dart';
 import 'package:flutter_application_1/util/ui/CarbonCircleAvatar.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ConnectionRequestsTable extends StatelessWidget {
@@ -123,7 +124,8 @@ class ConnectionRequestsTable extends StatelessWidget {
                   topPadding: max(10, 2.w(context)),
                   child: Center(
                     child: Text(
-                      connection.timestamp.toString(),
+                      DateFormat('MMM d, yyyy • h:mm a')
+                          .format(connection.timestamp.toLocal()),
                       style: TextStyle(
                         fontSize: 2.75.sp(context),
                       ),

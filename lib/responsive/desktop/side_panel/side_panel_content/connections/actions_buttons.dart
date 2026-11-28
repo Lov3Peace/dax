@@ -3,7 +3,14 @@ import 'package:flutter_application_1/util/ui/tactile_button.dart';
 import 'package:ionicons/ionicons.dart';
 
 class ActionsButtons extends StatelessWidget {
-  const ActionsButtons({super.key});
+  final String requestId;
+
+  final void Function(String) onRemoveConnection;
+  const ActionsButtons({
+    super.key,
+    required this.requestId,
+    required this.onRemoveConnection,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,29 +45,53 @@ class ActionsButtons extends StatelessWidget {
         SizedBox(width: .5.h(context)),
 
         // Secondary action: opens additional options (menu / settings)
-        TactileButton(
-          scale: 1.05,
-          child: Container(
-            height: 3.5.h(context),
-            width: 4.h(context),
 
-            // Neutral styling to indicate lower priority action
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(1.5.w(context)),
-              ),
-              gradient: LinearGradient(
-                colors: [
-                  Colors.grey.shade800,
-                  Colors.grey.shade700,
+        PopupMenuButton<String>(
+          tooltip: "",
+          offset: const Offset(0, 35),
+          color: const Color(0xFF1E1E2A),
+          onSelected: (value) {
+            if (value == "remove") {
+              onRemoveConnection(requestId);
+            }
+          },
+          itemBuilder: (context) => [
+            const PopupMenuItem<String>(
+              value: "remove",
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.person_remove_outlined,
+                    color: Colors.redAccent,
+                    size: 18,
+                  ),
+                  SizedBox(width: 10),
+                  Text("Remove Connection"),
                 ],
               ),
             ),
-
-            child: Center(
-              child: Icon(
-                Ionicons.ellipsis_horizontal,
-                size: 2.h(context),
+          ],
+          child: TactileButton(
+            scale: 1.05,
+            child: Container(
+              height: 3.5.h(context),
+              width: 4.h(context),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(1.5.w(context)),
+                ),
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.grey.shade800,
+                    Colors.grey.shade700,
+                  ],
+                ),
+              ),
+              child: Center(
+                child: Icon(
+                  Ionicons.ellipsis_horizontal,
+                  size: 2.h(context),
+                ),
               ),
             ),
           ),

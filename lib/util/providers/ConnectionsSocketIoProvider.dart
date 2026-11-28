@@ -9,6 +9,8 @@ class Connection {
   final String receiverUsername;
   final int status;
   final DateTime timestamp;
+  final bool online;
+  final DateTime? lastSeen;
 
   Connection({
     required this.requestId,
@@ -16,6 +18,8 @@ class Connection {
     required this.receiverUsername,
     required this.status,
     required this.timestamp,
+    required this.online,
+    required this.lastSeen,
   });
 
   factory Connection.fromJson(Map<String, dynamic> json) {
@@ -25,7 +29,31 @@ class Connection {
       receiverUsername: json["receiver_username"],
       status: json["status"],
       timestamp: DateTime.parse(json["timestamp"]),
+      online: json['online'] ?? false,
+      lastSeen:
+          json['lastSeen'] != null ? DateTime.parse(json['lastSeen']) : null,
     );
+  }
+
+  String get lastSeenDisplay {
+    if (online) return "Now";
+
+    if (lastSeen == null) return "Unknown";
+
+    final difference = DateTime.now().difference(lastSeen!);
+
+    if (difference.inMinutes < 1) return "Just now";
+    if (difference.inMinutes < 60) {
+      return "${difference.inMinutes}m ago";
+    }
+    if (difference.inHours < 24) {
+      return "${difference.inHours}h ago";
+    }
+    if (difference.inDays < 7) {
+      return "${difference.inDays}d ago";
+    }
+
+    return "${lastSeen!.toLocal().month}/${lastSeen!.toLocal().day}/${lastSeen!.toLocal().year}";
   }
 }
 
@@ -39,12 +67,43 @@ class ConnectionsProvider extends ChangeNotifier {
     logger.i("Connection Socket Enabled");
     logger.i("Username: $username");
     logger.i("Socket ID: ${SocketIoClient.socket.id}");
-
-    // Join User Room
-    SocketIoClient.socket.emit(
-      "joinUserRoom",
-      username,
+    logger.i(
+      "SOCKET CHECK: connected=${SocketIoClient.socket.connected}, "
+      "id=${SocketIoClient.socket.id}",
     );
+    // Join User Room
+    // SocketIoClient.socket.emit(
+    //   "joinUserRoom",
+    //   username,
+    // );
+    final socket = SocketIoClient.socket;
+
+    socket.off("currentConnectionRequests");
+    socket.off("connectionRequestSent");
+    socket.off("connectionRequestError");
+    socket.off("connectionRequestReceived");
+    socket.off("connectionRequestAccepted");
+    socket.off("connectionRequestRejected");
+    socket.off("connectionRemoved");
+    socket.off("connections");
+    socket.off("userRoomJoined");
+
+    void joinRoom() {
+      socket.emit("joinUserRoom", username);
+      socket.emit("getConnectionRequests", username);
+      socket.emit("getConnections", username);
+    }
+
+    if (socket.connected) {
+      joinRoom();
+    } else {
+      socket.once("connect", (_) {
+        joinRoom();
+      });
+
+      socket.connect();
+    }
+
     SocketIoClient.socket.on("userRoomJoined", (_) {
       logger.i("User Room Joined Successfully");
     }); //
@@ -53,7 +112,6 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "currentConnectionRequests",
       (data) {
-        logger.i("Event: currentConnectionRequests");
         print(data);
         pendingRequests = (data[0] as List)
             .map(
@@ -70,7 +128,6 @@ class ConnectionsProvider extends ChangeNotifier {
       logger.w("Event: connectionRequestSent");
       showPopupMessage(
           "Connection Request Sent!", navigatorKey.currentState?.context);
-      print("Sent!");
     });
 
     // Connection Request error
@@ -79,15 +136,13 @@ class ConnectionsProvider extends ChangeNotifier {
           "Unable to Complete Request!", navigatorKey.currentState?.context);
     });
 
-    // Current Connections
+// Current Connections
     SocketIoClient.socket.on(
       "connections",
       (data) {
         logger.i("Event: connections");
         logger.i("Raw connections: $data");
 
-        // Check if the first element of data is a List then set records to it
-        // Otherwise, just make records = data and force it to be a list for safety
         final records = data is List && data.isNotEmpty && data.first is List
             ? data.first as List
             : data as List;
@@ -100,21 +155,17 @@ class ConnectionsProvider extends ChangeNotifier {
               ),
             )
             .toList();
+
         logger.i("Connections from Socket Provider: ${connections}");
 
-        logger.i("Parsed connections: ${connections.length}");
         notifyListeners();
       },
     );
 
-    // New Connection Requests
+// New Connection Requests
     SocketIoClient.socket.on(
       "connectionRequestReceived",
       (data) {
-        logger.i("Event: connectionRequestReceived");
-        // logger.i("Data: $data");
-        // var req = data[0];
-        // logger.i("Req: $req");
         final request = Connection.fromJson(
           Map<String, dynamic>.from(data[0]),
         );
@@ -124,57 +175,74 @@ class ConnectionsProvider extends ChangeNotifier {
         )) {
           pendingRequests.insert(0, request);
         }
+
+        notifyListeners();
+
         final context = navigatorKey.currentState?.overlay?.context;
         if (context == null) return;
+
         showNotificationPopup(
           context,
           NotificationPopup(
-              onAccept: () {
-                if (!SocketIoClient.socket.connected) {
-                  logger.e("Accept failed: socket not connected");
-                  return;
-                }
-                closeNoticiationPopup();
-                SocketIoClient.socket.emit(
-                  "acceptConnection",
-                  {
-                    "requestId": request.requestId,
-                    "username": request.receiverUsername,
-                  },
-                );
-                logger.i("Connection Request Accepted");
-              },
-              onReject: () {
-                if (!SocketIoClient.socket.connected) {
-                  logger.e("Reject failed: socket not connected");
-                  return;
-                }
-                closeNoticiationPopup();
-                SocketIoClient.socket.emit(
-                  "rejectConnection",
-                  {
-                    "requestId": request.requestId,
-                    "username": request.receiverUsername,
-                  },
-                );
-                logger.i("Connection Request Rejected");
-              },
-              notificationHeader: "Connection Request Received",
-              notificationText: data[0]["sender_username"],
-              width: 15.w(context),
-              height: 8.w(context),
-              icon: const Icon(Icons.person)),
+            onAccept: () {
+              if (!SocketIoClient.socket.connected) {
+                logger.e("Accept failed: socket not connected");
+                return;
+              }
+
+              closeNoticiationPopup();
+
+              SocketIoClient.socket.emit(
+                "acceptConnection",
+                {
+                  "requestId": request.requestId,
+                  "username": request.receiverUsername,
+                },
+              );
+
+              logger.i("Accept connection request emitted");
+            },
+            onReject: () {
+              if (!SocketIoClient.socket.connected) {
+                logger.e("Reject failed: socket not connected");
+                return;
+              }
+
+              closeNoticiationPopup();
+
+              SocketIoClient.socket.emit(
+                "rejectConnection",
+                {
+                  "requestId": request.requestId,
+                  "username": request.receiverUsername,
+                },
+              );
+
+              logger.i("Reject connection request emitted");
+            },
+            notificationHeader: "Connection Request Received",
+            notificationText: request.senderUsername,
+            width: 15.w(context),
+            height: 8.w(context),
+            icon: const Icon(Icons.person),
+          ),
         );
-        notifyListeners();
       },
     );
+
+    // Online / Offline Status
+    SocketIoClient.socket.off("userPresenceChanged");
+
+    SocketIoClient.socket.on("userPresenceChanged", (data) {
+      logger.i("Presence changed: $data");
+
+      SocketIoClient.socket.emit("getConnections", username);
+    });
 
     // Connection Request Accepted
     SocketIoClient.socket.on(
       "connectionRequestAccepted",
       (data) {
-        logger.i("Event: connectionRequestAccepted");
-
         final connection = Connection.fromJson(
           Map<String, dynamic>.from(data[0]),
         );
@@ -200,6 +268,8 @@ class ConnectionsProvider extends ChangeNotifier {
                   icon: const Icon(Icons.person)));
         }
         notifyListeners();
+
+        SocketIoClient.socket.emit("getConnections", username);
       },
     );
 
@@ -207,8 +277,6 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRequestRejected",
       (data) {
-        logger.i("Event: connectionRequestRejected");
-
         final connection = Connection.fromJson(
           Map<String, dynamic>.from(data[0]),
         );
@@ -218,6 +286,9 @@ class ConnectionsProvider extends ChangeNotifier {
         );
 
         notifyListeners();
+
+        // Fetch the latest connections from PostgreSQL
+        SocketIoClient.socket.emit("getConnections", username);
       },
     );
 
@@ -225,28 +296,31 @@ class ConnectionsProvider extends ChangeNotifier {
     SocketIoClient.socket.on(
       "connectionRemoved",
       (data) {
-        logger.i("Event: connectionRemoved");
-        // connections.removeWhere(
-        //   (connection) => connection.requestId == data["connectionId"],
-        // );
+        final requestId = data[0]["requestId"].toString();
 
+        connections.removeWhere(
+          (connection) => connection.requestId == requestId,
+        );
         notifyListeners();
       },
     );
-    // Load Existing Pending Requests
-    SocketIoClient.socket.emit(
-      "getConnectionRequests",
-      username,
-    );
-    SocketIoClient.socket.emit(
-      "getConnections",
-      username,
-    );
+    SocketIoClient.socket.off("refreshConnections");
+
+    SocketIoClient.socket.on("refreshConnections", (_) {
+      SocketIoClient.socket.emit("getConnections", username);
+    });
   }
 
   // Save List of Users from Add Connection Search Box
   saveUserList(connectionRequestList) {
     this.connectionRequestList = connectionRequestList;
     notifyListeners();
+  }
+
+  void removeConnection(String requestId) {
+    SocketIoClient.socket.emit(
+      "removeConnection",
+      {"requestId": requestId},
+    );
   }
 }

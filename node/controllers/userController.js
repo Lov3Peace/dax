@@ -67,13 +67,47 @@ export const getLocation = async (req, res) => {
 // Join Room for User by username
 export const joinUserRoom = (socket) => {
   socket.on("joinUserRoom", (username) => {
-    socket.join(`user: ${username}`);
+    socket.data.username = username;
 
+    socket.join(`user: ${username}`);
+    socket.broadcast.emit("userPresenceChanged", {
+      username,
+      online: true,
+    });
     console.log(
       `Socket ${socket.id} joined room 'user: ${username}' successfully`,
     );
 
     socket.emit("userRoomJoined");
+  });
+
+  socket.on("disconnect", async () => {
+    const username = socket.data.username;
+
+    if (!username) return;
+
+    // Check whether the user has other active connections
+    const sockets = await io.in(`user:${username}`).fetchSockets();
+
+    if (sockets.length > 0) return;
+
+    console.log(`${username} went offline at ${new Date().toISOString()}`);
+
+    const result = await User.updateOne(
+      { username },
+      {
+        $set: {
+          online: false,
+          lastSeen: new Date(),
+        },
+      },
+    );
+    socket.broadcast.emit("userPresenceChanged", {
+      username,
+      online: false,
+      lastSeen: new Date().toISOString(),
+    });
+    // Next: Save this timestamp to MongoDB
   });
 };
 
@@ -86,14 +120,16 @@ export const sendConnectionRequest = (socket) => {
 
       for (const user of receiverUsernames) {
         // Check for an existing connection in either direction
+
         const existingConnection = await pgClient.query(
           `
-          SELECT status FROM users.connection_requests WHERE
-            (sender_username = $1 AND receiver_username = $2)
-            OR
-            (sender_username = $2 AND receiver_username = $1)
-          LIMIT 1
-          `,
+  SELECT status FROM users.connection_requests
+  WHERE
+    (sender_username = $1 AND receiver_username = $2)
+    OR
+    (sender_username = $2 AND receiver_username = $1)
+  LIMIT 1
+  `,
           [senderUsername, user],
         );
 
@@ -131,7 +167,6 @@ export const sendConnectionRequest = (socket) => {
 
         const connection = result.rows[0];
 
-        console.log(`Sending to ${user}`);
         // Notify recipient
         io.to(`user: ${user}`).emit("connectionRequestReceived", connection);
 
@@ -180,7 +215,6 @@ export const getConnectionRequest = (socket) => {
 // Accept Connection Request
 export const acceptConnectionRequest = (socket) => {
   socket.on("acceptConnection", async (data) => {
-    console.log("ACCEPT CONNECTION RECEIVED:", data);
     try {
       const { requestId, username } = data;
 
@@ -227,7 +261,6 @@ export const rejectConnectionRequest = (socket) => {
   socket.on("rejectConnection", async (data) => {
     try {
       const { requestId, username } = data;
-
       const result = await pgClient.query(
         `
         DELETE FROM users.connection_requests
@@ -238,7 +271,6 @@ export const rejectConnectionRequest = (socket) => {
         `,
         [requestId, username],
       );
-
       const connection = result.rows[0];
 
       if (!connection) {
@@ -268,7 +300,6 @@ export const rejectConnectionRequest = (socket) => {
 // Get Accepted Connections
 export const getConnections = (socket) => {
   socket.on("getConnections", async (username) => {
-    console.log("GET CONNECTIONS HIT:", username);
     try {
       const result = await pgClient.query(
         `
@@ -283,13 +314,249 @@ export const getConnections = (socket) => {
         `,
         [username],
       );
-      console.log("CONNECTIONS FOUND:", result.rows);
-      socket.emit("connections", result.rows);
+
+      // Get the other user's username for each connection
+      const connections = await Promise.all(
+        result.rows.map(async (connection) => {
+          const friendUsername =
+            connection.sender_username === username
+              ? connection.receiver_username
+              : connection.sender_username;
+
+          const user = await User.findOne({
+            username: friendUsername,
+          }).select("online lastSeen");
+
+          return {
+            ...connection,
+            online: user?.online ?? false,
+            lastSeen: user?.lastSeen ?? null,
+          };
+        }),
+      );
+
+      socket.emit("connections", connections);
     } catch (error) {
       console.error(error);
 
       socket.emit("connectionRequestError", {
         message: "Could not load connections",
+      });
+    }
+  });
+};
+
+// retrieves user profile from mondgo
+export const getUserProfile = (socket) => {
+  socket.on("getUserProfile", async (username) => {
+    try {
+      if (typeof username !== "string" || !username.trim()) {
+        return socket.emit("userProfileError", {
+          message: "Invalid username",
+        });
+      }
+
+      const user = await User.findOne({
+        username: username.trim(),
+      }).select("username skills projects profile online lastSeen");
+
+      if (!user) {
+        return socket.emit("userProfileError", {
+          message: "User not found",
+        });
+      }
+
+      socket.emit("userProfileResponse", user.toObject());
+    } catch (error) {
+      console.error("Error retrieving user profile:", error);
+
+      socket.emit("userProfileError", {
+        message: "Could not retrieve user profile",
+      });
+    }
+  });
+};
+
+// updates the user's bio
+export const updateUserBio = (socket) => {
+  socket.on("updateUserBio", async ({ bio }) => {
+    try {
+      const username = socket.data.username;
+
+      if (!username) {
+        return socket.emit("userProfileError", {
+          message: "User not authenticated",
+        });
+      }
+
+      const user = await User.findOneAndUpdate(
+        { username },
+        { $set: { "profile.bio": bio } },
+        { new: true, runValidators: true },
+      );
+
+      if (!user) {
+        return socket.emit("userProfileError", {
+          message: "User not found",
+        });
+      }
+
+      socket.emit("userProfileResponse", user.toObject());
+    } catch (error) {
+      console.error("Error updating bio:", error);
+
+      socket.emit("userProfileError", {
+        message: "Could not update bio",
+      });
+    }
+  });
+};
+
+// updates user skills
+export const updateUserSkills = (socket) => {
+  socket.on("updateUserSkills", async ({ skills }) => {
+    try {
+      const username = socket.data.username;
+
+      if (!username) {
+        return socket.emit("userProfileError", {
+          message: "User not authenticated",
+        });
+      }
+
+      if (
+        !Array.isArray(skills) ||
+        skills.length > 15 ||
+        skills.some(
+          (skill) =>
+            typeof skill !== "string" || !skill.trim() || skill.length > 40,
+        ) ||
+        new Set(skills.map((skill) => skill.trim().toLowerCase())).size !==
+          skills.length
+      ) {
+        return socket.emit("userProfileError", {
+          message: "Invalid skills",
+        });
+      }
+
+      const user = await User.findOneAndUpdate(
+        { username },
+        { $set: { skills: skills.map((skill) => skill.trim()) } },
+        { new: true, runValidators: true },
+      );
+
+      if (!user) {
+        return socket.emit("userProfileError", {
+          message: "User not found",
+        });
+      }
+
+      socket.emit("userProfileResponse", user.toObject());
+    } catch (error) {
+      console.error("Error updating skills:", error);
+
+      socket.emit("userProfileError", {
+        message: "Could not update skills",
+      });
+    }
+  });
+};
+// update users goals
+export const updateUserGoals = (socket) => {
+  socket.on("updateUserGoals", async ({ goals }) => {
+    try {
+      const username = socket.data.username;
+
+      if (!username) {
+        return socket.emit("userProfileError", {
+          message: "User not authenticated",
+        });
+      }
+
+      if (
+        !Array.isArray(goals) ||
+        goals.length > 5 ||
+        goals.some(
+          (goal) =>
+            typeof goal !== "string" || !goal.trim() || goal.length > 150,
+        )
+      ) {
+        return socket.emit("userProfileError", {
+          message: "Invalid goals",
+        });
+      }
+
+      const user = await User.findOneAndUpdate(
+        { username },
+        { $set: { "profile.goals": goals.map((goal) => goal.trim()) } },
+        { new: true, runValidators: true },
+      );
+
+      if (!user) {
+        return socket.emit("userProfileError", {
+          message: "User not found",
+        });
+      }
+
+      socket.emit("userProfileResponse", user.toObject());
+    } catch (error) {
+      console.error("Error updating goals:", error);
+      socket.emit("userProfileError", {
+        message: "Could not update goals",
+      });
+    }
+  });
+};
+
+// Remove a accepted connection
+export const removeConnection = (socket) => {
+  socket.on("removeConnection", async (data) => {
+    try {
+      const { requestId } = data;
+      const username = socket.data.username;
+      if (!username) {
+        return socket.emit("connectionRemovalError", {
+          message: "User not authenticated",
+        });
+      }
+
+      const result = await pgClient.query(
+        `
+        DELETE FROM users.connection_requests
+        WHERE request_id = $1
+          AND status = 1
+          AND (
+            sender_username = $2
+            OR receiver_username = $2
+          )
+        RETURNING *
+        `,
+        [requestId, username],
+      );
+
+      const connection = result.rows[0];
+
+      if (!connection) {
+        return socket.emit("connectionRemovalError", {
+          message: "Connection not found or unauthorized",
+        });
+      }
+      io.to(`user: ${connection.sender_username}`).emit("connectionRemoved", {
+        requestId: String(connection.request_id),
+      });
+
+      io.to(`user: ${connection.receiver_username}`).emit("connectionRemoved", {
+        requestId: String(connection.request_id),
+      });
+      socket.emit("connectionRemoved", {
+        requestId: String(connection.request_id),
+      });
+      socket.emit("refreshConnections");
+    } catch (error) {
+      console.error("REMOVE CONNECTION ERROR:", error);
+
+      socket.emit("connectionRemovalError", {
+        message: "Could not remove connection",
       });
     }
   });
